@@ -1,0 +1,22 @@
+title = "sujets"
+url = "/sujets"
+layout="default"
+is_hidden = 0
+[sujetsall]
+==
+
+
+<div class="wrapper">
+    {% partial 'site/header' %}
+
+    <div class="content container">
+
+            <div class="row cols-wrapper">
+                <div class="col-lg-9 col-12">
+                	{% component 'sujetsall' %}
+                </div>
+                
+                {% partial 'site/navabar-right' %}
+            </div>
+        </div>
+</div>

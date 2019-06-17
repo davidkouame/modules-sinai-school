@@ -1,0 +1,12 @@
+list: $/bootnetcrasher/slideshow/models/slideshowmodel/columns.yaml
+modelClass: BootnetCrasher\Slideshow\Models\SlideShowModel
+title: SlideShowController
+noRecordsMessage: 'backend::lang.list.no_records'
+showSetup: true
+showCheckboxes: true
+recordsPerPage: 20
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: 'backend::lang.list.search_prompt'
+recordUrl: 'bootnetcrasher/slideshow/slideshowcontroller/update/:id'

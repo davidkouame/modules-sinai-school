@@ -1,0 +1,109 @@
+
+<style>
+    .album-cover {
+    border: 1px solid #e8e8e8;
+    margin-bottom: 30px;
+}
+
+.carousel-inner>.item>a>img, .carousel-inner>.item>img, .img-responsive, .thumbnail a>img, .thumbnail>img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+.album-cover .desc {
+    padding: 15px;
+    position: relative;
+}
+
+.album-cover .desc:before {
+    content: "";
+    display: block;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid #fff;
+    position: absolute;
+    top: -10px;
+}
+
+:after, :before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.page-wrapper .page-content h4 {
+    font-size: 18px;
+    font-weight: normal;
+}
+
+.h4 .small, .h4 small, .h5 .small, .h5 small, .h6 .small, .h6 small, h4 .small, h4 small, h5 .small, h5 small, h6 .small, h6 small {
+    font-size: 75%;
+}
+
+.h1 .small, .h1 small, .h2 .small, .h2 small, .h3 .small, .h3 small, .h4 .small, .h4 small, .h5 .small, .h5 small, .h6 .small, .h6 small, h1 .small, h1 small, h2 .small, h2 small, h3 .small, h3 small, h4 .small, h4 small, h5 .small, h5 small, h6 .small, h6 small {
+    font-weight: 400;
+    line-height: 1;
+    color: #777;
+}
+
+p {
+    color: #444;
+    font-size: 13px;
+}
+
+.album-cover:hover {
+    -webkit-box-shadow: 0px 0px 5px 0px #e8e8e8;
+    -moz-box-shadow: 0px 0px 5px 0px #e8e8e8;
+    box-shadow: 0px 0px 5px 0px #e8e8e8;
+}
+
+.album-cover {
+    border: 1px solid #e8e8e8;
+    margin-bottom: 30px;
+}
+</style>
+<section class="news">
+    <div class='section-header clearfix'>
+        <div class="col-md-12">
+            <div class="row" style="padding-bottom: 5px;border-bottom: 2px #e2e2e2 solid;margin-bottom: 20px;">
+                <div class="col-lg-10" style="padding-left: 0px;">
+                    <h1 class="section-title title col-md-2" style="font-size: 1.2rem;padding-left: 0px;margin-bottom: 0px;">Galeries</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="section-content clearfix" style='padding-left: 0px;'>
+        <div id="news-carousel" class="news-carousel carousel slide">
+            <div class="carousel-inner">
+
+                <div class="row page-row">
+                    {% for galerie in galeries %}
+                        <div class="col-md-3 col-sm-3 col-xs-12 text-center">
+                            <div class="album-cover">
+                                <a href="{{ url('galeries')}}/{{ galerie.slug }}""><img class="img-responsive" src="{{ galerie.images[0].getpath }}" alt=""></a>
+                                <div class="desc">
+                                    <h4><small><a href="#">{{ galerie.name|truncate(40, '...') }}</a></small></h4>
+                                    <p>{{ galerie.description|raw }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    <!--                    <div class="col-md-4 col-12 text-center">
+                                            <div class="album-cover">
+                                                <a href="{{ url('galeries')}}/{{ galerie.slug }}"><img class="img-fluid" src="{{ galerie.images[0].getpath }}" alt=""></a>
+                                                <div class="desc">
+                                                    <h4><small><a href="#">{{ galerie.name }}</a></small></h4>
+                                                    <p>{{ galerie.description|raw }}</p>
+                                                </div>
+                                            </div>
+                                        </div>-->
+                    {% endfor %}
+                </div>
+
+            </div>
+
+            {{ galeries|raw }}
+        </div>
+
+    </div>
+</section>

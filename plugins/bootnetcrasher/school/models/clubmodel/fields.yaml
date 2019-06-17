@@ -1,0 +1,24 @@
+fields:
+    logo:
+        label: Logo
+        mode: file
+        useCaption: true
+        thumbOptions:
+            mode: crop
+            extension: auto
+        span: auto
+        type: fileupload
+    name:
+        label: Libelle
+        span: auto
+        type: text
+    description:
+        label: Description
+        size: ''
+        span: auto
+        type: textarea
+    content:
+        label: Content
+        size: tiny
+        span: auto
+        type: richeditor

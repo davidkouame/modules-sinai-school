@@ -1,0 +1,20 @@
+title = "Demonstration"
+url = "/professeurs"
+layout = "default"
+is_hidden = 0
+
+[professeursAll]
+==
+
+<div class="wrapper">
+    {% partial 'site/header' %}
+
+    <div class="content container">
+
+        <div class="row cols-wrapper">
+            {% component 'professeursAll' %}
+            
+            {% partial 'site/navabar-right' %}
+        </div>
+    </div>
+</div>

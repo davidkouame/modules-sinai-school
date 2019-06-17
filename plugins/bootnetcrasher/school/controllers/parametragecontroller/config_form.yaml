@@ -1,0 +1,10 @@
+name: ParametrageController
+form: $/bootnetcrasher/school/models/parametragemodel/fields.yaml
+modelClass: BootnetCrasher\School\Models\ParametrageModel
+defaultRedirect: bootnetcrasher/school/parametragecontroller
+create:
+    redirect: 'bootnetcrasher/school/parametragecontroller/update/:id'
+    redirectClose: bootnetcrasher/school/parametragecontroller
+update:
+    redirect: bootnetcrasher/school/parametragecontroller
+    redirectClose: bootnetcrasher/school/parametragecontroller

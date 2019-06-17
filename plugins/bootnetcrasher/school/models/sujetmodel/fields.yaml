@@ -1,0 +1,19 @@
+fields:
+    name:
+        label: Libellé
+        span: auto
+        type: text
+    description:
+        label: Description
+        size: ''
+        span: auto
+        type: textarea
+    sujet:
+        label: Sujet
+        mode: file
+        useCaption: true
+        thumbOptions:
+            mode: crop
+            extension: auto
+        span: auto
+        type: fileupload

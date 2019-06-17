@@ -1,0 +1,23 @@
+<div class="col-lg-9 col-12">
+    <section class="news">
+        <div class="section-content clearfix" style='padding-left: 0px;'>
+            <div id="news-carousel" class="news-carousel carousel slide">
+                <div class="carousel-inner">
+                    <p>Logo : <img src="{{ sujet.sujet.getpath }}" alt=""></p>
+                    <br>
+
+                   <p>Name : {{ sujet.name }}</p>
+                   <br>
+
+                   <p>Description : {{ sujet.description|raw  }}</p>
+                   <br>
+
+                   <p><a href="{{ sujet.sujet.getpath }}" target="_blank">télécharger le sujet</a>
+                   <br>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+</div>

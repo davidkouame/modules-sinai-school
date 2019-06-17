@@ -1,0 +1,59 @@
+
+<link href="{{ 'assets/css/organigrame.css'|theme }}" rel="stylesheet">
+
+<style>
+    .organizational-chart div{
+            color: #fff;
+    font-weight: bold;
+    }
+</style>
+
+<ol class="organizational-chart">
+    <li>
+        <div>
+            {{ premierParent.libelle }}
+        </div>
+        <ol>
+            {% for premierEnfant in premierParent.getChildren %}
+            <li>
+                <div>
+                    {{ premierEnfant.libelle }}
+                </div>
+                {% if premierEnfant.getChildren|length > 0 %}
+                    <ol>
+                        {% for deuxiemeEnfant in premierEnfant.getChildren %}
+                            <li>
+                                <div>
+                                    {{ deuxiemeEnfant.libelle }}
+                                </div>
+                                {% if deuxiemeEnfant.getChildren|length > 0 %}
+                                    <ol>
+                                        {% for troisiemeEnfant in deuxiemeEnfant.getChildren %}
+                                        <li>
+                                            <div>
+                                                {{ troisiemeEnfant.libelle }}
+                                            </div>
+                                            {% if troisiemeEnfant.getChildren|length > 0 %}
+                                                <ol>
+                                                    {% for quatriemeEnfant in troisiemeEnfant.getChildren %}
+                                                    <li>
+                                                        <div>
+                                                            {{ troisiemeEnfant.libelle }}
+                                                        </div>
+                                                    </li>
+                                                    {% endfor %}
+                                                </ol>
+                                            {% endif %}
+                                        </li>
+                                        {% endfor %}
+                                    </ol>
+                                {% endif %}
+                            </li>
+                        {% endfor %}
+                    </ol>
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ol>
+    </li>
+</ol>

@@ -1,0 +1,10 @@
+name: SujetController
+form: $/bootnetcrasher/school/models/sujetmodel/fields.yaml
+modelClass: BootnetCrasher\School\Models\SujetModel
+defaultRedirect: bootnetcrasher/school/sujetcontroller
+create:
+    redirect: 'bootnetcrasher/school/sujetcontroller/update/:id'
+    redirectClose: bootnetcrasher/school/sujetcontroller
+update:
+    redirect: bootnetcrasher/school/sujetcontroller
+    redirectClose: bootnetcrasher/school/sujetcontroller

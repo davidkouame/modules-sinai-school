@@ -1,0 +1,4 @@
+title: OrganigrameController
+modelClass: BootnetCrasher\School\Models\OrganigrameModel
+toolbar:
+    buttons: reorder_toolbar

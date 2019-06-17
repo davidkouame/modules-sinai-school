@@ -1,0 +1,39 @@
+
+<section class="news">
+    <div class='section-header clearfix'>
+        <div class="col-md-12">
+            <div class="row" style="padding-bottom: 5px;border-bottom: 2px #e2e2e2 solid;margin-bottom: 20px;">
+                <div class="col-lg-10" style="padding-left: 0px;">
+                    <h1 class="section-title title col-md-12" style="font-size: 1.2rem;padding-left: 0px;margin-bottom: 0px;">Clubs d'activités</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="section-content clearfix" style='padding-left: 0px;'>
+        <div id="news-carousel" class="news-carousel carousel slide">
+            <div class="carousel-inner">
+
+                {% for clubActivite in clubsActivites %}
+                <div class="item carousel-item active">
+                    <div class="row" data-idclub="{{ clubActivite.id }}">
+                        <div class="col-lg-3">
+                            <figure class='jss374' style='background-image: url("{{ clubActivite.logo.getpath }}");'></figure>
+                        </div>
+                        <div class="col-lg-9">
+                            <h2 class="title"><a href="{{ url('clubs-activites') }}/{{ clubActivite.id }}" style="color: #6091ba;">{{ clubActivite.name }}</a></h2>
+                            <p>
+                                {{ clubActivite.description|truncate(235, false, " ...") }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                {% endfor %}
+
+                {{ clubsActivites|raw }}
+
+            </div>
+        </div>
+
+    </div>
+</section>

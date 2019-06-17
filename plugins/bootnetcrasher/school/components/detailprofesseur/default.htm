@@ -1,0 +1,30 @@
+<div class="col-lg-9 col-12">
+    <section class="news">
+        <div class="section-content clearfix" style='padding-left: 0px;'>
+            <div id="news-carousel" class="news-carousel carousel slide">
+                <div class="carousel-inner">
+
+                    <p>Logo : <img src="{{ professeur.logo.getpath }}" alt=""></p>
+                    <br>
+
+                    <p>Nom : {{ professeur.nom }}</p>
+                    <br>    
+
+                    <p>Prénoms : {{ professeur.prenom }}</p>
+                    <br>
+
+                    <p>Email : {{ professeur.email }}</p>
+                    <br>
+
+                    <p>Matière : {{ professeur.matiere }}</p>
+                    <br>
+
+                    <p>Description : {{ professeur.description|raw }}</p>
+                    <br>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+</div>

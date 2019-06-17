@@ -1,0 +1,16 @@
+columns:
+    niveau:
+        label: Niveau
+        type: text
+        searchable: true
+    libelle:
+        label: Libellé
+        type: text
+        searchable: true
+    organigrame:
+        label: Organigrame
+        relation: organigrame
+        searchable: true
+        sortable: true
+        select: libelle
+        type: text

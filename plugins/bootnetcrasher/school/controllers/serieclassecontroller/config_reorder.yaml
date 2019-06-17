@@ -1,0 +1,4 @@
+title: SerieClasseController
+modelClass: BootnetCrasher\School\Models\SerieClasseModel
+toolbar:
+    buttons: reorder_toolbar

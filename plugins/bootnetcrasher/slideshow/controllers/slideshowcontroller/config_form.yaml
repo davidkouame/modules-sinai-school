@@ -1,0 +1,10 @@
+name: SlideShowController
+form: $/bootnetcrasher/slideshow/models/slideshowmodel/fields.yaml
+modelClass: BootnetCrasher\Slideshow\Models\SlideShowModel
+defaultRedirect: bootnetcrasher/slideshow/slideshowcontroller
+create:
+    redirect: 'bootnetcrasher/slideshow/slideshowcontroller/update/:id'
+    redirectClose: bootnetcrasher/slideshow/slideshowcontroller
+update:
+    redirect: bootnetcrasher/slideshow/slideshowcontroller
+    redirectClose: bootnetcrasher/slideshow/slideshowcontroller

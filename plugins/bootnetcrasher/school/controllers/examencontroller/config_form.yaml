@@ -1,0 +1,10 @@
+name: ExamenController
+form: $/bootnetcrasher/school/models/examenmodel/fields.yaml
+modelClass: BootnetCrasher\School\Models\ExamenModel
+defaultRedirect: bootnetcrasher/school/examencontroller
+create:
+    redirect: 'bootnetcrasher/school/examencontroller/update/:id'
+    redirectClose: bootnetcrasher/school/examencontroller
+update:
+    redirect: bootnetcrasher/school/examencontroller
+    redirectClose: bootnetcrasher/school/examencontroller

@@ -1,0 +1,4 @@
+title: ClubController
+modelClass: BootnetCrasher\School\Models\ClubModel
+toolbar:
+    buttons: reorder_toolbar

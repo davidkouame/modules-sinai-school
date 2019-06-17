@@ -1,0 +1,18 @@
+fields:
+    key:
+        label: Clé
+        span: auto
+        type: text
+    value:
+        label: Valeur
+        span: auto
+        type: textarea
+    logo:
+        label: Logo
+        mode: file
+        useCaption: true
+        thumbOptions:
+            mode: crop
+            extension: auto
+        span: auto
+        type: fileupload

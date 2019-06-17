@@ -1,0 +1,4 @@
+title: ExamenController
+modelClass: BootnetCrasher\School\Models\ExamenModel
+toolbar:
+    buttons: reorder_toolbar

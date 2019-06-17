@@ -1,0 +1,118 @@
+<!--<div class="page-wrapper">
+    <header class="page-heading clearfix">
+        <h1 class="heading-title pull-left">Album Lorem Ipsum <small>(without sidebar)</small></h1>
+        <div class="breadcrumbs pull-right">
+            <ul class="breadcrumbs-list">
+                <li class="breadcrumbs-label">You are here:</li>
+                <li><a href="index.html">Home</a><i class="fa fa-angle-right"></i></li>
+                <li><a href="gallery.html">Gallery</a><i class="fa fa-angle-right"></i></li>
+                <li class="current">Album Lorem Ipsum</li>
+            </ul>
+        </div>//breadcrumbs
+    </header> 
+    <div class="page-content">     
+        <div class="row page-row">
+            <a class="prettyphoto col-md-3 col-sm-3 col-xs-6" rel="prettyPhoto[gallery]" title="Lorem ipsum dolor sit amet" href="https://themes.3rdwavemedia.com/college-green/assets/images/gallery/gallery-1.jpg"><img class="img-responsive img-thumbnail" src="https://themes.3rdwavemedia.com/college-green/assets/images/gallery/gallery-thumb-1.jpg" alt=""></a>
+            <a class="prettyphoto col-md-3 col-sm-3 col-xs-6" rel="prettyPhoto[gallery]" href="https://themes.3rdwavemedia.com/college-green/assets/images/gallery/gallery-24.jpg"><img class="img-responsive img-thumbnail" src="https://themes.3rdwavemedia.com/college-green/assets/images/gallery/gallery-thumb-1.jpg" alt=""></a>
+            <a class="prettyphoto col-md-3 col-sm-3 col-xs-6" rel="prettyPhoto[gallery]" href="https://themes.3rdwavemedia.com/college-green/assets/images/gallery/gallery-23.jpg"><img class="img-responsive img-thumbnail" src="https://themes.3rdwavemedia.com/college-green/assets/images/gallery/gallery-thumb-1.jpg" alt=""></a>
+            <a class="prettyphoto col-md-3 col-sm-3 col-xs-6" rel="prettyPhoto[gallery]" href="https://themes.3rdwavemedia.com/college-green/assets/images/gallery/gallery-14.jpg"><img class="img-responsive img-thumbnail" src="https://themes.3rdwavemedia.com/college-green/assets/images/gallery/gallery-thumb-1.jpg" alt=""></a>                              
+        </div>//page-row
+    </div>//page-content 
+</div>-->
+
+{% put styles %}
+<link href="{{ 'assets/css/app-lightbox.css'|theme }}" rel="stylesheet" />
+{% endput %}
+
+<div class="lightbox">
+
+    <header class="page-heading clearfix">
+        <h1 class="heading-title pull-left">{{ galerie.name }}</h1>
+        <div class="breadcrumbs pull-right">
+            <ul class="breadcrumbs-list">
+                <li class="breadcrumbs-label">You are here:</li>
+                <li><a href="index.html">Home</a><i class="fa fa-angle-right"></i></li>
+                <li><a href="gallery.html">Gallery</a><i class="fa fa-angle-right"></i></li>
+                <li class="current">Album Lorem Ipsum</li>
+            </ul>
+        </div><!--//breadcrumbs-->
+    </header>
+
+    <div class="row">
+        {% for image in galerie.images %}
+        <div class="prettyphoto col-md-3 col-sm-3 col-xs-6">
+            <img src="{{ image.getpath }}" style="width:100%" onclick="openModal(); currentSlide({{ loop.index }})" class="img-responsive img-thumbnail hover-shadow cursor">
+        </div>
+        {% endfor %}
+    </div>
+
+    <div id="myModal" class="modal">
+        <span class="close cursor" onclick="closeModal()">&times;</span>
+        <div class="modal-content">
+            {% for image in galerie.images %}
+            <div class="mySlides">
+                <div class="numbertext">{{ loop.index }} / {{ loop.length }}</div>
+                <img src="{{ image.getpath }}" style="width:100%">
+            </div>
+            {% endfor %}
+
+            <a class="prev" onclick="plusSlides( - 1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+            <div class="caption-container">
+                <p id="caption"></p>
+            </div>
+
+
+            {% for image in galerie.images %}
+            <div class="{{ column }}">
+                <img class="demo cursor" src="{{ image.getpath }}" style="width:100%" onclick="currentSlide({{ loop.index }})" >
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+</div>
+<script>
+            function openModal() {
+            document.getElementById("myModal").style.display = "block";
+                    document.getElementById("main-nav-wrapper").style.display = "none";
+            }
+
+    function closeModal() {
+    document.getElementById("myModal").style.display = "none";
+            document.getElementById("main-nav-wrapper").style.display = "block";
+    }
+
+    var slideIndex = 1;
+            showSlides(slideIndex);
+            function plusSlides(n) {
+            showSlides(slideIndex += n);
+            }
+
+    function currentSlide(n) {
+    showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+    var i;
+            var slides = document.getElementsByClassName("mySlides");
+            var dots = document.getElementsByClassName("demo");
+            var captionText = document.getElementById("caption");
+            if (n > slides.length) {
+    slideIndex = 1
+    }
+    if (n < 1) {
+    slideIndex = slides.length
+    }
+    for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";
+    }
+    for (i = 0; i < dots.length; i++) {
+    dots[i].className = dots[i].className.replace(" active", "");
+    }
+    slides[slideIndex - 1].style.display = "block";
+            dots[slideIndex - 1].className += " active";
+            captionText.innerHTML = dots[slideIndex - 1].alt;
+    }
+</script>

@@ -1,0 +1,14 @@
+columns:
+    name:
+        label: Name
+        type: text
+        searchable: true
+    datedeut:
+        label: 'Date de début'
+        type: date
+    datefin:
+        label: 'Date de fin'
+        type: date
+    published_at:
+        label: 'Date de publication'
+        type: date

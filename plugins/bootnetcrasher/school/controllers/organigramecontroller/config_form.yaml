@@ -1,0 +1,10 @@
+name: OrganigrameController
+form: $/bootnetcrasher/school/models/organigramemodel/fields.yaml
+modelClass: BootnetCrasher\School\Models\OrganigrameModel
+defaultRedirect: bootnetcrasher/school/organigramecontroller
+create:
+    redirect: 'bootnetcrasher/school/organigramecontroller/update/:id'
+    redirectClose: bootnetcrasher/school/organigramecontroller
+update:
+    redirect: bootnetcrasher/school/organigramecontroller
+    redirectClose: bootnetcrasher/school/organigramecontroller

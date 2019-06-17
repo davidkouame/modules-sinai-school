@@ -1,0 +1,12 @@
+list: $/bootnetcrasher/school/models/sujetmodel/columns.yaml
+modelClass: BootnetCrasher\School\Models\SujetModel
+title: SujetController
+noRecordsMessage: 'backend::lang.list.no_records'
+showSetup: true
+showCheckboxes: true
+recordsPerPage: 20
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: 'backend::lang.list.search_prompt'
+recordUrl: 'bootnetcrasher/school/sujetcontroller/update/:id'

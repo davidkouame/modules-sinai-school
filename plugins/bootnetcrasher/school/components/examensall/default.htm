@@ -1,0 +1,21 @@
+{% for examen in examensall %}
+    <div class="item carousel2-item active">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="title" style="margin-bottom: 0rem;"><a href="{{ url('examens')}}/{{ examen.id }}">{{ examen.name }}</a></h2>
+                <p style="margin-bottom: 0rem;">
+                    {{ examen.description|truncate(400, false, " ...") }}
+                </p>
+            </div>
+            <div class="col-lg-12">
+                {% if(examen.sujets) %} <a href="{{ examen.sujets.getpath }}" target="_blank">Sujets</a>/ {% endif %}
+                {% if(examen.corrections) %} <a href="{{ examen.corrections.getpath }}" target="_blank">Corrections</a>/ {% endif %}
+                {% if(examen.resultats) %} <a href="{{ examen.resultats.getpath }}" target="_blank">Resultats</a> {% endif %}
+            </div>
+        </div>
+    </div>
+{% endfor %}
+
+<div class="pagination">
+    {{ examensall|raw }}
+</div>

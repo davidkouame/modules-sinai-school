@@ -1,0 +1,4 @@
+title: NiveauClasseController
+modelClass: BootnetCrasher\School\Models\NiveauClasseModel
+toolbar:
+    buttons: reorder_toolbar

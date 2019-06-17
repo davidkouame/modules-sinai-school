@@ -1,0 +1,10 @@
+name: ActualiteController
+form: $/bootnetcrasher/school/models/actualitemodel/fields.yaml
+modelClass: BootnetCrasher\School\Models\ActualiteModel
+defaultRedirect: bootnetcrasher/school/actualitecontroller
+create:
+    redirect: 'bootnetcrasher/school/actualitecontroller/update/:id'
+    redirectClose: bootnetcrasher/school/actualitecontroller
+update:
+    redirect: bootnetcrasher/school/actualitecontroller
+    redirectClose: bootnetcrasher/school/actualitecontroller

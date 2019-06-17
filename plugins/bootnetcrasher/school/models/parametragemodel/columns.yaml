@@ -1,0 +1,9 @@
+columns:
+    key:
+        label: Clé
+        type: text
+        searchable: true
+    value:
+        label: Valeur
+        type: text
+        searchable: true

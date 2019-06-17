@@ -1,0 +1,39 @@
+
+<section class="news">
+    <div class='section-header clearfix'>
+        <div class="col-md-12">
+            <div class="row" style="padding-bottom: 5px;border-bottom: 2px #e2e2e2 solid;margin-bottom: 20px;">
+                <div class="col-lg-10" style="padding-left: 0px;">
+                    <h1 class="section-title title col-md-2" style="font-size: 1.2rem;padding-left: 0px;margin-bottom: 0px;">Sujets</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="section-content clearfix" style='padding-left: 0px;'>
+        <div id="news-carousel" class="news-carousel carousel slide">
+            <div class="carousel-inner">
+
+                <div class="row">
+                    {% for sujet in sujets %}
+                    <div class="col-lg-6" style="margin-bottom: 20px;">
+                        <div class="item carousel-item active">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <figure class='jss374' style='background-image: url("{{ sujet.sujet.getpath }}");'></figure>
+                                </div>
+                                <div class="col-lg-8">
+                                    <h2 class="title"><a href="{{ url('sujet') }}/{{ sujet.id }}">{{ sujet.name }}</a></h2>
+<!--                                    <p>
+                                        {{ sujet.description|truncate(235, false, " ...") }}
+                                    </p>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>

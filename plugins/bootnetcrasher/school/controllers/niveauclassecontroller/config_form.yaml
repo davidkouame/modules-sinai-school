@@ -1,0 +1,10 @@
+name: NiveauClasseController
+form: $/bootnetcrasher/school/models/niveauclassemodel/fields.yaml
+modelClass: BootnetCrasher\School\Models\NiveauClasseModel
+defaultRedirect: bootnetcrasher/school/niveauclassecontroller
+create:
+    redirect: 'bootnetcrasher/school/niveauclassecontroller/update/:id'
+    redirectClose: bootnetcrasher/school/niveauclassecontroller
+update:
+    redirect: bootnetcrasher/school/niveauclassecontroller
+    redirectClose: bootnetcrasher/school/niveauclassecontroller

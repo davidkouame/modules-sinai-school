@@ -1,0 +1,4 @@
+title: SujetController
+modelClass: BootnetCrasher\School\Models\SujetModel
+toolbar:
+    buttons: reorder_toolbar

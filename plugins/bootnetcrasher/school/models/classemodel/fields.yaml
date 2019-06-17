@@ -1,0 +1,28 @@
+fields:
+    libelle:
+        label: Libelle
+        span: auto
+        type: text
+    serie:
+        label: Serie
+        nameFrom: libelle
+        descriptionFrom: description
+        span: auto
+        type: relation
+        placeholder: 'Selectionner une serie'
+    niveau:
+        label: Niveau
+        nameFrom: libelle
+        descriptionFrom: description
+        span: auto
+        type: relation
+        placeholder: 'Selectionner un niveau'
+    emploisdutemps:
+        label: 'Emplois du temps'
+        mode: file
+        useCaption: true
+        thumbOptions:
+            mode: crop
+            extension: auto
+        span: auto
+        type: fileupload

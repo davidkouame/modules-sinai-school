@@ -1,0 +1,47 @@
+fields:
+    name:
+        label: Name
+        span: auto
+        type: text
+    datedebut:
+        label: 'Date de début'
+        mode: date
+        span: auto
+        type: datepicker
+    datefin:
+        label: 'Date de fin'
+        mode: date
+        span: auto
+        type: datepicker
+    description:
+        label: Description
+        size: ''
+        span: auto
+        type: textarea
+    sujets:
+        label: Sujets
+        mode: file
+        useCaption: true
+        thumbOptions:
+            mode: crop
+            extension: auto
+        span: auto
+        type: fileupload
+    resultats:
+        label: Resultats
+        mode: file
+        useCaption: true
+        thumbOptions:
+            mode: crop
+            extension: auto
+        span: auto
+        type: fileupload
+    corrections:
+        label: Corrections
+        mode: file
+        useCaption: true
+        thumbOptions:
+            mode: crop
+            extension: auto
+        span: auto
+        type: fileupload

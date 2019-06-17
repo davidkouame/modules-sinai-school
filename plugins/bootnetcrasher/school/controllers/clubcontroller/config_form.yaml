@@ -1,0 +1,10 @@
+name: ClubController
+form: $/bootnetcrasher/school/models/clubmodel/fields.yaml
+modelClass: BootnetCrasher\School\Models\ClubModel
+defaultRedirect: bootnetcrasher/school/clubcontroller
+create:
+    redirect: 'bootnetcrasher/school/clubcontroller/update/:id'
+    redirectClose: bootnetcrasher/school/clubcontroller
+update:
+    redirect: bootnetcrasher/school/clubcontroller
+    redirectClose: bootnetcrasher/school/clubcontroller

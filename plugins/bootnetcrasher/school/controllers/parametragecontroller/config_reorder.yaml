@@ -1,0 +1,4 @@
+title: ParametrageController
+modelClass: BootnetCrasher\School\Models\ParametrageModel
+toolbar:
+    buttons: reorder_toolbar

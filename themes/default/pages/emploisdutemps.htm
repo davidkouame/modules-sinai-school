@@ -1,0 +1,20 @@
+title = "emploisdutemps"
+url = "/emplois-du-temps"
+layout = "default"
+is_hidden = 0
+
+[emploisDuTemps]
+==
+
+<div class="wrapper">
+    {% partial 'site/header' %}
+
+    <div class="content container">
+
+        <div class="row cols-wrapper">
+            {% component 'emploisDuTemps' %}
+            
+            {% partial 'site/navabar-right' %}
+        </div>
+    </div>
+</div>

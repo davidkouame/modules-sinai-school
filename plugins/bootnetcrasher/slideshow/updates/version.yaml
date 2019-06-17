@@ -1,0 +1,8 @@
+1.0.1:
+    - 'Initialize plugin.'
+1.0.2:
+    - 'Created table bootnetcrasher_slideshow_slideshow'
+    - builder_table_create_bootnetcrasher_slideshow_slideshow.php
+1.0.3:
+    - 'Updated table bootnetcrasher_slideshow_slideshow'
+    - builder_table_update_bootnetcrasher_slideshow_slideshow.php

@@ -1,0 +1,215 @@
+description = "Default layout"
+[parametrages]
+==
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <!--<title>October CMS - {{ this.page.title }}</title>
+        <meta name="description" content="{{ this.page.meta_description }}">
+        <meta name="title" content="Sinai-School}">
+        <meta name="author" content="OctoberCMS">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="generator" content="OctoberCMS">-->
+        <!--<link rel="icon" type="image/png" href="{{ 'assets/images/october.png'|theme }}">
+        <link href="{{ 'assets/css/vendor.css'|theme }}" rel="stylesheet">
+        <link href="{{ 'assets/css/theme.css'|theme }}" rel="stylesheet">-->
+
+
+        <!-- <title>{% block title %}This is my new project home page{% endblock title %}</title> -->
+        <title>Sinai-School</title>
+        <!-- Meta -->
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="">    
+        <link rel="shortcut icon" href="favicon.ico">  
+        <!--x<link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>-->
+        <!-- FontAwesome JS-->
+        <script defer src="{{ 'assets/js/all.js'|theme }}" integrity="sha384-3LK/3kTpDE/Pkp8gTNp2gR/2gOiwQ6QaO7Td0zV76UFJVhqLl4Vl3KL1We6q6wR9" crossorigin="anonymous"></script>
+
+        <!-- Global CSS -->
+        <link href="{{ 'assets/plugins/bootstrap/css/bootstrap.css'|theme }}" rel="stylesheet">
+        <!-- Plugins CSS -->
+        <link href="{{ 'assets/plugins/flexslider/css/flexslider.css'|theme }}" rel="stylesheet">
+        <!-- Theme CSS -->  
+        <link id="theme-style" rel="stylesheet" href="./static/assets/css/theme-1.css">
+        <link href="{{ 'assets/css/theme-1.css'|theme }}" rel="stylesheet">
+
+        <!-- APP css-->
+        <link rel="stylesheet" href="{{ 'assets/css/app.css'|theme }}">
+
+
+        <!-- Facebook Pixel Code -->
+        <!--<script>
+          !function(f,b,e,v,n,t,s)
+          {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+          n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+          if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+          n.queue=[];t=b.createElement(e);t.async=!0;
+          t.src=v;s=b.getElementsByTagName(e)[0];
+          s.parentNode.insertBefore(t,s)}(window, document,'script',
+          'https://connect.facebook.net/en_US/fbevents.js');
+          fbq('init', '1506230579705064');
+          fbq('track', 'PageView');
+        </script>-->
+    <noscript><img height="1" width="1" style="display:none"
+                   src="https://www.facebook.com/tr?id=1506230579705064&ev=PageView&noscript=1"
+                   /></noscript>
+    <!-- End Facebook Pixel Code -->
+
+    <!-- css add -->
+    <style type="text/css">
+        .home-page section.news {
+            background: #fff;
+        }
+
+        .home-page .news .news-item {
+            margin-bottom: 36px;
+        }
+
+        .jss374 {
+            width: 100%;
+            height: auto;
+            margin: 0;
+            display: block;
+            padding: 0;
+            padding-bottom: 56.25%;
+            background-size: cover;
+            background-color: #d2d2d2;
+            background-position: center;
+        }
+
+        .item.carousel-item.active{
+            margin-bottom: 2%;
+        }
+
+
+        /*img {
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        padding: 5px;
+        width: 150px;
+        }
+
+        img:hover {
+        box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+        }*/
+
+        .profile:hover{
+            box-shadow: initial;
+        }
+
+        .item.carousel-item{
+            cursor: pointer
+        }
+
+        .no-padding-left-and-right{
+            padding-left: 0px !important;
+            padding-right: 0px !important;
+        }
+
+    </style>
+    {% styles %}
+    <script src="{{ 'assets/plugins/popover/popper.min.js'|theme }}"></script>
+
+    <!-- Scripts -->
+    <script src="{{ 'assets/vendor/jquery.js'|theme }}"></script>
+    <script src="{{ 'assets/vendor/bootstrap.js'|theme }}"></script>
+    <script src="{{ 'assets/javascript/app.js'|theme }}"></script>
+
+    <!-- JS --> 
+    <!--    <script src="{{ 'assets/plugins/jquery/jquery-3.3.1.min.js'|theme }}"></script>-->
+    <script src="{{ 'assets/plugins/bootstrap/js/bootstrap.min.js'|theme }}"></script>
+    <script src="{{ 'assets/js/back-to-top.js'|theme }}"></script>
+    <script src="{{ 'assets/plugins/jquery-placeholder/jquery.placeholder.js'|theme }}"></script>
+    <script src="{{ 'assets/plugins/pretty-photo/js/jquery.prettyPhoto.js'|theme }}"></script>
+    <script src="{{ 'assets/plugins/flexslider/js/jquery.flexslider-min.js'|theme }}"></script>
+    <script src="{{ 'assets/js/jflickrfeed.min.js'|theme }}"></script>
+    <script src="{{ 'assets/js/main.js'|theme }}"></script>
+
+</head>
+<body class="home-page">
+
+    <!-- Content -->
+    <section id="layout-content">
+        <div class="wrapper">
+            {% partial 'site/header1' %}
+            <div class="content container">
+                <div class="row cols-wrapper">
+                    <div class="col-lg-9 col-12">{% page %}</div>
+                    <div class="col-lg-3 col-12">{% partial 'site/navabar-right' %}</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        {% partial 'site/footer' %}
+    </footer>
+
+    <!-- Theme Switcher (REMOVE ON YOUR PRODUCTION SITE) -->
+    <script src="{{ 'assets/js/theme-switcher.js'|theme }}"></script>
+    {% framework extras %}
+    {% scripts %}
+
+    <script type="text/javascript">
+$(document).ready(function () {
+    $(".carousel-item div.row").click(function (e) {
+        window.location.href = "{{ url('actualites') }}/" + $(this).data('id');
+    });
+    
+        $(".{{ active }}").addClass("active");
+
+    $(".carousel-item div.row").click(function (e) {
+        window.location.href = "{{ url('clubs-activites') }}/" + $(this).data('idclub');
+    });
+
+    /*('.link-mot-directeur').click(function(){
+     console.log($(this).data('click'))
+     
+     });*/
+
+    // alert("dsds");
+
+    /* ======= Flexslider ======= */
+    $('.flexslider').flexslider({
+        animation: "fade"
+    });
+
+    /* ======= jQuery Placeholder ======= */
+    $('input, textarea').placeholder();
+
+
+    /* ======= Carousels ======= */
+    $('#news-carousel').carousel({interval: false});
+    $('#videos-carousel').carousel({interval: false});
+    $('#testimonials-carousel').carousel({interval: 6000, pause: "hover"});
+    $('#awards-carousel').carousel({interval: false});
+
+
+    /* ======= Flickr PhotoStream ======= */
+    $('#flickr-photos').jflickrfeed({
+        limit: 12,
+        qstrings: {
+            id: '32104790@N02' /* Use idGettr.com to find the flickr user id */
+        },
+        itemTemplate:
+                '<li>' +
+                '<a rel="prettyPhoto[flickr]" href="{{image}}" title="{{title}}">' +
+                '<img src="{{image_s}}" alt="{{title}}" />' +
+                '</a>' +
+                '</li>'
+
+    }, function (data) {
+        $('#flickr-photos a').prettyPhoto();
+    });
+
+    /* ======= Pretty Photo ======= */
+    $('a.prettyphoto').prettyPhoto();
+});
+    </script>
+</body>
+</html>

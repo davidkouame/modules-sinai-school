@@ -1,0 +1,15 @@
+<section class="news" style="margin-bottom: 0px;">
+    <div class="section-content clearfix" style='padding-left: 0px;'>
+        <div id="news-carousel" class="news-carousel carousel slide">
+            <div class="carousel-inner">
+                <!-- <img src="{{'assets/images/slide-2.jpg' | theme }}" class="img-fluid" alt="Responsive image">-->
+                <img src="{{ clubActivite.logo.getpath }}" class="img-fluid" alt="Responsive image">
+
+                <h3 style="margin-top: 2%;">{{ clubActivite.name }}</h3>
+                <p style="text-align: justify;">{{ clubActivite.content|raw }}</p>
+
+            </div>
+        </div>
+    </div>
+</section>
+<!--<div class="float-right" style="margin-right: 12px;"><b>Publié le {{ clubActivite.created_at|date("d-m-Y") }}</b></div>-->

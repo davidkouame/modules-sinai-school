@@ -1,0 +1,33 @@
+1560727755a:1:{s:23:"site/pourquoi-ecole.htm";a:5:{s:8:"fileName";s:23:"site/pourquoi-ecole.htm";s:7:"content";s:826:"<section class="promo box box-dark" style="padding-top: 15px;padding-left: 15px;padding-bottom: 15px;padding-right: 15px;">        
+    <div class="row">
+        <div class="col-md-9">
+            <h1 class="section-heading">Pourquoi le Collège Green</h1>
+            <p style="margin-bottom: 0px;">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Sed bibendum orci eget nulla mattis, quis viverra tellus
+                porta. Donec vitae neque ut velit eleifend commodo. 
+                Maecenas turpis odio, placerat eu lorem ut, suscipit 
+                commodo augue.  
+            </p>   
+        </div>  
+        <div class="col-md-3">
+            <a class="btn btn-cta" href="index.html#"><i class="fa fa-play-circle"></i>Apply Now</a>  
+        </div>
+    </div>
+</section>";s:5:"mtime";i:1560006221;s:6:"markup";s:826:"<section class="promo box box-dark" style="padding-top: 15px;padding-left: 15px;padding-bottom: 15px;padding-right: 15px;">        
+    <div class="row">
+        <div class="col-md-9">
+            <h1 class="section-heading">Pourquoi le Collège Green</h1>
+            <p style="margin-bottom: 0px;">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Sed bibendum orci eget nulla mattis, quis viverra tellus
+                porta. Donec vitae neque ut velit eleifend commodo. 
+                Maecenas turpis odio, placerat eu lorem ut, suscipit 
+                commodo augue.  
+            </p>   
+        </div>  
+        <div class="col-md-3">
+            <a class="btn btn-cta" href="index.html#"><i class="fa fa-play-circle"></i>Apply Now</a>  
+        </div>
+    </div>
+</section>";s:4:"code";N;}}

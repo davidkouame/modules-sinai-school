@@ -1,0 +1,11 @@
+columns:
+    title:
+        label: Title
+        type: text
+        searchable: true
+    created_at:
+        label: 'Date de création'
+        type: date
+    published_at:
+        label: 'Date de publication'
+        type: date

@@ -1,0 +1,44 @@
+1.0.1:
+    - 'Initialize plugin.'
+1.0.2:
+    - 'Created table bootnetcrasher_school_classe'
+    - builder_table_create_bootnetcrasher_school_classe.php
+1.0.3:
+    - 'Created table bootnetcrasher_school_organigrame'
+    - builder_table_create_bootnetcrasher_school_organigrame.php
+1.0.4:
+    - 'Created table bootnetcrasher_school_parametrage'
+    - builder_table_create_bootnetcrasher_school_parametrage.php
+1.0.5:
+    - 'Created table bootnetcrasher_school_professeur'
+    - builder_table_create_bootnetcrasher_school_professeur.php
+1.0.6:
+    - 'Created table bootnetcrasher_school_reglement_interieur'
+    - builder_table_create_bootnetcrasher_school_reglement_interieur.php
+1.0.7:
+    - 'Created table bootnetcrasher_school_'
+    - builder_table_create_bootnetcrasher_school_.php
+1.0.8:
+    - 'Updated table bootnetcrasher_school_'
+    - builder_table_update_bootnetcrasher_school_sujets.php
+1.0.9:
+    - 'Created table bootnetcrasher_school_examen'
+    - builder_table_create_bootnetcrasher_school_examen.php
+1.0.10:
+    - 'Created table bootnetcrasher_school_niveau_classe'
+    - builder_table_create_bootnetcrasher_school_niveau_classe.php
+1.0.11:
+    - 'Updated table bootnetcrasher_school_club'
+    - builder_table_update_bootnetcrasher_school_club.php
+1.0.12:
+    - 'Updated table bootnetcrasher_school_organigrame'
+    - builder_table_update_bootnetcrasher_school_organigrame.php
+1.0.13:
+    - 'Updated table bootnetcrasher_school_organigrame'
+    - builder_table_update_bootnetcrasher_school_organigrame_2.php
+1.0.14:
+    - 'Created table bootnetcrasher_school_serie_classe'
+    - builder_table_create_bootnetcrasher_school_serie_classe.php
+1.0.15:
+    - 'Updated table bootnetcrasher_school_examen'
+    - builder_table_update_bootnetcrasher_school_examen.php

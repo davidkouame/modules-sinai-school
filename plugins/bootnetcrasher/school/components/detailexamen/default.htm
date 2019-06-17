@@ -1,0 +1,60 @@
+<style>
+    .news ul li {
+        list-style: none;
+        margin-top: 12px;
+    }
+    
+    .key{
+        font-size: 15px;
+        font-weight: bold;
+    }
+    
+    .value{
+        font-size: 14px;
+    }
+    
+    .detail{
+        
+    }
+    
+    ul{padding-left: 0px;}
+</style>
+<div class="row">
+    <div class="col-lg-12">
+        <img src="{{'assets/images/slide-2.jpg' | theme }}" class="img-fluid" alt="Responsive image">
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12 col-12">
+        <section class="news">
+            <div class="section-content clearfix" style='padding-left: 0px;'>
+                <div id="news-carousel" class="news-carousel carousel slide">
+                    <div class="carousel-inner">
+                        <ul>
+                            <li class="detail">
+                                <span class="key">Nom :</span> 
+                                <span class="value">{{ examen.name }}</span></li>
+                            <li>
+                                <span class="key">Date de début :</span> 
+                                <span class="value">{{ examen.datedebut }}</span>
+                            </li>
+                            <li>
+                                <span class="key">Date de fin :</span> 
+                                <span class="value">{{ examen.datefin }}</span>
+                            </li>
+                            <li>
+                                <span class="key">Description :</span>
+                                <span class="value">{{ examen.description|raw }}</span>
+                            </li>
+                            <li>
+                                {% if(examen.sujets) %} <a href="{{ examen.sujets.getpath }}" target="_blank">Télécharger les Sujets</a> /{% endif %}
+                                {% if(examen.corrections) %} <a href="{{ examen.corrections.getpath }}" target="_blank">Télécharger les Corrections</a> /{% endif %}
+                                {% if(examen.resultats) %} <a href="{{ examen.resultats.getpath }}" target="_blank">Télécharger Resultats</a>{% endif %}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
