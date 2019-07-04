@@ -1,0 +1,10 @@
+name: Valeur Note Eleve
+form: $/bootnetcrasher/school/models/notemodel/valeurnoteelevefields.yaml
+modelClass: BootnetCrasher\School\Models\NoteModel
+defaultRedirect: bootnetcrasher/school/valeurnoteeleve
+create:
+    redirect: 'bootnetcrasher/school/valeurnoteeleve/update/:id'
+    redirectClose: bootnetcrasher/school/valeurnoteeleve
+update:
+    redirect: bootnetcrasher/school/valeurnoteeleve
+    redirectClose: bootnetcrasher/school/valeurnoteeleve

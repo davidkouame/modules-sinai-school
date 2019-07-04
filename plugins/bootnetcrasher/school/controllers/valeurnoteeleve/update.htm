@@ -1,0 +1,100 @@
+<?php Block::put('breadcrumb') ?>
+    <ul>
+        <li><a href="<?= Backend::url('bootnetcrasher/school/valeurnoteeleve') ?>">NoteEleve</a></li>
+        <li><?= e($this->pageTitle) ?></li>
+    </ul>
+<?php Block::endPut() ?>
+
+<?php if (!$this->fatalError): ?>
+
+    <?= Form::open(['class' => 'layout']) ?>
+
+        <div class="layout-row">
+            <?= $widget->render() ?>
+        </div>
+
+        <div class="layout-row">
+            <?= $this->listRender($liste) ?>
+        </div>
+
+
+        <div class="form-buttons">
+            <div class="loading-indicator-container">
+                <button
+                    type="submit"
+                    data-request="onSave"
+                    data-request-data="close:1"
+                    data-hotkey="ctrl+enter, cmd+enter"
+                    data-load-indicator="<?= e(trans('backend::lang.form.saving')) ?>"
+                    class="btn btn-primary">
+                    <?= e(trans('backend::lang.form.save')) ?>
+                </button>
+ <!--                
+                <button
+                    type="button"
+                    data-request="onSave"
+                    data-request-data="close:1"
+                    data-hotkey="ctrl+enter, cmd+enter"
+                    data-load-indicator="<?= e(trans('backend::lang.form.saving')) ?>"
+                    class="btn btn-default">
+                    <?= e(trans('backend::lang.form.save_and_close')) ?>
+                </button>
+               <button
+                    type="button"
+                    class="oc-icon-trash-o btn-icon danger pull-right"
+                    data-request="onDelete"
+                    data-load-indicator="<?= e(trans('backend::lang.form.deleting')) ?>"
+                    data-request-confirm="<?= e(trans('backend::lang.form.confirm_delete')) ?>">
+                </button>-->
+
+                <span class="btn-text">
+                    <?= e(trans('backend::lang.form.or')) ?> <a href="<?= Backend::url('bootnetcrasher/school/valeurnoteeleve') ?>"><?= e(trans('backend::lang.form.cancel')) ?></a>
+                </span>
+            </div>
+        </div>
+    <?= Form::close() ?>
+
+<?php else: ?>
+    <p class="flash-message static error"><?= e(trans($this->fatalError)) ?></p>
+    <p><a href="<?= Backend::url('bootnetcrasher/school/valeurnoteeleve') ?>" class="btn btn-default"><?= e(trans('backend::lang.form.return_to_list')) ?></a></p>
+<?php endif ?>
+
+ <?= Form::open(['id' => 'valueStudentForm']) ?>
+ <div class="control-popup modal fade" id="modal-add-value-eleve" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Ajouter une valeur </h4>
+            </div>
+            <div class="modal-body">
+                <input type="text" name="valeur" />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal" id="cancel-modal-add-value">annuler</button>
+                <button type="button" data-request="onAddValueStudent" class="btn btn-success" data-dismiss="modal" id="send-data-value-student">confirmer</button>
+            </div>
+        </div>
+    </div>
+</div>
+ <?= Form::close() ?>
+
+ <script>
+    $(document).ready(function(){
+        // alert("salut les gars");
+        var splitAction = $("#valueStudentForm").attr("action").split('/');
+        var idNote = splitAction[splitAction.length-1];
+        // add data dynamic students form
+        $("#send-data-value-student").click(function(){
+            var i = 1;
+            var students = "<div id='new-input'>";
+            $('.control-list').listWidget('getChecked').forEach(element => {
+                students+="<input type='text' name='students["+i+"]' hidden value='"+element+"'/>";
+                i+=1;
+            });
+            students+="</div>";
+            $(".modal-body").append(students);
+            $(".modal-body").append("<input type='text' name='noteId' hidden value='"+idNote+"'/>");
+        });
+    });
+ </script>

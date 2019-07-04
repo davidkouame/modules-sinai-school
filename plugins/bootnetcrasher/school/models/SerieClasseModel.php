@@ -24,4 +24,8 @@ class SerieClasseModel extends Model
      */
     public $rules = [
     ];
+    
+    public $belongsTo = [
+        'niveau' => ['BootnetCrasher\School\Models\NiveauClasseModel', 'key' => 'niveau_id', 'otherKey' => 'id'],
+    ];
 }

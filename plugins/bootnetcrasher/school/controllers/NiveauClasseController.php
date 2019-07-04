@@ -13,6 +13,7 @@ class NiveauClasseController extends Controller
 
     public function __construct()
     {
+        BackendMenu::setContext('BootnetCrasher.School', 'parametres', 'niveaux');
         parent::__construct();
     }
 }

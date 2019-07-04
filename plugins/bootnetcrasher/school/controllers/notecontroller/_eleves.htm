@@ -1,0 +1,18 @@
+<?php
+    $eleves = \BootnetCrasher\School\Models\EleveModel::all();
+    // dd($this);
+?>
+
+<select
+        id="<?= $field->getId() ?>"
+        name="<?= $field->getName() ?>[]"
+        class="form-control custom-select"
+        multiple
+        <?= $field->getAttributes() ?>>
+        <?php foreach ($eleves as $eleve): ?>
+            <option
+                value="<?= $eleve->id ?>">
+                    <?= $eleve->matricule ?>
+            </option>
+        <?php endforeach ?>
+    </select>

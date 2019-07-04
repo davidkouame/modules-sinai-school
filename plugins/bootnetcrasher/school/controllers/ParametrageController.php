@@ -13,6 +13,7 @@ class ParametrageController extends Controller
 
     public function __construct()
     {
+        BackendMenu::setContext('BootnetCrasher.School', 'parametres', 'parametrages');
         parent::__construct();
     }
 }

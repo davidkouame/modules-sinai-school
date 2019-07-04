@@ -1,0 +1,27 @@
+fields:
+    valeur:
+        label: Valeur
+        span: auto
+        type: text
+    note:
+        label: Note
+        nameFrom: name
+        descriptionFrom: description
+        select: libelle
+        span: auto
+        type: relation
+        placeholder: 'Sélectionner une note'
+    eleve:
+        label: Elève
+        type: partial
+        placeholder: 'Sélectionner un élève'
+#    eleve:
+#        label: Elève
+#        nameFrom: name
+#        descriptionFrom: description
+#        select: matricule
+#        span: auto
+#        type: relation
+#        placeholder: 'Sélectionner un élève'
+#        attributes:
+#            multiple: true

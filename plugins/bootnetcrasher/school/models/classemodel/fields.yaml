@@ -3,13 +3,6 @@ fields:
         label: Libelle
         span: auto
         type: text
-    serie:
-        label: Serie
-        nameFrom: libelle
-        descriptionFrom: description
-        span: auto
-        type: relation
-        placeholder: 'Selectionner une serie'
     niveau:
         label: Niveau
         nameFrom: libelle
@@ -26,3 +19,10 @@ fields:
             extension: auto
         span: auto
         type: fileupload
+    serie:
+        label: Serie
+        nameFrom: libelle
+        descriptionFrom: description
+        span: auto
+        type: relation
+        placeholder: 'Selectionner une serie'

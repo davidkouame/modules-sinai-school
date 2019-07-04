@@ -23,6 +23,9 @@ class ClasseModel extends Model
      * @var array Validation rules
      */
     public $rules = [
+                        "libelle" => "required",
+                        "niveau" => "required",
+                        "emploisdutemps" => "required"
     ];
 
     public $belongsTo = [

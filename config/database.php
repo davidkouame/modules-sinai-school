@@ -56,7 +56,7 @@ return [
             'driver'    => 'mysql',
             'host'      => 'localhost',
             'port'      => 3306,
-            'database'  => 'cipher',
+            'database'  => 'module-sinai-school',
             'username'  => 'dks',
             'password'  => '29121990marie',
             'charset'   => 'utf8mb4',

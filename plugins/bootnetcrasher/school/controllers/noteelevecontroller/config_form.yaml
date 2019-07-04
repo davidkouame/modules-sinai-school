@@ -1,0 +1,10 @@
+name: NoteEleveController
+form: $/bootnetcrasher/school/models/noteeleve/noteelevefields.yaml
+modelClass: BootnetCrasher\School\Models\NoteEleve
+defaultRedirect: bootnetcrasher/school/noteelevecontroller
+create:
+    redirect: 'bootnetcrasher/school/noteelevecontroller/update/:id'
+    redirectClose: bootnetcrasher/school/noteelevecontroller
+update:
+    redirect: bootnetcrasher/school/noteelevecontroller
+    redirectClose: bootnetcrasher/school/noteelevecontroller

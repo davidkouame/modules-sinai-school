@@ -1,0 +1,11 @@
+columns:
+    libelle:
+        label: Libelle
+        type: text
+        searchable: true
+    typematiere:
+        label: 'Type matière'
+        type: text
+        searchable: true
+        select: libelle
+        relation: typematiere

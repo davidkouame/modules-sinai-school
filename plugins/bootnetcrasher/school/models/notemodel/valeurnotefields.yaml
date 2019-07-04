@@ -1,0 +1,41 @@
+fields:
+    libelle:
+        label: Libelle
+        span: auto
+        type: text
+        disabled: true
+    description:
+        label: Description
+        size: ''
+        span: auto
+        type: textarea
+        disabled: true
+    datenoteeffectue:
+        label: 'Date de note effectué'
+        mode: datetime
+        span: auto
+        type: datepicker
+        disabled: true
+    typenote:
+        label: 'Type Note'
+        span: auto
+        nameFrom: name
+        descriptionFrom: description
+        select: libelle
+        type: relation
+        placeholder: 'Sélectionner un type de note'
+        disabled: true
+    matiere:
+        label: 'Matière'
+        span: auto
+        nameFrom: name
+        descriptionFrom: description
+        select: libelle
+        type: relation
+        placeholder: 'Sélectionner une matière'
+        disabled: true
+    coefficient:
+        label: Coéfficient
+        span: auto
+        type: number
+        disabled: true

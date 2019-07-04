@@ -1,0 +1,13 @@
+columns:
+    matricule:
+        label: Matricule
+        type: text
+        searchable: true
+    nom:
+        label: Nom
+        type: text
+        searchable: true
+    prenom:
+        label: Prénom
+        type: text
+        searchable: true

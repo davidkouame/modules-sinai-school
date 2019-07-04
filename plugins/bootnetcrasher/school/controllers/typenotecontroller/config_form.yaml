@@ -1,0 +1,10 @@
+name: TypeNoteController
+form: $/bootnetcrasher/school/models/typenotemodel/fields.yaml
+modelClass: BootnetCrasher\School\Models\TypeNoteModel
+defaultRedirect: bootnetcrasher/school/typenotecontroller
+create:
+    redirect: 'bootnetcrasher/school/typenotecontroller/update/:id'
+    redirectClose: bootnetcrasher/school/typenotecontroller
+update:
+    redirect: bootnetcrasher/school/typenotecontroller
+    redirectClose: bootnetcrasher/school/typenotecontroller

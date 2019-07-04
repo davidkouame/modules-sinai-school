@@ -3,15 +3,15 @@ columns:
         label: Libelle
         type: text
         searchable: true
-    serie:
-        label: Serie
-        relation: serie
-        select: libelle
-        type: text
     niveau:
         label: Niveau
         relation: niveau
         searchable: true
         sortable: true
+        select: libelle
+        type: text
+    serie:
+        label: Serie
+        relation: serie
         select: libelle
         type: text

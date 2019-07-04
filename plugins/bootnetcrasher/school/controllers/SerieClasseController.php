@@ -13,6 +13,7 @@ class SerieClasseController extends Controller
 
     public function __construct()
     {
+        BackendMenu::setContext('BootnetCrasher.School', 'parametres', 'series');
         parent::__construct();
     }
 }

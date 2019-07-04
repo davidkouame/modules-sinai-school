@@ -1,0 +1,8 @@
+matieres:
+    label: Matieres
+    view:
+        list: $/bootnetcrasher/school/models/matieremodel/columns.yaml
+        toolbarButtons: add|remove
+    manage:
+        form: $/bootnetcrasher/school/models/matieremodel/fields.yaml
+        list: $/bootnetcrasher/school/models/matieremodel/columns.yaml

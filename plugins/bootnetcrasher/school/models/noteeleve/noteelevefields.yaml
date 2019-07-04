@@ -1,0 +1,8 @@
+fields:
+    eleve:
+        label: Elève
+        type: relation
+        placeholder: 'Sélectionner un élève'
+        select: matricule
+        attributes:
+            multiple: true

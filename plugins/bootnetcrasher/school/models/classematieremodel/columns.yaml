@@ -1,0 +1,5 @@
+columns:
+    coefficient:
+        label: Matière
+        type: number
+        searchable: true
