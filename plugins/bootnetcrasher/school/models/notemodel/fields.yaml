@@ -1,4 +1,9 @@
 fields:
+    reference:
+        label: Reference
+        span: auto
+        type: text
+        disabled: true
     libelle:
         label: Libelle
         span: auto

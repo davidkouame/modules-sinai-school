@@ -5,19 +5,24 @@ use BackendMenu;
 
 class ClasseController extends Controller
 {
-    public $implement = [        'Backend\Behaviors\ListController',        'Backend\Behaviors\FormController',        'Backend\Behaviors\ReorderController'    ];
+    public $implement = [
+        'Backend\Behaviors\ListController',
+        'Backend\Behaviors\FormController',
+        'Backend\Behaviors\ReorderController',
+        'Backend\Behaviors\RelationController'
+    ];
     
     public $listConfig = 'config_list.yaml';
     public $formConfig = 'config_form.yaml';
     public $reorderConfig = 'config_reorder.yaml';
-    // public $relationConfig = 'config_relation.yaml';
+    public $relationConfig = 'config_relation.yaml';
 
     public function __construct()
     {
         parent::__construct();
     }
 
-    public function update($classeId = null){
+    /* public function update($classeId = null){
         $config = $this->makeConfig('$/bootnetcrasher/school/models/classemodel/fields.yaml');
         $model = \BootnetCrasher\School\Models\ClasseModel::find($classeId);
         $config->model = $model;
@@ -25,5 +30,5 @@ class ClasseController extends Controller
         $this->vars['model'] = $config->model;
         $widget->bindToController();
         $this->vars['widget'] = $widget;
-    }
+    } */
 }

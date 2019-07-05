@@ -81,3 +81,12 @@
 1.0.28:
     - 'Created table bootnetcrasher_school_classe_matiere'
     - builder_table_create_bootnetcrasher_school_classe_matiere.php
+1.0.29:
+    - 'Updated table bootnetcrasher_school_note'
+    - builder_table_update_bootnetcrasher_school_note_3.php
+1.0.30:
+    - 'Created table bootnetcrasher_school_type_user'
+    - builder_table_create_bootnetcrasher_school_type_user.php
+1.0.31:
+    - 'Created table bootnetcrasher_school_parent'
+    - builder_table_create_bootnetcrasher_school_parent.php

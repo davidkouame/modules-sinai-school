@@ -36,4 +36,17 @@ class ClasseModel extends Model
     public $attachOne = [
         'emploisdutemps' => \System\Models\File::class
     ];
+
+    /* public $belongsToMany = [
+        'matieres' => [
+            'bootnetcrasher\school\models\matieremodel',
+            'table' => 'bootnetcrasher_school_classe_matiere',
+            'key' => 'matiere_id',
+            'otherKey' => 'classe_id'
+        ]
+    ]; */
+
+    public $hasMany = [
+        'classematiere' => ['bootnetcrasher\school\models\classematieremodel', 'key' => 'classe_id', 'otherKey' => 'id'],
+    ];
 }

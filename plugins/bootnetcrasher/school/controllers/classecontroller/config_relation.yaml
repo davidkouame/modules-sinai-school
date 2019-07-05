@@ -1,8 +1,8 @@
-matieres:
+classematiere:
     label: Matieres
     view:
-        list: $/bootnetcrasher/school/models/matieremodel/columns.yaml
-        toolbarButtons: add|remove
+        list: $/bootnetcrasher/school/models/classematieremodel/columns.yaml
+        toolbarButtons: create|delete
     manage:
-        form: $/bootnetcrasher/school/models/matieremodel/fields.yaml
-        list: $/bootnetcrasher/school/models/matieremodel/columns.yaml
+        form: $/bootnetcrasher/school/models/classematieremodel/fields.yaml
+        list: $/bootnetcrasher/school/models/classematieremodel/columns.yaml

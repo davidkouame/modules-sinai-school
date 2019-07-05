@@ -1,5 +1,16 @@
 columns:
-    coefficient:
+    matiere:
         label: Matière
-        type: number
+        type: text
+        select: libelle
+        relation: matiere
+    classe:
+        label: Classe
+        type: text
+        searchable: true
+        select: libelle
+        relation: classe
+    coefficient:
+        label: Coefficient
+        type: text
         searchable: true

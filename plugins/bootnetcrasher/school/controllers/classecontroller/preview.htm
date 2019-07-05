@@ -11,6 +11,8 @@
         <?= $this->formRenderPreview() ?>
     </div>
 
+    <?= $this->relationRender('classematiere') ?>
+
 <?php else: ?>
     <p class="flash-message static error"><?= e($this->fatalError) ?></p>
 <?php endif ?>

@@ -45,4 +45,14 @@ class NoteModel extends Model
             'otherKey' => 'note_id'
         ]
     ];
+
+    public function beforeCreate()
+    {
+        $this->reference = $this->getReference();
+    }
+
+    // generate reference
+    public function getReference(){
+       return rand();
+    }
 }
