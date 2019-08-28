@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>sinaischool</title>
+</head>
+
+<body>
+  <div id="app">
+    <div :id="id">{{ greeting }}</div>
+    <div v-bind:id="dynamicId">nnnnn</div>
+    <h2> Add Number {{ num1 }} + {{ num2 }} = {{ total }}</h2>
+    <button @click="displaynumbers">Click ME</button>
+
+    <form v-on:submit.prevent="handleFormSubmit">
+      <input type="text" v-model="personne.nom">
+      <input type="text" v-model="personne.prenom">
+      <button type="submit">envoi</button>
+    </form>
+
+    <!-- Is authenticated -->
+    <p id="text" v-if="isAuth">Welcome...</p>
+
+    <!-- Is NOT authenticated-->
+    <button else>Login</button>
+
+  </div>
+  <!-- built files will be auto injected -->
+</body>
+
+</html>
