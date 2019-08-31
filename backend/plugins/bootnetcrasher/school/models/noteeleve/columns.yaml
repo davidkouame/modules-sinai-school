@@ -1,0 +1,17 @@
+columns:
+    note:
+        label: Note
+        type: text
+        searchable: true
+        select: libelle
+        relation: note
+    eleve:
+        label: Elève
+        type: text
+        searchable: true
+        select: matricule
+        relation: eleve
+    valeur:
+        label: Valeur
+        type: text
+        searchable: false

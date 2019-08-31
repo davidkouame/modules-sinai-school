@@ -1,0 +1,10 @@
+name: MatiereController
+form: $/bootnetcrasher/school/models/matieremodel/fields.yaml
+modelClass: BootnetCrasher\School\Models\MatiereModel
+defaultRedirect: bootnetcrasher/school/matierecontroller
+create:
+    redirect: 'bootnetcrasher/school/matierecontroller/update/:id'
+    redirectClose: bootnetcrasher/school/matierecontroller
+update:
+    redirect: bootnetcrasher/school/matierecontroller
+    redirectClose: bootnetcrasher/school/matierecontroller

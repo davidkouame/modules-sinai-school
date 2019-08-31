@@ -1,0 +1,81 @@
+plugin:
+    name: 'bootnetcrasher.school::lang.plugin.name'
+    description: 'bootnetcrasher.school::lang.plugin.description'
+    author: 'Bootnet crasher'
+    icon: oc-icon-adjust
+    homepage: ''
+navigation:
+    actualites:
+        label: Actualites
+        url: bootnetcrasher/school/actualitecontroller
+        icon: icon-arrow-right
+    examens:
+        label: Examens
+        url: bootnetcrasher/school/examencontroller
+        icon: icon-life-ring
+    clubs:
+        label: Clubs
+        url: bootnetcrasher/school/clubcontroller
+        icon: icon-life-ring
+    professeurs:
+        label: Professeurs
+        url: bootnetcrasher/school/professeurmodel
+        icon: icon-life-ring
+    classes:
+        label: Classes
+        url: bootnetcrasher/school/classecontroller
+        icon: icon-life-ring
+    sujets:
+        label: Sujets
+        url: bootnetcrasher/school/sujetcontroller
+        icon: icon-life-ring
+    organigrame:
+        label: Organigrames
+        url: bootnetcrasher/school/organigramecontroller
+        icon: icon-life-ring
+    main-menu-item:
+        label: Eleves
+        url: bootnetcrasher/school/elevecontroller
+        icon: icon-adjust
+    parametres:
+        label: Paramètres
+        url: bootnetcrasher/school/indexcontrollerparametre
+        icon: icon-life-ring
+        sideMenu:
+            matieres:
+                label: Matière
+                url: bootnetcrasher/school/matierecontroller
+                icon: icon-sitemap
+            typesmatiere:
+                label: 'Type matière'
+                url: bootnetcrasher/school/typematierecontroller
+                icon: icon-life-ring
+            series:
+                label: Series
+                url: bootnetcrasher/school/serieclassecontroller
+                icon: icon-life-ring
+            parametrages:
+                label: Parametrages
+                url: bootnetcrasher/school/parametragecontroller
+                icon: icon-life-ring
+            niveaux:
+                label: Niveaux
+                url: bootnetcrasher/school/niveauclassecontroller
+                icon: icon-life-ring
+    notes:
+        label: Notes
+        url: bootnetcrasher/school/indexcontrollernote
+        icon: icon-life-ring
+        sideMenu:
+            notes:
+                label: Notes
+                url: bootnetcrasher/school/notecontroller
+                icon: icon-sitemap
+            valeursnoteseleves:
+                label: 'Valeur Notes Eleves'
+                url: bootnetcrasher/school/valeurnoteeleve
+                icon: icon-sitemap
+            typenote:
+                label: 'Type note'
+                url: bootnetcrasher/school/typenotecontroller
+                icon: icon-life-ring

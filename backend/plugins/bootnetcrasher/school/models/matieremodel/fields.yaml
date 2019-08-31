@@ -1,0 +1,18 @@
+fields:
+    libelle:
+        label: Libelle
+        span: auto
+        type: text
+    typematiere:
+        label: 'Type matière'
+        nameFrom: name
+        descriptionFrom: description
+        select: libelle
+        span: auto
+        placeholder: 'Sélectionner un type matère'
+        type: relation
+    description:
+        label: Description
+        span: auto
+        size: ''
+        type: textarea

@@ -1,0 +1,21 @@
+fields:
+    matricule:
+        label: Matricule
+        span: auto
+        type: text
+        disabled: true
+#    nom:
+#        label: Nom
+#        span: auto
+#        type: text
+#    prenom:
+#        label: Prénom
+#        span: auto
+#        type: text
+    users:
+        label: Nom
+        span: auto
+        type: relation
+        select: name
+        partial: users
+        placeholder: Sélectionnez un user

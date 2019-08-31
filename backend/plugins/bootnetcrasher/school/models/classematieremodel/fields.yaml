@@ -1,0 +1,19 @@
+fields:
+    matiere:
+        label: Matière
+        nameFrom: libelle
+        descriptionFrom: description
+        span: auto
+        type: relation
+        placeholder: Sélectionner une matière
+    classe:
+        label: Classe
+        nameFrom: libelle
+        descriptionFrom: description
+        span: auto
+        type: relation
+        placeholder: Sélectionner une classe
+    coefficient:
+        label: Coefficient
+        span: auto
+        type: number

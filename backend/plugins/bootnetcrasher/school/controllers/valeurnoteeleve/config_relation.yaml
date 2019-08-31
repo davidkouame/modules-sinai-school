@@ -1,0 +1,13 @@
+eleves:
+    label: Eleves Notes
+    view:
+        list: $/bootnetcrasher/school/models/elevemodel/columns.yaml
+        toolbarButtons: add|remove
+#        showSearch: true
+#        showSorting: true
+#        recordsPerPage: 10
+#        showCheckboxes: false
+#        toolbarButtons: add|remove
+    manage:
+        form: $/bootnetcrasher/school/models/elevemodel/fields.yaml
+        list: $/bootnetcrasher/school/models/elevemodel/columns.yaml

@@ -1,0 +1,34 @@
+fields:
+    libelle:
+        label: Libelle
+        span: auto
+        type: text
+        disabled: 1
+    description:
+        label: Description
+        size: ''
+        span: auto
+        type: textarea
+        disabled: 1
+    datenoteeffectue:
+        label: 'Date de note effectué'
+        mode: datetime
+        span: auto
+        type: datepicker
+        disabled: 1
+    typenote:
+        label: 'Type Note'
+        span: auto
+        nameFrom: name
+        descriptionFrom: description
+        select: libelle
+        type: relation
+        placeholder: 'Sélectionner un type de note'
+        disabled: 1
+#tabs:
+#    fields:
+#        eleves:
+#            span: full
+#            path: eleves
+#            type: partial
+#            tab: Eleves

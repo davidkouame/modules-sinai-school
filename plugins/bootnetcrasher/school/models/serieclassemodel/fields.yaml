@@ -1,5 +1,0 @@
-fields:
-    libelle:
-        label: Libelle
-        span: auto
-        type: text

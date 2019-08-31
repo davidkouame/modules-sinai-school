@@ -1,0 +1,21 @@
+fields:
+    nom:
+        label: Nom
+        span: auto
+        type: text
+    prenom:
+        label: Prenom
+        span: auto
+        type: text
+    password:
+        label: Password
+        span: auto
+        type: password
+    telephone:
+        label: Téléphone
+        span: auto
+        type: number
+    passwordretype:
+        label: 'Retype Password'
+        span: auto
+        type: password

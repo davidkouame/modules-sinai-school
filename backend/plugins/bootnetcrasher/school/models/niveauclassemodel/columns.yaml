@@ -1,0 +1,8 @@
+columns:
+    libelle:
+        label: Libelle
+        type: text
+        searchable: true
+    ordre:
+        label: Ordre
+        type: text
