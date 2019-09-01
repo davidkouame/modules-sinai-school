@@ -5,11 +5,10 @@ use BackendMenu;
 
 use Illuminate\Http\Request;
 use AhmadFatoni\ApiGenerator\Helpers\Helpers;
-use Illuminate\Support\Facades\Validator;
 use BootnetCrasher\School\Models\NoteModel;
 class noteController extends Controller
 {
-	protected $NoteModel;
+    protected $NoteModel;
 
     protected $helpers;
 
@@ -20,30 +19,33 @@ class noteController extends Controller
         $this->helpers          = $helpers;
     }
 
-    public function index(){
-
-        $data = $this->NoteModel->all()->toArray();
-
+    
+    public function index(){ 
+        $data = $this->NoteModel->with(array(
+            'typenote'=>function($query){
+                $query->select();
+            },
+            'matiere'=>function($query){
+                $query->select();
+            }, ))->select('*')->get()->toArray();
         return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
     }
 
-    public function show($id){
-
-        $data = $this->NoteModel->where('id',$id)->first();
-
-        if( count($data) > 0){
-
-            return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
-
-        }
-
-        $this->helpers->apiArrayResponseBuilder(400, 'bad request', ['error' => 'invalid key']);
-
+    
+    public function show($id){ 
+        $data = $this->NoteModel->with(array(
+            'typenote'=>function($query){
+                $query->select();
+            },
+            'matiere'=>function($query){
+                $query->select();
+            }, ))->select('*')->where('id', '=', $id)->first();
+        return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
     }
 
     public function store(Request $request){
 
-    	$arr = $request->all();
+        $arr = $request->all();
 
         while ( $data = current($arr)) {
             $this->NoteModel->{key($arr)} = $data;
