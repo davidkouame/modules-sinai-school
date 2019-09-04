@@ -11,6 +11,7 @@
               <th scope="col">Libellé</th>
               <th scope="col">Date</th>
               <th scope="col">Type de note</th>
+              <th scope="col">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -18,7 +19,8 @@
               <th scope="row">1</th>
               <td>{{ note.libelle }}</td>
               <td>{{ note.created_at|formatDate }}</td>
-              <td>{{ note.typenote_id }}</td>
+              <td>{{ note.typenote.libelle }}</td>
+              <td><a :href="'/#/notes/'+note.id" class="btn btn-primary">detail</a></td>
             </tr>
           </tbody>
         </table>
@@ -34,15 +36,16 @@ export default {
   name: "HelloWorld",
   data() {
     return {
-      msg: "Welcome to Your Vue.js App ",
+      msg: "Liste des notes",
       notes: []
     };
   },
   mounted () {
      Axios
-      .get('http://localhost/modules-sinai-school/backend/api/v1/note')
+      .get('http://localhost:8888/modulesinaischool/backend/api/v1/notemodel')
       .then(response => {
         this.notes = response.data.data
+        console.log(response.data.data)
       })
       .catch(error => {
         console.log(error)
