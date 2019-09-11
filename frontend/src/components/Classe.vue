@@ -1,11 +1,11 @@
 <template>
   <div class="container">
-    <h1>Bienvenue sur l'application de gestion de notes</h1>
+    <h1>Information de la classe</h1>
   </div>
 </template>
 
 <script>
 export default {
-  name: "HelloWorld"
+  name: "Classe"
 };
 </script>

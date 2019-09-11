@@ -1,5 +1,16 @@
 <template>
   <div id="app">
+    <ul>
+      <li style="display: inline-block;">
+        <router-link to="/">Home</router-link>
+      </li>
+      <li style="display: inline-block;">
+        <router-link to="/notes">Notes</router-link>
+      </li>
+      <li style="display: inline-block;">
+        <router-link to="/classe">Classe</router-link>
+      </li>
+    </ul>
     <router-view/>
   </div>
 </template>
