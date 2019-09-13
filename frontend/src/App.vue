@@ -10,6 +10,9 @@
       <li style="display: inline-block;">
         <router-link to="/classe">Classe</router-link>
       </li>
+      <li style="display: inline-block;">
+        <router-link to="/create-parent">Create compte parent</router-link>
+      </li>
     </ul>
     <router-view/>
   </div>

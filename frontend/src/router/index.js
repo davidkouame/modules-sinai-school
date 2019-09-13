@@ -4,6 +4,7 @@ import HelloWorld from '@/components/HelloWorld'
 import DetailNote from '@/components/DetailNote'
 import Note from '@/components/Note'
 import Classe from '@/components/Classe'
+import CreateCompteParent from '@/components/CreateCompteParent'
 
 Vue.use(Router)
 
@@ -12,7 +13,7 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'HelloWorld',
+      name: 'Home',
       component: HelloWorld
     },
     {
@@ -29,6 +30,11 @@ export default new Router({
       path: '/classe',
       name: 'Classe',
       component: Classe
+    },
+    {
+      path: '/create-parent',
+      name: 'Create compte parent',
+      component: CreateCompteParent
     }
   ]
 })

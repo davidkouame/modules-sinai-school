@@ -15,14 +15,14 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-if="notes" v-for="note in notes">
+            <tr v-if="allnoteseleves" v-for="noteeleve in allnoteseleves">
               <th scope="row">1</th>
-              <td>{{ note.libelle }}</td>
-              <td>{{ note.created_at|formatDate }}</td>
-              <td v-if="note.typenote">{{ note.typenote.libelle }}</td>
-              <td v-else="note.typenote"></td>
+              <td>{{ noteeleve.note.libelle }}</td>
+              <td>{{ noteeleve.note.created_at|formatDate }}</td>
+              <td v-if="noteeleve.note.typenote">{{ noteeleve.note.typenote.libelle }}</td>
+              <td v-else="noteeleve.note.typenote"></td>
               <td>
-                <a :href="'/#/notes/'+note.id" class="btn btn-primary">detail</a>
+                <a :href="'/#/notes/'+noteeleve.note.id" class="btn btn-primary">detail</a>
               </td>
             </tr>
           </tbody>
@@ -56,13 +56,15 @@ export default {
   methods: {
     fetch(pageNum) {
       pageNum = pageNum == null ? 1:pageNum;
-      console.log(pageNum);
-      this.$store.dispatch("allnotes", pageNum);
+      this.$store.dispatch("allnoteseleves", {'pageNum': pageNum, 'userId': this.$store.getters.userId});
     }
   },
   computed: {
     notes() {
       return this.$store.getters.notes;
+    },
+    allnoteseleves() {
+      return this.$store.getters.noteseleves;
     },
     pageCount(){
       return this.$store.getters.pageCount;

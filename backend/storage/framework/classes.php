@@ -404,4 +404,9 @@
   'RLuders\\Cors\\Providers\\CorsServiceProvider' => 'plugins/rluders/cors/providers/CorsServiceProvider.php',
   'RLuders\\Cors\\Models\\Settings' => 'plugins/rluders/cors/models/Settings.php',
   'Backend\\FormWidgets\\TagList' => 'modules/backend/formwidgets/TagList.php',
+  'Backend\\FormWidgets\\DatePicker' => 'modules/backend/formwidgets/DatePicker.php',
+  'BootnetCrasher\\School\\Controllers\\Api\\NoteEleveController' => 'plugins/bootnetcrasher/school/controllers/api/NoteEleveController.php',
+  'AhmadFatoni\\ApiGenerator\\Controllers\\API\\userController' => 'plugins/ahmadfatoni/apigenerator/controllers/api/userController.php',
+  'BootnetCrasher\\School\\Models\\ParentEleve' => 'plugins/bootnetcrasher/school/models/ParentEleve.php',
+  'RainLab\\User\\Models\\Throttle' => 'plugins/rainlab/user/models/Throttle.php',
 );

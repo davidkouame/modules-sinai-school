@@ -51,8 +51,16 @@ class NoteModel extends Model
         $this->reference = $this->getReference();
     }
 
+    public function afterSave(){
+        // dd($this->id);
+    }
+
     // generate reference
     public function getReference(){
        return rand();
+    }
+
+    public function attributeNoteToEleve($noteId = null){
+
     }
 }

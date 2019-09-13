@@ -21,13 +21,14 @@ class noteController extends Controller
 
     
     public function index(){ 
+
         $data = $this->NoteModel->with(array(
             'typenote'=>function($query){
-                $query->select();
+                $query->select('*');
             },
             'matiere'=>function($query){
-                $query->select();
-            }, ))->select('*')->get()->toArray();
+                $query->select('*');
+            }, ))->paginate(10)->toArray();
         return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
     }
 
@@ -35,11 +36,11 @@ class noteController extends Controller
     public function show($id){ 
         $data = $this->NoteModel->with(array(
             'typenote'=>function($query){
-                $query->select();
+                $query->select('*');
             },
             'matiere'=>function($query){
-                $query->select();
-            }, ))->select('*')->where('id', '=', $id)->first();
+                $query->select('*');
+            }, ))->select()->where('id', '=', $id)->first();
         return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
     }
 
