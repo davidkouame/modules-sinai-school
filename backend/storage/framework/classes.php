@@ -409,4 +409,13 @@
   'AhmadFatoni\\ApiGenerator\\Controllers\\API\\userController' => 'plugins/ahmadfatoni/apigenerator/controllers/api/userController.php',
   'BootnetCrasher\\School\\Models\\ParentEleve' => 'plugins/bootnetcrasher/school/models/ParentEleve.php',
   'RainLab\\User\\Models\\Throttle' => 'plugins/rainlab/user/models/Throttle.php',
+  'AhmadFatoni\\ApiGenerator\\Controllers\\API\\classesController' => 'plugins/ahmadfatoni/apigenerator/controllers/api/classesController.php',
+  'bootnetcrasher\\school\\Controllers\\absenceelevecontroller' => 'plugins/bootnetcrasher/school/controllers/absenceelevecontroller.php',
+  'BootnetCrasher\\School\\Models\\AbsenceEleveModel' => 'plugins/bootnetcrasher/school/models/AbsenceEleveModel.php',
+  'bootnetcrasher\\parametrage\\Plugin' => 'plugins/bootnetcrasher/parametrage/Plugin.php',
+  'bootnetcrasher\\parametrage\\Controllers\\indexcontrollerparametrage' => 'plugins/bootnetcrasher/parametrage/controllers/indexcontrollerparametrage.php',
+  'bootnetcrasher\\parametrage\\Controllers\\raisonabsencecontroller' => 'plugins/bootnetcrasher/parametrage/controllers/raisonabsencecontroller.php',
+  'BootnetCrasher\\Parametrage\\Models\\RaisonAbsenceModel' => 'plugins/bootnetcrasher/parametrage/models/RaisonAbsenceModel.php',
+  'AhmadFatoni\\ApiGenerator\\Controllers\\API\\absenceeleveController' => 'plugins/ahmadfatoni/apigenerator/controllers/api/absenceeleveController.php',
+  'AhmadFatoni\\ApiGenerator\\Controllers\\API\\absenceselevesController' => 'plugins/ahmadfatoni/apigenerator/controllers/api/absenceselevesController.php',
 );

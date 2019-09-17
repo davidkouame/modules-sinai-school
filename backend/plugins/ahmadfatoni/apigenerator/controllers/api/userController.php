@@ -1,21 +1,19 @@
-<?php
-
-namespace AhmadFatoni\ApiGenerator\Controllers\API;
+<?php namespace AhmadFatoni\ApiGenerator\Controllers\API;
 
 use Cms\Classes\Controller;
 use BackendMenu;
 
 use Illuminate\Http\Request;
 use AhmadFatoni\ApiGenerator\Helpers\Helpers;
-use BootnetCrasher\School\Models\ParentEleve;
 use Illuminate\Support\Facades\Validator;
-use RainLab\User\Facades\Auth;
 use RainLab\User\Models\User;
+use BootnetCrasher\School\Models\ParentEleve;
+use BootnetCrasher\School\Models\EleveModel;
 use Event;
-
+use Auth;
 class userController extends Controller
 {
-    protected $User;
+	protected $User;
 
     protected $helpers;
 
@@ -26,73 +24,72 @@ class userController extends Controller
         $this->helpers          = $helpers;
     }
 
-    public function index()
-    {
+    public function index(){
 
         $data = $this->User->all()->toArray();
 
         return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
     }
 
-    public function show($id)
-    {
+    public function show($id){
 
-        $data = $this->User->where('id', $id)->first();
+        $data = $this->User->where('id',$id)->first();
 
-        if (count($data) > 0) {
+        if( count($data) > 0){
 
             return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
+
         }
 
         $this->helpers->apiArrayResponseBuilder(400, 'bad request', ['error' => 'invalid key']);
+
     }
 
-    public function store(Request $request)
-    {
+    public function store(Request $request){
 
-        $arr = $request->all();
+    	$arr = $request->all();
 
-        while ($data = current($arr)) {
+        while ( $data = current($arr)) {
             $this->User->{key($arr)} = $data;
             next($arr);
         }
 
         $validation = Validator::make($request->all(), $this->User->rules);
-
-        if ($validation->passes()) {
+        
+        if( $validation->passes() ){
             $this->User->save();
             return $this->helpers->apiArrayResponseBuilder(201, 'created', ['id' => $this->User->id]);
-        } else {
-            return $this->helpers->apiArrayResponseBuilder(400, 'fail', $validation->errors());
+        }else{
+            return $this->helpers->apiArrayResponseBuilder(400, 'fail', $validation->errors() );
         }
+
     }
 
-    public function update($id, Request $request)
-    {
+    public function update($id, Request $request){
 
-        $status = $this->User->where('id', $id)->update($data);
-
-        if ($status) {
-
+        $status = $this->User->where('id',$id)->update($data);
+    
+        if( $status ){
+            
             return $this->helpers->apiArrayResponseBuilder(200, 'success', 'Data has been updated successfully.');
-        } else {
+
+        }else{
 
             return $this->helpers->apiArrayResponseBuilder(400, 'bad request', 'Error, data failed to update.');
+
         }
     }
 
-    public function delete($id)
-    {
+    public function delete($id){
 
-        $this->User->where('id', $id)->delete();
+        $this->User->where('id',$id)->delete();
 
         return $this->helpers->apiArrayResponseBuilder(200, 'success', 'Data has been deleted successfully.');
     }
 
-    public function destroy($id)
-    {
+    public function destroy($id){
 
-        $this->User->where('id', $id)->delete();
+        $this->User->where('id',$id)->delete();
 
         return $this->helpers->apiArrayResponseBuilder(200, 'success', 'Data has been deleted successfully.');
     }
@@ -110,17 +107,25 @@ class userController extends Controller
 
             //on verifie si l'email est dans la base et que celui est rattaché a un compte cabinetplacement
             $user = User::where('email', '=', $data['email'])
-                ->whereNotNull('parenteleve_id')
+                // ->whereNotNull('parenteleve_id')
                 ->first();
 
             if (!$user) {
                 return $this->helpers->apiArrayResponseBuilder(403, 'success', "Désolé, l'email ou mot passe est incorrect .");
             }
 
-            //recupération du compte parenteleve
-            $parenteleve = ParentEleve::where('id', '=', $user->parenteleve_id)->first();
-            if (!$parenteleve) {
-                return $this->helpers->apiArrayResponseBuilder(403, 'success', "Désolé, l'email ou mot passe est incorrect .");
+            if($user->parenteleve_id){
+                //recupération du compte parenteleve
+                $parenteleve = ParentEleve::where('id', '=', $user->parenteleve_id)->first();
+                if (!$parenteleve) {
+                    return $this->helpers->apiArrayResponseBuilder(403, 'success', "Désolé, l'email ou mot passe est incorrect .");
+                }
+            }else{
+                //recupération du compte eleve
+                $eleve = EleveModel::where('id', '=', $user->eleve_id)->first();
+                if (!$eleve) {
+                    return $this->helpers->apiArrayResponseBuilder(403, 'success', "Désolé, l'email ou mot passe est incorrect .");
+                }
             }
 
             Event::fire('rainlab.user.beforeAuthenticate', [$this, $credentials]);
@@ -132,20 +137,11 @@ class userController extends Controller
         return $this->helpers->apiArrayResponseBuilder(200, 'success', $user);
     }
 
-    public static function getAfterFilters()
-    {
-        return [];
-    }
-    public static function getBeforeFilters()
-    {
-        return [];
-    }
-    public static function getMiddleware()
-    {
-        return [];
-    }
-    public function callAction($method, $parameters = false)
-    {
+    public static function getAfterFilters() {return [];}
+    public static function getBeforeFilters() {return [];}
+    public static function getMiddleware() {return [];}
+    public function callAction($method, $parameters=false) {
         return call_user_func_array(array($this, $method), $parameters);
     }
+    
 }

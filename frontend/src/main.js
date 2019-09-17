@@ -3,6 +3,9 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import App from './App'
+import Login from './components/Login.vue'
+import ParentLayout from './components/layouts/Parent.vue'
+import EleveLayout from './components/layouts/Eleve.vue'
 import router from './router'
 import moment from 'moment'
 import 'bootstrap'
@@ -25,23 +28,47 @@ Vue.use(BootstrapVue)
 
 Vue.component('paginate', Paginate)
 
-Vue.filter('formatDate', function(value) {
+Vue.filter('formatDate', function (value) {
   if (value) {
     return moment(String(value)).format('MM/DD/YYYY')
   }
 });
 
-Vue.filter('truncate', function(value){
+Vue.filter('truncate', function (value) {
   return value.substring(0, 20)
 });
 
 
+if (localStorage.userId) {
+  if (localStorage.userType == "parent") {
+    /* eslint-disable */
+    new Vue({
+      el: '#app',
+      router,
+      store,
+      components: { ParentLayout },
+      template: '<ParentLayout/>'
+    })
+  } else {
+    /* eslint-disable */
+    new Vue({
+      el: '#app',
+      router,
+      store,
+      components: { EleveLayout },
+      template: '<EleveLayout/>'
+    })
+  }
 
-/* eslint-disable */
-new Vue({
-  el: '#app',
-  router,
-  store,
-  components: { App },
-  template: '<App/>'
-})
+} else {
+  /* eslint-disable */
+  new Vue({
+    el: '#app',
+    router,
+    store,
+    components: { Login },
+    template: '<Login/>'
+  })
+}
+
+

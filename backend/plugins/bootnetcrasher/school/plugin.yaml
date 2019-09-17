@@ -37,6 +37,10 @@ navigation:
         label: Eleves
         url: bootnetcrasher/school/elevecontroller
         icon: icon-adjust
+    absenceeleve:
+        label: Absences élèves
+        url: bootnetcrasher/school/absenceelevecontroller
+        icon: icon-adjust
     parametres:
         label: Paramètres
         url: bootnetcrasher/school/indexcontrollerparametre

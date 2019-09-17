@@ -1,0 +1,31 @@
+fields:
+    eleve:
+        label: Elève
+        span: auto
+        required: 1
+        type: relation
+        select: matricule
+        placeholder: 'Sélectionner un éléve'
+    raisonabsence:
+        label: Raison d'absence
+        span: auto
+        required: 1
+        type: relation
+        select: libelle
+        placeholder: 'Sélectionner une raison'
+    commentaire:
+        label: Commentaire
+        size: ''
+        span: auto
+        required: 1
+        type: textarea
+    heure_debut_cours:
+        label: 'Heure début de cours'
+        mode: datetime
+        span: auto
+        type: datepicker
+    heure_fin_cours:
+        label: 'Heure fin de cours'
+        mode: datetime
+        span: auto
+        type: datepicker

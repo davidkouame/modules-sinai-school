@@ -1,0 +1,10 @@
+name: RaisonAbsenceController
+form: $/bootnetcrasher/parametrage/models/raisonabsencemodel/fields.yaml
+modelClass: BootnetCrasher\Parametrage\Models\RaisonAbsenceModel
+defaultRedirect: bootnetcrasher/parametrage/raisonabsencecontroller
+create:
+    redirect: 'bootnetcrasher/parametrage/raisonabsencecontroller/update/:id'
+    redirectClose: bootnetcrasher/parametrage/raisonabsencecontroller
+update:
+    redirect: bootnetcrasher/parametrage/raisonabsencecontroller
+    redirectClose: bootnetcrasher/parametrage/raisonabsencecontroller

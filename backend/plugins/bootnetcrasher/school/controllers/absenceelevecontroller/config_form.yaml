@@ -1,0 +1,10 @@
+name: AbsenceEleveController
+form: $/bootnetcrasher/school/models/absenceelevemodel/fields.yaml
+modelClass: BootnetCrasher\School\Models\AbsenceEleveModel
+defaultRedirect: bootnetcrasher/school/absenceelevecontroller
+create:
+    redirect: 'bootnetcrasher/school/absenceelevecontroller/update/:id'
+    redirectClose: bootnetcrasher/school/absenceelevecontroller
+update:
+    redirect: bootnetcrasher/school/absenceelevecontroller
+    redirectClose: bootnetcrasher/school/absenceelevecontroller

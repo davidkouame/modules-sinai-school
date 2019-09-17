@@ -7,12 +7,16 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     strict: true,
     state: {
-        endpoint: 'http://localhost/modules-sinai-school/backend/',
+        // endpoint: 'http://localhost/modules-sinai-school/backend/',
+        endpoint: 'http://localhost:8888/modulesinaischool/backend/',
         api: 'api/v1/note/',
         notes: [],
         noteseleves: [],
         pageCount: 1,
-        userId: 1
+        userId: 6,
+        classe: null,
+        absenceseleves: []
+        // userId: 1
     },
     mutations: {
         notes(state, payload) {
@@ -23,6 +27,12 @@ export default new Vuex.Store({
         },
         pageCount(state, payload) {
             state.pageCount = payload
+        },
+        classe(state, classe){
+            state.classe = classe
+        },
+        absenceseleves(state, absenceseleves){
+            state.absenceseleves = absenceseleves
         }
     },
     getters: {
@@ -37,6 +47,12 @@ export default new Vuex.Store({
         },
         userId: state => {
             return state.userId
+        },
+        classe: state => {
+            return state.classe
+        },
+        absenceseleves: state => {
+            return state.absenceseleves
         }
     },
     actions: {
@@ -47,7 +63,7 @@ export default new Vuex.Store({
                 .then(response => {
                     context.commit('notes', response.data.data.data)
                     context.commit('pageCount', response.data.data.last_page)
-                    console.log("la valeur de pageCount dans l'actions est " + response.data.data.last_page)
+                    // console.log("la valeur de pageCount dans l'actions est " + response.data.data.last_page)
                 })
                 .catch(error => {
                     console.log(error);
@@ -57,7 +73,7 @@ export default new Vuex.Store({
         },
         allnoteseleves(context, payload) {
             Axios.get(
-                context.state.endpoint + "api/v1/noteeleve?eleve_id=" + payload.userId + "&page=" + payload.pageNum
+                context.state.endpoint + "api/v1/noteseleves?eleve_id=" + payload.userId + "&page=" + payload.pageNum
             )
                 .then(response => {
                     context.commit('noteseleves', response.data.data.data)
@@ -77,6 +93,45 @@ export default new Vuex.Store({
                 context.state.endpoint + "api/v1/users/login", data,
                 { headers: { 'Content-Type': 'multipart/form-data' } }
             );
+        },
+        login(context, payload) {
+            const data = new FormData();
+            data.append('email', payload.email);
+            data.append('password', payload.password);
+            return Axios.post(
+                context.state.endpoint + "api/v1/users/login", data,
+                { headers: { 'Content-Type': 'multipart/form-data' } }
+            );
+        },
+        classe(context, eleveId){
+            Axios.get(
+                context.state.endpoint + "api/v1/classes/" + 9
+            )
+                .then(response => {
+                    context.commit('classe', response.data.data)
+                    // console.log(response.data.data);
+                })
+                .catch(error => {
+                    console.log(error);
+                    this.errored = true;
+                })
+                .finally(() => (this.loading = false));
+        },
+        absenceseleves(context, request){
+            console.log(request);
+            Axios.get(
+                context.state.endpoint + "api/v1/absenceseleves?eleve_id=" + request.eleveId + "&page=" + request.pageNum
+            )
+                .then(response => {
+                    context.commit('absenceseleves', response.data.data.data)
+                    context.commit('pageCount', response.data.data.last_page)
+                    // console.log(response.data.data.data);
+                })
+                .catch(error => {
+                    console.log(error);
+                    this.errored = true;
+                })
+                .finally(() => (this.loading = false));
         }
     }
 })

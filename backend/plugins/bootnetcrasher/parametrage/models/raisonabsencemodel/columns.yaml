@@ -1,0 +1,21 @@
+columns:
+    id:
+        label: Id
+        type: number
+        searchable: true
+    libelle:
+        label: Libelle
+        type: text
+        searchable: true
+    description:
+        label: Description
+        type: text
+        searchable: true
+    created_at:
+        label: Date de création
+        type: date
+        searchable: true
+    updated_at:
+        label: Date de la dernière modification 
+        type: date
+        searchable: true

@@ -1,0 +1,16 @@
+plugin:
+    name: 'bootnetcrasher.parametrage::lang.plugin.name'
+    description: 'bootnetcrasher.parametrage::lang.plugin.description'
+    author: 'Bootnet Crasher'
+    icon: oc-icon-adjust
+    homepage: ''
+navigation:
+    parametrage:
+        label: Parametrages
+        url: bootnetcrasher/parametrage/indexcontrollerparametrage
+        icon: icon-life-ring
+        sideMenu:
+            raisonabsence:
+                label: Raisons absences
+                url: bootnetcrasher/parametrage/raisonabsencecontroller
+                icon: icon-sitemap

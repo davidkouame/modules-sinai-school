@@ -1,0 +1,40 @@
+columns:
+    id:
+        label: Id
+        type: number
+        searchable: true
+        invisible: true
+    heure_debut_cours:
+        label: 'Heure début de cours'
+        type: datetime
+        searchable: true
+    heure_fin_cours:
+        label: 'Heure fin de cours'
+        type: datetime
+        searchable: true
+    raisonabsence:
+        label: 'Raison de l''absence'
+        type: text
+        searchable: true
+        relation: raisonabsence
+        select: libelle
+    eleve:
+        label: Elève
+        type: text
+        searchable: true
+        relation: eleve
+        select: matricule
+    commentaire:
+        label: Commentaire
+        type: text
+        searchable: true
+    created_at:
+        label: 'Date de création'
+        type: date
+        searchable: true
+        invisible: true
+    updated_at:
+        label: 'Date de la dernière modification'
+        type: date
+        searchable: true
+        invisible: true

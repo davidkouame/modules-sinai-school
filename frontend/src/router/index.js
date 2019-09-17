@@ -5,6 +5,7 @@ import DetailNote from '@/components/DetailNote'
 import Note from '@/components/Note'
 import Classe from '@/components/Classe'
 import CreateCompteParent from '@/components/CreateCompteParent'
+import AbsenceEleve from '@/components/AbsenceEleve'
 
 Vue.use(Router)
 
@@ -35,6 +36,11 @@ export default new Router({
       path: '/create-parent',
       name: 'Create compte parent',
       component: CreateCompteParent
+    },
+    {
+      path: '/absence-eleve',
+      name: 'Absence eleve',
+      component: AbsenceEleve
     }
   ]
 })
