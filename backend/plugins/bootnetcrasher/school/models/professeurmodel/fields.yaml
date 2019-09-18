@@ -1,20 +1,11 @@
 fields:
-    nom:
+    users:
         label: Nom
         span: auto
-        type: text
-    prenom:
-        label: Prénoms
-        span: auto
-        type: text
-    email:
-        label: Email
-        span: auto
-        type: text
-    telephone:
-        label: Téléphone
-        span: auto
-        type: text
+        type: relation
+        select: name
+        partial: users
+        placeholder: Sélectionnez un user
     matiere:
         label: Matière
         span: auto

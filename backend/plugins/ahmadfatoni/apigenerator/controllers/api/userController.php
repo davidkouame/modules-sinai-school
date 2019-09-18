@@ -11,6 +11,8 @@ use BootnetCrasher\School\Models\ParentEleve;
 use BootnetCrasher\School\Models\EleveModel;
 use Event;
 use Auth;
+use BootnetCrasher\School\Models\Professeurmodel;
+
 class userController extends Controller
 {
 	protected $User;
@@ -118,6 +120,12 @@ class userController extends Controller
                 //recupération du compte parenteleve
                 $parenteleve = ParentEleve::where('id', '=', $user->parenteleve_id)->first();
                 if (!$parenteleve) {
+                    return $this->helpers->apiArrayResponseBuilder(403, 'success', "Désolé, l'email ou mot passe est incorrect .");
+                }
+            }elseif($user->professeur_id){
+                //recupération du compte professeur
+                $professeur = Professeurmodel::where('id', '=', $user->professeur_id)->first();
+                if (!$professeur) {
                     return $this->helpers->apiArrayResponseBuilder(403, 'success', "Désolé, l'email ou mot passe est incorrect .");
                 }
             }else{

@@ -8,14 +8,15 @@ export default new Vuex.Store({
     strict: true,
     state: {
         // endpoint: 'http://localhost/modules-sinai-school/backend/',
-        endpoint: 'http://localhost:8888/modulesinaischool/backend/',
+        endpoint: 'http://localhost/modules-sinai-school/backend/',
         api: 'api/v1/note/',
         notes: [],
         noteseleves: [],
         pageCount: 1,
         userId: 6,
         classe: null,
-        absenceseleves: []
+        absenceseleves: [],
+        absenceeleve: null
         // userId: 1
     },
     mutations: {
@@ -33,6 +34,9 @@ export default new Vuex.Store({
         },
         absenceseleves(state, absenceseleves){
             state.absenceseleves = absenceseleves
+        },
+        absenceeleve(state, absenceeleve){
+            state.absenceeleve = absenceeleve
         }
     },
     getters: {
@@ -53,6 +57,9 @@ export default new Vuex.Store({
         },
         absenceseleves: state => {
             return state.absenceseleves
+        },
+        absenceeleve: state => {
+            return state.absenceeleve
         }
     },
     actions: {
@@ -78,6 +85,7 @@ export default new Vuex.Store({
                 .then(response => {
                     context.commit('noteseleves', response.data.data.data)
                     context.commit('pageCount', response.data.data.last_page)
+                    // console.log("log pageCount "+JSON.stringify(response.data.last_page))
                 })
                 .catch(error => {
                     console.log(error);
@@ -126,6 +134,20 @@ export default new Vuex.Store({
                     context.commit('absenceseleves', response.data.data.data)
                     context.commit('pageCount', response.data.data.last_page)
                     // console.log(response.data.data.data);
+                })
+                .catch(error => {
+                    console.log(error);
+                    this.errored = true;
+                })
+                .finally(() => (this.loading = false));
+        },
+        absenceeleve(context, request){
+            Axios.get(
+                context.state.endpoint + "api/v1/absenceseleves/" + request.absenceEleveId
+            )
+                .then(response => {
+                    // console.log("log absence eleve"+JSON.stringify(response.data.data));
+                    context.commit('absenceeleve', response.data.data)
                 })
                 .catch(error => {
                     console.log(error);

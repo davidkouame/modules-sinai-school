@@ -418,4 +418,10 @@
   'BootnetCrasher\\Parametrage\\Models\\RaisonAbsenceModel' => 'plugins/bootnetcrasher/parametrage/models/RaisonAbsenceModel.php',
   'AhmadFatoni\\ApiGenerator\\Controllers\\API\\absenceeleveController' => 'plugins/ahmadfatoni/apigenerator/controllers/api/absenceeleveController.php',
   'AhmadFatoni\\ApiGenerator\\Controllers\\API\\absenceselevesController' => 'plugins/ahmadfatoni/apigenerator/controllers/api/absenceselevesController.php',
+  'Cms\\Twig\\ComponentNode' => 'modules/cms/twig/ComponentNode.php',
+  'Cms\\Classes\\ComponentPartial' => 'modules/cms/classes/ComponentPartial.php',
+  'Cms\\Helpers\\File' => 'modules/cms/helpers/File.php',
+  'Backend\\Models\\UserRole' => 'modules/backend/models/UserRole.php',
+  'Backend\\Models\\UserGroup' => 'modules/backend/models/UserGroup.php',
+  'BootnetCrasher\\School\\Controllers\\ProfesseurModel' => 'plugins/bootnetcrasher/school/controllers/ProfesseurModel.php',
 );

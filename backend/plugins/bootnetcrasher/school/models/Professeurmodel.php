@@ -28,4 +28,8 @@ class Professeurmodel extends Model
     public $attachOne = [
         'logo' => \System\Models\File::class
     ];
+
+    public $hasOne = [
+        'users' => ['RainLab\User\Models\User', 'key' => 'professeur_id']  
+      ];
 }

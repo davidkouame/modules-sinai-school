@@ -1,0 +1,9 @@
+1568771455a:1:{s:11:"examens.htm";a:10:{s:8:"fileName";s:11:"examens.htm";s:7:"content";s:120:"title = "Demonstration"
+url = "/examens"
+layout = "default"
+is_hidden = 0
+
+[examensall]
+==
+
+{% component 'examensall' %}";s:5:"mtime";i:1567283667;s:6:"markup";s:28:"{% component 'examensall' %}";s:4:"code";N;s:5:"title";s:13:"Demonstration";s:3:"url";s:8:"/examens";s:6:"layout";s:7:"default";s:9:"is_hidden";s:1:"0";s:10:"examensall";a:0:{}}}

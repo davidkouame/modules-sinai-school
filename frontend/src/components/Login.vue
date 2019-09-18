@@ -56,8 +56,8 @@ export default {
       let nameTypeUser = "";
       if(user.parenteleve_id){
         nameTypeUser = "parent";
-      }else{
-        nameTypeUser = "eleve";
+      }else if(user.professeur_id){
+        nameTypeUser = "professeur";
       }
       return nameTypeUser;
     }

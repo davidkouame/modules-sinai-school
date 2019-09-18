@@ -56,6 +56,7 @@ export default {
   methods: {
     fetch(pageNum) {
       pageNum = pageNum == null ? 1:pageNum;
+      // console.log("log pageNum "+ this.$store.getters.userId);
       this.$store.dispatch("allnoteseleves", {'pageNum': pageNum, 'userId': this.$store.getters.userId});
     }
   },
@@ -67,6 +68,7 @@ export default {
       return this.$store.getters.noteseleves;
     },
     pageCount(){
+      console.log("log count "+ this.$store.getters.pageCount);
       return this.$store.getters.pageCount;
     }
   }

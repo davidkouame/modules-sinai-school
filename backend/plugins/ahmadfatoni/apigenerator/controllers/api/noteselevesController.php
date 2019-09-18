@@ -21,9 +21,21 @@ class noteselevesController extends Controller
     }
 
     public function index(){
-
-        $data = $this->NoteEleve->all()->toArray();
-
+        $dataGet = get();
+        $query = $this->NoteEleve->with(array(
+            'note' => function ($query) {
+                $query->select('*');
+            },
+            'eleve' => function ($query) {
+                $query->select('*');
+            },
+        ));
+        foreach($dataGet as $key => $data) {
+            if($key != 'page'){
+                $query->where($key, $data);
+            } 
+        }
+        $data = $query->paginate(10)->toArray();
         return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
     }
 

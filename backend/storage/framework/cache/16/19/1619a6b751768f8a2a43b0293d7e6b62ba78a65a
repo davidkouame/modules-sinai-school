@@ -1,0 +1,9 @@
+1568771455a:1:{s:20:"detailsactualite.htm";a:11:{s:8:"fileName";s:20:"detailsactualite.htm";s:7:"content";s:158:"title = "Demonstration"
+url = "/actualites/:actualite_id"
+layout = "default"
+is_hidden = 0
+
+[detailactualite]
+[filAriane]
+==
+{% component 'detailactualite' %}";s:5:"mtime";i:1567283667;s:6:"markup";s:33:"{% component 'detailactualite' %}";s:4:"code";N;s:5:"title";s:13:"Demonstration";s:3:"url";s:25:"/actualites/:actualite_id";s:6:"layout";s:7:"default";s:9:"is_hidden";s:1:"0";s:15:"detailactualite";a:0:{}s:9:"filAriane";a:0:{}}}

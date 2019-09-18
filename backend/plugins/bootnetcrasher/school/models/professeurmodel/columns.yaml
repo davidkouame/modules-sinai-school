@@ -1,12 +1,8 @@
 columns:
-    nom:
+    users:
         label: Nom
         type: text
         searchable: true
-        sortable: true
-    prenom:
-        label: Prénom
-        type: text
-        searchable: true
-        invisible: false
-        sortable: true
+        select: name
+        relation: users
+

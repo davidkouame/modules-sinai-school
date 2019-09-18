@@ -29,7 +29,7 @@ return [
     |
     */
 
-    'host' => 'smtp.gmail.com',
+    'host' => 'mail.infomaniak.com',
 
     /*
     |--------------------------------------------------------------------------
@@ -42,7 +42,7 @@ return [
     |
     */
 
-    'port' => 25,
+    'port' => 587,
 
     /*
     |--------------------------------------------------------------------------
@@ -55,7 +55,7 @@ return [
     |
     */
 
-    'from' => ['address' => 'bootnetcrasher@gmail.com', 'name' => 'bootnectrasher'],
+    'from' => ['address' => 'opstech.digital@groupedigital.com', 'name' => 'DIGITAL'],
 
     /*
     |--------------------------------------------------------------------------
@@ -81,7 +81,7 @@ return [
     |
     */
 
-    'username' => 'bootnetcrasher@gmail.com',
+    'username' => 'opstech.digital@groupedigital.com',
 
     /*
     |--------------------------------------------------------------------------
@@ -94,7 +94,7 @@ return [
     |
     */
 
-    'password' => '29121990marie',
+    'password' => 'Digiopstech2019',
 
     /*
     |--------------------------------------------------------------------------

@@ -6,6 +6,7 @@ import App from './App'
 import Login from './components/Login.vue'
 import ParentLayout from './components/layouts/Parent.vue'
 import EleveLayout from './components/layouts/Eleve.vue'
+import ProfesseurLayout from './components/layouts/Professeur.vue'
 import router from './router'
 import moment from 'moment'
 import 'bootstrap'
@@ -49,7 +50,16 @@ if (localStorage.userId) {
       components: { ParentLayout },
       template: '<ParentLayout/>'
     })
-  } else {
+  } else if(localStorage.userType == "professeur"){
+    /* eslint-disable */
+    new Vue({
+      el: '#app',
+      router,
+      store,
+      components: { ProfesseurLayout },
+      template: '<ProfesseurLayout/>'
+    })
+  }else {
     /* eslint-disable */
     new Vue({
       el: '#app',

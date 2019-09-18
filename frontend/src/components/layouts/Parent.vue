@@ -13,8 +13,14 @@
           <li style="display: inline-block;">
             <router-link to="/classe">Classe</router-link>
           </li>
-          <li style="display: inline-block;">
+          <!--<li style="display: inline-block;">
             <router-link to="/create-parent">Create compte parent</router-link>
+          </li>
+           <li style="display: inline-block;">
+            <router-link to="/create-parent">Create compte parent</router-link>
+          </li> -->
+          <li style="display: inline-block;">
+            <router-link to="/absence-eleve">Absences</router-link>
           </li>
         </ul>
       </div>

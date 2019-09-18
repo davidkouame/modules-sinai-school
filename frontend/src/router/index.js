@@ -6,6 +6,7 @@ import Note from '@/components/Note'
 import Classe from '@/components/Classe'
 import CreateCompteParent from '@/components/CreateCompteParent'
 import AbsenceEleve from '@/components/AbsenceEleve'
+import DetailAbsenceEleve from '@/components/DetailAbsenceEleve'
 
 Vue.use(Router)
 
@@ -41,6 +42,11 @@ export default new Router({
       path: '/absence-eleve',
       name: 'Absence eleve',
       component: AbsenceEleve
+    },
+    {
+      path: '/absence-eleve/:id',
+      name: 'Detail Absence élève',
+      component: DetailAbsenceEleve
     }
   ]
 })
