@@ -5,52 +5,56 @@ use BackendMenu;
 
 use Illuminate\Http\Request;
 use AhmadFatoni\ApiGenerator\Helpers\Helpers;
-use BootnetCrasher\School\Models\EleveModel;
-class eleveController extends Controller
+use Illuminate\Support\Facades\Validator;
+use BootnetCrasher\Parametrage\Models\RaisonAbsenceModel;
+class raisonabsenceController extends Controller
 {
-    protected $EleveModel;
+	protected $RaisonAbsenceModel;
 
     protected $helpers;
 
-    public function __construct(EleveModel $EleveModel, Helpers $helpers)
+    public function __construct(RaisonAbsenceModel $RaisonAbsenceModel, Helpers $helpers)
     {
         parent::__construct();
-        $this->EleveModel    = $EleveModel;
+        $this->RaisonAbsenceModel    = $RaisonAbsenceModel;
         $this->helpers          = $helpers;
     }
 
-    
-    public function index(){ 
-        $data = $this->EleveModel->with(array(
-            'users'=>function($query){
-                $query->select('*');
-            }, ))->select('*')->get()->toArray();
+    public function index(){
+
+        $data = $this->RaisonAbsenceModel->all()->toArray();
+
         return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
     }
 
-    
-    public function show($id){ 
-        $data = $this->EleveModel->with(array(
-            'users'=>function($query){
-                $query->select('*');
-            }, ))->select('*')->where('id', '=', $id)->first();
-        return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
+    public function show($id){
+
+        $data = $this->RaisonAbsenceModel->where('id',$id)->first();
+
+        if( count($data) > 0){
+
+            return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
+
+        }
+
+        $this->helpers->apiArrayResponseBuilder(400, 'bad request', ['error' => 'invalid key']);
+
     }
 
     public function store(Request $request){
 
-        $arr = $request->all();
+    	$arr = $request->all();
 
         while ( $data = current($arr)) {
-            $this->EleveModel->{key($arr)} = $data;
+            $this->RaisonAbsenceModel->{key($arr)} = $data;
             next($arr);
         }
 
-        $validation = Validator::make($request->all(), $this->EleveModel->rules);
+        $validation = Validator::make($request->all(), $this->RaisonAbsenceModel->rules);
         
         if( $validation->passes() ){
-            $this->EleveModel->save();
-            return $this->helpers->apiArrayResponseBuilder(201, 'created', ['id' => $this->EleveModel->id]);
+            $this->RaisonAbsenceModel->save();
+            return $this->helpers->apiArrayResponseBuilder(201, 'created', ['id' => $this->RaisonAbsenceModel->id]);
         }else{
             return $this->helpers->apiArrayResponseBuilder(400, 'fail', $validation->errors() );
         }
@@ -59,7 +63,7 @@ class eleveController extends Controller
 
     public function update($id, Request $request){
 
-        $status = $this->EleveModel->where('id',$id)->update($data);
+        $status = $this->RaisonAbsenceModel->where('id',$id)->update($data);
     
         if( $status ){
             
@@ -74,14 +78,14 @@ class eleveController extends Controller
 
     public function delete($id){
 
-        $this->EleveModel->where('id',$id)->delete();
+        $this->RaisonAbsenceModel->where('id',$id)->delete();
 
         return $this->helpers->apiArrayResponseBuilder(200, 'success', 'Data has been deleted successfully.');
     }
 
     public function destroy($id){
 
-        $this->EleveModel->where('id',$id)->delete();
+        $this->RaisonAbsenceModel->where('id',$id)->delete();
 
         return $this->helpers->apiArrayResponseBuilder(200, 'success', 'Data has been deleted successfully.');
     }

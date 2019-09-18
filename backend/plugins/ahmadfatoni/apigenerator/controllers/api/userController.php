@@ -5,17 +5,10 @@ use BackendMenu;
 
 use Illuminate\Http\Request;
 use AhmadFatoni\ApiGenerator\Helpers\Helpers;
-use Illuminate\Support\Facades\Validator;
 use RainLab\User\Models\User;
-use BootnetCrasher\School\Models\ParentEleve;
-use BootnetCrasher\School\Models\EleveModel;
-use Event;
-use Auth;
-use BootnetCrasher\School\Models\Professeurmodel;
-
 class userController extends Controller
 {
-	protected $User;
+    protected $User;
 
     protected $helpers;
 
@@ -26,30 +19,27 @@ class userController extends Controller
         $this->helpers          = $helpers;
     }
 
-    public function index(){
-
-        $data = $this->User->all()->toArray();
-
+    
+    public function index(){ 
+        $data = $this->User->with(array(
+            'users'=>function($query){
+                $query->select('*');
+            }, ))->select('*')->get()->toArray();
         return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
     }
 
-    public function show($id){
-
-        $data = $this->User->where('id',$id)->first();
-
-        if( count($data) > 0){
-
-            return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
-
-        }
-
-        $this->helpers->apiArrayResponseBuilder(400, 'bad request', ['error' => 'invalid key']);
-
+    
+    public function show($id){ 
+        $data = $this->User->with(array(
+            'users'=>function($query){
+                $query->select('*');
+            }, ))->select('*')->where('id', '=', $id)->first();
+        return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
     }
 
     public function store(Request $request){
 
-    	$arr = $request->all();
+        $arr = $request->all();
 
         while ( $data = current($arr)) {
             $this->User->{key($arr)} = $data;
@@ -96,54 +86,6 @@ class userController extends Controller
         return $this->helpers->apiArrayResponseBuilder(200, 'success', 'Data has been deleted successfully.');
     }
 
-    public function login(Request $request)
-    {
-        $user = null;
-        try {
-            //recupération des données postées
-            $data = post();
-            $credentials = [
-                'login'    => array_get($data, 'email'),
-                'password' => array_get($data, 'password')
-            ];
-
-            //on verifie si l'email est dans la base et que celui est rattaché a un compte cabinetplacement
-            $user = User::where('email', '=', $data['email'])
-                // ->whereNotNull('parenteleve_id')
-                ->first();
-
-            if (!$user) {
-                return $this->helpers->apiArrayResponseBuilder(403, 'success', "Désolé, l'email ou mot passe est incorrect .");
-            }
-
-            if($user->parenteleve_id){
-                //recupération du compte parenteleve
-                $parenteleve = ParentEleve::where('id', '=', $user->parenteleve_id)->first();
-                if (!$parenteleve) {
-                    return $this->helpers->apiArrayResponseBuilder(403, 'success', "Désolé, l'email ou mot passe est incorrect .");
-                }
-            }elseif($user->professeur_id){
-                //recupération du compte professeur
-                $professeur = Professeurmodel::where('id', '=', $user->professeur_id)->first();
-                if (!$professeur) {
-                    return $this->helpers->apiArrayResponseBuilder(403, 'success', "Désolé, l'email ou mot passe est incorrect .");
-                }
-            }else{
-                //recupération du compte eleve
-                $eleve = EleveModel::where('id', '=', $user->eleve_id)->first();
-                if (!$eleve) {
-                    return $this->helpers->apiArrayResponseBuilder(403, 'success', "Désolé, l'email ou mot passe est incorrect .");
-                }
-            }
-
-            Event::fire('rainlab.user.beforeAuthenticate', [$this, $credentials]);
-            $user = Auth::authenticate($credentials, true);
-        } catch (\Exception $e) {
-            trace_log("une erreur est survenue lors de l'authentification du compte cabinet, message=>" . $e->getMessage());
-            return $this->helpers->apiArrayResponseBuilder(403, 'success', "Désolé, l'email ou mot passe est incorrect .");
-        }
-        return $this->helpers->apiArrayResponseBuilder(200, 'success', $user);
-    }
 
     public static function getAfterFilters() {return [];}
     public static function getBeforeFilters() {return [];}

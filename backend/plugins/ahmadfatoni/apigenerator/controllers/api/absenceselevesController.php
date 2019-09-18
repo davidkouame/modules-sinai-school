@@ -6,6 +6,8 @@ use BackendMenu;
 use Illuminate\Http\Request;
 use AhmadFatoni\ApiGenerator\Helpers\Helpers;
 use BootnetCrasher\School\Models\AbsenceEleveModel;
+use Dotenv\Validator;
+
 class absenceselevesController extends Controller
 {
     protected $AbsenceEleveModel;
@@ -35,7 +37,7 @@ class absenceselevesController extends Controller
                 $query->where($key, $data);
             } 
         }
-        $data = $query->paginate(2)->toArray();
+        $data = $query->paginate(10)->toArray();
         return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
     }
 
@@ -59,16 +61,26 @@ class absenceselevesController extends Controller
             $this->AbsenceEleveModel->{key($arr)} = $data;
             next($arr);
         }
-
-        $validation = Validator::make($request->all(), $this->AbsenceEleveModel->rules);
         
-        if( $validation->passes() ){
-            $this->AbsenceEleveModel->save();
-            return $this->helpers->apiArrayResponseBuilder(201, 'created', ['id' => $this->AbsenceEleveModel->id]);
+        if(count($this->AbsenceEleveModel->rules) > 0){
+            $validation = Validator::make($request->all(), $this->AbsenceEleveModel->rules);
+            if( $validation->passes() ){
+                $this->AbsenceEleveModel->save();
+                return $this->helpers->apiArrayResponseBuilder(201, 'created', ['id' => $this->AbsenceEleveModel->id]);
+            }else{
+                return $this->helpers->apiArrayResponseBuilder(400, 'fail', $validation->errors() );
+            }
         }else{
-            return $this->helpers->apiArrayResponseBuilder(400, 'fail', $validation->errors() );
+            $absenceelevemodel = $this->AbsenceEleveModel->save();
+            /*dd($this->AbsenceEleveModel->with(array(
+                'raisonabsence'=>function($query){
+                    $query->select('*');
+                },
+                'eleve'=>function($query){
+                    $query->select('*');
+                }, ))->first()->toArray());*/
+            return $this->helpers->apiArrayResponseBuilder(201, 'created', $this->AbsenceEleveModel->toArray()); 
         }
-
     }
 
     public function update($id, Request $request){

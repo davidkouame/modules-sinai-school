@@ -16,3 +16,7 @@ Route::resource('api/v1/users', 'AhmadFatoni\ApiGenerator\Controllers\API\userCo
 Route::get('api/v1/users/{id}/delete', ['as' => 'api/v1/users.delete', 'uses' => 'AhmadFatoni\ApiGenerator\Controllers\API\userController@destroy']);
 Route::resource('api/v1/professeurs', 'AhmadFatoni\ApiGenerator\Controllers\API\professeurController', ['except' => ['destroy', 'create', 'edit']]);
 Route::get('api/v1/professeurs/{id}/delete', ['as' => 'api/v1/professeurs.delete', 'uses' => 'AhmadFatoni\ApiGenerator\Controllers\API\professeurController@destroy']);
+Route::resource('api/v1/eleves', 'AhmadFatoni\ApiGenerator\Controllers\API\eleveController', ['except' => ['destroy', 'create', 'edit']]);
+Route::get('api/v1/eleves/{id}/delete', ['as' => 'api/v1/eleves.delete', 'uses' => 'AhmadFatoni\ApiGenerator\Controllers\API\eleveController@destroy']);
+Route::resource('api/v1/raisonsabsences', 'AhmadFatoni\ApiGenerator\Controllers\API\raisonabsenceController', ['except' => ['destroy', 'create', 'edit']]);
+Route::get('api/v1/raisonsabsences/{id}/delete', ['as' => 'api/v1/raisonsabsences.delete', 'uses' => 'AhmadFatoni\ApiGenerator\Controllers\API\raisonabsenceController@destroy']);
