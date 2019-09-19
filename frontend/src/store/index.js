@@ -18,7 +18,8 @@ export default new Vuex.Store({
         absenceseleves: [],
         absenceeleve: null,
         eleves: [],
-        raisonsabsences: []
+        raisonsabsences: [],
+        absenceeleve: null
         // userId: 1
     },
     mutations: {
@@ -31,20 +32,23 @@ export default new Vuex.Store({
         pageCount(state, payload) {
             state.pageCount = payload
         },
-        classe(state, classe){
+        classe(state, classe) {
             state.classe = classe
         },
-        absenceseleves(state, absenceseleves){
+        absenceseleves(state, absenceseleves) {
             state.absenceseleves = absenceseleves
         },
-        absenceeleve(state, absenceeleve){
+        absenceeleve(state, absenceeleve) {
             state.absenceeleve = absenceeleve
         },
-        eleves(state, eleves){
+        eleves(state, eleves) {
             state.eleves = eleves
         },
-        raisonsabsences(state, raisonsabsences){
+        raisonsabsences(state, raisonsabsences) {
             state.raisonsabsences = raisonsabsences
+        },
+        absenceeleve(state, absenceeleve) {
+            state.absenceeleve = absenceeleve
         }
     },
     getters: {
@@ -74,6 +78,9 @@ export default new Vuex.Store({
         },
         raisonsabsences: state => {
             return state.raisonsabsences
+        },
+        absenceeleve: state => {
+            return state.absenceeleve
         }
     },
     actions: {
@@ -124,7 +131,7 @@ export default new Vuex.Store({
                 { headers: { 'Content-Type': 'multipart/form-data' } }
             );
         },
-        classe(context, eleveId){
+        classe(context, eleveId) {
             Axios.get(
                 context.state.endpoint + "api/v1/classes/" + 9
             )
@@ -138,28 +145,28 @@ export default new Vuex.Store({
                 })
                 .finally(() => (this.loading = false));
         },
-        absenceseleves(context, request){
+        absenceseleves(context, request) {
             let axios = null;
-            if(request.eleveId){
+            if (request.eleveId) {
                 axios = Axios.get(
                     context.state.endpoint + "api/v1/absenceseleves?eleve_id=" + request.eleveId + "&page=" + request.pageNum
                 );
-            }else{
+            } else {
                 axios = Axios.get(
                     context.state.endpoint + "api/v1/absenceseleves?page=" + request.pageNum
                 );
             }
             axios.then(response => {
-                    context.commit('absenceseleves', response.data.data.data)
-                    context.commit('pageCount', response.data.data.last_page)
-                })
+                context.commit('absenceseleves', response.data.data.data)
+                context.commit('pageCount', response.data.data.last_page)
+            })
                 .catch(error => {
                     console.log(error);
                     this.errored = true;
                 })
                 .finally(() => (this.loading = false));
         },
-        absenceeleve(context, request){
+        absenceeleve(context, request) {
             Axios.get(
                 context.state.endpoint + "api/v1/absenceseleves/" + request.absenceEleveId
             )
@@ -200,11 +207,39 @@ export default new Vuex.Store({
                 })
                 .finally(() => (this.loading = false));
         },
-        saveAgence(context, data){
+        saveAgence(context, data) {
             return Axios.post(
                 context.state.endpoint + "api/v1/absenceseleves", data,
                 { headers: { 'Content-Type': 'multipart/form-data' } }
-            ); 
+            );
+        },
+        absenceseleves(context, data) {
+            if (data && data.action == "edit") {
+                return Axios.put(
+                    context.state.endpoint + "api/v1/absenceseleves/" + data.absenceEleveId, data.data,
+                    { headers: { 'Content-Type': 'json' } }
+                );
+            } else {
+                let axios = null;
+                if (data.eleveId) {
+                    axios = Axios.get(
+                        context.state.endpoint + "api/v1/absenceseleves?eleve_id=" + data.eleveId + "&page=" + data.pageNum
+                    );
+                } else {
+                    axios = Axios.get(
+                        context.state.endpoint + "api/v1/absenceseleves?page=" + data.pageNum
+                    );
+                }
+                axios.then(response => {
+                    context.commit('absenceseleves', response.data.data.data)
+                    context.commit('pageCount', response.data.data.last_page)
+                })
+                    .catch(error => {
+                        console.log(error);
+                        this.errored = true;
+                    })
+                    .finally(() => (this.loading = false));
+            }
         }
     }
 })

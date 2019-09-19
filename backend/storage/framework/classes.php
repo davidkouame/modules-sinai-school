@@ -425,4 +425,5 @@
   'Backend\\Models\\UserGroup' => 'modules/backend/models/UserGroup.php',
   'BootnetCrasher\\School\\Controllers\\ProfesseurModel' => 'plugins/bootnetcrasher/school/controllers/ProfesseurModel.php',
   'AhmadFatoni\\ApiGenerator\\Controllers\\API\\raisonabsenceController' => 'plugins/ahmadfatoni/apigenerator/controllers/api/raisonabsenceController.php',
+  'BootnetCrasher\\School\\Controllers\\Api\\userController' => 'plugins/bootnetcrasher/school/controllers/api/userController.php',
 );

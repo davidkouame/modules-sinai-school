@@ -16,12 +16,22 @@
           </thead>
           <tbody>
             <tr v-if="absenceseleves" v-for="absenceeleve in absenceseleves">
-              <th scope="row">1</th>
-              <td>{{ absenceeleve.eleve.matricule }}</td>
+              <th scope="row">{{ absenceeleve.id }}</th>
+              <td>
+                <span v-if="absenceeleve.eleve">{{ absenceeleve.eleve.matricule }}</span>
+                <span v-else="absenceeleve.eleve"></span>
+              </td>
               <td>{{ absenceeleve.heure_debut_cours}}</td>
               <td>{{ absenceeleve.heure_fin_cours}}</td>
               <td>
-                <a :href="'/#/professeur/absences-eleves/'+absenceeleve.id" class="btn btn-primary">detail</a>
+                <a
+                  :href="'/#/professeur/absences-eleves/'+absenceeleve.id"
+                  class="btn btn-primary"
+                >detail</a>
+                <a
+                  :href="'/#/professeur/absences-eleves/edit/'+absenceeleve.id"
+                  class="btn btn-primary"
+                >Modifier</a>
               </td>
             </tr>
           </tbody>
@@ -47,20 +57,20 @@ export default {
       el: "edd"
     };
   },
-  created(){
-      this.fetch()
+  created() {
+    this.fetch();
   },
   methods: {
-      fetch(pageNum) {
-      pageNum = pageNum == null ? 1:pageNum;
-      this.$store.dispatch("absenceseleves", {'pageNum': pageNum});
+    fetch(pageNum) {
+      pageNum = pageNum == null ? 1 : pageNum;
+      this.$store.dispatch("absenceseleves", { pageNum: pageNum });
     }
   },
   computed: {
-      absenceseleves() {
+    absenceseleves() {
       return this.$store.getters.absenceseleves;
     },
-    pageCount(){
+    pageCount() {
       return this.$store.getters.pageCount;
     }
   }

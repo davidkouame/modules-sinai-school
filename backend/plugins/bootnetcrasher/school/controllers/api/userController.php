@@ -1,11 +1,14 @@
-<?php namespace AhmadFatoni\ApiGenerator\Controllers\API;
+<?php namespace BootnetCrasher\School\Controllers\Api;
 
 use Cms\Classes\Controller;
 use BackendMenu;
 
 use Illuminate\Http\Request;
 use AhmadFatoni\ApiGenerator\Helpers\Helpers;
+use BootnetCrasher\School\Models\Professeurmodel;
 use RainLab\User\Models\User;
+use Event;
+use Auth;
 class userController extends Controller
 {
     protected $User;

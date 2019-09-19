@@ -84,12 +84,16 @@ class absenceselevesController extends Controller
     }
 
     public function update($id, Request $request){
+        // $data = $request->all();
+        // dd($data);
+        $data = json_decode($request->getContent(), true);
 
         $status = $this->AbsenceEleveModel->where('id',$id)->update($data);
     
         if( $status ){
             
-            return $this->helpers->apiArrayResponseBuilder(200, 'success', 'Data has been updated successfully.');
+            return $this->helpers->apiArrayResponseBuilder(200, 'success', 
+            $this->AbsenceEleveModel->where('id',$id)->first()->toArray());
 
         }else{
 

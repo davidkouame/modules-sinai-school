@@ -10,6 +10,7 @@ import DetailAbsenceEleve from '@/components/DetailAbsenceEleve'
 import ProfesseurAbsenceEleve from '@/components/professeurs/AbsenceEleve'
 import ProfesseurDetailAbsenceEleve from '@/components/professeurs/DetailAbsenceEleve'
 import ProfesseurAddAbsenceEleve from '@/components/professeurs/AddAbsenceEleve'
+import ProfesseurEditAbsenceEleve from '@/components/professeurs/EditAbsenceEleve'
 
 Vue.use(Router)
 
@@ -65,6 +66,11 @@ export default new Router({
       path: '/professeur/absenceseleves/add',
       name: 'Add Absence élève',
       component: ProfesseurAddAbsenceEleve
+    },
+    {
+      path: '/professeur/absences-eleves/edit/:id',
+      name: 'ProfesseurEditAbsenceEleve',
+      component: ProfesseurEditAbsenceEleve
     }
   ]
 })

@@ -23,7 +23,7 @@
             <router-link to="/create-parent">Create compte parent</router-link>
           </li> -->
           <li style="display: inline-block;">
-            <router-link to="/absence-eleve">Absences</router-link>
+            <router-link to="/professeur/absences-eleves">Absences</router-link>
           </li>
         </ul>
       </div>

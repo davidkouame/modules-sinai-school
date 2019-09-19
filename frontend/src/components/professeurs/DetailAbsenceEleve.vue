@@ -1,13 +1,13 @@
 <template>
   <div class="container">
     <div>Détail absence note {{ $route.params.id }}</div>
-    <ul>
+    <ul v-if="absenceeleve">
       <li>Id : {{ absenceeleve.id }}</li>
       <li>Heure de début : {{ absenceeleve.heure_debut_cours }}</li>
       <li>Heure de fin : {{ absenceeleve.heure_fin_cours }}</li>
-      <li>Raison absence  : {{ absenceeleve.raisonabsence.libelle }}</li>
+      <li>Raison absence  : <span v-if="absenceeleve.raisonabsence">{{ absenceeleve.raisonabsence.libelle }}</span></li>
       <li>Commentaire  : {{ absenceeleve.commentaire }}</li>
-      <li>Elève  : {{ absenceeleve.eleve.matricule }}</li>
+      <li>Elève  : <span v-if="absenceeleve.eleve">{{ absenceeleve.eleve.matricule }}</span></li>
     </ul>
   <a :href="'/#/professeur/absences-eleves'" class="btn btn-primary">retour</a>
   </div>
