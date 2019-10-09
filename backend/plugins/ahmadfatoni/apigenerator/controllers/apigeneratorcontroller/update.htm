@@ -12,7 +12,7 @@
         <div class="layout-row">
             <?= $this->formRender() ?>
         </div>
-            
+
     <div class="modal fade" id="modal-id">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -54,14 +54,14 @@
                     class="btn btn-primary">
                     <?= e(trans('backend::lang.form.save')) ?>
                 </button>
-                
+
                 <a href="<?= Backend::url('ahmadfatoni/apigenerator/apigeneratorcontroller') ?>" class="btn btn-warning"><div id="cancel">Cancel</div></a>
 
                 <button
                     type="button"
                     class="oc-icon-trash-o btn-icon danger pull-right"
-                    data-request="onDelete"
-                    data-request-success="delData()"
+                    data-request="ondelete"
+                    data-request-success="deldata()"
                     data-load-indicator="<?= e(trans('backend::lang.form.deleting')) ?>"
                     data-request-confirm="<?= e(trans('backend::lang.form.confirm_delete')) ?>">
                 </button>
@@ -71,7 +71,7 @@
                         Example Custom Condition
                     </button>
                 </a>
-                
+
             </div>
         </div>
     <?= Form::close() ?>
@@ -94,10 +94,10 @@
         <input type='text' name='name' id="name">
         <input type='text' name='endpoint' id="endpoint">
         <input type='text' name='oldname' id="oldname" value="<?= $this->widget->form->data->attributes['name'] ?>">
-        <input type='text' name='oldmodel' id="oldmodel" value="<?= $this->widget->form->data->attributes['model'] ?>">        
+        <input type='text' name='oldmodel' id="oldmodel" value="<?= $this->widget->form->data->attributes['model'] ?>">
         <input type='text' name='oldendpoint' id="oldendpoint" value="<?= $this->widget->form->data->attributes['endpoint'] ?>">
         <textarea name='oldcustom_format' id="oldcustom_format"><?= $this->widget->form->data->attributes['custom_format'] ?></textarea>
-        
+
         <input type='text' name='model' id="model">
         <input type='text' name='custom_format' id="custom_format">
         <button
@@ -107,10 +107,10 @@
                 </button>
     </form>
 <script type="text/javascript">
-     function delData(){       
+     function delData(){
         document.getElementById('send').click();
     }
-    
+
 </script>
 
 <script type="text/javascript">
@@ -119,11 +119,11 @@
         document.getElementById('model').value = document.getElementById('Form-field-ApiGenerator-model').value;
          document.getElementById('custom_format').value = document.getElementById('Form-field-ApiGenerator-custom_format').value;
          document.getElementById('endpoint').value = document.getElementById('Form-field-ApiGenerator-endpoint').value;
-        if ( 
+        if (
             document.getElementById('name').value != document.getElementById('oldname').value ||
             document.getElementById('Form-field-ApiGenerator-model').value != document.getElementById('oldmodel').value ||
             document.getElementById('Form-field-ApiGenerator-custom_format').value != document.getElementById('oldcustom_format').value ||
-            document.getElementById('Form-field-ApiGenerator-endpoint').value != document.getElementById('oldendpoint').value 
+            document.getElementById('Form-field-ApiGenerator-endpoint').value != document.getElementById('oldendpoint').value
         ){
             document.getElementById('save').click();
         }else{

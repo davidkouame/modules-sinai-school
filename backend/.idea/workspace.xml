@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="d5b3bc12-46d2-476b-9c50-54e812d7f504" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/ahmadfatoni/apigenerator/controllers/api/noteController.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/ahmadfatoni/apigenerator/controllers/api/noteController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/ahmadfatoni/apigenerator/controllers/api/userController.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/ahmadfatoni/apigenerator/controllers/api/userController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/ahmadfatoni/apigenerator/controllers/apigeneratorcontroller/config_list.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/ahmadfatoni/apigenerator/controllers/apigeneratorcontroller/config_list.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/ahmadfatoni/apigenerator/controllers/apigeneratorcontroller/update.htm" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/ahmadfatoni/apigenerator/controllers/apigeneratorcontroller/update.htm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/ahmadfatoni/apigenerator/routes.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/ahmadfatoni/apigenerator/routes.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/bootnetcrasher/school/controllers/ProfesseurModel.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/bootnetcrasher/school/controllers/api/userController.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/bootnetcrasher/school/controllers/api/userController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/bootnetcrasher/school/controllers/professeurmodel/_list_toolbar.htm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/bootnetcrasher/school/controllers/professeurmodel/_reorder_toolbar.htm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/bootnetcrasher/school/controllers/professeurmodel/config_form.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/bootnetcrasher/school/controllers/professeurmodel/config_list.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/bootnetcrasher/school/controllers/professeurmodel/config_reorder.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/bootnetcrasher/school/controllers/professeurmodel/create.htm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/bootnetcrasher/school/controllers/professeurmodel/index.htm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/bootnetcrasher/school/controllers/professeurmodel/preview.htm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/bootnetcrasher/school/controllers/professeurmodel/reorder.htm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/bootnetcrasher/school/controllers/professeurmodel/update.htm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/bootnetcrasher/school/models/ClasseModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/bootnetcrasher/school/models/ClasseModel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/bootnetcrasher/school/models/Professeurmodel.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/bootnetcrasher/school/plugin.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/bootnetcrasher/school/plugin.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/bootnetcrasher/school/routes.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/bootnetcrasher/school/routes.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/cache/08/df/08dfdfd922681bba7ab5215d56b7da8dd8d64c53" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/cache/08/df/08dfdfd922681bba7ab5215d56b7da8dd8d64c53" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/cache/11/de/11de31e1eabb2682cf62ee9c9ccb0630f1019006" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/cache/11/de/11de31e1eabb2682cf62ee9c9ccb0630f1019006" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/cache/13/70/13700ec4f5d6c9548e784ad4086830fc19661f0e" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/cache/13/70/13700ec4f5d6c9548e784ad4086830fc19661f0e" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/cache/16/19/1619a6b751768f8a2a43b0293d7e6b62ba78a65a" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/cache/16/19/1619a6b751768f8a2a43b0293d7e6b62ba78a65a" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/cache/18/81/188104e37988b9719e2253de2bc8502c54c6ae7f" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/cache/18/81/188104e37988b9719e2253de2bc8502c54c6ae7f" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/cache/22/01/22019f078997f8229618d6888b9e33b7f0b00852" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/cache/22/01/22019f078997f8229618d6888b9e33b7f0b00852" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/cache/22/43/2243f500ae1632e1e609a9d4d08e7bad65800071" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/cache/22/43/2243f500ae1632e1e609a9d4d08e7bad65800071" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/cache/32/03/3203d62f08a989e1db95c3f437050c8f2bb31b4c" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/cache/32/03/3203d62f08a989e1db95c3f437050c8f2bb31b4c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/cache/35/09/35094f74adb0134ce75c67a266daa58a059d8274" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/cache/35/09/35094f74adb0134ce75c67a266daa58a059d8274" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/cache/45/30/45306ef467759ecc88497a8652419d1e0f539987" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/cache/45/30/45306ef467759ecc88497a8652419d1e0f539987" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/cache/46/80/4680f2ec22e7e96a9f797ba39629877753200f3b" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/cache/46/80/4680f2ec22e7e96a9f797ba39629877753200f3b" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/cache/47/1b/471bc0cd219cfe11f8a6a4b306ab37ab833d18fd" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/cache/47/1b/471bc0cd219cfe11f8a6a4b306ab37ab833d18fd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/cache/58/cf/58cf0a9683a3bff3a5abe11f67de9e5ab8239362" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/cache/58/cf/58cf0a9683a3bff3a5abe11f67de9e5ab8239362" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/cache/5d/1f/5d1ff1d3d9d6dc526405c537cb1d94935b903e83" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/cache/5d/1f/5d1ff1d3d9d6dc526405c537cb1d94935b903e83" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/cache/62/b6/62b63fd23606a5d580125bbf80cfd9f394d9b758" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/cache/62/b6/62b63fd23606a5d580125bbf80cfd9f394d9b758" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/cache/64/e8/64e867be3ca7d8483e8e070cfb11552a4de970c2" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/cache/64/e8/64e867be3ca7d8483e8e070cfb11552a4de970c2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/cache/66/25/66258b0563c78d9b2cbc9ed217238eb6e11837cb" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/cache/66/25/66258b0563c78d9b2cbc9ed217238eb6e11837cb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/cache/66/65/666582ffea28796aac87443dbbc6420b7c6df7cd" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/cache/66/65/666582ffea28796aac87443dbbc6420b7c6df7cd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/cache/68/14/681441af38ac2f05a56d7118130f932163789338" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/cache/6e/83/6e836072f3608a1296117ca3576079170d40b052" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/cache/6e/83/6e836072f3608a1296117ca3576079170d40b052" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/cache/72/4d/724d64623b82cdd367a46a1a3611b8fce75faedf" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/cache/72/4d/724d64623b82cdd367a46a1a3611b8fce75faedf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/cache/77/61/77616e1c5e0d202cb4cf522bddafaebf56f27660" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/cache/77/61/77616e1c5e0d202cb4cf522bddafaebf56f27660" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/cache/83/b0/83b00c260c1a497ba24c8415bf10556ef08c9dd9" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/cache/83/b0/83b00c260c1a497ba24c8415bf10556ef08c9dd9" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/cache/97/37/9737833e426f53b3dcb4d98fdcb68c76762765de" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/cache/97/37/9737833e426f53b3dcb4d98fdcb68c76762765de" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/cache/99/6b/996b534fe6b63c23ddc825a2efe4588688b616f4" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/cache/99/6b/996b534fe6b63c23ddc825a2efe4588688b616f4" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/cache/a0/c9/a0c910eb995ad1e9281e5bb05187281e039e242f" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/cache/a0/c9/a0c910eb995ad1e9281e5bb05187281e039e242f" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/cache/b1/b6/b1b6b61b6cd58fcbec08f9d00687d524901e8a6d" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/cache/b1/b6/b1b6b61b6cd58fcbec08f9d00687d524901e8a6d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/cache/bc/b0/bcb03c48b42c0914b43c593a96b199e712154460" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/cache/bc/b0/bcb03c48b42c0914b43c593a96b199e712154460" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/cache/cd/4a/cd4a39e85942787d6274dd275cc36548b9cb543c" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/cache/cd/4a/cd4a39e85942787d6274dd275cc36548b9cb543c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/cache/d0/9d/d09d8c5165d8fda09b210cc701ee39cf70bd5b48" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/cache/d0/9d/d09d8c5165d8fda09b210cc701ee39cf70bd5b48" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/cache/d2/bf/d2bfa1437aba00dadecca2b56617050d8f711997" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/cache/d2/bf/d2bfa1437aba00dadecca2b56617050d8f711997" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/cache/db/c9/dbc90c3f61080741d2a52c82a07ca43602c629f5" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/cache/db/c9/dbc90c3f61080741d2a52c82a07ca43602c629f5" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/cache/dc/01/dc0159c38453284a773953817d07aef378064515" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/cache/dc/01/dc0159c38453284a773953817d07aef378064515" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/cache/e3/dc/e3dca2704d9b520cb0f1f597ea7f53489252aab9" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/cache/e3/dc/e3dca2704d9b520cb0f1f597ea7f53489252aab9" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/cache/e5/49/e549e45928ba905a6bba0d5d3f531fff3b0ce52c" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/cache/e5/49/e549e45928ba905a6bba0d5d3f531fff3b0ce52c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/cache/e5/58/e5585e1e8c7268ef32d0a776892951638f7c6063" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/cache/e5/58/e5585e1e8c7268ef32d0a776892951638f7c6063" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/cache/ee/4e/ee4e8cfa5d928ff6951d5dafda1a86892cd3f8af" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/cache/ee/4e/ee4e8cfa5d928ff6951d5dafda1a86892cd3f8af" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/classes.php" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/classes.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/sessions/2QEifQUHAZU41Njc2C1UnRhS8fLzkef89DYOA4uZ" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/sessions/W0cvIkSogsgYZpYV4dkj01COA5Zw3DpnvJ5nQDbA" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/sessions/jAfrvstAzX82N098vesKRLwRB1tLd0fDTMyZfu0J" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/DetailNote.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/DetailNote.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/Note.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/Note.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/layouts/Eleve.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/layouts/Eleve.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/layouts/Parent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/layouts/Parent.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/layouts/Professeur.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/layouts/Professeur.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/router/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/store/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/store/index.js" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/plugins/ahmadfatoni/apigenerator/controllers/api/userController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="168">
+              <caret line="120" selection-start-line="120" selection-end-line="120" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/plugins/bootnetcrasher/school/controllers/api/userController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="761">
+              <caret line="142" lean-forward="true" selection-start-line="142" selection-end-line="142" />
+              <folding>
+                <element signature="e#56#83#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/plugins/bootnetcrasher/school/controllers/api/NoteEleveController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="272">
+              <caret line="22" column="49" selection-start-line="22" selection-start-column="33" selection-end-line="22" selection-end-column="49" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/plugins/ahmadfatoni/apigenerator/controllers/api/ProfesseurClasseController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="33" column="47" lean-forward="true" selection-start-line="33" selection-start-column="47" selection-end-line="33" selection-end-column="47" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/plugins/ahmadfatoni/apigenerator/controllers/apigeneratorcontroller/update.htm" />
+        <option value="$PROJECT_DIR$/plugins/ahmadfatoni/apigenerator/controllers/apigeneratorcontroller/config_form.yaml" />
+        <option value="$PROJECT_DIR$/plugins/ahmadfatoni/apigenerator/controllers/apigeneratorcontroller/config_list.yaml" />
+        <option value="$PROJECT_DIR$/plugins/bootnetcrasher/school/controllers/api/userController.php" />
+        <option value="$PROJECT_DIR$/plugins/ahmadfatoni/apigenerator/controllers/api/ProfesseurClasseController.php" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="y" value="69" />
+    <option name="width" value="1348" />
+    <option name="height" value="666" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="backend" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="bcb0276e:PhpExternalLibrariesNodePatcher$PatchedExternalLibrariesNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d5b3bc12-46d2-476b-9c50-54e812d7f504" name="Default Changelist" comment="" />
+      <created>1570551943353</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1570551943353</updated>
+      <workItem from="1570551946383" duration="2159000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="2159000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="0" y="28" width="1368" height="706" extended-state="6" />
+    <layout>
+      <window_info id="Favorites" side_tool="true" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.27878788" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Database Changes" />
+      <window_info anchor="bottom" id="Version Control" />
+      <window_info anchor="bottom" id="Terminal" />
+      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="right" id="Database" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/plugins/bootnetcrasher/school/plugin.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-9">
+          <caret line="6" column="11" selection-start-line="6" selection-start-column="11" selection-end-line="6" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/plugins/ahmadfatoni/apigenerator/controllers/apigeneratorcontroller/update.htm">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="33" column="3" lean-forward="true" selection-start-line="33" selection-start-column="3" selection-end-line="33" selection-end-column="3" />
+          <folding>
+            <element signature="e#681#688#1" expanded="true" />
+            <element signature="n#style#0;n#form#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#form#1;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/plugins/ahmadfatoni/apigenerator/controllers/apigeneratorcontroller/config_form.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="66" selection-start-line="9" selection-start-column="66" selection-end-line="9" selection-end-column="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/plugins/ahmadfatoni/apigenerator/controllers/apigeneratorcontroller/config_list.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/plugins/ahmadfatoni/apigenerator/controllers/ApiGeneratorController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="166" column="35" lean-forward="true" selection-start-line="166" selection-start-column="35" selection-end-line="166" selection-end-column="35" />
+          <folding>
+            <element signature="e#55#86#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/plugins/bootnetcrasher/school/models/ProfesseurModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="1" lean-forward="true" selection-start-line="8" selection-start-column="1" selection-end-line="8" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/plugins/bootnetcrasher/school/controllers/api/userController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="761">
+          <caret line="142" lean-forward="true" selection-start-line="142" selection-end-line="142" />
+          <folding>
+            <element signature="e#56#83#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/plugins/ahmadfatoni/apigenerator/controllers/api/userController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="120" selection-start-line="120" selection-end-line="120" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/plugins/bootnetcrasher/school/controllers/api/NoteEleveController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="22" column="49" selection-start-line="22" selection-start-column="33" selection-end-line="22" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/plugins/ahmadfatoni/apigenerator/controllers/api/ProfesseurClasseController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="33" column="47" lean-forward="true" selection-start-line="33" selection-start-column="47" selection-end-line="33" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

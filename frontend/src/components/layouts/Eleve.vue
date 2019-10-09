@@ -21,7 +21,9 @@
           </li>
         </ul>
       </div>
+      <div class="col-sm"><button v-on:click="logout">Logout</button></div>
     </div>
+
     <router-view/>
   </div>
 </template>
@@ -34,6 +36,16 @@ export default {
       username: localStorage.userName,
       email: localStorage.userEmail
     };
+  },
+  methods: {
+    logout: function(){
+      // nous devons externaliser la fonctionn de déconnexion et de connexion
+      localStorage.userId = "";
+      localStorage.userName = "";
+      localStorage.userEmail = "";
+      localStorage.userType  = "";
+      window.location.reload();
+    }
   }
 };
 </script>

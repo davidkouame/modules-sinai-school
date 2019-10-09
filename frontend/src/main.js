@@ -17,6 +17,7 @@ import Axios from 'axios'
 import Paginate from 'vuejs-paginate'
 import store from './store/index'
 import VuePaginationfrom from './components/Pagination.vue'
+import Modal from './components/Modal.vue'
 
 /* axios.defaults.headers.common = {
   'X-Requested-With': 'XMLHttpRequest',
@@ -29,6 +30,8 @@ Vue.use(BootstrapVue)
 
 Vue.component('paginate', Paginate)
 
+Vue.component('modal', Modal)
+
 Vue.filter('formatDate', function (value) {
   if (value) {
     return moment(String(value)).format('MM/DD/YYYY')
@@ -39,9 +42,8 @@ Vue.filter('truncate', function (value) {
   return value.substring(0, 20)
 });
 
-
-if (localStorage.userId) {
-  if (localStorage.userType == "parent") {
+if (localStorage.getItem('userId')) {
+  if (localStorage.getItem('userType') == "parent") {
     /* eslint-disable */
     new Vue({
       el: '#app',
@@ -50,7 +52,7 @@ if (localStorage.userId) {
       components: { ParentLayout },
       template: '<ParentLayout/>'
     })
-  } else if(localStorage.userType == "professeur"){
+  } else if(localStorage.getItem('userType') == "professeur"){
     /* eslint-disable */
     new Vue({
       el: '#app',
@@ -60,6 +62,7 @@ if (localStorage.userId) {
       template: '<ProfesseurLayout/>'
     })
   }else {
+    // alert("nous sommes dans le user id");
     /* eslint-disable */
     new Vue({
       el: '#app',
@@ -80,5 +83,3 @@ if (localStorage.userId) {
     template: '<Login/>'
   })
 }
-
-

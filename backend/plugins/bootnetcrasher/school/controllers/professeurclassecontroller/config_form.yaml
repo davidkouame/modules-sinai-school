@@ -1,0 +1,10 @@
+name: ProfesseurClasseController
+form: $/bootnetcrasher/school/models/professeurclassemodel/fields.yaml
+modelClass: BootnetCrasher\School\Models\ProfesseurClasseModel
+defaultRedirect: bootnetcrasher/school/professeurclassecontroller
+create:
+    redirect: 'bootnetcrasher/school/professeurclassecontroller/update/:id'
+    redirectClose: bootnetcrasher/school/professeurclassecontroller
+update:
+    redirect: bootnetcrasher/school/professeurclassecontroller
+    redirectClose: bootnetcrasher/school/professeurclassecontroller

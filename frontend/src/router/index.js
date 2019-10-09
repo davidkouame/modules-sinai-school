@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
-import DetailNote from '@/components/DetailNote'
-import Note from '@/components/Note'
+
+
 import Classe from '@/components/Classe'
 import CreateCompteParent from '@/components/CreateCompteParent'
 import AbsenceEleve from '@/components/AbsenceEleve'
@@ -12,8 +12,13 @@ import ProfesseurDetailAbsenceEleve from '@/components/professeurs/DetailAbsence
 import ProfesseurAddAbsenceEleve from '@/components/professeurs/AddAbsenceEleve'
 import ProfesseurEditAbsenceEleve from '@/components/professeurs/EditAbsenceEleve'
 
-Vue.use(Router)
+// Note
+import AddNote from '@/components/notes/Add.vue'
+import UpdateNote from '@/components/notes/Update.vue'
+import PreviewNote from '@/components/notes/Preview.vue'
+import ListNote from '@/components/notes/List.vue'
 
+Vue.use(Router)
 
 export default new Router({
   routes: [
@@ -24,13 +29,23 @@ export default new Router({
     },
     {
       path: '/notes',
-      name: 'Note',
-      component: Note
+      name: 'ListNote',
+      component: ListNote
     },
     {
-      path: '/notes/:id',
-      name: 'DetailNote',
-      component: DetailNote
+      path: '/notes/preview/:id(\\d+)',
+      name: 'PreviewNote',
+      component: PreviewNote
+    },
+    {
+      path: '/notes/add',
+      name: 'AddNote',
+      component: AddNote
+    },
+    {
+      path: '/notes/update/:id(\\d+)',
+      name: 'UpdateNote',
+      component: UpdateNote
     },
     {
       path: '/classe',
@@ -53,7 +68,7 @@ export default new Router({
       component: AbsenceEleve
     },
     {
-      path: '/absence-eleve/:id',
+      path: '/absence-eleve/:id(\\d+)',
       name: 'Detail Absence élève',
       component: DetailAbsenceEleve
     },

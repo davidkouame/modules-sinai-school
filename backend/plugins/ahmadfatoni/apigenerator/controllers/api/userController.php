@@ -6,6 +6,8 @@ use BackendMenu;
 use Illuminate\Http\Request;
 use AhmadFatoni\ApiGenerator\Helpers\Helpers;
 use RainLab\User\Models\User;
+use BootnetCrasher\School\Models\EleveModel;
+use BootnetCrasher\School\Models\ProfesseurModel;
 class userController extends Controller
 {
     protected $User;
@@ -19,8 +21,8 @@ class userController extends Controller
         $this->helpers          = $helpers;
     }
 
-    
-    public function index(){ 
+
+    public function index(){
         $data = $this->User->with(array(
             'users'=>function($query){
                 $query->select('*');
@@ -28,8 +30,8 @@ class userController extends Controller
         return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
     }
 
-    
-    public function show($id){ 
+
+    public function show($id){
         $data = $this->User->with(array(
             'users'=>function($query){
                 $query->select('*');
@@ -47,7 +49,7 @@ class userController extends Controller
         }
 
         $validation = Validator::make($request->all(), $this->User->rules);
-        
+
         if( $validation->passes() ){
             $this->User->save();
             return $this->helpers->apiArrayResponseBuilder(201, 'created', ['id' => $this->User->id]);
@@ -60,9 +62,9 @@ class userController extends Controller
     public function update($id, Request $request){
 
         $status = $this->User->where('id',$id)->update($data);
-    
+
         if( $status ){
-            
+
             return $this->helpers->apiArrayResponseBuilder(200, 'success', 'Data has been updated successfully.');
 
         }else{
@@ -114,7 +116,7 @@ class userController extends Controller
                 }
             }elseif($user->professeur_id){
                 //recupération du compte professeur
-                $professeur = Professeurmodel::where('id', '=', $user->professeur_id)->first();
+                $professeur = ProfesseurModel::where('id', '=', $user->professeur_id)->first();
                 if (!$professeur) {
                     return $this->helpers->apiArrayResponseBuilder(403, 'success', "Désolé, l'email ou mot passe est incorrect .");
                 }
@@ -143,5 +145,5 @@ class userController extends Controller
     public function callAction($method, $parameters=false) {
         return call_user_func_array(array($this, $method), $parameters);
     }
-    
+
 }

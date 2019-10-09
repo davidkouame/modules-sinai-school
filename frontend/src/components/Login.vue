@@ -38,10 +38,19 @@ export default {
       this.$store
         .dispatch("loginParentEleve", { email, password })
         .then(response => {
+          localStorage.setItem('userId', response.data.data.id);
+          localStorage.setItem('userName', response.data.data.name);
+          localStorage.setItem('userEmail', response.data.data.email);
+          localStorage.setItem('userType', this.getNameTypeUser(response.data.data));
+          localStorage.setItem('professeurId', response.data.data.professeur_id);
+
+
             localStorage.userId = response.data.data.id;
             localStorage.userName = response.data.data.name;
             localStorage.userEmail = response.data.data.email;
             localStorage.userType  = this.getNameTypeUser(response.data.data);
+            localStorage.professeurId = response.data.data.professeur_id;
+            // localStorage.setItem('monChat', 'Tom');
             // this.$router.push("/");
             window.location.reload();
         })

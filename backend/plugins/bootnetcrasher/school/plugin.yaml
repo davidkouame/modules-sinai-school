@@ -19,7 +19,7 @@ navigation:
         icon: icon-life-ring
     professeurs:
         label: Professeurs
-        url: bootnetcrasher/school/professeurmodel
+        url: bootnetcrasher/school/professeurcontroller
         icon: icon-life-ring
     classes:
         label: Classes

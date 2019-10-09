@@ -1,0 +1,20 @@
+columns:
+    classe:
+        label: Classe
+        relation: classe
+        searchable: true
+        sortable: true
+        select: libelle
+        type: text
+    matiere:
+        label: Matiere
+        relation: matiere
+        searchable: true
+        sortable: true
+        select: libelle
+        type: text
+    professeurname:
+        label: Professeur
+        searchable: true
+        sortable: true
+        type: partial

@@ -8,7 +8,7 @@ use Model;
 class ClasseModel extends Model
 {
     use \October\Rain\Database\Traits\Validation;
-    
+
     use \October\Rain\Database\Traits\SoftDelete;
 
     protected $dates = ['deleted_at'];
@@ -47,6 +47,6 @@ class ClasseModel extends Model
     ]; */
 
     public $hasMany = [
-        'classematiere' => ['bootnetcrasher\school\models\classematieremodel', 'key' => 'classe_id', 'otherKey' => 'id'],
+        'classematiere' => ['BootnetCrasher\School\Models\ClasseMatiereModel', 'key' => 'classe_id', 'otherKey' => 'id'],
     ];
 }

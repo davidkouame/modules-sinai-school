@@ -1,0 +1,22 @@
+fields:
+    classe:
+        label: Classe
+        nameFrom: libelle
+        descriptionFrom: description
+        span: auto
+        type: relation
+        placeholder: 'Selectionner une classe'
+    matiere:
+        label: Matière
+        nameFrom: libelle
+        descriptionFrom: description
+        span: auto
+        type: relation
+        placeholder: 'Selectionner une matière'
+    professeur:
+        label: Professeur
+        nameFrom: username
+        descriptionFrom: description
+        span: auto
+        type: relation
+        placeholder: 'Selectionner un professeur'

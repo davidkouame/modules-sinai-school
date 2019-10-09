@@ -6,30 +6,30 @@ use BackendMenu;
 use Illuminate\Http\Request;
 use AhmadFatoni\ApiGenerator\Helpers\Helpers;
 use Illuminate\Support\Facades\Validator;
-use BootnetCrasher\School\Models\Professeurmodel;
+use BootnetCrasher\School\Models\ProfesseurModel;
 class professeurController extends Controller
 {
-	protected $Professeurmodel;
+	protected $ProfesseurModel;
 
     protected $helpers;
 
-    public function __construct(Professeurmodel $Professeurmodel, Helpers $helpers)
+    public function __construct(ProfesseurModel $ProfesseurModel, Helpers $helpers)
     {
         parent::__construct();
-        $this->Professeurmodel    = $Professeurmodel;
+        $this->ProfesseurModel    = $ProfesseurModel;
         $this->helpers          = $helpers;
     }
 
     public function index(){
 
-        $data = $this->Professeurmodel->all()->toArray();
+        $data = $this->ProfesseurModel->all()->toArray();
 
         return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
     }
 
     public function show($id){
 
-        $data = $this->Professeurmodel->where('id',$id)->first();
+        $data = $this->ProfesseurModel->where('id',$id)->first();
 
         if( count($data) > 0){
 
@@ -46,15 +46,15 @@ class professeurController extends Controller
     	$arr = $request->all();
 
         while ( $data = current($arr)) {
-            $this->Professeurmodel->{key($arr)} = $data;
+            $this->ProfesseurModel->{key($arr)} = $data;
             next($arr);
         }
 
-        $validation = Validator::make($request->all(), $this->Professeurmodel->rules);
+        $validation = Validator::make($request->all(), $this->ProfesseurModel->rules);
         
         if( $validation->passes() ){
-            $this->Professeurmodel->save();
-            return $this->helpers->apiArrayResponseBuilder(201, 'created', ['id' => $this->Professeurmodel->id]);
+            $this->ProfesseurModel->save();
+            return $this->helpers->apiArrayResponseBuilder(201, 'created', ['id' => $this->ProfesseurModel->id]);
         }else{
             return $this->helpers->apiArrayResponseBuilder(400, 'fail', $validation->errors() );
         }
@@ -63,7 +63,7 @@ class professeurController extends Controller
 
     public function update($id, Request $request){
 
-        $status = $this->Professeurmodel->where('id',$id)->update($data);
+        $status = $this->ProfesseurModel->where('id',$id)->update($data);
     
         if( $status ){
             
@@ -78,14 +78,14 @@ class professeurController extends Controller
 
     public function delete($id){
 
-        $this->Professeurmodel->where('id',$id)->delete();
+        $this->ProfesseurModel->where('id',$id)->delete();
 
         return $this->helpers->apiArrayResponseBuilder(200, 'success', 'Data has been deleted successfully.');
     }
 
     public function destroy($id){
 
-        $this->Professeurmodel->where('id',$id)->delete();
+        $this->ProfesseurModel->where('id',$id)->delete();
 
         return $this->helpers->apiArrayResponseBuilder(200, 'success', 'Data has been deleted successfully.');
     }

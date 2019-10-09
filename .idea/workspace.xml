@@ -1,0 +1,714 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="259d6927-db90-493c-a6bf-1a6004ccdc80" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/Modal.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/notes/List.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/notes/Preview.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/notes/Update.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/plugins/ahmadfatoni/apigenerator/controllers/api/noteController.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/plugins/ahmadfatoni/apigenerator/controllers/api/noteController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/plugins/ahmadfatoni/apigenerator/controllers/api/professeurController.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/plugins/ahmadfatoni/apigenerator/controllers/api/professeurController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/plugins/ahmadfatoni/apigenerator/controllers/api/userController.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/plugins/ahmadfatoni/apigenerator/controllers/api/userController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/plugins/ahmadfatoni/apigenerator/controllers/apigeneratorcontroller/config_list.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/plugins/ahmadfatoni/apigenerator/controllers/apigeneratorcontroller/config_list.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/plugins/ahmadfatoni/apigenerator/controllers/apigeneratorcontroller/update.htm" beforeDir="false" afterPath="$PROJECT_DIR$/backend/plugins/ahmadfatoni/apigenerator/controllers/apigeneratorcontroller/update.htm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/plugins/ahmadfatoni/apigenerator/routes.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/plugins/ahmadfatoni/apigenerator/routes.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/controllers/ProfesseurModel.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/controllers/api/userController.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/controllers/api/userController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/controllers/professeurmodel/_list_toolbar.htm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/controllers/professeurmodel/_reorder_toolbar.htm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/controllers/professeurmodel/config_form.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/controllers/professeurmodel/config_list.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/controllers/professeurmodel/config_reorder.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/controllers/professeurmodel/create.htm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/controllers/professeurmodel/index.htm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/controllers/professeurmodel/preview.htm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/controllers/professeurmodel/reorder.htm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/controllers/professeurmodel/update.htm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/models/ClasseModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/models/ClasseModel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/models/NoteModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/models/NoteModel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/models/Professeurmodel.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/plugin.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/plugin.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/routes.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/routes.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/08/df/08dfdfd922681bba7ab5215d56b7da8dd8d64c53" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/08/df/08dfdfd922681bba7ab5215d56b7da8dd8d64c53" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/11/de/11de31e1eabb2682cf62ee9c9ccb0630f1019006" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/11/de/11de31e1eabb2682cf62ee9c9ccb0630f1019006" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/13/70/13700ec4f5d6c9548e784ad4086830fc19661f0e" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/13/70/13700ec4f5d6c9548e784ad4086830fc19661f0e" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/16/19/1619a6b751768f8a2a43b0293d7e6b62ba78a65a" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/16/19/1619a6b751768f8a2a43b0293d7e6b62ba78a65a" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/18/81/188104e37988b9719e2253de2bc8502c54c6ae7f" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/18/81/188104e37988b9719e2253de2bc8502c54c6ae7f" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/22/01/22019f078997f8229618d6888b9e33b7f0b00852" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/22/01/22019f078997f8229618d6888b9e33b7f0b00852" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/22/43/2243f500ae1632e1e609a9d4d08e7bad65800071" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/22/43/2243f500ae1632e1e609a9d4d08e7bad65800071" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/32/03/3203d62f08a989e1db95c3f437050c8f2bb31b4c" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/32/03/3203d62f08a989e1db95c3f437050c8f2bb31b4c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/35/09/35094f74adb0134ce75c67a266daa58a059d8274" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/35/09/35094f74adb0134ce75c67a266daa58a059d8274" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/45/30/45306ef467759ecc88497a8652419d1e0f539987" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/45/30/45306ef467759ecc88497a8652419d1e0f539987" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/46/80/4680f2ec22e7e96a9f797ba39629877753200f3b" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/46/80/4680f2ec22e7e96a9f797ba39629877753200f3b" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/47/1b/471bc0cd219cfe11f8a6a4b306ab37ab833d18fd" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/47/1b/471bc0cd219cfe11f8a6a4b306ab37ab833d18fd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/58/cf/58cf0a9683a3bff3a5abe11f67de9e5ab8239362" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/58/cf/58cf0a9683a3bff3a5abe11f67de9e5ab8239362" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/5d/1f/5d1ff1d3d9d6dc526405c537cb1d94935b903e83" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/5d/1f/5d1ff1d3d9d6dc526405c537cb1d94935b903e83" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/62/b6/62b63fd23606a5d580125bbf80cfd9f394d9b758" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/62/b6/62b63fd23606a5d580125bbf80cfd9f394d9b758" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/64/e8/64e867be3ca7d8483e8e070cfb11552a4de970c2" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/64/e8/64e867be3ca7d8483e8e070cfb11552a4de970c2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/66/25/66258b0563c78d9b2cbc9ed217238eb6e11837cb" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/66/25/66258b0563c78d9b2cbc9ed217238eb6e11837cb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/66/65/666582ffea28796aac87443dbbc6420b7c6df7cd" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/66/65/666582ffea28796aac87443dbbc6420b7c6df7cd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/68/14/681441af38ac2f05a56d7118130f932163789338" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/6e/83/6e836072f3608a1296117ca3576079170d40b052" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/6e/83/6e836072f3608a1296117ca3576079170d40b052" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/72/4d/724d64623b82cdd367a46a1a3611b8fce75faedf" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/72/4d/724d64623b82cdd367a46a1a3611b8fce75faedf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/77/61/77616e1c5e0d202cb4cf522bddafaebf56f27660" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/77/61/77616e1c5e0d202cb4cf522bddafaebf56f27660" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/83/b0/83b00c260c1a497ba24c8415bf10556ef08c9dd9" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/83/b0/83b00c260c1a497ba24c8415bf10556ef08c9dd9" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/97/37/9737833e426f53b3dcb4d98fdcb68c76762765de" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/97/37/9737833e426f53b3dcb4d98fdcb68c76762765de" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/99/6b/996b534fe6b63c23ddc825a2efe4588688b616f4" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/99/6b/996b534fe6b63c23ddc825a2efe4588688b616f4" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/a0/c9/a0c910eb995ad1e9281e5bb05187281e039e242f" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/a0/c9/a0c910eb995ad1e9281e5bb05187281e039e242f" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/b1/b6/b1b6b61b6cd58fcbec08f9d00687d524901e8a6d" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/b1/b6/b1b6b61b6cd58fcbec08f9d00687d524901e8a6d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/bc/b0/bcb03c48b42c0914b43c593a96b199e712154460" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/bc/b0/bcb03c48b42c0914b43c593a96b199e712154460" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/cd/4a/cd4a39e85942787d6274dd275cc36548b9cb543c" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/cd/4a/cd4a39e85942787d6274dd275cc36548b9cb543c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/d0/9d/d09d8c5165d8fda09b210cc701ee39cf70bd5b48" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/d0/9d/d09d8c5165d8fda09b210cc701ee39cf70bd5b48" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/d2/bf/d2bfa1437aba00dadecca2b56617050d8f711997" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/d2/bf/d2bfa1437aba00dadecca2b56617050d8f711997" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/db/c9/dbc90c3f61080741d2a52c82a07ca43602c629f5" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/db/c9/dbc90c3f61080741d2a52c82a07ca43602c629f5" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/dc/01/dc0159c38453284a773953817d07aef378064515" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/dc/01/dc0159c38453284a773953817d07aef378064515" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/e3/dc/e3dca2704d9b520cb0f1f597ea7f53489252aab9" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/e3/dc/e3dca2704d9b520cb0f1f597ea7f53489252aab9" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/e5/49/e549e45928ba905a6bba0d5d3f531fff3b0ce52c" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/e5/49/e549e45928ba905a6bba0d5d3f531fff3b0ce52c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/e5/58/e5585e1e8c7268ef32d0a776892951638f7c6063" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/e5/58/e5585e1e8c7268ef32d0a776892951638f7c6063" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/ee/4e/ee4e8cfa5d928ff6951d5dafda1a86892cd3f8af" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/ee/4e/ee4e8cfa5d928ff6951d5dafda1a86892cd3f8af" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/classes.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/classes.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/sessions/2QEifQUHAZU41Njc2C1UnRhS8fLzkef89DYOA4uZ" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/sessions/W0cvIkSogsgYZpYV4dkj01COA5Zw3DpnvJ5nQDbA" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/sessions/jAfrvstAzX82N098vesKRLwRB1tLd0fDTMyZfu0J" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/DetailNote.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Login.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Note.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/layouts/Eleve.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/layouts/Eleve.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/layouts/Parent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/layouts/Parent.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/layouts/Professeur.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/layouts/Professeur.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/router/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/store/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/store/index.js" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/frontend/src/components/notes/Add.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="238">
+              <caret line="101" column="37" lean-forward="true" selection-start-line="100" selection-start-column="9" selection-end-line="101" selection-end-column="37" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/frontend/src/store/index.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="92">
+              <caret line="379" column="8" selection-start-line="379" selection-start-column="8" selection-end-line="386" selection-end-column="46" />
+              <folding>
+                <element signature="e#0#21#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/frontend/src/components/notes/Preview.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="160">
+              <caret line="24" column="5" lean-forward="true" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/backend/plugins/ahmadfatoni/apigenerator/controllers/api/noteController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="180">
+              <caret line="113" column="26" selection-start-line="113" selection-start-column="26" selection-end-line="113" selection-end-column="26" />
+              <folding>
+                <element signature="e#59#86#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/backend/plugins/ahmadfatoni/apigenerator/controllers/api/userController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-612">
+              <caret line="9" column="48" selection-start-line="9" selection-start-column="48" selection-end-line="9" selection-end-column="48" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/backend/plugins/ahmadfatoni/apigenerator/controllers/api/professeurController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="119">
+              <caret line="7" column="41" lean-forward="true" selection-start-line="7" selection-start-column="41" selection-end-line="7" selection-end-column="41" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/frontend/src/components/notes/List.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="486">
+              <caret line="41" column="18" lean-forward="true" selection-start-line="41" selection-start-column="18" selection-end-line="41" selection-end-column="18" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/frontend/src/components/Modal.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="126">
+              <caret line="44" column="7" selection-start-line="44" selection-start-column="7" selection-end-line="44" selection-end-column="7" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/frontend/src/components/DetailAbsenceEleve.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="170">
+              <caret line="10" column="52" lean-forward="true" selection-start-line="10" selection-start-column="52" selection-end-line="10" selection-end-column="52" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>logout</find>
+      <find>professeur_id</find>
+      <find>alert(</find>
+      <find>noteModel</find>
+      <find>absenceseleves</find>
+      <find>show</find>
+      <find>saveNote</find>
+      <find>allnotes</find>
+      <find>Professeurmodel</find>
+      <find>noteeleves</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>ProfesseurModel</replace>
+    </replaceStrings>
+    <dirStrings>
+      <dir>$PROJECT_DIR$/backend/plugins/ahmadfatoni/apigenerator</dir>
+    </dirStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/frontend/src/components/Login.vue" />
+        <option value="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/models/NoteModel.php" />
+        <option value="$PROJECT_DIR$/backend/storage/logs/system.log" />
+        <option value="$PROJECT_DIR$/backend/plugins/ahmadfatoni/apigenerator/controllers/api/ProfesseurClasseController.php" />
+        <option value="$PROJECT_DIR$/frontend/src/components/Note.vue" />
+        <option value="$PROJECT_DIR$/frontend/src/components/notes/Add.vue" />
+        <option value="$PROJECT_DIR$/frontend/src/router/index.js" />
+        <option value="$PROJECT_DIR$/backend/plugins/ahmadfatoni/apigenerator/controllers/api/noteController.php" />
+        <option value="$PROJECT_DIR$/frontend/src/components/notes/Update.vue" />
+        <option value="$PROJECT_DIR$/frontend/src/components/notes/Preview.vue" />
+        <option value="$PROJECT_DIR$/frontend/src/components/layouts/Professeur.vue" />
+        <option value="$PROJECT_DIR$/frontend/src/main.js" />
+        <option value="$PROJECT_DIR$/frontend/src/components/notes/List.vue" />
+        <option value="$PROJECT_DIR$/backend/plugins/ahmadfatoni/apigenerator/controllers/api/userController.php" />
+        <option value="$PROJECT_DIR$/backend/plugins/ahmadfatoni/apigenerator/controllers/api/professeurController.php" />
+        <option value="$PROJECT_DIR$/frontend/src/store/index.js" />
+        <option value="$PROJECT_DIR$/frontend/src/components/Modal.vue" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="y" value="68" />
+    <option name="width" value="1348" />
+    <option name="height" value="666" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="modules-sinai-school" type="b2602c69:ProjectViewProjectNode" />
+              <item name="modules-sinai-school" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="modules-sinai-school" type="b2602c69:ProjectViewProjectNode" />
+              <item name="modules-sinai-school" type="462c0819:PsiDirectoryNode" />
+              <item name="backend" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="modules-sinai-school" type="b2602c69:ProjectViewProjectNode" />
+              <item name="modules-sinai-school" type="462c0819:PsiDirectoryNode" />
+              <item name="backend" type="462c0819:PsiDirectoryNode" />
+              <item name="plugins" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="modules-sinai-school" type="b2602c69:ProjectViewProjectNode" />
+              <item name="modules-sinai-school" type="462c0819:PsiDirectoryNode" />
+              <item name="backend" type="462c0819:PsiDirectoryNode" />
+              <item name="plugins" type="462c0819:PsiDirectoryNode" />
+              <item name="ahmadfatoni" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="modules-sinai-school" type="b2602c69:ProjectViewProjectNode" />
+              <item name="modules-sinai-school" type="462c0819:PsiDirectoryNode" />
+              <item name="backend" type="462c0819:PsiDirectoryNode" />
+              <item name="plugins" type="462c0819:PsiDirectoryNode" />
+              <item name="ahmadfatoni" type="462c0819:PsiDirectoryNode" />
+              <item name="apigenerator" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="modules-sinai-school" type="b2602c69:ProjectViewProjectNode" />
+              <item name="modules-sinai-school" type="462c0819:PsiDirectoryNode" />
+              <item name="backend" type="462c0819:PsiDirectoryNode" />
+              <item name="plugins" type="462c0819:PsiDirectoryNode" />
+              <item name="ahmadfatoni" type="462c0819:PsiDirectoryNode" />
+              <item name="apigenerator" type="462c0819:PsiDirectoryNode" />
+              <item name="controllers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="modules-sinai-school" type="b2602c69:ProjectViewProjectNode" />
+              <item name="modules-sinai-school" type="462c0819:PsiDirectoryNode" />
+              <item name="backend" type="462c0819:PsiDirectoryNode" />
+              <item name="plugins" type="462c0819:PsiDirectoryNode" />
+              <item name="ahmadfatoni" type="462c0819:PsiDirectoryNode" />
+              <item name="apigenerator" type="462c0819:PsiDirectoryNode" />
+              <item name="controllers" type="462c0819:PsiDirectoryNode" />
+              <item name="api" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="modules-sinai-school" type="b2602c69:ProjectViewProjectNode" />
+              <item name="modules-sinai-school" type="462c0819:PsiDirectoryNode" />
+              <item name="backend" type="462c0819:PsiDirectoryNode" />
+              <item name="plugins" type="462c0819:PsiDirectoryNode" />
+              <item name="bootnetcrasher" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="modules-sinai-school" type="b2602c69:ProjectViewProjectNode" />
+              <item name="modules-sinai-school" type="462c0819:PsiDirectoryNode" />
+              <item name="backend" type="462c0819:PsiDirectoryNode" />
+              <item name="plugins" type="462c0819:PsiDirectoryNode" />
+              <item name="bootnetcrasher" type="462c0819:PsiDirectoryNode" />
+              <item name="school" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="modules-sinai-school" type="b2602c69:ProjectViewProjectNode" />
+              <item name="modules-sinai-school" type="462c0819:PsiDirectoryNode" />
+              <item name="backend" type="462c0819:PsiDirectoryNode" />
+              <item name="plugins" type="462c0819:PsiDirectoryNode" />
+              <item name="bootnetcrasher" type="462c0819:PsiDirectoryNode" />
+              <item name="school" type="462c0819:PsiDirectoryNode" />
+              <item name="models" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="modules-sinai-school" type="b2602c69:ProjectViewProjectNode" />
+              <item name="modules-sinai-school" type="462c0819:PsiDirectoryNode" />
+              <item name="backend" type="462c0819:PsiDirectoryNode" />
+              <item name="storage" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="modules-sinai-school" type="b2602c69:ProjectViewProjectNode" />
+              <item name="modules-sinai-school" type="462c0819:PsiDirectoryNode" />
+              <item name="backend" type="462c0819:PsiDirectoryNode" />
+              <item name="storage" type="462c0819:PsiDirectoryNode" />
+              <item name="logs" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="modules-sinai-school" type="b2602c69:ProjectViewProjectNode" />
+              <item name="modules-sinai-school" type="462c0819:PsiDirectoryNode" />
+              <item name="frontend" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="modules-sinai-school" type="b2602c69:ProjectViewProjectNode" />
+              <item name="modules-sinai-school" type="462c0819:PsiDirectoryNode" />
+              <item name="frontend" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="modules-sinai-school" type="b2602c69:ProjectViewProjectNode" />
+              <item name="modules-sinai-school" type="462c0819:PsiDirectoryNode" />
+              <item name="frontend" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="modules-sinai-school" type="b2602c69:ProjectViewProjectNode" />
+              <item name="modules-sinai-school" type="462c0819:PsiDirectoryNode" />
+              <item name="frontend" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="layouts" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="modules-sinai-school" type="b2602c69:ProjectViewProjectNode" />
+              <item name="modules-sinai-school" type="462c0819:PsiDirectoryNode" />
+              <item name="frontend" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="notes" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="modules-sinai-school" type="b2602c69:ProjectViewProjectNode" />
+              <item name="modules-sinai-school" type="462c0819:PsiDirectoryNode" />
+              <item name="frontend" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="professeurs" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="modules-sinai-school" type="b2602c69:ProjectViewProjectNode" />
+              <item name="modules-sinai-school" type="462c0819:PsiDirectoryNode" />
+              <item name="frontend" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="router" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="modules-sinai-school" type="b2602c69:ProjectViewProjectNode" />
+              <item name="modules-sinai-school" type="462c0819:PsiDirectoryNode" />
+              <item name="frontend" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="store" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="$PROJECT_DIR$/frontend/node_modules/eslint" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/frontend/src/components/notes" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="259d6927-db90-493c-a6bf-1a6004ccdc80" name="Default Changelist" comment="" />
+      <created>1570554126023</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1570554126023</updated>
+      <workItem from="1570554127417" duration="9938000" />
+      <workItem from="1570564183326" duration="19954000" />
+      <workItem from="1570613595367" duration="13264000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="43156000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="0" y="68" width="1348" height="666" extended-state="0" />
+    <editor active="true" />
+    <layout>
+      <window_info content_ui="combo" id="Project" order="0" weight="0.29384616" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="Database Changes" order="9" />
+      <window_info anchor="bottom" id="TypeScript" order="10" />
+      <window_info anchor="bottom" id="Terminal" order="11" />
+      <window_info anchor="bottom" id="Event Log" order="12" side_tool="true" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Database" order="3" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/frontend/src/App.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="194">
+          <caret line="39" column="35" lean-forward="true" selection-start-line="39" selection-start-column="35" selection-end-line="39" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/node_modules/vuex/types/index.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="164">
+          <caret line="41" column="2" selection-start-line="41" selection-start-column="2" selection-end-line="41" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/plugins/ahmadfatoni/apigenerator/controllers/api/raisonabsenceController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-153" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/plugins/ahmadfatoni/apigenerator/controllers/api/matiereController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-153" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/models/ProfesseurClasseModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="313">
+          <caret line="26" column="19" selection-start-line="26" selection-start-column="9" selection-end-line="26" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/plugins/ahmadfatoni/apigenerator/helpers/Helpers.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="20" selection-start-line="4" selection-start-column="20" selection-end-line="4" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/plugins/ahmadfatoni/apigenerator/controllers/api/eleveController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="50" column="34" selection-start-line="50" selection-start-column="34" selection-end-line="50" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/models/NoteModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="42" column="58" lean-forward="true" selection-start-line="42" selection-start-column="58" selection-end-line="42" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/plugins/ahmadfatoni/apigenerator/controllers/api/ProfesseurClasseController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="47" column="30" lean-forward="true" selection-start-line="47" selection-start-column="30" selection-end-line="47" selection-end-column="30" />
+          <folding>
+            <element signature="e#59#86#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/src/components/professeurs/EditAbsenceEleve.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="90" column="38" selection-start-line="90" selection-start-column="38" selection-end-line="90" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/src/components/DetailNote.vue" />
+    <entry file="file://$PROJECT_DIR$/backend/storage/logs/system.log">
+      <provider selected="true" editor-type-id="LogFileEditorProvider">
+        <state>
+          <caret column="241" lean-forward="true" selection-start-column="241" selection-end-column="241" />
+        </state>
+      </provider>
+      <provider editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/src/components/Note.vue" />
+    <entry file="file://$PROJECT_DIR$/frontend/src/components/Classe.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-255" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/src/components/AbsenceEleve.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="28" lean-forward="true" selection-start-line="17" selection-start-column="28" selection-end-line="17" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/plugins/ahmadfatoni/apigenerator/controllers/api/absenceselevesController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="88" column="18" selection-start-line="88" selection-start-column="18" selection-end-line="88" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/controllers/api/NoteEleveController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="5" selection-start-line="5" selection-end-line="5" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/node_modules/vuejs-paginate/dist/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="65" selection-start-column="65" selection-end-column="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/src/components/Login.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-741">
+          <caret line="10" column="32" lean-forward="true" selection-start-line="10" selection-start-column="32" selection-end-line="10" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/src/components/layouts/Professeur.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-544">
+          <caret line="22" column="56" lean-forward="true" selection-start-line="22" selection-start-column="56" selection-end-line="22" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/src/components/HelloWorld.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-line="10" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/src/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="31" lean-forward="true" selection-start-line="31" selection-end-line="31" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#140#161#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/src/components/notes/Update.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="398">
+          <caret line="95" column="16" lean-forward="true" selection-start-line="95" selection-start-column="16" selection-end-line="95" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/plugins/ahmadfatoni/apigenerator/controllers/api/noteController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="113" column="26" selection-start-line="113" selection-start-column="26" selection-end-line="113" selection-end-column="26" />
+          <folding>
+            <element signature="e#59#86#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/plugins/ahmadfatoni/apigenerator/controllers/api/userController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-612">
+          <caret line="9" column="48" selection-start-line="9" selection-start-column="48" selection-end-line="9" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/routes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="43" selection-start-line="4" selection-start-column="43" selection-end-line="4" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/src/components/notes/Preview.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="24" column="5" lean-forward="true" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/plugins/ahmadfatoni/apigenerator/routes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="328">
+          <caret line="24" column="32" selection-start-line="24" selection-start-column="32" selection-end-line="24" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/src/router/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="22" column="27" lean-forward="true" selection-start-line="22" selection-start-column="27" selection-end-line="22" selection-end-column="27" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+            <element signature="e#664#712#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/src/components/notes/List.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="486">
+          <caret line="41" column="18" lean-forward="true" selection-start-line="41" selection-start-column="18" selection-end-line="41" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/src/store/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="92">
+          <caret line="379" column="8" selection-start-line="379" selection-start-column="8" selection-end-line="386" selection-end-column="46" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/src/components/DetailAbsenceEleve.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="52" lean-forward="true" selection-start-line="10" selection-start-column="52" selection-end-line="10" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/src/components/notes/Add.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="101" column="37" lean-forward="true" selection-start-line="100" selection-start-column="9" selection-end-line="101" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/plugins/ahmadfatoni/apigenerator/controllers/api/professeurController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="41" lean-forward="true" selection-start-line="7" selection-start-column="41" selection-end-line="7" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/src/components/Modal.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="44" column="7" selection-start-line="44" selection-start-column="7" selection-end-line="44" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

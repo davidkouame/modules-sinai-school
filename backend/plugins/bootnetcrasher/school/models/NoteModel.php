@@ -49,6 +49,11 @@ class NoteModel extends Model
     public function beforeCreate()
     {
         $this->reference = $this->getReference();
+
+    }
+
+    public function beforeSave(){
+        /// trace_log("insertion de donnée a ".now(). " est l'instance est ".$this);
     }
 
     public function afterSave(){

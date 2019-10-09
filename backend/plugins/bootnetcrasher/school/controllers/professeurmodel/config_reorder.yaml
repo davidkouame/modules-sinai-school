@@ -1,4 +1,0 @@
-title: ProfesseurModel
-modelClass: BootnetCrasher\School\Models\Professeurmodel
-toolbar:
-    buttons: reorder_toolbar
