@@ -22,7 +22,11 @@
               <td v-if="absenceeleve.raisonabsence">{{ absenceeleve.raisonabsence.libelle }}</td>
               <td v-else="absenceeleve.raisonabsence"></td>
               <td>
-                <a :href="'/#/absence-eleve/'+absenceeleve.id" class="btn btn-primary">detail</a>
+                <!--<a :href="'/#/absence-eleve/'+absenceeleve.id" class="btn btn-primary">detail</a>-->
+
+                <a :href="'/#/absence-eleve/preview/'+absenceeleve.id" class="btn btn-primary">Voir</a>
+              <a :href="'/#/absence-eleve/update/'+absenceeleve.id" class="btn btn-primary">Modifier</a>
+              <!--<button id="show-modal" @click="showModalF(note.id)" class="btn btn-danger">Supprimer</button>-->
               </td>
             </tr>
           </tbody>

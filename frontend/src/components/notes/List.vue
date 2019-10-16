@@ -42,7 +42,9 @@
           </tbody>
         </table>
 
-        <modal v-if="showModal" @close="showModal = false" v-bind:noteid="noteid"></modal>
+        <!--<modal v-if="showModal" @close="showModal = false" v-bind:noteid="noteid"></modal>-->
+
+        <modal v-if="showModal" @close="showModal = false" v-bind:modelid="noteid" modelname="note"></modal>
 
         <paginate
                 :page-count="pageCount"

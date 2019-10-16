@@ -12,7 +12,7 @@
 
                     <div class="modal-body">
                         <slot name="body">
-                            Voulez vous supprimer cette note ?
+                            {{ getTextBody() }}
                         </slot>
                     </div>
 
@@ -21,7 +21,7 @@
                             <button class="modal-default-button btn btn-primary" @click="$emit('close')">
                                 Non
                             </button>
-                            <button class="modal-default-button btn btn-danger" v-on:click="deleteNote">
+                            <button class="modal-default-button btn btn-danger" v-on:click="deleteModel">
                                 Oui
                             </button>
                         </slot>
@@ -35,19 +35,30 @@
 <script>
 export default {
   name: 'Modal',
-  props: ['noteid'],
+  props: ['modelid', 'modelname'],
   data: function () {
     return {
       showModal: false
     }
   },
   created () {
-    // console.log('la noteid est ' + this.noteid)
+    console.log('la noteid est ' + this.modelid)
+    console.log('le nom du model est '+ this.modelname)
   },
   methods: {
-    deleteNote () {
-      // this.showModal = false
-      this.$store.dispatch('deleteNote', this.noteid).then(response => {
+    getTextBody(){
+      let textBody = null;
+      if(this.modelname == 'note'){
+        textBody = "Voulez vous supprimer cette note ?"
+      }else{
+        textBody = "Voulez vous supprimer cette absence ?"
+      }
+      return textBody
+    },
+    deleteModel() {
+      if(this.modelname == 'note'){
+        // this.showModal = false
+      this.$store.dispatch('deleteNote', this.modelid).then(response => {
         this.$emit('close')
         alert("L'enregistrement a été supprimé avec succès")
         //  this.$router.push('/notes')
@@ -58,6 +69,20 @@ export default {
           this.errored = true
         })
         .finally(() => (this.loading = false))
+      }else{
+        // this.showModal = false
+      this.$store.dispatch('deleteAbsenceEleve', this.modelid).then(response => {
+        this.$emit('close')
+        alert("L'absence a été supprimé avec succès")
+        //  this.$router.push('/absences-eleves')
+          location.reload()
+      })
+        .catch(error => {
+          console.log(error)
+          this.errored = true
+        })
+        .finally(() => (this.loading = false))
+      }
     }
   }
 }

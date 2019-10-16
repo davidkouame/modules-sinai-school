@@ -197,6 +197,35 @@ export default new Vuex.Store({
         })
         .finally(() => (this.loading = false))
     },
+    absenceseleves (context, params) {
+      let concatParams = null
+      if (params.search) {
+        concatParams = params.search.map(function (elemen) {
+          return elemen.key + '=' + elemen.value
+        }).join('&')
+        concatParams = '&' + concatParams
+      }
+      let axios = null
+      if (params.eleveId) {
+        axios = Axios.get(
+          context.state.endpoint + 'api/v1/absenceseleves?eleve_id=' + params.eleveId + '&page=' + params.pageNum
+        )
+      } else {
+        /*axios = Axios.get(
+          context.state.endpoint + 'api/v1/absenceseleves?page=' + params.pageNum
+        )*/
+        context.state.endpoint + 'api/v1/absenceseleves?page=' + params.payload + concatParams
+      }
+      axios.then(response => {
+        context.commit('absenceseleves', response.data.data.data)
+        context.commit('pageCount', response.data.data.last_page)
+      })
+        .catch(error => {
+          console.log(error)
+          this.errored = true
+        })
+        .finally(() => (this.loading = false))
+    }/*,
     absenceseleves (context, request) {
       let axios = null
       if (request.eleveId) {
@@ -217,7 +246,7 @@ export default new Vuex.Store({
           this.errored = true
         })
         .finally(() => (this.loading = false))
-    },
+    }*/,
     absenceeleve (context, request) {
       Axios.get(
         context.state.endpoint + 'api/v1/absenceseleves/' + request.absenceEleveId
@@ -275,8 +304,7 @@ export default new Vuex.Store({
         let axios = null
         if (data.eleveId) {
           axios = Axios.get(
-            context.state.endpoint + 'api/v1/absenceseleves?eleve_id=' + data.eleveId + '&page=' + data.pageNum
-          )
+          context.state.endpoint + 'api/v1/absenceseleves?eleve_id=' + data.eleveId + '&page=' + data.pageNum)
         } else {
           axios = Axios.get(
             context.state.endpoint + 'api/v1/absenceseleves?page=' + data.pageNum
@@ -389,6 +417,11 @@ export default new Vuex.Store({
     deleteNote (context, noteId) {
       return Axios.get(
           context.state.endpoint + 'api/v1/notemodel/' + noteId + '/delete'
+      );
+    },
+    deleteAbsenceEleve (context, absenceId) {
+      return Axios.get(
+          context.state.endpoint + 'api/v1/absenceseleves/' + absenceId + '/delete'
       );
     }
   }

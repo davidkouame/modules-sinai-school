@@ -18,6 +18,12 @@ import UpdateNote from '@/components/notes/Update.vue'
 import PreviewNote from '@/components/notes/Preview.vue'
 import ListNote from '@/components/notes/List.vue'
 
+// Absence élève
+import ListAbsenceEleve from '@/components/absences/List.vue'
+import AddAbsenceEleve from '@/components/absences/Add.vue'
+import UpdateAbsenceEleve from '@/components/absences/Update.vue'
+import PreviewAbsenceEleve from '@/components/absences/Preview.vue'
+
 Vue.use(Router)
 
 export default new Router({
@@ -27,15 +33,11 @@ export default new Router({
       name: 'Home',
       component: HelloWorld
     },
+    /* ============== Note ============== */
     {
       path: '/notes',
       name: 'ListNote',
       component: ListNote
-    },
-    {
-      path: '/notes/preview/:id(\\d+)',
-      name: 'PreviewNote',
-      component: PreviewNote
     },
     {
       path: '/notes/add',
@@ -48,6 +50,12 @@ export default new Router({
       component: UpdateNote
     },
     {
+      path: '/notes/preview/:id(\\d+)',
+      name: 'PreviewNote',
+      component: PreviewNote
+    },
+    /* ============== \.Note ============== */
+    {
       path: '/classe',
       name: 'Classe',
       component: Classe
@@ -56,17 +64,40 @@ export default new Router({
       path: '/create-parent',
       name: 'Create compte parent',
       component: CreateCompteParent
-    },
+    }/*,
     {
       path: '/professeur/absences-eleves',
       name: 'Absence eleve',
       component: ProfesseurAbsenceEleve
-    },
+    }*/,
     {
       path: '/absence-eleve',
       name: 'Absence eleve',
       component: AbsenceEleve
     },
+    /* ============== Absence élève ============== */
+    {
+      path: '/absences-eleves',
+      name: 'ListAbsenceEleve',
+      component: ListAbsenceEleve
+    },
+    {
+      path: '/absences-eleves/add',
+      name: 'AddAbsenceEleve',
+      component: AddAbsenceEleve
+    },
+    {
+      path: '/absences-eleves/update/:id(\\d+)',
+      name: 'UpdateAbsenceEleve',
+      component: UpdateAbsenceEleve
+    },
+    {
+      path: '/absences-eleves/preview/:id(\\d+)',
+      name: 'PreviewAbsenceEleve',
+      component: PreviewAbsenceEleve
+    }
+    /* ============== \.Absence élève ============== */
+    ,
     {
       path: '/absence-eleve/:id(\\d+)',
       name: 'Detail Absence élève',
