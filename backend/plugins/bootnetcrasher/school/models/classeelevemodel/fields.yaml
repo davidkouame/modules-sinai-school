@@ -1,0 +1,15 @@
+fields:
+    eleve:
+        label: Elève
+        nameFrom: matricule
+        descriptionFrom: description
+        span: auto
+        type: relation
+        placeholder: Sélectionner un élève
+    classe:
+        label: Classe
+        nameFrom: libelle
+        descriptionFrom: description
+        span: auto
+        type: relation
+        placeholder: Sélectionner une classe

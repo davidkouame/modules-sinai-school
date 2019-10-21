@@ -10,6 +10,12 @@ columns:
         searchable: true
         select: libelle
         relation: classe
+    professeur:
+        label: Professeur
+        type: text
+        searchable: true
+        select: name
+        relation: professeur
     coefficient:
         label: Coefficient
         type: text

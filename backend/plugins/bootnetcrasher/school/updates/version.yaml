@@ -99,3 +99,9 @@
 1.0.34:
     - 'Updated table bootnetcrasher_school_eleve'
     - builder_table_update_bootnetcrasher_school_eleve.php
+1.0.35:
+    - 'Created table bootnetcrasher_school_classe_eleve'
+    - builder_table_create_bootnetcrasher_school_classe_eleve.php
+1.0.36:
+    - 'Created table bootnetcrasher_school_parent_eleve'
+    - builder_table_create_bootnetcrasher_school_parent_eleve.php

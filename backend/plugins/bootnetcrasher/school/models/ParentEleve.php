@@ -24,4 +24,8 @@ class ParentEleve extends Model
      */
     public $rules = [
     ];
+
+    public $hasOne = [
+      'us' => ['RainLab\User\Models\User', 'key' => 'parent_id']  
+    ];
 }

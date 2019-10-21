@@ -1,7 +1,13 @@
 columns:
-    users:
-        label: Nom
+    parent:
+        label: Parent
         type: text
         searchable: true
         select: name
-        relation: users
+        relation: parent
+    eleve:
+        label: Elève
+        type: text
+        searchable: true
+        select: name
+        relation: eleve

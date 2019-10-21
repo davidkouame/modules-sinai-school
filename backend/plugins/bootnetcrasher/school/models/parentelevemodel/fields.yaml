@@ -1,8 +1,15 @@
 fields:
-    users:
-        label: Nom
+    parent:
+        label: Parent
         span: auto
         type: relation
         select: name
-        partial: users
-        placeholder: Sélectionnez un user
+        partial: parent
+        placeholder: Sélectionnez un parent
+    eleve:
+        label: Elève
+        span: auto
+        type: relation
+        select: name
+        partial: parent
+        placeholder: Sélectionnez un élève

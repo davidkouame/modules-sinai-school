@@ -14,11 +14,13 @@ export default new Vuex.Store({
     noteseleves: [],
     note: null,
     pageCount: 1,
+    pageCountNote: 1,
     userId: 6,
     classe: null,
     absenceseleves: [],
     absenceeleve: null,
     eleves: [],
+    eleve: null,
     raisonsabsences: [],
     absenceeleve: null,
     typesnotes: [],
@@ -29,50 +31,56 @@ export default new Vuex.Store({
     // userId: 1
   },
   mutations: {
-    notes (state, payload) {
+    notes(state, payload) {
       state.notes = payload
     },
-    noteseleves (state, payload) {
+    noteseleves(state, payload) {
       state.noteseleves = payload
     },
-    note (state, note) {
+    note(state, note) {
       state.note = note
     },
-    pageCount (state, payload) {
+    pageCount(state, payload) {
       state.pageCount = payload
     },
-    classe (state, classe) {
+    pageCountNote(state, payload) {
+      state.pageCountNote = payload
+    },
+    classe(state, classe) {
       state.classe = classe
     },
-    absenceseleves (state, absenceseleves) {
+    absenceseleves(state, absenceseleves) {
       state.absenceseleves = absenceseleves
     },
-    absenceeleve (state, absenceeleve) {
+    absenceeleve(state, absenceeleve) {
       state.absenceeleve = absenceeleve
     },
-    eleves (state, eleves) {
+    eleves(state, eleves) {
       state.eleves = eleves
     },
-    raisonsabsences (state, raisonsabsences) {
+    raisonsabsences(state, raisonsabsences) {
       state.raisonsabsences = raisonsabsences
     },
-    absenceeleve (state, absenceeleve) {
+    absenceeleve(state, absenceeleve) {
       state.absenceeleve = absenceeleve
     },
-    typesnotes (state, typesnotes) {
+    typesnotes(state, typesnotes) {
       state.typesnotes = typesnotes
     },
-    matieres (state, matieres) {
-        	state.matieres = matieres
+    matieres(state, matieres) {
+      state.matieres = matieres
     },
-    classes (state, classes) {
+    classes(state, classes) {
       state.classes = classes
     },
-    classesByProfesseur (state, classesByProfesseur) {
+    classesByProfesseur(state, classesByProfesseur) {
       state.classesByProfesseur = classesByProfesseur
     },
-    classeByProfesseur (state, classeByProfesseur) {
+    classeByProfesseur(state, classeByProfesseur) {
       state.classeByProfesseur = classeByProfesseur
+    },
+    eleve(state, eleve) {
+      state.eleve = eleve
     }
   },
   getters: {
@@ -84,6 +92,9 @@ export default new Vuex.Store({
     },
     pageCount: state => {
       return state.pageCount
+    },
+    pageCountNote: state => {
+      return state.pageCountNote
     },
     userId: state => {
       return state.userId
@@ -100,6 +111,9 @@ export default new Vuex.Store({
     eleves: state => {
       return state.eleves
     },
+    eleve: state => {
+      return state.eleve
+    },
     raisonsabsences: state => {
       return state.raisonsabsences
     },
@@ -110,10 +124,10 @@ export default new Vuex.Store({
       return state.typesnotes
     },
     matieres: state => {
-        	return state.matieres
+      return state.matieres
     },
     classes: state => {
-        	return state.classes
+      return state.classes
     },
     classesByProfesseur: state => {
       return state.classesByProfesseur
@@ -126,23 +140,31 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    allnotes (context, params) {
-      // console.log("liste des parametres à rechercher "+params.payload);
-      // console.log("liste des parametres à rechercher "+JSON.stringify(params.search));
+    allnotes(context, params) {
+      // console.log("all notes "+JSON.stringify(params));
       let concatParams = null
       if (params.search) {
+        // console.log("params "+ JSON.stringify(params.search))
         concatParams = params.search.map(function (elemen) {
+          // console.log("element ===> "+ elemen.key)
           return elemen.key + '=' + elemen.value
         }).join('&')
-        concatParams = '&' + concatParams
+        // concatParams = '&' + concatParams
       }
       // console.log("resultat de la recherche exemplejoin "+concatParams);
-      Axios.get(
-        context.state.endpoint + 'api/v1/notemodel?page=' + params.payload + concatParams
-      )
+      let url = null
+        // concatParams = '&' + concatParams
+      if(concatParams){
+        // console.log("concatParams => "+concatParams)
+        url = context.state.endpoint + 'api/v1/notemodel?page=' + params.payload + '&' + concatParams
+      }else{
+        url = context.state.endpoint + 'api/v1/notemodel?page=' + params.payload
+      }
+      Axios.get(url)
         .then(response => {
           context.commit('notes', response.data.data.data)
           context.commit('pageCount', response.data.data.last_page)
+          context.commit('pageCountNote', response.data.data.last_page)
         })
         .catch(error => {
           console.log(error)
@@ -150,7 +172,7 @@ export default new Vuex.Store({
         })
         .finally(() => (this.loading = false))
     },
-    allnoteseleves (context, payload) {
+    allnoteseleves(context, payload) {
       Axios.get(
         context.state.endpoint + 'api/v1/noteseleves?eleve_id=' + payload.userId + '&page=' + payload.pageNum
       )
@@ -165,7 +187,7 @@ export default new Vuex.Store({
         })
         .finally(() => (this.loading = false))
     },
-    loginParentEleve (context, payload) {
+    loginParentEleve(context, payload) {
       const data = new FormData()
       data.append('email', payload.email)
       data.append('password', payload.password)
@@ -174,7 +196,7 @@ export default new Vuex.Store({
         { headers: { 'Content-Type': 'multipart/form-data' } }
       )
     },
-    login (context, payload) {
+    login(context, payload) {
       const data = new FormData()
       data.append('email', payload.email)
       data.append('password', payload.password)
@@ -183,7 +205,7 @@ export default new Vuex.Store({
         { headers: { 'Content-Type': 'multipart/form-data' } }
       )
     },
-    classe (context, eleveId) {
+    classe(context, eleveId) {
       Axios.get(
         context.state.endpoint + 'api/v1/classes/' + 9
       )
@@ -197,7 +219,7 @@ export default new Vuex.Store({
         })
         .finally(() => (this.loading = false))
     },
-    absenceseleves (context, params) {
+    absenceselevesprofesseur(context, params) {
       let concatParams = null
       if (params.search) {
         concatParams = params.search.map(function (elemen) {
@@ -211,14 +233,19 @@ export default new Vuex.Store({
           context.state.endpoint + 'api/v1/absenceseleves?eleve_id=' + params.eleveId + '&page=' + params.pageNum
         )
       } else {
-        /*axios = Axios.get(
-          context.state.endpoint + 'api/v1/absenceseleves?page=' + params.pageNum
-        )*/
-        context.state.endpoint + 'api/v1/absenceseleves?page=' + params.payload + concatParams
+        if(concatParams){
+          // console.log("concatParams est n'est pas null");
+          axios = Axios.get(context.state.endpoint + 'api/v1/absenceseleves?page=' + params.payload + concatParams)
+        }else{
+          // console.log("concatParams est null");
+          axios = Axios.get(context.state.endpoint + 'api/v1/absenceseleves?page=' + params.payload)
+        }
+        // console.log("seconde parametre est "+ concatParams.length);
       }
       axios.then(response => {
         context.commit('absenceseleves', response.data.data.data)
         context.commit('pageCount', response.data.data.last_page)
+        console.log("absence eleves ====> "+ response.data.data.data)
       })
         .catch(error => {
           console.log(error)
@@ -247,7 +274,7 @@ export default new Vuex.Store({
         })
         .finally(() => (this.loading = false))
     }*/,
-    absenceeleve (context, request) {
+    absenceeleve(context, request) {
       Axios.get(
         context.state.endpoint + 'api/v1/absenceseleves/' + request.absenceEleveId
       )
@@ -261,7 +288,7 @@ export default new Vuex.Store({
         })
         .finally(() => (this.loading = false))
     },
-    eleves (context) {
+    eleves(context) {
       Axios.get(
         context.state.endpoint + 'api/v1/eleves'
       )
@@ -275,7 +302,7 @@ export default new Vuex.Store({
         })
         .finally(() => (this.loading = false))
     },
-    raisonsabsences (context) {
+    raisonsabsences(context) {
       Axios.get(
         context.state.endpoint + 'api/v1/raisonsabsences'
       )
@@ -288,13 +315,15 @@ export default new Vuex.Store({
         })
         .finally(() => (this.loading = false))
     },
-    saveAgence (context, data) {
+    saveAgence(context, data) {
       return Axios.post(
         context.state.endpoint + 'api/v1/absenceseleves', data,
         { headers: { 'Content-Type': 'multipart/form-data' } }
       )
     },
-    absenceseleves (context, data) {
+    absenceseleves(context, data) {
+      // console.log("information data "+JSON.stringify(data.))
+      // console.log("information data "+data.params.eleveId);
       if (data && data.action == 'edit') {
         return Axios.put(
           context.state.endpoint + 'api/v1/absenceseleves/' + data.absenceEleveId, data.data,
@@ -303,25 +332,22 @@ export default new Vuex.Store({
       } else {
         let axios = null
         if (data.eleveId) {
-          axios = Axios.get(
-          context.state.endpoint + 'api/v1/absenceseleves?eleve_id=' + data.eleveId + '&page=' + data.pageNum)
+          axios = Axios.get(context.state.endpoint + 'api/v1/absenceseleves?eleve_id=' + data.eleveId + '&page=' + data.payload)
         } else {
-          axios = Axios.get(
-            context.state.endpoint + 'api/v1/absenceseleves?page=' + data.pageNum
-          )
+          axios = Axios.get(context.state.endpoint + 'api/v1/absenceseleves?page=' + data.payload)
         }
         axios.then(response => {
           context.commit('absenceseleves', response.data.data.data)
           context.commit('pageCount', response.data.data.last_page)
         })
-          .catch(error => {
-            console.log(error)
-            this.errored = true
-          })
-          .finally(() => (this.loading = false))
+        .catch(error => {
+          console.log(error)
+          this.errored = true
+        })
+        .finally(() => (this.loading = false))
       }
     },
-    typesnotes (context) {
+    typesnotes(context) {
       Axios.get(
         context.state.endpoint + 'api/v1/typesnotes'
       )
@@ -334,7 +360,7 @@ export default new Vuex.Store({
         })
         .finally(() => (this.loading = false))
     },
-    matieres (context) {
+    matieres(context) {
       Axios.get(
         context.state.endpoint + 'api/v1/matieres'
       )
@@ -347,7 +373,7 @@ export default new Vuex.Store({
         })
         .finally(() => (this.loading = false))
     },
-    saveNote (context, data) {
+    saveNote(context, data) {
       if (data.id) {
         return Axios.put(
           context.state.endpoint + 'api/v1/notemodel/' + data.id, data,
@@ -360,7 +386,7 @@ export default new Vuex.Store({
         )
       }
     },
-    classes (context, eleveId) {
+    classes(context, eleveId) {
       Axios.get(
         context.state.endpoint + 'api/v1/classes/'
       )
@@ -374,7 +400,7 @@ export default new Vuex.Store({
         })
         .finally(() => (this.loading = false))
     },
-    classesByProfesseur (context, professeurId) {
+    classesByProfesseur(context, professeurId) {
       Axios.get(
         context.state.endpoint + 'api/v1/professeursclasses?professeur_id=' + professeurId
       )
@@ -388,7 +414,7 @@ export default new Vuex.Store({
         })
         .finally(() => (this.loading = false))
     },
-    classeByProfesseur (context, classeByProfesseurId) {
+    classeByProfesseur(context, classeByProfesseurId) {
       Axios.get(
         context.state.endpoint + 'api/v1/professeursclasses/' + classeByProfesseurId
       )
@@ -401,7 +427,7 @@ export default new Vuex.Store({
         })
         .finally(() => (this.loading = false))
     },
-    note (context, noteId) {
+    note(context, noteId) {
       Axios.get(
         context.state.endpoint + 'api/v1/notemodel/' + noteId
       )
@@ -414,15 +440,41 @@ export default new Vuex.Store({
         })
         .finally(() => (this.loading = false))
     },
-    deleteNote (context, noteId) {
+    deleteNote(context, noteId) {
       return Axios.get(
-          context.state.endpoint + 'api/v1/notemodel/' + noteId + '/delete'
+        context.state.endpoint + 'api/v1/notemodel/' + noteId + '/delete'
       );
     },
-    deleteAbsenceEleve (context, absenceId) {
+    deleteAbsenceEleve(context, absenceId) {
       return Axios.get(
-          context.state.endpoint + 'api/v1/absenceseleves/' + absenceId + '/delete'
+        context.state.endpoint + 'api/v1/absenceseleves/' + absenceId + '/delete'
       );
+    },
+    getElevesByClasseId(context) {
+      Axios.get(
+        context.state.endpoint + 'api/v1/elevesclasses')
+        .then(response => {
+          context.commit('eleves', response.data.data.data)
+          // console.log("eleves "+ JSON.stringify(response.data.data.data))
+        })
+        .catch(error => {
+          console.log(error)
+          this.errored = true
+        })
+        .finally(() => (this.loading = false))
+    },
+    eleve(context, eleveId) {
+      Axios.get(
+        context.state.endpoint + 'api/v1/eleves/'+eleveId)
+        .then(response => {
+          context.commit('eleve', response.data.data)
+          // console.log("eleve "+ JSON.stringify(response.data.data))
+        })
+        .catch(error => {
+          console.log(error)
+          this.errored = true
+        })
+        .finally(() => (this.loading = false))
     }
   }
 })

@@ -1,0 +1,10 @@
+name: ClasseEleveController
+form: $/bootnetcrasher/school/models/classeelevemodel/fields.yaml
+modelClass: BootnetCrasher\School\Models\ClasseEleveModel
+defaultRedirect: bootnetcrasher/school/classeelevecontroller
+create:
+    redirect: 'bootnetcrasher/school/classeelevecontroller/update/:id'
+    redirectClose: bootnetcrasher/school/classeelevecontroller
+update:
+    redirect: bootnetcrasher/school/classeelevecontroller
+    redirectClose: bootnetcrasher/school/classeelevecontroller

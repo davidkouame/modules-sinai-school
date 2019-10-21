@@ -439,4 +439,12 @@
   'mohsin\\rest\\Plugin' => 'plugins/mohsin/rest/Plugin.php',
   'Mohsin\\Rest\\Classes\\ApiManager' => 'plugins/mohsin/rest/classes/ApiManager.php',
   'Mohsin\\Rest\\Models\\Setting' => 'plugins/mohsin/rest/models/Setting.php',
+  'Backend\\FormWidgets\\DataTable' => 'modules/backend/formwidgets/DataTable.php',
+  'Backend\\Widgets\\Table' => 'modules/backend/widgets/Table.php',
+  'Backend\\Widgets\\Table\\DataSourceBase' => 'modules/backend/widgets/table/DataSourceBase.php',
+  'Backend\\Widgets\\Table\\ClientMemoryDataSource' => 'modules/backend/widgets/table/ClientMemoryDataSource.php',
+  'Backend\\FormWidgets\\CodeEditor' => 'modules/backend/formwidgets/CodeEditor.php',
+  'BootnetCrasher\\School\\Models\\ClasseEleveModel' => 'plugins/bootnetcrasher/school/models/ClasseEleveModel.php',
+  'AhmadFatoni\\ApiGenerator\\Controllers\\API\\classeeleveController' => 'plugins/ahmadfatoni/apigenerator/controllers/api/classeeleveController.php',
+  'BootnetCrasher\\School\\Models\\ParentModel' => 'plugins/bootnetcrasher/school/models/ParentModel.php',
 );

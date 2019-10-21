@@ -28,5 +28,6 @@ class ClasseMatiereModel extends Model
     public $belongsTo = [
         'matiere' => ['BootnetCrasher\School\Models\MatiereModel', 'key' => 'matiere_id', 'otherKey' => 'id'],
         'classe' => ['BootnetCrasher\School\Models\ClasseModel', 'key' => 'classe_id', 'otherKey' => 'id'],
+        'professeur' => ['BootnetCrasher\School\Models\ProfesseurModel', 'key' => 'professeur_id', 'otherKey' => 'id'],
     ];
 }

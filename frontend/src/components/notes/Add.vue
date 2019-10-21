@@ -50,7 +50,7 @@
           <textarea v-model="description" class="form-control"></textarea>
         </div>
       </div>
-      <a :href="'/#/notes'" class="btn btn-danger">Annuler</a>
+      <a @click="$router.go(-1)" class="btn btn-danger">Annuler</a>
       <a v-on:click="createNote()" class="btn btn-primary">Envoyer</a>
     </form>
   </div>
@@ -99,7 +99,8 @@ export default {
         .then(response => {
           store.dispatch("raisonsabsences", response.data.data);
           alert("L'enregistrement a été succès")
-          this.$router.push('/notes')
+          // this.$router.push('/notes')
+          this.$router.go(-1)
         })
         .catch(error => {
           console.log(error);

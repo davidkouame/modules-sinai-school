@@ -2,7 +2,123 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="259d6927-db90-493c-a6bf-1a6004ccdc80" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/models/classeelevemodel/columns.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/models/classeelevemodel/fields.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/.idea/backend.iml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/.idea/backend.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/plugins/ahmadfatoni/apigenerator/controllers/api/eleveController.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/plugins/ahmadfatoni/apigenerator/controllers/api/eleveController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/plugins/ahmadfatoni/apigenerator/routes.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/plugins/ahmadfatoni/apigenerator/routes.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/controllers/api/ProfesseurClasseController.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/controllers/api/ProfesseurClasseController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/controllers/api/userController.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/controllers/api/userController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/controllers/professeurclassecontroller/_professeurname.htm" beforeDir="false" afterPath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/controllers/professeurclassecontroller/_professeurname.htm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/models/ClasseMatiereModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/models/ClasseMatiereModel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/models/EleveModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/models/EleveModel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/models/ProfesseurModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/models/ProfesseurModel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/models/classematieremodel/columns.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/models/classematieremodel/columns.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/models/classematieremodel/fields.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/models/classematieremodel/fields.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/models/professeurclassemodel/columns.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/models/professeurclassemodel/columns.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/models/professeurclassemodel/fields.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/models/professeurclassemodel/fields.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/plugin.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/plugin.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/updates/version.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/updates/version.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/plugins/mohsin/rest/LICENSE.md" beforeDir="false" afterPath="$PROJECT_DIR$/backend/plugins/mohsin/rest/LICENSE.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/plugins/mohsin/rest/Plugin.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/plugins/mohsin/rest/Plugin.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/plugins/mohsin/rest/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/backend/plugins/mohsin/rest/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/plugins/mohsin/rest/UPGRADE.md" beforeDir="false" afterPath="$PROJECT_DIR$/backend/plugins/mohsin/rest/UPGRADE.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/plugins/mohsin/rest/behaviors/RestController.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/plugins/mohsin/rest/behaviors/RestController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/plugins/mohsin/rest/classes/ApiManager.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/plugins/mohsin/rest/classes/ApiManager.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/plugins/mohsin/rest/console/CreateRestController.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/plugins/mohsin/rest/console/CreateRestController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/plugins/mohsin/rest/console/http/config_rest.stub" beforeDir="false" afterPath="$PROJECT_DIR$/backend/plugins/mohsin/rest/console/http/config_rest.stub" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/plugins/mohsin/rest/console/http/controller.stub" beforeDir="false" afterPath="$PROJECT_DIR$/backend/plugins/mohsin/rest/console/http/controller.stub" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/plugins/mohsin/rest/console/http/routes.stub" beforeDir="false" afterPath="$PROJECT_DIR$/backend/plugins/mohsin/rest/console/http/routes.stub" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/plugins/mohsin/rest/controllers/Settings.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/plugins/mohsin/rest/controllers/Settings.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/plugins/mohsin/rest/controllers/settings/_is_enabled.htm" beforeDir="false" afterPath="$PROJECT_DIR$/backend/plugins/mohsin/rest/controllers/settings/_is_enabled.htm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/plugins/mohsin/rest/controllers/settings/_list_toolbar.htm" beforeDir="false" afterPath="$PROJECT_DIR$/backend/plugins/mohsin/rest/controllers/settings/_list_toolbar.htm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/plugins/mohsin/rest/controllers/settings/config_form.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/plugins/mohsin/rest/controllers/settings/config_form.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/plugins/mohsin/rest/controllers/settings/config_list.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/plugins/mohsin/rest/controllers/settings/config_list.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/plugins/mohsin/rest/controllers/settings/index.htm" beforeDir="false" afterPath="$PROJECT_DIR$/backend/plugins/mohsin/rest/controllers/settings/index.htm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/plugins/mohsin/rest/lang/en/lang.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/plugins/mohsin/rest/lang/en/lang.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/plugins/mohsin/rest/models/Node.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/plugins/mohsin/rest/models/Node.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/plugins/mohsin/rest/models/Setting.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/plugins/mohsin/rest/models/Setting.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/plugins/mohsin/rest/models/node/columns.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/plugins/mohsin/rest/models/node/columns.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/plugins/mohsin/rest/models/setting/fields.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/plugins/mohsin/rest/models/setting/fields.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/plugins/mohsin/rest/models/setting/list_nodes.htm" beforeDir="false" afterPath="$PROJECT_DIR$/backend/plugins/mohsin/rest/models/setting/list_nodes.htm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/plugins/mohsin/rest/updates/add_extras_field_to_nodes_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/plugins/mohsin/rest/updates/add_extras_field_to_nodes_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/plugins/mohsin/rest/updates/create_nodes_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/plugins/mohsin/rest/updates/create_nodes_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/plugins/mohsin/rest/updates/create_settings_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/plugins/mohsin/rest/updates/create_settings_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/plugins/mohsin/rest/updates/version.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/plugins/mohsin/rest/updates/version.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/cms/twig/0d/0dca0aadb2d124e83b4d63d6b7328fb2d6c2bea5a60be597142d43a0219ab436.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/cms/twig/0d/0dca0aadb2d124e83b4d63d6b7328fb2d6c2bea5a60be597142d43a0219ab436.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/cms/twig/6f/6ffb35cd517d221981b372f1e96cdbfd187217b71fc9ae22f12595058da64243.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/cms/twig/6f/6ffb35cd517d221981b372f1e96cdbfd187217b71fc9ae22f12595058da64243.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/cms/twig/88/8847ed9eb400b80be457f6d0811ceb73a385e8e5982cc1baec3fc3bb97843f27.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/cms/twig/88/8847ed9eb400b80be457f6d0811ceb73a385e8e5982cc1baec3fc3bb97843f27.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/cms/twig/a7/a72539a4ed1ebdf1c72f3adcbfb25505b3284bf6233f031d45a00d61a4097786.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/cms/twig/a7/a72539a4ed1ebdf1c72f3adcbfb25505b3284bf6233f031d45a00d61a4097786.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/cms/twig/b5/b57255ef306c1e6b1f949cf0e3f0e063445e11c90a67e2df68d716f2316e4740.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/cms/twig/b5/b57255ef306c1e6b1f949cf0e3f0e063445e11c90a67e2df68d716f2316e4740.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/cms/twig/cc/ccbae1554bb44e6064b0b972eb4fe8801dcbe5f7666eac8d95100e2bec6e9ed6.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/cms/twig/cc/ccbae1554bb44e6064b0b972eb4fe8801dcbe5f7666eac8d95100e2bec6e9ed6.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/cms/twig/da/da58cb8c551f581f0ada4b3d1487890e8de883017fbbb2c8bd01cac27e42bd9d.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/cms/twig/da/da58cb8c551f581f0ada4b3d1487890e8de883017fbbb2c8bd01cac27e42bd9d.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/cms/twig/e8/e8b38cabda712f144ff643cb61590a215dd3f4e66cd9f3251efa5e033560f6eb.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/cms/twig/e8/e8b38cabda712f144ff643cb61590a215dd3f4e66cd9f3251efa5e033560f6eb.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/cms/twig/f1/f1a5ae945c588c6f44efaa0b8d0992bd57d5ddcc1954dc101b49a4e7925b04da.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/cms/twig/f1/f1a5ae945c588c6f44efaa0b8d0992bd57d5ddcc1954dc101b49a4e7925b04da.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/08/c9/08c9258bd1216a616dc1828ca08298a2170bbd72" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/08/c9/08c9258bd1216a616dc1828ca08298a2170bbd72" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/08/df/08dfdfd922681bba7ab5215d56b7da8dd8d64c53" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/08/df/08dfdfd922681bba7ab5215d56b7da8dd8d64c53" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/11/de/11de31e1eabb2682cf62ee9c9ccb0630f1019006" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/11/de/11de31e1eabb2682cf62ee9c9ccb0630f1019006" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/13/70/13700ec4f5d6c9548e784ad4086830fc19661f0e" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/13/70/13700ec4f5d6c9548e784ad4086830fc19661f0e" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/16/19/1619a6b751768f8a2a43b0293d7e6b62ba78a65a" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/16/19/1619a6b751768f8a2a43b0293d7e6b62ba78a65a" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/18/81/188104e37988b9719e2253de2bc8502c54c6ae7f" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/18/81/188104e37988b9719e2253de2bc8502c54c6ae7f" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/20/ec/20ecd0ea67e3601fe57f28ec1bc9ceab77c70c56" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/20/ec/20ecd0ea67e3601fe57f28ec1bc9ceab77c70c56" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/22/01/22019f078997f8229618d6888b9e33b7f0b00852" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/22/01/22019f078997f8229618d6888b9e33b7f0b00852" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/22/43/2243f500ae1632e1e609a9d4d08e7bad65800071" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/22/43/2243f500ae1632e1e609a9d4d08e7bad65800071" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/32/03/3203d62f08a989e1db95c3f437050c8f2bb31b4c" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/32/03/3203d62f08a989e1db95c3f437050c8f2bb31b4c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/32/f6/32f67f0752fcf00fe8a281617b904a664bf87c31" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/32/f6/32f67f0752fcf00fe8a281617b904a664bf87c31" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/35/09/35094f74adb0134ce75c67a266daa58a059d8274" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/35/09/35094f74adb0134ce75c67a266daa58a059d8274" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/45/30/45306ef467759ecc88497a8652419d1e0f539987" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/45/30/45306ef467759ecc88497a8652419d1e0f539987" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/46/80/4680f2ec22e7e96a9f797ba39629877753200f3b" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/46/80/4680f2ec22e7e96a9f797ba39629877753200f3b" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/47/1b/471bc0cd219cfe11f8a6a4b306ab37ab833d18fd" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/47/1b/471bc0cd219cfe11f8a6a4b306ab37ab833d18fd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/58/cf/58cf0a9683a3bff3a5abe11f67de9e5ab8239362" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/58/cf/58cf0a9683a3bff3a5abe11f67de9e5ab8239362" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/5d/1f/5d1ff1d3d9d6dc526405c537cb1d94935b903e83" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/5d/1f/5d1ff1d3d9d6dc526405c537cb1d94935b903e83" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/62/b6/62b63fd23606a5d580125bbf80cfd9f394d9b758" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/62/b6/62b63fd23606a5d580125bbf80cfd9f394d9b758" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/64/4c/644c0c3c5e92847a79435d34078510f2b3c9fcb8" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/64/4c/644c0c3c5e92847a79435d34078510f2b3c9fcb8" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/64/e8/64e867be3ca7d8483e8e070cfb11552a4de970c2" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/64/e8/64e867be3ca7d8483e8e070cfb11552a4de970c2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/64/f7/64f73f9fe0ef882e10d0240fd9e5003ce0118027" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/64/f7/64f73f9fe0ef882e10d0240fd9e5003ce0118027" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/66/25/66258b0563c78d9b2cbc9ed217238eb6e11837cb" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/66/25/66258b0563c78d9b2cbc9ed217238eb6e11837cb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/66/65/666582ffea28796aac87443dbbc6420b7c6df7cd" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/66/65/666582ffea28796aac87443dbbc6420b7c6df7cd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/6e/83/6e836072f3608a1296117ca3576079170d40b052" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/6e/83/6e836072f3608a1296117ca3576079170d40b052" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/72/4d/724d64623b82cdd367a46a1a3611b8fce75faedf" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/72/4d/724d64623b82cdd367a46a1a3611b8fce75faedf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/77/61/77616e1c5e0d202cb4cf522bddafaebf56f27660" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/77/61/77616e1c5e0d202cb4cf522bddafaebf56f27660" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/8e/49/8e49c3e69ed719d8f16fe1c6c5f96dce65c513f0" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/8e/49/8e49c3e69ed719d8f16fe1c6c5f96dce65c513f0" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/97/37/9737833e426f53b3dcb4d98fdcb68c76762765de" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/97/37/9737833e426f53b3dcb4d98fdcb68c76762765de" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/97/39/9739b3a900e31d6b7467fc7f7b244804b462b524" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/97/39/9739b3a900e31d6b7467fc7f7b244804b462b524" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/9a/e8/9ae8ba54c10c58926a7502abb5f7ba6ba6d19951" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/9d/c1/9dc1b6efe4944a3b8b98b7555f8e3e7d60d1ff84" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/9d/c1/9dc1b6efe4944a3b8b98b7555f8e3e7d60d1ff84" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/9f/e4/9fe4a158570b7197e9769c32f76c57976db6b2bd" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/9f/e4/9fe4a158570b7197e9769c32f76c57976db6b2bd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/a0/c9/a0c910eb995ad1e9281e5bb05187281e039e242f" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/a0/c9/a0c910eb995ad1e9281e5bb05187281e039e242f" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/bc/b0/bcb03c48b42c0914b43c593a96b199e712154460" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/bc/b0/bcb03c48b42c0914b43c593a96b199e712154460" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/c2/5e/c25e05566232d1fcc4eb309dc03f2fdbdb7350e0" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/c2/5e/c25e05566232d1fcc4eb309dc03f2fdbdb7350e0" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/cd/4a/cd4a39e85942787d6274dd275cc36548b9cb543c" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/cd/4a/cd4a39e85942787d6274dd275cc36548b9cb543c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/d0/1e/d01e8e95ac402ba16ad83ad09f6851991c3b6212" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/d0/1e/d01e8e95ac402ba16ad83ad09f6851991c3b6212" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/d0/9d/d09d8c5165d8fda09b210cc701ee39cf70bd5b48" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/d0/9d/d09d8c5165d8fda09b210cc701ee39cf70bd5b48" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/d2/bf/d2bfa1437aba00dadecca2b56617050d8f711997" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/d2/bf/d2bfa1437aba00dadecca2b56617050d8f711997" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/d9/39/d939f34e26e98a877a32c23862bdbe59c75128e2" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/d9/39/d939f34e26e98a877a32c23862bdbe59c75128e2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/d9/f6/d9f63cc9a455b521a6b6d233716a399ce95a3c5d" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/d9/f6/d9f63cc9a455b521a6b6d233716a399ce95a3c5d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/db/c9/dbc90c3f61080741d2a52c82a07ca43602c629f5" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/db/c9/dbc90c3f61080741d2a52c82a07ca43602c629f5" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/dc/01/dc0159c38453284a773953817d07aef378064515" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/dc/01/dc0159c38453284a773953817d07aef378064515" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/e3/dc/e3dca2704d9b520cb0f1f597ea7f53489252aab9" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/e3/dc/e3dca2704d9b520cb0f1f597ea7f53489252aab9" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/e5/49/e549e45928ba905a6bba0d5d3f531fff3b0ce52c" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/e5/49/e549e45928ba905a6bba0d5d3f531fff3b0ce52c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/e5/58/e5585e1e8c7268ef32d0a776892951638f7c6063" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/e5/58/e5585e1e8c7268ef32d0a776892951638f7c6063" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/ee/4e/ee4e8cfa5d928ff6951d5dafda1a86892cd3f8af" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/ee/4e/ee4e8cfa5d928ff6951d5dafda1a86892cd3f8af" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/classes.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/classes.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/services.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/services.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/sessions/47RcHeVcrQETIexGXTQw1CWN5ZuKENxteApjWGEf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/sessions/5SAxz5edGswrLU1PueuKzQ3zhKjzUGx5o9FFh7tm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/sessions/DYzrBleDzsmH8QrFlIU3ZTsDjXmISlwADDiZCRxv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/sessions/ERwcjmRkjrR8sMdnOsdWA5G2p544WIyzOMZkekPC" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/sessions/JVBaiQBFO2KX6NSTTvnK8bdnpDwggoKbxoyNKMOc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/sessions/khlF0Y2t6B5Lp4sE0IAXYF7qdiZXYtng1vA2hJHa" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/sessions/vkcmuFYh3WleQJkNc1JMddYjO6nocCa0sF3HFDNh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/sessions/wS7VkTK2wpr1qiyEPv44lPPaQ9NcJrqjHYRTEFmi" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/router/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/store/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/store/index.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -12,94 +128,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/frontend/src/components/notes/Add.vue">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1717">
-              <caret line="101" column="37" selection-start-line="100" selection-start-column="9" selection-end-line="101" selection-end-column="37" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/frontend/src/store/index.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6409">
-              <caret line="379" column="8" selection-start-line="379" selection-start-column="8" selection-end-line="386" selection-end-column="46" />
-              <folding>
-                <element signature="e#0#21#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/frontend/src/components/notes/Preview.vue">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="24" column="5" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/backend/plugins/ahmadfatoni/apigenerator/controllers/api/noteController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1819">
-              <caret line="113" column="26" selection-start-line="113" selection-start-column="26" selection-end-line="113" selection-end-column="26" />
-              <folding>
-                <element signature="e#59#86#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/backend/plugins/ahmadfatoni/apigenerator/controllers/api/userController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="9" column="48" selection-start-line="9" selection-start-column="48" selection-end-line="9" selection-end-column="48" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/backend/plugins/ahmadfatoni/apigenerator/controllers/api/professeurController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" column="41" selection-start-line="7" selection-start-column="41" selection-end-line="7" selection-end-column="41" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/frontend/src/components/notes/List.vue">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="697">
-              <caret line="41" column="18" selection-start-line="41" selection-start-column="18" selection-end-line="41" selection-end-column="18" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/frontend/src/components/Modal.vue">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="160">
-              <caret line="46" column="12" lean-forward="true" selection-start-line="46" selection-start-column="12" selection-end-line="46" selection-end-column="12" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/frontend/.eslintrc.js">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/frontend/src/components/DetailAbsenceEleve.vue">
+        <entry file="file://$PROJECT_DIR$/backend/plugins/ahmadfatoni/apigenerator/controllers/api/eleveController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="10" column="52" selection-start-line="10" selection-start-column="52" selection-end-line="10" selection-end-column="52" />
+            <state relative-caret-position="323">
+              <caret line="39" column="32" selection-start-line="39" selection-start-column="32" selection-end-line="39" selection-end-column="32" />
             </state>
           </provider>
         </entry>
@@ -118,6 +151,7 @@
       <find>allnotes</find>
       <find>Professeurmodel</find>
       <find>noteeleves</find>
+      <find>professeursclasses</find>
     </findStrings>
     <replaceStrings>
       <replace>ProfesseurModel</replace>
@@ -149,6 +183,18 @@
         <option value="$PROJECT_DIR$/backend/plugins/ahmadfatoni/apigenerator/controllers/api/professeurController.php" />
         <option value="$PROJECT_DIR$/frontend/src/store/index.js" />
         <option value="$PROJECT_DIR$/frontend/src/components/Modal.vue" />
+        <option value="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/models/ClasseEleveModel.php" />
+        <option value="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/models/EleveModel.php" />
+        <option value="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/models/classeelevemodel/columns.yaml" />
+        <option value="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/models/classeelevemodel/fields.yaml" />
+        <option value="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/models/ClasseMatiereModel.php" />
+        <option value="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/models/classematieremodel/columns.yaml" />
+        <option value="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/models/classematieremodel/fields.yaml" />
+        <option value="$PROJECT_DIR$/backend/plugins/ahmadfatoni/apigenerator/routes.php" />
+        <option value="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/plugin.yaml" />
+        <option value="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/models/ProfesseurModel.php" />
+        <option value="$PROJECT_DIR$/backend/plugins/ahmadfatoni/apigenerator/controllers/api/classeeleveController.php" />
+        <option value="$PROJECT_DIR$/backend/plugins/ahmadfatoni/apigenerator/controllers/api/eleveController.php" />
       </list>
     </option>
   </component>
@@ -161,7 +207,178 @@
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
-    <panes />
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="modules-sinai-school" type="b2602c69:ProjectViewProjectNode" />
+              <item name="modules-sinai-school" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="modules-sinai-school" type="b2602c69:ProjectViewProjectNode" />
+              <item name="modules-sinai-school" type="462c0819:PsiDirectoryNode" />
+              <item name="backend" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="modules-sinai-school" type="b2602c69:ProjectViewProjectNode" />
+              <item name="modules-sinai-school" type="462c0819:PsiDirectoryNode" />
+              <item name="backend" type="462c0819:PsiDirectoryNode" />
+              <item name="plugins" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="modules-sinai-school" type="b2602c69:ProjectViewProjectNode" />
+              <item name="modules-sinai-school" type="462c0819:PsiDirectoryNode" />
+              <item name="backend" type="462c0819:PsiDirectoryNode" />
+              <item name="plugins" type="462c0819:PsiDirectoryNode" />
+              <item name="ahmadfatoni" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="modules-sinai-school" type="b2602c69:ProjectViewProjectNode" />
+              <item name="modules-sinai-school" type="462c0819:PsiDirectoryNode" />
+              <item name="backend" type="462c0819:PsiDirectoryNode" />
+              <item name="plugins" type="462c0819:PsiDirectoryNode" />
+              <item name="ahmadfatoni" type="462c0819:PsiDirectoryNode" />
+              <item name="apigenerator" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="modules-sinai-school" type="b2602c69:ProjectViewProjectNode" />
+              <item name="modules-sinai-school" type="462c0819:PsiDirectoryNode" />
+              <item name="backend" type="462c0819:PsiDirectoryNode" />
+              <item name="plugins" type="462c0819:PsiDirectoryNode" />
+              <item name="ahmadfatoni" type="462c0819:PsiDirectoryNode" />
+              <item name="apigenerator" type="462c0819:PsiDirectoryNode" />
+              <item name="controllers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="modules-sinai-school" type="b2602c69:ProjectViewProjectNode" />
+              <item name="modules-sinai-school" type="462c0819:PsiDirectoryNode" />
+              <item name="backend" type="462c0819:PsiDirectoryNode" />
+              <item name="plugins" type="462c0819:PsiDirectoryNode" />
+              <item name="ahmadfatoni" type="462c0819:PsiDirectoryNode" />
+              <item name="apigenerator" type="462c0819:PsiDirectoryNode" />
+              <item name="controllers" type="462c0819:PsiDirectoryNode" />
+              <item name="api" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="modules-sinai-school" type="b2602c69:ProjectViewProjectNode" />
+              <item name="modules-sinai-school" type="462c0819:PsiDirectoryNode" />
+              <item name="backend" type="462c0819:PsiDirectoryNode" />
+              <item name="plugins" type="462c0819:PsiDirectoryNode" />
+              <item name="ahmadfatoni" type="462c0819:PsiDirectoryNode" />
+              <item name="apigenerator" type="462c0819:PsiDirectoryNode" />
+              <item name="controllers" type="462c0819:PsiDirectoryNode" />
+              <item name="apigeneratorcontroller" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="modules-sinai-school" type="b2602c69:ProjectViewProjectNode" />
+              <item name="modules-sinai-school" type="462c0819:PsiDirectoryNode" />
+              <item name="backend" type="462c0819:PsiDirectoryNode" />
+              <item name="plugins" type="462c0819:PsiDirectoryNode" />
+              <item name="bootnetcrasher" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="modules-sinai-school" type="b2602c69:ProjectViewProjectNode" />
+              <item name="modules-sinai-school" type="462c0819:PsiDirectoryNode" />
+              <item name="backend" type="462c0819:PsiDirectoryNode" />
+              <item name="plugins" type="462c0819:PsiDirectoryNode" />
+              <item name="bootnetcrasher" type="462c0819:PsiDirectoryNode" />
+              <item name="school" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="modules-sinai-school" type="b2602c69:ProjectViewProjectNode" />
+              <item name="modules-sinai-school" type="462c0819:PsiDirectoryNode" />
+              <item name="backend" type="462c0819:PsiDirectoryNode" />
+              <item name="plugins" type="462c0819:PsiDirectoryNode" />
+              <item name="bootnetcrasher" type="462c0819:PsiDirectoryNode" />
+              <item name="school" type="462c0819:PsiDirectoryNode" />
+              <item name="controllers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="modules-sinai-school" type="b2602c69:ProjectViewProjectNode" />
+              <item name="modules-sinai-school" type="462c0819:PsiDirectoryNode" />
+              <item name="backend" type="462c0819:PsiDirectoryNode" />
+              <item name="plugins" type="462c0819:PsiDirectoryNode" />
+              <item name="bootnetcrasher" type="462c0819:PsiDirectoryNode" />
+              <item name="school" type="462c0819:PsiDirectoryNode" />
+              <item name="controllers" type="462c0819:PsiDirectoryNode" />
+              <item name="parentelevecontroller" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="modules-sinai-school" type="b2602c69:ProjectViewProjectNode" />
+              <item name="modules-sinai-school" type="462c0819:PsiDirectoryNode" />
+              <item name="backend" type="462c0819:PsiDirectoryNode" />
+              <item name="plugins" type="462c0819:PsiDirectoryNode" />
+              <item name="bootnetcrasher" type="462c0819:PsiDirectoryNode" />
+              <item name="school" type="462c0819:PsiDirectoryNode" />
+              <item name="controllers" type="462c0819:PsiDirectoryNode" />
+              <item name="professeurclassecontroller" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="modules-sinai-school" type="b2602c69:ProjectViewProjectNode" />
+              <item name="modules-sinai-school" type="462c0819:PsiDirectoryNode" />
+              <item name="backend" type="462c0819:PsiDirectoryNode" />
+              <item name="plugins" type="462c0819:PsiDirectoryNode" />
+              <item name="bootnetcrasher" type="462c0819:PsiDirectoryNode" />
+              <item name="school" type="462c0819:PsiDirectoryNode" />
+              <item name="models" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="modules-sinai-school" type="b2602c69:ProjectViewProjectNode" />
+              <item name="modules-sinai-school" type="462c0819:PsiDirectoryNode" />
+              <item name="backend" type="462c0819:PsiDirectoryNode" />
+              <item name="plugins" type="462c0819:PsiDirectoryNode" />
+              <item name="bootnetcrasher" type="462c0819:PsiDirectoryNode" />
+              <item name="school" type="462c0819:PsiDirectoryNode" />
+              <item name="models" type="462c0819:PsiDirectoryNode" />
+              <item name="absenceelevemodel" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="modules-sinai-school" type="b2602c69:ProjectViewProjectNode" />
+              <item name="modules-sinai-school" type="462c0819:PsiDirectoryNode" />
+              <item name="backend" type="462c0819:PsiDirectoryNode" />
+              <item name="plugins" type="462c0819:PsiDirectoryNode" />
+              <item name="bootnetcrasher" type="462c0819:PsiDirectoryNode" />
+              <item name="school" type="462c0819:PsiDirectoryNode" />
+              <item name="models" type="462c0819:PsiDirectoryNode" />
+              <item name="classeelevemodel" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="modules-sinai-school" type="b2602c69:ProjectViewProjectNode" />
+              <item name="modules-sinai-school" type="462c0819:PsiDirectoryNode" />
+              <item name="backend" type="462c0819:PsiDirectoryNode" />
+              <item name="plugins" type="462c0819:PsiDirectoryNode" />
+              <item name="bootnetcrasher" type="462c0819:PsiDirectoryNode" />
+              <item name="school" type="462c0819:PsiDirectoryNode" />
+              <item name="models" type="462c0819:PsiDirectoryNode" />
+              <item name="classematieremodel" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="modules-sinai-school" type="b2602c69:ProjectViewProjectNode" />
+              <item name="modules-sinai-school" type="462c0819:PsiDirectoryNode" />
+              <item name="backend" type="462c0819:PsiDirectoryNode" />
+              <item name="plugins" type="462c0819:PsiDirectoryNode" />
+              <item name="bootnetcrasher" type="462c0819:PsiDirectoryNode" />
+              <item name="school" type="462c0819:PsiDirectoryNode" />
+              <item name="models" type="462c0819:PsiDirectoryNode" />
+              <item name="elevemodel" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="modules-sinai-school" type="b2602c69:ProjectViewProjectNode" />
+              <item name="modules-sinai-school" type="462c0819:PsiDirectoryNode" />
+              <item name="backend" type="462c0819:PsiDirectoryNode" />
+              <item name="plugins" type="462c0819:PsiDirectoryNode" />
+              <item name="bootnetcrasher" type="462c0819:PsiDirectoryNode" />
+              <item name="school" type="462c0819:PsiDirectoryNode" />
+              <item name="models" type="462c0819:PsiDirectoryNode" />
+              <item name="matieremodel" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -179,6 +396,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/models/classeelevemodel" />
       <recent name="$PROJECT_DIR$/frontend/src/components/notes" />
     </key>
   </component>
@@ -208,32 +426,35 @@
       <workItem from="1570564183326" duration="19954000" />
       <workItem from="1570613595367" duration="14652000" />
       <workItem from="1570792867895" duration="444000" />
+      <workItem from="1571214342351" duration="6742000" />
+      <workItem from="1571233842907" duration="1415000" />
+      <workItem from="1571247011424" duration="13000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="44988000" />
+    <option name="totallyTimeSpent" value="53158000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="64" width="1348" height="666" extended-state="0" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" weight="0.29384616" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.30384615" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" />
-      <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info anchor="bottom" id="TypeScript" order="10" />
-      <window_info anchor="bottom" id="Terminal" order="11" />
-      <window_info anchor="bottom" id="Event Log" order="12" side_tool="true" />
+      <window_info anchor="bottom" id="REST Client" order="0" weight="0.61142856" />
+      <window_info anchor="bottom" id="Message" order="1" />
+      <window_info anchor="bottom" id="Find" order="2" />
+      <window_info anchor="bottom" id="Run" order="3" />
+      <window_info anchor="bottom" id="Debug" order="4" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="7" />
+      <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="9" />
+      <window_info anchor="bottom" id="Database Changes" order="10" />
+      <window_info anchor="bottom" id="TypeScript" order="11" />
+      <window_info anchor="bottom" id="Terminal" order="12" />
+      <window_info anchor="bottom" id="Event Log" order="13" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -244,90 +465,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/frontend/src/App.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="194">
-          <caret line="39" column="35" lean-forward="true" selection-start-line="39" selection-start-column="35" selection-end-line="39" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/node_modules/vuex/types/index.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="164">
-          <caret line="41" column="2" selection-start-line="41" selection-start-column="2" selection-end-line="41" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/plugins/ahmadfatoni/apigenerator/controllers/api/raisonabsenceController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-153" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/plugins/ahmadfatoni/apigenerator/controllers/api/matiereController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-153" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/models/ProfesseurClasseModel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="313">
-          <caret line="26" column="19" selection-start-line="26" selection-start-column="9" selection-end-line="26" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/plugins/ahmadfatoni/apigenerator/helpers/Helpers.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="20" selection-start-line="4" selection-start-column="20" selection-end-line="4" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/plugins/ahmadfatoni/apigenerator/controllers/api/eleveController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="50" column="34" selection-start-line="50" selection-start-column="34" selection-end-line="50" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/models/NoteModel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="42" column="58" lean-forward="true" selection-start-line="42" selection-start-column="58" selection-end-line="42" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/plugins/ahmadfatoni/apigenerator/controllers/api/ProfesseurClasseController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="47" column="30" lean-forward="true" selection-start-line="47" selection-start-column="30" selection-end-line="47" selection-end-column="30" />
-          <folding>
-            <element signature="e#59#86#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/src/components/professeurs/EditAbsenceEleve.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="90" column="38" selection-start-line="90" selection-start-column="38" selection-end-line="90" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/src/components/DetailNote.vue" />
-    <entry file="file://$PROJECT_DIR$/backend/storage/logs/system.log">
-      <provider selected="true" editor-type-id="LogFileEditorProvider">
-        <state>
-          <caret column="241" lean-forward="true" selection-start-column="241" selection-end-column="241" />
-        </state>
-      </provider>
-      <provider editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/src/components/Note.vue" />
-    <entry file="file://$PROJECT_DIR$/frontend/src/components/Classe.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-255" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/frontend/src/components/AbsenceEleve.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
@@ -402,13 +539,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/backend/plugins/ahmadfatoni/apigenerator/routes.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="328">
-          <caret line="24" column="32" selection-start-line="24" selection-start-column="32" selection-end-line="24" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/frontend/src/router/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
@@ -429,8 +559,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/frontend/src/store/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6409">
-          <caret line="379" column="8" selection-start-line="379" selection-start-column="8" selection-end-line="386" selection-end-column="46" />
+        <state relative-caret-position="6885">
+          <caret line="407" column="8" selection-start-line="407" selection-start-column="8" selection-end-line="407" selection-end-column="8" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
           </folding>
@@ -441,16 +571,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="408">
           <caret line="24" column="5" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/plugins/ahmadfatoni/apigenerator/controllers/api/noteController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1819">
-          <caret line="113" column="26" selection-start-line="113" selection-start-column="26" selection-end-line="113" selection-end-column="26" />
-          <folding>
-            <element signature="e#59#86#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -475,6 +595,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/src/components/Modal.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="799">
+          <caret line="47" column="12" selection-start-line="47" selection-start-column="12" selection-end-line="47" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/frontend/src/components/DetailAbsenceEleve.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
@@ -482,15 +609,216 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/src/components/Modal.vue">
+    <entry file="file://$PROJECT_DIR$/frontend/.eslintrc.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="46" column="12" lean-forward="true" selection-start-line="46" selection-start-column="12" selection-end-line="46" selection-end-column="12" />
+        <state relative-caret-position="51">
+          <caret line="3" column="13" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/.eslintrc.js">
+    <entry file="file://$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/models/elevemodel/columns.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="22" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/controllers/classeelevecontroller/config_list.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="56" selection-start-column="56" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/controllers/ClasseEleveController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/models/EleveModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="194">
+          <caret line="38" column="5" lean-forward="true" selection-start-line="38" selection-start-column="5" selection-end-line="38" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/models/classeelevemodel/columns.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="25" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/models/ClasseModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="19" column="49" selection-start-line="19" selection-start-column="21" selection-end-line="19" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/models/classeelevemodel/fields.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" column="22" selection-start-line="13" selection-start-column="22" selection-end-line="13" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/controllers/ClubController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="9" column="26" selection-start-line="9" selection-start-column="26" selection-end-line="9" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/controllers/ClasseMatiereController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="12" column="22" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/controllers/ClasseController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="7">
+          <caret line="13" column="4" lean-forward="true" selection-start-line="13" selection-start-column="4" selection-end-line="13" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/models/matieremodel/columns.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="18" lean-forward="true" selection-start-line="7" selection-start-column="18" selection-end-line="7" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/models/classematieremodel/columns.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="15" lean-forward="true" selection-start-line="12" selection-start-column="15" selection-end-line="12" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/models/ClasseMatiereModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="394">
+          <caret line="30" column="64" selection-start-line="30" selection-start-column="64" selection-end-line="30" selection-end-column="64" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/plugins/ahmadfatoni/apigenerator/controllers/ApiGeneratorController.php">
       <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/models/classematieremodel/fields.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="7" selection-start-line="7" selection-start-column="7" selection-end-line="7" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/plugins/ahmadfatoni/apigenerator/controllers/api/ProfesseurClasseController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="45" selection-start-line="8" selection-start-column="45" selection-end-line="8" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/models/ProfesseurClasseModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="129">
+          <caret line="13" column="14" selection-start-line="13" selection-start-column="14" selection-end-line="13" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/controllers/parentelevecontroller/index.htm">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/controllers/professeurclassecontroller/index.htm">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/models/ClasseEleveModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="262">
+          <caret line="27" column="25" lean-forward="true" selection-start-line="27" selection-start-column="25" selection-end-line="27" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/models/ProfesseurModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" column="38" lean-forward="true" selection-start-line="13" selection-start-column="38" selection-end-line="13" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/controllers/professeurclassecontroller/config_list.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="20" lean-forward="true" selection-start-line="5" selection-start-column="20" selection-end-line="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/controllers/ProfesseurClasseController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="9" column="29" selection-start-line="9" selection-start-column="29" selection-end-line="9" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/plugin.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="50" column="30" lean-forward="true" selection-start-line="50" selection-start-column="30" selection-end-line="50" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/controllers/ProfesseurController.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/plugins/ahmadfatoni/apigenerator/controllers/api/classesController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-153" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/plugins/ahmadfatoni/apigenerator/controllers/api/matiereController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-102" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/plugins/ahmadfatoni/apigenerator/controllers/api/noteController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="23" column="30" lean-forward="true" selection-start-line="23" selection-start-column="30" selection-end-line="23" selection-end-column="31" />
+          <folding>
+            <element signature="e#59#86#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/plugins/ahmadfatoni/apigenerator/controllers/api/classeeleveController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="16" column="30" selection-start-line="16" selection-start-column="30" selection-end-line="16" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/plugins/ahmadfatoni/apigenerator/routes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="45" selection-start-line="12" selection-start-column="45" selection-end-line="12" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/plugins/ahmadfatoni/apigenerator/controllers/api/eleveController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="39" column="32" selection-start-line="39" selection-start-column="32" selection-end-line="39" selection-end-column="32" />
+        </state>
+      </provider>
     </entry>
   </component>
 </project>

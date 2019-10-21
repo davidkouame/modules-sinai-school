@@ -11,6 +11,12 @@ columns:
 #        label: Prénom
 #        type: text
 #        searchable: true
+    parent:
+        label: Parent
+        type: text
+        searchable: true
+        select: name
+        relation: parent
     users:
         label: Nom
         type: text

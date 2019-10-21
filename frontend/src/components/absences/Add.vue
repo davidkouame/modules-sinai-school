@@ -40,7 +40,8 @@
           <input v-model="heure_fin_cours" type="date" class="form-control" />
         </div>
       </div>
-      <a :href="'/#/absences-eleves'" class="btn btn-danger">Annuler</a>
+      <!--<a :href="'/#/absences-eleves'" class="btn btn-danger">Annuler</a>-->
+      <a @click="$router.go(-1)" class="btn btn-danger">Annuler</a>
       <a v-on:click="addAgence()" class="btn btn-primary">Envoyer</a>
     </form>
   </div>
@@ -84,7 +85,8 @@ export default {
         .then(response => {
           store.dispatch("raisonsabsences", response.data.data);
           alert("L'enregistrement a été succès")
-          this.$router.push('/absences-eleves')
+          //this.$router.push('/absences-eleves')
+          this.$router.go(-1)
         })
         .catch(error => {
           console.log(error);

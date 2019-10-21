@@ -4,18 +4,26 @@ fields:
         span: auto
         type: text
         disabled: true
-#    nom:
-#        label: Nom
-#        span: auto
-#        type: text
-#    prenom:
-#        label: Prénom
-#        span: auto
-#        type: text
     users:
         label: Nom
         span: auto
         type: relation
         select: name
         partial: users
-        placeholder: Sélectionnez un user
+        placeholder: 'Sélectionnez un user'
+    parent:
+        label: Parent
+        span: auto
+        type: relation
+        select: name
+        partial: parent
+        placeholder: 'Sélectionnez un parent'
+    datenaissance:
+        label: 'Date naissance'
+        mode: datetime
+        span: auto
+        type: datepicker
+    tel:
+        label: Téléphone
+        span: auto
+        type: text

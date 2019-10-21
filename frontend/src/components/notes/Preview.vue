@@ -8,7 +8,7 @@
       <li>Coefficient : {{ note.coefficient }}</li>
       <li>Référence : {{ note.reference }}</li>
     </ul>
-    <a :href="'/#/notes'" class="btn btn-primary">retour</a>
+    <a @click="$router.go(-1)" class="btn btn-primary">retour</a>
   </div>
 </template>
 

@@ -27,7 +27,8 @@ class NoteModel extends Model
     
     public $belongsTo = [
         'typenote' => ['BootnetCrasher\School\Models\TypeNoteModel', 'key' => 'typenote_id', 'otherKey' => 'id'],
-        'matiere' => ['BootnetCrasher\School\Models\MatiereModel', 'key' => 'matiere_id', 'otherKey' => 'id']
+        'matiere' => ['BootnetCrasher\School\Models\MatiereModel', 'key' => 'matiere_id', 'otherKey' => 'id'],
+        'professeur' => ['BootnetCrasher\School\Models\ProfesseurModel', 'key' => 'professeur_id', 'otherKey' => 'id']
     ];
     
     public $hasMany = [

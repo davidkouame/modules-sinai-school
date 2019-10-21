@@ -24,6 +24,12 @@ import AddAbsenceEleve from '@/components/absences/Add.vue'
 import UpdateAbsenceEleve from '@/components/absences/Update.vue'
 import PreviewAbsenceEleve from '@/components/absences/Preview.vue'
 
+// Absence élève
+import ListEleve from '@/components/eleves/List.vue'
+// import AddAbsenceEleve from '@/components/absences/Add.vue'
+// import UpdateAbsenceEleve from '@/components/absences/Update.vue'
+import PreviewEleve from '@/components/eleves/Preview.vue'
+
 Vue.use(Router)
 
 export default new Router({
@@ -97,6 +103,19 @@ export default new Router({
       component: PreviewAbsenceEleve
     }
     /* ============== \.Absence élève ============== */
+    ,
+    /* ============== Elèves ============== */
+    {
+      path: '/eleves',
+      name: 'ListEleve',
+      component: ListEleve
+    },
+    {
+      path: '/eleves/preview/:id(\\d+)',
+      name: 'PreviewEleve',
+      component: PreviewEleve
+    }
+    /* ============== \.Elèves ============== */
     ,
     {
       path: '/absence-eleve/:id(\\d+)',

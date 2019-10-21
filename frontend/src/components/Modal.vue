@@ -42,8 +42,8 @@ export default {
     }
   },
   created () {
-    console.log('la noteid est ' + this.modelid)
-    console.log('le nom du model est '+ this.modelname)
+    // console.log('la noteid est ' + this.modelid)
+    // console.log('le nom du model est '+ this.modelname)
   },
   methods: {
     getTextBody(){

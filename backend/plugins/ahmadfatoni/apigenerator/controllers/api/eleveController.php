@@ -24,16 +24,30 @@ class eleveController extends Controller
         $data = $this->EleveModel->with(array(
             'users'=>function($query){
                 $query->select('*');
+            },'parent'=>function($query){
+                //$query->select('*');
+                $query->with(array(
+                    'users'=>function($q){
+                        $q->select('*');
+                    }
+                ))->select('*');
             }, ))->select('*')->get()->toArray();
         return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
     }
 
     
-    public function show($id){ 
+    public function show($id){
         $data = $this->EleveModel->with(array(
             'users'=>function($query){
                 $query->select('*');
-            }, ))->select('*')->where('id', '=', $id)->first();
+            },'parent'=>function($query){
+                // $query->select('*');
+                $query->with(array(
+                    'users'=>function($q){
+                        $q->select('*');
+                    }
+                ))->select('*');
+            } ))->select('*')->where('id', '=', $id)->first();
         return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
     }
 

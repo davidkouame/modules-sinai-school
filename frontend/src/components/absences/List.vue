@@ -26,6 +26,7 @@
               <th scope="col">Heure début de cours</th>
               <th scope="col">Heure fin de cours</th>
               <th scope="col">Raison absence</th>
+              <th scope="col">Eleve</th>
               <th scope="col">Actions</th>
             </tr>
           </thead>
@@ -37,6 +38,7 @@
               <!-- <td>{{ noteeleve.note.created_at|formatDate }}</td> -->
               <td v-if="absenceeleve.raisonabsence">{{ absenceeleve.raisonabsence.libelle }}</td>
               <td v-else="absenceeleve.raisonabsence"></td>
+              <td>qsdsq</td>
               <td>
                   <!--<a :href="'/#/absence-eleve/'+absenceeleve.id" class="btn btn-primary">detail</a>-->
 
@@ -81,11 +83,13 @@ export default {
   },
   methods: {
     fetch (pageNum, search = null) {
+      // console.log("nous sommes dans le fetch "+ pageNum);
       pageNum = pageNum == null ? 1 : pageNum
+      // return ;
       if (search) {
-        this.$store.dispatch('absenceseleves', {payload: pageNum, search: [{key: 'libelle', value: search} ]})
+        this.$store.dispatch('absenceselevesprofesseur', {payload: pageNum, search: [{key: 'libelle', value: search} ]})
       } else {
-        this.$store.dispatch('absenceseleves', {payload: pageNum, search: null})
+        this.$store.dispatch('absenceselevesprofesseur', {payload: pageNum, search: null})
       }
       // pageNum = pageNum == null ? 1:pageNum;
       // this.$store.dispatch("absenceseleves", {'pageNum': pageNum, 'eleveId': 6});
@@ -100,6 +104,7 @@ export default {
   },
   computed: {
     absenceseleves() {
+      // console.log("liste d'absences "+this.$store.getters.absenceseleves)
       return this.$store.getters.absenceseleves;
     },
     pageCount () {

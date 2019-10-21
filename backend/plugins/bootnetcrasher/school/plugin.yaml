@@ -41,6 +41,22 @@ navigation:
         label: Absences élèves
         url: bootnetcrasher/school/absenceelevecontroller
         icon: icon-adjust
+    classeeleve:
+        label: Classe Eleve
+        url: bootnetcrasher/school/classeelevecontroller
+        icon: icon-arrow-right
+    professeurclasse:
+        label: Professeur Classe
+        url: bootnetcrasher/school/professeurclassecontroller
+        icon: icon-arrow-right
+    parent:
+        label: Parents
+        url: bootnetcrasher/school/parentcontroller
+        icon: icon-arrow-right
+    #parenteleve:
+    #    label: Parents Elèves
+    #    url: bootnetcrasher/school/parentelevecontroller
+    #    icon: icon-arrow-right
     parametres:
         label: Paramètres
         url: bootnetcrasher/school/indexcontrollerparametre

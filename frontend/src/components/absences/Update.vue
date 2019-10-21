@@ -40,7 +40,8 @@
           <input v-model="heure_fin_cours" type="date" class="form-control" />
         </div>
       </div>
-      <a :href="'/#/absences-eleves'" class="btn btn-danger">Annuler</a>
+      <!-- <a :href="'/#/absences-eleves'" class="btn btn-danger">Annuler</a>-->
+      <a @click="$router.go(-1)" class="btn btn-danger">Annuler</a>
       <a v-on:click="editAbsenceEleve()" class="btn btn-primary">Envoyer</a>
     </form>
   </div>
@@ -88,7 +89,8 @@ export default {
       store
         .dispatch("absenceseleves", { data: data, action: "edit", absenceEleveId: this.$route.params.id})
         .then(response => {
-          this.$router.push('/absences-eleves')
+          // this.$router.push('/absences-eleves')
+          this.$router.go(-1)
           alert("la mise a été éffectué avec succès")
         })
         .catch(error => {

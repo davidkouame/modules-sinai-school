@@ -1,0 +1,10 @@
+name: ParentEleveController
+form: $/bootnetcrasher/school/models/parentmodel/fields.yaml
+modelClass: BootnetCrasher\School\Models\ParentModel
+defaultRedirect: bootnetcrasher/school/parentcontroller
+create:
+    redirect: 'bootnetcrasher/school/parentcontroller/update/:id'
+    redirectClose: bootnetcrasher/school/parentcontroller
+update:
+    redirect: bootnetcrasher/school/parentcontroller
+    redirectClose: bootnetcrasher/school/parentcontroller

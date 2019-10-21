@@ -1,0 +1,8 @@
+fields:
+    users:
+        label: Nom
+        span: auto
+        type: relation
+        select: name
+        partial: users
+        placeholder: Sélectionnez un user

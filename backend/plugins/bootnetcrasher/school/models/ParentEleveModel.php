@@ -17,15 +17,21 @@ class ParentEleveModel extends Model
     /**
      * @var string The database table used by the model.
      */
-    public $table = 'bootnetcrasher_school_parent';
+    public $table = 'bootnetcrasher_school_parent_eleve';
 
     /**
      * @var array Validation rules
      */
     public $rules = [
     ];
-    
-    public $hasOne = [
-      'users' => ['RainLab\User\Models\User', 'key' => 'parenteleve_id']  
+
+    public $belongsTo = [
+      'parent' => ['BootnetCrasher\School\Models\ParentModel', 'key' => 'parent_id', 'otherKey' => 'id'],
+      'eleve' => ['BootnetCrasher\School\Models\EleveModel', 'key' => 'eleve_id', 'otherKey' => 'id']
     ];
+
+    public function getParAttribute()
+    {
+        return "test";
+    }
 }

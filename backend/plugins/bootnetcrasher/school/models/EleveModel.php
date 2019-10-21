@@ -28,10 +28,14 @@ class EleveModel extends Model
     public $hasOne = [
       'users' => ['RainLab\User\Models\User', 'key' => 'eleve_id']  
     ];
-    
-    public $hasMany = [
-        'eleves' => ['BootnetCrasher\School\Models\EleveModel'],
+
+    public $belongsTo = [
+        'parent' => ['BootnetCrasher\School\Models\ParentModel', 'key' => 'parent_id', 'otherKey' => 'id']
     ];
+    
+    /*public $hasMany = [
+        'eleves' => ['BootnetCrasher\School\Models\EleveModel'],
+    ];*/
 
     public function beforeCreate()
     {
@@ -41,5 +45,9 @@ class EleveModel extends Model
     // generate matricule
     public function getMatricule(){
        return rand();
+    }
+
+    public function scopeParent($query){
+        dd($query);
     }
 }
