@@ -31,6 +31,7 @@ class ClasseModel extends Model
     public $belongsTo = [
         'niveau' => ['BootnetCrasher\School\Models\NiveauClasseModel', 'key' => 'niveau_id', 'otherKey' => 'id'],
         'serie' => ['BootnetCrasher\School\Models\SerieClasseModel', 'key' => 'serie_id', 'otherKey' => 'id'],
+        'professeurprincipal' => ['BootnetCrasher\School\Models\ProfesseurModel', 'key' => 'professeur_principal_id', 'otherKey' => 'id'],
     ];
 
     public $attachOne = [

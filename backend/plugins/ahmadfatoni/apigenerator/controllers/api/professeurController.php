@@ -29,9 +29,13 @@ class professeurController extends Controller
 
     public function show($id){
 
-        $data = $this->ProfesseurModel->where('id',$id)->first();
+        // $data = $this->ProfesseurModel->where('id',$id)->first();
+        $data = $this->ProfesseurModel->with(array(
+            'users'=>function($query){
+                $query->select('*');
+            }))->select('*')->where('id', '=', $id)->first();
 
-        if( count($data) > 0){
+        if($data){
 
             return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
 

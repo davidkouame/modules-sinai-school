@@ -27,7 +27,8 @@ export default new Vuex.Store({
     matieres: [],
     classes: [],
     classesByProfesseur: [],
-    classeByProfesseur: []
+    classeByProfesseur: [],
+    professeur: null
     // userId: 1
   },
   mutations: {
@@ -81,6 +82,9 @@ export default new Vuex.Store({
     },
     eleve(state, eleve) {
       state.eleve = eleve
+    },
+    professeur(state, professeur) {
+      state.professeur = professeur
     }
   },
   getters: {
@@ -137,6 +141,9 @@ export default new Vuex.Store({
     },
     note: state => {
       return state.note
+    },
+    professeur: state => {
+      return state.professeur
     }
   },
   actions: {
@@ -475,6 +482,37 @@ export default new Vuex.Store({
           this.errored = true
         })
         .finally(() => (this.loading = false))
+    },
+    professeur(context, professeurId) {
+      // console.log("le professeur id est "+ professeurId)
+      Axios.get(
+        context.state.endpoint + 'api/v1/professeurs/'+professeurId)
+        .then(response => {
+          context.commit('professeur', response.data.data)
+        })
+        .catch(error => {
+          console.log(error)
+          this.errored = true
+        })
+        .finally(() => (this.loading = false))
+    },
+    getClassesByProfesseurId(context, professeurId){
+      Axios.get(
+        context.state.endpoint + 'api/v1/classes-by-professeur-id/'+professeurId)
+        .then(response => {
+          context.commit('classes', response.data.data)
+        })
+        .catch(error => {
+          console.log(error)
+          this.errored = true
+        })
+        .finally(() => (this.loading = false))
+    },
+    updateUser(context, data) {
+        return Axios.post(
+          context.state.endpoint + 'api/v1/users/update', data,
+          { headers: { 'Content-Type': 'application/json' } }
+        )
     }
   }
 })

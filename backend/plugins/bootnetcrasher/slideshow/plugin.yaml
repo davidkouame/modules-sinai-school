@@ -4,8 +4,8 @@ plugin:
     author: 'Bootnet crasher'
     icon: oc-icon-adjust
     homepage: ''
-navigation:
-    slideshow:
-        label: 'Slide Show'
-        url: bootnetcrasher/slideshow/slideshowcontroller
-        icon: icon-arrow-right
+# navigation:
+#     slideshow:
+#         label: 'Slide Show'
+#         url: bootnetcrasher/slideshow/slideshowcontroller
+#         icon: icon-arrow-right

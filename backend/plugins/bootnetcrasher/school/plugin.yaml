@@ -5,34 +5,38 @@ plugin:
     icon: oc-icon-adjust
     homepage: ''
 navigation:
-    actualites:
-        label: Actualites
-        url: bootnetcrasher/school/actualitecontroller
-        icon: icon-arrow-right
-    examens:
-        label: Examens
-        url: bootnetcrasher/school/examencontroller
-        icon: icon-life-ring
-    clubs:
-        label: Clubs
-        url: bootnetcrasher/school/clubcontroller
-        icon: icon-life-ring
+    # actualites:
+    #     label: Actualites
+    #     url: bootnetcrasher/school/actualitecontroller
+    #     icon: icon-arrow-right
+    # examens:
+    #     label: Examens
+    #     url: bootnetcrasher/school/examencontroller
+    #     icon: icon-life-ring
+    # clubs:
+    #     label: Clubs
+    #     url: bootnetcrasher/school/clubcontroller
+    #     icon: icon-life-ring
     professeurs:
         label: Professeurs
         url: bootnetcrasher/school/professeurcontroller
+        icon: icon-life-ring
+    matieres:
+        label: Matières
+        url: bootnetcrasher/school/matierecontroller
         icon: icon-life-ring
     classes:
         label: Classes
         url: bootnetcrasher/school/classecontroller
         icon: icon-life-ring
-    sujets:
-        label: Sujets
-        url: bootnetcrasher/school/sujetcontroller
-        icon: icon-life-ring
-    organigrame:
-        label: Organigrames
-        url: bootnetcrasher/school/organigramecontroller
-        icon: icon-life-ring
+    # sujets:
+    #     label: Sujets
+    #     url: bootnetcrasher/school/sujetcontroller
+    #     icon: icon-life-ring
+    # organigrame:
+    #     label: Organigrames
+    #     url: bootnetcrasher/school/organigramecontroller
+    #     icon: icon-life-ring
     main-menu-item:
         label: Eleves
         url: bootnetcrasher/school/elevecontroller
@@ -45,10 +49,10 @@ navigation:
         label: Classe Eleve
         url: bootnetcrasher/school/classeelevecontroller
         icon: icon-arrow-right
-    professeurclasse:
-        label: Professeur Classe
-        url: bootnetcrasher/school/professeurclassecontroller
-        icon: icon-arrow-right
+    #professeurclasse:
+    #    label: Professeur Classe
+    #    url: bootnetcrasher/school/professeurclassecontroller
+    #    icon: icon-arrow-right
     parent:
         label: Parents
         url: bootnetcrasher/school/parentcontroller

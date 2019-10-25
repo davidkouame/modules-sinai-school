@@ -30,6 +30,9 @@ import ListEleve from '@/components/eleves/List.vue'
 // import UpdateAbsenceEleve from '@/components/absences/Update.vue'
 import PreviewEleve from '@/components/eleves/Preview.vue'
 
+// Parametres professeur
+import ProfesseurParametre from '@/components/parametres/User.vue'
+
 Vue.use(Router)
 
 export default new Router({
@@ -136,6 +139,11 @@ export default new Router({
       path: '/professeur/absences-eleves/edit/:id',
       name: 'ProfesseurEditAbsenceEleve',
       component: ProfesseurEditAbsenceEleve
+    },
+    {
+      path: '/parametres',
+      name: 'ProfesseurParametre',
+      component: ProfesseurParametre
     }
   ]
 })

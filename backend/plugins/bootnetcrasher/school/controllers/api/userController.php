@@ -10,6 +10,9 @@ use RainLab\User\Models\User;
 use Event;
 use Auth;
 use BootnetCrasher\School\Models\EleveModel;
+use Validator;
+use ValidationException;
+
 class userController extends Controller
 {
     protected $User;
@@ -139,6 +142,49 @@ class userController extends Controller
         return $this->helpers->apiArrayResponseBuilder(200, 'success', $user);
     }
 
+
+    public function updateUser(Request $request){
+        $data = $request->all();
+        // if($data["password"])
+        $rules = null;
+        if(array_key_exists("password", $data)){
+            $rules = [
+                'username'     => 'required',
+                'tel' => 'required',
+                'password' => 'required|confirmed'
+            ];
+        }else{
+            $rules = [
+                'username'     => 'required',
+                'tel' => 'required'
+            ];
+        }
+        
+        $validation = Validator::make($data, $rules);
+        if ($validation->fails()) {
+            return $this->helpers->apiArrayResponseBuilder(500, 'error', "Une erreur est survenue lors de la mise à jour du professeur !");
+        }
+        $user = User::where('email', $request->get('email'))->first();
+        if(!$user){
+            return $this->helpers->apiArrayResponseBuilder(500, 'error', "Une erreur est survenue lors de la mise à jour du professeur !");
+        }
+        $user->name = $data['username'];
+        if(array_key_exists("password", $data)){
+            $user->password = $data['password'];
+            $user->password_confirmation = $data['password_confirmation'];
+        }
+        $user->save();
+        if($user->professeur_id){
+            $professeur = ProfesseurModel::find($user->professeur_id);
+            if($professeur){
+                $professeur->tel = $data['tel'];
+                $professeur->nom = $data['username'];
+                $professeur->save();
+            }
+        }
+        return $this->helpers->apiArrayResponseBuilder(200, 'success', $user);
+        // $user->name = $request->get('username');
+    }
 
 
     public static function getAfterFilters() {return [];}

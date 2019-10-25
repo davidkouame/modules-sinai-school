@@ -60,9 +60,8 @@ class userController extends Controller
     }
 
     public function update($id, Request $request){
-
+        $data = $request->all();
         $status = $this->User->where('id',$id)->update($data);
-
         if( $status ){
 
             return $this->helpers->apiArrayResponseBuilder(200, 'success', 'Data has been updated successfully.');

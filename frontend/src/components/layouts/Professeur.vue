@@ -38,7 +38,7 @@
             <router-link to="/absences-eleves">Absences</router-link>
           </li>
           <li style="display: inline-block;">
-            <router-link to="/eleves">Paramètre</router-link>
+            <router-link to="/parametres">Paramètre</router-link>
           </li>
         </ul>
       </div>
