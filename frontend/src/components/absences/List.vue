@@ -83,16 +83,11 @@ export default {
   },
   methods: {
     fetch (pageNum, search = null) {
-      // console.log("nous sommes dans le fetch "+ pageNum);
       pageNum = pageNum == null ? 1 : pageNum
-      // return ;
-      if (search) {
-        this.$store.dispatch('absenceselevesprofesseur', {payload: pageNum, search: [{key: 'libelle', value: search} ]})
-      } else {
-        this.$store.dispatch('absenceselevesprofesseur', {payload: pageNum, search: null})
-      }
-      // pageNum = pageNum == null ? 1:pageNum;
-      // this.$store.dispatch("absenceseleves", {'pageNum': pageNum, 'eleveId': 6});
+      let params = [{key: 'libelle', value: search},
+      {key: 'classe_id', value: this.classeListId} ];
+      this.$store.dispatch('absenceselevesprofesseur', 
+      {payload: pageNum, search: this.trimSearch(params)})
     },
     searchAbsenceEleve () {
       this.fetch(null, this.searchkeys)
@@ -100,6 +95,15 @@ export default {
     showModalF (absenceId = null) {
       this.showModal = true
       this.absenceid = absenceId
+    },
+    trimSearch(searchs = null){
+      let params = [];
+      for (var key in searchs) {
+        if(searchs[key].value){
+          params.push({'key': searchs[key].key, 'value': searchs[key].value});
+        }
+      }
+      return params;
     }
   },
   computed: {
@@ -109,6 +113,14 @@ export default {
     },
     pageCount () {
       return this.$store.getters.pageCount
+    }, 
+    classeListId(){
+      return this.$store.getters.classeId
+    }
+  },
+  watch:{
+    classeListId(){
+      this.fetch();
     }
   }
 

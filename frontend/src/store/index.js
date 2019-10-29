@@ -28,7 +28,8 @@ export default new Vuex.Store({
     classes: [],
     classesByProfesseur: [],
     classeByProfesseur: [],
-    professeur: null
+    professeur: null,
+    classeId: null
     // userId: 1
   },
   mutations: {
@@ -85,6 +86,9 @@ export default new Vuex.Store({
     },
     professeur(state, professeur) {
       state.professeur = professeur
+    },
+    classeId(state, classeId) {
+      state.classeId = classeId
     }
   },
   getters: {
@@ -144,6 +148,9 @@ export default new Vuex.Store({
     },
     professeur: state => {
       return state.professeur
+    },
+    classeId: state => {
+      return state.classeId
     }
   },
   actions: {
@@ -252,7 +259,7 @@ export default new Vuex.Store({
       axios.then(response => {
         context.commit('absenceseleves', response.data.data.data)
         context.commit('pageCount', response.data.data.last_page)
-        console.log("absence eleves ====> "+ response.data.data.data)
+        // console.log("absence eleves ====> "+ response.data.data.data)
       })
         .catch(error => {
           console.log(error)
@@ -393,9 +400,23 @@ export default new Vuex.Store({
         )
       }
     },
-    classes(context, eleveId) {
+    classes(context, params) {
+      let concatParams = null
+      if (params) {
+        concatParams = params.map(function (elemen) {
+          return elemen.key + '=' + elemen.value
+        }).join('&')
+        // concatParams =  concatParams
+      }
+      console.log("params "+ JSON.stringify(concatParams))
+      let url = null;
+      if(concatParams){
+        url = context.state.endpoint + 'api/v1/classesprofesseursmatieres?' + concatParams
+      }else{
+        url = context.state.endpoint + 'api/v1/classesprofesseursmatieres/'
+      }
       Axios.get(
-        context.state.endpoint + 'api/v1/classes/'
+        url
       )
         .then(response => {
           context.commit('classes', response.data.data)
@@ -457,9 +478,23 @@ export default new Vuex.Store({
         context.state.endpoint + 'api/v1/absenceseleves/' + absenceId + '/delete'
       );
     },
-    getElevesByClasseId(context) {
+    getElevesByClasseId(context, params) {
+      let concatParams = null
+      if (params.search) {
+        concatParams = params.search.map(function (elemen) {
+          return elemen.key + '=' + elemen.value
+        }).join('&')
+        // concatParams = '&' + concatParams
+      }
+      // console.log("liste des parametres "+JSON.stringify(params.payload));
+      let url = null;
+      if(concatParams){
+        url = context.state.endpoint + 'api/v1/elevesclasses?page=' + params.payload + '&' + concatParams;
+      }else{
+        url = context.state.endpoint + 'api/v1/elevesclasses?page=' + params.payload;   
+      }
       Axios.get(
-        context.state.endpoint + 'api/v1/elevesclasses')
+        url)
         .then(response => {
           context.commit('eleves', response.data.data.data)
           // console.log("eleves "+ JSON.stringify(response.data.data.data))
@@ -513,6 +548,9 @@ export default new Vuex.Store({
           context.state.endpoint + 'api/v1/users/update', data,
           { headers: { 'Content-Type': 'application/json' } }
         )
+    },
+    classeId(context, classeId){
+      context.commit('classeId', classeId)
     }
   }
 })

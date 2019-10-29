@@ -42,6 +42,14 @@ Vue.filter('truncate', function (value) {
   return value.substring(0, 20)
 });
 
+Vue.mixin({
+  data: function() {
+    return {
+      generalClasseId: null
+    }
+  }
+});
+
 if (localStorage.getItem('userId')) {
   if (localStorage.getItem('userType') == "parent") {
     /* eslint-disable */

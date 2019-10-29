@@ -30,12 +30,12 @@ class EleveModel extends Model
     ];
 
     public $belongsTo = [
-        'parent' => ['BootnetCrasher\School\Models\ParentModel', 'key' => 'parent_id', 'otherKey' => 'id']
+        'parent' => ['BootnetCrasher\School\Models\ParentModel', 'key' => 'parent_id', 'otherKey' => 'id'],
     ];
-    
-    /*public $hasMany = [
-        'eleves' => ['BootnetCrasher\School\Models\EleveModel'],
-    ];*/
+
+    public $hasMany = [
+        'classeseleves' => ['BootnetCrasher\School\Models\ClasseEleveModel', 'key' => 'eleve_id', 'otherKey' => 'id'],
+    ];
 
     public function beforeCreate()
     {

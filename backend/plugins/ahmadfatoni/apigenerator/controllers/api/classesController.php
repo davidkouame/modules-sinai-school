@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use AhmadFatoni\ApiGenerator\Helpers\Helpers;
 use BootnetCrasher\School\Models\ClasseModel;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Collection;
 
 class classesController extends Controller
 {
@@ -98,7 +99,35 @@ class classesController extends Controller
         return $this->helpers->apiArrayResponseBuilder(200, 'success', 'Data has been deleted successfully.');
     }
 
-    // public function 
+    /* Get all élèves by classe id*/
+    public function getAllEleves($id = null){
+        // try{
+            $classe = ClasseModel::with(array(
+            'eleves'=>function($query){
+                $query->with(array(
+                    'eleve'=>function($q){
+                        $q->select('*');
+                    }
+                ));
+            }
+            ))->where('id', $id)->first();
+            $eleves = new Collection;
+            //dd($classe);
+            if($classe){
+                $classe->eleves->each(function($e) use($eleves) {
+                    $eleves->push($e->eleve);
+                });
+                $eleves = $eleves->toArray();
+                return $this->helpers->apiArrayResponseBuilder(200, 'success', $eleves);
+            }else{
+                return $this->helpers->apiArrayResponseBuilder(200, 'success', []);
+            }
+        /*}catch(Exception $e){
+            $nameFile = dirname(__FILE__);
+            trace_log("NameFile : ".$nameFile."Erreur lors de la recuperation des élèves, error : ".$e->getMessage());
+            return $this->helpers->apiArrayResponseBuilder(500, 'error', 'Erreur lors de la recuperation des élèves.', $e->getMessage());
+        }*/
+    }
 
 
     public static function getAfterFilters() {return [];}

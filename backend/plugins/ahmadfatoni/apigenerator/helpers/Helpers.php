@@ -2,7 +2,7 @@
 
 Class Helpers {
 
-	public function apiArrayResponseBuilder($statusCode = null, $message = null, $data = [])
+	public function apiArrayResponseBuilder($statusCode = null, $message = null, $data = [], $errorMessage = null)
 	{
 		$arr = [
 			'status_code' => (isset($statusCode)) ? $statusCode : 500,
@@ -11,9 +11,13 @@ Class Helpers {
 		if ($data) {
 			$arr['data'] = $data;
 		}
-
-		return response()->json($arr, $arr['status_code']);
-		//return $arr;
-		
+		$response = null;
+		if($errorMessage)
+			$response = response()->
+						json($arr, $arr['status_code'], $errorMessage);
+		else
+			$response = response()->
+						json($arr, $arr['status_code']);
+		return $response;
 	}
 }

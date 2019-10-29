@@ -6,6 +6,7 @@ use BackendMenu;
 use Illuminate\Http\Request;
 use AhmadFatoni\ApiGenerator\Helpers\Helpers;
 use BootnetCrasher\School\Models\AbsenceEleveModel;
+use BootnetCrasher\School\Models\EleveModel;
 use Dotenv\Validator;
 
 class absenceselevesController extends Controller
@@ -22,9 +23,8 @@ class absenceselevesController extends Controller
     }
 
     
-    public function index(){
-        $dataGet = get();
-        $query = $this->AbsenceEleveModel->with(array(
+    public function index(Request $request){
+        $data = $this->AbsenceEleveModel->with(array(
             'raisonabsence'=>function($query){
                 $query->select('*');
             },
@@ -32,12 +32,19 @@ class absenceselevesController extends Controller
                 $query->select('*');
             }, )
         );
-        foreach($dataGet as $key => $data) {
-            if($key != 'page'){
-                $query->where($key, $data);
-            } 
+
+        $data = $data->whereHas('eleve', function ($query) use($request) {
+                    $query->whereHas('classeseleves', function ($q) use($request) {
+                        if($request->has('classe_id')){
+                            $q->where('classe_id', $request->get('classe_id'));
+                        }
+                    });
+                });
+
+        foreach($request->except('page', 'classe_id') as $key => $value){
+            $data = $data->where($key, $value);
         }
-        $data = $query->paginate(10)->toArray();
+        $data = $data->paginate(10)->toArray();
         return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
     }
 

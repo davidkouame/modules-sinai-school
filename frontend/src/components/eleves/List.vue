@@ -11,7 +11,6 @@
             placeholder="Rechercher un élève"
             aria-label="Recipient's username"
             aria-describedby="button-addon2"
-            disabled
           />
           <div class="input-group-append">
             <button
@@ -87,17 +86,12 @@ export default {
   methods: {
     fetch(pageNum, search = null) {
       pageNum = pageNum == null ? 1 : pageNum;
-      if (search) {
-        this.$store.dispatch("getElevesByClasseId", {
+      let params = [{key: 'matricule', value: search},
+      {key: 'name', value: search}, {key: 'classe_id', value: this.classeListId}];
+      this.$store.dispatch("getElevesByClasseId", {
           payload: pageNum,
-          search: [{ key: "libelle", value: search }]
+          search: this.trimSearch(params)
         });
-      } else {
-        this.$store.dispatch("getElevesByClasseId", {
-          payload: pageNum,
-          search: null
-        });
-      }
     },
     searchEleve() {
       this.fetch(null, this.searchkeys);
@@ -105,6 +99,23 @@ export default {
     showModalF(absenceId = null) {
       this.showModal = true;
       this.absenceid = absenceId;
+    },
+    getParams(search = null){
+      let response = null;
+      if (search) {
+        response = [{ key: "libelle", value: search }]
+      } else {
+        response = null
+      }
+    },
+    trimSearch(searchs = null){
+      let params = [];
+      for (var key in searchs) {
+        if(searchs[key].value){
+          params.push({'key': searchs[key].key, 'value': searchs[key].value});
+        }
+      }
+      return params;
     }
   },
   computed: {
@@ -113,6 +124,14 @@ export default {
     },
     pageCount() {
       return this.$store.getters.pageCount;
+    }, 
+    classeListId(){
+      return this.$store.getters.classeId
+    }
+  },
+  watch:{
+    classeListId(){
+      this.fetch();
     }
   }
 };

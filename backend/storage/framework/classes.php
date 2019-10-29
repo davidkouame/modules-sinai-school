@@ -448,4 +448,5 @@
   'AhmadFatoni\\ApiGenerator\\Controllers\\API\\classeeleveController' => 'plugins/ahmadfatoni/apigenerator/controllers/api/classeeleveController.php',
   'BootnetCrasher\\School\\Models\\ParentModel' => 'plugins/bootnetcrasher/school/models/ParentModel.php',
   'BootnetCrasher\\School\\Controllers\\Api\\ClasseMatiereProfesseurController' => 'plugins/bootnetcrasher/school/controllers/api/ClasseMatiereProfesseurController.php',
+  'AhmadFatoni\\ApiGenerator\\Controllers\\API\\classeProfesseurMatiereController' => 'plugins/ahmadfatoni/apigenerator/controllers/api/classeProfesseurMatiereController.php',
 );

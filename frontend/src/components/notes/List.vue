@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <h1>Liste des notes</h1>
+    classe id est {{ classeListId }}
     <div class="row">
       <div class="col">
         <div class="input-group mb-3">
@@ -73,17 +74,14 @@ export default {
     }
   },
   created () {
-    this.fetch()
+    this.fetch();
+    // this.classeId = this.$store.getters.classeId;
   },
   methods: {
     fetch (pageNum, search = null) {
       pageNum = pageNum == null ? 1 : pageNum
-      if (search) {
-        this.$store.dispatch('allnotes', {payload: pageNum, search: [{key: 'libelle', value: search} ]})
-      } else {
-        this.$store.dispatch('allnotes', {payload: pageNum, search: null})
-      }
-      // [{key: 'classe_id', value: 10},{key: 'typenote_id', value: 1} ]
+      let params = [{key: 'libelle', value: search}, {key: 'classe_id', value: this.classeListId}];
+      this.$store.dispatch('allnotes', {payload: pageNum, search: this.trimSearch(params)})
     },
     searchNote () {
       this.fetch(null, this.searchkeys)
@@ -91,6 +89,15 @@ export default {
     showModalF (noteId = null) {
       this.showModal = true
       this.noteid = noteId
+    },
+    trimSearch(searchs = null){
+      let params = [];
+      for (var key in searchs) {
+        if(searchs[key].value){
+          params.push({'key': searchs[key].key, 'value': searchs[key].value});
+        }
+      }
+      return params;
     }
   },
   computed: {
@@ -102,6 +109,14 @@ export default {
     },
     pageCount () {
       return this.$store.getters.pageCount
+    }, 
+    classeListId(){
+      return this.$store.getters.classeId
+    }
+  },
+  watch:{
+    classeListId(){
+      this.fetch();
     }
   }
 }

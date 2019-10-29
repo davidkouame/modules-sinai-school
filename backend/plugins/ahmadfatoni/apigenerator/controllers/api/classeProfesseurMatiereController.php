@@ -5,65 +5,65 @@ use BackendMenu;
 
 use Illuminate\Http\Request;
 use AhmadFatoni\ApiGenerator\Helpers\Helpers;
-use BootnetCrasher\School\Models\ClasseEleveModel;
-class classeeleveController extends Controller
+use BootnetCrasher\School\Models\ClasseMatiereModel;
+class classeProfesseurMatiereController extends Controller
 {
-    protected $ClasseEleveModel;
+    protected $ClasseMatiereModel;
 
     protected $helpers;
 
-    public function __construct(ClasseEleveModel $ClasseEleveModel, Helpers $helpers)
+    public function __construct(ClasseMatiereModel $ClasseMatiereModel, Helpers $helpers)
     {
         parent::__construct();
-        $this->ClasseEleveModel    = $ClasseEleveModel;
+        $this->ClasseMatiereModel    = $ClasseMatiereModel;
         $this->helpers          = $helpers;
     }
 
     
-    public function index(Request $request){
-        $data = $this->ClasseEleveModel->with(array(
-            'eleve'=>function($query) use ($request) {
-                /*if($request->has('name')){
-                    $query->where('name', $request->get('name'));
-                }
-
-                if($request->has('matricule')){
-                    $query->where('matricule', $request->get('matricule'));
-                }*/
+    public function index(Request $request){ 
+        $data = $this->ClasseMatiereModel->with(array(
+            'matiere'=>function($query){
                 $query->select('*');
             },
             'classe'=>function($query){
                 $query->select('*');
-            }, )); // ->select('*')->get()->toArray();
-        // dd($request->except('page', 'matricule', 'name'));
-        foreach($request->except('page', 'matricule', 'name') as $key => $value){
+            },
+            'professeur'=>function($query){
+                $query->select('*');
+            }, )); //->select('*')->get()->toArray();
+
+        $searchProfesseur = null;
+        foreach($request->except(['page']) as $key => $value){
             if($key == "libelle"){
                 $data = $data->where($key, 'like', '%'.$value.'%');
+            }elseif ($key == "professeur_id") {
+                $searchProfesseur = true;
             }else{
                 $data = $data->where($key, $value);
             }
         }
 
-        if($request->get('matricule') || $request->get('name')){
-            $data = $data->whereHas('eleve', function ($query) use($request) {
-                    $query->where('matricule', $request->get('matricule'))
-                    ->orWhere('name', $request->get('name'));
-                });
+        // $data = $data->paginate(10)->toArray();
+        // dd($searchProfesseur);
+        if($searchProfesseur){
+            $data = $data->get()->unique('classe_id')->toArray();
+        }else{
+            $data = $data->get()->toArray();
         }
-
-
-        $data = $data->paginate(10)->toArray();
 
         return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
     }
 
     
     public function show($id){ 
-        $data = $this->ClasseEleveModel->with(array(
-            'eleve'=>function($query){
+        $data = $this->ClasseMatiereModel->with(array(
+            'matiere'=>function($query){
                 $query->select('*');
             },
             'classe'=>function($query){
+                $query->select('*');
+            },
+            'professeur'=>function($query){
                 $query->select('*');
             }, ))->select('*')->where('id', '=', $id)->first();
         return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
@@ -74,15 +74,15 @@ class classeeleveController extends Controller
         $arr = $request->all();
 
         while ( $data = current($arr)) {
-            $this->ClasseEleveModel->{key($arr)} = $data;
+            $this->ClasseMatiereModel->{key($arr)} = $data;
             next($arr);
         }
 
-        $validation = Validator::make($request->all(), $this->ClasseEleveModel->rules);
+        $validation = Validator::make($request->all(), $this->ClasseMatiereModel->rules);
         
         if( $validation->passes() ){
-            $this->ClasseEleveModel->save();
-            return $this->helpers->apiArrayResponseBuilder(201, 'created', ['id' => $this->ClasseEleveModel->id]);
+            $this->ClasseMatiereModel->save();
+            return $this->helpers->apiArrayResponseBuilder(201, 'created', ['id' => $this->ClasseMatiereModel->id]);
         }else{
             return $this->helpers->apiArrayResponseBuilder(400, 'fail', $validation->errors() );
         }
@@ -91,7 +91,7 @@ class classeeleveController extends Controller
 
     public function update($id, Request $request){
 
-        $status = $this->ClasseEleveModel->where('id',$id)->update($data);
+        $status = $this->ClasseMatiereModel->where('id',$id)->update($data);
     
         if( $status ){
             
@@ -106,14 +106,14 @@ class classeeleveController extends Controller
 
     public function delete($id){
 
-        $this->ClasseEleveModel->where('id',$id)->delete();
+        $this->ClasseMatiereModel->where('id',$id)->delete();
 
         return $this->helpers->apiArrayResponseBuilder(200, 'success', 'Data has been deleted successfully.');
     }
 
     public function destroy($id){
 
-        $this->ClasseEleveModel->where('id',$id)->delete();
+        $this->ClasseMatiereModel->where('id',$id)->delete();
 
         return $this->helpers->apiArrayResponseBuilder(200, 'success', 'Data has been deleted successfully.');
     }

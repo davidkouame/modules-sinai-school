@@ -28,3 +28,5 @@ Route::resource('api/v1/professeursclasses', 'AhmadFatoni\ApiGenerator\Controlle
 Route::get('api/v1/professeursclasses/{id}/delete', ['as' => 'api/v1/professeursclasses.delete', 'uses' => 'AhmadFatoni\ApiGenerator\Controllers\API\ProfesseurClasseController@destroy']);
 Route::resource('api/v1/elevesclasses', 'AhmadFatoni\ApiGenerator\Controllers\API\classeeleveController', ['except' => ['destroy', 'create', 'edit']]);
 Route::get('api/v1/elevesclasses/{id}/delete', ['as' => 'api/v1/elevesclasses.delete', 'uses' => 'AhmadFatoni\ApiGenerator\Controllers\API\classeeleveController@destroy']);
+Route::resource('api/v1/classesprofesseursmatieres', 'AhmadFatoni\ApiGenerator\Controllers\API\classeProfesseurMatiereController', ['except' => ['destroy', 'create', 'edit']]);
+Route::get('api/v1/classesprofesseursmatieres/{id}/delete', ['as' => 'api/v1/classesprofesseursmatieres.delete', 'uses' => 'AhmadFatoni\ApiGenerator\Controllers\API\classeProfesseurMatiereController@destroy']);

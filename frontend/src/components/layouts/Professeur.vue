@@ -6,12 +6,12 @@
     <br>
     <div class="row">
       <div class="col-sm">
-        <select name="" id="" class="form-control">
-          <option>Sélectionner une classe</option>
+        <select v-model="classeId" class="form-control">
+          <option selected>Sélectionner une classe</option>
           <option
-            :value="classe.id"
             v-for="classe in classes"
-          >{{ classe.libelle }}</option>
+            :value="classe.classe.id"
+          >{{ classe.classe.libelle }}</option>
         </select>
       </div>
       <div class="col-sm">
@@ -55,7 +55,8 @@ export default {
   data () {
     return {
       username: localStorage.userName,
-      email: localStorage.userEmail
+      email: localStorage.userEmail,
+      classeId: null
     }
   },
   methods: {
@@ -63,14 +64,29 @@ export default {
       // nous devons externaliser la fonctionn de déconnexion et de connexion
       window.localStorage.clear()
       window.location.reload()
+    },
+    created(){
+      // console.log("classeId "+this.$store.getters.classeId)
+      /*if(this.$store.getters.classeId){
+        this.$store.dispatch('classes', [{'key': 'professeur_id', 'value': 1}, 
+        {'key': 'classe_id', 'value': this.$store.getters.classeId}])
+      }else{
+        this.$store.dispatch('classes', [{'key': 'professeur_id', 'value': 1}])
+      }*/
+      this.$store.dispatch('classes', [{'key': 'professeur_id', 'value': 1}])
     }
   },
   created () {
-    this.$store.dispatch('classes')
+    this.created();
   },
   computed: {
     classes () {
       return this.$store.getters.classes
+    }
+  },
+  watch:{
+    classeId(){
+      this.$store.dispatch('classeId', this.classeId);
     }
   }
 }

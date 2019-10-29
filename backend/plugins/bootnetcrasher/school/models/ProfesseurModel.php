@@ -38,4 +38,27 @@ class ProfesseurModel extends Model
         $professeur = \RainLab\User\Models\User::where('professeur_id', $this->id)->first();
         return $professeur ? $professeur->name : null;
     }
+
+    /*public function eleves(){
+        try{
+            $elevesId = DB::table('bootnetcrasher_school_classe_eleve')
+                                        ->where('classe_id', $this->id)
+                                        ->select('eleve_id')
+                                        ->get();
+            $eleves = new Collection;
+            $elevesId->each(function($e) use($eleves){
+                $eleves->push(EleveModel::find($e->eleve_id));
+            });
+            return $eleves;
+        }catch(Execption $e){
+            $nameFile = dirname(__FILE__);
+            trace_log("NameFile : ".$nameFile."Erreur lors de la recuperation des élèves, error : ".$e->getMessage());
+            return null;
+        }
+    }*/
+
+    /*
+      Scope eleves
+    */
+      
 }
