@@ -2,6 +2,17 @@
   <div id="app" class="container">
     <div class="row">
       <div class="col-sm">Username: {{ username }} <br> Email: {{ email }}</div>
+    </div>
+    <div class="row">
+      <div class="col-sm">
+        <select v-model="eleveId" class="form-control" id="select-eleve">
+          <option selected>Sélectionner un élève</option>
+          <option
+            v-for="eleve in eleves"
+            :value="eleve.id"
+          >{{ eleve.users.name }}</option>
+        </select>
+      </div>
       <div class="col-sm">
         <ul>
           <li style="display: inline-block;">
@@ -11,6 +22,12 @@
             <router-link to="/notes">Notes</router-link>
           </li>
           <li style="display: inline-block;">
+            <router-link to="/absences">Absences</router-link>
+          </li>
+          <li style="display: inline-block;">
+            <router-link to="/matieres">Matières</router-link>
+          </li>
+          <!--<li style="display: inline-block;">
             <router-link to="/classe">Classe</router-link>
           </li>
           <!--<li style="display: inline-block;">
@@ -19,19 +36,10 @@
            <li style="display: inline-block;">
             <router-link to="/create-parent">Create compte parent</router-link>
           </li> -->
-          <li style="display: inline-block;">
-            <router-link to="/absence-eleve">Absences</router-link>
-          </li>
+          
         </ul>
       </div>
-      <div class="col-sm">
-        <select name="" id="" class="form-control">
-          <option>Sélectionner un élève afin de le suivre</option>
-          <option value="">Eleve 1</option>
-          <option value="">Eleve 2</option>
-        </select>
-      </div>
-        <div class="col-sm"><button v-on:click="logout">Logout</button></div>
+      <div class="col-sm"><button v-on:click="logout">Logout</button></div>
     </div>
     <router-view/>
   </div>
@@ -43,8 +51,13 @@ export default {
   data() {
     return {
       username: localStorage.userName,
-      email: localStorage.userEmail
+      email: localStorage.userEmail, 
+      eleveId: null
     };
+  },
+  created() {
+    this.$store.dispatch('loadElevesByProfesseurId', 
+    localStorage.getItem('parentId'));
   },
   methods: {
     logout: function(){
@@ -54,6 +67,16 @@ export default {
       localStorage.userEmail = "";
       localStorage.userType  = "";
       window.location.reload();
+    }
+  },
+  computed:{
+    eleves(){
+      return this.$store.getters.eleves
+    }
+  },
+  watch:{
+    eleveId(){
+      this.$store.dispatch('eleveId', this.eleveId);
     }
   }
 };

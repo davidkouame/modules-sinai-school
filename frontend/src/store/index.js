@@ -1,10 +1,18 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import Axios from 'axios'
+import storeParent from '@/components/pages/parents/store'
 
 Vue.use(Vuex)
 
+let modules = null
+if (localStorage.getItem('userId')) {
+  if (localStorage.getItem('userType') == "parent") {
+    modules = { storeParent }
+  }
+} 
 export default new Vuex.Store({
+  modules: modules,
   strict: true,
   state: {
     // endpoint: 'http://localhost/modules-sinai-school/backend/',
@@ -29,8 +37,9 @@ export default new Vuex.Store({
     classesByProfesseur: [],
     classeByProfesseur: [],
     professeur: null,
-    classeId: null
-    // userId: 1
+    classeId: null,
+    classeprofesseurmatiere: null,
+    classesprofesseursmatieres: null
   },
   mutations: {
     notes(state, payload) {
@@ -89,6 +98,12 @@ export default new Vuex.Store({
     },
     classeId(state, classeId) {
       state.classeId = classeId
+    },
+    classeprofesseurmatiere(state, classeprofesseurmatiere){
+      state.classeprofesseurmatiere = classeprofesseurmatiere
+    },
+    classesprofesseursmatieres(state, classesprofesseursmatieres){
+      state.classesprofesseursmatieres = classesprofesseursmatieres
     }
   },
   getters: {
@@ -151,6 +166,12 @@ export default new Vuex.Store({
     },
     classeId: state => {
       return state.classeId
+    },
+    classeprofesseurmatiere: state => {
+      return state.classeprofesseurmatiere
+    },
+    classesprofesseursmatieres: state => {
+      return state.classesprofesseursmatieres
     }
   },
   actions: {
@@ -551,6 +572,56 @@ export default new Vuex.Store({
     },
     classeId(context, classeId){
       context.commit('classeId', classeId)
+    },
+    classeprofesseurmatiere(context, params) {
+      let concatParams = null
+      if (params) {
+        concatParams = params.map(function (elemen) {
+          return elemen.key + '=' + elemen.value
+        }).join('&')
+      }
+      let url = null;
+      if(concatParams){
+        url = context.state.endpoint + 'api/v1/classesprofesseursmatieres?' + concatParams
+      }else{
+        url = context.state.endpoint + 'api/v1/classesprofesseursmatieres/'
+      }
+      Axios.get(
+        url
+      )
+        .then(response => {
+          context.commit('classes', response.data.data)
+        })
+        .catch(error => {
+          console.log(error)
+          this.errored = true
+        })
+        .finally(() => (this.loading = false))
+    },
+    classesprofesseursmatieres(context, params) {
+      let concatParams = null
+      if (params) {
+        concatParams = params.search.map(function (elemen) {
+          return elemen.key + '=' + elemen.value
+        }).join('&')
+      }
+      let url = null;
+      if(concatParams){
+        url = context.state.endpoint + 'api/v1/classesprofesseursmatieres?' + concatParams
+      }else{
+        url = context.state.endpoint + 'api/v1/classesprofesseursmatieres/'
+      }
+      Axios.get(
+        url
+      )
+        .then(response => {
+          context.commit('classesprofesseursmatieres', response.data.data)
+        })
+        .catch(error => {
+          console.log(error)
+          this.errored = true
+        })
+        .finally(() => (this.loading = false))
     }
   }
 })

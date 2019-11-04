@@ -43,16 +43,16 @@ export default {
           localStorage.setItem('userEmail', response.data.data.email);
           localStorage.setItem('userType', this.getNameTypeUser(response.data.data));
           localStorage.setItem('professeurId', response.data.data.professeur_id);
+          localStorage.setItem('parentId', response.data.data.parenteleve_id);
 
 
-            localStorage.userId = response.data.data.id;
-            localStorage.userName = response.data.data.name;
-            localStorage.userEmail = response.data.data.email;
-            localStorage.userType  = this.getNameTypeUser(response.data.data);
-            localStorage.professeurId = response.data.data.professeur_id;
-            // localStorage.setItem('monChat', 'Tom');
-            // this.$router.push("/");
-            window.location.reload();
+          localStorage.userId = response.data.data.id;
+          localStorage.userName = response.data.data.name;
+          localStorage.userEmail = response.data.data.email;
+          localStorage.userType  = this.getNameTypeUser(response.data.data);
+          localStorage.professeurId = response.data.data.professeur_id;
+          localStorage.parentId = response.data.data.parenteleve_id;
+          window.location.reload();
         })
         .catch(response => {
           this.errorMessage = "Désolé, l'email ou le password est incorreect";

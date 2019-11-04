@@ -1,4 +1,4 @@
-1572116276a:1:{s:22:"site/navabar-right.htm";a:5:{s:8:"fileName";s:22:"site/navabar-right.htm";s:7:"content";s:262:"<!--Navabar right -> {mot du directeur, majeur de la promotion-->
+1572739366a:1:{s:22:"site/navabar-right.htm";a:5:{s:8:"fileName";s:22:"site/navabar-right.htm";s:7:"content";s:262:"<!--Navabar right -> {mot du directeur, majeur de la promotion-->
 <div class="row">
     <div class="col-lg-12 col-12" style="margin-top: 38px;" id="navabar-right">
     {% partial 'site/mot-du-directeur' %}

@@ -42,7 +42,13 @@ class absenceselevesController extends Controller
                 });
 
         foreach($request->except('page', 'classe_id') as $key => $value){
-            $data = $data->where($key, $value);
+            if($key == "parent_id"){
+                $data = $data->whereHas('eleve', function ($query) use($request, $key) {
+                    $query->where($key,$request->get('parent_id'));
+                });
+            }else{
+                $data = $data->where($key, $value);
+            }
         }
         $data = $data->paginate(10)->toArray();
         return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);

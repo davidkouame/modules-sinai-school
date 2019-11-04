@@ -20,7 +20,7 @@ class eleveController extends Controller
     }
 
     
-    public function index(){ 
+    public function index(Request $request){ 
         $data = $this->EleveModel->with(array(
             'users'=>function($query){
                 $query->select('*');
@@ -31,7 +31,13 @@ class eleveController extends Controller
                         $q->select('*');
                     }
                 ))->select('*');
-            }, ))->select('*')->get()->toArray();
+            }, ))->select('*');
+
+        foreach($request->except('page') as $key => $value){
+            $data = $data->where($key, $value);
+        }
+
+        $data = $data->paginate(10)->toArray();
         return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
     }
 

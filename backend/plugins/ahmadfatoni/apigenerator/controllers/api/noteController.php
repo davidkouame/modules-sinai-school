@@ -6,6 +6,7 @@ use BackendMenu;
 use Illuminate\Http\Request;
 use AhmadFatoni\ApiGenerator\Helpers\Helpers;
 use BootnetCrasher\School\Models\NoteModel;
+use BootnetCrasher\School\Models\NoteEleve;
 use Dotenv\Validator;
 class noteController extends Controller
 {
@@ -28,7 +29,14 @@ class noteController extends Controller
             },
             'matiere'=>function($query){
                 $query->select('*');
-            }, ));//->paginate(10)->toArray();
+            },
+            'classe'=>function($query){
+                $query->with(array(
+                    'eleves'=>function($q){
+                        $q->select('*');
+                    }
+                ));
+            } ));//->paginate(10)->toArray();
 
         foreach($request->except(['page']) as $key => $value){
             if($key == "libelle"){
@@ -38,9 +46,53 @@ class noteController extends Controller
             }
         }
         $data = $data->paginate(10)->toArray();
+        return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
+    }
 
+    public function getNotesByEleveId(Request $request, $eleve_id = null){
+        $data = NoteEleve::with(array(
+            'eleve'=>function($query){
+                $query->select('*');
+            },
+            'note'=>function($query){
+                $query->select('*');
+            } ))->where('eleve_id', $eleve_id);
+        foreach($request->except(['page']) as $key => $value){
+            if($key == "libelle"){
+                $data = $data->where($key, 'like', '%'.$value.'%');
+            }else{
+                $data = $data->where($key, $value);
+            }
+        }
+        $data = $data->paginate(10)->toArray();
+        return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
+    }
 
-
+    public function getNotes(Request $request){
+        $data = NoteEleve::with(array(
+            'eleve'=>function($query){
+                $query->select('*');
+            },
+            'note'=>function($query){
+                $query->with(array(
+                    'typenote' => function($q){
+                        $q->select('*');
+                    }))->select('*');
+            } ));
+        foreach($request->except(['page']) as $key => $value){
+            if($key == "libelle"){
+                $data = $data->whereHas('note', function ($query) use($request, $key) {
+                    $query->where($key, 'like', '%'.$request->get('libelle').'%');
+                });
+            }elseif($key == "parent_id"){
+                $data = $data->whereHas('eleve', function ($query) use($request, $key) {
+                    $query->where($key,$request->get('parent_id'));
+                });
+            }else{
+                $data = $data->where($key, $value);
+            }
+        }
+        $data = $data->paginate(10)->toArray();
         return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
     }
 

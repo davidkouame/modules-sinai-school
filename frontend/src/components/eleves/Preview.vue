@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <div>DetailNote {{ $route.params.id }}</div>
+    {{ classesprofesseursmatieres }}
     <form>
       <fieldset v-if="eleve">
         <legend>Information de l'élève</legend>
@@ -282,8 +283,6 @@ export default {
   created() {
     this.eleveId = this.$route.params.id;
     this.$store.dispatch("eleve", this.eleveId);
-    // this.$store.dispatch("absenceseleves");
-    // this.$store.dispatch("absenceseleves", { payload: null, search: null });
     this.fetchAbsence();
     this.fetchNote();
   },
@@ -327,6 +326,15 @@ export default {
       this.showModal = true
       this.noteid = noteId
       this.modelname = modelname
+    },
+    trimSearch(searchs = null){
+      let params = [];
+      for (var key in searchs) {
+        if(searchs[key].value){
+          params.push({'key': searchs[key].key, 'value': searchs[key].value});
+        }
+      }
+      return params;
     }
   },
   computed: {
@@ -344,6 +352,9 @@ export default {
     },
     pageCountNote() {
       return this.$store.getters.pageCountNote;
+    },
+    classesprofesseursmatieres(){
+      return this.$store.getters.classesprofesseursmatieres
     }
   }
 };

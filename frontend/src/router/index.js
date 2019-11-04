@@ -33,10 +33,11 @@ import PreviewEleve from '@/components/eleves/Preview.vue'
 // Parametres professeur
 import ProfesseurParametre from '@/components/parametres/User.vue'
 
+import routerParent from '@/components/pages/parents/router'
+
 Vue.use(Router)
 
-export default new Router({
-  routes: [
+const baseRoutes = [
     {
       path: '/',
       name: 'Home',
@@ -145,5 +146,16 @@ export default new Router({
       name: 'ProfesseurParametre',
       component: ProfesseurParametre
     }
-  ]
-})
+  ];
+let routes = null
+// const routes = baseRoutes;//.concat(messagesRoutes, peopleRoutes);
+if (localStorage.getItem('userId')) {
+  if (localStorage.getItem('userType') == "parent") {
+    routes = routerParent;
+  }else {
+    routes = baseRoutes;
+  }
+} 
+export default new Router({
+  routes,
+});

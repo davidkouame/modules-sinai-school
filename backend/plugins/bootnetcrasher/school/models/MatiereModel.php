@@ -28,4 +28,8 @@ class MatiereModel extends Model
     public $belongsTo = [
         'typematiere' => ['BootnetCrasher\School\Models\TypeMatiere', 'key' => 'typematiere_id', 'otherKey' => 'id']
     ];
+
+    public $hasMany = [
+        'classematiere' => ['BootnetCrasher\School\Models\ClasseMatiereModel', 'key' => 'matiere_id', 'otherKey' => 'id']
+    ];
 }

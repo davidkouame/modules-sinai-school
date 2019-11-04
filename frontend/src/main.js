@@ -56,6 +56,7 @@ if (localStorage.getItem('userId')) {
     new Vue({
       el: '#app',
       router,
+      //routerParent,
       store,
       components: { ParentLayout },
       template: '<ParentLayout/>'

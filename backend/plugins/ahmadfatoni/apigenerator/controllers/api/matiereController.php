@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use AhmadFatoni\ApiGenerator\Helpers\Helpers;
 use Illuminate\Support\Facades\Validator;
 use BootnetCrasher\School\Models\MatiereModel;
+use BootnetCrasher\School\Models\ClasseEleveModel;
 class matiereController extends Controller
 {
 	protected $MatiereModel;
@@ -20,18 +21,66 @@ class matiereController extends Controller
         $this->helpers          = $helpers;
     }
 
-    public function index(){
+    public function index(Request $request){
 
-        $data = $this->MatiereModel->all()->toArray();
+        $data = $this->MatiereModel->with(array(
+            'classematiere' => function($query){
+                $query->select('*');
+            }
+        ));
+
+        foreach($request->except('page') as $key => $value){
+            if($key == "eleve_id"){
+                $classeeleve = ClasseEleveModel::where('eleve_id', $value)->first();
+                $classe_id = $classeeleve ? $classeeleve->classe_id : null;
+                $data = $data->whereHas(
+                    'classematiere', function($query) use($classe_id){
+                        $query->where('classe_id', $classe_id)->whereHas(
+                            'classe',function($queryClasse){
+                                $queryClasse->select('*');
+                            }
+                        );
+                    }
+                );
+            }elseif($key == 'parent_id'){
+                $data = $data->whereHas(
+                    'classematiere',function($query) use($request){
+                        $query->whereHas(
+                            'classe',function($queryClasse) use($request){
+                                $queryClasse->whereHas(
+                                'eleves',function($queryEleves) use($request){
+                                        $queryEleves->whereHas(
+                                            'eleve',function($queryEleve) use($request){
+                                                $queryEleve->where('parent_id', $request->get('parent_id'))
+                                                ->select('*');
+                                            }
+                                        );
+                                    }
+                                );
+                            }
+                        );
+                    }
+                );
+            }elseif($key == "libelle"){
+                $data = $data->where($key, 'like', '%'.$value.'%');
+            }else{
+                $data = $data->where($key, $value);
+            }
+        }
+
+        $data = $data->paginate(10)->toArray();
 
         return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
     }
 
     public function show($id){
+        $data = $this->MatiereModel->with(array(
+            'typematiere' => function($query){
+                $query->select('*');
+            }
+        ))->where('id',$id)->first();
 
-        $data = $this->MatiereModel->where('id',$id)->first();
-
-        if( count($data) > 0){
+        if($data){
 
             return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
 

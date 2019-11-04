@@ -30,4 +30,12 @@ class ClasseMatiereModel extends Model
         'classe' => ['BootnetCrasher\School\Models\ClasseModel', 'key' => 'classe_id', 'otherKey' => 'id'],
         'professeur' => ['BootnetCrasher\School\Models\ProfesseurModel', 'key' => 'professeur_id', 'otherKey' => 'id'],
     ];
+
+    /*public $belongsToMany = [
+        'classeseleves' => ['BootnetCrasher\School\Models\ClasseEleveModel', 'key' => 'classe_id', 'otherKey' => 'id']
+    ];*/
+
+    public $hasMany = [
+        'classeseleves' => ['BootnetCrasher\School\Models\ClasseEleveModel', 'key' => 'classe_id', 'otherKey' => 'id']
+    ];
 }

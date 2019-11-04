@@ -33,20 +33,35 @@ class classeProfesseurMatiereController extends Controller
             }, )); //->select('*')->get()->toArray();
 
         $searchProfesseur = null;
+        $searchEleve = null;
         foreach($request->except(['page']) as $key => $value){
             if($key == "libelle"){
                 $data = $data->where($key, 'like', '%'.$value.'%');
             }elseif ($key == "professeur_id") {
                 $searchProfesseur = true;
+            }elseif ($key == "parent_id") {
+                $searchProfesseur = true;
+            }elseif ($key == "eleve_id") {
+                $searchEleve = true;
+                $data = $data->wherehas(
+                    'classe',function($query) use($request){
+                        $query->whereHas(
+                            'eleves',function($query) use($request){
+                                $query->where('eleve_id', $request
+                                    ->get('eleve_id'))->select('*');
+                            }
+                        );
+                    }
+                );
             }else{
                 $data = $data->where($key, $value);
             }
         }
 
-        // $data = $data->paginate(10)->toArray();
-        // dd($searchProfesseur);
         if($searchProfesseur){
             $data = $data->get()->unique('classe_id')->toArray();
+        }elseif($searchEleve){
+            $data = $data->get()->unique('matiere_id')->toArray();
         }else{
             $data = $data->get()->toArray();
         }

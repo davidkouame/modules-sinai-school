@@ -6,6 +6,7 @@ use BackendMenu;
 use Illuminate\Http\Request;
 use AhmadFatoni\ApiGenerator\Helpers\Helpers;
 use BootnetCrasher\School\Models\ProfesseurModel;
+use BootnetCrasher\School\Models\ParentEleve;
 use RainLab\User\Models\User;
 use Event;
 use Auth;
