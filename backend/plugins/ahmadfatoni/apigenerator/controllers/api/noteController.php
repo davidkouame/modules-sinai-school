@@ -88,6 +88,10 @@ class noteController extends Controller
                 $data = $data->whereHas('eleve', function ($query) use($request, $key) {
                     $query->where($key,$request->get('parent_id'));
                 });
+            }elseif($key == "matiere_id"){
+                $data = $data->whereHas('note', function ($query) use($request, $key) {
+                    $query->where($key,$request->get('matiere_id'));
+                });
             }else{
                 $data = $data->where($key, $value);
             }

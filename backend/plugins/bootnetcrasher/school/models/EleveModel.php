@@ -26,7 +26,8 @@ class EleveModel extends Model
     ];
     
     public $hasOne = [
-      'users' => ['RainLab\User\Models\User', 'key' => 'eleve_id']  
+      'users' => ['RainLab\User\Models\User', 'key' => 'eleve_id'],
+      'user' => ['RainLab\User\Models\User', 'key' => 'eleve_id']  
     ];
 
     public $belongsTo = [

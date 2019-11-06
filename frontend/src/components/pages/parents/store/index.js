@@ -26,7 +26,8 @@ export default {
     professeur: null,
     classeId: null,
     eleveId: null,
-    matiere: null
+    matiere: null,
+    parent: null
   },
   mutations: {
     notes(state, payload) {
@@ -91,6 +92,9 @@ export default {
     },
     matiere(state, matiere){
       state.matiere = matiere
+    },
+    parent(state, parent){
+      state.parent = parent
     }
   },
   getters: {
@@ -159,6 +163,9 @@ export default {
     },
     matiere: state => {
       return state.matiere
+    },
+    parent: state => {
+      return state.parent
     }
   },
   actions: {
@@ -537,7 +544,6 @@ export default {
         context.state.endpoint + 'api/v1/eleves/'+eleveId)
         .then(response => {
           context.commit('eleve', response.data.data)
-          // console.log("eleve "+ JSON.stringify(response.data.data))
         })
         .catch(error => {
           console.log(error)
@@ -595,5 +601,17 @@ export default {
         })
         .finally(() => (this.loading = false))
     },
+    parent(context, parentId) {
+      Axios.get(
+        context.state.endpoint + 'api/v1/parents/'+parentId)
+        .then(response => {
+          context.commit('parent', response.data.data)
+        })
+        .catch(error => {
+          console.log(error)
+          this.errored = true
+        })
+        .finally(() => (this.loading = false))
+    }
   }
 }

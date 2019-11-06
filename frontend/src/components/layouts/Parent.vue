@@ -27,6 +27,9 @@
           <li style="display: inline-block;">
             <router-link to="/matieres">Matières</router-link>
           </li>
+          <li style="display: inline-block;">
+            <router-link to="/parametres">Paramétrage</router-link>
+          </li>
           <!--<li style="display: inline-block;">
             <router-link to="/classe">Classe</router-link>
           </li>

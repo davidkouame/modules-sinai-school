@@ -9,6 +9,12 @@ import PreviewAbsenceEleve from '@/components/pages/parents/absences/Preview.vue
 import ListMatiere from '@/components/pages/parents/matieres/List.vue'
 import PreviewMatiere from '@/components/pages/parents/matieres/Preview.vue'
 
+// Paramétrage
+import ParentParametre from '@/components/pages/parents/parametres/User.vue'
+
+// Eleve
+import PreviewEleve from '@/components/pages/parents/eleves/Preview.vue'
+
 
 export default [
   {
@@ -40,5 +46,20 @@ export default [
       path: '/matieres/preview/:id(\\d+)',
       name: 'PreviewMatiere',
       component: PreviewMatiere
+    },
+    {
+      path: '/parametres',
+      name: 'ParentParametre',
+      component: ParentParametre
+    },
+    {
+      path: '/parametres/eleve/:id(\\d+)',
+      name: 'ParentParametre',
+      component: ParentParametre
+    },
+    {
+      path: '/parametres/eleves/preview/:id(\\d+)',
+      name: 'PreviewEleve',
+      component: PreviewEleve
     }
 ];
