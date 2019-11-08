@@ -41,6 +41,17 @@ class noteController extends Controller
         foreach($request->except(['page']) as $key => $value){
             if($key == "libelle"){
                 $data = $data->where($key, 'like', '%'.$value.'%');
+            }elseif($key == 'eleve_id'){
+                $data = $data->whereHas(
+                    'classe',function($query){
+                        $query->whereHas(
+                            'eleves',function($query){
+                                $query->where('id', 4)
+                                ->select('*');
+                            }
+                        );
+                    }
+                );
             }else{
                 $data = $data->where($key, $value);
             }

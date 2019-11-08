@@ -22,7 +22,7 @@ class eleveController extends Controller
     
     public function index(Request $request){ 
         $data = $this->EleveModel->with(array(
-            'users'=>function($query){
+            'user'=>function($query){
                 $query->select('*');
             },'parent'=>function($query){
                 //$query->select('*');
@@ -44,7 +44,7 @@ class eleveController extends Controller
     
     public function show($id){
         $data = $this->EleveModel->with(array(
-            'users'=>function($query){
+            'user'=>function($query){
                 $query->select('*');
             },'parent'=>function($query){
                 // $query->select('*');

@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h1>Bienvenue sur l'application de gestion de notes</h1>
+    <h1>Bienvenue sur l'application de gestion de noteffhbfs</h1>
   </div>
 </template>
 

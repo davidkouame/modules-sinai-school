@@ -41,7 +41,7 @@ class NoteModel extends Model
 
     public $belongsToMany = [
         'eleves' => [
-            'bootnetcrasher\school\models\elevemodel',
+            'BootnetCrasher\School\Models\EleveModel',
             'table' => 'bootnetcrasher_school_note_eleve',
             'key' => 'eleve_id',
             'otherKey' => 'note_id'

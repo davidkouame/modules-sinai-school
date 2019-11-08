@@ -1,55 +1,38 @@
 <template>
-  <div id="app" class="container">
-    <div class="row">
-      <div class="col-sm">Username: {{ username }} <br> Email: {{ email }}</div>
-      <div class="col-sm">
-        <ul>
-          <li style="display: inline-block;">
-            <router-link to="/">Home</router-link>
-          </li>
-          <li style="display: inline-block;">
-            <router-link to="/notes">Notes</router-link>
-          </li>
-          <li style="display: inline-block;">
-            <router-link to="/classe">Classe</router-link>
-          </li>
-          <li style="display: inline-block;">
-            <router-link to="/create-parent">Create compte parent</router-link>
-          </li>
-        </ul>
-      </div>
-      <div class="col-sm">
-        <select name="" id="" class="form-control">
-          <option>Sélectionner un élève afin de le suivre</option>
-          <option value="">Eleve 1</option>
-          <option value="">Eleve 2</option>
-        </select>
-      </div>
-    </div>
-    <router-view/>
+  <div :class="{'nav-open': $sidebar.showSidebar}">
+    <notifications></notifications>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-// console.log("Salut les gars, nous sommes dans l'app")
-export default {
-  name: "App",
-  data() {
-    return {
-      username: localStorage.userName,
-      email: localStorage.userEmail
-    };
-  }
-};
+  export default {}
 </script>
+<style lang="scss">
+  .vue-notifyjs.notifications{
+    .list-move {
+      transition: transform 0.3s, opacity 0.4s;
+    }
+    .list-item {
+      display: inline-block;
+      margin-right: 10px;
 
-<style>
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+    }
+    .list-enter-active {
+      transition: transform 0.2s ease-in, opacity 0.4s ease-in;
+    }
+    .list-leave-active {
+      transition: transform 1s ease-out, opacity 0.4s ease-out;
+    }
+
+    .list-enter {
+      opacity: 0;
+      transform: scale(1.1);
+
+    }
+    .list-leave-to {
+      opacity: 0;
+      transform: scale(1.2, 0.7);
+    }
+  }
 </style>

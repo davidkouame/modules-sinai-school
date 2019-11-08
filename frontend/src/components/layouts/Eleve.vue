@@ -1,6 +1,6 @@
 <template>
-  <div id="app" class="container">
-    <div class="row">
+  <div>
+    <!--<div class="row">
       <div class="col-sm">Username: {{ username }} <br> Email: {{ email }}</div>
       <div class="col-sm">
         <ul>
@@ -11,18 +11,18 @@
             <router-link to="/notes">Notes</router-link>
           </li>
           <li style="display: inline-block;">
-            <router-link to="/classe">Classe</router-link>
+            <router-link to="/absences">Absences</router-link>
           </li>
-          <!-- <li style="display: inline-block;">
-            <router-link to="/create-parent">Create compte parent</router-link>
-          </li> -->
           <li style="display: inline-block;">
-            <router-link to="/absence-eleve">Absences</router-link>
+            <router-link to="/matieres">Matières</router-link>
+          </li>
+          <li style="display: inline-block;">
+            <router-link to="/parametres">Paramétrage</router-link>
           </li>
         </ul>
       </div>
       <div class="col-sm"><button v-on:click="logout">Logout</button></div>
-    </div>
+    </div>-->
 
     <router-view/>
   </div>

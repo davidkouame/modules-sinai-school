@@ -1,28 +1,65 @@
-// The Vue build version to load with the `import` command
-// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
-import Vue from 'vue'
-import Vuex from 'vuex'
-import App from './App'
-import Login from './components/Login.vue'
-import ParentLayout from './components/layouts/Parent.vue'
-import EleveLayout from './components/layouts/Eleve.vue'
-import ProfesseurLayout from './components/layouts/Professeur.vue'
-import router from './router'
-import moment from 'moment'
-import 'bootstrap'
-import BootstrapVue from 'bootstrap-vue'
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap-vue/dist/bootstrap-vue.css'
-import Axios from 'axios'
-import Paginate from 'vuejs-paginate'
-import store from './store/index'
-import VuePaginationfrom from './components/Pagination.vue'
-import Modal from './components/Modal.vue'
+/*!
 
-/* axios.defaults.headers.common = {
-  'X-Requested-With': 'XMLHttpRequest',
-  'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-}; */
+ =========================================================
+ * Vue Light Bootstrap Dashboard - v2.0.0 (Bootstrap 4)
+ =========================================================
+
+ * Product Page: http://www.creative-tim.com/product/light-bootstrap-dashboard
+ * Copyright 2019 Creative Tim (http://www.creative-tim.com)
+ * Licensed under MIT (https://github.com/creativetimofficial/light-bootstrap-dashboard/blob/master/LICENSE.md)
+
+ =========================================================
+
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+ */
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+import App from './App.vue'
+
+// LightBootstrap plugin
+import LightBootstrap from './light-bootstrap-main'
+
+// router setup
+import routes from './routes/routes'
+
+import './registerServiceWorker'
+
+import store from './store/index'
+import ParentLayout from './components/layouts/Parent.vue'
+// import EleveLayout from './components/layouts/Eleve.vue'
+import ProfesseurLayout from './components/layouts/Professeur.vue'
+import Login from './components/Login.vue'
+import BootstrapVue from 'bootstrap-vue'
+import Paginate from 'vuejs-paginate'
+import Modal from './components/Modal.vue'
+import DashboardLayout from './layout/DashboardLayout.vue'
+import EleveLayout from './layout/EleveLayout.vue'
+import moment from 'moment'
+
+// plugin setup
+Vue.use(VueRouter)
+Vue.use(LightBootstrap)
+
+// configure router
+const router = new VueRouter({
+  routes, // short for routes: routes
+  linkActiveClass: 'nav-item active',
+  scrollBehavior: (to) => {
+    if (to.hash) {
+      return {selector: to.hash}
+    } else {
+      return { x: 0, y: 0 }
+    }
+  }
+})
+
+/* eslint-disable no-new */
+/*new Vue({
+  el: '#app',
+  render: h => h(App),
+  router
+})*/
 
 Vue.config.productionTip = false
 
@@ -50,45 +87,43 @@ Vue.mixin({
   }
 });
 
+let vue = null;
 if (localStorage.getItem('userId')) {
   if (localStorage.getItem('userType') == "parent") {
-    /* eslint-disable */
-    new Vue({
+    vue = {
       el: '#app',
       router,
-      //routerParent,
       store,
       components: { ParentLayout },
       template: '<ParentLayout/>'
-    })
+    };
   } else if(localStorage.getItem('userType') == "professeur"){
-    /* eslint-disable */
-    new Vue({
+    vue = {
       el: '#app',
       router,
       store,
       components: { ProfesseurLayout },
       template: '<ProfesseurLayout/>'
-    })
+    };
   }else {
-    // alert("nous sommes dans le user id");
-    /* eslint-disable */
-    new Vue({
+    vue = {
       el: '#app',
       router,
       store,
       components: { EleveLayout },
       template: '<EleveLayout/>'
-    })
+    };
   }
-
 } else {
-  /* eslint-disable */
-  new Vue({
+  vue = {
     el: '#app',
     router,
     store,
     components: { Login },
     template: '<Login/>'
-  })
+  };
 }
+
+/* eslint-disable */
+new Vue(vue);
+
