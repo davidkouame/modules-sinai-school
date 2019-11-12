@@ -1,29 +1,103 @@
 <template>
-  <div class="container">
-    <div>Détail absence note {{ $route.params.id }}</div>
-    <ul v-if="absenceeleve">
-      <li>Id : {{ absenceeleve.id }}</li>
-      <li>Heure de début : {{ absenceeleve.heure_debut_cours }}</li>
-      <li>Heure de fin : {{ absenceeleve.heure_fin_cours }}</li>
-      <li>Raison absence  : <span v-if="absenceeleve.raisonabsence">{{ absenceeleve.raisonabsence.libelle }}</span></li>
-      <li>Commentaire  : {{ absenceeleve.commentaire }}</li>
-      <li>Elève  : <span v-if="absenceeleve.eleve">{{ absenceeleve.eleve.matricule }}</span></li>
-    </ul>
-  <!-- <a :href="'/#/absences-eleves'" class="btn btn-primary">retour</a>-->
-  <a @click="$router.go(-1)" class="btn btn-primary">retour</a>
+  <div class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title">Détail d'absence</h4>
+            </div>
+            <div class="card-body">
+              <form>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label class="control-label">Heure de début</label>
+                      <!---->
+                      <input
+                        aria-describedby="addon-right addon-left"
+                        placeholder="First Name"
+                        class="form-control"
+                        type="text"
+                        v-model="absenceeleve.heure_debut_cours"
+                        disabled
+                      />
+                      <!---->
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label class="control-label">Heure de fin</label>
+                      <!---->
+                      <input
+                        aria-describedby="addon-right addon-left"
+                        placeholder="Last Name"
+                        class="form-control"
+                        type="text"
+                        v-model="absenceeleve.heure_fin_cours"
+                        disabled
+                      />
+                      <!---->
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label class="control-label">Raison d'absence</label>
+                      <!---->
+                      <input
+                        aria-describedby="addon-right addon-left"
+                        placeholder="Home Address"
+                        class="form-control"
+                        type="text"
+                        v-model="absenceeleve.raisonabsence.libelle"
+                        disabled
+                      />
+                      <!---->
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label class="control-label">Commentaire</label>
+                      <!---->
+                      <textarea
+                        name
+                        id
+                        cols="30"
+                        rows="3"
+                        aria-describedby="addon-right addon-left"
+                        class="form-control"
+                      >
+                  {{ absenceeleve.commentaire }}
+                  </textarea>
+                      <!---->
+                    </div>
+                  </div>
+                </div>
+                <div class="clearfix"></div>
+              </form>
+            </div>
+            <!---->
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
   name: "DetailAbsenceEleve",
-  created(){
-      this.$store.dispatch('absenceeleve', {absenceEleveId: this.$route.params.id})
+  created() {
+    this.$store.dispatch("absenceeleve", {
+      absenceEleveId: this.$route.params.id
+    });
   },
-  computed:{
-      absenceeleve(){
-          return this.$store.getters.absenceeleve
-      }
+  computed: {
+    absenceeleve() {
+      return this.$store.getters.absenceeleve;
+    }
   }
 };
 </script>

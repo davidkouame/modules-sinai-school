@@ -95,7 +95,7 @@ export default {
 
       let store = this.$store;
       store
-        .dispatch("saveNote", data)
+        .dispatch("saveNoteP", data)
         .then(response => {
           store.dispatch("raisonsabsences", response.data.data);
           alert("L'enregistrement a été succès")

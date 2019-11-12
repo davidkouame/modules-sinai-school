@@ -26,7 +26,11 @@ class classeProfesseurMatiereController extends Controller
                 $query->select('*');
             },
             'classe'=>function($query){
-                $query->select('*');
+                $query->with(array(
+                    'professeurprincipal' => function($query){
+                        $query->select('*');
+                    }
+                ));
             },
             'professeur'=>function($query){
                 $query->select('*');

@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import Axios from 'axios'
 import storeParent from '@/components/pages/parents/store'
 import storeEleve from '@/components/pages/eleves/store'
+import storeProfesseur from '@/components/pages/professeurs/store'
 
 Vue.use(Vuex)
 
@@ -12,6 +13,8 @@ if (localStorage.getItem('userId')) {
     modules = { storeParent }
   }else if (localStorage.getItem('userType') == "eleve"){
     modules = { storeEleve }
+  }else{
+    modules = { storeProfesseur }
   }
 } 
 export default new Vuex.Store({

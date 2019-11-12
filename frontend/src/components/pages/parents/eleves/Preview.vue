@@ -38,7 +38,7 @@
         <div class="form-group row">
           <label class="col-sm-2 col-form-label">Email</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" v-bind:value="eleve.users.email" disabled />
+            <input type="text" class="form-control" v-bind:value="eleve.user.email" disabled />
           </div>
         </div>
       </fieldset>

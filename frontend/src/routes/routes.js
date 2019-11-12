@@ -23,6 +23,7 @@ import Overview from '@/components/Overview.vue'
 
 import routerParent from '@/components/pages/parents/router'
 import routerEleve from '@/components/pages/eleves/router'
+import routerProfesseur from '@/components/pages/professeurs/router'
 
 const baseRoutes = [
   {
@@ -95,11 +96,11 @@ let routes = null
 // const routes = baseRoutes;//.concat(messagesRoutes, peopleRoutes);
 if (localStorage.getItem('userId')) {
   if (localStorage.getItem('userType') == "parent") {
-    routes = routerParent;
+    routes = baseRoutes.concat(routerParent);
   }else if(localStorage.getItem('userType') == "eleve"){
-    routes = routerEleve;
+    routes = baseRoutes.concat(routerEleve);
   }else{
-    routes = baseRoutes;
+    routes = baseRoutes.concat(routerProfesseur);
   }
 }
 // routes = baseRoutes;

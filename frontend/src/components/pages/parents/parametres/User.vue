@@ -5,10 +5,12 @@
       <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item">
           <a
-            class="nav-link active"
+            class="nav-link"
+            :class="{active:selected == 1}"
             id="user-connexion"
             data-toggle="tab"
-            href="#home"
+            href="javascript:void(0)"
+            @click="selected = 1"
             role="tab"
             aria-controls="home"
             aria-selected="true"
@@ -17,9 +19,11 @@
         <li class="nav-item">
           <a
             class="nav-link"
+            :class="{active:selected == 2}"
+            @click="selected = 2"
             id="classes"
             data-toggle="tab"
-            href="#profile"
+            href="javascript:void(0)"
             role="tab"
             aria-controls="profile"
             aria-selected="false"
@@ -31,7 +35,8 @@
 
         <!-- Tab user connexion -->
         <div
-          class="tab-pane fade show active"
+          class="tab-pane fade"
+          :class="{show:selected == 1,active:selected == 1}"
           id="home"
           role="tabpanel"
           aria-labelledby="user-connexion"
@@ -72,7 +77,9 @@
         </div>
 
         <!-- Tab classes -->
-        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="classes">
+        <div class="tab-pane fade" 
+        :class="{show:selected == 2,active:selected == 2}"
+        id="profile" role="tabpanel" aria-labelledby="classes">
           <div class="row">
             <div class="col-md-12">
               <table class="table">
@@ -117,7 +124,8 @@ export default {
       email: null,
       password: null,
       password_confirmation: null,
-      tel: null
+      tel: null,
+      selected: 1,
     };
   },
   created() {

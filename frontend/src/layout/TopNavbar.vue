@@ -54,6 +54,19 @@
             <div class="divider"></div>
             <a class="dropdown-item" href="#">Separated link</a>
           </base-dropdown>
+          
+          <base-dropdown v-bind:title="titleDropdown" v-if="parentId">
+            <a v-for="eleve in eleves" class="dropdown-item" href="javascript:void(0)" @click="changeEleve(eleve)">{{ eleve.user.name }}</a>
+            <div class="divider"></div>
+            <a class="dropdown-item" href="javascript:void(0)" @click="changeEleve(0)">All</a>
+          </base-dropdown>
+
+          <base-dropdown v-bind:title="titleDropdownClasse" v-if="professeurId">
+            <a v-for="classe in classes" class="dropdown-item" href="javascript:void(0)" @click="changeClasse(classe)">{{ classe.classe.libelle }}</a>
+            <div class="divider"></div>
+            <a class="dropdown-item" href="javascript:void(0)" @click="changeClasse(0)">All</a>
+          </base-dropdown>
+
           <li class="nav-item">
             <a href="javascript:void(0)" v-on:click="logout" class="nav-link">Log out</a>
           </li>
@@ -68,14 +81,33 @@ export default {
     routeName() {
       const { name } = this.$route;
       return this.capitalizeFirstLetter(name);
+    },
+    eleves(){
+      return this.$store.getters.eleves
+    },
+    classes () {
+      return this.$store.getters.classes
     }
   },
   data() {
     return {
       activeNotifications: false,
       username: localStorage.userName,
-      email: localStorage.userEmail
+      email: localStorage.userEmail,
+      eleveId: null,
+      titleDropdown: "Elèves",
+      titleDropdownClasse: "Classes",
+      parentId: localStorage.getItem('parentId') != "null",
+      professeurId: localStorage.getItem('professeurId') != "null"
     };
+  },
+  created() {
+    if(localStorage.getItem('parentId') && localStorage.getItem('parentId')!="null"){
+      this.$store.dispatch('loadElevesByProfesseurId', 
+      localStorage.getItem('parentId'));
+    }else{
+      this.$store.dispatch('classes', [{'key': 'professeur_id', 'value': localStorage.getItem('professeurId')}])
+    }
   },
   methods: {
     capitalizeFirstLetter(string) {
@@ -100,6 +132,25 @@ export default {
       localStorage.userEmail = "";
       localStorage.userType = "";
       window.location.reload();
+    },
+    changeEleve(eleve){
+      if(eleve == 0){
+        this.$store.dispatch('eleveId', null);
+        this.titleDropdown = "Elèves";
+        // alert("sdsvfd");
+      }else{
+        this.$store.dispatch('eleveId', eleve.id);
+        this.titleDropdown = eleve.user.name;
+      }
+    },
+    changeClasse(classe){
+      if(classe == 0){
+        this.$store.dispatch('classeId', null);
+        this.titleDropdownClasse = "Classes";
+      }else{
+        this.$store.dispatch('classeId', classe.classe.id);
+        this.titleDropdownClasse = classe.classe.libelle ;
+      }
     }
   }
 };
