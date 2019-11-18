@@ -1,1 +1,1 @@
-1573586330a:1:{i:0;O:8:"stdClass":3:{s:2:"id";i:2;s:4:"item";s:21:"offline_cors_settings";s:5:"value";s:159:"{"supportsCredentials":"0","maxAge":"0","allowedOrigins":[{"value":"*"}],"allowedHeaders":[{"value":"*"}],"allowedMethods":[{"value":"*"}],"exposedHeaders":[]}";}}
+1574149643a:1:{i:0;O:8:"stdClass":3:{s:2:"id";i:2;s:4:"item";s:21:"offline_cors_settings";s:5:"value";s:159:"{"supportsCredentials":"0","maxAge":"0","allowedOrigins":[{"value":"*"}],"allowedHeaders":[{"value":"*"}],"allowedMethods":[{"value":"*"}],"exposedHeaders":[]}";}}

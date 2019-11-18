@@ -13,9 +13,17 @@ import PreviewMatiere from '@/components/pages/eleves/matieres/Preview.vue'
 import EleveParametre from '@/components/pages/eleves/parametres/User.vue'
 
 // Eleve
-import PreviewEleve from '@/components/pages/eleves/eleves/Preview.vue'
+// import PreviewEleve from '@/components/pages/eleves/eleves/Preview.vue'
+
+
+import DashboardEleve from '@/components/pages/eleves/DashboardEleve.vue'
 
 export default [
+  {
+    path: '/',
+    name: 'DashboardEleve',
+    component: DashboardEleve
+  },
   {
     path: '/notes',
     name: 'ListNote',
@@ -47,6 +55,11 @@ export default [
       component: PreviewMatiere
     },
     {
+      path: '/matieres/notes/:matiere_id(\\d+)/preview/:id(\\d+)',
+      name: 'PreviewNote',
+      component: PreviewNote
+    },
+    {
       path: '/parametres',
       name: 'EleveParametre',
       component: EleveParametre
@@ -55,10 +68,5 @@ export default [
       path: '/parametres/eleve/:id(\\d+)',
       name: 'EleveParametre',
       component: EleveParametre
-    },
-    {
-      path: '/parametres/eleves/preview/:id(\\d+)',
-      name: 'PreviewEleve',
-      component: PreviewEleve
     }
 ];

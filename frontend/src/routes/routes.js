@@ -25,7 +25,7 @@ import routerParent from '@/components/pages/parents/router'
 import routerEleve from '@/components/pages/eleves/router'
 import routerProfesseur from '@/components/pages/professeurs/router'
 
-const baseRoutes = [
+/*const baseRoutes = [
   {
     path: '/',
     component: DashboardLayout,
@@ -79,6 +79,10 @@ const baseRoutes = [
     ]
   },
   { path: '*', component: NotFound }
+]*/
+
+const baseRoutes = [
+  { path: '*', component: NotFound }
 ]
 
 /**
@@ -103,6 +107,7 @@ if (localStorage.getItem('userId')) {
     routes = baseRoutes.concat(routerProfesseur);
   }
 }
+// routes = baseRoutes;
 // routes = baseRoutes;
 /*export default new Router({
   routes,

@@ -57,25 +57,29 @@
                       <!---->
                     </div>
                   </div>
-                  <div class="col-md-6">
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
                     <div class="form-group">
-                      <label class="control-label">Commentaire</label>
+                      <label class="control-label">Description</label>
                       <!---->
                       <textarea
                         name
                         id
                         cols="30"
-                        rows="3"
+                        rows="2"
                         aria-describedby="addon-right addon-left"
                         class="form-control"
+                        disabled
                       >
-                  {{ absenceeleve.commentaire }}
-                  </textarea>
+                        {{ absenceeleve.commentaire }}
+                      </textarea>
                       <!---->
                     </div>
                   </div>
                 </div>
                 <div class="clearfix"></div>
+                <a href="#/absences" class="btn btn-danger float-right" style="background: #EE2D20;color: #fff;opacity: 1;">Retour</a>
               </form>
             </div>
             <!---->

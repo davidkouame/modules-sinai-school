@@ -1,21 +1,34 @@
 <template>
   <div class="content">
     <div class="container-fluid">
+
+      <!-- Fil d'ariane -->
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="#/">Accueil</a></li>
+          <li class="breadcrumb-item"><a href="#/notes">Absences</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Liste des absences</li>
+        </ol>
+      </nav>
+
       <div class="row">
         <div class="col-12">
-          <card class="strpied-tabled-with-hover" body-classes="table-full-width table-responsive">
-            <template slot="header">
+          <div class="card">
+
+            <!-- Titre de la page -->
+            <div class="card-header">
               <h4 class="card-title">Liste des absences élèves</h4>
-            </template>
-            <div class="card-body table-full-width table-responsive">
+            </div>
+
+            <div class="card-body">
+              <div class="table-responsive">
               <table class="table table-hover table-striped">
                 <thead>
                   <tr>
                     <th scope="col">#</th>
                     <th scope="col">Heure début de cours</th>
                     <th scope="col">Heure fin de cours</th>
-                    <th scope="col">Raison absence</th>
-                    <th scope="col">Eleve</th>
+                    <th scope="col">Raison d'absence</th>
                     <th scope="col">Actions</th>
                   </tr>
                 </thead>
@@ -26,23 +39,29 @@
                     <td>{{ absenceeleve.heure_fin_cours}}</td>
                     <td v-if="absenceeleve.raisonabsence">{{ absenceeleve.raisonabsence.libelle }}</td>
                     <td v-else="absenceeleve.raisonabsence"></td>
-                    <td>qsdsq</td>
-                    <td>
-                      <a :href="'/#/absences/preview/'+absenceeleve.id" class="btn btn-primary">Voir</a>
+                    <td style="padding-left: 30px;">
+                      <a :href="'/#/absences/preview/'+absenceeleve.id">
+                        <i class="fa fa-eye fa-lg"></i>
+                      </a>
                     </td>
                   </tr>
                 </tbody>
               </table>
 
-              <paginate
-                :page-count="pageCount"
-                :click-handler="fetch"
-                :prev-text="'Prev'"
-                :next-text="'Next'"
-                :container-class="'pagination'">
-              </paginate>
+              <!-- Pagination -->
+              <div class="float-right pagi" v-if="pageCount > 1">
+                  <paginate
+                    :page-count="pageCount"
+                    :click-handler="fetch"
+                    :prev-text="'&laquo;'"
+                    :next-text="'&raquo;'"
+                    :container-class="'pagination'"
+                  ></paginate>
+              </div>
+              </div>
+
             </div>
-          </card>
+          </div>
         </div>
       </div>
     </div>
@@ -53,44 +72,6 @@
 import Axios from "axios";
 import LTable from "@/components/Table.vue";
 import Card from "@/components/Cards/Card.vue";
-const tableColumns = ["Id", "Named", "Salary", "Country", "City"];
-const tableData = [
-  {
-    id: 1,
-    named: "Dakota Rice",
-    salary: "$36.738",
-    country: "Niger",
-    city: "Oud-Turnhout"
-  },
-  {
-    id: 2,
-    named: "Minerva Hooper",
-    salary: "$23,789",
-    country: "Curaçao",
-    city: "Sinaai-Waas"
-  },
-  {
-    id: 3,
-    named: "Sage Rodriguez",
-    salary: "$56,142",
-    country: "Netherlands",
-    city: "Baileux"
-  },
-  {
-    id: 4,
-    named: "Philip Chaney",
-    salary: "$38,735",
-    country: "Korea, South",
-    city: "Overland Park"
-  },
-  {
-    id: 5,
-    named: "Doris Greene",
-    salary: "$63,542",
-    country: "Malawi",
-    city: "Feldkirchen in Kärnten"
-  }
-];
 
 export default {
   name: "ListAbsence",
@@ -103,15 +84,7 @@ export default {
       msg: "Liste des absences",
       searchkeys: null,
       showModal: false,
-      absenceid: null,
-      table1: {
-        columns: [...tableColumns],
-        data: [...tableData]
-      },
-      table2: {
-        columns: [...tableColumns],
-        data: [...tableData]
-      }
+      absenceid: null
     };
   },
   created() {

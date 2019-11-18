@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Dashboard</a>
+      <a class="navbar-brand" href="#/  ">Tableau de bord</a>
       <button
         type="button"
         class="navbar-toggler navbar-toggler-right"
@@ -17,12 +17,12 @@
       </button>
       <div class="collapse navbar-collapse justify-content-end">
         <ul class="nav navbar-nav mr-auto">
-          <li class="nav-item">
+          <!--<li class="nav-item">
             <a class="nav-link" href="#" data-toggle="dropdown">
               <i class="nc-icon nc-palette"></i>
             </a>
-          </li>
-          <base-dropdown tag="li">
+          </li>-->
+          <!--<base-dropdown tag="li">
             <template slot="title">
               <i class="nc-icon nc-planet"></i>
               <b class="caret"></b>
@@ -33,19 +33,19 @@
             <a class="dropdown-item" href="#">Notification 3</a>
             <a class="dropdown-item" href="#">Notification 4</a>
             <a class="dropdown-item" href="#">Another notification</a>
-          </base-dropdown>
-          <li class="nav-item">
+          </base-dropdown>-->
+          <!--<li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nc-icon nc-zoom-split"></i>
               <span class="d-lg-block">&nbsp;Search</span>
             </a>
-          </li>
+          </li>-->
         </ul>
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="#">Account</a>
+            <a class="nav-link" href="#/parametres">Compte</a>
           </li>
-          <base-dropdown title="Dropdown">
+          <!--<base-dropdown title="Dropdown">
             <a class="dropdown-item" href="#">Action</a>
             <a class="dropdown-item" href="#">Another action</a>
             <a class="dropdown-item" href="#">Something</a>
@@ -53,7 +53,7 @@
             <a class="dropdown-item" href="#">Something</a>
             <div class="divider"></div>
             <a class="dropdown-item" href="#">Separated link</a>
-          </base-dropdown>
+          </base-dropdown>-->
           
           <base-dropdown v-bind:title="titleDropdown" v-if="parentId">
             <a v-for="eleve in eleves" class="dropdown-item" href="javascript:void(0)" @click="changeEleve(eleve)">{{ eleve.user.name }}</a>
@@ -68,7 +68,7 @@
           </base-dropdown>
 
           <li class="nav-item">
-            <a href="javascript:void(0)" v-on:click="logout" class="nav-link">Log out</a>
+            <a href="javascript:void(0)" v-on:click="logout" class="nav-link">Déconnexion</a>
           </li>
         </ul>
       </div>

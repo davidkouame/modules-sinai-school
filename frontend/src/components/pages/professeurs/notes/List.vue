@@ -84,7 +84,6 @@ export default {
   },
   methods: {
     fetch (pageNum, search = null) {
-      console.log(pageNum == null);
       pageNum = pageNum == null ? 1 : pageNum
       let params = [{key: 'libelle', value: search}, {key: 'classe_id', value: this.classeListId}];
       this.$store.dispatch('allnotes', {payload: pageNum, search: this.trimSearch(params)})
