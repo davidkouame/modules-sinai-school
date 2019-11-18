@@ -146,8 +146,6 @@ export default {
   },
   computed: {
     notes() {
-      /*let notes = this.$store.getters.notes;
-      console.log(this.$store.getters.notes);*/
       this.countNotes = this.$store.getters.notes.length;
       this.countNotes = this.countNotes > 0;
       return this.$store.getters.notes;

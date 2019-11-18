@@ -168,7 +168,7 @@
                           <td>
                             <span v-if="note.note.typenote">{{ note.note.typenote.libelle }}</span>
                           </td>
-                          <td style="padding-left: 30px;">
+                          <td class="actions">
                             <a :href="'/#/matieres/notes/'+matiere_id+'/preview/'+note.note.id">
                               <i class="fa fa-eye fa-lg"></i>
                             </a>

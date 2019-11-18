@@ -71,7 +71,9 @@
                       />
                       <!---->
                     </div>
-                  </div>
+                  </div>                  
+                </div>
+                <div class="row">
                   <div class="col-md-12">
                     <div class="form-group">
                       <label class="control-label">Description</label>
@@ -92,6 +94,7 @@
                   </div>
                 </div>
                 <div class="clearfix"></div>
+                <a @click="$router.go(-1)" class="btn btn-danger float-right">Retour</a>
               </form>
             </div>
             <!---->

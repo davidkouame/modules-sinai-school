@@ -15,7 +15,6 @@
                     <th scope="col">Heure début de cours</th>
                     <th scope="col">Heure fin de cours</th>
                     <th scope="col">Raison absence</th>
-                    <th scope="col">Eleve</th>
                     <th scope="col">Actions</th>
                   </tr>
                 </thead>
@@ -26,21 +25,25 @@
                     <td>{{ absenceeleve.heure_fin_cours}}</td>
                     <td v-if="absenceeleve.raisonabsence">{{ absenceeleve.raisonabsence.libelle }}</td>
                     <td v-else="absenceeleve.raisonabsence"></td>
-                    <td>qsdsq</td>
-                    <td>
-                      <a :href="'/#/absences/preview/'+absenceeleve.id" class="btn btn-primary">Voir</a>
+                    <td class="actions">
+                      <a :href="'/#/absences/preview/'+absenceeleve.id">
+                        <i class="fa fa-eye fa-lg"></i>
+                      </a>
                     </td>
                   </tr>
                 </tbody>
               </table>
 
-              <paginate
-                :page-count="pageCount"
-                :click-handler="fetch"
-                :prev-text="'Prev'"
-                :next-text="'Next'"
-                :container-class="'pagination'">
-              </paginate>
+              <!-- Pagination -->
+                <div class="float-right pagi" v-if="pageCount > 1">
+                  <paginate
+                    :page-count="pageCount"
+                    :click-handler="fetch"
+                    :prev-text="'&laquo;'"
+                    :next-text="'&raquo;'"
+                    :container-class="'pagination'"
+                  ></paginate>
+                </div>
             </div>
           </card>
         </div>

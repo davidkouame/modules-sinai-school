@@ -414,6 +414,7 @@ export default {
       )
         .then(response => {
           context.commit('matieres', response.data.data.data)
+          context.commit('pageCount', response.data.data.last_page)
         })
         .catch(error => {
           console.log(error)
