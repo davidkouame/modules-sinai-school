@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#/  ">Tableau de bord</a>
+      <a class="navbar-brand" href="#/">Tableau de bord</a>
       <button
         type="button"
         class="navbar-toggler navbar-toggler-right"

@@ -15,8 +15,20 @@ import ParentParametre from '@/components/pages/parents/parametres/User.vue'
 // Eleve
 import PreviewEleve from '@/components/pages/parents/eleves/Preview.vue'
 
+import DashboardParent from '@/components/pages/parents/DashboardParent.vue'
+
 
 export default [
+  {
+    path: '/',
+    name: 'DashboardParent',
+    component: DashboardParent
+  },
+  {
+    path: '/dahsboard',
+    name: 'DashboardParent',
+    component: DashboardParent
+  },
   {
     path: '/notes',
     name: 'ListNote',
