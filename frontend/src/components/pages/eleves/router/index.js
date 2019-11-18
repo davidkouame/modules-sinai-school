@@ -25,6 +25,11 @@ export default [
     component: DashboardEleve
   },
   {
+    path: '/dashboard',
+    name: 'DashboardEleve',
+    component: DashboardEleve
+  },
+  {
     path: '/notes',
     name: 'ListNote',
     component: ListNote

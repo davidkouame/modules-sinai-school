@@ -25,7 +25,7 @@ export default [
     component: DashboardParent
   },
   {
-    path: '/dahsboard',
+    path: '/dashboard',
     name: 'DashboardParent',
     component: DashboardParent
   },
