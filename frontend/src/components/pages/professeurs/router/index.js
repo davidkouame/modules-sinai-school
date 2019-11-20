@@ -20,8 +20,20 @@ import Parametre from '@/components/pages/professeurs/parametres/User.vue'
 import ListEleve from '@/components/pages/professeurs/eleves/List.vue'
 import PreviewEleve from '@/components/pages/professeurs/eleves/Preview.vue'
 
+import DashboardProfesseur from '@/components/pages/professeurs/DashboardProfesseur.vue'
+
 
 export default [
+  {
+    path: '/',
+    name: 'DashboardProfesseur',
+    component: DashboardProfesseur
+  },
+  {
+    path: '/dashboard',
+    name: 'DashboardProfesseur',
+    component: DashboardProfesseur
+  },
   {
     path: '/notes',
     name: 'ListNote',

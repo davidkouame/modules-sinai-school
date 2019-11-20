@@ -1,64 +1,91 @@
 <template>
-  <div id="app" class="container">
-    <h1>Editer une absence d'élève</h1>
-    <form>
-      <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Elève</label>
-        <div class="col-sm-10">
-          <select v-model="eleve" class="form-control">
-            <option :value="eleve.id" v-for="eleve in eleves">{{ eleve.matricule }}</option>
-          </select>
+  <div class="content">
+    <div class="container-fluid">
+      <!-- Fil d'ariane -->
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="#/">Accueil</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="#/absences">Absences</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Modifier une absence</li>
+        </ol>
+      </nav>
+
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <!-- Titre de la page -->
+            <div class="card-header">
+              <h4 class="card-title">Modifier une absence</h4>
+            </div>
+
+            <div class="card-body">
+              <form>
+                <div class="form-group row">
+                  <label class="col-sm-2 col-form-label">Elève</label>
+                  <div class="col-sm-10">
+                    <select v-model="eleve" class="form-control">
+                      <option :value="eleve.id" v-for="eleve in eleves">{{ eleve.matricule }}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-2 col-form-label">Raison d'absence</label>
+                  <div class="col-sm-10">
+                    <select v-model="raisonabsence" id class="form-control">
+                      <option value>Sélectionner une raison d'absence</option>
+                      <option
+                        :value="raisonabsence.id"
+                        v-for="raisonabsence in raisonsabsences"
+                      >{{ raisonabsence.libelle }}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-2 col-form-label">Commentaire</label>
+                  <div class="col-sm-10">
+                    <textarea v-model="commentaire" class="form-control"></textarea>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-2 col-form-label">Heure de début de cours</label>
+                  <div class="col-sm-10">
+                    <input v-model="heure_debut_cours" type="date" class="form-control" />
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-2 col-form-label">Heure de fin de cours</label>
+                  <div class="col-sm-10">
+                    <input v-model="heure_fin_cours" type="date" class="form-control" />
+                  </div>
+                </div>
+                <a v-on:click="editAbsenceEleve()" class="btn btn-primary float-right">Envoyer</a>
+                <a @click="$router.go(-1)" class="btn btn-danger float-right" style="border-right-width: 2px;margin-right: 10px;">Annuler</a>
+              </form>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Raison d'absence</label>
-        <div class="col-sm-10">
-          <select v-model="raisonabsence" id class="form-control">
-            <option value>Sélectionner une raison d'absence</option>
-            <option
-              :value="raisonabsence.id"
-              v-for="raisonabsence in raisonsabsences"
-            >{{ raisonabsence.libelle }}</option>
-          </select>
-        </div>
-      </div>
-      <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Commentaire</label>
-        <div class="col-sm-10">
-          <textarea v-model="commentaire" class="form-control"></textarea>
-        </div>
-      </div>
-      <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Heure de début de cours</label>
-        <div class="col-sm-10">
-          <input v-model="heure_debut_cours" type="date" class="form-control" />
-        </div>
-      </div>
-      <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Heure de fin de cours</label>
-        <div class="col-sm-10">
-          <input v-model="heure_fin_cours" type="date" class="form-control" />
-        </div>
-      </div>
-      <a @click="$router.go(-1)" class="btn btn-danger">Annuler</a>
-      <a v-on:click="editAbsenceEleve()" class="btn btn-primary">Envoyer</a>
-    </form>
+    </div>
   </div>
 </template>
 
 <script>
-import moment from 'moment'
+import moment from "moment";
 
 export default {
   name: "EditAbsenceEleve",
-  data(){
-    return{
+  data() {
+    return {
       heure_debut_cours: null,
       heure_fin_cours: null,
       commentaire: null,
       raisonabsence: null,
       eleve: null
-    }
+    };
   },
   created() {
     this.$store.dispatch("elevesProfesseur");
@@ -86,10 +113,14 @@ export default {
       console.log(this.eleve);
       let store = this.$store;
       store
-        .dispatch("absenceselevesP", { data: data, action: "edit", absenceEleveId: this.$route.params.id})
+        .dispatch("absenceselevesP", {
+          data: data,
+          action: "edit",
+          absenceEleveId: this.$route.params.id
+        })
         .then(response => {
-          alert("la mise a été éffectué avec succès")
-          this.$router.push('/absences')
+          alert("la mise a été éffectué avec succès");
+          this.$router.push("/absences");
         })
         .catch(error => {
           console.log(error);
@@ -105,18 +136,23 @@ export default {
     },
     raisonsabsences() {
       return this.$store.getters.raisonsabsences;
-    },absenceeleve() {
-      return this.$store.getters.absenceeleve    
+    },
+    absenceeleve() {
+      return this.$store.getters.absenceeleve;
     }
   },
   watch: {
-    absenceeleve(){
-      this.heure_debut_cours = this.absenceeleve.heure_debut_cours.substring(0, 10);
+    absenceeleve() {
+      this.heure_debut_cours = this.absenceeleve.heure_debut_cours.substring(
+        0,
+        10
+      );
       this.heure_fin_cours = this.absenceeleve.heure_fin_cours.substring(0, 10);
-      this.commentaire =this.absenceeleve.commentaire;
+      this.commentaire = this.absenceeleve.commentaire;
       this.eleve = this.absenceeleve.eleve ? this.absenceeleve.eleve.id : null;
-      this.raisonabsence = this.absenceeleve.raisonabsence ? this.absenceeleve.raisonabsence.id : null; 
-      
+      this.raisonabsence = this.absenceeleve.raisonabsence
+        ? this.absenceeleve.raisonabsence.id
+        : null;
     }
   }
 };

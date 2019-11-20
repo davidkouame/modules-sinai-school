@@ -520,6 +520,7 @@ export default {
         url)
         .then(response => {
           context.commit('eleves', response.data.data.data)
+          context.commit('pageCount', response.data.data.last_page)
           // console.log("eleves "+ JSON.stringify(response.data.data.data))
         })
         .catch(error => {
