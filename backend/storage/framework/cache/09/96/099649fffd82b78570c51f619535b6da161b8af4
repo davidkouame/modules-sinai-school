@@ -1,0 +1,269 @@
+1574657775a:1:{s:16:"site/header1.htm";a:5:{s:8:"fileName";s:16:"site/header1.htm";s:7:"content";s:7830:"<header class="header">
+    <div class="top-bar">
+        <div class="container">
+            <div class="row">
+                <ul class="social-icons col-md-6 col-12 d-none d-md-block">
+                    <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                    <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                    <li><a href="#"><i class="fab fa-youtube"></i></a></li>
+                    <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                    <li><a href="#"><i class="fab fa-google-plus-g"></i></a></li>
+                    <li class="row-end"><a href="#"><i class="fas fa-rss"></i></a></li>
+                </ul>
+                <form class="col-md-6 col-12 search-form" role="search">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Rechercher sur le site ...">
+                    </div>
+                    <button type="submit" class="btn btn-theme">Recherchez</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!--//to-bar-->
+
+    <div class="header-main container">
+        <div class="row">
+            <h1 class="logo col-md-4 col-12">
+                <a href="{{ url('/') }}"><img id="logo" style="width: 245px;height: 40px;" src="{{ parametrages.logo }}"
+                        alt="Logo"></a>
+            </h1>
+            <!--//logo-->
+            <div class="info col-md-8 col-12">
+                <ul class="menu-top float-right d-none d-md-block">
+                    <li class="divider"><a href="{{ url('/') }}">Accueil</a></li>
+                    <!-- <li class="divider"><a href="faq.html">FAQ</a></li> -->
+                    <li><a href="{{ url('/contact') }}">Contact</a></li>
+                </ul>
+                <!--//menu-top-->
+                <br />
+                <div class="contact float-right">
+                    <p class="phone"><i class="fas fa-phone"></i>Appelez nous aujourd'hui au {{ parametrages.number_front }}</p>
+                    <p class="email"><i class="fas fa-envelope"></i><a href="#">{{ parametrages.email_front }}</a></p>
+                </div>
+                <!--//contact-->
+            </div>
+            <!--//info-->
+        </div>
+        <!--//row-->
+    </div>
+    <!--//header-main-->
+</header>
+
+<div class="main-nav-wrapper" id="main-nav-wrapper">
+    <div class="container">
+        <nav class="main-nav navbar navbar-expand-md" role="navigation">
+            <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <!--//nav-toggle-->
+
+            <div class="navbar-collapse collapse" id="navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="nav-item"><a class="nav-link accueil" href="{{ url('/') }}">Accueil</a></li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle administration" href="#" id="navbarDropdown-1" role="button" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">Administration <i class="fas fa-angle-down"></i></a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{ url('/organigrame') }}">Organigrame</a>
+                            <a class="dropdown-item" href="{{ url('/examens') }}">Resultats et Examens</a>
+                        </div>
+                        <!--//dropdown-menu-->
+                    </li>
+                    
+                    <li class="nav-item"><a class="nav-link actualites" href="{{ url('/actualites') }}">Actulités</a></li>
+                    
+<!--                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown-2" role="button" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">Enseignants <i class="fas fa-angle-down"></i></a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown-2">
+                            <a class="dropdown-item" href="{{ url('/professeurs') }}">Infos aux Enseignants</a>
+                            <a class="dropdown-item" href="{{ url('/activites-fin-trimestre') }}" style="width: 109%;">Activités de
+                                fin de trimestre</a>
+                        </div>
+                    </li>-->
+                    
+<!--                    <li class="nav-item"><a class="nav-link" href="{{ url('/reglement-interieur') }}">Règlement intérieur</a></li>-->
+                                
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle espaceeleve" data-toggle="dropdown" data-hover="dropdown" data-delay="0"
+                            data-close-others="false" href="#">Espace Elèves <i class="fas fa-angle-down"></i></a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="{{ url('/reglement-interieur') }}">Règlement intérieur</a>
+                            <a class="dropdown-item" href="{{ url('/activites-fin-trimestre') }}">Activités de
+                                fin de trimestre</a>
+<!--                            <a class="dropdown-item" href="javascript:void(0)">Infos aux élèves</a>
+                            <a class="dropdown-item" href="{{ url('/emplois-du-temps') }}">Emplois du temps eleve</a>
+                            <a class="dropdown-item" href="javascript:void(0)">Devoirs de niveau</a>
+                            <a class="dropdown-item" href="{{ url('/sujets') }}">Bibliothèque numérique</a>-->
+                        </div>
+                    </li>
+                    
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle viescolaire" data-toggle="dropdown" data-hover="dropdown" data-delay="0"
+                            data-close-others="false" href="#">Vie scolaire <i class="fas fa-angle-down"></i></a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="{{ url('clubs-activites')}}">Clubs d'activités</a>
+<!--                            <a class="dropdown-item" href="javascript:void(0)">Conseil scolaire</a>-->
+                            <a class="dropdown-item" href="{{ url('galeries')}}">Galerie</a>
+                        </div>
+                    </li>
+
+<!--                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0"
+                            data-close-others="false" href="#">Parents d'Elèves <i class="fas fa-angle-down"></i></a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="{{ url('/suivre-mes-eleves') }}">Suivre mon élèves </a>
+                             c'est programme qui a pour de suivre les moyennes de son enfant 
+                            <a class="dropdown-item" href="javascript:void(0)">Notes-Moyennes-Bulletins</a>
+                        </div>
+                    </li>-->
+
+                    <li class="nav-item"><a class="nav-link contact" href="{{ url('/contact') }}">Contact</a></li>
+                </ul>
+                <!--//nav-->
+            </div>
+            <!--//navabr-collapse-->
+
+        </nav>
+        <!--//main-nav-->
+    </div>
+    <!--//container-->
+</div>";s:5:"mtime";i:1573909249;s:6:"markup";s:7830:"<header class="header">
+    <div class="top-bar">
+        <div class="container">
+            <div class="row">
+                <ul class="social-icons col-md-6 col-12 d-none d-md-block">
+                    <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                    <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                    <li><a href="#"><i class="fab fa-youtube"></i></a></li>
+                    <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                    <li><a href="#"><i class="fab fa-google-plus-g"></i></a></li>
+                    <li class="row-end"><a href="#"><i class="fas fa-rss"></i></a></li>
+                </ul>
+                <form class="col-md-6 col-12 search-form" role="search">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Rechercher sur le site ...">
+                    </div>
+                    <button type="submit" class="btn btn-theme">Recherchez</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!--//to-bar-->
+
+    <div class="header-main container">
+        <div class="row">
+            <h1 class="logo col-md-4 col-12">
+                <a href="{{ url('/') }}"><img id="logo" style="width: 245px;height: 40px;" src="{{ parametrages.logo }}"
+                        alt="Logo"></a>
+            </h1>
+            <!--//logo-->
+            <div class="info col-md-8 col-12">
+                <ul class="menu-top float-right d-none d-md-block">
+                    <li class="divider"><a href="{{ url('/') }}">Accueil</a></li>
+                    <!-- <li class="divider"><a href="faq.html">FAQ</a></li> -->
+                    <li><a href="{{ url('/contact') }}">Contact</a></li>
+                </ul>
+                <!--//menu-top-->
+                <br />
+                <div class="contact float-right">
+                    <p class="phone"><i class="fas fa-phone"></i>Appelez nous aujourd'hui au {{ parametrages.number_front }}</p>
+                    <p class="email"><i class="fas fa-envelope"></i><a href="#">{{ parametrages.email_front }}</a></p>
+                </div>
+                <!--//contact-->
+            </div>
+            <!--//info-->
+        </div>
+        <!--//row-->
+    </div>
+    <!--//header-main-->
+</header>
+
+<div class="main-nav-wrapper" id="main-nav-wrapper">
+    <div class="container">
+        <nav class="main-nav navbar navbar-expand-md" role="navigation">
+            <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <!--//nav-toggle-->
+
+            <div class="navbar-collapse collapse" id="navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="nav-item"><a class="nav-link accueil" href="{{ url('/') }}">Accueil</a></li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle administration" href="#" id="navbarDropdown-1" role="button" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">Administration <i class="fas fa-angle-down"></i></a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{ url('/organigrame') }}">Organigrame</a>
+                            <a class="dropdown-item" href="{{ url('/examens') }}">Resultats et Examens</a>
+                        </div>
+                        <!--//dropdown-menu-->
+                    </li>
+                    
+                    <li class="nav-item"><a class="nav-link actualites" href="{{ url('/actualites') }}">Actulités</a></li>
+                    
+<!--                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown-2" role="button" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">Enseignants <i class="fas fa-angle-down"></i></a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown-2">
+                            <a class="dropdown-item" href="{{ url('/professeurs') }}">Infos aux Enseignants</a>
+                            <a class="dropdown-item" href="{{ url('/activites-fin-trimestre') }}" style="width: 109%;">Activités de
+                                fin de trimestre</a>
+                        </div>
+                    </li>-->
+                    
+<!--                    <li class="nav-item"><a class="nav-link" href="{{ url('/reglement-interieur') }}">Règlement intérieur</a></li>-->
+                                
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle espaceeleve" data-toggle="dropdown" data-hover="dropdown" data-delay="0"
+                            data-close-others="false" href="#">Espace Elèves <i class="fas fa-angle-down"></i></a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="{{ url('/reglement-interieur') }}">Règlement intérieur</a>
+                            <a class="dropdown-item" href="{{ url('/activites-fin-trimestre') }}">Activités de
+                                fin de trimestre</a>
+<!--                            <a class="dropdown-item" href="javascript:void(0)">Infos aux élèves</a>
+                            <a class="dropdown-item" href="{{ url('/emplois-du-temps') }}">Emplois du temps eleve</a>
+                            <a class="dropdown-item" href="javascript:void(0)">Devoirs de niveau</a>
+                            <a class="dropdown-item" href="{{ url('/sujets') }}">Bibliothèque numérique</a>-->
+                        </div>
+                    </li>
+                    
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle viescolaire" data-toggle="dropdown" data-hover="dropdown" data-delay="0"
+                            data-close-others="false" href="#">Vie scolaire <i class="fas fa-angle-down"></i></a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="{{ url('clubs-activites')}}">Clubs d'activités</a>
+<!--                            <a class="dropdown-item" href="javascript:void(0)">Conseil scolaire</a>-->
+                            <a class="dropdown-item" href="{{ url('galeries')}}">Galerie</a>
+                        </div>
+                    </li>
+
+<!--                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0"
+                            data-close-others="false" href="#">Parents d'Elèves <i class="fas fa-angle-down"></i></a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="{{ url('/suivre-mes-eleves') }}">Suivre mon élèves </a>
+                             c'est programme qui a pour de suivre les moyennes de son enfant 
+                            <a class="dropdown-item" href="javascript:void(0)">Notes-Moyennes-Bulletins</a>
+                        </div>
+                    </li>-->
+
+                    <li class="nav-item"><a class="nav-link contact" href="{{ url('/contact') }}">Contact</a></li>
+                </ul>
+                <!--//nav-->
+            </div>
+            <!--//navabr-collapse-->
+
+        </nav>
+        <!--//main-nav-->
+    </div>
+    <!--//container-->
+</div>";s:4:"code";N;}}

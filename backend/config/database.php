@@ -58,7 +58,7 @@ return [
             'port'      => 3306,
             'database'  => 'modulesinaischool',
             'username'  => 'dks',
-            'password'  => 'dks',
+            'password'  => '29121990marie',
             'charset'   => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
             'prefix'    => '',
