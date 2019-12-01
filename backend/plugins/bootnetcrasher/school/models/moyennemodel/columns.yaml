@@ -1,0 +1,18 @@
+columns:
+    eleve:
+        label: Elève
+        type: text
+        searchable: true
+        select: name
+        relation: eleve
+    matiere:
+        label: Matière
+        type: text
+        searchable: true
+        select: libelle
+        relation: matiere
+    valeur:
+        label: Valeur
+        type: text
+        searchable: true
+

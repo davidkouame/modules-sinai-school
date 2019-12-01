@@ -1,0 +1,20 @@
+fields:
+    eleve:
+        label: Elève
+        span: auto
+        type: relation
+        select: name
+        partial: eleve
+        placeholder: 'Sélectionnez un élève'
+    matiere:
+        label: Matière
+        span: auto
+        type: relation
+        select: libelle
+        partial: matiere
+        placeholder: 'Sélectionnez une matière'
+    valeur:
+        label: Valeur
+        type: text
+        searchable: true
+        span: auto

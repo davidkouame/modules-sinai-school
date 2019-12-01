@@ -2,7 +2,8 @@
     <transition name="modal">
         <div class="modal-mask">
             <div class="modal-wrapper">
-                <div class="modal-container">
+                
+                <div class="modal-container" v-bind:class="{ active: modaltype=='delete' }">
 
                     <!--<div class="modal-header">
                         <slot name="header">
@@ -27,6 +28,56 @@
                         </slot>
                     </div>
                 </div>
+                
+                <div class="modal-container" v-bind:class="{ active: modaltype=='addValue' }">
+
+
+                    <div class="modal-body">
+                        <slot name="body">
+                            Modifier la valeur de la note 
+                            <input class="form-control" placeholder="Ajouter une valeur" v-model="valeur">
+                        </slot>
+                    </div>
+
+                    <div class="modal-footer">
+                        <slot name="footer">
+                            <button class="modal-default-button btn btn-primary" @click="$emit('close')">
+                                Annuler
+                            </button>
+                            <button class="modal-default-button btn btn-danger" v-on:click="editValueNote">
+                                Modifier
+                            </button>
+                        </slot>
+                    </div>
+                </div>
+                
+                <div class="modal-container" v-bind:class="{ active: modaltype=='validationNotes' }">
+
+                    <div class="modal-header">
+                        <slot name="header">
+                            Validation de la moyenne d'une classe !
+                        </slot>
+                    </div>
+
+                    <div class="modal-body">
+                        <slot name="body">
+                            Ajouter un rapport pour la valiation du rapport 
+                            <textarea v-model="rapport" class="form-control" rows="8"></textarea>
+                        </slot>
+                    </div>
+
+                    <div class="modal-footer">
+                        <slot name="footer">
+                            <button class="modal-default-button btn btn-primary" @click="$emit('close')">
+                                Annuler
+                            </button>
+                            <button class="modal-default-button btn btn-danger" v-on:click="validerRapport">
+                                Valider
+                            </button>
+                        </slot>
+                    </div>
+                </div>
+
             </div>
         </div>
     </transition>
@@ -35,10 +86,23 @@
 <script>
 export default {
   name: 'Modal',
-  props: ['modelid', 'modelname'],
+  props: {
+    modelid: [String, Number],
+    modelname: [String, Number],
+    modaltype: {
+        type: String,
+        default: 'delete'
+    },
+    eleveId: {
+        type: [String, Number],
+        default: 0
+    }
+  },
   data: function () {
     return {
-      showModal: false
+      showModal: false,
+      valeur: null,
+      rapport: null
     }
   },
   created () {
@@ -83,6 +147,43 @@ export default {
         })
         .finally(() => (this.loading = false))
       }
+    },
+    editValueNote(){
+        const data = {};
+        data["note_id"] = this.modelid;
+        data["valeur"] = this.valeur;
+        data["eleve_id"] = this.eleveId;
+        console.log(JSON.stringify(data));
+        this.$store
+        .dispatch("addValueNote", data)
+        .then(response => {
+          alert("La modification de la valeur de la note a été un succèss");
+          location.reload()
+        })
+        .catch(error => {
+          console.log(error);
+           alert("echec lors de la modification de la valeur de la note");
+          this.errored = true;
+        })
+        .finally(() => (this.loading = false));
+    },
+    validerRapport(){
+        const data = {};
+        data["description"] = this.rapport;
+        data["classe_id"] = this.modelid;
+        // console.log(JSON.stringify(data));
+        this.$store
+        .dispatch("saveRapport", data)
+        .then(response => {
+          alert("L'enregistrement d'un rapport a été éffectué avec succèss");
+          location.reload()
+        })
+        .catch(error => {
+          console.log(error);
+           alert("echec lors de l'enregistrement du rapport !");
+          this.errored = true;
+        })
+        .finally(() => (this.loading = false));
     }
   }
 }
@@ -152,5 +253,8 @@ export default {
         -webkit-transform: scale(1.1);
         transform: scale(1.1);
     }
+
+    .modal-wrapper .modal-container{display: none}
+    .active{display: block!important}
 
 </style>

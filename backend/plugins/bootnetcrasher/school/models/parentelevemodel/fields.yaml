@@ -4,7 +4,7 @@ fields:
         span: auto
         type: relation
         select: name
-        partial: parent
+        partial: user
         placeholder: Sélectionnez un parent
     eleve:
         label: Elève

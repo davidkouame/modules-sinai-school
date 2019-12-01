@@ -1,3 +1,5 @@
 .DS_Store
 *.log
 /nbproject/private/
+/backend/nbproject/private/
+/frontend/nbproject/private/

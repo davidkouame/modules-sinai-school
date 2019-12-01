@@ -1,153 +1,200 @@
 <template>
-  <div class="container">
-    <div>Detail de la matière</div>
-    <h1>Detail de la matière</h1>
-    <ul class="nav nav-tabs" id="myTab" role="tablist">
-      <li class="nav-item">
-        <a
-          class="nav-link active"
-          id="user-connexion"
-          data-toggle="tab"
-          href="#detailMatiere"
-          role="tab"
-          aria-controls="home"
-          aria-selected="true"
-        >Détail matière</a>
-      </li>
-      <li class="nav-item">
-        <a
-          class="nav-link"
-          id="classes"
-          data-toggle="tab"
-          href="#informationProfesseur"
-          role="tab"
-          aria-controls="profile"
-          aria-selected="false"
-        >Information professeur</a>
-      </li>
-      <li class="nav-item">
-        <a
-          class="nav-link"
-          id="parent-notes"
-          data-toggle="tab"
-          href="#notes"
-          role="tab"
-          aria-controls="profile"
-          aria-selected="false"
-        >Notes</a>
-      </li>
-    </ul>
-    <div class="tab-content" id="myTabContent">
-      <br />
+  <div class="content">
+    <div class="container-fluid">
+        <div>
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a
+                      class="nav-link"
+                      :class="{active:selected == 1}"
+                      id="user-connexion"
+                      data-toggle="tab"
+                      href="javascript:void(0)"
+                      @click="selected = 1"
+                      role="tab"
+                      aria-controls="home"
+                      aria-selected="true"
+                    >Détail matière</a>
+                </li>
+                <li class="nav-item">
+                    <a
+                      class="nav-link"
+                      :class="{active:selected == 2}"
+                      @click="selected = 2"
+                      id="classes"
+                      data-toggle="tab"
+                      href="javascript:void(0)"
+                      role="tab"
+                      aria-controls="profile"
+                      aria-selected="false"
+                    >Information professeur</a>
+                </li>
+                <li class="nav-item">
+                    <a
+                      class="nav-link"
+                      :class="{active:selected == 3}"
+                      @click="selected = 3"
+                      id="classes"
+                      data-toggle="tab"
+                      href="javascript:void(0)"
+                      role="tab"
+                      aria-controls="profile"
+                      aria-selected="false"
+                    >Notes</a>
+                </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+                <br />
 
-      <!-- Tab user connexion -->
-      <div
-        class="tab-pane fade show active"
-        id="detailMatiere"
-        role="tabpanel"
-        aria-labelledby="user-connexion"
-      >
-        <form>
-          <ul v-if="matiere">
-            <li>Id : {{ matiere.id }}</li>
-            <li>libelle : {{ matiere.libelle }}</li>
-            <li>Description : {{ matiere.description }}</li>
-            <li>Type de matière : {{ matiere.typematiere.libelle }}</li>
-          </ul>
-        </form>
-      </div>
+                  <!-- Détail matière -->
+                  <div
+                    class="tab-pane fade"
+                    :class="{show:selected == 1,active:selected == 1}"
+                    id="home"
+                    role="tabpanel"
+                    aria-labelledby="user-connexion"
+                  >
+                    <div class="col-12">
+                      <div class="card">
+                        <div class="card-body">
+                            <form v-if="matiere">
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">Libellé</label>
+                                    <div class="col-sm-10">
+                                      <input v-model="matiere.libelle" type="text" class="form-control" disabled />
+                                    </div>
+                                </div>  
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">Type de matière</label>
+                                    <div class="col-sm-10">
+                                      <input v-model="matiere.typematiere.libelle" type="text" class="form-control" disabled />
+                                    </div>
+                                </div>
+                                <a @click="$router.go(-1)" class="float-right btn btn-danger">retour</a>
+                            </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
 
-      <!-- Tab classes -->
-      <div
-        class="tab-pane fade"
-        id="informationProfesseur"
-        role="tabpanel"
-        aria-labelledby="classes"
-      >
-        <form>
-          <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Username</label>
-            <div class="col-sm-10">
-              <input v-model="username" type="text" class="form-control" disabled />
-            </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Email</label>
-            <div class="col-sm-10">
-              <input v-model="email" type="text" class="form-control" disabled />
-            </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Tel</label>
-            <div class="col-sm-10">
-              <input v-model="tel" type="text" class="form-control" disabled />
-            </div>
-          </div>
-        </form>
-      </div>
-
-      <!-- Tab matiere notes  -->
-      <div
-        class="tab-pane fade"
-        id="notes"
-        role="tabpanel"
-        aria-labelledby="parent-notes"
-      >
-        <form>
-          <div class="row">
-            <div class="col">
-              <div class="input-group mb-3">
-                <input type="text" class="form-control" v-model="searchkeys" placeholder="Rechercher une note" aria-label="Recipient's username" aria-describedby="button-addon2">
-                <div class="input-group-append">
-                  <button class="btn btn-outline-secondary" id="button-addon2" v-on:click="searchNote">rechercher</button>
+                <!-- Information professeur -->
+                <div
+                    class="tab-pane fade"
+                    :class="{show:selected == 2,active:selected == 2}"
+                    id="profile"
+                    role="tabpanel"
+                    aria-labelledby="classes"
+                  >
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="card">
+                          <div class="card-body">
+                            <form>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">Username</label>
+                                    <div class="col-sm-10">
+                                      <input v-model="username" type="text" class="form-control" disabled />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">Email</label>
+                                    <div class="col-sm-10">
+                                      <input v-model="email" type="text" class="form-control" disabled />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">Tel</label>
+                                    <div class="col-sm-10">
+                                      <input v-model="tel" type="text" class="form-control" disabled />
+                                    </div>
+                                </div>
+                                <a @click="$router.go(-1)" class="float-right btn btn-danger">retour</a>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-          </div>
-          <br>
-          <div class="row">
-            <div class="col-md-12">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Libellé</th>
-                    <th scope="col">Date</th>
-                    <th scope="col">Type de note</th>
-                    <th scope="col">Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr v-if="notes" v-for="(note, index) in notes">
-                    <th scope="row">{{ index + 1}}</th>
-                    <td>{{ note.note.libelle }}</td>
-                    <td>{{ note.note.created_at|formatDate }}</td>
-                    <td>
-                      <span v-if="note.note.typenote">{{ note.note.typenote.libelle }}</span>
-                    </td>
-                    <td>
-                      <a :href="'/#/notes/preview/'+note.note.id" class="btn btn-primary">Voir</a>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+                
+                <!-- Notes -->
+                <div
+                    class="tab-pane fade"
+                    :class="{show:selected == 3,active:selected == 3}"
+                    id="profile"
+                    role="tabpanel"
+                    aria-labelledby="classes"
+                  >
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <form>
+                                        <!--<div class="row">
+                                            <div class="col">
+                                              <div class="input-group mb-3">
+                                                <input type="text" class="form-control" v-model="searchkeys" placeholder="Rechercher une note" aria-label="Recipient's username" aria-describedby="button-addon2">
+                                                <div class="input-group-append">
+                                                  <button class="btn btn-outline-secondary" id="button-addon2" v-on:click="searchNote">rechercher</button>
+                                                </div>
+                                              </div>
+                                            </div>
+                                        </div>-->
+                                        <br>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                              <table class="table">
+                                                <thead>
+                                                  <tr>
+                                                    <th scope="col">#</th>
+                                                    <th scope="col">Libellé</th>
+                                                    <th scope="col">Date</th>
+                                                    <th scope="col">Type de note</th>
+                                                    <th scope="col">Actions</th>
+                                                  </tr>
+                                                </thead>
+                                                <tbody>
+                                                  <tr v-if="countNotes" v-for="(note, index) in notes">
+                                                    <th scope="row">{{ index + 1}}</th>
+                                                    <td>{{ note.note.libelle }}</td>
+                                                    <td>{{ note.note.created_at|formatDate }}</td>
+                                                    <td>
+                                                      <span v-if="note.note.typenote">{{ note.note.typenote.libelle }}</span>
+                                                    </td>
+                                                    <td>
+                                                        <a :href="'/#/notes/preview/'+note.note.id">
+                                                            <i class="fa fa-eye fa-lg"></i>
+                                                        </a>
+                                                    </td>
+                                                  </tr>
+                                                </tbody>
+                                              </table>
 
-              <!--<modal v-if="showModal" @close="showModal = false" v-bind:noteid="noteid"></modal>-->
+                                              <!--<modal v-if="showModal" @close="showModal = false" v-bind:noteid="noteid"></modal>-->
 
-              <paginate
-                :page-count="pageCount"
-                :click-handler="fetch"
-                :prev-text="'Prev'"
-                :next-text="'Next'"
-                :container-class="'pagination'"
-              ></paginate>
+                                              <!-- Pagination -->
+                                                <div class="float-right pagi" v-if="pageCount > 1">
+                                                  <paginate
+                                                    :page-count="pageCount"
+                                                    :click-handler="fetch"
+                                                    :prev-text="'&laquo;'"
+                                                    :next-text="'&raquo;'"
+                                                    :container-class="'pagination'"
+                                                  ></paginate>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <a @click="$router.go(-1)" class="float-right btn btn-danger">retour</a>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-        </form>
-      </div>
+        </div>
     </div>
 
-    <a @click="$router.go(-1)" class="btn btn-primary">retour</a>
+    
   </div>
 </template>
 
@@ -163,7 +210,9 @@ export default {
       tel: null,
       note_id: 0,
       eleve_id: 1,
-      elevenote: ""
+      elevenote: "",
+      selected: 1,
+      countNotes: false
     };
   },
   created() {
@@ -171,7 +220,8 @@ export default {
   },
   computed: {
     notes () {
-      return this.$store.getters.notes
+        this.countNotes = this.$store.getters.notes.length > 0;
+      return this.$store.getters.notes;
     },
     matiere() {
       return this.$store.getters.matiere;

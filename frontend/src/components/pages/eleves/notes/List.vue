@@ -1,68 +1,95 @@
 <template>
   <div class="content">
     <div class="container-fluid">
-      <div class="row">
-        <div class="col">
-          <div class="input-group mb-3">
-            <input
-              type="text"
-              class="form-control"
-              v-model="searchkeys"
-              placeholder="Rechercher une note"
-              aria-label="Recipient's username"
-              aria-describedby="button-addon2"
-            />
-            <div class="input-group-append">
-              <button
-                class="btn btn-outline-secondary"
-                id="button-addon2"
-                v-on:click="searchNote"
-              >rechercher</button>
-            </div>
-          </div>
-        </div>
-      </div>
+
+      <!-- Fil d'ariane -->
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="#/">Accueil</a></li>
+          <li class="breadcrumb-item"><a href="#/notes">Notes</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Liste des notes</li>
+        </ol>
+      </nav>
+
       <div class="row">
         <div class="col-12">
-          <card class="strpied-tabled-with-hover" body-classes="table-full-width table-responsive">
-            <template slot="header">
-              <h4 class="card-title">Liste des notes</h4>
-            </template>
-            <div class="card-body table-full-width table-responsive">
-              <table class="table table-hover table-striped">
-                <thead>
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Libellé</th>
-                    <th scope="col">Date</th>
-                    <th scope="col">Type de note</th>
-                    <th scope="col">Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr v-if="notes" v-for="(note, index) in notes">
-                    <th scope="row">{{ index + 1}}</th>
-                    <td>{{ note.libelle }}</td>
-                    <td>{{ note.created_at|formatDate }}</td>
-                    <td>
-                      <span v-if="note.typenote">{{ note.typenote.libelle }}</span>
-                    </td>
-                    <td>
-                      <a :href="'/#/notes/preview/'+note.id" class="btn btn-primary">Voir</a>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+          <div class="card">
 
-              <paginate
-                :page-count="pageCount"
-                :click-handler="fetch"
-                :prev-text="'Prev'"
-                :next-text="'Next'"
-                :container-class="'pagination'"
-              ></paginate>
+            <!-- Titre de la page -->
+            <div class="card-header">
+              <h4 class="card-title">Liste des notes</h4>
             </div>
-          </card>
+
+            <div class="card-body">
+              <div class="table-responsive">
+
+                <!-- Zone de recherche -->
+                <div class="float-right col-4" style="padding-right: 0px;">
+                  <div class="input-group mb-3">
+                    <input
+                      type="text"
+                      class="form-control"
+                      v-model="searchkeys"
+                      placeholder="Rechercher une note"
+                      aria-label="Recipient's username"
+                      aria-describedby="button-addon2"
+                    />
+                    <div class="input-group-append" style="height: 41px;">
+                      <button
+                        class="btn btn-outline-secondary"
+                        id="button-addon2"
+                        v-on:click="searchNote"
+                      >rechercher</button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Liste -->
+                <table class="table table-hover table-striped">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Libellé</th>
+                      <th scope="col">Date</th>
+                      <th scope="col">Type de note</th>
+                      <th scope="col">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr v-if="countNotes" v-for="(note, index) in notes">
+                      <td>{{ index + 1}}</td>
+                      <td>{{ note.libelle }}</td>
+                      <td>{{ note.created_at|formatDate }}</td>
+                      <td>
+                        <span v-if="note.typenote">{{ note.typenote.libelle }}</span>
+                      </td>
+                      <td style="padding-left: 30px;">
+                        <a :href="'/#/notes/preview/'+note.id">
+                          <i class="fa fa-eye fa-lg"></i>
+                        </a>
+                      </td>
+                    </tr>
+                    <tr v-if="!countNotes">
+                      <td colspan="6" style="text-align: center;">Aucun resultat trouvé !</td>
+                      <td></td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                <!-- Pagination -->
+                <div class="float-right pagi" v-if="pageCount > 1">
+                    <paginate
+                      :page-count="pageCount"
+                      :click-handler="fetch"
+                      :prev-text="'&laquo;'"
+                      :next-text="'&raquo;'"
+                      :container-class="'pagination'"
+                    ></paginate>
+                </div>
+
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -79,7 +106,8 @@ export default {
       msg: "Liste des notes",
       searchkeys: null,
       showModal: false,
-      noteid: null
+      noteid: null,
+      countNotes: null
     };
   },
   created() {
@@ -118,8 +146,9 @@ export default {
   },
   computed: {
     notes() {
-      let notes = this.$store.getters.notes;
-      return notes;
+      this.countNotes = this.$store.getters.notes.length;
+      this.countNotes = this.countNotes > 0;
+      return this.$store.getters.notes;
     },
     allnoteseleves() {
       return this.$store.getters.noteseleves;
@@ -129,6 +158,14 @@ export default {
     },
     classeListId() {
       return this.$store.getters.classeId;
+    },
+    isNotes(){
+      /*// let isNotes = this.notes && this.notes.length > 0;
+      // let isNotes = this.notes.length > 0 ? new Boolean(true) : new Boolean(false);
+      let isNotes = new Boolean(false);
+      console.log(this.notes);
+      return isNotes*/
+      return true;
     }
   },
   watch: {

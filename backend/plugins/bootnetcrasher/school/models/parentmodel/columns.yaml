@@ -1,7 +1,18 @@
 columns:
-    users:
+    matricule:
+        label: Matricule
+        type: text
+        searchable: true
+    name:
         label: Nom
         type: text
         searchable: true
-        select: name
-        relation: users
+        select: surname
+    tel:
+        label: Téléphone
+        type: text
+        searchable: true
+    email:
+        label: Email
+        type: text
+        searchable: true

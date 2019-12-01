@@ -18,11 +18,11 @@ if (localStorage.getItem('userId')) {
   }
 } 
 export default new Vuex.Store({
-  modules: modules,
   strict: true,
   state: {
     // endpoint: 'http://localhost/modules-sinai-school/backend/',
-    endpoint: 'http://localhost/modules-sinai-school/backend/',
+    // endpoint: 'http://localhost/modules-sinai-school/backend/',
+    endpoint: 'http://localhost:8888/modules-sinai-school/backend/',
     api: 'api/v1/note/',
     notes: [],
     noteseleves: [],
@@ -40,7 +40,6 @@ export default new Vuex.Store({
     typesnotes: [],
     matieres: [],
     classes: [],
-    classesByProfesseur: [],
     classeByProfesseur: [],
     professeur: null,
     classeId: null,
@@ -89,9 +88,6 @@ export default new Vuex.Store({
     },
     classes(state, classes) {
       state.classes = classes
-    },
-    classesByProfesseur(state, classesByProfesseur) {
-      state.classesByProfesseur = classesByProfesseur
     },
     classeByProfesseur(state, classeByProfesseur) {
       state.classeByProfesseur = classeByProfesseur
@@ -158,9 +154,6 @@ export default new Vuex.Store({
     classes: state => {
       return state.classes
     },
-    classesByProfesseur: state => {
-      return state.classesByProfesseur
-    },
     classeByProfesseur: state => {
       return state.classeByProfesseur
     },
@@ -181,7 +174,7 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    allnotes(context, params) {
+    /*allnotes(context, params) {
       // console.log("all notes "+JSON.stringify(params));
       let concatParams = null
       if (params.search) {
@@ -212,7 +205,7 @@ export default new Vuex.Store({
           this.errored = true
         })
         .finally(() => (this.loading = false))
-    },
+    },*/
     allnoteseleves(context, payload) {
       Axios.get(
         context.state.endpoint + 'api/v1/noteseleves?eleve_id=' + payload.userId + '&page=' + payload.pageNum
@@ -455,20 +448,6 @@ export default new Vuex.Store({
         })
         .finally(() => (this.loading = false))
     },
-    classesByProfesseur(context, professeurId) {
-      Axios.get(
-        context.state.endpoint + 'api/v1/professeursclasses?professeur_id=' + professeurId
-      )
-        .then(response => {
-          context.commit('classesByProfesseur', response.data.data)
-          // console.log("liste de toutes les classes "+JSON.stringify(response.data.data));
-        })
-        .catch(error => {
-          console.log(error)
-          this.errored = true
-        })
-        .finally(() => (this.loading = false))
-    },
     classeByProfesseur(context, classeByProfesseurId) {
       Axios.get(
         context.state.endpoint + 'api/v1/professeursclasses/' + classeByProfesseurId
@@ -629,5 +608,6 @@ export default new Vuex.Store({
         })
         .finally(() => (this.loading = false))
     }
-  }
+  },
+  modules: modules
 })

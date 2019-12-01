@@ -1,6 +1,32 @@
 <template>
   <div class="content">
     <div class="container-fluid">
+
+      <!-- Fil d'ariane -->
+      <nav aria-label="breadcrumb" v-if="!matiere_id">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="#/">Accueil</a></li>
+          <li class="breadcrumb-item"><a href="#/notes">Notes</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Détail de note</li>
+        </ol>
+      </nav>
+
+
+      <nav aria-label="breadcrumb" v-if="matiere_id">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="#/">Accueil</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="#/matieres">Matières</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a :href="'/#/matieres/preview/'+matiere_id">Détail de la matière</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Détail d'une note</li>
+        </ol>
+      </nav>
+
       <div class="row">
         <div class="col-md-12">
           <div class="card">
@@ -72,7 +98,13 @@
                       <!---->
                     </div>
                   </div>
-                  <div class="col-md-12">
+
+
+
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-12">
                     <div class="form-group">
                       <label class="control-label">Description</label>
                       <!---->
@@ -89,15 +121,18 @@
                   </textarea>
                       <!---->
                     </div>
-                  </div>
                 </div>
+                  </div>
+                  
                 <div class="clearfix"></div>
+                <a @click="$router.go(-1)" class="btn btn-danger float-right" style="background: #EE2D20;color: #fff;opacity: 1;">Retour</a>
               </form>
             </div>
             <!---->
           </div>
         </div>
       </div>
+      
     </div>
   </div>
 </template>
@@ -111,11 +146,13 @@ export default {
     return {
       note_id: 0,
       eleve_id: 1,
-      elevenote: ''
+      elevenote: '',
+      matiere_id: null
     }
   },
   created () {
-    this.$store.dispatch('note', this.$route.params.id)
+    this.matiere_id = this.$route.params.matiere_id;
+    this.$store.dispatch('note', this.$route.params.id);
   },
   computed: {
     note () {

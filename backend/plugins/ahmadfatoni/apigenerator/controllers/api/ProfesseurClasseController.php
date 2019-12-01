@@ -45,6 +45,25 @@ class ProfesseurClasseController extends Controller
         return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
     }
 
+    public function allByUniqueClasseId(Request $request){
+
+        $data = $this->ProfesseurClasseModel;
+        foreach($request->all() as $key => $value){
+            $data = $data->where($key, $value);
+        }
+        $data = $data->with(array(
+            'classe'=>function($query){
+                $query->select('*');
+            },'matiere'=>function($query){
+                $query->select('*');
+            },'professeur'=>function($query){
+                $query->select('*');
+            }, ))->select('*')->get()->unique('classe_id')
+            ->toArray();
+
+        return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
+    }
+
     public function show($id){
 
         $data = $this->ProfesseurClasseModel->where('id',$id)->first();
@@ -107,7 +126,14 @@ class ProfesseurClasseController extends Controller
 
         return $this->helpers->apiArrayResponseBuilder(200, 'success', 'Data has been deleted successfully.');
     }
-
+    
+    // permet de retourner la matiere
+    public function getMatiere($professeur_id, $classe_id){
+        $data = $this->ProfesseurClasseModel->where('classe_id', $classe_id)
+                                    ->where('professeur_id', $professeur_id)
+                                    ->first()->matiere;
+        return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
+    }
 
     public static function getAfterFilters() {return [];}
     public static function getBeforeFilters() {return [];}

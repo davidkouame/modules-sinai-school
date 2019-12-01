@@ -2,9 +2,9 @@
   <div class="wrapper">
     <side-bar>
       <mobile-menu slot="content"></mobile-menu>
-      <sidebar-link to="/admin/overview">
+      <sidebar-link to="/dashboard">
         <i class="nc-icon nc-chart-pie-35"></i>
-        <p>Dashboard</p>
+        <p>Tableau de bord</p>
       </sidebar-link>
       <sidebar-link to="/notes">
         <i class="nc-icon nc-bell-55"></i>
@@ -17,6 +17,10 @@
       <sidebar-link to="/matieres">
         <i class="nc-icon nc-bell-55"></i>
         <p>Matières</p>
+      </sidebar-link>
+      <sidebar-link to="/moyennes">
+        <i class="nc-icon nc-bell-55"></i>
+        <p>Moyennes</p>
       </sidebar-link>
       <sidebar-link to="/parametres">
         <i class="nc-icon nc-bell-55"></i>

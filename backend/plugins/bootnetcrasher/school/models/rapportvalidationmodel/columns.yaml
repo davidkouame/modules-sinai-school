@@ -1,0 +1,5 @@
+columns:
+    created_at:
+        label: 'Date de création'
+        type: date
+        searchable: true

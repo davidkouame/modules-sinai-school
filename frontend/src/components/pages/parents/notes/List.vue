@@ -1,71 +1,88 @@
 <template>
-  <card class="content">
+  <div class="content">
     <div class="container-fluid">
       <div class="row">
-        <div class="col">
-          <div class="input-group mb-3">
-            <input
-              type="text"
-              class="form-control"
-              v-model="searchkeys"
-              placeholder="Rechercher une note"
-              aria-label="Recipient's username"
-              aria-describedby="button-addon2"
-            />
-            <div class="input-group-append">
-              <button
-                class="btn btn-outline-secondary"
-                id="button-addon2"
-                v-on:click="searchNote"
-              >rechercher</button>
+        <div class="col-12">
+          <div class="card">
+            
+            <!-- Titre de la page -->
+            <div class="card-header">
+              <h4 class="card-title">Liste des notes</h4>
+            </div>
+
+            <div class="card-body">
+              <div class="table-responsive">
+
+                <!-- Zone de recherche -->
+                <div class="float-right col-4" style="padding-right: 0px;">
+                  <div class="input-group mb-3">
+                    <input
+                      type="text"
+                      class="form-control"
+                      v-model="searchkeys"
+                      placeholder="Rechercher une note"
+                      aria-label="Recipient's username"
+                      aria-describedby="button-addon2"
+                    />
+                    <div class="input-group-append search-parent">
+                      <button
+                        class="btn btn-outline-secondary"
+                        id="button-addon2"
+                        v-on:click="searchNote"
+                      >rechercher</button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Liste -->
+                <table class="table table-hover table-striped">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Libellé</th>
+                      <th scope="col">Date</th>
+                      <th scope="col">Type de note</th>
+                      <th scope="col">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr v-if="countNotes" v-for="(note, index) in notes">
+                      <th scope="row">{{ index + 1}}</th>
+                      <td>{{ note.note.libelle }}</td>
+                      <td>{{ note.note.created_at|formatDate }}</td>
+                      <td>
+                        <span v-if="note.note.typenote">{{ note.note.typenote.libelle }}</span>
+                      </td>
+                      <td class="actions">
+                        <a :href="'/#/notes/preview/'+note.note.id">
+                          <i class="fa fa-eye fa-lg"></i>
+                        </a>
+                      </td>
+                    </tr>
+
+                    <tr v-if="!countNotes">
+                      <td colspan="6" style="text-align: center;">Aucun resultat trouvé !</td>
+                      <td></td>
+                    </tr>
+                  </tbody>
+                </table>
+                <!-- Pagination -->
+                <div class="float-right pagi" v-if="pageCount > 1">
+                    <paginate
+                      :page-count="pageCount"
+                      :click-handler="fetch"
+                      :prev-text="'&laquo;'"
+                      :next-text="'&raquo;'"
+                      :container-class="'pagination'"
+                    ></paginate>
+                </div>
+            </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-12">
-          <card class="strpied-tabled-with-hover" body-classes="table-full-width table-responsive">
-            <template slot="header">
-              <h4 class="card-title">Liste des notes</h4>
-            </template>
-            <div class="card-body table-full-width table-responsive">
-              <table class="table table-hover table-striped">
-                <thead>
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Libellé</th>
-                    <th scope="col">Date</th>
-                    <th scope="col">Type de note</th>
-                    <th scope="col">Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr v-if="notes" v-for="(note, index) in notes">
-                    <th scope="row">{{ index + 1}}</th>
-                    <td>{{ note.note.libelle }}</td>
-                    <td>{{ note.note.created_at|formatDate }}</td>
-                    <td>
-                      <span v-if="note.note.typenote">{{ note.note.typenote.libelle }}</span>
-                    </td>
-                    <td>
-                      <a :href="'/#/notes/preview/'+note.note.id" class="btn btn-primary">Voir</a>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-              <paginate
-                :page-count="pageCount"
-                :click-handler="fetch"
-                :prev-text="'Prev'"
-                :next-text="'Next'"
-                :container-class="'pagination'"
-              ></paginate>
-            </div>
-          </card>
-        </div>
-      </div>
     </div>
-  </card>
+  </div>
 </template>
 
 <script>
@@ -78,7 +95,8 @@ export default {
       msg: "Liste des notes",
       searchkeys: null,
       showModal: false,
-      noteid: null
+      noteid: null,
+      countNotes: false
     };
   },
   created() {
@@ -117,6 +135,11 @@ export default {
   },
   computed: {
     notes() {
+      this.countNotes = this.$store.getters.notes.length > 0;
+      // this.countNotes = this.$store.getters.notes.length > 0;
+      // var te = this.$store.getters.notes.length > 0;
+      // console.log("le countNote est "+JSON.stringify(this.$store.getters.notes));
+      // console.log("le countNote est "+te);
       return this.$store.getters.notes;
     },
     allnoteseleves() {

@@ -20,8 +20,24 @@ import Parametre from '@/components/pages/professeurs/parametres/User.vue'
 import ListEleve from '@/components/pages/professeurs/eleves/List.vue'
 import PreviewEleve from '@/components/pages/professeurs/eleves/Preview.vue'
 
+// Moyenne
+import ListMoyenne from '@/components/pages/professeurs/moyennes/List.vue'
+import PreviewMoyenne from '@/components/pages/professeurs/moyennes/Preview.vue'
+
+import DashboardProfesseur from '@/components/pages/professeurs/DashboardProfesseur.vue'
+
 
 export default [
+  {
+    path: '/',
+    name: 'DashboardProfesseur',
+    component: DashboardProfesseur
+  },
+  {
+    path: '/dashboard',
+    name: 'DashboardProfesseur',
+    component: DashboardProfesseur
+  },
   {
     path: '/notes',
     name: 'ListNote',
@@ -62,8 +78,6 @@ export default [
       name: 'UpdateAbsenceEleve',
       component: UpdateAbsenceEleve
     },
-
-
     {
       path: '/eleves',
       name: 'ListEleve',
@@ -74,9 +88,17 @@ export default [
       name: 'PreviewEleve',
       component: PreviewEleve
     },
-
-
-  {
+    {
+      path: '/moyennes',
+      name: 'ListMoyenne',
+      component: ListMoyenne
+    },
+    {
+      path: '/moyennes/preview/:id(\\d+)',
+      name: 'PreviewMoyenne',
+      component: PreviewMoyenne
+    },
+    {
       path: '/matieres',
       name: 'ListMatiere',
       component: ListMatiere
@@ -91,11 +113,6 @@ export default [
       name: 'Parametre',
       component: Parametre
     },
-    /*{
-      path: '/parametres/eleve/:id(\\d+)',
-      name: 'ParentParametre',
-      component: ParentParametre
-    },*/
     {
       path: '/parametres/eleves/preview/:id(\\d+)',
       name: 'PreviewEleve',

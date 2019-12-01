@@ -12,6 +12,8 @@ class EleveModel extends Model
     use \October\Rain\Database\Traits\SoftDelete;
 
     protected $dates = ['deleted_at'];
+    
+    protected $appends = ['classe_id'];
 
 
     /**
@@ -29,6 +31,8 @@ class EleveModel extends Model
       'users' => ['RainLab\User\Models\User', 'key' => 'eleve_id'],
       'user' => ['RainLab\User\Models\User', 'key' => 'eleve_id']  
     ];
+    
+    protected $fillable = ['test'];
 
     public $belongsTo = [
         'parent' => ['BootnetCrasher\School\Models\ParentModel', 'key' => 'parent_id', 'otherKey' => 'id'],
@@ -36,6 +40,7 @@ class EleveModel extends Model
 
     public $hasMany = [
         'classeseleves' => ['BootnetCrasher\School\Models\ClasseEleveModel', 'key' => 'eleve_id', 'otherKey' => 'id'],
+        'noteseleves' => ['BootnetCrasher\School\Models\NoteEleve', 'key' => 'eleve_id', 'otherKey' => 'id'],
     ];
 
     public function beforeCreate()
@@ -48,7 +53,19 @@ class EleveModel extends Model
        return rand();
     }
 
-    public function scopeParent($query){
+    /*public function scopeParent($query){
         dd($query);
+    }*/
+    
+    // get la classe de l'élève
+    public function classe(){
+        return $this->classeseleves ? $this->classeseleves[0] : null;
+    }
+    
+    public function getClasseIdAttribute()
+    {
+        // dd($this->classeseleves);
+        $classeeleve = ClasseEleveModel::where('eleve_id', $this->id)->first();
+        return $classeeleve ? $classeeleve->classe_id : null;
     }
 }

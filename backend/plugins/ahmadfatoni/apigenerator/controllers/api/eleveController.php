@@ -24,14 +24,18 @@ class eleveController extends Controller
         $data = $this->EleveModel->with(array(
             'user'=>function($query){
                 $query->select('*');
-            },'parent'=>function($query){
-                //$query->select('*');
+            },
+            'parent'=>function($query){
                 $query->with(array(
                     'users'=>function($q){
                         $q->select('*');
                     }
                 ))->select('*');
-            }, ))->select('*');
+            }, 
+            'noteseleves'=>function($query){
+                $query->select('*');
+            },          
+            ))->select('*');
 
         foreach($request->except('page') as $key => $value){
             $data = $data->where($key, $value);
@@ -53,7 +57,14 @@ class eleveController extends Controller
                         $q->select('*');
                     }
                 ))->select('*');
-            } ))->select('*')->where('id', '=', $id)->first();
+            },
+            'classeseleves'=>function($query){
+                $query->select('*');
+            },
+            'noteseleves'=>function($query){
+                $query->select('*');
+            }))->select('*')->where('id', '=', $id)->first();
+            // dd($data);
         return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
     }
 

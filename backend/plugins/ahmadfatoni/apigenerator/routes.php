@@ -32,3 +32,7 @@ Route::resource('api/v1/classesprofesseursmatieres', 'AhmadFatoni\ApiGenerator\C
 Route::get('api/v1/classesprofesseursmatieres/{id}/delete', ['as' => 'api/v1/classesprofesseursmatieres.delete', 'uses' => 'AhmadFatoni\ApiGenerator\Controllers\API\classeProfesseurMatiereController@destroy']);
 Route::resource('api/v1/parents', 'AhmadFatoni\ApiGenerator\Controllers\API\parentsController', ['except' => ['destroy', 'create', 'edit']]);
 Route::get('api/v1/parents/{id}/delete', ['as' => 'api/v1/parents.delete', 'uses' => 'AhmadFatoni\ApiGenerator\Controllers\API\parentsController@destroy']);
+Route::resource('api/v1/moyennes', 'AhmadFatoni\ApiGenerator\Controllers\API\moyenneController', ['except' => ['destroy', 'create', 'edit']]);
+Route::get('api/v1/moyennes/{id}/delete', ['as' => 'api/v1/moyennes.delete', 'uses' => 'AhmadFatoni\ApiGenerator\Controllers\API\moyenneController@destroy']);
+Route::resource('api/v1/rapportsvalidations', 'AhmadFatoni\ApiGenerator\Controllers\API\rapportvalidationController', ['except' => ['destroy', 'create', 'edit']]);
+Route::get('api/v1/rapportsvalidations/{id}/delete', ['as' => 'api/v1/rapportsvalidations.delete', 'uses' => 'AhmadFatoni\ApiGenerator\Controllers\API\rapportvalidationController@destroy']);

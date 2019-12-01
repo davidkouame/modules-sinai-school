@@ -1,6 +1,10 @@
 <?php namespace BootnetCrasher\School;
 
 use System\Classes\PluginBase;
+use BootnetCrasher\School\Models\MoyenneModel;
+use Bootnetcrasher\School\Classes\CalculMoyenne;
+
+use Queue;
 
 class Plugin extends PluginBase
 {
@@ -31,5 +35,19 @@ class Plugin extends PluginBase
 
     public function registerSettings()
     {
+    }
+
+    public function registerSchedule($schedule)
+    {        
+        // calcule de moyenne d'une matiere
+        $schedule->call(function () {
+            // $moyennes = MoyenneModel::all();
+            // trace_log("Suppression des fichiers compresses au cours de la journée !!!");
+            // trace_log($moyennes);
+            // Queue::push(CalculMoyenne::class, '');
+        });
+        // trace_log("bfhsdbfhdsfd");
+        // Queue::push(CalculMoyenne::class, '');
+        Queue::push(CalculMoyenne::class, '');
     }
 }

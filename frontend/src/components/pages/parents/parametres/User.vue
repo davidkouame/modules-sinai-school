@@ -1,118 +1,134 @@
 <template>
-  <div id="app" class="container">
-    <h1>Paramètre parent</h1>
-    <div v-if="parent">
-      <ul class="nav nav-tabs" id="myTab" role="tablist">
-        <li class="nav-item">
-          <a
-            class="nav-link"
-            :class="{active:selected == 1}"
-            id="user-connexion"
-            data-toggle="tab"
-            href="javascript:void(0)"
-            @click="selected = 1"
-            role="tab"
-            aria-controls="home"
-            aria-selected="true"
-          >User connexion</a>
-        </li>
-        <li class="nav-item">
-          <a
-            class="nav-link"
-            :class="{active:selected == 2}"
-            @click="selected = 2"
-            id="classes"
-            data-toggle="tab"
-            href="javascript:void(0)"
-            role="tab"
-            aria-controls="profile"
-            aria-selected="false"
-          >Elèves</a>
-        </li>
-      </ul>
-      <div class="tab-content" id="myTabContent">
-        <br />
+    <div class="content">
+        <div class="container-fluid">
+            <div v-if="parent">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                  <li class="nav-item">
+                    <a
+                      class="nav-link"
+                      :class="{active:selected == 1}"
+                      id="user-connexion"
+                      data-toggle="tab"
+                      href="javascript:void(0)"
+                      @click="selected = 1"
+                      role="tab"
+                      aria-controls="home"
+                      aria-selected="true"
+                    >User connexion</a>
+                  </li>
+                  <li class="nav-item">
+                    <a
+                      class="nav-link"
+                      :class="{active:selected == 2}"
+                      @click="selected = 2"
+                      id="classes"
+                      data-toggle="tab"
+                      href="javascript:void(0)"
+                      role="tab"
+                      aria-controls="profile"
+                      aria-selected="false"
+                    >Elèves</a>
+                  </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                  <br />
 
-        <!-- Tab user connexion -->
-        <div
-          class="tab-pane fade"
-          :class="{show:selected == 1,active:selected == 1}"
-          id="home"
-          role="tabpanel"
-          aria-labelledby="user-connexion"
-        >
-          <form>
-            <div class="form-group row">
-              <label class="col-sm-2 col-form-label">Username</label>
-              <div class="col-sm-10">
-                <input v-model="username" type="text" class="form-control" />
-              </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-sm-2 col-form-label">Email</label>
-              <div class="col-sm-10">
-                <input v-model="email" type="text" class="form-control" disabled />
-              </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-sm-2 col-form-label">Tel</label>
-              <div class="col-sm-10">
-                <input v-model="tel" type="text" class="form-control" />
-              </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-sm-2 col-form-label">Password</label>
-              <div class="col-sm-10">
-                <input v-model="password" type="password" class="form-control" />
-              </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-sm-2 col-form-label">Confirm password</label>
-              <div class="col-sm-10">
-                <input v-model="password_confirmation" type="password" class="form-control" />
-              </div>
-            </div>
-            <a v-on:click="updateUser()" class="btn btn-primary">Enregistrer</a>
-          </form>
-        </div>
+                  <!-- Tab user connexion -->
+                  <div
+                    class="tab-pane fade"
+                    :class="{show:selected == 1,active:selected == 1}"
+                    id="home"
+                    role="tabpanel"
+                    aria-labelledby="user-connexion"
+                  >
+                    <div class="col-12">
+                      <div class="card">
+                        <div class="card-body">
+                          <form>
+                            <div class="form-group row">
+                              <label class="col-sm-2 col-form-label">Username</label>
+                              <div class="col-sm-10">
+                                <input v-model="username" type="text" class="form-control" />
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <label class="col-sm-2 col-form-label">Email</label>
+                              <div class="col-sm-10">
+                                <input v-model="email" type="text" class="form-control" disabled />
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <label class="col-sm-2 col-form-label">Tel</label>
+                              <div class="col-sm-10">
+                                <input v-model="tel" type="text" class="form-control" />
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <label class="col-sm-2 col-form-label">Password</label>
+                              <div class="col-sm-10">
+                                <input v-model="password" type="password" class="form-control" />
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <label class="col-sm-2 col-form-label">Confirm password</label>
+                              <div class="col-sm-10">
+                                <input v-model="password_confirmation" type="password" class="form-control" />
+                              </div>
+                            </div>
+                            <a v-on:click="updateUser()" class="float-right btn btn-primary">Enregistrer</a>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
 
-        <!-- Tab classes -->
-        <div class="tab-pane fade" 
-        :class="{show:selected == 2,active:selected == 2}"
-        id="profile" role="tabpanel" aria-labelledby="classes">
-          <div class="row">
-            <div class="col-md-12">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Username</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Tel</th>
-                    <th scope="col">Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr v-if="parent.eleves" v-for="(eleve, index) in parent.eleves">
-                    <th scope="row">{{ index + 1}}</th>
-                    <td>{{ eleve.user.name }}</td>
-                    <td>{{ eleve.user.email }}</td>
-                    <td>{{ eleve.tel }}</td>
-                    <td>
-                      <a
-                        :href="'/#/parametres/eleves/preview/'+eleve.id"
-                        class="btn btn-primary"
-                      >voir</a>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+                  <!-- Tab classes -->
+                  <div
+                    class="tab-pane fade"
+                    :class="{show:selected == 2,active:selected == 2}"
+                    id="profile"
+                    role="tabpanel"
+                    aria-labelledby="classes"
+                  >
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="card">
+                          <div class="card-body">
+                            <div class="table-responsive">
+                              <table class="table table-hover table-striped">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Username</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Tel</th>
+                                    <th scope="col">Action</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr v-if="parent.eleves" v-for="(eleve, index) in parent.eleves">
+                                    <th scope="row">{{ index + 1}}</th>
+                                    <td>{{ eleve.user.name }}</td>
+                                    <td>{{ eleve.user.email }}</td>
+                                    <td>{{ eleve.tel }}</td>
+                                    <td class="actions">
+                                      <a :href="'/#/parametres/eleves/preview/'+eleve.id">
+                                        <i class="fa fa-eye fa-lg"></i>
+                                      </a>
+                                    </td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
 </template>
 
 <script>
@@ -125,7 +141,7 @@ export default {
       password: null,
       password_confirmation: null,
       tel: null,
-      selected: 1,
+      selected: 1
     };
   },
   created() {

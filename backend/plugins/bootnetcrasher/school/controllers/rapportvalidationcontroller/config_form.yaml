@@ -1,0 +1,10 @@
+name: RapportValidationController
+form: $/bootnetcrasher/school/models/rapportvalidationmodel/fields.yaml
+modelClass: BootnetCrasher\School\Models\RapportValidationModel
+defaultRedirect: bootnetcrasher/school/rapportvalidationcontroller
+create:
+    redirect: 'bootnetcrasher/school/rapportvalidationcontroller/update/:id'
+    redirectClose: bootnetcrasher/school/rapportvalidationcontroller
+update:
+    redirect: bootnetcrasher/school/rapportvalidationcontroller
+    redirectClose: bootnetcrasher/school/rapportvalidationcontroller

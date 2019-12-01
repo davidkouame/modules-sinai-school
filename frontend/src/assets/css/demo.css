@@ -826,3 +826,31 @@
 .documentation .dropdown .dropdown-menu.show {
     transform: translate3d(0, 39px, 0) !important;
 }
+
+.search-parent{
+    height: 41px;
+}
+
+.actions{
+    padding-left: 30px !important;
+}
+
+.btn-danger{
+    background: #EE2D20 !important;
+    color: #fff !important;
+    opacity: 1 !important;
+    cursor: pointer!important;
+}
+
+.btn-primary{
+    cursor: pointer!important;
+}
+
+.add-form{
+    padding-left: 0px !important;
+    padding-top: 7px !important;
+}
+
+.font-size-28{
+    font-size: 2.333em !important;
+}

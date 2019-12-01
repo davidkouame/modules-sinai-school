@@ -97,7 +97,7 @@ class userController extends Controller
     public function login(Request $request)
     {
         $user = null;
-        try {
+        // try {
             //recupération des données postées
             $data = post();
             $credentials = [
@@ -133,40 +133,44 @@ class userController extends Controller
                     return $this->helpers->apiArrayResponseBuilder(403, 'success', "Désolé, l'email ou mot passe est incorrect .");
                 }
             }
-
+            // dd(Auth::attempt($request->only('email', 'password')));
             Event::fire('rainlab.user.beforeAuthenticate', [$this, $credentials]);
             $user = Auth::authenticate($credentials, true);
-        } catch (\Exception $e) {
-            trace_log("une erreur est survenue lors de l'authentification du compte cabinet, message=>" . $e->getMessage());
+        /*} catch (\Exception $e) {
+            trace_log("une erreur est survenue lors de l'authentification du compte, message=>" . $e->getMessage());
             return $this->helpers->apiArrayResponseBuilder(403, 'success', "Désolé, l'email ou mot passe est incorrect .");
-        }
+        }*/
         return $this->helpers->apiArrayResponseBuilder(200, 'success', $user);
     }
 
 
     public function updateUser(Request $request){
+        trace_log("vdgvgds");
         $data = $request->all();
         // if($data["password"])
         $rules = null;
         if(array_key_exists("password", $data)){
             $rules = [
                 'username'     => 'required',
-                'tel' => 'required',
+                // 'tel' => 'required',
                 'password' => 'required|confirmed'
             ];
         }else{
             $rules = [
                 'username'     => 'required',
-                'tel' => 'required'
+                // 'tel' => 'required'
             ];
         }
         
         $validation = Validator::make($data, $rules);
         if ($validation->fails()) {
+            trace_log($validation->errors());
             return $this->helpers->apiArrayResponseBuilder(500, 'error', "Une erreur est survenue lors de la mise à jour du professeur !");
         }
         $user = User::where('email', $request->get('email'))->first();
         if(!$user){
+            trace_log("Une erreur est survenue lors de la mise à jour de l'utilsateur, message : l'utilisateur
+            n'existe pas ");
             return $this->helpers->apiArrayResponseBuilder(500, 'error', "Une erreur est survenue lors de la mise à jour du professeur !");
         }
         $user->name = $data['username'];
@@ -178,7 +182,9 @@ class userController extends Controller
         if($user->professeur_id){
             $professeur = ProfesseurModel::find($user->professeur_id);
             if($professeur){
-                $professeur->tel = $data['tel'];
+                if(array_key_exists("tel", $data)){
+                    $professeur->tel = $data['tel'];
+                }
                 $professeur->nom = $data['username'];
                 $professeur->save();
             }

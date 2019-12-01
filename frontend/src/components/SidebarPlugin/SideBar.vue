@@ -43,7 +43,7 @@
     props: {
       title: {
         type: String,
-        default: 'Vue LBD'
+        default: 'AYAUKA'
       },
       backgroundColor: {
         type: String,

@@ -1,51 +1,118 @@
 <template>
   <div class="content">
     <div class="container-fluid">
-      <div class="row">
-        <a :href="'/#/absences/add'" class="btn btn-primary">Ajouter une absence</a>
-      </div>
+
+      <!-- Fil d'ariane -->
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="#/">Accueil</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="#/absences">Absences</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Liste des absences</li>
+        </ol>
+      </nav>
+
       <div class="row">
         <div class="col-12">
-          <card class="strpied-tabled-with-hover" body-classes="table-full-width table-responsive">
-            <template slot="header">
-              <h4 class="card-title">Liste des absences élèves</h4>
-            </template>
-            <div class="card-body table-full-width table-responsive">
-              <table class="table table-hover table-striped">
-                <thead>
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Heure début de cours</th>
-                    <th scope="col">Heure fin de cours</th>
-                    <th scope="col">Raison absence</th>
-                    <th scope="col">Eleve</th>
-                    <th scope="col">Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr v-if="absenceseleves" v-for="(absenceeleve, index) in absenceseleves">
-                    <th scope="row">{{ index + 1}}</th>
-                    <td>{{ absenceeleve.heure_debut_cours}}</td>
-                    <td>{{ absenceeleve.heure_fin_cours}}</td>
-                    <td v-if="absenceeleve.raisonabsence">{{ absenceeleve.raisonabsence.libelle }}</td>
-                    <td v-else="absenceeleve.raisonabsence"></td>
-                    <td>qsdsq</td>
-                    <td>
-                      <a :href="'/#/absences/preview/'+absenceeleve.id" class="btn btn-primary">Voir</a>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+          <div class="card">
 
-              <paginate
-                :page-count="pageCount"
-                :click-handler="fetch"
-                :prev-text="'Prev'"
-                :next-text="'Next'"
-                :container-class="'pagination'">
-              </paginate>
+            <!-- Titre de la page -->
+            <div class="card-header">
+              <h4 class="card-title">Liste des absences</h4>
             </div>
-          </card>
+
+            <div class="card-body">
+              <div class="table-responsive">
+                
+                <!-- Zone de recherche -->
+                <div class="row">
+                    <div class="float-left col-2">
+                    <base-dropdown v-bind:title="titleDropdownClasse">
+                        <a v-for="classe in classes" class="dropdown-item" 
+                            href="javascript:void(0)" @click="changeClasse(classe)">
+                          {{ classe.classe.libelle }}
+                          <i class="fa fa-check"  :class="{check:classe.classe.id == classeId}" ></i>
+                        </a>
+                    </base-dropdown>
+                    </div>
+                    <div class="float-right offset-md-4 col-6">
+                        <div class="row">
+                            <div class="col-md-10">
+                            </div>
+                            <div class="col-md-1">
+                                <div class="col-1 add-form">
+                                    <a :href="'/#/notes/add'">
+                                      <i class="fa fa-plus-circle fa-lg font-size-28"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <table class="table table-hover table-striped">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Heure début de cours</th>
+                      <th scope="col">Heure fin de cours</th>
+                      <th scope="col">Raison absence</th>
+                      <th scope="col">Eleve</th>
+                      <th scope="col">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr v-if="countAbsences" v-for="(absenceeleve, index) in absenceseleves">
+                      <th scope="row">{{ index + 1}}</th>
+                      <td>{{ absenceeleve.heure_debut_cours}}</td>
+                      <td>{{ absenceeleve.heure_fin_cours}}</td>
+                      <td v-if="absenceeleve.raisonabsence">{{ absenceeleve.raisonabsence.libelle }}</td>
+                      <td v-else="absenceeleve.raisonabsence"></td>
+                      <td>{{ absenceeleve.eleve.matricule}}</td>
+                      <td>
+                        <div class="row">
+                          <a :href="'/#/absences/preview/'+absenceeleve.id" class="col">
+                            <i class="fa fa-eye fa-lg"></i>
+                          </a>
+                          <a :href="'/#/absences/update/'+absenceeleve.id" class="col">
+                            <i class="fa fa-pencil fa-lg"></i>
+                          </a>
+                          <a id="show-modal" @click="showModalF(absenceeleve.id)" class="col" style="cursor:pointer;color:#42d0ed">
+                            <i class="fa fa-trash-o fa-lg"></i>
+                          </a>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr v-if="!countAbsences">
+                      <td colspan="6" style="text-align: center;">Aucun resultat trouvé !</td>
+                      <td></td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                <modal
+                  v-if="showModal"
+                  @close="showModal = false"
+                  v-bind:modelid="absenceId"
+                  modelname="absence"
+                ></modal>
+
+               <!-- Pagination -->
+                <div class="float-right pagi" v-if="pageCount > 1">
+                    <paginate
+                      :page-count="pageCount"
+                      :click-handler="fetch"
+                      :prev-text="'&laquo;'"
+                      :next-text="'&raquo;'"
+                      :container-class="'pagination'"
+                    ></paginate>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -57,7 +124,12 @@ export default {
   name: "AbsenceEleve",
   data() {
     return {
-      el: "edd"
+      el: "edd",
+      absenceId: null,
+      showModal: false,
+      classeId: null,
+      titleDropdownClasse: null,
+      countAbsences: null
     };
   },
   created() {
@@ -78,10 +150,27 @@ export default {
         }
       }
       return params;
+    },
+    showModalF(absenceId = null) {
+      this.showModal = true;
+      this.absenceId = absenceId;
+    },
+    changeClasse(classe){
+      if(classe == 0){
+        this.$store.dispatch('classeId', null);
+        this.titleDropdownClasse = "Classes";
+        this.classeId = 0;
+      }else{
+        this.$store.dispatch('classeId', classe.classe.id);
+        this.titleDropdownClasse = classe.classe.libelle ;
+        this.classeId = classe.classe.id;
+      }
     }
   },
   computed: {
     absenceseleves() {
+      this.countAbsences = this.$store.getters.absenceseleves.length;
+      this.countAbsences = this.countAbsences > 0;
       return this.$store.getters.absenceseleves;
     },
     pageCount() {
@@ -89,12 +178,23 @@ export default {
     }, 
     classeListId(){
       return this.$store.getters.classeId
+    },
+    classes () {
+      return this.$store.getters.classes
     }
   },
   watch:{
     classeListId(){
       this.fetch();
+    },
+    classes(){
+      this.titleDropdownClasse = this.classes[0].classe.libelle;
+      this.$store.dispatch('classeId', this.classes[0].classe.id);
     }
   }
 };
 </script>
+
+<style>
+  li { list-style-type: none}
+</style>

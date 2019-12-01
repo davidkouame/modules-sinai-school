@@ -3,7 +3,6 @@ import Axios from 'axios'
 export default {
   strict: true,
   state: {
-    endpoint: 'http://localhost/modules-sinai-school/backend/',
     api: 'api/v1/note/',
     notes: [],
     noteseleves: [],
@@ -27,7 +26,12 @@ export default {
     classeId: null,
     eleveId: null,
     matiere: null,
-    parent: null
+    parent: null,
+    moyennes: null,
+    moyenne: null,
+    valeurs: null,
+    rapportvalidation: null,
+    endpoint: 'http://localhost:8888/modules-sinai-school/backend/'
   },
   mutations: {
     notes(state, payload) {
@@ -95,6 +99,18 @@ export default {
     },
     parent(state, parent){
       state.parent = parent
+    },
+    moyennes(state, moyennes){
+      state.moyennes = moyennes
+    },
+    moyenne(state, moyenne){
+      state.moyenne = moyenne
+    },
+    valeurs(state, valeurs){
+      state.valeurs = valeurs
+    },
+    rapportvalidation(state, rapportvalidation){
+      state.rapportvalidation = rapportvalidation
     }
   },
   getters: {
@@ -166,9 +182,72 @@ export default {
     },
     parent: state => {
       return state.parent
+    },
+    moyennes: state => {
+      return state.moyennes
+    },
+    moyenne: state => {
+      return state.moyenne
+    },
+    valeurs: state => {
+      return state.valeurs
+    },
+    rapportvalidation: state => {
+      return state.rapportvalidation
     }
   },
   actions: {
+    allnotes(context, params) {
+      let concatParams = null
+      if (params.search) {
+        concatParams = params.search.map(function (elemen) {
+          return elemen.key + '=' + elemen.value
+        }).join('&')
+      }
+      let url = null
+      if(concatParams){
+        url = context.state.endpoint + 'api/v1/notemodel?page=' + params.payload + '&' + concatParams
+      }else{
+        url = context.state.endpoint + 'api/v1/notemodel?page=' + params.payload
+      }
+      Axios.get(url)
+        .then(response => {
+          context.commit('notes', response.data.data.data)
+          context.commit('pageCount', response.data.data.last_page)
+          context.commit('pageCountNote', response.data.data.last_page)
+        })
+        .catch(error => {
+          console.log(error)
+          this.errored = true
+        })
+        .finally(() => (this.loading = false))
+    },
+    allnotesandvaleur(context, params) {
+      let concatParams = null
+      if (params.search) {
+        concatParams = params.search.map(function (elemen) {
+          return elemen.key + '=' + elemen.value
+        }).join('&')
+      }
+      let url = null
+      if(concatParams){
+        url = context.state.endpoint + 'api/v1/notemodel-valeur?page=' + params.payload + '&' + concatParams
+      }else{
+        url = context.state.endpoint + 'api/v1/notemodel-valeur?page=' + params.payload
+      }
+      Axios.get(url)
+        .then(response => {
+          context.commit('notes', response.data.data.notes.data)
+          context.commit('pageCount', response.data.data.notes.last_page)
+          context.commit('pageCountNote', response.data.data.notes.last_page)
+          context.commit('valeurs', response.data.data.valeurs)
+        })
+        .catch(error => {
+          console.log(error)
+          this.errored = true
+        })
+        .finally(() => (this.loading = false))
+    },
     allnotesparent(context, params) {
       let concatParams = null
       if (params.search) {
@@ -209,15 +288,6 @@ export default {
           this.errored = true
         })
         .finally(() => (this.loading = false))
-    },
-    loginParentEleve(context, payload) {
-      const data = new FormData()
-      data.append('email', payload.email)
-      data.append('password', payload.password)
-      return Axios.post(
-        context.state.endpoint + 'api/v1/users/login', data,
-        { headers: { 'Content-Type': 'multipart/form-data' } }
-      )
     },
     login(context, payload) {
       const data = new FormData()
@@ -357,6 +427,19 @@ export default {
         { headers: { 'Content-Type': 'multipart/form-data' } }
       )
     },
+    saveRapport(context, data) {
+      return Axios.post(
+        context.state.endpoint + 'api/v1/rapportsvalidations', data,
+        { headers: { 'Content-Type': 'application/json' } }
+      )
+      /*const data1 = new FormData()
+      data1.append('email', "payloademail")
+      data1.append('password', "payload.password")
+      return Axios.post(
+        context.state.endpoint + 'api/v1/rapportsvalidations', data1,
+        { headers: { 'Content-Type': 'multipart/form-data' } }
+      )*/
+    },
     absenceselevesP(context, data) {
       // console.log("information data "+JSON.stringify(data.))
       // console.log("information data "+data.params.eleveId);
@@ -402,7 +485,20 @@ export default {
         context.state.endpoint + 'api/v1/matieres'
       )
         .then(response => {
-          context.commit('matieres', response.data.data)
+          context.commit('matieres', response.data.data.data)
+        })
+        .catch(error => {
+          console.log(error)
+          this.errored = true
+        })
+        .finally(() => (this.loading = false))
+    },
+    matieresall(context) {
+      Axios.get(
+        context.state.endpoint + 'api/v1/matieres-all'
+      )
+        .then(response => {
+            context.commit('matieres', response.data.data)
         })
         .catch(error => {
           console.log(error)
@@ -411,12 +507,14 @@ export default {
         .finally(() => (this.loading = false))
     },
     saveNoteP(context, data) {
+       // console.log("@@@@@@@ "+ JSON.stringify(data));
       if (data.id) {
         return Axios.put(
           context.state.endpoint + 'api/v1/notemodel/' + data.id, data,
           { headers: { 'Content-Type': 'application/json' } }
         )
       } else {
+        console.log("liste des parametres "+JSON.stringify(data));
         return Axios.post(
           context.state.endpoint + 'api/v1/notemodel', data,
           { headers: { 'Content-Type': 'application/json' } }
@@ -443,7 +541,32 @@ export default {
       )
         .then(response => {
           context.commit('classes', response.data.data)
-          // console.log("liste de toutes les classes "+JSON.stringify(response.data.data));
+        })
+        .catch(error => {
+          console.log(error)
+          this.errored = true
+        })
+        .finally(() => (this.loading = false))
+    },
+    moyennes(context, params) {
+      let concatParams = null
+      if (params.search) {
+        concatParams = params.search.map(function (elemen) {
+            return elemen.key + '=' + elemen.value
+        }).join('&');
+      }
+      let url = null;
+      if(concatParams){
+        url = context.state.endpoint + 'api/v1/moyennes?' + concatParams
+      }else{
+        url = context.state.endpoint + 'api/v1/moyennes/'
+      }
+      Axios.get(
+        url
+      )
+        .then(response => {
+          context.commit('moyennes', response.data.data.data);
+          context.commit('pageCount', response.data.data.last_page);
         })
         .catch(error => {
           console.log(error)
@@ -452,8 +575,21 @@ export default {
         .finally(() => (this.loading = false))
     },
     classesByProfesseur(context, professeurId) {
-      Axios.get(
+      console.log("nous sommes dans la fonction classesByProfesseur et le context state est "+ JSON.stringify(context.state));
+      /*Axios.get(
         context.state.endpoint + 'api/v1/professeursclasses?professeur_id=' + professeurId
+      )
+        .then(response => {
+          context.commit('classesByProfesseur', response.data.data)
+          // console.log("liste de toutes les classes "+JSON.stringify(response.data.data));
+        })
+        .catch(error => {
+          console.log(error)
+          this.errored = true
+        })
+        .finally(() => (this.loading = false))*/
+        Axios.get(
+        context.state.endpoint + 'api/v1/allprofesseursclassesbyuniqueclasse?professeur_id=' + professeurId
       )
         .then(response => {
           context.commit('classesByProfesseur', response.data.data)
@@ -520,6 +656,7 @@ export default {
         url)
         .then(response => {
           context.commit('eleves', response.data.data.data)
+          context.commit('pageCount', response.data.data.last_page)
           // console.log("eleves "+ JSON.stringify(response.data.data.data))
         })
         .catch(error => {
@@ -564,13 +701,13 @@ export default {
           this.errored = true
         })
         .finally(() => (this.loading = false))
-    },
+    }/*,
     updateUser(context, data) {
         return Axios.post(
           context.state.endpoint + 'api/v1/users/update', data,
           { headers: { 'Content-Type': 'application/json' } }
         )
-    },
+    }*/,
     classeId(context, classeId){
       context.commit('classeId', classeId)
     },
@@ -643,6 +780,88 @@ export default {
         })
         .finally(() => (this.loading = false))
         }
-    }
+    },
+    getMoyenneMatiere(context, params) {
+      Axios.get(
+        context.state.endpoint + 'api/v1/moyenne-matiere?eleve_id='+
+        params.eleveId+'&matiere_id='+params.matiereId)
+        .then(response => {
+          context.commit('moyenne', response.data.data);
+        })
+        .catch(error => {
+          console.log(error)
+          this.errored = true
+        })
+        .finally(() => (this.loading = false))
+    },
+    getMatiereByProfesseurAndClasse(context, params){
+       Axios.get(
+        context.state.endpoint + 'api/v1/get-matiere-by-professeur-and-classe/'
+        +params.professeurId+'/'+params.classeId)
+        .then(response => {
+          context.commit('matiere', response.data.data);
+        })
+        .catch(error => {
+          console.log(error)
+          this.errored = true
+        })
+        .finally(() => (this.loading = false)) 
+    },
+    moyenne(context, moyenneId) {
+      Axios.get(
+        context.state.endpoint + 'api/v1/moyennes/' + moyenneId
+      )
+        .then(response => {
+          context.commit('moyenne', response.data.data)
+        })
+        .catch(error => {
+          console.log(error)
+          this.errored = true
+        })
+        .finally(() => (this.loading = false))
+    },
+    getValeurNote(context, params) {
+      return Axios.get(
+        context.state.endpoint + 'api/v1/get-valeur-by-eleve_id-and-note_id/' + 
+        params.eleveId + '/' + params.noteId
+      )
+    },
+    saveNoteEleve(context, data) {
+      if (data.id) {
+        return Axios.put(
+          context.state.endpoint + 'api/v1/noteseleves/' + data.id, data,
+          { headers: { 'Content-Type': 'application/json' } }
+        )
+      } else {
+        return Axios.post(
+          context.state.endpoint + 'api/v1/noteseleves', data,
+          { headers: { 'Content-Type': 'application/json' } }
+        )
+      }
+    },
+    addValueNote(context, data) {
+        return Axios.put(
+          context.state.endpoint + 'api/v1/noteseleves-valeur/' + data.eleve_id
+             + '/' + data.note_id, data,
+          { headers: { 'Content-Type': 'application/json' } }
+        )
+    },
+    getRapportValidationByClasseId(context, classeId) {
+      Axios.get(
+        context.state.endpoint + 'api/v1/rapportsvalidations?classe_id=' +classeId 
+      )
+        .then(response => {
+            if(response.data.data){
+                context.commit('rapportvalidation', response.data.data[0])
+            }else{
+                context.commit('rapportvalidation', null)
+            }
+        })
+        .catch(error => {
+          console.log(error)
+          this.errored = true
+        })
+        .finally(() => (this.loading = false))
+    },
   }
 }

@@ -8,7 +8,7 @@
               <h4 class="card-title">Détail d'absence</h4>
             </div>
             <div class="card-body">
-              <form>
+              <form v-if="absenceeleve">
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
@@ -47,6 +47,7 @@
                       <label class="control-label">Raison d'absence</label>
                       <!---->
                       <input
+                        v-if="absenceeleve.raisonabsence"
                         aria-describedby="addon-right addon-left"
                         placeholder="Home Address"
                         class="form-control"
@@ -54,12 +55,23 @@
                         v-model="absenceeleve.raisonabsence.libelle"
                         disabled
                       />
+
+                      <input
+                        v-if="!absenceeleve.raisonabsence"
+                        aria-describedby="addon-right addon-left"
+                        placeholder="Raison d'absence"
+                        class="form-control"
+                        type="text"
+                        disabled
+                      />
                       <!---->
                     </div>
                   </div>
-                  <div class="col-md-6">
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
                     <div class="form-group">
-                      <label class="control-label">Commentaire</label>
+                      <label class="control-label">Description</label>
                       <!---->
                       <textarea
                         name
@@ -68,6 +80,7 @@
                         rows="3"
                         aria-describedby="addon-right addon-left"
                         class="form-control"
+                        disabled
                       >
                   {{ absenceeleve.commentaire }}
                   </textarea>
@@ -76,6 +89,7 @@
                   </div>
                 </div>
                 <div class="clearfix"></div>
+                <a @click="$router.go(-1)" class="btn btn-danger float-right">Retour</a>
               </form>
             </div>
             <!---->

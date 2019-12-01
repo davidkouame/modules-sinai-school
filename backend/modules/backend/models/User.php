@@ -4,6 +4,7 @@ use Mail;
 use Event;
 use Backend;
 use October\Rain\Auth\Models\User as UserBase;
+use BootnetCrasher\School\Models\ParentModel;
 
 /**
  * Administrator user model
@@ -127,6 +128,18 @@ class User extends UserBase
         if ($this->send_invite) {
             $this->sendInvitation();
         }
+    }
+
+    public function afterSave(){
+        /*$parentmodel = ParentModel::find($this->parenteleve_id);
+        if($parentmodel){
+            $parentmodel->name = $this->name;
+            $parentmodel->surname = $this->surname;
+            $parentmodel->tel = $this->tel;
+            $parentmodel->email = $this->email;
+            $parentmodel->save();
+        }*/
+        trace_log("nous rentrons dans le user apres la creation d'un compte parent");
     }
 
     /**

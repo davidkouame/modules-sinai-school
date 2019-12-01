@@ -1,0 +1,6 @@
+fields:
+    description:
+        label: Description
+        span: auto
+        required: 1
+        type: textarea

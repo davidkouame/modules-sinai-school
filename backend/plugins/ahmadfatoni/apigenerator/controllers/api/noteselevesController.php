@@ -38,6 +38,23 @@ class noteselevesController extends Controller
         $data = $query->paginate(10)->toArray();
         return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
     }
+    
+    public function addValueNote($eleve_id, $note_id, Request $request){
+        $data = $this->NoteEleve->where('eleve_id', $eleve_id)
+                ->where('note_id', $note_id)
+                ->first();
+        if($data){
+            $data->valeur = $request->get('valeur');
+            $data->save();
+        }else{
+            $data = new NoteEleve;
+            $data->eleve_id = $eleve_id;
+            $data->note_id = $note_id;
+            $data->valeur = $request->get('valeur');
+            $data->save();
+        }
+        return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
+    }
 
     public function show($id){
 
@@ -101,6 +118,14 @@ class noteselevesController extends Controller
 
         return $this->helpers->apiArrayResponseBuilder(200, 'success', 'Data has been deleted successfully.');
     }
+    
+    /*public function getValeurByEleveIdAndNoteId($eleve_id, $note_id){
+        $data = $this->NoteEleve->where('eleve_id', $eleve_id)
+                ->where('note_id', $note_id)
+                ->first();
+        $data = $data ? $data->valeur : null;
+        return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
+    }*/
 
 
     public static function getAfterFilters() {return [];}

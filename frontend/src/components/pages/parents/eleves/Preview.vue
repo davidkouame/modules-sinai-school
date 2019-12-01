@@ -1,49 +1,58 @@
 <template>
-  <div class="container">
-    <div>DetailNote {{ $route.params.id }}</div>
-    {{ classesprofesseursmatieres }}
-    <form>
-      <fieldset v-if="eleve">
-        <legend>Information de l'élève</legend>
-        <div class="form-group row">
-          <label class="col-sm-2 col-form-label">Nom</label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" v-bind:value="eleve.name" disabled />
+  <div class="content">
+    <div class="container-fluid">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body">
+            <form>
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Nom</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" v-bind:value="eleve.name" disabled />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Prénoms</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" v-bind:value="eleve.surname" disabled />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Matricule</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" v-bind:value="eleve.matricule" disabled />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Date de naissance</label>
+                <div class="col-sm-10">
+                  <input
+                    type="text"
+                    class="form-control"
+                    v-bind:value="eleve.datenaissance"
+                    disabled
+                  />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Téléphone</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" v-bind:value="eleve.tel" disabled />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Email</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" v-bind:value="eleve.user.email" disabled />
+                </div>
+              </div>
+              <div class="clearfix"></div>
+              <a @click="$router.go(-1)" class="btn btn-danger float-right">Retour</a>
+            </form>
           </div>
         </div>
-        <div class="form-group row">
-          <label class="col-sm-2 col-form-label">Prénoms</label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" v-bind:value="eleve.surname" disabled />
-          </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-sm-2 col-form-label">Matricule</label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" v-bind:value="eleve.matricule" disabled />
-          </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-sm-2 col-form-label">Date de naissance</label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" v-bind:value="eleve.datenaissance" disabled />
-          </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-sm-2 col-form-label">Téléphone</label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" v-bind:value="eleve.tel" disabled />
-          </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-sm-2 col-form-label">Email</label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" v-bind:value="eleve.user.email" disabled />
-          </div>
-        </div>
-      </fieldset>
-    </form>
-    <a @click="$router.go(-1)" class="btn btn-primary">retour</a>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -97,22 +106,25 @@ export default {
           search: [{ key: "libelle", value: search }]
         });
       } else {
-        this.$store.dispatch("allnotes", { payload: pageNum, search: [{key:'professeur_id', value:1}] });
+        this.$store.dispatch("allnotes", {
+          payload: pageNum,
+          search: [{ key: "professeur_id", value: 1 }]
+        });
       }
     },
     searchNote() {
       this.fetch(null, this.searchkeys);
     },
-    showModalF (noteId = null, modelname = null) {
-      this.showModal = true
-      this.noteid = noteId
-      this.modelname = modelname
+    showModalF(noteId = null, modelname = null) {
+      this.showModal = true;
+      this.noteid = noteId;
+      this.modelname = modelname;
     },
-    trimSearch(searchs = null){
+    trimSearch(searchs = null) {
       let params = [];
       for (var key in searchs) {
-        if(searchs[key].value){
-          params.push({'key': searchs[key].key, 'value': searchs[key].value});
+        if (searchs[key].value) {
+          params.push({ key: searchs[key].key, value: searchs[key].value });
         }
       }
       return params;
@@ -134,8 +146,8 @@ export default {
     pageCountNote() {
       return this.$store.getters.pageCountNote;
     },
-    classesprofesseursmatieres(){
-      return this.$store.getters.classesprofesseursmatieres
+    classesprofesseursmatieres() {
+      return this.$store.getters.classesprofesseursmatieres;
     }
   }
 };

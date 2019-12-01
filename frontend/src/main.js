@@ -30,6 +30,7 @@ import store from './store/index'
 // import EleveLayout from './components/layouts/Eleve.vue'
 // import ProfesseurLayout from './components/layouts/Professeur.vue'
 import Login from './components/Login.vue'
+import FirstConnexion from './components/FirstConnexion.vue'
 import BootstrapVue from 'bootstrap-vue'
 import Paginate from 'vuejs-paginate'
 import Modal from './components/Modal.vue'
@@ -91,7 +92,19 @@ Vue.mixin({
 
 let vue = null;
 if (localStorage.getItem('userId')) {
-  if (localStorage.getItem('userType') == "parent") {
+  console.log("==================");
+  console.log(localStorage.getItem('firstLogin'));
+  if (localStorage.getItem('firstLogin') == 0) {
+    vue = {
+      el: '#app',
+      router,
+      store,
+      components: { FirstConnexion },
+      template: '<FirstConnexion/>'
+    };
+    console.log("dbhdbfhd fdhf dhfd fdhfd fhdfd fhdf df");
+  }else{
+    if (localStorage.getItem('userType') == "parent") {
     vue = {
       el: '#app',
       router,
@@ -115,6 +128,7 @@ if (localStorage.getItem('userId')) {
       components: { EleveLayout },
       template: '<EleveLayout/>'
     };
+  }
   }
 } else {
   vue = {

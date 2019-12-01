@@ -30,8 +30,13 @@ class ParentEleveModel extends Model
       'eleve' => ['BootnetCrasher\School\Models\EleveModel', 'key' => 'eleve_id', 'otherKey' => 'id']
     ];
 
-    public function getParAttribute()
+    public $hasOne = [
+      'users' => ['RainLab\User\Models\User', 'key' => 'eleve_id'],
+      'user' => ['RainLab\User\Models\User', 'key' => 'eleve_id']  
+    ];
+
+    /*public function getParAttribute()
     {
         return "test";
-    }
+    }*/
 }

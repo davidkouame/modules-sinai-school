@@ -450,4 +450,13 @@
   'BootnetCrasher\\School\\Controllers\\Api\\ClasseMatiereProfesseurController' => 'plugins/bootnetcrasher/school/controllers/api/ClasseMatiereProfesseurController.php',
   'AhmadFatoni\\ApiGenerator\\Controllers\\API\\classeProfesseurMatiereController' => 'plugins/ahmadfatoni/apigenerator/controllers/api/classeProfesseurMatiereController.php',
   'AhmadFatoni\\ApiGenerator\\Controllers\\API\\parentsController' => 'plugins/ahmadfatoni/apigenerator/controllers/api/parentsController.php',
+  'bootnetcrasher\\school\\Controllers\\parentcontroller' => 'plugins/bootnetcrasher/school/controllers/parentcontroller.php',
+  'bedard\\debugbar\\Plugin' => 'plugins/bedard/debugbar/Plugin.php',
+  'bootnetcrasher\\school\\Controllers\\classeelevecontroller' => 'plugins/bootnetcrasher/school/controllers/classeelevecontroller.php',
+  'bootnetcrasher\\school\\Controllers\\moyennecontroller' => 'plugins/bootnetcrasher/school/controllers/moyennecontroller.php',
+  'BootnetCrasher\\School\\Models\\MoyenneModel' => 'plugins/bootnetcrasher/school/models/MoyenneModel.php',
+  'AhmadFatoni\\ApiGenerator\\Controllers\\API\\moyenneController' => 'plugins/ahmadfatoni/apigenerator/controllers/api/moyenneController.php',
+  'bootnetcrasher\\school\\Controllers\\rapportvalidationcontroller' => 'plugins/bootnetcrasher/school/controllers/rapportvalidationcontroller.php',
+  'BootnetCrasher\\School\\Models\\RapportValidationModel' => 'plugins/bootnetcrasher/school/models/RapportValidationModel.php',
+  'AhmadFatoni\\ApiGenerator\\Controllers\\API\\rapportvalidationController' => 'plugins/ahmadfatoni/apigenerator/controllers/api/rapportvalidationController.php',
 );

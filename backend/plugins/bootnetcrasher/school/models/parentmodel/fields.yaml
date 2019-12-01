@@ -6,3 +6,28 @@ fields:
         select: name
         partial: users
         placeholder: Sélectionnez un user
+    name:
+        label: Nom
+        span: auto
+        type: text
+        searchable: true
+        select: surname
+        disabled: 1
+    email:
+        label: Email
+        span: auto
+        type: text
+        searchable: true
+        visible: false
+        disabled: 1
+    tel:
+        label: Téléphone
+        span: auto
+        type: text
+        searchable: true
+    datenaissance:
+        label: Date de naissance
+        span: auto
+        type: datepicker
+        mode: datetime
+        searchable: true

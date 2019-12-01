@@ -13,7 +13,8 @@ class ProfesseurClasseModel extends Model
 
     protected $dates = ['deleted_at'];
 
-    public $table = 'bootnetcrasher_school_classe_anneescolaire_matiere';
+    // public $table = 'bootnetcrasher_school_classe_anneescolaire_matiere';
+    public $table = 'bootnetcrasher_school_classe_matiere';
 
     /**
      * @var array Validation rules

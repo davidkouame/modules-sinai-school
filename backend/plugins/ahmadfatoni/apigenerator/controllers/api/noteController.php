@@ -36,18 +36,20 @@ class noteController extends Controller
                         $q->select('*');
                     }
                 ));
-            } ));//->paginate(10)->toArray();
+            } ));
 
         foreach($request->except(['page']) as $key => $value){
             if($key == "libelle"){
                 $data = $data->where($key, 'like', '%'.$value.'%');
             }elseif($key == 'eleve_id'){
                 $data = $data->whereHas(
-                    'classe',function($query){
+                    'classe',function($query) use($request){
                         $query->whereHas(
-                            'eleves',function($query){
-                                $query->where('id', 4)
+                            'eleves',function($query) use($request){
+                                $query->where('eleve_id', $request->get('eleve_id'))
                                 ->select('*');
+                                // dd($query->get());
+                                // return $query->select('*');
                             }
                         );
                     }
@@ -59,25 +61,55 @@ class noteController extends Controller
         $data = $data->paginate(10)->toArray();
         return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
     }
-
-    public function getNotesByEleveId(Request $request, $eleve_id = null){
-        $data = NoteEleve::with(array(
-            'eleve'=>function($query){
+    
+    // elle retourne les notes et ainsi que le valeur
+    public function indexValeur(Request $request){
+        $data = $this->NoteModel->with(array(
+            'typenote'=>function($query){
                 $query->select('*');
             },
-            'note'=>function($query){
+            'matiere'=>function($query){
                 $query->select('*');
-            } ))->where('eleve_id', $eleve_id);
+            },
+            'classe'=>function($query){
+                $query->with(array(
+                    'eleves'=>function($q){
+                        $q->select('*');
+                    }
+                ));
+            } ));
         foreach($request->except(['page']) as $key => $value){
             if($key == "libelle"){
                 $data = $data->where($key, 'like', '%'.$value.'%');
+            }elseif($key == 'eleve_id'){
+                $data = $data->whereHas(
+                    'classe',function($query) use($request){
+                        $query->whereHas(
+                            'eleves',function($query) use($request){
+                                // $query->where('id', $request->get('eleve_id'))
+                                return $query->select('*');
+                            }
+                        );
+                    }
+                );
             }else{
                 $data = $data->where($key, $value);
             }
         }
+        $notesValeurs = collect([]);
+        if($request->has('eleve_id')){
+            $eleve_id = $request->get('eleve_id');
+            $data->get()->each(function ($item, $key) use($notesValeurs, $eleve_id){
+                $notesValeurs->push($item->id);
+            });
+        }
+        $noteleve = NoteEleve::whereIn('note_id',$notesValeurs->toArray())
+                ->where('eleve_id', $request->get('eleve_id'))->get();
         $data = $data->paginate(10)->toArray();
+        $data = ["notes"=>$data, "valeurs"=>$noteleve->toArray()];
         return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
     }
+    
 
     public function getNotes(Request $request){
         $data = NoteEleve::with(array(
@@ -128,13 +160,14 @@ class noteController extends Controller
         $bodyResponse = null;
         $NoteModel = null;
         // foreach ($datajson['classe_id'] as $classe_id){
-            $arr = $request->except(['classe_id']);
+            // $arr = $request->except(['classe_id']);
+            $arr = $request->all();
             $NoteModel = new NoteModel();
             while ( $data = current($arr)) {
                 $NoteModel->{key($arr)} = $data;
                 next($arr);
             }
-            $NoteModel->classe_id = join(",", $datajson['classe_id']);
+            // $NoteModel->classe_id = join(",", $datajson['classe_id']);
             $NoteModel->save();
             if(count($NoteModel->rules) > 0){
                 $validation = Validator::make($request->all(), $NoteModel->rules);
@@ -159,7 +192,7 @@ class noteController extends Controller
 
         $data = json_decode($request->getContent(), true);
 
-        $data['classe_id'] = join(',', $data['classe_id']);
+        // $data['classe_id'] = join(',', $data['classe_id']);
 
         $status = $this->NoteModel->where('id',$id)->update($data);
     
