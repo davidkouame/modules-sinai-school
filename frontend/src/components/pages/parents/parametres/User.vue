@@ -29,6 +29,19 @@
                       aria-selected="false"
                     >Elèves</a>
                   </li>
+                  <li class="nav-item">
+          <a
+            class="nav-link"
+            :class="{active:selected == 3}"
+            @click="selected = 3"
+            id="classes"
+            data-toggle="tab"
+            href="javascript:void(0)"
+            role="tab"
+            aria-controls="profile"
+            aria-selected="false"
+          >App</a>
+        </li>
                 </ul>
                 <div class="tab-content" id="myTabContent">
                   <br />
@@ -125,6 +138,36 @@
                       </div>
                     </div>
                   </div>
+
+                  <!-- Information App -->
+        <div
+          class="tab-pane fade"
+          :class="{show:selected == 3,active:selected == 3}"
+          id="profile"
+          role="tabpanel"
+          aria-labelledby="classes"
+        >
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-body">
+                    <form>
+                    <div class="form-group row">
+                      <label class="col-sm-2 col-form-label">Année Scolaire</label>
+                      <div class="col-sm-10">
+                        <select v-model="anneescolaire" class="form-control">
+                            <option :value="annee" v-for="annee in anneesscolaires">{{ annee.libelle }}</option>
+                        </select>
+                      </div>
+                    </div>
+                    <a v-on:click="saveSessionUser()" class="btn btn-primary float-right">Enregistrer</a>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
                 </div>
             </div>
         </div>
@@ -141,11 +184,14 @@ export default {
       password: null,
       password_confirmation: null,
       tel: null,
-      selected: 1
+      selected: 1,
+      anneescolaire: null
     };
   },
   created() {
     this.$store.dispatch("parent", localStorage.getItem("parentId"));
+    this.$store.dispatch("sessionuserapp", {user_id: localStorage.getItem("userId")});
+    this.$store.dispatch("anneesscolaires");
   },
   methods: {
     updateUser() {
@@ -170,6 +216,33 @@ export default {
           this.errored = true;
         })
         .finally(() => (this.loading = false));
+    },
+    saveSessionUser() {
+      let dataSa = null;
+      let data = {annee_scolaire_id: this.anneescolaire.id, 
+                user_id: localStorage.getItem("userId")};
+      if(this.sessionuserapp){
+        dataSa = {id: this.sessionuserapp.id, data: data};
+      }else{
+        dataSa = {data: data};
+        }
+      let store = this.$store;
+      // console.log("liste des params "+data);
+      store
+        .dispatch("saveSessionUserApp", dataSa)
+        .then(response => {
+          store.dispatch("sessionuserapp", response.data.data);
+          store.dispatch("anneeScolaireId", this.anneescolaire.id);
+          localStorage.setItem("anneeScolaireId", this.anneescolaire.id);
+          alert("La mise à jour a été effectué avec succès !");
+            window.location.reload();
+        })
+        .catch(error => {
+          console.log(error);
+          alert("echec lors de l'enregistrement");
+          this.errored = true;
+        })
+        .finally(() => (this.loading = false));
     }
   },
   computed: {
@@ -178,6 +251,13 @@ export default {
     },
     eleve() {
       return this.$store.getters.eleve;
+    },
+    anneesscolaires() {
+      return this.$store.getters.anneesscolaires;
+    },
+    sessionuserapp(){
+        // console.log(">>>>>>>>>>"+JSON.stringify(this.$store.getters.sessionuserapp));
+      return this.$store.getters.sessionuserapp;
     }
   },
   watch: {
@@ -185,6 +265,19 @@ export default {
       this.username = this.parent.user.name;
       this.email = this.parent.user.email;
       this.tel = this.parent.tel;
+    },
+    anneesscolaires(){
+        // console.log("la valeur de la session user app est"+JSON.stringify(this.sessionuserapp));
+        // console.log("la valeur de la session de user app est "+this.sessionuserapp);
+        if(this.sessionuserapp){
+            // console.log("@@@@@@@@@@@");
+            this.anneescolaire = this.sessionuserapp.anneescolaire;
+        }else{
+            this.anneescolaire = this.anneesscolaires[0];
+        }
+    },
+    sessionuserapp(){
+        this.anneescolaire = this.sessionuserapp.anneescolaire;
     }
   }
 };

@@ -32,14 +32,14 @@ class absenceselevesController extends Controller
                 $query->select('*');
             }, )
         );
-
+            if($request->has('classe_id')){
         $data = $data->whereHas('eleve', function ($query) use($request) {
                     $query->whereHas('classeseleves', function ($q) use($request) {
                         if($request->has('classe_id')){
                             $q->where('classe_id', $request->get('classe_id'));
                         }
                     });
-                });
+    });}
 
         foreach($request->except('page', 'classe_id') as $key => $value){
             if($key == "parent_id"){

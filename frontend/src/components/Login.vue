@@ -58,6 +58,14 @@ export default {
       errorMessage: ""
     };
   },
+    created(){
+        this.$store.dispatch('anneesscolaires');
+    },
+    computed: {
+        anneesscolaires(){
+            return this.$store.getters.anneesscolaires;
+        }
+    },
   methods: {
     connection() {
       let email = this.email;
@@ -90,7 +98,7 @@ export default {
           localStorage.professeurId = response.data.data.professeur_id;
           localStorage.parentId = response.data.data.parenteleve_id;
           localStorage.eleveId = response.data.data.eleve_id;
-          window.location.reload();
+          this.loadSessionUser(response.data.data.id);
         })
         .catch(response => {
           this.errorMessage = "Désolé, l'email ou le password est incorrect";
@@ -109,6 +117,35 @@ export default {
         nameTypeUser = "eleve";
       }
       return nameTypeUser;
+    },
+    loadSessionUser(user_id){
+        this.$store
+        .dispatch("sessionuserappSync", {user_id: user_id})
+        .then(response => {
+          // console.log("response =>"+JSON.stringify(response.data.data[0].annee_scolaire_id));
+          if(response.data.data){
+            // console.log("l'utilisateur a une session");
+            localStorage.setItem("anneeScolaireId", response.data.data[0].annee_scolaire_id);
+          }else{
+            let anneeScolaireId = this.anneesscolaires[(this.anneesscolaires.length-1)].id;
+            localStorage.setItem("anneeScolaireId", anneeScolaireId);
+            this.$store.dispatch('anneeScolaireId', anneeScolaireId);
+            let dataSa = null;
+            let data = {annee_scolaire_id: anneeScolaireId, user_id: user_id};
+            dataSa = {data: data};
+            let store = this.$store;
+            store.dispatch("saveSessionUserApp", dataSa)
+          }
+          window.location.reload();
+          // console.log("liste des annees scolaires =>"+JSON.stringify());
+          // console.log("la longeur est "+(this.anneesscolaires.length-1));
+        })
+        .catch(response => {
+          // this.errorMessage = "Désolé, l'email ou le password est incorrect";
+          console.log(response);
+          this.errored = true;
+        })
+        .finally(() => (this.loading = false));
     }
   }
 };

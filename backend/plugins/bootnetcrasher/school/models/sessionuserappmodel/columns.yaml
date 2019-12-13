@@ -1,0 +1,13 @@
+columns:
+    user:
+        label: Utilisateur
+        type: text
+        searchable: true
+        select: id
+        relation: user
+    anneescolaire:
+        label: Année scolaire
+        type: text
+        searchable: true
+        select: libelle
+        relation: anneescolaire

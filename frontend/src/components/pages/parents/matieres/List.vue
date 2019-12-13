@@ -37,6 +37,7 @@
                     <tr>
                       <th scope="col">#</th>
                       <th scope="col">Libellé</th>
+                      <th scope="col">Coefficient</th>
                       <th scope="col">Actions</th>
                     </tr>
                   </thead>
@@ -44,6 +45,7 @@
                     <tr v-if="countMatieres" v-for="(matiere, index) in matieres">
                       <th scope="row">{{ index + 1}}</th>
                       <td>{{ matiere.libelle }}</td>
+                      <td>{{ getCoefficientMatiere(matiere.id) }}</td>
                       <td class="actions">
                         <a :href="'/#/matieres/preview/'+matiere.id">
                           <i class="fa fa-eye fa-lg"></i>
@@ -93,7 +95,7 @@ export default {
     };
   },
   created() {
-    this.fetch();
+    this.refreshList();
     // this.classeId = this.$store.getters.classeId;
   },
   methods: {
@@ -103,7 +105,8 @@ export default {
         { key: "libelle", value: search },
         { key: "eleve_id", value: this.eleveListId },
         { key: "parent_id", value: localStorage.getItem("parentId") },
-        { key: "classe_id", value: this.classeListId }
+        { key: "classe_id", value: this.classeListId },
+        { key: "annee_scolaire_id", value: this.anneeScolaireId }
       ];
       this.$store.dispatch("matieres", {
         payload: pageNum,
@@ -125,6 +128,32 @@ export default {
         }
       }
       return params;
+    },
+    refreshList(){
+        if(this.eleveListId && this.anneeScolaireId){
+            this.fetch();
+        }
+    },
+    getCoefficientMatiere(id){
+        let classeId = this.classeListId;
+        let coefficient = null;
+        let e = this.matieres.find(function(element){
+            let response = null;
+            if(element.id == id){
+                response = element.classematiere.find(function(keyment){
+                    // console.log(">>>>>>>> keyment "+JSON.stringify(keyment)+" >>>>> id"+ id);
+                    if(keyment.matiere_id == id ){
+                        
+                            // console.log(">>>>>>>> keyment "+JSON.stringify(keyment.coefficient));
+                        coefficient = keyment.coefficient;
+                    }
+                })
+                // coefficient = response.coefficient;
+            }
+            // console.log(">>>>>>>> id "+JSON.stringify(response));
+        })
+         console.log(">>>>>>>> e "+JSON.stringify(e));
+         return coefficient;
     }
   },
   computed: {
@@ -143,12 +172,20 @@ export default {
       let eleveId = this.$store.getters.eleveId;
       localStorage.setItem("eleveId", eleveId);
       return eleveId;
+    },
+    anneeScolaireId(){
+        return this.$store.getters.anneeScolaireId ;
     }
   },
   watch: {
     eleveListId() {
       localStorage.setItem("eleveId", this.eleveListId);
-      this.fetch();
+      this.refreshList();
+    },
+    anneeScolaireId(){
+        // console.log(this.sectionAnneeScolaireId);
+        // this.fetch();
+        this.refreshList();
     }
   }
 };

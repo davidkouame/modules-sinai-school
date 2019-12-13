@@ -21,7 +21,7 @@
 
             <!-- Titre de la page -->
             <div class="card-header">
-              <h4 class="card-title">Liste des absences</h4>
+              <h4 class="card-title">Liste des absences </h4>
             </div>
 
             <div class="card-body">
@@ -129,16 +129,20 @@ export default {
       showModal: false,
       classeId: null,
       titleDropdownClasse: null,
-      countAbsences: null
+      countAbsences: null,
+      // sectionAnneeScolaireId: localStorage.getItem('sectionAnneeScolaireId')
     };
   },
   created() {
-    this.fetch();
+    // this.fetch();
+    // this.sectionAnneeScolaireId = localStorage.getItem('sectionAnneeScolaireId');
   },
   methods: {
     fetch(pageNum) {
+      // console.log("this.sectionAnneeScolaireId is "+ this.sectionAnneeScolaireId);
       pageNum = pageNum == null ? 1 : pageNum;
-      let params = [{key: 'classe_id', value: this.classeListId}];
+      let params = [{key: 'classe_id', value: this.classeListId},
+                    {key: 'section_annee_scolaire_id', value: this.sectionAnneeScolaireId }];
       this.$store.dispatch("absenceselevesP", { pageNum: pageNum, 
       search: this.trimSearch(params) });
     },
@@ -165,6 +169,11 @@ export default {
         this.titleDropdownClasse = classe.classe.libelle ;
         this.classeId = classe.classe.id;
       }
+    },
+    refreshList(){
+        if(this.classeListId && this.sectionAnneeScolaireId){
+            this.fetch();
+        }
     }
   },
   computed: {
@@ -180,16 +189,32 @@ export default {
       return this.$store.getters.classeId
     },
     classes () {
+        // this.sectionAnneeScolaireId = 0;
+        // this.sectionAnneeScolaireId = this.$store.getters.sectionAnneeScolaireId;
       return this.$store.getters.classes
+    },
+    sectionAnneeScolaireId(){
+        // console.log("changement");
+        return this.$store.getters.sectionAnneeScolaireId;
     }
   },
   watch:{
     classeListId(){
-      this.fetch();
+      // this.fetch();
+      this.refreshList();
     },
     classes(){
-      this.titleDropdownClasse = this.classes[0].classe.libelle;
-      this.$store.dispatch('classeId', this.classes[0].classe.id);
+      if(this.classes){
+        this.titleDropdownClasse = this.classes[0].classe.libelle;
+        this.$store.dispatch('classeId', this.classes[0].classe.id);
+      }
+      // this.sectionAnneeScolaireId = this.$store.getters.sectionAnneeScolaireId;
+      // console.log("recuperation de la section de l'annee scolaire");
+    },
+    sectionAnneeScolaireId(){
+        // console.log(this.sectionAnneeScolaireId);
+        // this.fetch();
+        this.refreshList();
     }
   }
 };

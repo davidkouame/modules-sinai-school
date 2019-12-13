@@ -146,18 +146,25 @@ export default {
       countMoyennes: false,
       classeId: null,
       titleDropdownClasse: null,
-      countAbsences: null
+      countAbsences: null,
+      matiereId: null,
+      // sectionAnneeScolaireId: localStorage.getItem('sectionAnneeScolaireId'),
     };
   },
   created() {
-    this.fetch();
+    this.refreshList();
+    /*this.$store.dispatch('classes', [{'key': 'professeur_id', 
+    'value': localStorage.getItem('professeurId')}])*/
   },
   methods: {
     fetch(pageNum, search = null) {
       pageNum = pageNum == null ? 1 : pageNum;
       let params = [
         { key: "libelle", value: search },
-        { key: "classe_id", value: this.classeListId }
+        { key: "classe_id", value: this.classeListId },
+        { key: "professeur_id", value: localStorage.getItem('professeurId') },
+        { key: "matiere_id", value: this.matiereId },
+        { key: "section_annee_scolaire_id", value: this.sectionAnneeScolaireId }
       ];
       this.$store.dispatch("moyennes", {
         payload: pageNum,
@@ -186,6 +193,7 @@ export default {
         this.titleDropdownClasse = classe.classe.libelle ;
         this.classeId = classe.classe.id;
       }
+      // this.matiereId = this.classes[0].matiere_id;
     },
     formatMoyenne(moy){
         if(moy.toString().length==1){
@@ -203,6 +211,11 @@ export default {
     showModalF(noteId = null) {
       this.showModal = true;
       this.validationNotes
+    },
+    refreshList(){
+        if(this.classeListId && this.sectionAnneeScolaireId){
+            this.fetch();
+        }
     }
   },
   computed: {
@@ -226,22 +239,41 @@ export default {
         return this.$store.getters.rapportvalidation
     },
     seeBtnValidation(){
-        console.log("le rapport validation "+JSON.stringify(this.rapportvalidation));
+        // console.log("le rapport validation "+JSON.stringify(this.rapportvalidation));
         return this.countMoyennes > 0 && !this.rapportvalidation;
+    },
+    sectionAnneeScolaireId(){
+        // console.log("changement");
+        return this.$store.getters.sectionAnneeScolaireId;
     }
   },
   watch: {
     classeListId() {
       // console.log("@@@@@@@@@@@@");
-      this.fetch();
+      // this.fetch();
+      this.refreshList();
     },
     classes(){
+        if(this.classes){
       this.titleDropdownClasse = this.classes[0].classe.libelle;
       this.$store.dispatch('classeId', this.classes[0].classe.id);
       this.classeId = this.classes[0].classe.id;
+      // this.matiereId = this.classes[0].matiere_id;
+       //console.log("la matiere de la classe est "+this.matiereId);
+        // console.log("la matiere id est "+JSON.stringify(this.classes));
+        }
     },
     classeId(){
-        this.$store.dispatch('getRapportValidationByClasseId', this.classes[0].classe.id);
+        // this.$store.dispatch('getRapportValidationByClasseId', this.classes[0].classe.id);
+    },
+    matiereId(){
+        // console.log("la matiere de la classe est "+this.matiereId);
+        // this.fetch();
+    },
+    sectionAnneeScolaireId(){
+        // console.log(this.sectionAnneeScolaireId);
+        // this.fetch();
+        this.refreshList();
     }
   }
 };

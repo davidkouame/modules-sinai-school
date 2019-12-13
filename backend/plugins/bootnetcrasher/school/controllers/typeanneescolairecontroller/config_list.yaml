@@ -1,0 +1,12 @@
+list: $/bootnetcrasher/school/models/typeanneescolairemodel/columns.yaml
+modelClass: BootnetCrasher\School\Models\TypeAnneeScolaireModel
+title: TypeAnneeScolaireController
+noRecordsMessage: 'backend::lang.list.no_records'
+showSetup: true
+showCheckboxes: true
+recordsPerPage: 20
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: 'backend::lang.list.search_prompt'
+recordUrl: 'bootnetcrasher/school/typeanneescolairecontroller/update/:id'

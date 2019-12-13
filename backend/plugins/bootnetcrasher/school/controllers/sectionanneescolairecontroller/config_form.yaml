@@ -1,0 +1,10 @@
+name: SectionAnneeScolaireController
+form: $/bootnetcrasher/school/models/sectionanneescolairemodel/fields.yaml
+modelClass: BootnetCrasher\School\Models\SectionAnneeScolaireModel
+defaultRedirect: bootnetcrasher/school/sectionanneescolairecontroller
+create:
+    redirect: 'bootnetcrasher/school/sectionanneescolairecontroller/update/:id'
+    redirectClose: bootnetcrasher/school/sectionanneescolairecontroller
+update:
+    redirect: bootnetcrasher/school/sectionanneescolairecontroller
+    redirectClose: bootnetcrasher/school/sectionanneescolairecontroller

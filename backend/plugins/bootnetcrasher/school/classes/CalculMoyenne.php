@@ -12,44 +12,64 @@ use BootnetCrasher\School\Models\NoteEleve;
 use BootnetCrasher\School\Models\MoyenneModel;
 use BootnetCrasher\School\Models\ClasseEleveModel;
 use BootnetCrasher\School\Models\ClasseMatiereModel;
+use BootnetCrasher\School\Models\AnneeScolaireModel;
+use BootnetCrasher\School\Models\SectionAnneeScolaireModel;
 
 class CalculMoyenne {
 
     public function fire($job, $data = null) {
-        $notes = NoteModel::all();
-        foreach ($notes as $note) {
-            // recuperation de la va
-        }
-
-        // recuperation de tous les élèves
-        $eleves = EleveModel::all();
-        foreach ($eleves as $eleve) {
-            $classeEleve = ClasseEleveModel::where('eleve_id', $eleve->id)
-                    ->first();
-            if ($classeEleve) {
-                $matieres = MatiereModel::all();
-                foreach ($matieres as $matiere) {
-                    $notes = NoteModel::where('classe_id', $classeEleve->classe_id)
-                                    ->where('matiere_id', $matiere->id)
-                                    ->get()->toArray();
-                    if ($notes)
-                        $this->calcul($notes, $eleve->id, $matiere->id, $classeEleve->classe_id);
-                    else
-                        trace_log("L'élève ayant l'id ".$eleve->id." qui est dans"
-                                . "la classe ".$classeEleve->classe_id." n'a pas de "
-                                . "note dans la matiere ".$matiere->id);
-                }
-            }else {
-                trace_log("l'élève ayant l'id ".$eleve->id." n'est pas dans une "
-                        . "classe");
-            }
-        }
+        $this->calculMoyenneMatiere();
+        $this->calculMoyenneSection();
+        $this->calculMoyenneAnnuelle();
         $job->delete();
         // recuperation de toutes les notes
     }
+    
+    // calcul de moyenne matiere
+    public function calculMoyenneMatiere(){
+        // recuperation de tous les élèves
+        $eleves = EleveModel::all();
+        foreach ($eleves as $eleve) {
+            // recuperation de toutes les années scolaires
+            $anneesScolaires = AnneeScolaireModel::all();
+            foreach($anneesScolaires as $anneeScolaire){
+                $classeEleve = ClasseEleveModel::where('eleve_id', $eleve->id)
+                        ->where('annee_scolaire_id', $anneeScolaire->id)
+                        ->first();
+                if ($classeEleve) {
+                    // recuperation de toutes les sections de l'année scolaire
+                    $sectionsAnneeScolaire = SectionAnneeScolaireModel::
+                            where('annee_scolaire_id', $anneeScolaire->id)
+                            ->get();
+                    foreach($sectionsAnneeScolaire as $section){
+                        $matieres = MatiereModel::all();
+                        foreach ($matieres as $matiere) {
+                            $notes = NoteModel::where('classe_id', $classeEleve->classe_id)
+                                            ->where('matiere_id', $matiere->id)
+                                            ->where('section_annee_scolaire_id', $section->id)
+                                            ->get()->toArray();
+                            if ($notes)
+                                $this->calculMatiere($notes, $eleve->id, $matiere->id, 
+                                        $classeEleve->classe_id,
+                                        $section->id);
+                            else
+                                trace_log("L'élève ayant l'id ".$eleve->id." qui est dans"
+                                        . "la classe ".$classeEleve->classe_id." n'a pas de "
+                                        . "note dans la matiere ".$matiere->id);
+                        }
+                    }
+                }else {
+                    trace_log("l'élève ayant l'id ".$eleve->id." n'est pas dans une "
+                            . "classe");
+                } 
+            }
+            
+        }
+    }
 
-    // Calcul de moyenne
-    public function calcul($notes, $eleve_id, $matiere_id, $classe_id) {
+    // Calcul de moyenne des matieres
+    public function calculMatiere($notes, $eleve_id, $matiere_id, $classe_id, 
+            $section_annee_scolaire_id) {
         $points = 0;
         $coefficient = 0;
         foreach ($notes as $note) {
@@ -71,15 +91,109 @@ class CalculMoyenne {
         if ($moyenne) {
             $moyenne->valeur = $moy;
             $moyenne->coefficient_matiere = $classematiere->coefficient;
+            $moyenne->classe_id  = $classe_id;
+            $moyenne->type_moyenne_id  = 2;
+            $moyenne->section_annee_scolaire_id = $section_annee_scolaire_id;
             $moyenne->save();
         } else {
             $moyenne = new MoyenneModel;
             $moyenne->eleve_id = $eleve_id;
             $moyenne->matiere_id = $matiere_id;
             $moyenne->valeur = $moy;
-            $moyenne->valeur = $classematiere->coefficient;
+            $moyenne->coefficient_matiere = $classematiere->coefficient;
+            $moyenne->classe_id  = $classe_id;
+            $moyenne->type_moyenne_id  = 2;
+            $moyenne->section_annee_scolaire_id = $section_annee_scolaire_id;
             $moyenne->save();
         }
     }
-
+    
+    public function calculMoyenneSection(){
+        $eleves = EleveModel::all();
+        foreach ($eleves as $eleve) {
+            // recuperation de toutes les années scolaires
+            $anneesScolaires = AnneeScolaireModel::all();
+            foreach($anneesScolaires as $anneeScolaire){
+                $classeEleve = ClasseEleveModel::where('eleve_id', $eleve->id)
+                        ->where('annee_scolaire_id', $anneeScolaire->id)
+                        ->first();
+                if ($classeEleve) {
+                    // recuperation de toutes les sections de l'année scolaire
+                    $sectionsAnneeScolaire = SectionAnneeScolaireModel::
+                            where('annee_scolaire_id', $anneeScolaire->id)
+                            ->get();
+                    foreach($sectionsAnneeScolaire as $section){
+                        // recuperation de toutes les matieres de la classe
+                        $classesMatieres = ClasseMatiereModel::where('classe_id', 
+                                $classeEleve->classe_id)->get();
+                        $moyenneSection = 0;
+                        $coefficientSection = 0;
+                        foreach($classesMatieres as $classeMatiere){
+                             // recuperation de la moyenne de l'élève dans cette
+                             // matiere dans la section année scolaire
+                            $moyenneModel = MoyenneModel::where('eleve_id', $eleve->id)
+                                     ->where('matiere_id', $classeMatiere->matiere_id)
+                                     ->where('section_annee_scolaire_id', $section->id)
+                                     ->where('type_moyenne_id', 2)
+                                     ->first();
+                            if($moyenneModel){
+                                $moyenneSection += $moyenneModel->valeur * 
+                                        $moyenneModel->coefficient_matiere;
+                                $coefficientSection += $moyenneModel->coefficient_matiere;
+                            }
+                        }
+                        
+                        $moyenneModelSection = new MoyenneModel;
+                        $moyenneModelSection->valeur = $moyenneSection ? $moyenneSection / $coefficientSection : 0;
+                        $moyenneModelSection->coefficient_section = $coefficientSection;
+                        $moyenneModelSection->section_annee_scolaire_id = $section->id;
+                        $moyenneModelSection->type_moyenne_id = 3;
+                        $moyenneModelSection->eleve_id = $eleve->id;
+                        $moyenneModelSection->classe_id = $classeEleve->classe_id;
+                        $moyenneModelSection->save();
+                    }
+                }
+            }
+        }
+    }
+    
+    public function calculMoyenneAnnuelle(){
+        $eleves = EleveModel::all();
+        foreach ($eleves as $eleve) {
+            // recuperation de toutes les années scolaires
+            $anneesScolaires = AnneeScolaireModel::all();
+            foreach($anneesScolaires as $anneeScolaire){
+                // recuperation de toutes les sections de l'année scolaire
+                $sectionsAnneeScolaire = SectionAnneeScolaireModel::
+                        where('annee_scolaire_id', $anneeScolaire->id)
+                        ->get();
+                $moyenneAnnuelle = 0;
+                $coefficientAnnuelle = 0;
+                $classeId = null;
+                foreach($sectionsAnneeScolaire as $section){
+                    $moyenneSection = MoyenneModel::where('section_annee_scolaire_id', $section->id)
+                            ->where('eleve_id', $eleve->id)
+                            ->where('type_moyenne_id', 3)
+                            ->first();
+                    if($moyenneSection){
+                        $classeId = $moyenneSection->classe_id;
+                        if($eleve->id == 6){
+                            trace_log("moyenne annuelle ".$moyenneSection->valeur . " coefficient ".$moyenneSection->sectionanneescolaire->coefficient);
+                        }
+                        $moyenneAnnuelle += $moyenneSection->valeur * 
+                                $moyenneSection->sectionanneescolaire->coefficient;
+                        $coefficientAnnuelle += $moyenneSection->sectionanneescolaire->coefficient;
+                    }
+                }
+                $moyenneModelAnnuelle = new MoyenneModel;
+                $moyenneModelAnnuelle->valeur = $coefficientAnnuelle ? $moyenneAnnuelle / $coefficientAnnuelle : 0;
+                $moyenneModelAnnuelle->coefficient_section = $coefficientAnnuelle;
+                $moyenneModelAnnuelle->annee_scolaire_id = $anneeScolaire->id;
+                $moyenneModelAnnuelle->type_moyenne_id = 1;
+                $moyenneModelAnnuelle->eleve_id = $eleve->id;
+                $moyenneModelAnnuelle->classe_id = $classeId;
+                $moyenneModelAnnuelle->save();
+            }
+        }
+    }
 }

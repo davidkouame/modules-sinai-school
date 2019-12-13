@@ -48,10 +48,10 @@
                   <tbody>
                     <tr v-if="countNotes" v-for="(note, index) in notes">
                       <th scope="row">{{ index + 1}}</th>
-                      <td>{{ note.note.libelle }}</td>
-                      <td>{{ note.note.created_at|formatDate }}</td>
+                      <td><span v-if="note.note">{{ note.note.libelle }}</span></td>
+                      <td><span v-if="note.note">{{ note.note.created_at|formatDate }}</span></td>
                       <td>
-                        <span v-if="note.note.typenote">{{ note.note.typenote.libelle }}</span>
+                        <span v-if="note.note && note.note.typenote">{{ note.note.typenote.libelle }}</span>
                       </td>
                       <td class="actions">
                         <a :href="'/#/notes/preview/'+note.note.id">
@@ -100,8 +100,9 @@ export default {
     };
   },
   created() {
-    this.fetch();
+    // this.fetch();
     // this.classeId = this.$store.getters.classeId;
+    this.refreshList();
   },
   methods: {
     fetch(pageNum, search = null) {
@@ -109,7 +110,8 @@ export default {
       let params = [
         { key: "libelle", value: search },
         { key: "eleve_id", value: this.eleveListId },
-        { key: "parent_id", value: localStorage.getItem("parentId") }
+        { key: "parent_id", value: localStorage.getItem("parentId") },
+        { key: "section_annee_scolaire_id", value: this.sectionAnneeScolaireId }
       ];
       this.$store.dispatch("allnotesparent", {
         payload: pageNum,
@@ -131,6 +133,12 @@ export default {
         }
       }
       return params;
+    },
+    refreshList(){
+        // console.log(">>>>>>>>>>>>>>>>> "+this.sectionAnneeScolaireId);
+        if(this.sectionAnneeScolaireId && this.eleveListId){
+            this.fetch();
+        }
     }
   },
   computed: {
@@ -140,6 +148,7 @@ export default {
       // var te = this.$store.getters.notes.length > 0;
       // console.log("le countNote est "+JSON.stringify(this.$store.getters.notes));
       // console.log("le countNote est "+te);
+      // console.log("la liste des notes"+JSON.stringify(this.$store.getters.notes[0]))
       return this.$store.getters.notes;
     },
     allnoteseleves() {
@@ -148,19 +157,22 @@ export default {
     pageCount() {
       return this.$store.getters.pageCount;
     },
-    classeListId() {
-      return this.$store.getters.classeId;
-    },
     eleveListId() {
       return this.$store.getters.eleveId;
+    },
+    sectionAnneeScolaireId(){
+        return this.$store.getters.sectionAnneeScolaireId;
     }
   },
   watch: {
-    classeListId() {
-      this.fetch();
-    },
     eleveListId() {
-      this.fetch();
+      // this.fetch();
+      this.refreshList();
+    },
+    sectionAnneeScolaireId(){
+        // console.log(this.sectionAnneeScolaireId);
+        // this.fetch();
+        this.refreshList();
     }
   }
 };

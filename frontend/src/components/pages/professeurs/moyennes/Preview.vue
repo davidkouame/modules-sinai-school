@@ -8,7 +8,7 @@
             <a href="#/">Accueil</a>
           </li>
           <li class="breadcrumb-item">
-            <a href="#/notes">Notes</a>
+            <a href="#/moyennes">Moyennes</a>
           </li>
           <li class="breadcrumb-item active" aria-current="page">Détailler une moyenne</li>
         </ol>

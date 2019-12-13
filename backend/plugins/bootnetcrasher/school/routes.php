@@ -13,3 +13,5 @@ Route::get('api/v1/notes-eleve/{eleve_id}', 'AhmadFatoni\ApiGenerator\Controller
 Route::get('api/v1/get-notes', 'AhmadFatoni\ApiGenerator\Controllers\API\noteController@getNotes');
 Route::get('api/v1/matieres-all', 'AhmadFatoni\ApiGenerator\Controllers\API\matiereController@all');
 Route::get('api/v1/notemodel-valeur', 'AhmadFatoni\ApiGenerator\Controllers\API\noteController@indexValeur');
+
+Route::put('api/v1/noteseleves-valeur/{eleve_id}/{note_id}', 'AhmadFatoni\ApiGenerator\Controllers\API\noteselevesController@addValueNote');

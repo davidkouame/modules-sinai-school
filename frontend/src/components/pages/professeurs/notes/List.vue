@@ -149,19 +149,22 @@ export default {
       countNotes: null,
       classeId: null,
       titleDropdownClasse: null
+      // sectionAnneeScolaireId: localStorage.getItem('sectionAnneeScolaireId')
     };
   },
   created() {
     this.fetch();
-    this.$store.dispatch('classes', [{'key': 'professeur_id', 
-    'value': localStorage.getItem('professeurId')}])
+    /*this.$store.dispatch('classes', [{'key': 'professeur_id', 
+    'value': localStorage.getItem('professeurId')}])*/
   },
   methods: {
     fetch(pageNum, search = null) {
       pageNum = pageNum == null ? 1 : pageNum;
       let params = [
         { key: "libelle", value: search },
-        { key: "classe_id", value: this.classeListId }
+        { key: "classe_id", value: this.classeListId },
+        { key: "professeur_id", value: localStorage.getItem('professeurId') },
+        { key: "section_annee_scolaire_id", value: this.sectionAnneeScolaireId }
       ];
       this.$store.dispatch("allnotes", {
         payload: pageNum,
@@ -195,6 +198,11 @@ export default {
         this.classeId = classe.classe.id;
       }
     },
+    refreshList(){
+        if(this.classeListId && this.sectionAnneeScolaireId){
+            this.fetch();
+        }
+    }
   },
   computed: {
     notes() {
@@ -213,15 +221,26 @@ export default {
     },
     classes () {
       return this.$store.getters.classes
+    },
+    sectionAnneeScolaireId(){
+        return this.$store.getters.sectionAnneeScolaireId;
     }
   },
   watch: {
     classeListId() {
-      this.fetch();
+      // this.fetch();
+      this.refreshList();
     },
     classes(){
-      this.titleDropdownClasse = this.classes[0].classe.libelle;
-      this.$store.dispatch('classeId', this.classes[0].classe.id);
+      if(this.classes){
+        this.titleDropdownClasse = this.classes[0].classe.libelle;
+        this.$store.dispatch('classeId', this.classes[0].classe.id);
+        }
+    },
+    sectionAnneeScolaireId(){
+        // console.log(this.sectionAnneeScolaireId);
+        // this.fetch();
+        this.refreshList();
     }
   }
 };

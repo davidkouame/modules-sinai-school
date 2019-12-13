@@ -1,0 +1,11 @@
+columns:
+    libelle:
+        label: Libellé
+        type: text
+        searchable: true
+    typeanneescolaire:
+        label: Type d'année scolaire
+        type: text
+        searchable: true
+        select: libelle
+        relation: typeanneescolaire

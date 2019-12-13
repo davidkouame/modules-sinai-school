@@ -9,6 +9,7 @@ export default {
     note: null,
     pageCount: 1,
     pageCountNote: 1,
+    pageCountSection: 1,
     userId: 6,
     classe: null,
     absenceseleves: [],
@@ -28,9 +29,12 @@ export default {
     matiere: null,
     parent: null,
     moyennes: null,
+    moyenneAnnuelle: null,
+    moyennesSections: null,
     moyenne: null,
     valeurs: null,
-    endpoint: 'http://localhost:8888/modules-sinai-school/backend/'
+    endpoint: 'http://localhost:8888/modules-sinai-school/backend/',
+    // endpoint: 'http://monsitenet.com/modules-sinai-school/backend/'
   },
   mutations: {
     notes(state, payload) {
@@ -47,6 +51,9 @@ export default {
     },
     pageCountNote(state, payload) {
       state.pageCountNote = payload
+    },
+    pageCountSection(state, payload) {
+      state.pageCountSection = payload
     },
     classe(state, classe) {
       state.classe = classe
@@ -102,6 +109,12 @@ export default {
     moyennes(state, moyennes){
       state.moyennes = moyennes
     },
+    moyenneAnnuelle(state, moyenneAnnuelle){
+      state.moyenneAnnuelle = moyenneAnnuelle
+    },
+    moyennesSections(state, moyennesSections){
+      state.moyennesSections = moyennesSections
+    },
     moyenne(state, moyenne){
       state.moyenne = moyenne
     },
@@ -118,6 +131,9 @@ export default {
     },
     pageCount: state => {
       return state.pageCount
+    },
+    pageCountSection: state => {
+      return state.pageCountSection
     },
     pageCountNote: state => {
       return state.pageCountNote
@@ -181,6 +197,12 @@ export default {
     },
     moyennes: state => {
       return state.moyennes
+    },
+    moyennesSections: state => {
+      return state.moyennesSections
+    },
+    moyenneAnnuelle: state => {
+      return state.moyenneAnnuelle
     },
     moyenne: state => {
       return state.moyenne
@@ -645,6 +667,61 @@ export default {
         .then(response => {
           context.commit('moyennes', response.data.data.data);
           context.commit('pageCount', response.data.data.last_page);
+        })
+        .catch(error => {
+          console.log(error)
+          this.errored = true
+        })
+        .finally(() => (this.loading = false))
+    },
+    moyennesSections(context, params) {
+      let concatParams = null
+      if (params.search) {
+        concatParams = params.search.map(function (elemen) {
+            return elemen.key + '=' + elemen.value
+        }).join('&');
+      }
+      let url = null;
+      if(concatParams){
+        url = context.state.endpoint + 'api/v1/moyennes?' + concatParams
+      }else{
+        url = context.state.endpoint + 'api/v1/moyennes/'
+      }
+       // console.log("&&&&&&&&&&&&&&&&&&&&");
+      Axios.get(
+        url
+      )
+        .then(response => {
+              // console.log(">>>>>>>>>>>>>>>>>> "+JSON.stringify(response.data.data.data));
+          context.commit('moyennesSections', response.data.data.data);
+          context.commit('pageCountSection', response.data.data.last_page);
+        })
+        .catch(error => {
+          console.log(error)
+          this.errored = true
+        })
+        .finally(() => (this.loading = false))
+    },
+    moyenneAnnuelle(context, params) {
+      let concatParams = null
+      if (params.search) {
+        concatParams = params.search.map(function (elemen) {
+            return elemen.key + '=' + elemen.value
+        }).join('&');
+      }
+      let url = null;
+      if(concatParams){
+        url = context.state.endpoint + 'api/v1/moyennes?' + concatParams
+      }else{
+        url = context.state.endpoint + 'api/v1/moyennes/'
+      }
+       // console.log("&&&&&&&&&&&&&&&&&&&&");
+      Axios.get(
+        url
+      )
+        .then(response => {
+              // console.log(">>>>>>>>>>>>>>>>>> "+JSON.stringify(response.data.data.data));
+          context.commit('moyenneAnnuelle', response.data.data.data);
         })
         .catch(error => {
           console.log(error)

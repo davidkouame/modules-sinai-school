@@ -5,18 +5,6 @@ plugin:
     icon: oc-icon-adjust
     homepage: ''
 navigation:
-    # actualites:
-    #     label: Actualites
-    #     url: bootnetcrasher/school/actualitecontroller
-    #     icon: icon-arrow-right
-    # examens:
-    #     label: Examens
-    #     url: bootnetcrasher/school/examencontroller
-    #     icon: icon-life-ring
-    # clubs:
-    #     label: Clubs
-    #     url: bootnetcrasher/school/clubcontroller
-    #     icon: icon-life-ring
     professeurs:
         label: Professeurs
         url: bootnetcrasher/school/professeurcontroller
@@ -29,46 +17,46 @@ navigation:
         label: Classes
         url: bootnetcrasher/school/classecontroller
         icon: icon-life-ring
-    # sujets:
-    #     label: Sujets
-    #     url: bootnetcrasher/school/sujetcontroller
-    #     icon: icon-life-ring
-    # organigrame:
-    #     label: Organigrames
-    #     url: bootnetcrasher/school/organigramecontroller
-    #     icon: icon-life-ring
+    anneescolaires:
+        label: 'Années scolaire'
+        url: bootnetcrasher/school/anneescolairecontroller
+        icon: icon-life-ring
     main-menu-item:
         label: Eleves
         url: bootnetcrasher/school/elevecontroller
         icon: icon-adjust
     absenceeleve:
-        label: Absences élèves
+        label: 'Absences élèves'
         url: bootnetcrasher/school/absenceelevecontroller
         icon: icon-adjust
     classeeleve:
-        label: Classe Eleve
+        label: 'Classe Eleve'
         url: bootnetcrasher/school/classeelevecontroller
         icon: icon-arrow-right
-    #professeurclasse:
-    #    label: Professeur Classe
-    #    url: bootnetcrasher/school/professeurclassecontroller
-    #    icon: icon-arrow-right
     parent:
         label: Parents
         url: bootnetcrasher/school/parentcontroller
         icon: icon-arrow-right
-    #parenteleve:
-    #    label: Parents Elèves
-    #    url: bootnetcrasher/school/parentelevecontroller
-    #    icon: icon-arrow-right
     parametres:
         label: Paramètres
         url: bootnetcrasher/school/indexcontrollerparametre
         icon: icon-life-ring
         sideMenu:
+            sectionsanneescolaire:
+                label: 'Section année scolaire'
+                url: bootnetcrasher/school/sectionanneescolairecontroller
+                icon: icon-sitemap
+            sessionuserapp:
+                label: 'Session user app'
+                url: bootnetcrasher/school/sessionuserappcontroller
+                icon: icon-sitemap
             matieres:
                 label: Matière
                 url: bootnetcrasher/school/matierecontroller
+                icon: icon-sitemap
+            typesanneescolaire:
+                label: 'Types d''année scolaire'
+                url: bootnetcrasher/school/typeanneescolairecontroller
                 icon: icon-sitemap
             typesmatiere:
                 label: 'Type matière'
@@ -86,6 +74,10 @@ navigation:
                 label: Niveaux
                 url: bootnetcrasher/school/niveauclassecontroller
                 icon: icon-life-ring
+            typemoyenne:
+                label: 'Types moyennes'
+                url: bootnetcrasher/school/typemoyennecontroller
+                icon: icon-list
     notes:
         label: Notes
         url: bootnetcrasher/school/indexcontrollernote

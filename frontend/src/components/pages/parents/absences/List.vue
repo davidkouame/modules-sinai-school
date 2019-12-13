@@ -66,7 +66,7 @@ export default {
     }
   },
   created () {
-    this.fetch()
+    this.refreshList()
   },
   methods: {
     fetch (pageNum, search = null) {
@@ -74,7 +74,8 @@ export default {
       let params = [
       {key: 'libelle', value: search},
       {key: 'parent_id', value: localStorage.getItem('parentId')},
-      {key: 'eleve_id', value: this.eleveListId},];
+      {key: 'eleve_id', value: this.eleveListId},
+        { key: "section_annee_scolaire_id", value: this.sectionAnneeScolaireId }];
       this.$store.dispatch('absenceselevesprofesseur', 
       {payload: pageNum, search: this.trimSearch(params)})
     },
@@ -93,6 +94,12 @@ export default {
         }
       }
       return params;
+    },
+    refreshList(){
+        console.log(">>>>>>>>>>>>>>>>> "+this.sectionAnneeScolaireId);
+        if(this.sectionAnneeScolaireId && this.eleveListId){
+            this.fetch();
+        }
     }
   },
   computed: {
@@ -103,19 +110,21 @@ export default {
     pageCount () {
       return this.$store.getters.pageCount
     }, 
-    classeListId(){
-      return this.$store.getters.classeId
-    },
     eleveListId(){
       return this.$store.getters.eleveId
+    },
+    sectionAnneeScolaireId(){
+        return this.$store.getters.sectionAnneeScolaireId;
     }
   },
   watch:{
-    classeListId(){
-      this.fetch();
-    },
     eleveListId(){
-      this.fetch();
+      this.refreshList();
+    },
+    sectionAnneeScolaireId(){
+        // console.log(this.sectionAnneeScolaireId);
+        // this.fetch();
+        this.refreshList();
     }
   }
 

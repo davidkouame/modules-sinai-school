@@ -1,0 +1,5 @@
+columns:
+    libelle:
+        label: Libellé
+        type: text
+        searchable: true

@@ -1,0 +1,10 @@
+name: TypeMoyenneController
+form: $/bootnetcrasher/school/models/typemoyennemodel/fields.yaml
+modelClass: BootnetCrasher\School\Models\TypeMoyenneModel
+defaultRedirect: bootnetcrasher/school/typemoyennecontroller
+create:
+    redirect: 'bootnetcrasher/school/typemoyennecontroller/update/:id'
+    redirectClose: bootnetcrasher/school/typemoyennecontroller
+update:
+    redirect: bootnetcrasher/school/typemoyennecontroller
+    redirectClose: bootnetcrasher/school/typemoyennecontroller

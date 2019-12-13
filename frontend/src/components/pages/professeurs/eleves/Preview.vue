@@ -344,7 +344,7 @@
                       ></paginate>
                     </div>
                     <span v-if="moyenneEleve">Moyenne : {{ formatMoyenne(moyenneEleve.valeur) }} / 20</span>
-                    <a class="btn btn-primary">valider</a>
+                    <!--<a class="btn btn-primary">valider</a>-->
                   </div>
                 </div>
               </div>
@@ -450,9 +450,9 @@
                       ></modal>
 
                       <!-- Pagination -->
-                      <div class="float-right pagi" v-if="pageCount > 1">
+                      <div class="float-right pagi" v-if="pageCountAbsence > 1">
                         <paginate
-                          :page-count="pageCount"
+                          :page-count="pageCountAbsence"
                           :click-handler="fetchAbsence"
                           :prev-text="'&laquo;'"
                           :next-text="'&raquo;'"
@@ -581,6 +581,10 @@ export default {
     },
     pageCount() {
       return this.$store.getters.pageCount;
+    },
+    pageCountAbsence() {
+      console.log("le page count absence est de "+this.$store.getters.pageCountAbsence);
+      return this.$store.getters.pageCountAbsence;
     },
     pageCountNote() {
       return this.$store.getters.pageCountNote;

@@ -105,3 +105,33 @@
 1.0.36:
     - 'Created table bootnetcrasher_school_parent_eleve'
     - builder_table_create_bootnetcrasher_school_parent_eleve.php
+1.0.37:
+    - 'Created table bootnetcrasher_school_annee_scolaire'
+    - builder_table_create_bootnetcrasher_school_annee_scolaire.php
+1.0.38:
+    - 'Updated table bootnetcrasher_school_annee_scolaire'
+    - builder_table_update_bootnetcrasher_school_annee_scolaire.php
+1.0.39:
+    - 'Updated table bootnetcrasher_school_annee_scolaire'
+    - builder_table_update_bootnetcrasher_school_annee_scolaire_2.php
+1.0.40:
+    - 'Created table bootnetcrasher_school_section_annee_scolaire'
+    - builder_table_create_bootnetcrasher_school_section_annee_scolaire.php
+1.0.41:
+    - 'Updated table bootnetcrasher_school_section_annee_scolaire'
+    - builder_table_update_bootnetcrasher_school_section_annee_scolaire.php
+1.0.42:
+    - 'Updated table bootnetcrasher_school_absence'
+    - builder_table_update_bootnetcrasher_school_absence.php
+1.0.43:
+    - 'Created table bootnetcrasher_school_session_user_app'
+    - builder_table_create_bootnetcrasher_school_session_user_app.php
+1.0.44:
+    - 'Created table bootnetcrasher_school_type_moyenne'
+    - builder_table_create_bootnetcrasher_school_type_moyenne.php
+1.0.45:
+    - 'Updated table bootnetcrasher_school_moyenne'
+    - builder_table_update_bootnetcrasher_school_moyenne.php
+1.0.46:
+    - 'Updated table bootnetcrasher_school_moyenne'
+    - builder_table_update_bootnetcrasher_school_moyenne_2.php

@@ -82,7 +82,8 @@ export default {
       raisonabsence: null,
       commentaire: null,
       heure_debut_cours: null,
-      heure_fin_cours: null
+      heure_fin_cours: null,
+      sectionAnneeScolaireId: localStorage.getItem('sectionAnneeScolaireId')
     };
   },
   created() {
@@ -104,6 +105,7 @@ export default {
       data.append("raisonabsence_id", this.raisonabsence);
       data.append("eleve_id", this.eleve);
       data.append("commentaire", this.commentaire);
+      data.append("section_annee_scolaire_id", this.sectionAnneeScolaireId);
       let store = this.$store;
       store
         .dispatch("saveAgence", data)

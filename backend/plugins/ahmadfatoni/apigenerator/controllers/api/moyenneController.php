@@ -27,10 +27,34 @@ class moyenneController extends Controller
             },
             'matiere' => function($query){
                 $query->select('*');
+            },
+            'sectionanneescolaire' => function($query){
+                $query->select('*');
+            },
+            'anneescolaire' => function($query){
+                $query->select('*');
             }
         ));
         foreach($request->except('page', 'classe_id') as $key => $value){
-            $data = $data->where($key, $value);
+            if($key == "annee_scolaire_id"){
+                if($request->has('type_moyenne_id') && 
+                        $request->get('type_moyenne_id') == 1){
+                    $data = $data->where($key, $value);
+                }else{
+                    $data = $data->whereHas('sectionanneescolaire', function ($query) use($request) {
+                        $query->where('annee_scolaire_id', $request->get('annee_scolaire_id'))
+                           ->select('*');
+                    });
+                }
+            }elseif ($key == "professeur_id" && $request->has('classe_id')) {
+                $data = $data->whereHas('classes', function ($query) use($request) {
+                    $query->where('classe_id', $request->get('classe_id'))
+                          ->where('professeur_id', $request->get('professeur_id'))
+                          ->select('*');
+                });
+            }else{
+                $data = $data->where($key, $value);
+            }
         }
         if($request->has('classe_id')){
             $data = $data->whereHas('eleve', function ($query) use($request) {
@@ -40,6 +64,7 @@ class moyenneController extends Controller
             });
         }
         $data = $data->paginate(10)->toArray();
+        // dd($data);
         return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
     }
     

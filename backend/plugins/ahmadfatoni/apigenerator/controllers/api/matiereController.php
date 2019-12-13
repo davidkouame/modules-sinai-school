@@ -63,6 +63,16 @@ class matiereController extends Controller
                 );
             }elseif($key == "libelle"){
                 $data = $data->where($key, 'like', '%'.$value.'%');
+            }elseif($key == "annee_scolaire_id"){
+                $classeeleve = ClasseEleveModel::where('eleve_id', $value)->first();
+                $classe_id = $classeeleve ? $classeeleve->classe_id : null;
+                $data = $data->whereHas(
+                    'classematiere', function($query) use($request){
+                        $query->where('annee_scolaire_id', $request->get('annee_scolaire_id'))
+                                ->select('*');
+                    }
+                );
+                // $data = $data->where($key, 'like', '%'.$value.'%');
             }else{
                 $data = $data->where($key, $value);
             }
@@ -128,6 +138,8 @@ class matiereController extends Controller
     public function show($id){
         $data = $this->MatiereModel->with(array(
             'typematiere' => function($query){
+                $query->select('*');
+            },'classematiere' => function($query){
                 $query->select('*');
             }
         ))->where('id',$id)->first();

@@ -3,6 +3,8 @@
 use System\Classes\PluginBase;
 use BootnetCrasher\School\Models\MoyenneModel;
 use Bootnetcrasher\School\Classes\CalculMoyenne;
+use Bootnetcrasher\School\Classes\Rang;
+use Bootnetcrasher\School\Classes\CleanerDatabaseTest;
 
 use Queue;
 
@@ -48,6 +50,12 @@ class Plugin extends PluginBase
         });
         // trace_log("bfhsdbfhdsfd");
         // Queue::push(CalculMoyenne::class, '');
-        Queue::push(CalculMoyenne::class, '');
+        Queue::push(Rang::class, '');
+        // Queue::push(CleanerDatabaseTest::class, '');
+    }
+    
+    public function register()
+    {
+        // $this->registerConsoleCommand('school.seeder', 'Bootnetcrasher\School\Console\Seeder');
     }
 }

@@ -1,8 +1,6 @@
 columns:
-    users:
+    name:
         label: Nom
         type: text
         searchable: true
-        select: name
-        relation: users
 

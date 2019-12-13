@@ -19,7 +19,7 @@
           <div class="card">
             <!-- Titre de la page -->
             <div class="card-header">
-              <h4 class="card-title">Liste des élèves</h4>
+              <h4 class="card-title">Liste des élèves {{ classeListId }}</h4>
             </div>
 
             <div class="card-body">
@@ -130,7 +130,10 @@ export default {
       absenceid: null,
       countEleves: null,
       titleDropdownClasse: null,
-      countAbsences: null
+      countAbsences: null,
+      classeId: null
+      // sectionAnneeScolaireId: localStorage.getItem('sectionAnneeScolaireId'),
+      // anneeScolaireId: localStorage.getItem('anneeScolaireId')
     };
   },
   created() {
@@ -142,7 +145,8 @@ export default {
       let params = [
         { key: "matricule", value: search },
         { key: "name", value: search },
-        { key: "classe_id", value: this.classeListId }
+        { key: "classe_id", value: this.classeListId },
+        { key: "annee_scolaire_id", value: this.anneeScolaireId }
       ];
       this.$store.dispatch("getElevesByClasseId", {
         payload: pageNum,
@@ -173,19 +177,23 @@ export default {
       }
       return params;
     },
-    classes () {
-      return this.$store.getters.classes
-    },
     changeClasse(classe){
+        // console.log("check classe "+JSON.stringify(classe));
       if(classe == 0){
         this.$store.dispatch('classeId', null);
         this.titleDropdownClasse = "Classes";
         this.classeId = 0;
       }else{
+        console.log("check classe est "+ JSON.stringify(classe.classe.id));
         this.$store.dispatch('classeId', classe.classe.id);
         this.titleDropdownClasse = classe.classe.libelle ;
         this.classeId = classe.classe.id;
       }
+    },
+    refreshList(){
+        if(this.classeListId && this.anneeScolaireId){
+            this.fetch();
+        }
     }
   },
   computed: {
@@ -202,15 +210,28 @@ export default {
     },
     classes () {
       return this.$store.getters.classes
+    },
+    anneeScolaireId(){
+        return this.$store.getters.anneeScolaireId ? this.$store.getters.anneeScolaireId : 
+        localStorage.getItem('anneeScolaireId');
     }
   },
   watch: {
     classeListId() {
-      this.fetch();
+    console.log("la valeur >> "+ this.anneeScolaireId);
+      // this.fetch();
+      this.refreshList();
     },
     classes(){
+        if(this.classes){
       this.titleDropdownClasse = this.classes[0].classe.libelle;
       this.$store.dispatch('classeId', this.classes[0].classe.id);
+        }
+    },
+    anneeScolaireId(){
+        // console.log(this.sectionAnneeScolaireId);
+        // this.fetch();
+        this.refreshList();
     }
   }
 };

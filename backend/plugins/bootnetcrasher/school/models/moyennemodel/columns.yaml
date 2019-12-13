@@ -11,6 +11,12 @@ columns:
         searchable: true
         select: libelle
         relation: matiere
+    typemoyenne:
+        label: Type de la moyenne
+        type: text
+        searchable: true
+        select: libelle
+        relation: typemoyenne
     valeur:
         label: Valeur
         type: text

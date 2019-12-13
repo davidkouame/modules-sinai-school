@@ -27,6 +27,13 @@ class MoyenneModel extends Model
 
     public $belongsTo = [
         'eleve' => ['BootnetCrasher\School\Models\EleveModel', 'key' => 'eleve_id', 'otherKey' => 'id'],
-        'matiere' => ['BootnetCrasher\School\Models\MatiereModel', 'key' => 'matiere_id', 'otherKey' => 'id']
+        'typemoyenne' => ['BootnetCrasher\School\Models\TypeMoyenneModel', 'key' => 'type_moyenne_id', 'otherKey' => 'id'],
+        'matiere' => ['BootnetCrasher\School\Models\MatiereModel', 'key' => 'matiere_id', 'otherKey' => 'id'],
+        'sectionanneescolaire' => ['BootnetCrasher\School\Models\SectionAnneeScolaireModel', 'key' => 'section_annee_scolaire_id', 'otherKey' => 'id'],
+        'anneescolaire' => ['BootnetCrasher\School\Models\AnneeScolaireModel', 'key' => 'annee_scolaire_id', 'otherKey' => 'id']
+    ];
+    
+    public $hasMany = [
+        'classes' => ['BootnetCrasher\School\Models\ClasseMatiereModel', 'key' => 'classe_id', 'otherKey' => 'classe_id']
     ];
 }

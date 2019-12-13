@@ -70,6 +70,12 @@
                                       <input v-model="matiere.typematiere.libelle" type="text" class="form-control" disabled />
                                     </div>
                                 </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">Coefficient</label>
+                                    <div class="col-sm-10">
+                                      <input type="text" class="form-control" v-model="coefficient" disabled />
+                                    </div>
+                                </div>
                                 <a @click="$router.go(-1)" class="float-right btn btn-danger">retour</a>
                             </form>
                         </div>
@@ -212,7 +218,9 @@ export default {
       eleve_id: 1,
       elevenote: "",
       selected: 1,
-      countNotes: false
+      countNotes: false,
+      classeId: null,
+      coefficient: null
     };
   },
   created() {
@@ -231,6 +239,9 @@ export default {
     },
     classesprofesseursmatieres() {
       return this.$store.getters.classesprofesseursmatieres;
+    },
+    pageCount() {
+      return this.$store.getters.pageCount;
     }
   },
   methods: {
@@ -272,6 +283,20 @@ export default {
     },
     searchNote () {
       this.fetchMatiereNote(null, this.searchkeys)
+    },
+    getCoefficientMatiere(){
+        let coefficient = null;
+        let classeId = this.classeId;
+        if(classeId){
+            this.matiere.classematiere.find(function(element){
+                if(element.classe_id ==  classeId){
+                    coefficient = element.coefficient;
+                    // console.log(">>>>>>>>>>> "+JSON.stringify(element.coefficient));
+                }
+            })
+            // console.log(">>>>>>>>>>> "+JSON.stringify(this.matiere.classematiere));
+        }
+        this.coefficient = coefficient;
     }
   },
   watch: {
@@ -280,10 +305,12 @@ export default {
       this.username = professeur.nom;
       this.tel = professeur.tel;
       this.email = professeur.email;
-      console.log(
+      this.classeId = this.classesprofesseursmatieres[0].classe_id;
+      /*console.log(
         "classes professeurs classes" +
-          JSON.stringify(this.classesprofesseursmatieres[0].professeur)
-      );
+          JSON.stringify(this.classesprofesseursmatieres[0].classe_id)
+      );*/
+      this.getCoefficientMatiere();
     }
   }
 };

@@ -52,11 +52,23 @@ return [
             'prefix'   => '',
         ],
 
-        'mysql' => [
+        /*'mysql' => [
             'driver'    => 'mysql',
             'host'      => 'localhost',
             'port'      => 3306,
             'database'  => 'modulesinaischool',
+            'username'  => 'dks',
+            'password'  => '29121990marie',
+            'charset'   => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix'    => '',
+        ],*/
+        
+        'mysql' => [
+            'driver'    => 'mysql',
+            'host'      => 'localhost',
+            'port'      => 3306,
+            'database'  => 'modulesinaischooltest',
             'username'  => 'dks',
             'password'  => '29121990marie',
             'charset'   => 'utf8mb4',

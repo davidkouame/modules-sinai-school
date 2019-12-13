@@ -1,0 +1,22 @@
+fields:
+    libelle:
+        label: Libellé
+        span: auto
+        type: text
+    anneescolaire:
+        label: Année Scolaire
+        nameFrom: libelle
+        descriptionFrom: description
+        span: auto
+        type: relation
+        placeholder: Sélectionner une année scolaire
+    start:
+        label: 'Date de début'
+        mode: date
+        span: auto
+        type: datepicker
+    end:
+        label: 'Date de fin'
+        mode: date
+        span: auto
+        type: datepicker

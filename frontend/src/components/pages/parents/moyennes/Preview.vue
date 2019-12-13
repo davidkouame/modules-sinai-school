@@ -23,7 +23,7 @@
             </div>
             <div class="card-body">
               <form v-if="moyenne">
-                <div class="form-group row">
+                <!--<div class="form-group row">
                   <label class="col-sm-2 col-form-label">Matricule</label>
                   <div class="col-sm-10">
                     <input type="text" class="form-control" v-model="moyenne.eleve.matricule" disabled/>
@@ -58,7 +58,7 @@
                     <div class="col-sm-10">
                         <input type="text" class="form-control" v-bind:value="formatMoyenne(moyenne.coefficient_matiere*moyenne.valeur, 4)" disabled/>
                     </div>
-                </div>
+                </div>-->
 
                 <table class="table table-hover table-striped">
                       <thead>
@@ -153,7 +153,8 @@ export default {
       pageNum = pageNum == null ? 1 : pageNum;
       this.$store.dispatch("allnotesandvaleur", {
           payload: pageNum,
-          search: [{ key: "eleve_id", value: localStorage.getItem('eleveId') }]
+          search: [{ key: "eleve_id", value: localStorage.getItem('eleveId') },
+                    { key: "matiere_id", value: this.moyenne.matiere_id }]
         });
     },
     formatMoyenne(moy, coef = 1){

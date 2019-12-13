@@ -37,7 +37,7 @@ class noteController extends Controller
                     }
                 ));
             } ));
-
+            
         foreach($request->except(['page']) as $key => $value){
             if($key == "libelle"){
                 $data = $data->where($key, 'like', '%'.$value.'%');
@@ -58,6 +58,11 @@ class noteController extends Controller
                 $data = $data->where($key, $value);
             }
         }
+        
+        if(!$request->has('professeur_id')){
+            $data = $data->where('professeur_id', 0);
+        }
+        
         $data = $data->paginate(10)->toArray();
         return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
     }
@@ -134,6 +139,10 @@ class noteController extends Controller
             }elseif($key == "matiere_id"){
                 $data = $data->whereHas('note', function ($query) use($request, $key) {
                     $query->where($key,$request->get('matiere_id'));
+                });
+            }elseif($key == "section_annee_scolaire_id"){
+                $data = $data->whereHas('note', function ($query) use($request, $key) {
+                    $query->where($key,$request->get('section_annee_scolaire_id'));
                 });
             }else{
                 $data = $data->where($key, $value);

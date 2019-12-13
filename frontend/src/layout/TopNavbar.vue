@@ -60,17 +60,15 @@
                 @click="changeEleve(eleve)">{{ eleve.user.name }}
                 <i class="fa fa-check"  :class="{check:eleve.id == eleveId}" ></i>
             </a>
-            <div class="divider"></div>
             <!--<a class="dropdown-item" href="javascript:void(0)" @click="changeEleve(0)">All</a>-->
           </base-dropdown>
 
-          <base-dropdown v-bind:title="titleDropdownClasse" v-if="professeurId">
-            <a v-for="classe in classes" class="dropdown-item" href="javascript:void(0)" @click="changeClasse(classe)">
-              {{ classe.classe.libelle }}
-              <i class="fa fa-check"  :class="{check:classe.classe.id == classeId}" ></i>
+          <base-dropdown v-bind:title="titleDropdownSection" v-if="sectionsanneescolaire">
+            <a v-for="section in sectionsanneescolaire" class="dropdown-item" 
+                href="javascript:void(0)" @click="changeSectionAnneeScolaire(section)">
+              {{ section.libelle }}
+              <i class="fa fa-check"  :class="{check:section.id == sectionAnneeScolaireId}" ></i>
             </a>
-            <div class="divider"></div>
-            <a class="dropdown-item" href="javascript:void(0)" @click="changeClasse(0)">All</a>
           </base-dropdown>
 
           <li class="nav-item">
@@ -93,6 +91,9 @@ export default {
     },
     classes () {
       return this.$store.getters.classes
+    },
+    sectionsanneescolaire(){
+      return this.$store.getters.sectionsanneescolaire;
     }
   },
   data() {
@@ -105,16 +106,22 @@ export default {
       titleDropdownClasse: "Classes",
       parentId: localStorage.getItem('parentId') != "null",
       professeurId: localStorage.getItem('professeurId') != "null",
-      classeId: null
+      classeId: null,
+      sectionAnneeScolaireId: null,
+      titleDropdownSection: null
     };
   },
   created() {
+    // console.log("la valeur de section id a la création est "+this.sectionAnneeScolaireId);
     if(localStorage.getItem('parentId') && localStorage.getItem('parentId')!="null"){
       this.$store.dispatch('loadElevesByProfesseurId', 
       localStorage.getItem('parentId'));
     }else{
-      this.$store.dispatch('classes', [{'key': 'professeur_id', 'value': localStorage.getItem('professeurId')}])
+      this.$store.dispatch('classes', [{'key': 'professeur_id', 'value': localStorage.getItem('professeurId')},
+        {'key': 'annee_scolaire_id', 'value': localStorage.getItem('anneeScolaireId')}])
+      
     }
+    this.$store.dispatch('sectionsanneescolaire', [{'key': 'annee_scolaire_id', 'value': localStorage.getItem('anneeScolaireId')}])
   },
   methods: {
     capitalizeFirstLetter(string) {
@@ -142,8 +149,8 @@ export default {
     },
     changeEleve(eleve){
       this.$store.dispatch('eleveId', eleve.id);
-        this.titleDropdown = eleve.user.name;
-        this.eleveId = eleve.id;
+      this.titleDropdown = eleve.user.name;
+      this.eleveId = eleve.id;
     },
     changeClasse(classe){
       if(classe == 0){
@@ -155,13 +162,57 @@ export default {
         this.titleDropdownClasse = classe.classe.libelle ;
         this.classeId = classe.classe.id;
       }
+    },
+    changeSectionAnneeScolaire(section){
+        this.$store.dispatch('sectionAnneeScolaireId', section.id);
+        this.titleDropdownSection = section.libelle ;
+        this.sectionAnneeScolaireId = section.id;
+        localStorage.setItem('sectionAnneeScolaireId', section.id);
+        // localStorage.setItem('anneeScolaireId', section.annee_scolaire_id);
+        // this.$router.push('#/dashboard');
+        this.$router.push({ path: '/dashboard' })
     }
   },
   watch: {
     eleves() {
-        this.eleveId = this.eleves[0].id;
-      this.$store.dispatch('eleveId', this.eleves[0].id);
-      this.titleDropdown = this.eleves[0].user.name;
+        if(this.parentId){
+            this.eleveId = this.eleves[0].id;
+            this.$store.dispatch('eleveId', this.eleves[0].id);
+            this.titleDropdown = this.eleves[0].user ? this.eleves[0].user.name : null;
+        }
+    },
+    sectionsanneescolaire(){
+       // console.log(">>>>>>> "+JSON.stringify(this.sectionsanneescolaire));
+       // this.sectionAnneeScolaire = this.$store.getters.sectionsanneescolaire[0].id;
+       // this.titleDropdownSection = this.$store.getters.sectionsanneescolaire[0].libelle;
+       let sectionAnneeScolaireId = localStorage.getItem('sectionAnneeScolaireId');
+        if(this.$store.getters.sectionsanneescolaire){
+            if(sectionAnneeScolaireId!=-1){
+                var sectionAnneeScolaire = this.sectionsanneescolaire.find(function(element) { 
+                    if(element.id==sectionAnneeScolaireId){
+                        return element;
+                    }
+                });
+                // console.log("la section d'annee recherche est "+JSON.stringify(sectionAnneeScolaire))
+                this.sectionAnneeScolaireId = sectionAnneeScolaire.id;
+                localStorage.setItem('sectionAnneeScolaireId', sectionAnneeScolaire.id);
+                this.$store.dispatch('sectionAnneeScolaireId', sectionAnneeScolaire.id);
+                this.$store.dispatch('anneeScolaireId', sectionAnneeScolaire.annee_scolaire_id);
+                this.titleDropdownSection = sectionAnneeScolaire.libelle;
+                // console.log("la valeur de section annee scolaire enregistre dans le stockage est "+JSON.stringify(sectionAnneeScolaire));
+            }else{
+                this.sectionAnneeScolaireId = this.$store.getters.sectionsanneescolaire[0].id;
+                this.titleDropdownSection = this.$store.getters.sectionsanneescolaire[0].libelle;
+                localStorage.setItem('sectionAnneeScolaireId', this.sectionAnneeScolaireId);
+                localStorage.setItem('anneeScolaireId', this.$store.getters.sectionsanneescolaire[0].annee_scolaire_id);
+                this.$store.dispatch('sectionAnneeScolaireId', this.sectionAnneeScolaireId);
+                this.$store.dispatch('anneeScolaireId', this.$store.getters.sectionsanneescolaire[0].annee_scolaire_id);
+            }
+        }else{
+            localStorage.setItem('sectionAnneeScolaireId', -1);
+            this.$store.dispatch('sectionAnneeScolaireId', -1);
+        }
+        // console.log("la valeur de section id lors du changement est "+this.sectionAnneeScolaireId);
     }
   }
 };

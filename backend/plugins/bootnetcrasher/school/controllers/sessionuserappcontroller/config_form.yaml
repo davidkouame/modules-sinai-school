@@ -1,0 +1,10 @@
+name: SessionUserAppController
+form: $/bootnetcrasher/school/models/sessionuserappmodel/fields.yaml
+modelClass: BootnetCrasher\School\Models\SessionUserAppModel
+defaultRedirect: bootnetcrasher/school/sessionuserappcontroller
+create:
+    redirect: 'bootnetcrasher/school/sessionuserappcontroller/update/:id'
+    redirectClose: bootnetcrasher/school/sessionuserappcontroller
+update:
+    redirect: bootnetcrasher/school/sessionuserappcontroller
+    redirectClose: bootnetcrasher/school/sessionuserappcontroller

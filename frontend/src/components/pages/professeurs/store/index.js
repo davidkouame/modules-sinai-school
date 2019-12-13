@@ -8,6 +8,7 @@ export default {
     noteseleves: [],
     note: null,
     pageCount: 1,
+    pageCountSection: 1,
     pageCountNote: 1,
     userId: 6,
     classe: null,
@@ -28,10 +29,12 @@ export default {
     matiere: null,
     parent: null,
     moyennes: null,
+    moyennesSections: null,
     moyenne: null,
     valeurs: null,
     rapportvalidation: null,
-    endpoint: 'http://localhost:8888/modules-sinai-school/backend/'
+    endpoint: 'http://localhost:8888/modules-sinai-school/backend/',
+    // endpoint: 'http://monsitenet.com/modules-sinai-school/backend/'
   },
   mutations: {
     notes(state, payload) {
@@ -45,6 +48,9 @@ export default {
     },
     pageCount(state, payload) {
       state.pageCount = payload
+    },
+    pageCountSection(state, pageCountSection) {
+      state.pageCountSection = pageCountSection
     },
     pageCountNote(state, payload) {
       state.pageCountNote = payload
@@ -103,6 +109,9 @@ export default {
     moyennes(state, moyennes){
       state.moyennes = moyennes
     },
+    moyennesSections(state, moyennesSections){
+      state.moyennesSections = moyennesSections
+    },
     moyenne(state, moyenne){
       state.moyenne = moyenne
     },
@@ -122,6 +131,9 @@ export default {
     },
     pageCount: state => {
       return state.pageCount
+    },
+    pageCountSection: state => {
+      return state.pageCountSection
     },
     pageCountNote: state => {
       return state.pageCountNote
@@ -185,6 +197,9 @@ export default {
     },
     moyennes: state => {
       return state.moyennes
+    },
+    moyennesSections: state => {
+      return state.moyennesSections
     },
     moyenne: state => {
       return state.moyenne
@@ -440,7 +455,7 @@ export default {
         { headers: { 'Content-Type': 'multipart/form-data' } }
       )*/
     },
-    absenceselevesP(context, data) {
+    /*absenceselevesP(context, data) {
       // console.log("information data "+JSON.stringify(data.))
       // console.log("information data "+data.params.eleveId);
       if (data && data.action == 'edit') {
@@ -466,7 +481,7 @@ export default {
         })
         .finally(() => (this.loading = false))
       }
-    },
+    },*/
     typesnotes(context) {
       Axios.get(
         context.state.endpoint + 'api/v1/typesnotes'
@@ -549,6 +564,7 @@ export default {
         .finally(() => (this.loading = false))
     },
     moyennes(context, params) {
+     // console.log("@@@@@@@@@@@@@@@@@@@@@");
       let concatParams = null
       if (params.search) {
         concatParams = params.search.map(function (elemen) {
@@ -567,6 +583,35 @@ export default {
         .then(response => {
           context.commit('moyennes', response.data.data.data);
           context.commit('pageCount', response.data.data.last_page);
+        })
+        .catch(error => {
+          console.log(error)
+          this.errored = true
+        })
+        .finally(() => (this.loading = false))
+    },
+    moyennesX(context, params) {
+           
+      let concatParams = null
+      if (params.search) {
+        concatParams = params.search.map(function (elemen) {
+            return elemen.key + '=' + elemen.value
+        }).join('&');
+      }
+      let url = null;
+      if(concatParams){
+        url = context.state.endpoint + 'api/v1/moyennes?' + concatParams
+      }else{
+        url = context.state.endpoint + 'api/v1/moyennes/'
+      }
+       console.log("&&&&&&&&&&&&&&&&&&&&");
+      Axios.get(
+        url
+      )
+        .then(response => {
+              console.log(">>>>>>>>>>>>>>>>>> "+JSON.stringify(response.data.data.data));
+          context.commit('moyennesSections', response.data.data.data);
+          context.commit('pageCountSection', response.data.data.last_page);
         })
         .catch(error => {
           console.log(error)
@@ -746,7 +791,7 @@ export default {
           { headers: { 'Content-Type': 'json' } }
         )
       } else {
-
+          // console.log("data is "+JSON.stringify(data));
         let concatParams = null
         if (data.search) {
           concatParams = data.search.map(function (elemen) {

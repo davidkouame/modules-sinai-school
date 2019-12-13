@@ -23,12 +23,14 @@ export default new Vuex.Store({
     // endpoint: 'http://localhost/modules-sinai-school/backend/',
     // endpoint: 'http://localhost/modules-sinai-school/backend/',
     endpoint: 'http://localhost:8888/modules-sinai-school/backend/',
+    // endpoint: 'http://monsitenet.com/modules-sinai-school/backend/',
     api: 'api/v1/note/',
     notes: [],
     noteseleves: [],
     note: null,
     pageCount: 1,
     pageCountNote: 1,
+    pageCountAbsence: 1,
     userId: 6,
     classe: null,
     absenceseleves: [],
@@ -43,8 +45,13 @@ export default new Vuex.Store({
     classeByProfesseur: [],
     professeur: null,
     classeId: null,
+    sectionAnneeScolaireId: null,
+    anneeScolaireId: null,
     classeprofesseurmatiere: null,
-    classesprofesseursmatieres: null
+    classesprofesseursmatieres: null,
+    sectionsanneescolaire: null,
+    anneesscolaires: null,
+    sessionuserapp: null
   },
   mutations: {
     notes(state, payload) {
@@ -61,6 +68,9 @@ export default new Vuex.Store({
     },
     pageCountNote(state, payload) {
       state.pageCountNote = payload
+    },
+    pageCountAbsence(state, payload) {
+      state.pageCountAbsence = payload
     },
     classe(state, classe) {
       state.classe = classe
@@ -101,11 +111,26 @@ export default new Vuex.Store({
     classeId(state, classeId) {
       state.classeId = classeId
     },
+    anneeScolaireId(state, anneeScolaireId) {
+      state.anneeScolaireId = anneeScolaireId
+    },
     classeprofesseurmatiere(state, classeprofesseurmatiere){
       state.classeprofesseurmatiere = classeprofesseurmatiere
     },
     classesprofesseursmatieres(state, classesprofesseursmatieres){
       state.classesprofesseursmatieres = classesprofesseursmatieres
+    },
+    sectionsanneescolaire(state, sectionsanneescolaire){
+      state.sectionsanneescolaire = sectionsanneescolaire
+    },
+    sectionAnneeScolaireId(state, sectionAnneeScolaireId){
+      state.sectionAnneeScolaireId = sectionAnneeScolaireId
+    },
+    anneesscolaires(state, anneesscolaires){
+      state.anneesscolaires = anneesscolaires
+    },
+    sessionuserapp(state, sessionuserapp){
+      state.sessionuserapp = sessionuserapp
     }
   },
   getters: {
@@ -117,6 +142,9 @@ export default new Vuex.Store({
     },
     pageCount: state => {
       return state.pageCount
+    },
+    pageCountAbsence: state => {
+      return state.pageCountAbsence
     },
     pageCountNote: state => {
       return state.pageCountNote
@@ -166,11 +194,26 @@ export default new Vuex.Store({
     classeId: state => {
       return state.classeId
     },
+    anneeScolaireId: state => {
+      return state.anneeScolaireId
+    },
     classeprofesseurmatiere: state => {
       return state.classeprofesseurmatiere
     },
     classesprofesseursmatieres: state => {
       return state.classesprofesseursmatieres
+    },
+    sectionsanneescolaire: state => {
+      return state.sectionsanneescolaire
+    },
+    sectionAnneeScolaireId: state => {
+      return state.sectionAnneeScolaireId
+    },
+    anneesscolaires: state => {
+      return state.anneesscolaires
+    },
+    sessionuserapp: state => {
+      return state.sessionuserapp
     }
   },
   actions: {
@@ -328,13 +371,45 @@ export default new Vuex.Store({
       )
         .then(response => {
           context.commit('eleves', response.data.data)
-          // console.log("log d'eleves dans le store "+ response.data.data);
         })
         .catch(error => {
           console.log(error)
           this.errored = true
         })
         .finally(() => (this.loading = false))
+    },
+    anneesscolaires(context) {
+      Axios.get(
+        context.state.endpoint + 'api/v1/anneesscolaires'
+      )
+        .then(response => {
+          context.commit('anneesscolaires', response.data.data)
+        })
+        .catch(error => {
+          console.log(error)
+          this.errored = true
+        })
+        .finally(() => (this.loading = false))
+    },
+    sessionuserapp(context, request) {
+      Axios.get(
+        context.state.endpoint + 'api/v1/sessionsuserapp?user_id=' + request.user_id
+      )
+        .then(response => {
+            if(response.data.data){
+                context.commit('sessionuserapp', response.data.data[0])
+            }
+        })
+        .catch(error => {
+          console.log(error)
+          this.errored = true
+        })
+        .finally(() => (this.loading = false))
+    },
+    sessionuserappSync(context, request) {
+      return Axios.get(
+        context.state.endpoint + 'api/v1/sessionsuserapp?user_id=' + request.user_id
+      )
     },
     raisonsabsences(context) {
       Axios.get(
@@ -348,13 +423,13 @@ export default new Vuex.Store({
           this.errored = true
         })
         .finally(() => (this.loading = false))
-    },
+    }/*,
     saveAgence(context, data) {
       return Axios.post(
         context.state.endpoint + 'api/v1/absenceseleves', data,
         { headers: { 'Content-Type': 'multipart/form-data' } }
       )
-    },
+    }*/,
     absenceseleves(context, data) {
       // console.log("information data "+JSON.stringify(data.))
       // console.log("information data "+data.params.eleveId);
@@ -373,6 +448,7 @@ export default new Vuex.Store({
         axios.then(response => {
           context.commit('absenceseleves', response.data.data.data)
           context.commit('pageCount', response.data.data.last_page)
+          context.commit('pageCountAbsence', response.data.data.last_page)
         })
         .catch(error => {
           console.log(error)
@@ -483,7 +559,7 @@ export default new Vuex.Store({
       return Axios.get(
         context.state.endpoint + 'api/v1/absenceseleves/' + absenceId + '/delete'
       );
-    },
+    },/*
     getElevesByClasseId(context, params) {
       let concatParams = null
       if (params.search) {
@@ -510,7 +586,7 @@ export default new Vuex.Store({
           this.errored = true
         })
         .finally(() => (this.loading = false))
-    },
+    },*/
     eleve(context, eleveId) {
       Axios.get(
         context.state.endpoint + 'api/v1/eleves/'+eleveId)
@@ -557,6 +633,12 @@ export default new Vuex.Store({
     },
     classeId(context, classeId){
       context.commit('classeId', classeId)
+    },
+    sectionAnneeScolaireId(context, sectionAnneeScolaireId){
+      context.commit('sectionAnneeScolaireId', sectionAnneeScolaireId)
+    },
+    anneeScolaireId(context, anneeScolaireId){
+      context.commit('anneeScolaireId', anneeScolaireId)
     },
     classeprofesseurmatiere(context, params) {
       let concatParams = null
@@ -607,7 +689,43 @@ export default new Vuex.Store({
           this.errored = true
         })
         .finally(() => (this.loading = false))
-    }
+    },
+    sectionsanneescolaire(context, params) {
+      let concatParams = null
+      if (params) {
+        concatParams = params.map(function (elemen) {
+          return elemen.key + '=' + elemen.value
+        }).join('&')
+      }
+      let url = null;
+      if(concatParams){
+        url = context.state.endpoint + 'api/v1/sectionsanneescolaire?' + concatParams
+      }else{
+        url = context.state.endpoint + 'api/v1/sectionsanneescolaire/'
+      }
+      Axios.get(
+        url
+      )
+        .then(response => {
+          context.commit('sectionsanneescolaire', response.data.data)
+        })
+        .catch(error => {
+          console.log(error)
+          this.errored = true
+        })
+        .finally(() => (this.loading = false))
+    },
+    saveSessionUserApp(context, data) {
+      let url = null;
+        // console.log("liste des params "+JSON.stringify(data));
+      if(data.id){
+        return Axios.put(context.state.endpoint + 'api/v1/sessionsuserapp/'+data.id, data.data,
+        { headers: { 'Content-Type': 'application/json' } })
+      }else{
+        return Axios.post(context.state.endpoint + 'api/v1/sessionsuserapp', data.data,
+        { headers: { 'Content-Type': 'application/json' } })
+      }
+    },
   },
   modules: modules
 })

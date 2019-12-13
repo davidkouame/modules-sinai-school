@@ -1,0 +1,15 @@
+fields:
+    user:
+        label: Utilisateur
+        nameFrom: name
+        descriptionFrom: description
+        span: auto
+        type: relation
+        placeholder: Sélectionner un utilisateur
+    anneescolaire:
+        label: Année Scolaire
+        nameFrom: libelle
+        descriptionFrom: description
+        span: auto
+        type: relation
+        placeholder: Sélectionner une année scolaire

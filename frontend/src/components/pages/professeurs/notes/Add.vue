@@ -128,7 +128,8 @@ export default {
       classe: null,
       coefficient: null,
       multiple: true,
-      matiere_id: null
+      matiere_id: null,
+      sectionAnneeScolaireId: localStorage.getItem('sectionAnneeScolaireId')
     };
   },
   created() {
@@ -153,6 +154,7 @@ export default {
       data["matiere_id"] = this.matiere_id;
       data["description"] = this.description;
       data["professeur_id"] = localStorage.getItem("professeurId");
+      data["section_annee_scolaire_id"] = this.sectionAnneeScolaireId;
       // console.log("log data " +);
       /*data.append('datenoteeffectue', this.datenoteeffectue);
       data.append('description', this.description);

@@ -43,6 +43,7 @@ class classeProfesseurMatiereController extends Controller
                 $data = $data->where($key, 'like', '%'.$value.'%');
             }elseif ($key == "professeur_id") {
                 $searchProfesseur = true;
+                $data = $data->where($key, $value);
             }elseif ($key == "parent_id") {
                 $searchProfesseur = true;
             }elseif ($key == "eleve_id") {
