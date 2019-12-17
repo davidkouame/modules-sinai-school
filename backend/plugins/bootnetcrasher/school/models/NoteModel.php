@@ -1,7 +1,12 @@
 <?php namespace BootnetCrasher\School\Models;
 
 use Model;
-
+use Bootnetcrasher\School\Classes\Sms;
+use Backend\Facades\BackendAuth;
+use BootnetCrasher\School\Models\ClasseEleveModel;
+use BootnetCrasher\School\Models\EleveModel;
+use Backend\Models\User;
+use BootnetCrasher\School\Models\ParentModel;
 /**
  * Model
  */
@@ -27,6 +32,7 @@ class NoteModel extends Model
     
     public $belongsTo = [
         'typenote' => ['BootnetCrasher\School\Models\TypeNoteModel', 'key' => 'typenote_id', 'otherKey' => 'id'],
+        'sectionanneescolaire' => ['BootnetCrasher\School\Models\SectionAnneeScolaireModel', 'key' => 'section_annee_scolaire_id', 'otherKey' => 'id'],
         'matiere' => ['BootnetCrasher\School\Models\MatiereModel', 'key' => 'matiere_id', 'otherKey' => 'id'],
         'professeur' => ['BootnetCrasher\School\Models\ProfesseurModel', 'key' => 'professeur_id', 'otherKey' => 'id'],
         'classe' => ['BootnetCrasher\School\Models\ClasseModel', 'key' => 'classe_id', 'otherKey' => 'id']
@@ -51,7 +57,9 @@ class NoteModel extends Model
     public function beforeCreate()
     {
         $this->reference = $this->getReference();
-
+        $user = BackendAuth::getUser();
+        $this->backend_user_id = $user ? $user->id : null;
+        // trace_log("user = ".BackendAuth::getUser());
     }
 
     public function beforeSave(){
@@ -68,6 +76,22 @@ class NoteModel extends Model
     }
 
     public function attributeNoteToEleve($noteId = null){
-
+    }
+    
+    // send sms parent
+    public function afterCreate(){
+        $sms = new Sms;
+        $classeselves = ClasseEleveModel::where('classe_id', $this->classe_id)->get();
+        foreach($classeselves as $classeeleve){
+            $eleve = EleveModel::where('id', $classeeleve->eleve_id)->first();
+            if($eleve){
+                // $user = User::where('parenteleve_id', $eleve->parent_id)->first();
+                $parent = ParentModel::find($eleve->parent_id);
+                if($parent){
+                    $body = "Une note a été crée";
+                    $sms->send($parent->tel, $parent, $eleve, $body);
+                }
+            }
+        }
     }
 }

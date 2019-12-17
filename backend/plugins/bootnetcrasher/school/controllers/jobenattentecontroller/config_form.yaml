@@ -1,0 +1,10 @@
+name: JobEnAttenteController
+form: $/bootnetcrasher/school/models/jobmodel/fields.yaml
+modelClass: BootnetCrasher\School\Models\JobModel
+defaultRedirect: bootnetcrasher/school/jobenattentecontroller
+create:
+    redirect: 'bootnetcrasher/school/jobenattentecontroller/update/:id'
+    redirectClose: bootnetcrasher/school/jobenattentecontroller
+update:
+    redirect: bootnetcrasher/school/jobenattentecontroller
+    redirectClose: bootnetcrasher/school/jobenattentecontroller

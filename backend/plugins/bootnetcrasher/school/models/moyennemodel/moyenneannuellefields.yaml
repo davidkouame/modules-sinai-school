@@ -1,0 +1,27 @@
+fields:
+    eleve:
+        label: Elève
+        span: auto
+        type: relation
+        select: name
+        placeholder: 'Sélectionnez un élève'
+        disabled: true
+    anneescolaire:
+        label: Année scolaire
+        span: auto
+        type: relation
+        select: libelle
+        placeholder: 'Sélectionnez une année scolaire'
+        disabled: true
+    valeur_format:
+        label: Valeur
+        type: text
+        searchable: true
+        span: auto
+        disabled: true
+    validated_at:
+        label: 'Date de validation'
+        mode: datetime
+        span: auto
+        disabled: 1
+        type: datepicker

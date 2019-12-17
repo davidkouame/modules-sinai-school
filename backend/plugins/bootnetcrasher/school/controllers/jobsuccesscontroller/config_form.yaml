@@ -1,0 +1,10 @@
+name: JobSuccessController
+form: $/bootnetcrasher/school/models/jobsuccessmodel/fields.yaml
+modelClass: BootnetCrasher\School\Models\JobSuccessModel
+defaultRedirect: bootnetcrasher/school/jobsuccesscontroller
+create:
+    redirect: 'bootnetcrasher/school/jobsuccesscontroller/update/:id'
+    redirectClose: bootnetcrasher/school/jobsuccesscontroller
+update:
+    redirect: bootnetcrasher/school/jobsuccesscontroller
+    redirectClose: bootnetcrasher/school/jobsuccesscontroller

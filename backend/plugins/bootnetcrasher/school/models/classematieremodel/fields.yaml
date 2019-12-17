@@ -24,3 +24,10 @@ fields:
         label: Coefficient
         span: auto
         type: number
+    anneescolaire:
+        label: Année scolaire
+        nameFrom: libelle
+        descriptionFrom: description
+        span: auto
+        type: relation
+        placeholder: Sélectionner une année scolaire

@@ -12,7 +12,7 @@ class TypeNoteController extends Controller
 
     public function __construct()
     {
-        BackendMenu::setContext('BootnetCrasher.School', 'notes', 'typenote');
+        BackendMenu::setContext('BootnetCrasher.School', 'parametres');
         parent::__construct();
     }
 }

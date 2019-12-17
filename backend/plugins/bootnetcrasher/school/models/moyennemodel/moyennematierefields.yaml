@@ -1,0 +1,50 @@
+fields:
+    eleve:
+        label: Elève
+        span: auto
+        type: relation
+        select: name
+        partial: eleve
+        placeholder: 'Sélectionnez un élève'
+        disabled: true
+    matiere:
+        label: Matière
+        span: auto
+        type: relation
+        select: libelle
+        partial: matiere
+        placeholder: 'Sélectionnez une matière'
+        disabled: true
+    valeur_format:
+        label: Valeur
+        type: text
+        searchable: true
+        span: auto
+        disabled: true
+    coefficient_matiere:
+        label: Coefficient
+        type: text
+        searchable: true
+        span: auto
+        disabled: true
+    coefficient_moyenne_matiere_format:
+        label: 'Moyenne x Coefficient'
+        type: text
+        searchable: true
+        span: auto
+        disabled: true
+        select: dsbd
+    validated_at:
+        label: 'Date de validation'
+        mode: datetime
+        span: auto
+        disabled: 1
+        type: datepicker
+    sectionanneescolaire:
+        label: Section année scolaire
+        span: auto
+        type: relation
+        select: libelle
+        partial: matiere
+        placeholder: 'Sélectionnez une section année scolaire'
+        disabled: true

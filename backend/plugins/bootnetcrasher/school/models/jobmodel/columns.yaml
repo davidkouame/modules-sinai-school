@@ -1,0 +1,5 @@
+columns:
+    queue:
+        label: Queue
+        type: text
+        searchable: true

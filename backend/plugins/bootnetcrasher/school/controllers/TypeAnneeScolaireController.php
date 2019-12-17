@@ -12,7 +12,7 @@ class TypeAnneeScolaireController extends Controller
 
     public function __construct()
     {
-        BackendMenu::setContext('BootnetCrasher.School', 'parametres', 'typesanneescolaire');
+        BackendMenu::setContext('BootnetCrasher.School', 'parametres');
         parent::__construct();
     }
     

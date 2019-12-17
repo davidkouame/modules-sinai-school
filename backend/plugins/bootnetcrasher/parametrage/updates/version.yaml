@@ -1,2 +1,8 @@
 1.0.1:
-    - Initialize plugin.
+    - 'Initialize plugin.'
+1.0.2:
+    - 'Created table bootnetcrasher_parametrage_ap'
+    - builder_table_create_bootnetcrasher_parametrage_ap.php
+1.0.3:
+    - 'Updated table bootnetcrasher_parametrage_ap'
+    - builder_table_update_bootnetcrasher_parametrage_ap.php

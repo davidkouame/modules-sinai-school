@@ -1,0 +1,20 @@
+fields:
+    queue:
+        label: Queue
+        span: auto
+        type: text
+    attempts:
+        label: Attempts
+        span: auto
+        type: number
+    created_date_at:
+        label: 'Date de création'
+        mode: datetime
+        span: auto
+        type: datepicker
+    payload:
+        label: Payload
+        size: ''
+        span: full
+        type: textarea
+    

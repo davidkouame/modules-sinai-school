@@ -1,0 +1,9 @@
+columns:
+    queue:
+        label: Queue
+        type: text
+        searchable: true
+    created_date_at:
+        label: 'Date de création'
+        type: date
+        searchable: true

@@ -4,13 +4,13 @@ plugin:
     author: 'Bootnet Crasher'
     icon: oc-icon-adjust
     homepage: ''
-navigation:
-    parametrage:
-        label: Parametrages
-        url: bootnetcrasher/parametrage/indexcontrollerparametrage
-        icon: icon-life-ring
-        sideMenu:
-            raisonabsence:
-                label: Raisons absences
-                url: bootnetcrasher/parametrage/raisonabsencecontroller
-                icon: icon-sitemap
+#navigation:
+#    parametrage:
+#        label: Parametrages
+#        url: bootnetcrasher/parametrage/indexcontrollerparametrage
+#        icon: icon-life-ring
+#        sideMenu:
+#            raisonabsence:
+#                label: Raisons absences
+#                url: bootnetcrasher/parametrage/raisonabsencecontroller
+#                icon: icon-sitemap

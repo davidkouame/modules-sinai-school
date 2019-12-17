@@ -12,7 +12,7 @@ class TypeMatiereController extends Controller
 
     public function __construct()
     {
-        BackendMenu::setContext('BootnetCrasher.School', 'parametres', 'typesmatiere');
+        BackendMenu::setContext('BootnetCrasher.School', 'parametres');
         parent::__construct();
     }
 }

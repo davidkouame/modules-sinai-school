@@ -5,6 +5,7 @@ use BootnetCrasher\School\Models\MoyenneModel;
 use Bootnetcrasher\School\Classes\CalculMoyenne;
 use Bootnetcrasher\School\Classes\Rang;
 use Bootnetcrasher\School\Classes\CleanerDatabaseTest;
+use Bootnetcrasher\School\Jobs\MoyenneJob;
 
 use Queue;
 
@@ -46,16 +47,30 @@ class Plugin extends PluginBase
             // $moyennes = MoyenneModel::all();
             // trace_log("Suppression des fichiers compresses au cours de la journée !!!");
             // trace_log($moyennes);
-            // Queue::push(CalculMoyenne::class, '');
-        });
+            Queue::push(MoyenneJob::class, '');
+        })->daily();
+
+        // 
+        $schedule->call(function () {
+            Queue::push(CalculMoyenneJob::class, '');
+        })->daily();
+
         // trace_log("bfhsdbfhdsfd");
         // Queue::push(CalculMoyenne::class, '');
-        Queue::push(Rang::class, '');
+        // Queue::push(Rang::class, '');
         // Queue::push(CleanerDatabaseTest::class, '');
+        // $schedule->job(new MoyenneJob)->everyMinute();
+
+        exec("ps ax | grep -i 'queue:work --daemon --sleep=5 --tries=3 > storage/logs/system.log' | grep -v 'grep'
+        ", $pids);
+        if(empty($pids)) {
+            $schedule->command("queue:work --daemon --sleep=5 --tries=3 > storage/logs/system.log")->everyMinute();
+        }
     }
     
     public function register()
     {
+        $this->registerConsoleCommand('digit:sendRapportMoyenne', '\BootnetCrasher\School\Console\SendRapportMoyenneCommand');
         // $this->registerConsoleCommand('school.seeder', 'Bootnetcrasher\School\Console\Seeder');
     }
 }

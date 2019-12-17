@@ -1,0 +1,10 @@
+name: MoyenneAnnuelleController
+form: $/bootnetcrasher/school/models/moyennemodel/moyenneannuellefields.yaml
+modelClass: BootnetCrasher\School\Models\MoyenneModel
+defaultRedirect: bootnetcrasher/school/moyenneannuellecontroller
+create:
+    redirect: 'bootnetcrasher/school/moyenneannuellecontroller/update/:id'
+    redirectClose: bootnetcrasher/school/moyenneannuellecontroller
+update:
+    redirect: bootnetcrasher/school/moyenneannuellecontroller
+    redirectClose: bootnetcrasher/school/moyenneannuellecontroller

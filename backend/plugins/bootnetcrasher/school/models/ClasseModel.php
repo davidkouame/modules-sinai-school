@@ -9,6 +9,7 @@ use BootnetCrasher\School\Models\ClasseMatiereModel;
 use BootnetCrasher\School\Models\EleveModel;
 use DB;
 use Illuminate\Support\Collection;
+use BootnetCrasher\School\Models\ClasseEleveModel;
 
 class ClasseModel extends Model
 {
@@ -57,21 +58,24 @@ class ClasseModel extends Model
         'eleves' => ['BootnetCrasher\School\Models\ClasseEleveModel', 'key' => 'classe_id', 'otherKey' => 'id'],
     ];
 
-    /*public function eleves(){
+    /* recuperation de tous les eleves d'une classe
+     * return array EleveModel
+     * int $anee_scolaire_id
+     */
+    public function eleves($annee_scolaire = null){
+        $eleves = new Collection;
         try{
-            $elevesId = DB::table('bootnetcrasher_school_classe_eleve')
-                                        ->where('classe_id', $this->id)
-                                        ->select('eleve_id')
-                                        ->get();
-            $eleves = new Collection;
-            $elevesId->each(function($e) use($eleves){
-                $eleves->push(EleveModel::find($e->eleve_id));
+            // trace_log("l'id de la classe est ".$this->id);
+            $classeseleves = ClasseEleveModel::where('classe_id', $this->id);
+            if($annee_scolaire)
+                $classeseleves->where('annee_scolaire_id', $annee_scolaire);
+            $classeseleves = $classeseleves->get();
+            $classeseleves->each(function($element) use($eleves){
+                $eleves->push($element->eleve);
             });
-            return $eleves;
-        }catch(Execption $e){
-            $nameFile = dirname(__FILE__);
-            trace_log("NameFile : ".$nameFile."Erreur lors de la recuperation des élèves, error : ".$e->getMessage());
-            return null;
+        }catch(\Execption $e){
+            trace_log($e);
         }
-    }*/
+        return $eleves;
+    }
 }

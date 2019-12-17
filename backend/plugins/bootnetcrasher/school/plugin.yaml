@@ -78,6 +78,14 @@ navigation:
                 label: 'Types moyennes'
                 url: bootnetcrasher/school/typemoyennecontroller
                 icon: icon-list
+            raisonabsence:
+                label: Raisons absences
+                url: bootnetcrasher/parametrage/raisonabsencecontroller
+                icon: icon-sitemap
+            logsms:
+                label: Logs sms
+                url: bootnetcrasher/school/logsmscontroller
+                icon: icon-sitemap
     notes:
         label: Notes
         url: bootnetcrasher/school/indexcontrollernote
@@ -95,3 +103,37 @@ navigation:
                 label: 'Type note'
                 url: bootnetcrasher/school/typenotecontroller
                 icon: icon-life-ring
+    moyennes:
+        label: Moyennes
+        url: bootnetcrasher/school/indexcontrollermoyenne
+        icon: icon-life-ring
+        sideMenu:
+            moyennesmatieres:
+                label: Moyennes matieres
+                url: bootnetcrasher/school/moyennematierecontroller
+                icon: icon-sitemap
+            moyennessections:
+                label: Moyennes sections
+                url: bootnetcrasher/school/moyennesectioncontroller
+                icon: icon-sitemap
+            moyennesannuelles:
+                label: Moyennes annuelles
+                url: bootnetcrasher/school/moyenneannuellecontroller
+                icon: icon-sitemap
+    jobs:
+        label: Jobs
+        url: bootnetcrasher/school/jobenattentecontroller
+        icon: icon-life-ring
+        sideMenu:
+            jobenattente:
+                label: Jobs en attentes
+                url: bootnetcrasher/school/jobenattentecontroller
+                icon: icon-sitemap
+            jobsuccess:
+                label: Jobs traités avec success
+                url: bootnetcrasher/school/jobsuccesscontroller
+                icon: icon-sitemap
+            jobserror:
+                label: Jobs errors
+                url: bootnetcrasher/school/jobserrorcontroller
+                icon: icon-sitemap

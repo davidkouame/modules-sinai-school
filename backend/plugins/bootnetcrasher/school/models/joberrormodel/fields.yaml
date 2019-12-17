@@ -1,0 +1,23 @@
+fields:
+    connection:
+        label: Connection
+        span: auto
+        type: text
+    queue:
+        label: Queue
+        span: auto
+        type: text
+    payload:
+        label: Payload
+        span: auto
+        type: text
+    exception:
+        label: Exception
+        span: auto
+        type: text 
+    failed_at:
+        label: 'Date de création'
+        mode: datetime
+        span: auto
+        type: datepicker
+    

@@ -15,4 +15,9 @@ class MatiereController extends Controller
         BackendMenu::setContext('BootnetCrasher.School', 'parametres', 'matieres');
         parent::__construct();
     }
+    
+    public function listExtendQuery($query,$id)
+    {
+        // $query->where('type_moyenne_id', 2);
+    }
 }

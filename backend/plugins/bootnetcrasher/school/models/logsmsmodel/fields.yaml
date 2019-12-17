@@ -1,0 +1,25 @@
+fields:
+    parent:
+        label: Parent
+        span: auto
+        type: relation
+        select: name
+        partial: parent
+        placeholder: 'Sélectionnez un parent'
+    eleve:
+        label: Elève
+        span: auto
+        type: relation
+        select: name
+        partial: parent
+        placeholder: 'Sélectionnez un élève'
+    tel:
+        label: Téléphone
+        type: text
+        searchable: true
+        span: auto
+    content:
+        label: Content
+        size: ''
+        span: auto
+        type: textarea

@@ -1,0 +1,10 @@
+name: LogSmsController
+form: $/bootnetcrasher/school/models/logsmsmodel/fields.yaml
+modelClass: BootnetCrasher\School\Models\LogSmsModel
+defaultRedirect: bootnetcrasher/school/logsmscontroller
+create:
+    redirect: 'bootnetcrasher/school/logsmscontroller/update/:id'
+    redirectClose: bootnetcrasher/school/logsmscontroller
+update:
+    redirect: bootnetcrasher/school/logsmscontroller
+    redirectClose: bootnetcrasher/school/logsmscontroller

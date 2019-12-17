@@ -1,0 +1,21 @@
+columns:
+    parent:
+        label: Parent
+        type: text
+        searchable: true
+        select: name
+        relation: parent
+    eleve:
+        label: Elève
+        type: text
+        searchable: true
+        select: name
+        relation: eleve
+    tel:
+        label: Téléphone
+        type: text
+        searchable: true
+    created_at:
+        label: 'Date de création'
+        type: datetime
+        searchable: true

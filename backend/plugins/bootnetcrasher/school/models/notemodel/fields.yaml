@@ -34,6 +34,22 @@ fields:
         select: libelle
         type: relation
         placeholder: 'Sélectionner une matière'
+    classe:
+        label: 'Classe'
+        span: auto
+        nameFrom: name
+        descriptionFrom: description
+        select: libelle
+        type: relation
+        placeholder: 'Sélectionner une classe'
+    sectionanneescolaire:
+        label: 'Section année scolaire'
+        span: auto
+        nameFrom: name
+        descriptionFrom: description
+        select: libelle
+        type: relation
+        placeholder: 'Sélectionner une section'
     coefficient:
         label: Coéfficient
         span: auto

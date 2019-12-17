@@ -1,18 +1,22 @@
-<?php namespace BootnetCrasher\School\Models;
+<?php
+
+namespace BootnetCrasher\School\Models;
 
 use Model;
+use Bootnetcrasher\School\Classes\Sms;
+use BootnetCrasher\School\Models\EleveModel;
+use BootnetCrasher\School\Models\ParentModel;
 
 /**
  * Model
  */
-class AbsenceEleveModel extends Model
-{
+class AbsenceEleveModel extends Model {
+
     use \October\Rain\Database\Traits\Validation;
-    
-    use \October\Rain\Database\Traits\SoftDelete;
+
+use \October\Rain\Database\Traits\SoftDelete;
 
     protected $dates = ['deleted_at'];
-
 
     /**
      * @var string The database table used by the model.
@@ -24,9 +28,22 @@ class AbsenceEleveModel extends Model
      */
     public $rules = [
     ];
-
     public $belongsTo = [
         "raisonabsence" => ["BootnetCrasher\Parametrage\Models\RaisonAbsenceModel", "key" => "raisonabsence_id", "otherKey" => "id"],
         "eleve" => ["BootnetCrasher\School\Models\EleveModel", "key" => "eleve_id", "otherKey" => "id"],
     ];
+
+    public function afterCreate() {
+        $sms = new Sms;
+        $eleve = EleveModel::find($this->eleve_id);
+        if ($eleve) {
+            $parent = ParentModel::find($eleve->parent_id);
+            if ($parent) {
+                $body = $eleve->name . " a été absence de " . $this->heure_debut_cours . " a " .
+                        $this->heure_fin_cours." Raison : ".$this->raisonabsence->libelle;
+                $sms->send($parent->tel, $parent, $eleve, $body);
+            }
+        }
+    }
+
 }

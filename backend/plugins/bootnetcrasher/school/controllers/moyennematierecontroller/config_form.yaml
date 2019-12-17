@@ -1,0 +1,10 @@
+name: MoyenneMatiereController
+form: $/bootnetcrasher/school/models/moyennemodel/moyennematierefields.yaml
+modelClass: BootnetCrasher\School\Models\MoyenneModel
+defaultRedirect: bootnetcrasher/school/moyennematierecontroller
+create:
+    redirect: 'bootnetcrasher/school/moyennematierecontroller/update/:id'
+    redirectClose: bootnetcrasher/school/moyennematierecontroller
+update:
+    redirect: bootnetcrasher/school/moyennematierecontroller
+    redirectClose: bootnetcrasher/school/moyennematierecontroller

@@ -1,0 +1,12 @@
+list: $/bootnetcrasher/school/models/jobmodel/columns.yaml
+modelClass: BootnetCrasher\School\Models\JobModel
+title: JobEnAttenteController
+noRecordsMessage: 'backend::lang.list.no_records'
+showSetup: true
+showCheckboxes: true
+recordsPerPage: 20
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: 'backend::lang.list.search_prompt'
+recordUrl: 'bootnetcrasher/school/jobenattentecontroller/update/:id'

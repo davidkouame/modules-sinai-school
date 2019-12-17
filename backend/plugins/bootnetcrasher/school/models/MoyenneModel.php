@@ -36,4 +36,23 @@ class MoyenneModel extends Model
     public $hasMany = [
         'classes' => ['BootnetCrasher\School\Models\ClasseMatiereModel', 'key' => 'classe_id', 'otherKey' => 'classe_id']
     ];
+
+    public function getCoefficientMoyenneMatiereFormatAttribute()
+    {
+        return $this->valeur * $this->coefficient_matiere."/".$this->coefficient_matiere*20;
+    }
+
+    public function getCoefficientMoyenneSectionFormatAttribute()
+    {
+        $coefficient = $this->sectionanneescolaire->coefficient;
+        return $this->valeur * $coefficient."/".$coefficient*20;
+    }
+
+    public function getCoefficientSectionAttribute(){
+        return $this->sectionanneescolaire->coefficient;
+    }
+
+    public function getValeurFormatAttribute($valeur){
+        return $this->valeur."/20";
+    }
 }

@@ -1,0 +1,22 @@
+columns:
+    eleve:
+        label: Elève
+        type: text
+        searchable: true
+        select: name
+        relation: eleve
+    sectionanneescolaire:
+        label: Section année scolaire
+        type: text
+        searchable: true
+        select: libelle
+        relation: sectionanneescolaire
+    valeur:
+        label: Valeur
+        type: text
+        searchable: true
+    validated_at:
+        label: 'Date de validation'
+        type: datetime
+        searchable: true
+

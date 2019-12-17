@@ -1,0 +1,10 @@
+name: JobsErrorController
+form: $/bootnetcrasher/school/models/joberrormodel/fields.yaml
+modelClass: BootnetCrasher\School\Models\JobErrorModel
+defaultRedirect: bootnetcrasher/school/jobserrorcontroller
+create:
+    redirect: 'bootnetcrasher/school/jobserrorcontroller/update/:id'
+    redirectClose: bootnetcrasher/school/jobserrorcontroller
+update:
+    redirect: bootnetcrasher/school/jobserrorcontroller
+    redirectClose: bootnetcrasher/school/jobserrorcontroller
