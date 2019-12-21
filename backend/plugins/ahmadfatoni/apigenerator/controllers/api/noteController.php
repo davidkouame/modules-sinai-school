@@ -8,6 +8,8 @@ use AhmadFatoni\ApiGenerator\Helpers\Helpers;
 use BootnetCrasher\School\Models\NoteModel;
 use BootnetCrasher\School\Models\NoteEleve;
 use Dotenv\Validator;
+use DB;
+
 class noteController extends Controller
 {
     protected $NoteModel;
@@ -114,7 +116,127 @@ class noteController extends Controller
         $data = ["notes"=>$data, "valeurs"=>$noteleve->toArray()];
         return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
     }
-    
+
+    // elle retourne les notes et ainsi que le valeur
+    public function indexValeurV2(Request $request){
+        $data = DB::table('bootnetcrasher_school_note_eleve')
+            ->join('bootnetcrasher_school_note', 'bootnetcrasher_school_note.id', '=', 'bootnetcrasher_school_note_eleve.note_id')
+            ->join('bootnetcrasher_school_type_note', 'bootnetcrasher_school_type_note.id', '=', 'bootnetcrasher_school_note.typenote_id')
+            ->join('bootnetcrasher_school_matiere', 'bootnetcrasher_school_matiere.id', '=', 'bootnetcrasher_school_note.matiere_id')
+            ->join('bootnetcrasher_school_classe', 'bootnetcrasher_school_classe.id', '=', 'bootnetcrasher_school_note.classe_id');
+        foreach($request->except(['page']) as $key => $value){
+            if($key == "libelle"){
+                $data->where('bootnetcrasher_school_note.libelle', 'like', '%'.$value.'%');
+            }elseif ($key == "eleve_id"){
+                $data->where('bootnetcrasher_school_note_eleve.eleve_id', '=', $value);
+            }else{
+                $data = $data->where($key, $value);
+            }
+        }
+        $data = $data->select('bootnetcrasher_school_note.libelle', 'bootnetcrasher_school_type_note.libelle as type_note_libelle',
+            'bootnetcrasher_school_note.created_at', 'bootnetcrasher_school_note_eleve.valeur',
+            'bootnetcrasher_school_note.coefficient', 'bootnetcrasher_school_note_eleve.id as note_eleve_id')
+            ->get()->toArray();
+        return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
+    }
+
+    public function showNote(Request $request){
+        $data = DB::table('bootnetcrasher_school_note')
+            ->leftJoin('bootnetcrasher_school_note_eleve', 'bootnetcrasher_school_note.id', '=', 'bootnetcrasher_school_note_eleve.note_id')
+            ->leftJoin('bootnetcrasher_school_eleve', 'bootnetcrasher_school_note_eleve.eleve_id', '=', 'bootnetcrasher_school_eleve.id')
+            ->leftJoin('bootnetcrasher_school_type_note', 'bootnetcrasher_school_note.typenote_id', '=', 'bootnetcrasher_school_type_note.id')
+            ->select('bootnetcrasher_school_note_eleve.*', 'bootnetcrasher_school_note.*', 'bootnetcrasher_school_type_note.libelle as libelle_type_note')
+            ->where('eleve_id', $request->get('eleve_id'))
+            ->where('eleve_id', $request->get('eleve_id'));
+        foreach($request->except(['page']) as $key => $value){
+            if($key == "search"){
+                $date = explode("/", trim($request->get('search')));
+                if(count($date) == 3){
+                    $newdate = $date[2]."-".$date[1]."-".$date[0];
+                    // dd($newdate);
+                    $data = $data->whereDate("datenoteeffectue", "=", $newdate);
+                }else{
+                    $data = $data->where("bootnetcrasher_school_note.libelle", "=", trim($request->get('search')))
+                        ->orWhere("bootnetcrasher_school_type_note.libelle", "=", trim($request->get('search')));
+                }
+            }else{
+                $data = $data->where($key, $value);
+            }
+        }
+        $data = $data->paginate(10)->toArray();
+        return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
+    }
+
+    public function getNotesV2(Request $request){
+        $data = NoteModel::with(array(
+            'noteseleves'=>function($query){
+                $query->select('*');
+            }));
+        foreach($request->except(['page']) as $key => $value){
+            if($key == "libelle"){
+                $data = $data->where($key, 'like', '%'.$request->get('libelle').'%');
+            }elseif($key == "parent_id"){
+                $data = $data->whereHas('noteseleves', function ($query) use($request, $key) {
+                    $query->whereHas('eleve', function ($query) use($request, $key) {
+                        $query->where($key,$request->get('parent_id'));
+                    });
+                });
+            }elseif($key == "eleve_id"){
+                $data = $data->whereHas('noteseleves', function ($query) use($request, $key) {
+                    $query->where($key,$request->get('eleve_id'));
+                });
+            }elseif($key == "search"){
+                $date = explode("/", trim($request->get('search')));
+                if(count($date) == 3){
+                    $newdate = $date[2]."-".$date[1]."-".$date[0];
+                    // dd($newdate);
+                    $data = $data->whereDate("datenoteeffectue", "=", $newdate);
+                }else{
+                    $data = $data->where("libelle", 'like', '%'.trim($request->get('search')).'%')
+                        ->orWhereHas('typenote', function($queryTypeNote) use($request) {
+                            $queryTypeNote->where("libelle", "=", trim($request->get('search')));
+                        });
+                }
+            }else{
+                $data = $data->where($key, $value);
+            }
+        }
+        $data = $data->paginate(10)->toArray();
+        return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
+    }
+
+    public function getNotesV3(Request $request){
+        $data = DB::table('bootnetcrasher_school_note')
+            ->leftJoin('bootnetcrasher_school_note_eleve', 'bootnetcrasher_school_note.id', '=', 'bootnetcrasher_school_note_eleve.note_id')
+            ->leftJoin('bootnetcrasher_school_eleve', 'bootnetcrasher_school_note_eleve.eleve_id', '=', 'bootnetcrasher_school_eleve.id')
+            ->leftJoin('bootnetcrasher_school_type_note', 'bootnetcrasher_school_note.typenote_id', '=', 'bootnetcrasher_school_type_note.id');
+            // ->where('eleve_id', $request->get('eleve_id'))
+            // ->WhereNull('eleve_id', $request->get('eleve_id'));
+        foreach($request->except(['page', 'eleve_id']) as $key => $value){
+            if($key == "search"){
+                $date = explode("/", trim($request->get('search')));
+                if(count($date) == 3){
+                    $newdate = $date[2]."-".$date[1]."-".$date[0];
+                    // dd($newdate);
+                    $data = $data->whereDate("datenoteeffectue", "=", $newdate);
+                }else{
+                    // $data = $data->where(function ($query) use($request){
+                    //     $query->where("bootnetcrasher_school_note.libelle", "=", $request->get('search'))
+                    //         ->orWhere("bootnetcrasher_school_type_note.libelle", "=", $request->get('search'));
+                    // });
+                    $data = $data->where("bootnetcrasher_school_note.libelle", "like", "%".$request->get('search')."%")
+                        ->orWhere("bootnetcrasher_school_type_note.libelle", "like", "%".$request->get('search')."%");
+                }
+            }else{
+                $data = $data->where($key, $value);
+            }
+        }
+        $data = $data->where('eleve_id', $request->get('eleve_id'))
+            ->orWhereNull('eleve_id', $request->get('eleve_id'))
+            ->select('bootnetcrasher_school_note_eleve.id as note_eleve_id', 'bootnetcrasher_school_note_eleve.*', 'bootnetcrasher_school_note.*', 'bootnetcrasher_school_type_note.libelle as libelle_type_note');
+        $data = $data->paginate(10)->toArray();
+        return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
+    }
 
     public function getNotes(Request $request){
         $data = NoteEleve::with(array(
@@ -136,6 +258,24 @@ class noteController extends Controller
                 $data = $data->whereHas('eleve', function ($query) use($request, $key) {
                     $query->where($key,$request->get('parent_id'));
                 });
+            }elseif($key == "search"){
+                $data = $data->whereHas('note', function ($query) use($request, $key) {
+                    // $query->where("libelle", 'like', '%'.$request->get('search').'%');
+                        // ->orWhereDate("datenoteeffectue", "=", "2019-12-04 21:41:08");
+                    // $query->whereDate("datenoteeffectue", "=", "2019-12-04");
+                    $date = explode("/", trim($request->get('search')));
+                    if(count($date) == 3){
+                        $newdate = $date[2]."-".$date[1]."-".$date[0];
+                        // dd($newdate);
+                        $query->whereDate("datenoteeffectue", "=", $newdate);
+                    }else{
+                        $query->where("libelle", 'like', '%'.trim($request->get('search')).'%')
+                        ->orWhereHas('typenote', function($queryTypeNote) use($request) {
+                            $queryTypeNote->where("libelle", "=", trim($request->get('search')));
+                        });
+                    }
+
+                });
             }elseif($key == "matiere_id"){
                 $data = $data->whereHas('note', function ($query) use($request, $key) {
                     $query->where($key,$request->get('matiere_id'));
@@ -152,7 +292,17 @@ class noteController extends Controller
         return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
     }
 
-    
+    public function showV2($id){
+        $data = DB::table('bootnetcrasher_school_note_eleve')
+            ->leftJoin('bootnetcrasher_school_note', 'bootnetcrasher_school_note.id', '=', 'bootnetcrasher_school_note_eleve.note_id')
+            ->leftJoin('bootnetcrasher_school_eleve', 'bootnetcrasher_school_note_eleve.eleve_id', '=', 'bootnetcrasher_school_eleve.id')
+            ->leftJoin('bootnetcrasher_school_type_note', 'bootnetcrasher_school_note.typenote_id', '=', 'bootnetcrasher_school_type_note.id')
+            ->select('bootnetcrasher_school_note_eleve.*', 'bootnetcrasher_school_note.*', 'bootnetcrasher_school_type_note.libelle as libelle_type_note')
+            ->where('id', $id)
+            ->first();
+        return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
+    }
+
     public function show($id){ 
         $data = $this->NoteModel->with(array(
             'typenote'=>function($query){

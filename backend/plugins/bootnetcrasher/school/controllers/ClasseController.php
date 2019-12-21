@@ -20,6 +20,7 @@ class ClasseController extends Controller
     public function __construct()
     {
         parent::__construct();
+        BackendMenu::setContext('BootnetCrasher.School', 'parametres', 'classes');
     }
 
     /* public function update($classeId = null){

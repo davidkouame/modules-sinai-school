@@ -1,0 +1,8 @@
+eleves:
+    label: Eleves
+    view:
+        list: $/bootnetcrasher/school/models/elevemodel/columns.yaml
+        toolbarButtons: add|remove
+    manage:
+        form: $/bootnetcrasher/school/models/elevemodel/fields.yaml
+        list: $/bootnetcrasher/school/models/elevemodel/columns.yaml

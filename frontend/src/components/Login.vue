@@ -4,7 +4,7 @@
       <div class="offset-4 col-md-7">
         <h1 class="col-md-8" style="text-align: center; margin-bottom: 50px;">Connexion</h1>
         <div class="alert alert-danger col-md-8" v-show="errorMessage">{{ errorMessage }}</div>
-        <form>
+        <form v-on:submit="connection" >
           <div class="form-group">
             <input
               type="email"
@@ -39,7 +39,8 @@
               </div>
             </div>
           </div>
-          <a type="submit" class="btn btn-primary col-md-8 active" v-on:click="connection">Connectez vous</a>
+          <!--<a type="submit" class="btn btn-primary col-md-8 active" v-on:click="connection">Connectez vous</a>-->
+          <button type="submit" class="btn btn-primary col-md-8 active">Connectez vous</button>
         </form>
       </div>
     </div>
@@ -67,7 +68,12 @@ export default {
         }
     },
   methods: {
-    connection() {
+    sub(event){
+      event.preventDefault();
+        alert("vdgsds");
+    },
+    connection(event) {
+      event.preventDefault();
       let email = this.email;
       let password = this.password;
       let store = this.$store;

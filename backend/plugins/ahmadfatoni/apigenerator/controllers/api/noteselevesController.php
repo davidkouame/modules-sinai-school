@@ -58,9 +58,16 @@ class noteselevesController extends Controller
 
     public function show($id){
 
-        $data = $this->NoteEleve->where('id',$id)->first();
+        $data = $this->NoteEleve->with(array(
+            'note' => function ($query) {
+                $query->select('*');
+            },
+            'eleve' => function ($query) {
+                $query->select('*');
+            },
+        ))->where('id',$id)->first();
 
-        if( count($data) > 0){
+        if($data){
 
             return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
 

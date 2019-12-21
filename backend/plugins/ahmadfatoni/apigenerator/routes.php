@@ -42,3 +42,5 @@ Route::resource('api/v1/sessionsuserapp', 'AhmadFatoni\ApiGenerator\Controllers\
 Route::get('api/v1/sessionsuserapp/{id}/delete', ['as' => 'api/v1/sessionsuserapp.delete', 'uses' => 'AhmadFatoni\ApiGenerator\Controllers\API\sessionUserAppController@destroy']);
 Route::resource('api/v1/anneesscolaires', 'AhmadFatoni\ApiGenerator\Controllers\API\anneeScolaireController', ['except' => ['destroy', 'create', 'edit']]);
 Route::get('api/v1/anneesscolaires/{id}/delete', ['as' => 'api/v1/anneesscolaires.delete', 'uses' => 'AhmadFatoni\ApiGenerator\Controllers\API\anneeScolaireController@destroy']);
+// Route::resource('api/v1/noteseleves-v2', 'AhmadFatoni\ApiGenerator\Controllers\API\noteeleveController', ['except' => ['destroy', 'create', 'edit']]);
+// Route::get('api/v1/noteseleves-v2/{id}/delete', ['as' => 'api/v1/noteseleves-v2.delete', 'uses' => 'AhmadFatoni\ApiGenerator\Controllers\API\noteeleveController@destroy']);

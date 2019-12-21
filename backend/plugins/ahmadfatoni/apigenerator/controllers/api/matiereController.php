@@ -8,6 +8,8 @@ use AhmadFatoni\ApiGenerator\Helpers\Helpers;
 use Illuminate\Support\Facades\Validator;
 use BootnetCrasher\School\Models\MatiereModel;
 use BootnetCrasher\School\Models\ClasseEleveModel;
+use DB;
+
 class matiereController extends Controller
 {
 	protected $MatiereModel;
@@ -47,8 +49,7 @@ class matiereController extends Controller
                     'classematiere',function($query) use($request){
                         $query->whereHas(
                             'classe',function($queryClasse) use($request){
-                                $queryClasse->whereHas(
-                                'eleves',function($queryEleves) use($request){
+                                $queryClasse->whereHas('eleves',function($queryEleves) use($request){
                                         $queryEleves->whereHas(
                                             'eleve',function($queryEleve) use($request){
                                                 $queryEleve->where('parent_id', $request->get('parent_id'))
@@ -80,6 +81,30 @@ class matiereController extends Controller
 
         $data = $data->paginate(10)->toArray();
 
+        return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
+    }
+
+    public function indexV2(Request $request){
+        $data = DB::table('bootnetcrasher_school_matiere')
+            ->join('bootnetcrasher_school_classe_matiere', 'bootnetcrasher_school_matiere.id', '=', 'bootnetcrasher_school_classe_matiere.matiere_id')
+            ->join('bootnetcrasher_school_classe_eleve', 'bootnetcrasher_school_classe_eleve.classe_id', '=', 'bootnetcrasher_school_classe_matiere.classe_id')
+            ->join('bootnetcrasher_school_eleve', 'bootnetcrasher_school_eleve.id', '=', 'bootnetcrasher_school_classe_eleve.eleve_id')
+            ->join('bootnetcrasher_school_classe', 'bootnetcrasher_school_classe.id', '=', 'bootnetcrasher_school_classe_eleve.classe_id');
+        foreach($request->except('page') as $key => $value){
+            if($key == "eleve_id"){
+                $data->where('bootnetcrasher_school_classe_eleve.eleve_id', '=', $request->get('eleve_id'));
+            }elseif ($key == "parent_id"){
+                $data->where('bootnetcrasher_school_eleve.parent_id', '=', $request->get('parent_id'));
+            }elseif ($key == "libelle"){
+                $data = $data->where("bootnetcrasher_school_matiere.libelle", 'like', '%'.$value.'%');
+            }elseif($key == "annee_scolaire_id"){
+                $data->where('bootnetcrasher_school_classe_eleve.annee_scolaire_id', '=', $request->get('annee_scolaire_id'));
+            }else{
+                $data = $data->where($key, $value);
+            }
+        }
+        $data = $data->select('bootnetcrasher_school_matiere.libelle', 'bootnetcrasher_school_classe_matiere.coefficient',
+            'bootnetcrasher_school_matiere.id')->get()->toArray();
         return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
     }
     

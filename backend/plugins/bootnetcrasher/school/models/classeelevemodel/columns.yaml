@@ -1,22 +1,28 @@
 columns:
-    matricule:
-        label: Matricule Elève
-        type: text
-        select: matricule
-        relation: eleve
-    name:
-        label: Nom Elève
-        type: text
-        select: name
-        relation: eleve
-    surname:
-        label: Prénom Elève
-        type: text
-        select: surname
-        relation: eleve
+#    matricule:
+#        label: Matricule Elève
+#        type: text
+#        select: matricule
+#        relation: eleve
+#    name:
+#        label: Nom Elève
+#        type: text
+#        select: name
+#        relation: eleve
+#    surname:
+#        label: Prénom Elève
+#        type: text
+#        select: surname
+#        relation: eleve
     classe:
         label: Classe
         type: text
         searchable: true
         select: libelle
         relation: classe
+    anneescolaire:
+        label: Année scolaire
+        type: text
+        searchable: true
+        select: libelle
+        relation: anneescolaire

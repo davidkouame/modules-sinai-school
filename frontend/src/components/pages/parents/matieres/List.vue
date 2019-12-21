@@ -12,7 +12,7 @@
             <div class="card-body">
               <div class="table-responsive">
                 <!-- Zone de recherche -->
-                <div class="float-right col-4" style="padding-right: 0px;">
+                <!--<div class="float-right col-4" style="padding-right: 0px;">
                   <div class="input-group mb-3">
                     <input
                       type="text"
@@ -30,7 +30,7 @@
                       >rechercher</button>
                     </div>
                   </div>
-                </div>
+                </div>-->
 
                 <table class="table table-hover table-striped">
                   <thead>
@@ -45,7 +45,7 @@
                     <tr v-if="countMatieres" v-for="(matiere, index) in matieres">
                       <th scope="row">{{ index + 1}}</th>
                       <td>{{ matiere.libelle }}</td>
-                      <td>{{ getCoefficientMatiere(matiere.id) }}</td>
+                      <td>{{ matiere.coefficient }}</td>
                       <td class="actions">
                         <a :href="'/#/matieres/preview/'+matiere.id">
                           <i class="fa fa-eye fa-lg"></i>
@@ -60,17 +60,6 @@
 
                   </tbody>
                 </table>
-
-                <!-- Pagination -->
-                <div class="float-right pagi" v-if="pageCount > 1">
-                  <paginate
-                    :page-count="pageCount"
-                    :click-handler="fetch"
-                    :prev-text="'&laquo;'"
-                    :next-text="'&raquo;'"
-                    :container-class="'pagination'"
-                  ></paginate>
-                </div>
               </div>
             </div>
           </card>
@@ -108,7 +97,7 @@ export default {
         { key: "classe_id", value: this.classeListId },
         { key: "annee_scolaire_id", value: this.anneeScolaireId }
       ];
-      this.$store.dispatch("matieres", {
+      this.$store.dispatch("matieresV2", {
         payload: pageNum,
         search: this.trimSearch(params)
       });
@@ -143,7 +132,7 @@ export default {
                 response = element.classematiere.find(function(keyment){
                     // console.log(">>>>>>>> keyment "+JSON.stringify(keyment)+" >>>>> id"+ id);
                     if(keyment.matiere_id == id ){
-                        
+
                             // console.log(">>>>>>>> keyment "+JSON.stringify(keyment.coefficient));
                         coefficient = keyment.coefficient;
                     }
@@ -152,7 +141,7 @@ export default {
             }
             // console.log(">>>>>>>> id "+JSON.stringify(response));
         })
-         console.log(">>>>>>>> e "+JSON.stringify(e));
+         // console.log(">>>>>>>> e "+JSON.stringify(e));
          return coefficient;
     }
   },
@@ -161,9 +150,6 @@ export default {
       this.countMatieres = this.$store.getters.matieres.length > 0;
       // console.log("liste des matieres "+JSON.stringify(this.$store.getters.matieres));
       return this.$store.getters.matieres;
-    },
-    pageCount() {
-      return this.$store.getters.pageCount;
     },
     classeListId() {
       return this.$store.getters.classeId;

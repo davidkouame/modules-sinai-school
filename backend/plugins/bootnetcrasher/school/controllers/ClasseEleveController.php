@@ -14,4 +14,13 @@ class ClasseEleveController extends Controller
     {
         parent::__construct();
     }
+
+    public function listExtendQuery($query, $id)
+    {
+        // dd($query->where('classe_id', 14)->get());
+        // dd($query->distinct()->get(['id']));
+        // $querClone = $query;
+        // dd($querClone->get());
+        // $query->groupBy('classe_id','annee_scolaire_id')->select('classe_id','annee_scolaire_id');
+    }
 }

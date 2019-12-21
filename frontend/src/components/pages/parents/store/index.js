@@ -9,11 +9,13 @@ export default {
     note: null,
     pageCount: 1,
     pageCountNote: 1,
+    currentPage: null,
+    countPage: null,
+    totalElement: null,
     pageCountSection: 1,
     userId: 6,
     classe: null,
     absenceseleves: [],
-    absenceeleve: null,
     eleves: [],
     eleve: null,
     raisonsabsences: [],
@@ -49,6 +51,15 @@ export default {
     pageCount(state, payload) {
       state.pageCount = payload
     },
+    currentPage(state, payload) {
+      state.currentPage = payload
+    },
+    countPage(state, payload) {
+      state.countPage = payload
+    },
+    totalElement(state, payload) {
+      state.totalElement = payload
+    },
     pageCountNote(state, payload) {
       state.pageCountNote = payload
     },
@@ -69,9 +80,6 @@ export default {
     },
     raisonsabsences(state, raisonsabsences) {
       state.raisonsabsences = raisonsabsences
-    },
-    absenceeleve(state, absenceeleve) {
-      state.absenceeleve = absenceeleve
     },
     typesnotes(state, typesnotes) {
       state.typesnotes = typesnotes
@@ -132,6 +140,15 @@ export default {
     pageCount: state => {
       return state.pageCount
     },
+    currentPage: state => {
+      return state.currentPage
+    },
+    countPage: state => {
+      return state.countPage
+    },
+    totalElement: state => {
+      return state.totalElement
+    },
     pageCountSection: state => {
       return state.pageCountSection
     },
@@ -158,9 +175,6 @@ export default {
     },
     raisonsabsences: state => {
       return state.raisonsabsences
-    },
-    absenceeleve: state => {
-      return state.absenceeleve
     },
     typesnotes: state => {
       return state.typesnotes
@@ -231,6 +245,67 @@ export default {
           context.commit('notes', response.data.data.data)
           context.commit('pageCount', response.data.data.last_page)
           context.commit('pageCountNote', response.data.data.last_page)
+          context.commit('currentPage', response.data.data.current_page)
+          context.commit('countPage', response.data.data.last_page)
+          context.commit('totalElement', response.data.data.total)
+        })
+        .catch(error => {
+          console.log(error)
+          this.errored = true
+        })
+        .finally(() => (this.loading = false))
+    },
+    allnotesparentV2(context, params) {
+      let concatParams = null
+      if (params.search) {
+        concatParams = params.search.map(function (elemen) {
+          return elemen.key + '=' + elemen.value
+        }).join('&')
+      }
+      let url = null
+      if(concatParams){
+        url = context.state.endpoint + 'api/v1/get-notes-v2?page=' + params.payload + '&' + concatParams
+      }else{
+        url = context.state.endpoint + 'api/v1/get-notes-v2?page=' + params.payload
+      }
+      Axios.get(url)
+        .then(response => {
+          // console.log("chargement des notes "+JSON.stringify(response.data.data.data));
+          context.commit('notes', response.data.data.data)
+          context.commit('pageCount', response.data.data.last_page)
+          context.commit('pageCountNote', response.data.data.last_page)
+          context.commit('currentPage', response.data.data.current_page)
+          context.commit('countPage', response.data.data.last_page)
+          context.commit('totalElement', response.data.data.total)
+        })
+        .catch(error => {
+          console.log(error)
+          this.errored = true
+        })
+        .finally(() => (this.loading = false))
+    },
+    allnotesparentV3(context, params) {
+      let concatParams = null
+      if (params.search) {
+        concatParams = params.search.map(function (elemen) {
+          return elemen.key + '=' + elemen.value
+        }).join('&')
+      }
+      let url = null
+      if(concatParams){
+        url = context.state.endpoint + 'api/v1/get-notes-v3?page=' + params.payload + '&' + concatParams
+      }else{
+        url = context.state.endpoint + 'api/v1/get-notes-v3?page=' + params.payload
+      }
+      Axios.get(url)
+        .then(response => {
+          // console.log("chargement des notes "+JSON.stringify(response.data.data.data));
+          context.commit('notes', response.data.data.data)
+          context.commit('pageCount', response.data.data.last_page)
+          context.commit('pageCountNote', response.data.data.last_page)
+          context.commit('currentPage', response.data.data.current_page)
+          context.commit('countPage', response.data.data.last_page)
+          context.commit('totalElement', response.data.data.total)
         })
         .catch(error => {
           console.log(error)
@@ -302,6 +377,9 @@ export default {
       axios.then(response => {
         context.commit('absenceseleves', response.data.data.data)
         context.commit('pageCount', response.data.data.last_page)
+        context.commit('currentPage', response.data.data.current_page)
+        context.commit('countPage', response.data.data.last_page)
+        context.commit('totalElement', response.data.data.total)
         // console.log("absence eleves ====> "+ response.data.data.data)
       })
         .catch(error => {
@@ -560,7 +638,7 @@ export default {
       if(concatParams){
         url = context.state.endpoint + 'api/v1/elevesclasses?page=' + params.payload + '&' + concatParams;
       }else{
-        url = context.state.endpoint + 'api/v1/elevesclasses?page=' + params.payload;   
+        url = context.state.endpoint + 'api/v1/elevesclasses?page=' + params.payload;
       }
       Axios.get(
         url)
@@ -675,6 +753,7 @@ export default {
         .finally(() => (this.loading = false))
     },
     moyennesSections(context, params) {
+      console.log("liste des params "+JSON.stringify(params));
       let concatParams = null
       if (params.search) {
         concatParams = params.search.map(function (elemen) {
@@ -768,5 +847,31 @@ export default {
         })
         .finally(() => (this.loading = false))
     },
+    allnotesandvaleurV2(context, params) {
+      let concatParams = null
+      if (params.search) {
+        concatParams = params.search.map(function (elemen) {
+          return elemen.key + '=' + elemen.value
+        }).join('&')
+      }
+      let url = null
+      if(concatParams){
+        url = context.state.endpoint + 'api/v1/notemodel-valeur-v2?page=' + params.payload + '&' + concatParams
+      }else{
+        url = context.state.endpoint + 'api/v1/notemodel-valeur-v2?page=' + params.payload
+      }
+      Axios.get(url)
+        .then(response => {
+          console.log("recuperation des notes "+JSON.stringify(response.data.data))
+          context.commit('notes', response.data.data)
+          context.commit('pageCount', response.data.last_page)
+          context.commit('pageCountNote', response.data.last_page)
+        })
+        .catch(error => {
+          console.log(error)
+          this.errored = true
+        })
+        .finally(() => (this.loading = false))
+    }
   }
 }

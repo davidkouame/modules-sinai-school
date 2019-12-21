@@ -1,4 +1,4 @@
-import ListNote from '@/components/pages/parents/notes/List.vue'
+  import ListNote from '@/components/pages/parents/notes/List.vue'
 import PreviewNote from '@/components/pages/parents/notes/Preview.vue'
 
 // Absence élève

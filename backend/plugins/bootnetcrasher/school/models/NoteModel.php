@@ -42,15 +42,19 @@ class NoteModel extends Model
         'elevesnotes' => [
             'bootnetcrasher\school\models\noteeleve',
             'key' => 'eleve_id'
-            ]
-        ];
+        ],
+        'noteseleves' => [
+            'bootnetcrasher\school\models\noteeleve',
+            'key' => 'note_id'
+        ]
+    ];
 
     public $belongsToMany = [
         'eleves' => [
             'BootnetCrasher\School\Models\EleveModel',
             'table' => 'bootnetcrasher_school_note_eleve',
-            'key' => 'eleve_id',
-            'otherKey' => 'note_id'
+            'key' => 'note_id',
+            'otherKey' => 'eleve_id'
         ]
     ];
 
@@ -66,10 +70,6 @@ class NoteModel extends Model
         /// trace_log("insertion de donnée a ".now(). " est l'instance est ".$this);
     }
 
-    public function afterSave(){
-        // dd($this->id);
-    }
-
     // generate reference
     public function getReference(){
        return rand();
@@ -79,7 +79,7 @@ class NoteModel extends Model
     }
     
     // send sms parent
-    public function afterCreate(){
+    public function afterSave(){
         $sms = new Sms;
         $classeselves = ClasseEleveModel::where('classe_id', $this->classe_id)->get();
         foreach($classeselves as $classeeleve){

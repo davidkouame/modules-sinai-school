@@ -3,18 +3,22 @@ fields:
         label: Queue
         span: auto
         type: text
+        disabled: true
     attempts:
         label: Attempts
         span: auto
         type: number
+        disabled: true
+    payload:
+        label: Payload
+        size: ''
+        span: auto
+        type: text
+        disabled: true
     created_date_at:
         label: 'Date de création'
         mode: datetime
         span: auto
         type: datepicker
-    payload:
-        label: Payload
-        size: ''
-        span: full
-        type: textarea
+        disabled: true
     

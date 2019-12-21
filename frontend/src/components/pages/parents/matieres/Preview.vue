@@ -63,7 +63,7 @@
                                     <div class="col-sm-10">
                                       <input v-model="matiere.libelle" type="text" class="form-control" disabled />
                                     </div>
-                                </div>  
+                                </div>
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">Type de matière</label>
                                     <div class="col-sm-10">
@@ -121,7 +121,7 @@
                       </div>
                     </div>
                 </div>
-                
+
                 <!-- Notes -->
                 <div
                     class="tab-pane fade"
@@ -167,7 +167,7 @@
                                                       <span v-if="note.note.typenote">{{ note.note.typenote.libelle }}</span>
                                                     </td>
                                                     <td>
-                                                        <a :href="'/#/notes/preview/'+note.note.id">
+                                                        <a :href="'/#/notes/preview/'+note.id">
                                                             <i class="fa fa-eye fa-lg"></i>
                                                         </a>
                                                     </td>
@@ -200,7 +200,7 @@
         </div>
     </div>
 
-    
+
   </div>
 </template>
 

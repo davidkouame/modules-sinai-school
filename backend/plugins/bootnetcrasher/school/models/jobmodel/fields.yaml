@@ -3,12 +3,15 @@ fields:
         label: Queue
         span: auto
         type: text
+        disabled: true
     payload:
         label: Payload
         size: ''
         span: full
         type: textarea
+        disabled: true
     attempts:
         label: Attempts
         span: auto
         type: number
+        disabled: true

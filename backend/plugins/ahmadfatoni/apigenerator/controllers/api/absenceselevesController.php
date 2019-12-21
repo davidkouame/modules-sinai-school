@@ -18,35 +18,52 @@ class absenceselevesController extends Controller
     public function __construct(AbsenceEleveModel $AbsenceEleveModel, Helpers $helpers)
     {
         parent::__construct();
-        $this->AbsenceEleveModel    = $AbsenceEleveModel;
-        $this->helpers          = $helpers;
+        $this->AbsenceEleveModel = $AbsenceEleveModel;
+        $this->helpers = $helpers;
     }
 
-    
-    public function index(Request $request){
-        $data = $this->AbsenceEleveModel->with(array(
-            'raisonabsence'=>function($query){
-                $query->select('*');
-            },
-            'eleve'=>function($query){
-                $query->select('*');
-            }, )
-        );
-            if($request->has('classe_id')){
-        $data = $data->whereHas('eleve', function ($query) use($request) {
-                    $query->whereHas('classeseleves', function ($q) use($request) {
-                        if($request->has('classe_id')){
-                            $q->where('classe_id', $request->get('classe_id'));
-                        }
-                    });
-    });}
 
-        foreach($request->except('page', 'classe_id') as $key => $value){
-            if($key == "parent_id"){
-                $data = $data->whereHas('eleve', function ($query) use($request, $key) {
-                    $query->where($key,$request->get('parent_id'));
+    public function index(Request $request)
+    {
+        $data = $this->AbsenceEleveModel->with(array(
+                'raisonabsence' => function ($query) {
+                    $query->select('*');
+                },
+                'eleve' => function ($query) {
+                    $query->select('*');
+                },)
+        );
+        if ($request->has('classe_id')) {
+            $data = $data->whereHas('eleve', function ($query) use ($request) {
+                $query->whereHas('classeseleves', function ($q) use ($request) {
+                    if ($request->has('classe_id')) {
+                        $q->where('classe_id', $request->get('classe_id'));
+                    }
                 });
-            }else{
+            });
+        }
+        foreach ($request->except('page', 'classe_id') as $key => $value) {
+            if ($key == "parent_id") {
+                $data = $data->whereHas('eleve', function ($query) use ($request, $key) {
+                    $query->where($key, $request->get('parent_id'));
+                });
+            } elseif ($key == "search") {
+                $date = explode("/", trim($request->get('search')));
+                if (count($date) == 3) {
+                    $newdate = $date[2] . "-" . $date[1] . "-" . $date[0];
+                    // dd($newdate);
+                    $data = $data->whereDate("heure_debut_cours", "=", $newdate)
+                        ->orWhereDate("heure_fin_cours", "=", $newdate);
+                } else {
+                        $data = $data->whereHas('raisonabsence', function($queryRaisonAbsence) use($request) {
+                            // $queryRaisonAbsence->where("libelle", "=", trim($request->get('search')));
+                            $queryRaisonAbsence->where("libelle", 'like', '%'.$request->get('search').'%');
+                        });
+                }
+                // $data = $data->whereHas('eleve', function ($query) use($request, $key) {
+                //     $query->where($key,$request->get('parent_id'));
+                // });
+            } else {
                 $data = $data->where($key, $value);
             }
         }
@@ -54,36 +71,38 @@ class absenceselevesController extends Controller
         return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
     }
 
-    
-    public function show($id){ 
+
+    public function show($id)
+    {
         $data = $this->AbsenceEleveModel->with(array(
-            'raisonabsence'=>function($query){
+            'raisonabsence' => function ($query) {
                 $query->select('*');
             },
-            'eleve'=>function($query){
+            'eleve' => function ($query) {
                 $query->select('*');
-            }, ))->select('*')->where('id', '=', $id)->first();
+            },))->select('*')->where('id', '=', $id)->first();
         return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
 
         $arr = $request->all();
 
-        while ( $data = current($arr)) {
+        while ($data = current($arr)) {
             $this->AbsenceEleveModel->{key($arr)} = $data;
             next($arr);
         }
-        
-        if(count($this->AbsenceEleveModel->rules) > 0){
+
+        if (count($this->AbsenceEleveModel->rules) > 0) {
             $validation = Validator::make($request->all(), $this->AbsenceEleveModel->rules);
-            if( $validation->passes() ){
+            if ($validation->passes()) {
                 $this->AbsenceEleveModel->save();
                 return $this->helpers->apiArrayResponseBuilder(201, 'created', ['id' => $this->AbsenceEleveModel->id]);
-            }else{
-                return $this->helpers->apiArrayResponseBuilder(400, 'fail', $validation->errors() );
+            } else {
+                return $this->helpers->apiArrayResponseBuilder(400, 'fail', $validation->errors());
             }
-        }else{
+        } else {
             $absenceelevemodel = $this->AbsenceEleveModel->save();
             /*dd($this->AbsenceEleveModel->with(array(
                 'raisonabsence'=>function($query){
@@ -92,48 +111,64 @@ class absenceselevesController extends Controller
                 'eleve'=>function($query){
                     $query->select('*');
                 }, ))->first()->toArray());*/
-            return $this->helpers->apiArrayResponseBuilder(201, 'created', $this->AbsenceEleveModel->toArray()); 
+            return $this->helpers->apiArrayResponseBuilder(201, 'created', $this->AbsenceEleveModel->toArray());
         }
     }
 
-    public function update($id, Request $request){
+    public function update($id, Request $request)
+    {
         // $data = $request->all();
         $data = json_decode($request->getContent(), true);
 
-        $status = $this->AbsenceEleveModel->where('id',$id)->update($data);
-    
-        if( $status ){
-            
-            return $this->helpers->apiArrayResponseBuilder(200, 'success', 
-            $this->AbsenceEleveModel->where('id',$id)->first()->toArray());
+        $status = $this->AbsenceEleveModel->where('id', $id)->update($data);
 
-        }else{
+        if ($status) {
+
+            return $this->helpers->apiArrayResponseBuilder(200, 'success',
+                $this->AbsenceEleveModel->where('id', $id)->first()->toArray());
+
+        } else {
 
             return $this->helpers->apiArrayResponseBuilder(400, 'bad request', 'Error, data failed to update.');
 
         }
     }
 
-    public function delete($id){
+    public function delete($id)
+    {
 
-        $this->AbsenceEleveModel->where('id',$id)->delete();
-
-        return $this->helpers->apiArrayResponseBuilder(200, 'success', 'Data has been deleted successfully.');
-    }
-
-    public function destroy($id){
-
-        $this->AbsenceEleveModel->where('id',$id)->delete();
+        $this->AbsenceEleveModel->where('id', $id)->delete();
 
         return $this->helpers->apiArrayResponseBuilder(200, 'success', 'Data has been deleted successfully.');
     }
 
+    public function destroy($id)
+    {
 
-    public static function getAfterFilters() {return [];}
-    public static function getBeforeFilters() {return [];}
-    public static function getMiddleware() {return [];}
-    public function callAction($method, $parameters=false) {
+        $this->AbsenceEleveModel->where('id', $id)->delete();
+
+        return $this->helpers->apiArrayResponseBuilder(200, 'success', 'Data has been deleted successfully.');
+    }
+
+
+    public static function getAfterFilters()
+    {
+        return [];
+    }
+
+    public static function getBeforeFilters()
+    {
+        return [];
+    }
+
+    public static function getMiddleware()
+    {
+        return [];
+    }
+
+    public function callAction($method, $parameters = false)
+    {
         return call_user_func_array(array($this, $method), $parameters);
     }
-    
+
 }

@@ -13,10 +13,6 @@ navigation:
         label: Matières
         url: bootnetcrasher/school/matierecontroller
         icon: icon-life-ring
-    classes:
-        label: Classes
-        url: bootnetcrasher/school/classecontroller
-        icon: icon-life-ring
     anneescolaires:
         label: 'Années scolaire'
         url: bootnetcrasher/school/anneescolairecontroller
@@ -30,7 +26,7 @@ navigation:
         url: bootnetcrasher/school/absenceelevecontroller
         icon: icon-adjust
     classeeleve:
-        label: 'Classe Eleve'
+        label: 'Classes'
         url: bootnetcrasher/school/classeelevecontroller
         icon: icon-arrow-right
     parent:
@@ -42,6 +38,10 @@ navigation:
         url: bootnetcrasher/school/indexcontrollerparametre
         icon: icon-life-ring
         sideMenu:
+            classes:
+                label: Classes
+                url: bootnetcrasher/school/classecontroller
+                icon: icon-life-ring
             sectionsanneescolaire:
                 label: 'Section année scolaire'
                 url: bootnetcrasher/school/sectionanneescolairecontroller

@@ -10,7 +10,7 @@
           <li class="breadcrumb-item">
             <a href="#/notes">Notes</a>
           </li>
-          <li class="breadcrumb-item active" aria-current="page">Détailler une moyenne</li>
+            <li class="breadcrumb-item active" aria-current="page">Détailler une moyenne</li>
         </ol>
       </nav>
 
@@ -78,17 +78,15 @@
                           <th scope="row">{{ index + 1}}</th>
                           <td>{{ note.libelle }}</td>
                           <td>{{ note.created_at|formatDate }}</td>
-                          <td>
-                            <span v-if="note.typenote">{{ note.typenote.libelle }}</span>
-                          </td>
+                          <td>{{ note.type_note_libelle }}</td>
                           <!--<td v-bind:id="'note-'+note.id">{{ getValeur() }}</td>-->
-                          <td v-bind:id="'valeur-'+note.id"></td>
+                          <td> {{ formatValeur(note.valeur) ? formatValeur(note.valeur)+'/20': '--' }} </td>
                           <td>{{ note.coefficient }}</td>
                           <!--<td>{{ formatMoyenne(note.coefficient*getValeur(index)) }} / {{ note.coefficient * 20 }}</td>-->
-                          <td v-bind:id="'coef-valeur-'+note.id">{{ note.coefficient }}</td>
+                          <td>{{ formatValeur(note.valeur*note.coefficient) ? formatValeur(note.valeur*note.coefficient)+'/'+note.coefficient*20 : '--'}}</td>
                           <td>
                             <div class="row">
-                              <a :href="'/#/notes/preview/'+note.id" class="col">
+                              <a :href="'/#/notes/preview/'+note.note_eleve_id" class="col">
                                 <i class="fa fa-eye fa-lg"></i>
                               </a>
                               <!--<a :href="'/#/notes/update/'+note.id" class="col">
@@ -103,7 +101,7 @@
                         </tr>
                       </tbody>
                     </table>
-                    
+
                     <modal
                       v-if="showModal"
                       @close="showModal = false"
@@ -135,7 +133,7 @@ export default {
       matiere: null,
       classe: [],
       coefficient: null,
-      multiple: true, 
+      multiple: true,
       matiere_id: null,
       countNotes: false,
       eleveIdModal: null,
@@ -151,7 +149,7 @@ export default {
   methods: {
     fetchNote(pageNum, search = null) {
       pageNum = pageNum == null ? 1 : pageNum;
-      this.$store.dispatch("allnotesandvaleur", {
+      this.$store.dispatch("allnotesandvaleurV2", {
           payload: pageNum,
           search: [{ key: "eleve_id", value: localStorage.getItem('eleveId') },
                     { key: "matiere_id", value: this.moyenne.matiere_id }]
@@ -178,18 +176,32 @@ export default {
       this.eleveIdModal = this.moyenne.eleve.id;
       // console.log(">>>>>>> "+noteId);
     },
+    formatValeur(valeur){
+      if(valeur){
+        if(valeur.toString().length==1){
+          return '0'+valeur;
+        }else{
+          return valeur;
+        }
+      }else{
+        return null;
+      }
+    }
   },
   computed: {
     notes() {
-      this.countNotes = this.$store.getters.notes.length;
-      this.countNotes = this.countNotes > 0;
+      let notes = this.$store.getters.notes;
+      console.log("tentatives de recuperations des notes ");
+      if(notes){
+        console.log("recuperation des notes");
+        this.countNotes = this.$store.getters.notes.length;
+        this.countNotes = this.countNotes > 0;
+        console.log("notes "+JSON.stringify(this.$store.getters.notes));
+      }
       return this.$store.getters.notes;
     },
     moyenne(){
         return this.$store.getters.moyenne;
-    },
-    valeurs(){
-        return this.$store.getters.valeurs;
     }
   },
   watch: {
@@ -205,27 +217,13 @@ export default {
         // this.classe = [1,2];
         // console.log(this.note.classe_id.split(','));
         this.classe = this.note.classe_id;
-        this.seeAction = this.note.rapport_validation_id != null || 
+        this.seeAction = this.note.rapport_validation_id != null ||
         this.note.rapport_validation_id != 0 ? false : true;
         // console.log("la validation est "+this.note.rapport_validation_id)
       }
     },
     moyenne(){
         this.fetchNote();
-    },
-    valeurs(){
-        console.log("liste des valeurs "+JSON.stringify(this.valeurs));
-        let i = 0;
-        let th = this;
-        var found = this.valeurs.find(function(element) {
-            var i = element.note_id;
-            // console.log("l'element id est "+JSON.stringify(document.getElementById("valeur-"+i)));
-            if(document.getElementById("valeur-"+i)){
-                document.getElementById("valeur-"+i).innerHTML = th.formatMoyenne2(element.valeur) + '/20';
-                var coefficient = document.getElementById("coef-valeur-"+i).innerHTML;
-                document.getElementById("coef-valeur-"+i).innerHTML = th.formatMoyenne2(element.valeur * coefficient) + '/' + 20*coefficient;
-            }
-        }); 
     }
   }
 };

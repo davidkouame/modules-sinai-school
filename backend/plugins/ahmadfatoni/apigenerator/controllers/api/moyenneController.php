@@ -41,6 +41,7 @@ class moyenneController extends Controller
                         $request->get('type_moyenne_id') == 1){
                     $data = $data->where($key, $value);
                 }else{
+                    // dd("nsjds");
                     $data = $data->whereHas('sectionanneescolaire', function ($query) use($request) {
                         $query->where('annee_scolaire_id', $request->get('annee_scolaire_id'))
                            ->select('*');

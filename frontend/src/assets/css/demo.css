@@ -854,3 +854,15 @@
 .font-size-28{
     font-size: 2.333em !important;
 }
+
+.paginate active{
+  z-index: 1;
+  color: #fff;
+  background-color: #8294a8;
+}
+
+.active a{
+  z-index: 1;
+  color: #fff !important;
+  background-color: #8294a8 !important;
+}

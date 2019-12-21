@@ -34,6 +34,14 @@ class NoteEleve extends Model {
     'note' => ['BootnetCrasher\School\Models\NoteModel', 'key' => 'note_id', 'otherkey' => 'id'],
     'eleve' => ['BootnetCrasher\School\Models\EleveModel', 'key' => 'eleve_id', 'otherKey' => 'id']
     ];
+
+    public $belongsToMany = [
+        // 'test' => ['BootnetCrasher\School\Models\NoteModel', 'key' => 'note_id', 'otherkey' => 'id']
+        'test' => ['BootnetCrasher\School\Models\NoteModel',
+            'table' => 'bootnetcrasher_school_note_eleve',
+        'key' => 'note_id',
+            'otherKey' => 'id']
+    ];
     
     public function afterCreate(){
         if($this->valeur){

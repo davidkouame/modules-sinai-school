@@ -16,7 +16,7 @@ if (localStorage.getItem('userId')) {
   }else{
     modules = { storeProfesseur }
   }
-} 
+}
 export default new Vuex.Store({
   strict: true,
   state: {
@@ -38,7 +38,6 @@ export default new Vuex.Store({
     eleves: [],
     eleve: null,
     raisonsabsences: [],
-    absenceeleve: null,
     typesnotes: [],
     matieres: [],
     classes: [],
@@ -51,7 +50,8 @@ export default new Vuex.Store({
     classesprofesseursmatieres: null,
     sectionsanneescolaire: null,
     anneesscolaires: null,
-    sessionuserapp: null
+    sessionuserapp: null,
+    noteeleve: null,
   },
   mutations: {
     notes(state, payload) {
@@ -86,9 +86,6 @@ export default new Vuex.Store({
     },
     raisonsabsences(state, raisonsabsences) {
       state.raisonsabsences = raisonsabsences
-    },
-    absenceeleve(state, absenceeleve) {
-      state.absenceeleve = absenceeleve
     },
     typesnotes(state, typesnotes) {
       state.typesnotes = typesnotes
@@ -131,6 +128,9 @@ export default new Vuex.Store({
     },
     sessionuserapp(state, sessionuserapp){
       state.sessionuserapp = sessionuserapp
+    },
+    noteeleve(state, noteeleve){
+      state.noteeleve = noteeleve
     }
   },
   getters: {
@@ -169,9 +169,6 @@ export default new Vuex.Store({
     },
     raisonsabsences: state => {
       return state.raisonsabsences
-    },
-    absenceeleve: state => {
-      return state.absenceeleve
     },
     typesnotes: state => {
       return state.typesnotes
@@ -214,6 +211,9 @@ export default new Vuex.Store({
     },
     sessionuserapp: state => {
       return state.sessionuserapp
+    },
+    noteeleve: state => {
+      return state.noteeleve
     }
   },
   actions: {
@@ -295,7 +295,7 @@ export default new Vuex.Store({
           this.errored = true
         })
         .finally(() => (this.loading = false))
-    },
+    }/*,
     absenceselevesprofesseur(context, params) {
       let concatParams = null
       if (params.search) {
@@ -329,7 +329,7 @@ export default new Vuex.Store({
           this.errored = true
         })
         .finally(() => (this.loading = false))
-    }/*,
+    }*//*,
     absenceseleves (context, request) {
       let axios = null
       if (request.eleveId) {
@@ -483,6 +483,34 @@ export default new Vuex.Store({
         })
         .finally(() => (this.loading = false))
     },
+    matieresV2(context, params) {
+      let concatParams = null
+      if (params) {
+        concatParams = params.search.map(function (elemen) {
+          return elemen.key + '=' + elemen.value
+        }).join('&')
+        // concatParams =  concatParams
+      }
+      // console.log("params "+ JSON.stringify(concatParams))
+      let url = null;
+      if(concatParams){
+        url = context.state.endpoint + 'api/v1/matieres-v2?' + concatParams
+      }else{
+        url = context.state.endpoint + 'api/v1/matieres-v2/'
+      }
+      Axios.get(
+        url
+      )
+        .then(response => {
+          context.commit('matieres', response.data.data)
+          // console.log("liste de toutes les classes "+JSON.stringify(response.data.data));
+        })
+        .catch(error => {
+          console.log(error)
+          this.errored = true
+        })
+        .finally(() => (this.loading = false))
+    },
     saveNote(context, data) {
       if (data.id) {
         return Axios.put(
@@ -550,6 +578,19 @@ export default new Vuex.Store({
         })
         .finally(() => (this.loading = false))
     },
+    noteeleve(context, noteEleveId) {
+      Axios.get(
+        context.state.endpoint + 'api/v1/noteseleves/' + noteEleveId
+      )
+        .then(response => {
+          context.commit('noteeleve', response.data.data)
+        })
+        .catch(error => {
+          console.log(error)
+          this.errored = true
+        })
+        .finally(() => (this.loading = false))
+    },
     deleteNote(context, noteId) {
       return Axios.get(
         context.state.endpoint + 'api/v1/notemodel/' + noteId + '/delete'
@@ -573,7 +614,7 @@ export default new Vuex.Store({
       if(concatParams){
         url = context.state.endpoint + 'api/v1/elevesclasses?page=' + params.payload + '&' + concatParams;
       }else{
-        url = context.state.endpoint + 'api/v1/elevesclasses?page=' + params.payload;   
+        url = context.state.endpoint + 'api/v1/elevesclasses?page=' + params.payload;
       }
       Axios.get(
         url)

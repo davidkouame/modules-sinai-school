@@ -44,12 +44,18 @@ class MoyenneModel extends Model
 
     public function getCoefficientMoyenneSectionFormatAttribute()
     {
-        $coefficient = $this->sectionanneescolaire->coefficient;
-        return $this->valeur * $coefficient."/".$coefficient*20;
+
+        if($this->sectionanneescolaire){
+            $coefficient = $this->sectionanneescolaire->coefficient;
+            return $this->valeur * $coefficient."/".$coefficient*20;
+        }else{
+            return null;
+        }
+
     }
 
     public function getCoefficientSectionAttribute(){
-        return $this->sectionanneescolaire->coefficient;
+        return $this->sectionanneescolaire ? $this->sectionanneescolaire->coefficient : null;
     }
 
     public function getValeurFormatAttribute($valeur){

@@ -62,7 +62,7 @@ class ClasseModel extends Model
      * return array EleveModel
      * int $anee_scolaire_id
      */
-    public function eleves($annee_scolaire = null){
+    public function allEleves   ($annee_scolaire = null){
         $eleves = new Collection;
         try{
             // trace_log("l'id de la classe est ".$this->id);

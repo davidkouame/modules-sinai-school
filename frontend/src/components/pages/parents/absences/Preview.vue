@@ -12,36 +12,19 @@
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label class="control-label">Heure de début</label>
+                      <label class="control-label">Date</label>
                       <!---->
                       <input
                         aria-describedby="addon-right addon-left"
                         placeholder="First Name"
                         class="form-control"
                         type="text"
-                        v-model="absenceeleve.heure_debut_cours"
+                        v-bind:value="getDate(absenceeleve.heure_debut_cours)"
                         disabled
                       />
                       <!---->
                     </div>
                   </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label class="control-label">Heure de fin</label>
-                      <!---->
-                      <input
-                        aria-describedby="addon-right addon-left"
-                        placeholder="Last Name"
-                        class="form-control"
-                        type="text"
-                        v-model="absenceeleve.heure_fin_cours"
-                        disabled
-                      />
-                      <!---->
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
                       <label class="control-label">Raison d'absence</label>
@@ -62,6 +45,38 @@
                         placeholder="Raison d'absence"
                         class="form-control"
                         type="text"
+                        disabled
+                      />
+                      <!---->
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label class="control-label">Heure de début</label>
+                      <!---->
+                      <input
+                        aria-describedby="addon-right addon-left"
+                        placeholder="First Name"
+                        class="form-control"
+                        type="text"
+                        v-bind:value="getTime(absenceeleve.heure_debut_cours)"
+                        disabled
+                      />
+                      <!---->
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label class="control-label">Heure de fin</label>
+                      <!---->
+                      <input
+                        aria-describedby="addon-right addon-left"
+                        placeholder="Last Name"
+                        class="form-control"
+                        type="text"
+                        v-bind:value="getTime(absenceeleve.heure_fin_cours)"
                         disabled
                       />
                       <!---->
@@ -112,6 +127,15 @@ export default {
     absenceeleve() {
       return this.$store.getters.absenceeleve;
     }
+  },
+  methods:{
+  getDate(time){
+    return time.split(" ")[0]
+  },
+  getTime(time){
+    var times = time.split(" ")[1].split(":")
+    return times[0]+":"+times[1]
+  }
   }
 };
 </script>

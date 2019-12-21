@@ -15,4 +15,9 @@ class LogSmsController extends Controller
         parent::__construct();
         BackendMenu::setContext('BootnetCrasher.School', 'parametres', 'logsms');
     }
+
+    public function listExtendQuery($query,$id)
+    {
+        $query->orderBy('id', 'desc');
+    }
 }

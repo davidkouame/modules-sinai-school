@@ -3,21 +3,26 @@ fields:
         label: Connection
         span: auto
         type: text
+        disabled: true
     queue:
         label: Queue
         span: auto
         type: text
+        disabled: true
     payload:
         label: Payload
         span: auto
         type: text
-    exception:
-        label: Exception
-        span: auto
-        type: text 
+        disabled: true
     failed_at:
         label: 'Date de création'
         mode: datetime
         span: auto
         type: datepicker
-    
+        disabled: true
+    exception:
+        label: 'Text area'
+        size: huge
+        span: full
+        type: textarea
+        disabled: true
