@@ -17,7 +17,6 @@ export default {
     eleves: [],
     eleve: null,
     raisonsabsences: [],
-    absenceeleve: null,
     typesnotes: [],
     matieres: [],
     classes: [],
@@ -33,6 +32,9 @@ export default {
     moyenne: null,
     valeurs: null,
     rapportvalidation: null,
+    currentPage: null,
+    countPage: null,
+    totalElement: null,
     endpoint: 'http://localhost:8888/modules-sinai-school/backend/',
     // endpoint: 'http://monsitenet.com/modules-sinai-school/backend/'
   },
@@ -60,9 +62,6 @@ export default {
     },
     absenceseleves(state, absenceseleves) {
       state.absenceseleves = absenceseleves
-    },
-    absenceeleve(state, absenceeleve) {
-      state.absenceeleve = absenceeleve
     },
     eleves(state, eleves) {
       state.eleves = eleves
@@ -120,6 +119,15 @@ export default {
     },
     rapportvalidation(state, rapportvalidation){
       state.rapportvalidation = rapportvalidation
+    },
+    currentPage(state, currentPage){
+      state.currentPage = currentPage
+    },
+    countPage(state, countPage){
+      state.countPage = countPage
+    },
+    totalElement(state, totalElement){
+      state.totalElement = totalElement
     }
   },
   getters: {
@@ -146,9 +154,6 @@ export default {
     },
     absenceseleves: state => {
       return state.absenceseleves
-    },
-    absenceeleve: state => {
-      return state.absenceeleve
     },
     eleves: state => {
       return state.eleves
@@ -209,6 +214,15 @@ export default {
     },
     rapportvalidation: state => {
       return state.rapportvalidation
+    },
+    currentPage: state => {
+      return state.currentPage
+    },
+    countPage: state => {
+      return state.countPage
+    },
+    totalElement: state => {
+      return state.totalElement
     }
   },
   actions: {
@@ -230,6 +244,9 @@ export default {
           context.commit('notes', response.data.data.data)
           context.commit('pageCount', response.data.data.last_page)
           context.commit('pageCountNote', response.data.data.last_page)
+          context.commit('currentPage', response.data.data.current_page)
+          context.commit('countPage', response.data.data.last_page)
+          context.commit('totalElement', response.data.data.total)
         })
         .catch(error => {
           console.log(error)
@@ -256,6 +273,32 @@ export default {
           context.commit('pageCount', response.data.data.notes.last_page)
           context.commit('pageCountNote', response.data.data.notes.last_page)
           context.commit('valeurs', response.data.data.valeurs)
+        })
+        .catch(error => {
+          console.log(error)
+          this.errored = true
+        })
+        .finally(() => (this.loading = false))
+    },
+    allnotesandvaleurV2(context, params) {
+      let concatParams = null
+      if (params.search) {
+        concatParams = params.search.map(function (elemen) {
+          return elemen.key + '=' + elemen.value
+        }).join('&')
+      }
+      let url = null
+      if(concatParams){
+        url = context.state.endpoint + 'api/v1/notemodel-valeur-v2?page=' + params.payload + '&' + concatParams
+      }else{
+        url = context.state.endpoint + 'api/v1/notemodel-valeur-v2?page=' + params.payload
+      }
+      Axios.get(url)
+        .then(response => {
+          console.log("recuperation des notes "+JSON.stringify(response.data.data))
+          context.commit('notes', response.data.data)
+          context.commit('pageCount', response.data.last_page)
+          context.commit('pageCountNote', response.data.last_page)
         })
         .catch(error => {
           console.log(error)
@@ -312,20 +355,6 @@ export default {
         context.state.endpoint + 'api/v1/users/login', data,
         { headers: { 'Content-Type': 'multipart/form-data' } }
       )
-    },
-    classe(context, eleveId) {
-      Axios.get(
-        context.state.endpoint + 'api/v1/classes/' + 9
-      )
-        .then(response => {
-          context.commit('classe', response.data.data)
-          // console.log(response.data.data);
-        })
-        .catch(error => {
-          console.log(error)
-          this.errored = true
-        })
-        .finally(() => (this.loading = false))
     },
     absenceselevesprofesseur(context, params) {
       let concatParams = null
@@ -402,7 +431,21 @@ export default {
       )
         .then(response => {
           context.commit('eleves', response.data.data.data)
-          // console.log("log d'eleves dans le store "+ response.data.data);
+          console.log("log d'eleves dans le store "+ JSON.stringify(response.data.data));
+        })
+        .catch(error => {
+          console.log(error)
+          this.errored = true
+        })
+        .finally(() => (this.loading = false))
+    },
+    elevesProfesseurV2(context) {
+      Axios.get(
+        context.state.endpoint + 'api/v1/eleves-without-paginate'
+      )
+        .then(response => {
+          context.commit('eleves', response.data.data)
+          // console.log("log d'eleves dans le store "+ JSON.stringify(response.data.data));
         })
         .catch(error => {
           console.log(error)
@@ -536,33 +579,6 @@ export default {
         )
       }
     },
-    classes(context, params) {
-      let concatParams = null
-      if (params) {
-        concatParams = params.map(function (elemen) {
-          return elemen.key + '=' + elemen.value
-        }).join('&')
-        // concatParams =  concatParams
-      }
-      console.log("params "+ JSON.stringify(concatParams))
-      let url = null;
-      if(concatParams){
-        url = context.state.endpoint + 'api/v1/classesprofesseursmatieres?' + concatParams
-      }else{
-        url = context.state.endpoint + 'api/v1/classesprofesseursmatieres/'
-      }
-      Axios.get(
-        url
-      )
-        .then(response => {
-          context.commit('classes', response.data.data)
-        })
-        .catch(error => {
-          console.log(error)
-          this.errored = true
-        })
-        .finally(() => (this.loading = false))
-    },
     moyennes(context, params) {
      // console.log("@@@@@@@@@@@@@@@@@@@@@");
       let concatParams = null
@@ -590,8 +606,38 @@ export default {
         })
         .finally(() => (this.loading = false))
     },
+    moyennesV2(context, params) {
+      let concatParams = null
+      if (params.search) {
+        concatParams = params.search.map(function (elemen) {
+          return elemen.key + '=' + elemen.value
+        }).join('&');
+      }
+      let url = null;
+      if(concatParams){
+        url = context.state.endpoint + 'api/v1/search-moyennes-by-classe-and-professeur-and-section?page=' + params.payload + '&' + concatParams
+      }else{
+        url = context.state.endpoint + 'api/v1/search-moyennes-by-classe-and-professeur-and-section?page=' + params.payload;
+      }
+      // console.log("liste des params "+JSON.stringify(concatParams))
+      Axios.get(
+        url
+      )
+        .then(response => {
+          context.commit('moyennes', response.data.data.data);
+          context.commit('pageCount', response.data.data.last_page);
+          context.commit('currentPage', response.data.data.current_page);
+          context.commit('countPage', response.data.data.last_page);
+          context.commit('totalElement', response.data.data.total);
+        })
+        .catch(error => {
+          console.log(error)
+          this.errored = true
+        })
+        .finally(() => (this.loading = false))
+    },
     moyennesX(context, params) {
-           
+
       let concatParams = null
       if (params.search) {
         concatParams = params.search.map(function (elemen) {
@@ -695,13 +741,16 @@ export default {
       if(concatParams){
         url = context.state.endpoint + 'api/v1/elevesclasses?page=' + params.payload + '&' + concatParams;
       }else{
-        url = context.state.endpoint + 'api/v1/elevesclasses?page=' + params.payload;   
+        url = context.state.endpoint + 'api/v1/elevesclasses?page=' + params.payload;
       }
       Axios.get(
         url)
         .then(response => {
           context.commit('eleves', response.data.data.data)
           context.commit('pageCount', response.data.data.last_page)
+          context.commit('currentPage', response.data.data.current_page)
+          context.commit('countPage', response.data.data.last_page)
+          context.commit('totalElement', response.data.data.total)
           // console.log("eleves "+ JSON.stringify(response.data.data.data))
         })
         .catch(error => {
@@ -816,8 +865,13 @@ export default {
 
         Axios.get(url)
         .then(response => {
+          // console.log("absenceseleves "+JSON.stringify(response.data.data.data));
           context.commit('absenceseleves', response.data.data.data)
           context.commit('pageCount', response.data.data.last_page)
+          context.commit('currentPage', response.data.data.current_page)
+          context.commit('countPage', response.data.data.last_page)
+          context.commit('totalElement', response.data.data.total)
+          // console.log("totalElement "+JSON.stringify(response.data.data.total));
         })
         .catch(error => {
           console.log(error)
@@ -850,7 +904,7 @@ export default {
           console.log(error)
           this.errored = true
         })
-        .finally(() => (this.loading = false)) 
+        .finally(() => (this.loading = false))
     },
     moyenne(context, moyenneId) {
       Axios.get(
@@ -867,7 +921,7 @@ export default {
     },
     getValeurNote(context, params) {
       return Axios.get(
-        context.state.endpoint + 'api/v1/get-valeur-by-eleve_id-and-note_id/' + 
+        context.state.endpoint + 'api/v1/get-valeur-by-eleve_id-and-note_id/' +
         params.eleveId + '/' + params.noteId
       )
     },
@@ -893,7 +947,7 @@ export default {
     },
     getRapportValidationByClasseId(context, classeId) {
       Axios.get(
-        context.state.endpoint + 'api/v1/rapportsvalidations?classe_id=' +classeId 
+        context.state.endpoint + 'api/v1/rapportsvalidations?classe_id=' +classeId
       )
         .then(response => {
             if(response.data.data){

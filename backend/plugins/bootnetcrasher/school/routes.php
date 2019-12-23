@@ -18,3 +18,6 @@ Route::get('api/v1/notemodel-valeur', 'AhmadFatoni\ApiGenerator\Controllers\API\
 Route::get('api/v1/notemodel-valeur-v2', 'AhmadFatoni\ApiGenerator\Controllers\API\noteController@indexValeurV2');
 Route::get('api/v1/matieres-v2', 'AhmadFatoni\ApiGenerator\Controllers\API\matiereController@indexV2');
 Route::put('api/v1/noteseleves-valeur/{eleve_id}/{note_id}', 'AhmadFatoni\ApiGenerator\Controllers\API\noteselevesController@addValueNote');
+Route::get('api/v1/search-matiere-by-classe-and-professeur', 'AhmadFatoni\ApiGenerator\Controllers\API\matiereController@searchMatiereByClasseAndProfesseur');
+Route::get('api/v1/eleves-without-paginate', 'AhmadFatoni\ApiGenerator\Controllers\API\eleveController@indexWithoutPaginate');
+Route::get('api/v1/search-moyennes-by-classe-and-professeur-and-section', 'AhmadFatoni\ApiGenerator\Controllers\API\moyenneController@searchMoyennesByClasseAndMatiereAndSectionTypeMoyenne');

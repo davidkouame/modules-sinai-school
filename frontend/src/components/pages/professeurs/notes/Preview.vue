@@ -39,41 +39,13 @@
                 <div class="form-group row">
                   <label class="col-sm-2 col-form-label">Types notes</label>
                   <div class="col-sm-10">
-                    <select v-model="typenote" class="form-control" disabled>
-                      <option value>Sélectionner un type de note</option>
-                      <option
-                        :value="typenote.id"
-                        v-for="typenote in typesnotes"
-                      >{{ typenote.libelle }}</option>
-                    </select>
+                    <input v-bind:value="note.typenote.libelle" type="text" class="form-control" disabled/>
                   </div>
                 </div>
                 <div class="form-group row">
                   <label class="col-sm-2 col-form-label">Classes</label>
                   <div class="col-sm-10">
-                    <!--<select
-                      v-model="classe"
-                      class="form-control"
-                      multiple="true"
-                      v-bind:class="{ 'fix-height': multiple === 'true' }"
-                      disabled
-                    >
-                      <option value>Sélectionner une ou plusieurs classes</option>
-                      <option
-                        :value="classeByProfesseur.classe.id"
-                        v-for="classeByProfesseur in classesByProfesseur"
-                      >{{ classeByProfesseur.classe.libelle }}</option>
-                    </select>-->
-                    <select
-                      v-model="classe"
-                      class="form-control" 
-                      disabled                   >
-                      <option value>Sélectionner une ou plusieurs classes</option>
-                      <option
-                        :value="classeByProfesseur.classe.id"
-                        v-for="classeByProfesseur in classesByProfesseur"
-                      >{{ classeByProfesseur.classe.libelle }}</option>
-                    </select>
+                    <input v-bind:value="note.classe.libelle" type="text" class="form-control" disabled/>
                   </div>
                 </div>
 
@@ -81,19 +53,9 @@
                 <div class="form-group row">
                   <label class="col-sm-2 col-form-label">Matières</label>
                   <div class="col-sm-10">
-                    <select
-                      v-model="matiere_id"
-                      class="form-control"    
-                      disabled                >
-                      <option value>Sélectionner une matière</option>
-                      <option
-                        :value="ele.id"
-                        v-for="ele in matieres"
-                      >{{ ele.libelle }}</option>
-                    </select>
+                    <input v-bind:value="note.matiere.libelle" type="text" class="form-control" disabled/>
                   </div>
                 </div>
-
                 <div class="form-group row">
                   <label class="col-sm-2 col-form-label">Coefficient</label>
                   <div class="col-sm-10">
@@ -128,7 +90,7 @@ export default {
       matiere: null,
       classe: [],
       coefficient: null,
-      multiple: true, 
+      multiple: true,
       matiere_id: null
     };
   },

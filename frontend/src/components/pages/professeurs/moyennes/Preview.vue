@@ -70,7 +70,7 @@
                           <th scope="col">Valeur</th>
                           <th scope="col">Coef.</th>
                           <th scope="col">Coef. * Valeur</th>
-                          <th scope="col">Actions</th>
+                          <!--<th scope="col">Actions</th>-->
                         </tr>
                       </thead>
                       <tbody>
@@ -78,23 +78,23 @@
                           <th scope="row">{{ index + 1}}</th>
                           <td><a :href="'/#/notes/preview/'+note.id" >{{ note.libelle }}</a></td>
                           <td>{{ note.created_at|formatDate }}</td>
-                          <td>
-                            <span v-if="note.typenote">{{ note.typenote.libelle }}</span>
-                          </td>
+                          <td> {{ note.type_note_libelle}} </td>
                           <!--<td v-bind:id="'note-'+note.id">{{ getValeur() }}</td>-->
-                          <td v-bind:id="'valeur-'+note.id"></td>
+                          <td>{{ formatValeur(note.valeur) ?
+                            formatValeur(note.valeur)+'/20': '--' }}</td>
                           <td>{{ note.coefficient }}</td>
                           <!--<td>{{ formatMoyenne(note.coefficient*getValeur(index)) }} / {{ note.coefficient * 20 }}</td>-->
-                          <td v-bind:id="'coef-valeur-'+note.id">{{ note.coefficient }}</td>
-                          <td>
+                          <td>{{ formatValeur(note.valeur*note.coefficient) ?
+                            formatValeur(note.valeur*note.coefficient)+'/'+note.coefficient*20 : '--'}}</td>
+                          <!--<td>
                             <div class="row">
-                              <!--<a :href="'/#/notes/preview/'+note.id" class="col">
+                              <a :href="'/#/notes/preview/'+note.id" class="col">
                                 <i class="fa fa-eye fa-lg"></i>
                               </a>-->
                               <!--<a :href="'/#/notes/update/'+note.id" class="col">
                                 <i class="fa fa-pencil fa-lg"></i>
                               </a>-->
-                                <a
+                                <!--<a
                                 v-if="!note.rapport_validation_id"
                                 id="show-modal"
                                 @click="showModalF(note.id, 'note')"
@@ -105,7 +105,7 @@
                                 <i class="fa fa-pencil fa-lg"></i>
                               </a>
                             </div>
-                          </td>
+                          </td>-->
                         </tr>
                         <tr v-if="!countNotes">
                           <td colspan="6" style="text-align: center;">Aucun resultat trouvé !</td>
@@ -113,7 +113,7 @@
                         </tr>
                       </tbody>
                     </table>
-                    
+
                     <modal
                       v-if="showModal"
                       @close="showModal = false"
@@ -145,7 +145,7 @@ export default {
       matiere: null,
       classe: [],
       coefficient: null,
-      multiple: true, 
+      multiple: true,
       matiere_id: null,
       countNotes: false,
       eleveIdModal: null,
@@ -161,14 +161,14 @@ export default {
     fetchNote(pageNum, search = null) {
       pageNum = pageNum == null ? 1 : pageNum;
       if (search) {
-        this.$store.dispatch("allnotesandvaleur", {
+        this.$store.dispatch("allnotesandvaleurV2", {
           payload: pageNum,
           search: [{ key: "libelle", value: search },
                   { key: "professeur_id", value: localStorage.getItem("professeurId") },
                   { key: "eleve_id", value: this.moyenne.eleve.id }]
         });
       } else {
-        this.$store.dispatch("allnotesandvaleur", {
+        this.$store.dispatch("allnotesandvaleurV2", {
           payload: pageNum,
           search: [{ key: "professeur_id", value: localStorage.getItem("professeurId") },
                   { key: "eleve_id", value: this.moyenne.eleve.id }]
@@ -196,6 +196,17 @@ export default {
       this.eleveIdModal = this.moyenne.eleve.id;
       console.log(">>>>>>> "+noteId);
     },
+  formatValeur(valeur){
+    if(valeur){
+      if(valeur.toString().length==1){
+        return '0'+valeur;
+      }else{
+        return valeur;
+      }
+    }else{
+      return null;
+    }
+  }
   },
   computed: {
     notes() {
@@ -235,7 +246,7 @@ export default {
         let th = this;
         var found = this.valeurs.find(function(element) {
             /*if(element.note_id == 20){
-                return element; 
+                return element;
             }*/
             var i = element.note_id;
             console.log("l'element id est "+JSON.stringify(document.getElementById("valeur-"+i)));
@@ -244,7 +255,7 @@ export default {
                 var coefficient = document.getElementById("coef-valeur-"+i).innerHTML;
                 document.getElementById("coef-valeur-"+i).innerHTML = th.formatMoyenne2(element.valeur * coefficient) + '/' + 20*coefficient;
             }
-        }); 
+        });
         // console.log("l'index trouvé est "+JSON.stringify(found));
         /*for(i = this.valeurs.length - 1; i >= 0; i--){
             var valeur = this.valeurs[i].valeur;

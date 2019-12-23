@@ -2,44 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="259d6927-db90-493c-a6bf-1a6004ccdc80" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/console/CalculMoyenne.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/controllers/parentcontroller/config_relation.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/pages/parents/moyennes/PreviewBackoff.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/pages/professeurs/eleves/PreviewBackOff.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/plugins/ahmadfatoni/apigenerator/controllers/api/absenceselevesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/plugins/ahmadfatoni/apigenerator/controllers/api/absenceselevesController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/plugins/ahmadfatoni/apigenerator/controllers/api/classeProfesseurMatiereController.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/plugins/ahmadfatoni/apigenerator/controllers/api/classeProfesseurMatiereController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/plugins/ahmadfatoni/apigenerator/controllers/api/eleveController.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/plugins/ahmadfatoni/apigenerator/controllers/api/eleveController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/plugins/ahmadfatoni/apigenerator/controllers/api/matiereController.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/plugins/ahmadfatoni/apigenerator/controllers/api/matiereController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/plugins/ahmadfatoni/apigenerator/controllers/api/moyenneController.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/plugins/ahmadfatoni/apigenerator/controllers/api/moyenneController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/plugins/ahmadfatoni/apigenerator/controllers/api/noteController.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/plugins/ahmadfatoni/apigenerator/controllers/api/noteController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/plugins/ahmadfatoni/apigenerator/controllers/api/noteselevesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/plugins/ahmadfatoni/apigenerator/controllers/api/noteselevesController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/plugins/ahmadfatoni/apigenerator/routes.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/plugins/ahmadfatoni/apigenerator/routes.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/Plugin.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/Plugin.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/controllers/ClasseController.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/controllers/ClasseController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/controllers/ClasseEleveController.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/controllers/ClasseEleveController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/controllers/LogSmsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/controllers/LogSmsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/controllers/ParentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/controllers/ParentController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/controllers/parentcontroller/create.htm" beforeDir="false" afterPath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/controllers/parentcontroller/create.htm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/controllers/parentcontroller/update.htm" beforeDir="false" afterPath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/controllers/parentcontroller/update.htm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/models/ClasseEleveModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/models/ClasseEleveModel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/models/ClasseModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/models/ClasseModel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/models/JobErrorModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/models/JobErrorModel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/models/MoyenneModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/models/MoyenneModel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/models/NoteEleve.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/models/NoteEleve.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/models/NoteModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/models/NoteModel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/models/classeelevemodel/columns.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/models/classeelevemodel/columns.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/models/joberrormodel/columnsyaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/models/joberrormodel/fields.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/models/joberrormodel/fields.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/models/jobmodel/fields.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/models/jobmodel/fields.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/models/jobsuccessmodel/fields.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/models/jobsuccessmodel/fields.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/plugin.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/plugin.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/routes.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/routes.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/06/6e/066e1bffc6e9ac096027a2223314e548f69888c4" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/06/6e/066e1bffc6e9ac096027a2223314e548f69888c4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/09/96/099649fffd82b78570c51f619535b6da161b8af4" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/09/96/099649fffd82b78570c51f619535b6da161b8af4" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/0e/ba/0eba6d204a6cd3387bff594ac84e6533bc827394" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/0e/ba/0eba6d204a6cd3387bff594ac84e6533bc827394" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/11/de/11de31e1eabb2682cf62ee9c9ccb0630f1019006" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/11/de/11de31e1eabb2682cf62ee9c9ccb0630f1019006" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/16/2a/162aa0fd5a8aaf1aac52bfa63efa6d48e8900692" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/16/2a/162aa0fd5a8aaf1aac52bfa63efa6d48e8900692" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/22/43/2243f500ae1632e1e609a9d4d08e7bad65800071" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/22/43/2243f500ae1632e1e609a9d4d08e7bad65800071" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/27/55/275580f652d4412b3b4dc34f145f804df3025bd1" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/27/55/275580f652d4412b3b4dc34f145f804df3025bd1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/2c/1f/2c1fea1a32f45f959e27e3bc550ceb624c391ff2" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/2c/1f/2c1fea1a32f45f959e27e3bc550ceb624c391ff2" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/32/6f/326f6baaf90c030a417f1f6074a36026776049e7" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/32/6f/326f6baaf90c030a417f1f6074a36026776049e7" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/33/83/3383740886ae7330f62e13d7c3bc909cdfd8b8ef" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/33/83/3383740886ae7330f62e13d7c3bc909cdfd8b8ef" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/3b/1f/3b1fbc7d20d20b82e0c5bff67f53462074c566ac" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/3b/1f/3b1fbc7d20d20b82e0c5bff67f53462074c566ac" afterDir="false" />
@@ -52,48 +26,36 @@
       <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/57/ad/57ad8f5021cae167faf8354782af67e68ae65af5" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/57/ad/57ad8f5021cae167faf8354782af67e68ae65af5" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/5f/c6/5fc61d085680ba6e2a9577f670170342cca2d37b" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/5f/c6/5fc61d085680ba6e2a9577f670170342cca2d37b" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/64/91/64915a276d92f898a94b644d901bd24bea16d7d3" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/64/91/64915a276d92f898a94b644d901bd24bea16d7d3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/66/65/666582ffea28796aac87443dbbc6420b7c6df7cd" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/66/65/666582ffea28796aac87443dbbc6420b7c6df7cd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/67/5d/675d608c7935a25e611624f19095a22c6183d4be" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/67/5d/675d608c7935a25e611624f19095a22c6183d4be" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/72/4d/724d64623b82cdd367a46a1a3611b8fce75faedf" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/72/4d/724d64623b82cdd367a46a1a3611b8fce75faedf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/77/61/77616e1c5e0d202cb4cf522bddafaebf56f27660" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/77/61/77616e1c5e0d202cb4cf522bddafaebf56f27660" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/7f/18/7f1858f1486f09199a00f1b4e380841eeafbaa61" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/7f/18/7f1858f1486f09199a00f1b4e380841eeafbaa61" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/83/b0/83b00c260c1a497ba24c8415bf10556ef08c9dd9" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/83/b0/83b00c260c1a497ba24c8415bf10556ef08c9dd9" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/88/6b/886b203a10fcb110dcb971e3aa4aecd28cb7ce1c" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/88/6b/886b203a10fcb110dcb971e3aa4aecd28cb7ce1c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/8c/ca/8cca6193f7a9b672e6de629eb394ceae25001876" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/8c/ca/8cca6193f7a9b672e6de629eb394ceae25001876" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/93/0b/930b94c8bc70cc6084fa2160dce5d6f5615c968d" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/93/0b/930b94c8bc70cc6084fa2160dce5d6f5615c968d" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/96/1c/961c2864a15335dc579d6502ae5c5f79c81c3188" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/96/1c/961c2864a15335dc579d6502ae5c5f79c81c3188" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/97/37/9737833e426f53b3dcb4d98fdcb68c76762765de" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/97/37/9737833e426f53b3dcb4d98fdcb68c76762765de" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/97/39/9739b3a900e31d6b7467fc7f7b244804b462b524" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/97/39/9739b3a900e31d6b7467fc7f7b244804b462b524" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/99/6b/996b534fe6b63c23ddc825a2efe4588688b616f4" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/99/6b/996b534fe6b63c23ddc825a2efe4588688b616f4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/9e/95/9e9567a05e43f8ab3e23078b5c1f903059d26141" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/9e/95/9e9567a05e43f8ab3e23078b5c1f903059d26141" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/a0/6d/a06d0429ba98e5e23856cf9f1602590e66f027c1" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/a0/6d/a06d0429ba98e5e23856cf9f1602590e66f027c1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/a0/c9/a0c910eb995ad1e9281e5bb05187281e039e242f" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/a0/c9/a0c910eb995ad1e9281e5bb05187281e039e242f" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/a2/2a/a22af5cf5d9a4aac944c408c4e7e768af23674f6" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/a2/2a/a22af5cf5d9a4aac944c408c4e7e768af23674f6" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/a8/23/a823a57408294e569f28a18b4b538671dd509980" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/a8/23/a823a57408294e569f28a18b4b538671dd509980" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/b1/b6/b1b6b61b6cd58fcbec08f9d00687d524901e8a6d" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/b1/b6/b1b6b61b6cd58fcbec08f9d00687d524901e8a6d" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/b5/ed/b5edec56f620f54435fb31fca118073b0c60966b" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/b5/ed/b5edec56f620f54435fb31fca118073b0c60966b" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/c8/ac/c8ac734fdfb776eb107327bc3c2f37e7f13467e4" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/c8/ac/c8ac734fdfb776eb107327bc3c2f37e7f13467e4" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/cf/bb/cfbbfa4fea08fa055af314553e97d4c1a1b6b826" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/cf/bb/cfbbfa4fea08fa055af314553e97d4c1a1b6b826" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/d0/1e/d01e8e95ac402ba16ad83ad09f6851991c3b6212" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/d0/1e/d01e8e95ac402ba16ad83ad09f6851991c3b6212" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/d7/0c/d70cb8b6c2fb5357a59d77018dee6f8e9e044ddb" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/d7/0c/d70cb8b6c2fb5357a59d77018dee6f8e9e044ddb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/da/e9/dae913b4ed2e953488b529f159576339d35a255c" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/da/e9/dae913b4ed2e953488b529f159576339d35a255c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/df/8b/df8b56be8d603476482faa7bf45a3ad4e460e405" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/df/8b/df8b56be8d603476482faa7bf45a3ad4e460e405" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/e2/ab/e2abfde8f74a94f21d35ea72afbfb3e67d632b37" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/e2/ab/e2abfde8f74a94f21d35ea72afbfb3e67d632b37" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/e3/dc/e3dca2704d9b520cb0f1f597ea7f53489252aab9" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/e3/dc/e3dca2704d9b520cb0f1f597ea7f53489252aab9" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/storage/framework/cache/e9/29/e92989241188835813c857ba418cf1cb33dcc7da" beforeDir="false" afterPath="$PROJECT_DIR$/backend/storage/framework/cache/e9/29/e92989241188835813c857ba418cf1cb33dcc7da" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/storage/framework/sessions/wobC7VI4tZHAolF6xRNG5D2s9gJE1Xm9gcWXjKtL" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/storage/framework/sessions/PlA1yZUElxRRfwzdEybrNljQFKArq07fRIDL3pV3" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/assets/css/demo.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/assets/css/demo.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Login.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/pages/parents/absences/List.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/pages/parents/absences/List.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/pages/parents/absences/Preview.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/pages/parents/absences/Preview.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/pages/parents/matieres/List.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/pages/parents/matieres/List.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/pages/parents/matieres/Preview.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/pages/parents/matieres/Preview.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/pages/parents/moyennes/List.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/pages/parents/moyennes/List.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/pages/parents/moyennes/Preview.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/pages/parents/moyennes/Preview.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/pages/parents/notes/List.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/pages/parents/notes/List.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/pages/parents/notes/Preview.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/pages/parents/notes/Preview.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/pages/parents/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/pages/parents/router/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/pages/parents/store/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/pages/parents/store/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/SidebarPlugin/SideBar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/SidebarPlugin/SideBar.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/pages/professeurs/absences/Add.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/pages/professeurs/absences/Add.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/pages/professeurs/absences/List.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/pages/professeurs/absences/List.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/pages/professeurs/eleves/List.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/pages/professeurs/eleves/List.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/pages/professeurs/eleves/Preview.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/pages/professeurs/eleves/Preview.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/pages/professeurs/moyennes/List.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/pages/professeurs/moyennes/List.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/pages/professeurs/moyennes/Preview.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/pages/professeurs/moyennes/Preview.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/pages/professeurs/notes/Add.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/pages/professeurs/notes/Add.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/pages/professeurs/notes/List.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/pages/professeurs/notes/List.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/pages/professeurs/notes/Preview.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/pages/professeurs/notes/Preview.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/pages/professeurs/store/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/pages/professeurs/store/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/layout/TopNavbar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/layout/TopNavbar.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/main.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/store/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/store/index.js" afterDir="false" />
@@ -124,7 +86,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/frontend/src/components/pages/parents/moyennes" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/frontend/src/components/pages/professeurs/eleves" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -138,11 +100,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/frontend/src/components/pages/professeurs/eleves" />
       <recent name="$PROJECT_DIR$/frontend/src/components/pages/parents/moyennes" />
       <recent name="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/console" />
       <recent name="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/controllers/parentcontroller" />
       <recent name="$PROJECT_DIR$/backend/plugins/bootnetcrasher/school/models/classeelevemodel" />
-      <recent name="$PROJECT_DIR$/frontend/src/components/notes" />
     </key>
   </component>
   <component name="ServiceViewManager">
@@ -179,7 +141,7 @@
       <workItem from="1576838218910" duration="2107000" />
       <workItem from="1576846515761" duration="2722000" />
       <workItem from="1576913068511" duration="20985000" />
-      <workItem from="1576952423710" duration="4410000" />
+      <workItem from="1576952423710" duration="32777000" />
     </task>
     <servers />
   </component>
@@ -195,40 +157,42 @@
       <screen x="0" y="23" width="1280" height="714" />
     </state>
     <state x="321" y="212" key="#com.jetbrains.php.refactoring.move.member.instance.PhpMoveInstanceMethodDialog#/0.23.1280.714@0.23.1280.714" timestamp="1576760162175" />
-    <state width="554" height="445" key="SwitcherDM" timestamp="1576913824871">
-      <screen x="0" y="23" width="1280" height="716" />
+    <state width="554" height="446" key="SwitcherDM" timestamp="1577093466839">
+      <screen x="0" y="23" width="1280" height="717" />
     </state>
     <state width="554" height="445" key="SwitcherDM/0.23.1280.716@0.23.1280.716" timestamp="1576913824871" />
+    <state width="554" height="446" key="SwitcherDM/0.23.1280.717@0.23.1280.717" timestamp="1577093466839" />
     <state x="296" y="216" key="com.intellij.ide.util.TipDialog" timestamp="1576952902664">
       <screen x="0" y="23" width="1280" height="717" />
     </state>
     <state x="296" y="215" key="com.intellij.ide.util.TipDialog/0.23.1280.714@0.23.1280.714" timestamp="1576610879812" />
     <state x="296" y="216" key="com.intellij.ide.util.TipDialog/0.23.1280.717@0.23.1280.717" timestamp="1576952902664" />
-    <state x="303" y="150" width="673" height="467" key="find.popup" timestamp="1576933541263">
-      <screen x="0" y="23" width="1280" height="717" />
+    <state x="303" y="151" width="824" height="528" key="find.popup" timestamp="1577099514098">
+      <screen x="0" y="23" width="1280" height="722" />
     </state>
     <state x="303" y="150" width="673" height="462" key="find.popup/0.23.1280.712@0.23.1280.712" timestamp="1576688993540" />
     <state x="303" y="150" width="673" height="464" key="find.popup/0.23.1280.714@0.23.1280.714" timestamp="1576790854468" />
     <state x="303" y="150" width="673" height="466" key="find.popup/0.23.1280.716@0.23.1280.716" timestamp="1576913751763" />
     <state x="303" y="150" width="673" height="467" key="find.popup/0.23.1280.717@0.23.1280.717" timestamp="1576933541263" />
+    <state x="303" y="151" width="824" height="528" key="find.popup/0.23.1280.722@0.23.1280.722" timestamp="1577099514098" />
     <state x="305" y="170" key="run.anything.popup" timestamp="1576688254605">
       <screen x="0" y="23" width="1280" height="712" />
     </state>
     <state x="305" y="170" key="run.anything.popup/0.23.1280.712@0.23.1280.712" timestamp="1576688254605" />
-    <state x="305" y="32" width="670" height="681" key="search.everywhere.popup" timestamp="1576954418043">
+    <state x="305" y="32" width="670" height="681" key="search.everywhere.popup" timestamp="1577088984218">
       <screen x="0" y="23" width="1280" height="717" />
     </state>
     <state x="305" y="32" width="670" height="676" key="search.everywhere.popup/0.23.1280.712@0.23.1280.712" timestamp="1576688240379" />
     <state x="305" y="32" width="670" height="678" key="search.everywhere.popup/0.23.1280.714@0.23.1280.714" timestamp="1576793826340" />
     <state x="305" y="32" width="670" height="680" key="search.everywhere.popup/0.23.1280.716@0.23.1280.716" timestamp="1576923004157" />
-    <state x="305" y="32" width="670" height="681" key="search.everywhere.popup/0.23.1280.717@0.23.1280.717" timestamp="1576954418043" />
+    <state x="305" y="32" width="670" height="681" key="search.everywhere.popup/0.23.1280.717@0.23.1280.717" timestamp="1577088984218" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="php-line-method">
           <url>file://$PROJECT_DIR$/backend/plugins/ahmadfatoni/apigenerator/controllers/api/noteController.php</url>
-          <line>349</line>
+          <line>352</line>
           <properties>
             <option name="className" value="\AhmadFatoni\ApiGenerator\Controllers\API\noteController" />
             <option name="methodName" value="update" />

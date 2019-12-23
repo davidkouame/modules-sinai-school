@@ -1,5 +1,8 @@
 <?php namespace AhmadFatoni\ApiGenerator\Controllers\API;
 
+use BootnetCrasher\School\Models\ClasseMatiereModel;
+use BootnetCrasher\School\Models\MatiereModel;
+use BootnetCrasher\School\Models\SectionAnneeScolaireModel;
 use Cms\Classes\Controller;
 use BackendMenu;
 
@@ -66,6 +69,57 @@ class moyenneController extends Controller
         }
         $data = $data->paginate(10)->toArray();
         // dd($data);
+        return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
+    }
+
+    /*
+     * Search moyennes by classe_id, matiere_id, section_annee_scolaire_id
+     */
+    public function searchMoyennesByClasseAndMatiereAndSectionTypeMoyenne(Request $request){
+        $search = $request->get('search');
+        // search section annee scolaire
+        $sectionAnneeScolaire = SectionAnneeScolaireModel::find($request->get('section_annee_scolaire_id'));
+        // search matiere
+        $matiere = ClasseMatiereModel::where('classe_id', $request->get('classe_id'))
+            ->where('professeur_id', $request->get('professeur_id'))
+            ->where('annee_scolaire_id', $sectionAnneeScolaire->annee_scolaire_id)
+            ->first();
+        $data = $this->MoyenneModel->with(array(
+            'eleve' => function($query){
+                $query->select('*');
+            },
+            'matiere' => function($query){
+                $query->select('*');
+            },
+            'sectionanneescolaire' => function($query){
+                $query->select('*');
+            },
+            'anneescolaire' => function($query){
+                $query->select('*');
+            }
+        ));
+        if($matiere){
+            $data = $data->where('classe_id', $request->get('classe_id'))
+                ->where('matiere_id', $matiere->matiere_id)
+                ->where('section_annee_scolaire_id', $request->get('section_annee_scolaire_id'))
+                ->where('type_moyenne_id', $request->get('type_moyenne_id'));
+            if($search){
+                if((int)$search and strlen($search) < 5){
+                    $data = $data->where('valeur', 'like', '%'.$search.'%');
+                }else{
+                    $data->whereHas('eleve', function ($q) use($request) {
+                        // $q->where('matricule', 'like', '%'.$request->get('search').'%');
+                        $q->where(function ($queryE)use($request){
+                            $queryE->where('matricule', 'like', '%'.$request->get('search').'%')
+                                ->orWhere('name', 'like', '%'.$request->get('search').'%')
+                                ->orWhere('surname', 'like', '%'.$request->get('search').'%');
+                        });
+                    });
+                }
+
+            }
+        }
+        $data = $data->paginate(10)->toArray();
         return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
     }
     

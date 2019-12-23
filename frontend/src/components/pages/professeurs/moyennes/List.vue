@@ -29,7 +29,7 @@
                 <div class="row">
                     <div class="float-left col-2">
                         <base-dropdown v-bind:title="titleDropdownClasse">
-                            <a v-for="classe in classes" class="dropdown-item" 
+                            <a v-for="classe in classes" class="dropdown-item"
                                 href="javascript:void(0)" @click="changeClasse(classe)">
                               {{ classe.classe.libelle }}
                               <i class="fa fa-check" :class="{check:classe.classe.id == classeId}" ></i>
@@ -71,6 +71,7 @@
                       <th scope="col">Moyenne</th>
                       <th scope="col">Coef.</th>
                       <th scope="col">Coef. * Moy.</th>
+                      <th scope="col">Rang</th>
                       <th scope="col">Actions</th>
                     </tr>
                   </thead>
@@ -83,8 +84,9 @@
                       <td>{{ formatMoyenne(moyenne.valeur) }} / 20</td>
                       <td>{{ moyenne.coefficient_matiere }}</td>
                       <td>
-                           {{ formatMoyenne(moyenne.valeur * moyenne.coefficient_matiere) }} /  
+                           {{ formatMoyenne(moyenne.valeur * moyenne.coefficient_matiere) }} /
                            {{ moyenne.coefficient_matiere * 20 }}</td>
+                      <td>{{ moyenne.rang ? moyenne.rang : '--'  }}</td>
                       <td>
                         <div class="row">
                           <a :href="'/#/moyennes/preview/'+moyenne.id" class="col">
@@ -109,17 +111,25 @@
                 ></modal>
 
                 <!-- Pagination -->
-                <div class="float-right pagi" v-if="pageCount > 1">
-                    <paginate
-                      :page-count="pageCount"
-                      :click-handler="fetch"
-                      :prev-text="'&laquo;'"
-                      :next-text="'&raquo;'"
-                      :container-class="'pagination'"
-                    ></paginate>
+                <div class="row" v-if="pageCount > 1">
+                  <div class="col-md-4" style="color: #98a7a8;font-size: 13px;">
+                    Enregistrements affichés : {{ currentPage }}-{{ countPage }} sur {{ totalElement }}
+                  </div>
+                  <div class="col-md-8">
+                    <div class="float-right pagi">
+                      <paginate
+                        :page-count="pageCount"
+                        :click-handler="fetch"
+                        :prev-text="'&laquo;'"
+                        :next-text="'&raquo;'"
+                        :container-class="'pagination'"
+                        :page-class="'page-item'"
+                      ></paginate>
+                    </div>
+                  </div>
                 </div>
 
-                <a v-if="seeBtnValidation" class="btn btn-primary" @click="validate">valider</a>
+                <!--<a v-if="seeBtnValidation" class="btn btn-primary" @click="validate">valider</a>-->
                 <ul v-if="rapportvalidation">
                     <li>Date de création : {{ rapportvalidation.created_at }}</li>
                     <li>Description : {{ rapportvalidation.description }}</li>
@@ -153,20 +163,21 @@ export default {
   },
   created() {
     this.refreshList();
-    /*this.$store.dispatch('classes', [{'key': 'professeur_id', 
-    'value': localStorage.getItem('professeurId')}])*/
+    this.$store.dispatch('classes', [{'key': 'professeur_id',
+    'value': localStorage.getItem('professeurId')}])
   },
   methods: {
     fetch(pageNum, search = null) {
       pageNum = pageNum == null ? 1 : pageNum;
       let params = [
-        { key: "libelle", value: search },
+        { key: "search", value: search },
+        { key: "type_moyenne_id", value: 2 },
         { key: "classe_id", value: this.classeListId },
         { key: "professeur_id", value: localStorage.getItem('professeurId') },
         { key: "matiere_id", value: this.matiereId },
         { key: "section_annee_scolaire_id", value: this.sectionAnneeScolaireId }
       ];
-      this.$store.dispatch("moyennes", {
+      this.$store.dispatch("moyennesV2", {
         payload: pageNum,
         search: this.trimSearch(params)
       });
@@ -196,17 +207,36 @@ export default {
       // this.matiereId = this.classes[0].matiere_id;
     },
     formatMoyenne(moy){
-        if(moy.toString().length==1){
-            return '0'+moy;
+        if(moy){
+          let moyenne = null;
+          let moyennes = moy.toString().split(".");
+          let partieEntiere = null;
+          let partieDecimal = null;
+          if(moyennes[0].toString().length==1){
+            partieEntiere = '0'+moyennes[0];
+          }else{
+            partieEntiere = moyennes[0];
+          }
+          if(moyennes[1]){
+            if(moyennes[1].length == 1){
+              partieDecimal = moyennes[1]+"0";
+            }else if(moyennes[1].length > 2){
+              partieDecimal = moyennes[1].substr(0, 2);
+            }
+          }else{
+            partieDecimal = "00";
+          }
+          return partieEntiere+"."+partieDecimal;
         }else{
-            return moy;
+          return "--"
         }
+
     },
     validate(){
        // alert("hdbfhd");
       this.showModal = true;
-      // this.validationNotes = 
-      
+      // this.validationNotes =
+
     },
     showModalF(noteId = null) {
       this.showModal = true;
@@ -245,6 +275,15 @@ export default {
     sectionAnneeScolaireId(){
         // console.log("changement");
         return this.$store.getters.sectionAnneeScolaireId;
+    },
+    currentPage(){
+      return this.$store.getters.currentPage;
+    },
+    countPage(){
+      return this.$store.getters.countPage;
+    },
+    totalElement(){
+      return this.$store.getters.totalElement;
     }
   },
   watch: {

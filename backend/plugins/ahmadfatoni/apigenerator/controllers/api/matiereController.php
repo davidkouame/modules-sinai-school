@@ -1,5 +1,6 @@
 <?php namespace AhmadFatoni\ApiGenerator\Controllers\API;
 
+use BootnetCrasher\School\Models\ClasseMatiereModel;
 use Cms\Classes\Controller;
 use BackendMenu;
 
@@ -226,6 +227,21 @@ class matiereController extends Controller
         $this->MatiereModel->where('id',$id)->delete();
 
         return $this->helpers->apiArrayResponseBuilder(200, 'success', 'Data has been deleted successfully.');
+    }
+
+    /*
+     * Search matiere by professeur_id, classe_id
+     * params classe_id int
+     * params professeur_id int
+     * return Array
+     */
+    public function searchMatiereByClasseAndProfesseur(Request $request){
+        $data = ClasseMatiereModel::where('classe_id', $request->get('classe_id'))
+            ->where('professeur_id', $request->get('professeur_id'))
+            ->first();
+        if($data)
+            $data = $data->matiere;
+        return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
     }
 
 

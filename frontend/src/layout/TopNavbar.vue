@@ -63,13 +63,13 @@
             <!--<a class="dropdown-item" href="javascript:void(0)" @click="changeEleve(0)">All</a>-->
           </base-dropdown>
 
-          <!--<base-dropdown v-bind:title="titleDropdownSection" v-if="sectionsanneescolaire">
+          <base-dropdown v-bind:title="titleDropdownSection" v-if="sectionsanneescolaire && professeurId">
             <a v-for="section in sectionsanneescolaire" class="dropdown-item"
                 href="javascript:void(0)" @click="changeSectionAnneeScolaire(section)">
               {{ section.libelle }}
               <i class="fa fa-check"  :class="{check:section.id == sectionAnneeScolaireId}" ></i>
             </a>
-          </base-dropdown>-->
+          </base-dropdown>
 
           <li class="nav-item">
             <a href="javascript:void(0)" v-on:click="logout" class="nav-link">Déconnexion</a>

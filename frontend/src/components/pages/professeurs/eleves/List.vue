@@ -28,7 +28,7 @@
                 <div class="row">
                     <div class="float-left col-2">
                         <base-dropdown v-bind:title="titleDropdownClasse">
-                            <a v-for="classe in classes" class="dropdown-item" 
+                            <a v-for="classe in classes" class="dropdown-item"
                                 href="javascript:void(0)" @click="changeClasse(classe)">
                               {{ classe.classe.libelle }}
                               <i class="fa fa-check"  :class="{check:classe.classe.id == classeId}" ></i>
@@ -56,13 +56,13 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-1">
+                            <!--<div class="col-md-1">
                                 <div class="col-1 add-form">
                                     <a :href="'/#/notes/add'">
                                       <i class="fa fa-plus-circle fa-lg font-size-28"></i>
                                     </a>
                                 </div>
-                            </div>
+                            </div>-->
                         </div>
                     </div>
                 </div>
@@ -99,15 +99,24 @@
                 </table>
 
                 <!-- Pagination -->
-                <div class="float-right pagi" v-if="pageCount > 1">
-                    <paginate
-                      :page-count="pageCount"
-                      :click-handler="fetch"
-                      :prev-text="'&laquo;'"
-                      :next-text="'&raquo;'"
-                      :container-class="'pagination'"
-                    ></paginate>
+                <div class="row" v-if="pageCount > 1">
+                  <div class="col-md-4" style="color: #98a7a8;font-size: 13px;">
+                    Enregistrements affichés : {{ currentPage }}-{{ countPage }} sur {{ totalElement }}
+                  </div>
+                  <div class="col-md-8">
+                    <div class="float-right pagi">
+                      <paginate
+                        :page-count="pageCount"
+                        :click-handler="fetch"
+                        :prev-text="'&laquo;'"
+                        :next-text="'&raquo;'"
+                        :container-class="'pagination'"
+                        :page-class="'page-item'"
+                      ></paginate>
+                    </div>
+                  </div>
                 </div>
+
               </div>
             </div>
           </div>
@@ -138,6 +147,8 @@ export default {
   },
   created() {
     this.fetch();
+    this.$store.dispatch('classes', [{'key': 'professeur_id',
+      'value': localStorage.getItem('professeurId')}]);
   },
   methods: {
     fetch(pageNum, search = null) {
@@ -212,8 +223,17 @@ export default {
       return this.$store.getters.classes
     },
     anneeScolaireId(){
-        return this.$store.getters.anneeScolaireId ? this.$store.getters.anneeScolaireId : 
+        return this.$store.getters.anneeScolaireId ? this.$store.getters.anneeScolaireId :
         localStorage.getItem('anneeScolaireId');
+    },
+    currentPage(){
+      return this.$store.getters.currentPage;
+    },
+    countPage(){
+      return this.$store.getters.countPage;
+    },
+    totalElement(){
+      return this.$store.getters.totalElement;
     }
   },
   watch: {

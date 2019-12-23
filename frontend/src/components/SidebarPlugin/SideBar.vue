@@ -9,7 +9,10 @@
             <div class="logo-img">
                 <img src="img/vue-logo.png" alt="">
             </div>
-          {{title}}
+          <ul style="padding-top: 14px;padding-left: 0px">
+            <li style="line-height: 20px;font-size: 14px;padding-left: 0px;">{{username}} {{usersurname}}</li>
+            <li style="line-height: 20px;font-size: 14px;padding-left: 0px;">{{typeuser}}</li>
+          </ul>
         </a>
       </div>
 
@@ -84,6 +87,18 @@
         return {
           backgroundImage: `url(${this.backgroundImage})`
         }
+      },
+      username(){
+        return localStorage.getItem(("userName"))
+      },
+      usersurname(){
+        return localStorage.getItem(("userSurname"))
+      },
+      useremail(){
+        return localStorage.getItem(("userEmail"))
+      },
+      typeuser(){
+        return localStorage.getItem(("userType"))
       }
     }
   }

@@ -134,8 +134,8 @@ class noteController extends Controller
             }
         }
         $data = $data->select('bootnetcrasher_school_note.libelle', 'bootnetcrasher_school_type_note.libelle as type_note_libelle',
-            'bootnetcrasher_school_note.created_at', 'bootnetcrasher_school_note_eleve.valeur',
-            'bootnetcrasher_school_note.coefficient', 'bootnetcrasher_school_note_eleve.id as note_eleve_id')
+            'bootnetcrasher_school_note.created_at', 'bootnetcrasher_school_note_eleve.valeur', 'bootnetcrasher_school_note_eleve.rang',
+            'bootnetcrasher_school_note.coefficient', 'bootnetcrasher_school_note_eleve.id as note_eleve_id', 'bootnetcrasher_school_note.id')
             ->get()->toArray();
         return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
     }
@@ -303,12 +303,15 @@ class noteController extends Controller
         return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
     }
 
-    public function show($id){ 
+    public function show($id){
         $data = $this->NoteModel->with(array(
             'typenote'=>function($query){
                 $query->select('*');
             },
             'matiere'=>function($query){
+                $query->select('*');
+            },
+            'classe'=>function($query){
                 $query->select('*');
             }, ))->select()->where('id', '=', $id)->first();
         return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);

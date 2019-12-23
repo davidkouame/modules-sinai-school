@@ -45,6 +45,30 @@ class eleveController extends Controller
         return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
     }
 
+    public function indexWithoutPaginate(Request $request){
+        $data = $this->EleveModel->with(array(
+            'user'=>function($query){
+                $query->select('*');
+            },
+            'parent'=>function($query){
+                $query->with(array(
+                    'users'=>function($q){
+                        $q->select('*');
+                    }
+                ))->select('*');
+            },
+            'noteseleves'=>function($query){
+                $query->select('*');
+            },
+        ))->select('*');
+
+        foreach($request->except('page') as $key => $value){
+            $data = $data->where($key, $value);
+        }
+
+        $data = $data->get()->toArray();
+        return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
+    }
     
     public function show($id){
         $data = $this->EleveModel->with(array(

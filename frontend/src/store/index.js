@@ -52,6 +52,10 @@ export default new Vuex.Store({
     anneesscolaires: null,
     sessionuserapp: null,
     noteeleve: null,
+    currentPage: null,
+    countPage: null,
+    totalElement: null,
+    matiere: null
   },
   mutations: {
     notes(state, payload) {
@@ -131,6 +135,18 @@ export default new Vuex.Store({
     },
     noteeleve(state, noteeleve){
       state.noteeleve = noteeleve
+    },
+    currentPage(state, currentPage){
+      state.currentPage = currentPage
+    },
+    countPage(state, countPage){
+      state.countPage = countPage
+    },
+    totalElement(state, totalElement){
+      state.totalElement = totalElement
+    },
+    matiere(state, matiere){
+      state.matiere = matiere
     }
   },
   getters: {
@@ -214,6 +230,18 @@ export default new Vuex.Store({
     },
     noteeleve: state => {
       return state.noteeleve
+    },
+    currentPage: state => {
+      return state.currentPage
+    },
+    countPage: state => {
+      return state.countPage
+    },
+    totalElement: state => {
+      return state.totalElement
+    },
+    matiere: state => {
+      return state.matiere
     }
   },
   actions: {
@@ -282,9 +310,9 @@ export default new Vuex.Store({
         { headers: { 'Content-Type': 'multipart/form-data' } }
       )
     },
-    classe(context, eleveId) {
+    classe(context, classeId) {
       Axios.get(
-        context.state.endpoint + 'api/v1/classes/' + 9
+        context.state.endpoint + 'api/v1/classes/' + classeId
       )
         .then(response => {
           context.commit('classe', response.data.data)
@@ -449,6 +477,9 @@ export default new Vuex.Store({
           context.commit('absenceseleves', response.data.data.data)
           context.commit('pageCount', response.data.data.last_page)
           context.commit('pageCountAbsence', response.data.data.last_page)
+          context.commit('currentPage', response.data.data.current_page)
+          context.commit('countPage', response.data.data.last_page)
+          context.commit('totalElement', response.data.data.total)
         })
         .catch(error => {
           console.log(error)
@@ -766,6 +797,25 @@ export default new Vuex.Store({
         return Axios.post(context.state.endpoint + 'api/v1/sessionsuserapp', data.data,
         { headers: { 'Content-Type': 'application/json' } })
       }
+    },
+    searchMatiereByClasseAndProfesseur(context, params) {
+      let concatParams = null
+      if (params.search) {
+        concatParams = params.search.map(function (elemen) {
+          return elemen.key + '=' + elemen.value
+        }).join('&');
+      }
+      Axios.get(
+        context.state.endpoint + 'api/v1/search-matiere-by-classe-and-professeur?' + concatParams
+      )
+        .then(response => {
+          context.commit('matiere', response.data.data);
+        })
+        .catch(error => {
+          console.log(error)
+          this.errored = true
+        })
+        .finally(() => (this.loading = false))
     },
   },
   modules: modules

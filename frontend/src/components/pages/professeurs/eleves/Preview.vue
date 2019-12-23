@@ -280,6 +280,7 @@
                           <th scope="col">Valeur</th>
                           <th scope="col">Coef.</th>
                           <th scope="col">Coef. * Valeur</th>
+                          <th scope="col">Rang</th>
                           <th scope="col">Actions</th>
                         </tr>
                       </thead>
@@ -288,14 +289,15 @@
                           <th scope="row">{{ index + 1}}</th>
                           <td><a :href="'/#/notes/preview/'+note.id" >{{ note.libelle }}</a></td>
                           <td>{{ note.created_at|formatDate }}</td>
-                          <td>
-                            <span v-if="note.typenote">{{ note.typenote.libelle }}</span>
-                          </td>
+                          <td> {{ note.type_note_libelle}} </td>
                           <!--<td v-bind:id="'note-'+note.id">{{ getValeur() }}</td>-->
-                          <td v-bind:id="'valeur-'+note.id"></td>
+                          <td>{{ formatValeur(note.valeur) ?
+                        formatValeur(note.valeur)+'/20': '--' }}</td>
                           <td>{{ note.coefficient }}</td>
                           <!--<td>{{ formatMoyenne(note.coefficient*getValeur(index)) }} / {{ note.coefficient * 20 }}</td>-->
-                          <td v-bind:id="'coef-valeur-'+note.id">{{ note.coefficient }}</td>
+                          <td>{{ formatValeur(note.valeur*note.coefficient) ?
+                        formatValeur(note.valeur*note.coefficient)+'/'+note.coefficient*20 : '--'}}</td>
+                          <td>{{ note.rang ? note.rang : '--' }}</td>
                           <td>
                             <div class="row">
                               <!--<a :href="'/#/notes/preview/'+note.id" class="col">
@@ -368,6 +370,7 @@
 
                   <div class="card-body">
                     <div class="table-responsive">
+
                       <!-- Zone de recherche -->
                       <div class="row float-right">
                         <!--<div class="col-10">
@@ -450,15 +453,24 @@
                       ></modal>
 
                       <!-- Pagination -->
-                      <div class="float-right pagi" v-if="pageCountAbsence > 1">
-                        <paginate
-                          :page-count="pageCountAbsence"
-                          :click-handler="fetchAbsence"
-                          :prev-text="'&laquo;'"
-                          :next-text="'&raquo;'"
-                          :container-class="'pagination'"
-                        ></paginate>
+                      <div class="row" v-if="pageCountAbsence > 1">
+                        <div class="col-md-4" style="color: #98a7a8;font-size: 13px;">
+                          Enregistrements affichés : {{ currentPage }}-{{ countPage }} sur {{ totalElement }}
+                        </div>
+                        <div class="col-md-8">
+                          <div class="float-right pagi">
+                            <paginate
+                              :page-count="pageCountAbsence"
+                              :click-handler="fetchAbsence"
+                              :prev-text="'&laquo;'"
+                              :next-text="'&raquo;'"
+                              :container-class="'pagination'"
+                              :page-class="'page-item'"
+                            ></paginate>
+                          </div>
+                        </div>
                       </div>
+
                     </div>
                   </div>
                 </div>
@@ -526,7 +538,7 @@ export default {
                   { key: "eleve_id", value: this.$route.params.id }]
         });
       } else {
-        this.$store.dispatch("allnotesandvaleur", {
+        this.$store.dispatch("allnotesandvaleurV2", {
           payload: pageNum,
           search: [{ key: "professeur_id", value: localStorage.getItem("professeurId") },
                   { key: "eleve_id", value: this.$route.params.id }]
@@ -558,6 +570,17 @@ export default {
         }else{
             return moy;
         }
+    },
+    formatValeur(valeur){
+      if(valeur){
+        if(valeur.toString().length==1){
+          return '0'+valeur;
+        }else{
+          return valeur;
+        }
+      }else{
+        return null;
+      }
     }/*,
     getValeur(index){
         let valeur = null
@@ -603,8 +626,16 @@ export default {
         return this.$store.getters.matiere;
     },
     valeurs(){
-
-        return this.$store.getters.valeurs;
+      return this.$store.getters.valeurs;
+    },
+    currentPage(){
+      return this.$store.getters.currentPage;
+    },
+    countPage(){
+      return this.$store.getters.countPage;
+    },
+    totalElement(){
+      return this.$store.getters.totalElement;
     }
   },
   watch:{
@@ -615,7 +646,7 @@ export default {
     },
     matiere: function(){
         if(this.matiere){
-        this.$store.dispatch("getMoyenneMatiere", 
+        this.$store.dispatch("getMoyenneMatiere",
         {"eleveId":this.eleveId,"matiereId":this.matiere.id});}
     },
     valeurs(){
@@ -625,7 +656,7 @@ export default {
         let th = this;
         var found = this.valeurs.find(function(element) {
             /*if(element.note_id == 20){
-                return element; 
+                return element;
             }*/
             var i = element.note_id;
             console.log("l'element id est "+JSON.stringify(document.getElementById("valeur-"+i)));
@@ -634,7 +665,7 @@ export default {
                 var coefficient = document.getElementById("coef-valeur-"+i).innerHTML;
                 document.getElementById("coef-valeur-"+i).innerHTML = th.formatMoyenne(element.valeur * coefficient) + '/' + 20*coefficient;
             }
-        }); 
+        });
         // console.log("l'index trouvé est "+JSON.stringify(found));
         /*for(i = this.valeurs.length - 1; i >= 0; i--){
             var valeur = this.valeurs[i].valeur;

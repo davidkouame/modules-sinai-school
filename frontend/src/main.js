@@ -78,6 +78,23 @@ Vue.filter('formatDate', function (value) {
   }
 });
 
+Vue.filter('formatMoyenne', function (value) {
+  if (value) {
+    let valeurs = value.split(".");
+    let decimal = null;
+    if(valeurs[1]){
+      if(valeurs[1].length == 1){
+        decimal = valeurs[1]+"0";
+      }else if(valeurs[1].length > 2){
+        decimal = str.substr(0, 2);
+      }
+    }else{
+      decimal = "00";
+    }
+    return valeurs[1]+"."+decimal;
+  }
+});
+
 Vue.filter('truncate', function (value) {
   return value.substring(0, 20)
 });

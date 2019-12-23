@@ -24,11 +24,12 @@
 
             <div class="card-body">
               <form>
-                <div class="form-group row">
+                <div class="form-group row" v-if="eleves">
                   <label class="col-sm-2 col-form-label">Elève</label>
                   <div class="col-sm-10">
-                    <select v-model="eleve" class="form-control">
-                      <option :value="eleve.id" v-for="eleve in eleves">{{ eleve.matricule }}</option>
+                    <select v-model="eleve" class="form-control" >
+                      <option value="null">Sélectionner un élève</option>
+                      <option :value="eleve.id" v-for="eleve in eleves">{{ eleve.name+' '+eleve.surname }}</option>
                     </select>
                   </div>
                 </div>
@@ -36,7 +37,7 @@
                   <label class="col-sm-2 col-form-label">Raison d'absence</label>
                   <div class="col-sm-10">
                     <select v-model="raisonabsence" id class="form-control">
-                      <option value>Sélectionner une raison d'absence</option>
+                      <option value="null">Sélectionner une raison d'absence</option>
                       <option
                         :value="raisonabsence.id"
                         v-for="raisonabsence in raisonsabsences"
@@ -87,7 +88,8 @@ export default {
     };
   },
   created() {
-    this.$store.dispatch("elevesProfesseur");
+    this.$store.dispatch("elevesProfesseurV2");
+    console.log("recherche des eleves du professeur");
     this.$store.dispatch("raisonsabsences");
   },
   methods: {

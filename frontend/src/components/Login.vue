@@ -82,6 +82,7 @@ export default {
         .then(response => {
           localStorage.setItem("userId", response.data.data.id);
           localStorage.setItem("userName", response.data.data.name);
+          localStorage.setItem("userSurname", response.data.data.surname);
           localStorage.setItem("userEmail", response.data.data.email);
           localStorage.setItem("firstLogin", response.data.data.first_login);
           localStorage.setItem(

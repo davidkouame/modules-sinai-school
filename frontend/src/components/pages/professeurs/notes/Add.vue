@@ -13,7 +13,7 @@
           <li class="breadcrumb-item active" aria-current="page">Ajouter une note</li>
         </ol>
       </nav>
-      
+
       <div class="row">
         <div class="col-12">
           <div class="card">
@@ -40,7 +40,7 @@
                   <label class="col-sm-2 col-form-label">Types notes</label>
                   <div class="col-sm-10">
                     <select v-model="typenote" class="form-control">
-                      <option value>Sélectionner un type de note</option>
+                      <option value="null">Sélectionner un type de note</option>
                       <option
                         :value="typenote.id"
                         v-for="typenote in typesnotes"
@@ -65,8 +65,8 @@
                     </select>-->
                     <select
                       v-model="classe"
-                      class="form-control"                    >
-                      <option value>Sélectionner une ou plusieurs classes</option>
+                      class="form-control" @change="onChange($event)"                   >
+                      <option value="null">Sélectionner une ou plusieurs classes</option>
                       <option
                         :value="classe.classe.id"
                         v-for="classe in classes"
@@ -76,21 +76,27 @@
                 </div>
 
                 <!-- Matiere -->
-                <div class="form-group row">
+                <!--<div class="form-group row">
                   <label class="col-sm-2 col-form-label">Matières</label>
                   <div class="col-sm-10">
                     <select
                       v-model="matiere_id"
                       class="form-control"                    >
-                      <option value>Sélectionner une matière</option>
+                      <option value="null">Sélectionner une matière</option>
                       <option
                         :value="matiere.id"
                         v-for="matiere in matieres"
                       >{{ matiere.libelle }}</option>
                     </select>
                   </div>
+                </div>-->
+                <div class="form-group row">
+                  <label class="col-sm-2 col-form-label">Matières</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" v-bind:value="matiere ? matiere.libelle : ''" disabled/>
+                  </div>
                 </div>
-                
+
 
                 <div class="form-group row">
                   <label class="col-sm-2 col-form-label">Coefficient</label>
@@ -124,7 +130,7 @@ export default {
       description: null,
       libelle: null,
       datenoteeffectue: null,
-      matiere: null,
+      // matiere: null,
       classe: null,
       coefficient: null,
       multiple: true,
@@ -136,7 +142,7 @@ export default {
     this.$store.dispatch("eleves");
     this.$store.dispatch("typesnotes");
     this.$store.dispatch("matieresall");
-    this.$store.dispatch('classes', [{'key': 'professeur_id', 
+    this.$store.dispatch('classes', [{'key': 'professeur_id',
     'value': localStorage.getItem('professeurId')}]);
     this.$store.dispatch(
       "classesByProfesseur",
@@ -151,7 +157,7 @@ export default {
       data["typenote_id"] = this.typenote;
       data["classe_id"] = this.classe;
       data["coefficient"] = this.coefficient;
-      data["matiere_id"] = this.matiere_id;
+      data["matiere_id"] = this.matiere ?  this.matiere.id : null;
       data["description"] = this.description;
       data["professeur_id"] = localStorage.getItem("professeurId");
       data["section_annee_scolaire_id"] = this.sectionAnneeScolaireId;
@@ -177,7 +183,31 @@ export default {
           this.errored = true;
         })
         .finally(() => (this.loading = false));
-    }
+    },
+    onChange(event) {
+      if(event.target.value){
+        let params = [
+          { key: "classe_id", value: event.target.value },
+          { key: "professeur_id", value: localStorage.getItem('professeurId') }
+        ];
+        this.$store.dispatch("searchMatiereByClasseAndProfesseur", {
+          search: this.trimSearch(params)
+        });
+      }else{
+        // todo when classe is null
+      }
+      // console.log("classe_id "+event.target.value+", professeur_id "+localStorage.getItem("professeurId"))
+
+    },
+    trimSearch(searchs = null) {
+      let params = [];
+      for (var key in searchs) {
+        if (searchs[key].value) {
+          params.push({ key: searchs[key].key, value: searchs[key].value });
+        }
+      }
+      return params;
+    },
   },
   computed: {
     eleves() {
@@ -197,6 +227,14 @@ export default {
     },
     classes () {
       return this.$store.getters.classes
+    },
+    matiere(){
+      return this.$store.getters.matiere;
+    }
+  },
+  watch:{
+    matiere(){
+      console.log("matiere ")
     }
   }
 };

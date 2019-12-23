@@ -20,7 +20,7 @@ class classeProfesseurMatiereController extends Controller
     }
 
     
-    public function index(Request $request){ 
+    public function index(Request $request){
         $data = $this->ClasseMatiereModel->with(array(
             'matiere'=>function($query){
                 $query->select('*');
