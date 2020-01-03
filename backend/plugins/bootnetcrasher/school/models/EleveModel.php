@@ -13,7 +13,7 @@ class EleveModel extends Model
 
     protected $dates = ['deleted_at'];
     
-    protected $appends = ['classe_id'];
+    protected $appends = ['classe_id', 'full_name'];
 
 
     /**
@@ -67,5 +67,10 @@ class EleveModel extends Model
         // dd($this->classeseleves);
         $classeeleve = ClasseEleveModel::where('eleve_id', $this->id)->first();
         return $classeeleve ? $classeeleve->classe_id : null;
+    }
+
+    public function getFullNameAttribute()
+    {
+        return "{$this->name} {$this->surname}";
     }
 }

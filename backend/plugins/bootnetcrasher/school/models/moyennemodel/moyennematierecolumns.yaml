@@ -1,4 +1,8 @@
 columns:
+    reference:
+        label: Reférence
+        type: text
+        searchable: true
     eleve:
         label: Elève
         type: text

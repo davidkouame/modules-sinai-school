@@ -6,6 +6,7 @@ use BackendMenu;
 use Illuminate\Http\Request;
 use AhmadFatoni\ApiGenerator\Helpers\Helpers;
 use BootnetCrasher\School\Models\ClasseMatiereModel;
+use Illuminate\Support\Facades\Validator;
 class classeProfesseurMatiereController extends Controller
 {
     protected $ClasseMatiereModel;
@@ -35,7 +36,6 @@ class classeProfesseurMatiereController extends Controller
             'professeur'=>function($query){
                 $query->select('*');
             }, )); //->select('*')->get()->toArray();
-
         $searchProfesseur = null;
         $searchEleve = null;
         foreach($request->except(['page']) as $key => $value){
@@ -62,7 +62,6 @@ class classeProfesseurMatiereController extends Controller
                 $data = $data->where($key, $value);
             }
         }
-
         if($searchProfesseur){
             $data = $data->get()->unique('classe_id')->toArray();
         }elseif($searchEleve){
@@ -70,7 +69,6 @@ class classeProfesseurMatiereController extends Controller
         }else{
             $data = $data->get()->toArray();
         }
-
         return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
     }
 
@@ -110,17 +108,11 @@ class classeProfesseurMatiereController extends Controller
     }
 
     public function update($id, Request $request){
-
-        $status = $this->ClasseMatiereModel->where('id',$id)->update($data);
-    
+        $status = $this->ClasseMatiereModel->where('id',$id)->update($request->all());
         if( $status ){
-            
             return $this->helpers->apiArrayResponseBuilder(200, 'success', 'Data has been updated successfully.');
-
         }else{
-
             return $this->helpers->apiArrayResponseBuilder(400, 'bad request', 'Error, data failed to update.');
-
         }
     }
 

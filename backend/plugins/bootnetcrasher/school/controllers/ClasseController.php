@@ -32,4 +32,9 @@ class ClasseController extends Controller
         $widget->bindToController();
         $this->vars['widget'] = $widget;
     } */
+
+    public function listExtendQuery($query,$id)
+    {
+        $query->orderBy('id', 'desc');
+    }
 }

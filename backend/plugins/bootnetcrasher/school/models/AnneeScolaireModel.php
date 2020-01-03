@@ -26,6 +26,6 @@ class AnneeScolaireModel extends Model
     ];
     
     public $belongsTo = [
-        'typeanneescolaire' => ['BootnetCrasher\School\Models\TypeAnneeScolaireModel', 'key' => 'type_annnee_scolaire_id', 'otherKey' => 'id'],
+        'typeanneescolaire' => ['BootnetCrasher\School\Models\TypeAnneeScolaireModel', 'key' => 'type_annee_scolaire_id', 'otherKey' => 'id'],
     ];
 }

@@ -6,3 +6,9 @@
 1.0.3:
     - 'Updated table bootnetcrasher_parametrage_ap'
     - builder_table_update_bootnetcrasher_parametrage_ap.php
+1.0.4:
+    - 'Created table bootnetcrasher_parametrage_sms'
+    - builder_table_create_bootnetcrasher_parametrage_sms.php
+1.0.5:
+    - 'Updated table bootnetcrasher_parametrage_sms'
+    - builder_table_update_bootnetcrasher_parametrage_sms.php

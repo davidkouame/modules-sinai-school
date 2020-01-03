@@ -1,0 +1,70 @@
+<template>
+  <card class="card" :title="title">
+      <div class="row">
+        <div class="col-md-12">
+          <form v-on:submit="saveEleve">
+                <div class="row">
+                  <div class="col-md-6">
+                    <label class="control-label">Elève</label>
+                    <div class="form-group" v-if="eleves">
+                      <v-select :options="eleves"  multiple  v-model="elevesclasse" label="matricule">
+                        <template slot="option" slot-scope="option">
+                            {{ option.matricule }} : {{ option.name+' '+option.surname }}
+                          </template>
+                      </v-select>
+                    </div>
+                  </div>
+                </div>
+                <div class="clearfix"></div>
+                <a @click="$router.go(-1)" class="btn btn-danger">Annuler</a>
+      <button type="submit" class="btn btn-primary">Envoyer</button>
+              </form>
+        </div>
+      </div>
+  </card>
+</template>
+
+<script>
+
+import 'vue-select/dist/vue-select.css';
+
+
+export default {
+  data() {
+    return {
+      title: "Elève",
+      elevesclasse: null
+    };
+  },
+  created() {
+    // recuperation de tous les élèves
+    this.$store.dispatch('getAllEleves', {payload: 0})
+  },
+  methods:{
+    saveEleve(){
+      let data = {
+        eleves: this.elevesclasse,
+        classe_id: this.$route.params.id
+      };
+      let store = this.$store;
+      store
+        .dispatch("saveElevesClasse", {"data": data})
+        .then(response => {
+          alert("L'enregistrement a été succès")
+          this.$router.go(-1)
+        })
+        .catch(error => {
+          console.log(error);
+          alert("echec lors de l'enregistrement")
+          this.errored = true;
+        })
+        .finally(() => (this.loading = false));
+    }
+  },
+  computed:{
+    eleves(){
+      return this.$store.getters.eleves
+    }
+  }
+};
+</script>

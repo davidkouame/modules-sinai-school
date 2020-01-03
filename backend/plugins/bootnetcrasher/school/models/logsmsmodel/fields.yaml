@@ -6,6 +6,7 @@ fields:
         select: name
         partial: parent
         placeholder: 'Sélectionnez un parent'
+        disabled: true
     eleve:
         label: Elève
         span: auto
@@ -13,13 +14,16 @@ fields:
         select: name
         partial: parent
         placeholder: 'Sélectionnez un élève'
+        disabled: true
     tel:
         label: Téléphone
         type: text
         searchable: true
         span: auto
+        disabled: true
     content:
         label: Content
         size: ''
         span: auto
         type: textarea
+        disabled: true

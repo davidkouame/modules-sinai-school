@@ -13,6 +13,11 @@ class JobsErrorController extends Controller
     public function __construct()
     {
         parent::__construct();
-        BackendMenu::setContext('BootnetCrasher.School', 'jobs');
+        BackendMenu::setContext('BootnetCrasher.School', 'parametres', 'jobserror');
+    }
+
+    public function listExtendQuery($query,$id)
+    {
+        $query->orderBy('id', 'desc');
     }
 }

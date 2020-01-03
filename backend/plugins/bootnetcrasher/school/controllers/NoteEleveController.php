@@ -22,8 +22,6 @@ class NoteEleveController extends Controller
             // to do error when noteId exist
         }
     }
-    
-    
 
     public function onSaveCustom(){
         $noteId = get('noteId');
@@ -47,5 +45,10 @@ class NoteEleveController extends Controller
         // var_dump($noteId);
         // dd();
         
+    }
+
+    public function listExtendQuery($query,$id)
+    {
+        $query->orderBy('id', 'desc');
     }
 }

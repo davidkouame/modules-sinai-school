@@ -14,4 +14,9 @@ class IndexControllermoyenne extends Controller
         parent::__construct();
         BackendMenu::setContext('BootnetCrasher.School', 'moyennes');
     }
+
+    public function listExtendQuery($query,$id)
+    {
+        $query->orderBy('id', 'desc');
+    }
 }

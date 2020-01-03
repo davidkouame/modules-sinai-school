@@ -1,0 +1,17 @@
+columns:
+    libelle:
+        label: Libelle
+        type: text
+        searchable: true
+    niveau:
+        label: Niveau
+        relation: niveau
+        searchable: true
+        sortable: true
+        select: libelle
+        type: text
+    serie:
+        label: Serie
+        relation: serie
+        select: libelle
+        type: text

@@ -60,5 +60,22 @@ class ProfesseurModel extends Model
     /*
       Scope eleves
     */
+
+    public function beforeCreate()
+    {
+        $this->reference = $this->getReference();
+    }
+
+    public function beforeUpdate(){
+        // todo update reference if reference empty
+        dd($this->reference);
+        if(!$this->reference)
+            $this->reference = $this->getReference();
+    }
+
+    // generate matricule
+    public function getReference(){
+        return rand();
+    }
       
 }

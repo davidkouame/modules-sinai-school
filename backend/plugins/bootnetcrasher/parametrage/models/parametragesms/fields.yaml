@@ -1,0 +1,9 @@
+fields:
+    libelle:
+        label: Libellé
+        span: auto
+        type: text
+    #button:
+    #    span: auto
+    #    path: button
+    #    type: partial

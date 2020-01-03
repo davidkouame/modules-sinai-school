@@ -32,6 +32,7 @@ class noteController extends Controller
             'matiere'=>function($query){
                 $query->select('*');
             },
+
             'classe'=>function($query){
                 $query->with(array(
                     'eleves'=>function($q){
@@ -39,7 +40,6 @@ class noteController extends Controller
                     }
                 ));
             } ));
-            
         foreach($request->except(['page']) as $key => $value){
             if($key == "libelle"){
                 $data = $data->where($key, 'like', '%'.$value.'%');
@@ -56,7 +56,9 @@ class noteController extends Controller
                         );
                     }
                 );
-            }else{
+            }else if($key == "search"){
+                $data = $data->where("libelle", 'like', '%'.$value.'%');
+            } else{
                 $data = $data->where($key, $value);
             }
         }
@@ -313,7 +315,10 @@ class noteController extends Controller
             },
             'classe'=>function($query){
                 $query->select('*');
-            }, ))->select()->where('id', '=', $id)->first();
+            },
+            'sectionanneescolaire'=>function($query){
+                $query->select('*');
+            },))->select()->where('id', '=', $id)->first();
         return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
     }
 

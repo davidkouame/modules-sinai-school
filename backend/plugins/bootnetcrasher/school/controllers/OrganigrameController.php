@@ -35,4 +35,9 @@ class OrganigrameController extends Controller
             return Redirect::to(Backend::url('bootnetcrasher/school/organigramecontroller/update/'.$organigrameModel->id));
         }
     }*/
+
+    public function listExtendQuery($query,$id)
+    {
+        $query->orderBy('id', 'desc');
+    }
 }

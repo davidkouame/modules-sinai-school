@@ -32,4 +32,9 @@ class ExamenController extends Controller
                     . "examens, raison :".$ex->getMessage());
         }
     }
+
+    public function listExtendQuery($query,$id)
+    {
+        $query->orderBy('id', 'desc');
+    }
 }

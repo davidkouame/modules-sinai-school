@@ -15,4 +15,9 @@ class IndexControllerNote extends Controller
         parent::__construct();
         BackendMenu::setContext('BootnetCrasher.School', 'notes');
     }
+
+    public function listExtendQuery($query,$id)
+    {
+        $query->orderBy('id', 'desc');
+    }
 }

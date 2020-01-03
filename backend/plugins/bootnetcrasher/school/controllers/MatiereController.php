@@ -19,5 +19,6 @@ class MatiereController extends Controller
     public function listExtendQuery($query,$id)
     {
         // $query->where('type_moyenne_id', 2);
+        $query->orderBy('id', 'desc');
     }
 }

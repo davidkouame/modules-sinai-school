@@ -1,5 +1,6 @@
 <?php namespace AhmadFatoni\ApiGenerator\Controllers\API;
 
+use BootnetCrasher\School\Models\ClasseModel;
 use Cms\Classes\Controller;
 use BackendMenu;
 
@@ -43,17 +44,17 @@ class classeeleveController extends Controller
                 $data = $data->where($key, $value);
             }
         }
-
         if($request->get('matricule') || $request->get('name')){
             $data = $data->whereHas('eleve', function ($query) use($request) {
                     $query->where('matricule', $request->get('matricule'))
                     ->orWhere('name', $request->get('name'));
                 });
         }
-
-
-        $data = $data->paginate(10)->toArray();
-
+        if($request->has('page') && $request->get('page') == 0){
+            $data = $data->get()->toArray();
+        }else{
+            $data = $data->paginate(10)->toArray();
+        }
         return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
     }
 
@@ -116,6 +117,24 @@ class classeeleveController extends Controller
         $this->ClasseEleveModel->where('id',$id)->delete();
 
         return $this->helpers->apiArrayResponseBuilder(200, 'success', 'Data has been deleted successfully.');
+    }
+
+    public function saveElevesClasse(Request $request){
+        try{
+            // recuperation de la classe
+            $classe= ClasseModel::find($request->get('classe_id'));
+            $arr = $request->all();
+            foreach ($request->get('eleves') as $eleve){
+                $classeEleveModel = new ClasseEleveModel;
+                $classeEleveModel->classe_id = $classe->id;
+                $classeEleveModel->annee_scolaire_id = $classe->annee_scolaire_id;
+                $classeEleveModel->eleve_id = $eleve['id'];
+                $classeEleveModel->save();
+            }
+            return $this->helpers->apiArrayResponseBuilder(201, 'created', []);
+        }catch(\Exception $e){
+            return $this->helpers->apiArrayResponseBuilder(400, 'fail', $e->getTrace() );
+        }
     }
 
 

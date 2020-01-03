@@ -15,4 +15,9 @@ class ClubController extends Controller
     {
         parent::__construct();
     }
+
+    public function listExtendQuery($query,$id)
+    {
+        $query->orderBy('id', 'desc');
+    }
 }

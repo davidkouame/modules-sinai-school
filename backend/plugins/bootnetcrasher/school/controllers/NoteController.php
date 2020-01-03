@@ -18,4 +18,9 @@ class NoteController extends Controller
         BackendMenu::setContext('BootnetCrasher.School', 'notes', 'notes');
         parent::__construct();
     }
+
+    public function listExtendQuery($query,$id)
+    {
+        $query->orderBy('id', 'desc');
+    }
 }

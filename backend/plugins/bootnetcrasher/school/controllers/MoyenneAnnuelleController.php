@@ -8,6 +8,8 @@ use BootnetCrasher\School\Models\ParentModel;
 use BootnetCrasher\School\Models\MoyenneModel;
 use Illuminate\Support\Facades\Redirect;
 use Backend;
+use DB;
+use October\Rain\Support\Facades\Flash;
 
 class MoyenneAnnuelleController extends Controller
 {
@@ -31,11 +33,18 @@ class MoyenneAnnuelleController extends Controller
     public function onValidate() {
         foreach (post("checked") as $id) {
             $moyenne = MoyenneModel::find($id);
-            $moyenne->validated_at = now();
-            $moyenne->save();
-            $this->SendSms($moyenne);
-            return Redirect::to(Backend::url('bootnetcrasher/school/moyenneannuellecontroller'));
+            if(!$moyenne->validated_at){
+                $moyenne->validated_at = now();
+                $moyenne->save();
+                $this->SendSms($moyenne);
+
+            }
         }
+        if(count(post("checked")) > 1)
+            Flash::warning("Les moyennes ont été validé avec succès.");
+        else
+            Flash::success("La moyenne a été validé avec succès.");
+        return Redirect::to(Backend::url('bootnetcrasher/school/moyenneannuellecontroller'));
     }
     
     // send sms

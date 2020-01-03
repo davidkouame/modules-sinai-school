@@ -79,7 +79,7 @@ class NoteModel extends Model
     }
     
     // send sms parent
-    public function afterSave(){
+    /*public function afterSave(){
         $sms = new Sms;
         $classeselves = ClasseEleveModel::where('classe_id', $this->classe_id)->get();
         foreach($classeselves as $classeeleve){
@@ -93,5 +93,5 @@ class NoteModel extends Model
                 }
             }
         }
-    }
+    }*/
 }

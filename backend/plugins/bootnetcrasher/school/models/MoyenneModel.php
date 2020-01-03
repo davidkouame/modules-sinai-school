@@ -61,4 +61,14 @@ class MoyenneModel extends Model
     public function getValeurFormatAttribute($valeur){
         return $this->valeur."/20";
     }
+
+    public function beforeCreate()
+    {
+        $this->reference = $this->getReference();
+    }
+
+    // generate matricule
+    public function getReference(){
+        return rand();
+    }
 }

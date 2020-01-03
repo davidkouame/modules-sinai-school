@@ -1,6 +1,8 @@
 <?php namespace BootnetCrasher\School\Models;
 
 use Model;
+use Queue;
+use Bootnetcrasher\School\Jobs\MoyenneJob;
 
 /**
  * Model
@@ -28,4 +30,9 @@ class SectionAnneeScolaireModel extends Model
     public $belongsTo = [
         'anneescolaire' => ['BootnetCrasher\School\Models\AnneeScolaireModel', 'key' => 'annee_scolaire_id', 'otherKey' => 'id'],
     ];
+
+    public function afterSave(){
+        if($this->validated_at)
+            Queue::push(MoyenneJob::class, ["section_annee_scolaire_id" => $this->id]);
+    }
 }

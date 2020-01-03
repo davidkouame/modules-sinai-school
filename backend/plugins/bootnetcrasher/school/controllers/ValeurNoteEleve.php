@@ -30,7 +30,9 @@ class ValeurNoteEleve extends Controller
     {
         if($this->params && $this->params[0]){
             $query->where('note_id', $this->params[0])
-                ->whereNull('deleted_at');
+                ->whereNull('deleted_at')->orderBy('id', 'desc');
+        }else{
+            $query->orderBy('id', 'desc');
         }
         
     }
@@ -92,4 +94,5 @@ class ValeurNoteEleve extends Controller
     public function addStudentNote($noteId = null){
         dd($noteId);
     }*/
+
 }

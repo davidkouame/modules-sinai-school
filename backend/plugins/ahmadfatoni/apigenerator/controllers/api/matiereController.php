@@ -29,6 +29,9 @@ class matiereController extends Controller
         $data = $this->MatiereModel->with(array(
             'classematiere' => function($query){
                 $query->select('*');
+            },
+            'typematiere'=> function($query){
+                $query->select('*');
             }
         ));
 
@@ -65,6 +68,8 @@ class matiereController extends Controller
                 );
             }elseif($key == "libelle"){
                 $data = $data->where($key, 'like', '%'.$value.'%');
+            }elseif($key == "search"){
+                $data = $data->where("libelle", 'like', '%'.$value.'%');
             }elseif($key == "annee_scolaire_id"){
                 $classeeleve = ClasseEleveModel::where('eleve_id', $value)->first();
                 $classe_id = $classeeleve ? $classeeleve->classe_id : null;
@@ -79,9 +84,11 @@ class matiereController extends Controller
                 $data = $data->where($key, $value);
             }
         }
-
-        $data = $data->paginate(10)->toArray();
-
+        if($request->has('page') && $request->get('page') == 0){
+            $data = $data->get()->toArray();
+        }else{
+            $data = $data->paginate(10)->toArray();
+        }
         return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
     }
 
@@ -181,37 +188,26 @@ class matiereController extends Controller
     }
 
     public function store(Request $request){
-
     	$arr = $request->all();
-
         while ( $data = current($arr)) {
             $this->MatiereModel->{key($arr)} = $data;
             next($arr);
         }
-
         $validation = Validator::make($request->all(), $this->MatiereModel->rules);
-        
         if( $validation->passes() ){
             $this->MatiereModel->save();
             return $this->helpers->apiArrayResponseBuilder(201, 'created', ['id' => $this->MatiereModel->id]);
         }else{
             return $this->helpers->apiArrayResponseBuilder(400, 'fail', $validation->errors() );
         }
-
     }
 
     public function update($id, Request $request){
-
-        $status = $this->MatiereModel->where('id',$id)->update($data);
-    
+        $status = $this->MatiereModel->where('id',$id)->update($request->all());
         if( $status ){
-            
             return $this->helpers->apiArrayResponseBuilder(200, 'success', 'Data has been updated successfully.');
-
         }else{
-
             return $this->helpers->apiArrayResponseBuilder(400, 'bad request', 'Error, data failed to update.');
-
         }
     }
 

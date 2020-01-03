@@ -15,29 +15,23 @@ use DB;
 
 
 class MoyenneJob{
-    
+
+    private $sectionAnneeScolaire = null;
+    private $estProvisoire = true;
+
     public function fire($job, $data = null) {
         try{
-            // recuperation de l'annee scolaire
-            $anneescolaire = $this->getAnnneeScolaireEnCours();
-            $classeseleves = ClasseEleveModel::where('annee_scolaire_id', $anneescolaire->id)->get();
-            $classeselevestab = new Collection([]);
-            $classeseleves->each(function($element, $key) use($classeselevestab){
-                $classeselevestab->push(["classeeleve_id" => $element->id, "classe_id" => $element->classe_id]);
-            });
-            $classeseleves = $classeselevestab->unique('classe_id')->values()->all();
-            $sectionanneescolaire = $this->sectionAnneeScolaire();
+            $this->hydrate($data);
+            // recuperation de toutes les classes eleves
+            $classeseleves = $this->getClassesEleves();
+            $sectionanneescolaire = $this->getSectionAnneeScolaire();
             foreach($classeseleves as $classeeleve){
                 $classeeleve = ClasseEleveModel::find($classeeleve['classeeleve_id']);
-                // trace-log("")
-                // dd($classeeleve->classe->eleves($anneescolaire->id));
                 $eleves = $classeeleve && $classeeleve->classe
-                        ? $classeeleve->classe->eleves($anneescolaire->id)
+                        ? $classeeleve->classe->allEleves($this->getAnnneeScolaireEnCours()->id)
                         : null;
-                // trace_log("============= nombre d'eleve pour cette classe est ". count($eleves));
-                // dd(count($eleves));
                 foreach($eleves as $eleve){
-                    $rapportmoyenne = new RapportMoyenne($sectionanneescolaire, $classeeleve->classe, $eleve);
+                    $rapportmoyenne = new RapportMoyenne($sectionanneescolaire, $classeeleve->classe, $eleve, $this->estProvisoire);
                     $rapportmoyenne->constuct();
                     $body = $rapportmoyenne->getRapport();
                     if($body){
@@ -54,6 +48,18 @@ class MoyenneJob{
             trace_log($e);
         }
         $job->delete();
+    }
+
+    // recuperation de tous les classes eleves
+    public function getClassesEleves(){
+        // recuperation de l'annee scolaire
+        $anneescolaire = $this->getAnnneeScolaireEnCours();
+        $classeseleves = ClasseEleveModel::where('annee_scolaire_id', $anneescolaire->id)->get();
+        $classeselevestab = new Collection([]);
+        $classeseleves->each(function($element, $key) use($classeselevestab){
+            $classeselevestab->push(["classeeleve_id" => $element->id, "classe_id" => $element->classe_id]);
+        });
+        return  $classeselevestab->unique('classe_id')->values()->all();
     }
     
     // save success job
@@ -74,21 +80,25 @@ class MoyenneJob{
 
     // get annee scolaire en cours
     public function getAnnneeScolaireEnCours(){
-        // return AnneeScolaireModel::find(2);
-        return $this->sectionAnneeScolaire()->anneescolaire;
+        return $this->getSectionAnneeScolaire()->anneescolaire;
     }
 
      // recuperation de la section en cours
-    public function sectionAnneeScolaire(){
-        // recuperation de l'annee scolaire
-        // $date = date('Y-m-d');
-        $date = "2020-06-27";
-        $sectionanneescolaire = SectionAnneeScolaireModel::where('start', '<=',$date)
-        ->where('end', '>=', $date)->first();
-        if($sectionanneescolaire)
-            trace_log("la section annee scolaire est ".$sectionanneescolaire->libelle);
-        // to do
-        return SectionAnneeScolaireModel::find(2);
+    public function getSectionAnneeScolaire(){
+        if($this->sectionAnneeScolaire)
+            return $this->sectionAnneeScolaire;
+        else
+            return SectionAnneeScolaireModel::find(1);
+    }
+
+    public function hydrate($data){
+        if($data){
+            if(array_key_exists("section_annee_scolaire_id", $data)){
+                // recuperation de la section annee scolaire
+                $this->sectionAnneeScolaire = SectionAnneeScolaireModel::find($data["section_annee_scolaire_id"]);
+                $this->estProvisoire = false;
+            }
+        }
     }
     
 }

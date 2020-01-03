@@ -55,6 +55,10 @@ class Plugin extends PluginBase
             Queue::push(CalculMoyenneJob::class, '');
         })->daily();
 
+        $schedule->call(function () {
+            Queue::push("\BootnetCrasher\School\Jobs\MoyenneJob");
+        })->everyWeek();
+
         // trace_log("bfhsdbfhdsfd");
         // Queue::push(CalculMoyenne::class, '');
         // Queue::push(Rang::class, '');
@@ -70,7 +74,7 @@ class Plugin extends PluginBase
     
     public function register()
     {
-        $this->registerConsoleCommand('digit:sendRapportMoyenne', '\BootnetCrasher\School\Console\SendRapportMoyenneCommand');
+        $this->registerConsoleCommand('school:sendRapportMoyenne', '\BootnetCrasher\School\Console\SendRapportMoyenneCommand');
         $this->registerConsoleCommand('digit:calculMoyennes', '\BootnetCrasher\School\Console\CalculMoyenne');
         // $this->registerConsoleCommand('school.seeder', 'Bootnetcrasher\School\Console\Seeder');
     }

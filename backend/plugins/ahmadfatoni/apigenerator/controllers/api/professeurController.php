@@ -20,10 +20,28 @@ class professeurController extends Controller
         $this->helpers          = $helpers;
     }
 
-    public function index(){
-
-        $data = $this->ProfesseurModel->all()->toArray();
-
+    public function index(Request $request){
+        $data = $this->ProfesseurModel;
+        if($request->has('search')){
+            // dd("dd");
+            /*$data = $data->where("nom", 'like', '%'.$request->get('search'.'%'))
+            ->orWhere("prenom", 'like', '%'.$request->get('search'.'%'))
+            ->orWhere("reference", 'like', '%'.$request->get('search'.'%'))
+            ->orWhere("name", 'like', '%'.$request->get('search'.'%'))
+            ->orWhere("email", 'like', '%'.$request->get('search'.'%'));*/
+            $data = $data->where(function($query) use ($request){
+                $query->where("nom", 'like', '%'.$request->get('search').'%')
+                    ->orWhere("prenom", 'like', '%'.$request->get('search').'%')
+                    ->orWhere("reference", 'like', '%'.$request->get('search').'%')
+                    ->orWhere("name", 'like', '%'.$request->get('search').'%')
+                    ->orWhere("email", 'like', '%'.$request->get('search').'%');
+            });
+        }
+        if($request->has('page') && $request->get('page') == 0){
+            $data = $data->get()->toArray();
+        }else{
+            $data = $data->paginate(10)->toArray();
+        }
         return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
     }
 
@@ -46,7 +64,7 @@ class professeurController extends Controller
     }
 
     public function store(Request $request){
-
+        dd($request->all());
     	$arr = $request->all();
 
         while ( $data = current($arr)) {
@@ -58,6 +76,8 @@ class professeurController extends Controller
         
         if( $validation->passes() ){
             $this->ProfesseurModel->save();
+            // création d'un compte user pour le professeur
+            $this->createUserCompte($request);
             return $this->helpers->apiArrayResponseBuilder(201, 'created', ['id' => $this->ProfesseurModel->id]);
         }else{
             return $this->helpers->apiArrayResponseBuilder(400, 'fail', $validation->errors() );
@@ -65,18 +85,16 @@ class professeurController extends Controller
 
     }
 
+    public function createUserCompte(){
+        // todo create teacher accoumpt if the checkbox is checked
+    }
+
     public function update($id, Request $request){
-
-        $status = $this->ProfesseurModel->where('id',$id)->update($data);
-    
+        $status = $this->ProfesseurModel->where('id',$id)->update($request->all());
         if( $status ){
-            
             return $this->helpers->apiArrayResponseBuilder(200, 'success', 'Data has been updated successfully.');
-
         }else{
-
             return $this->helpers->apiArrayResponseBuilder(400, 'bad request', 'Error, data failed to update.');
-
         }
     }
 

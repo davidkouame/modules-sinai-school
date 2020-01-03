@@ -29,15 +29,13 @@ class ClasseModel extends Model
      * @var array Validation rules
      */
     public $rules = [
-                        "libelle" => "required",
-                        "niveau" => "required",
-                        "emploisdutemps" => "required"
     ];
 
     public $belongsTo = [
         'niveau' => ['BootnetCrasher\School\Models\NiveauClasseModel', 'key' => 'niveau_id', 'otherKey' => 'id'],
         'serie' => ['BootnetCrasher\School\Models\SerieClasseModel', 'key' => 'serie_id', 'otherKey' => 'id'],
         'professeurprincipal' => ['BootnetCrasher\School\Models\ProfesseurModel', 'key' => 'professeur_principal_id', 'otherKey' => 'id'],
+        'anneescolaire' => ['BootnetCrasher\School\Models\AnneeScolaireModel', 'key' => 'annee_scolaire_id', 'otherKey' => 'id'],
     ];
 
     public $attachOne = [
@@ -62,7 +60,7 @@ class ClasseModel extends Model
      * return array EleveModel
      * int $anee_scolaire_id
      */
-    public function allEleves   ($annee_scolaire = null){
+    public function allEleves  ($annee_scolaire = null){
         $eleves = new Collection;
         try{
             // trace_log("l'id de la classe est ".$this->id);
@@ -77,5 +75,19 @@ class ClasseModel extends Model
             trace_log($e);
         }
         return $eleves;
+    }
+
+    public function beforeCreate()
+    {
+        $this->reference = $this->getReference();
+    }
+
+    public function beforeUpdate(){
+        // todo register a reference if a reference is empty
+    }
+
+    // generate matricule
+    public function getReference(){
+        return rand();
     }
 }

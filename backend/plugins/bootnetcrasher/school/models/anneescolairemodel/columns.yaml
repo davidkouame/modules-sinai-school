@@ -9,3 +9,7 @@ columns:
         searchable: true
         select: libelle
         relation: typeanneescolaire
+    validated_at:
+        label: 'Date de validation'
+        type: datetime
+        searchable: true

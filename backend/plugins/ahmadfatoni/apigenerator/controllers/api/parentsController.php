@@ -19,8 +19,7 @@ class parentsController extends Controller
         $this->helpers          = $helpers;
     }
 
-    
-    public function index(){ 
+    public function index(Request $request){
         $data = $this->ParentModel->with(array(
             'user'=>function($query){
                 $query->select('*');
@@ -31,7 +30,20 @@ class parentsController extends Controller
                         $query->select('*');
                     }
                 ));
-            } ))->select('*')->get()->toArray();
+            } ));
+        if($request->has('search')){
+            $data = $data->where(function($query) use ($request){
+                $query->where("name", 'like', '%'.$request->get('search').'%')
+                    ->orWhere("surname", 'like', '%'.$request->get('search').'%')
+                    ->orWhere("matricule", 'like', '%'.$request->get('search').'%')
+                    ->orWhere("email", 'like', '%'.$request->get('search').'%');
+            });
+        }
+        if($request->has('page') && $request->get('page') == 0){
+            $data = $data->get()->toArray();
+        }else{
+            $data = $data->paginate(10)->toArray();
+        }
         return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
     }
 
@@ -73,17 +85,11 @@ class parentsController extends Controller
     }
 
     public function update($id, Request $request){
-
-        $status = $this->ParentModel->where('id',$id)->update($data);
-    
+        $status = $this->ParentModel->where('id',$id)->update($request->all());
         if( $status ){
-            
             return $this->helpers->apiArrayResponseBuilder(200, 'success', 'Data has been updated successfully.');
-
         }else{
-
             return $this->helpers->apiArrayResponseBuilder(400, 'bad request', 'Error, data failed to update.');
-
         }
     }
 

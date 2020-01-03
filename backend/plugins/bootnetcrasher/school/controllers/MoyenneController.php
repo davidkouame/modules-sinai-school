@@ -27,4 +27,9 @@ class MoyenneController extends Controller
             return Redirect::to(Backend::url('bootnetcrasher/school/moyennecontroller'));
         }
     }
+
+    public function listExtendQuery($query,$id)
+    {
+        $query->orderBy('id', 'desc');
+    }
 }

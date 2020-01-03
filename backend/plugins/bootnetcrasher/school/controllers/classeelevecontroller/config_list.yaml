@@ -1,5 +1,6 @@
-list: $/bootnetcrasher/school/models/classeelevemodel/columns.yaml
-modelClass: BootnetCrasher\School\Models\ClasseEleveModel
+#list: $/bootnetcrasher/school/models/classeelevemodel/columns.yaml
+list: $/bootnetcrasher/school/models/classemodel/classe_eleve_columns.yaml
+modelClass: BootnetCrasher\School\Models\ClasseModel
 title: ClasseEleveController
 noRecordsMessage: 'backend::lang.list.no_records'
 showSetup: true

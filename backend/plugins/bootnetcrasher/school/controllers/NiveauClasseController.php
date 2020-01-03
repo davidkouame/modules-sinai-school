@@ -16,4 +16,9 @@ class NiveauClasseController extends Controller
         BackendMenu::setContext('BootnetCrasher.School', 'parametres', 'niveaux');
         parent::__construct();
     }
+
+    public function listExtendQuery($query,$id)
+    {
+        $query->orderBy('id', 'desc');
+    }
 }

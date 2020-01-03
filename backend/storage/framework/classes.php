@@ -487,4 +487,13 @@
   'BootnetCrasher\\School\\Models\\JobSuccessModel' => 'plugins/bootnetcrasher/school/models/JobSuccessModel.php',
   'bootnetcrasher\\school\\Controllers\\jobserrorcontroller' => 'plugins/bootnetcrasher/school/controllers/jobserrorcontroller.php',
   'BootnetCrasher\\School\\Models\\JobErrorModel' => 'plugins/bootnetcrasher/school/models/JobErrorModel.php',
+  'backend\\Controllers\\users' => 'modules/backend/controllers/users.php',
+  'mohsin\\rest\\Controllers\\settings' => 'plugins/mohsin/rest/controllers/settings.php',
+  'Mohsin\\Rest\\Models\\Node' => 'plugins/mohsin/rest/models/Node.php',
+  'bootnetcrasher\\parametrage\\Controllers\\parametragesmscontroller' => 'plugins/bootnetcrasher/parametrage/controllers/parametragesmscontroller.php',
+  'BootnetCrasher\\Parametrage\\Models\\ParametrageSms' => 'plugins/bootnetcrasher/parametrage/models/ParametrageSms.php',
+  'AhmadFatoni\\ApiGenerator\\Controllers\\API\\TypeAnneeScolaireController' => 'plugins/ahmadfatoni/apigenerator/controllers/api/TypeAnneeScolaireController.php',
+  'AhmadFatoni\\ApiGenerator\\Controllers\\API\\TypeMatiereController' => 'plugins/ahmadfatoni/apigenerator/controllers/api/TypeMatiereController.php',
+  'AhmadFatoni\\ApiGenerator\\Controllers\\API\\SerieController' => 'plugins/ahmadfatoni/apigenerator/controllers/api/SerieController.php',
+  'AhmadFatoni\\ApiGenerator\\Controllers\\API\\NiveauController' => 'plugins/ahmadfatoni/apigenerator/controllers/api/NiveauController.php',
 );

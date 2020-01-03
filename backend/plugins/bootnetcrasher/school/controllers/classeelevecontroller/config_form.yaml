@@ -1,6 +1,7 @@
 name: ClasseEleveController
-form: $/bootnetcrasher/school/models/classeelevemodel/fields.yaml
-modelClass: BootnetCrasher\School\Models\ClasseEleveModel
+#form: $/bootnetcrasher/school/models/classeelevemodel/fields.yaml
+form: $/bootnetcrasher/school/models/classemodel/classe_eleve_fields.yaml
+modelClass: BootnetCrasher\School\Models\ClasseModel
 defaultRedirect: bootnetcrasher/school/classeelevecontroller
 create:
     redirect: 'bootnetcrasher/school/classeelevecontroller/update/:id'

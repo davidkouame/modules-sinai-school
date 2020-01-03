@@ -153,3 +153,6 @@
 1.0.52:
     - 'Created table bootnetcrasher_school_pack_abonnement'
     - builder_table_create_bootnetcrasher_school_pack_abonnement.php
+1.0.53:
+    - 'Updated table bootnetcrasher_school_moyenne'
+    - builder_table_update_bootnetcrasher_school_moyenne_3.php

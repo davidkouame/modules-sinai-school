@@ -15,4 +15,9 @@ class TypeMoyenneController extends Controller
         parent::__construct();
         BackendMenu::setContext('BootnetCrasher.School', 'parametres');
     }
+
+    public function listExtendQuery($query,$id)
+    {
+        $query->orderBy('id', 'desc');
+    }
 }

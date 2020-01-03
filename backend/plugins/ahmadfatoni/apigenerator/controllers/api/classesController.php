@@ -8,6 +8,7 @@ use AhmadFatoni\ApiGenerator\Helpers\Helpers;
 use BootnetCrasher\School\Models\ClasseModel;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Validator;
 
 class classesController extends Controller
 {
@@ -23,14 +24,22 @@ class classesController extends Controller
     }
 
     
-    public function index(){ 
+    public function index(Request $request){
         $data = $this->ClasseModel->with(array(
             'niveau'=>function($query){
                 $query->select('*');
             },
             'serie'=>function($query){
                 $query->select('*');
-            }, ))->select('*')->get()->toArray();
+            }, ));
+        if($request->has('search')){
+            $data = $data->where("libelle", 'like', '%'.$request->get('search').'%');
+        }
+        if($request->has('page') && $request->get('page') == 0){
+            $data = $data->get()->toArray();
+        }else{
+            $data = $data->paginate(10)->toArray();
+        }
         return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
     }
 
@@ -42,9 +51,15 @@ class classesController extends Controller
             },
             'serie'=>function($query){
                 $query->select('*');
-            }, ))->select('*')->where('id', '=', $id)->first();
-            $emploisdutemps = base64_encode($data->emploisdutemps->getContents());
-            $data->emploitemps = $emploisdutemps;
+            },
+            'anneescolaire'=>function($query){
+                $query->select('*');
+            },))->select('*')->where('id', '=', $id)->first();
+            if($data and $data->emploisdutemps){
+                $emploisdutemps = base64_encode($data->emploisdutemps->getContents());
+                $data->emploitemps = $emploisdutemps;
+            }
+
             // dd($data);
             // Storage::disk('local')->put("test.txt", $emploisdutemps);
         return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
@@ -71,17 +86,11 @@ class classesController extends Controller
     }
 
     public function update($id, Request $request){
-
-        $status = $this->ClasseModel->where('id',$id)->update($data);
-    
+        $status = $this->ClasseModel->where('id',$id)->update($request->all());
         if( $status ){
-            
             return $this->helpers->apiArrayResponseBuilder(200, 'success', 'Data has been updated successfully.');
-
         }else{
-
             return $this->helpers->apiArrayResponseBuilder(400, 'bad request', 'Error, data failed to update.');
-
         }
     }
 

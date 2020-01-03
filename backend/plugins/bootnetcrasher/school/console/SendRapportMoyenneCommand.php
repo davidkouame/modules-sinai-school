@@ -16,7 +16,7 @@ class SendRapportMoyenneCommand extends Command
     /**
      * @var string The console command name.
      */
-    protected $name = 'digit:sendRapportMoyenne';
+    protected $name = 'school:sendRapportMoyenne';
 
     /**
      * @var string The console command description.

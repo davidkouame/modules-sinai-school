@@ -31,4 +31,9 @@ class ActualiteController extends Controller
                     . "actualites, raison :".$ex->getMessage());
         }
     }
+
+    public function listExtendQuery($query,$id)
+    {
+        $query->orderBy('id', 'desc');
+    }
 }

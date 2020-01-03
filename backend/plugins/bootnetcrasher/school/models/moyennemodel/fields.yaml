@@ -1,4 +1,9 @@
 fields:
+    reference:
+        label: Reférence
+        type: text
+        searchable: true
+        span: auto
     eleve:
         label: Elève
         span: auto

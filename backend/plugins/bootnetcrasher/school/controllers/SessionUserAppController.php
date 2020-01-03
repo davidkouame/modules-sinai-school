@@ -15,4 +15,9 @@ class SessionUserAppController extends Controller
         BackendMenu::setContext('BootnetCrasher.School', 'parametres', 'sessionuserapp');
         parent::__construct();
     }
+
+    public function listExtendQuery($query,$id)
+    {
+        $query->orderBy('id', 'desc');
+    }
 }

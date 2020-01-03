@@ -42,5 +42,11 @@ Route::resource('api/v1/sessionsuserapp', 'AhmadFatoni\ApiGenerator\Controllers\
 Route::get('api/v1/sessionsuserapp/{id}/delete', ['as' => 'api/v1/sessionsuserapp.delete', 'uses' => 'AhmadFatoni\ApiGenerator\Controllers\API\sessionUserAppController@destroy']);
 Route::resource('api/v1/anneesscolaires', 'AhmadFatoni\ApiGenerator\Controllers\API\anneeScolaireController', ['except' => ['destroy', 'create', 'edit']]);
 Route::get('api/v1/anneesscolaires/{id}/delete', ['as' => 'api/v1/anneesscolaires.delete', 'uses' => 'AhmadFatoni\ApiGenerator\Controllers\API\anneeScolaireController@destroy']);
-// Route::resource('api/v1/noteseleves-v2', 'AhmadFatoni\ApiGenerator\Controllers\API\noteeleveController', ['except' => ['destroy', 'create', 'edit']]);
-// Route::get('api/v1/noteseleves-v2/{id}/delete', ['as' => 'api/v1/noteseleves-v2.delete', 'uses' => 'AhmadFatoni\ApiGenerator\Controllers\API\noteeleveController@destroy']);
+Route::resource('api/v1/typesanneescolaire', 'AhmadFatoni\ApiGenerator\Controllers\API\TypeAnneeScolaireController', ['except' => ['destroy', 'create', 'edit']]);
+Route::get('api/v1/typesanneescolaire/{id}/delete', ['as' => 'api/v1/typesanneescolaire.delete', 'uses' => 'AhmadFatoni\ApiGenerator\Controllers\API\TypeAnneeScolaireController@destroy']);
+Route::resource('api/v1/typesmatiere', 'AhmadFatoni\ApiGenerator\Controllers\API\TypeMatiereController', ['except' => ['destroy', 'create', 'edit']]);
+Route::get('api/v1/typesmatiere/{id}/delete', ['as' => 'api/v1/typesmatiere.delete', 'uses' => 'AhmadFatoni\ApiGenerator\Controllers\API\TypeMatiereController@destroy']);
+Route::resource('api/v1/series', 'AhmadFatoni\ApiGenerator\Controllers\API\SerieController', ['except' => ['destroy', 'create', 'edit']]);
+Route::get('api/v1/series/{id}/delete', ['as' => 'api/v1/series.delete', 'uses' => 'AhmadFatoni\ApiGenerator\Controllers\API\SerieController@destroy']);
+Route::resource('api/v1/niveaux', 'AhmadFatoni\ApiGenerator\Controllers\API\NiveauController', ['except' => ['destroy', 'create', 'edit']]);
+Route::get('api/v1/niveaux/{id}/delete', ['as' => 'api/v1/niveaux.delete', 'uses' => 'AhmadFatoni\ApiGenerator\Controllers\API\NiveauController@destroy']);

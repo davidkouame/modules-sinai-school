@@ -1,0 +1,10 @@
+name: ParametrageSmsController
+form: $/bootnetcrasher/parametrage/models/parametragesms/fields.yaml
+modelClass: BootnetCrasher\Parametrage\Models\ParametrageSms
+defaultRedirect: bootnetcrasher/parametrage/parametragesmscontroller
+create:
+    redirect: 'bootnetcrasher/parametrage/parametragesmscontroller/update/:id'
+    redirectClose: bootnetcrasher/parametrage/parametragesmscontroller
+update:
+    redirect: bootnetcrasher/parametrage/parametragesmscontroller
+    redirectClose: bootnetcrasher/parametrage/parametragesmscontroller

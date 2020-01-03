@@ -15,6 +15,11 @@ class TypeAnneeScolaireController extends Controller
         BackendMenu::setContext('BootnetCrasher.School', 'parametres');
         parent::__construct();
     }
+
+    public function listExtendQuery($query,$id)
+    {
+        $query->orderBy('id', 'desc');
+    }
     
     
 }

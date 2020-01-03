@@ -15,20 +15,22 @@ class RapportMoyenne {
     private $anneescolaire = null;
     private $sectionanneescolaire = null;
     private $rapport = null;
+    private $estProvisoire = null;
     
     public function __construct(SectionAnneeScolaireModel $sectionanneescolaire, 
-            ClasseModel $classe, EleveModel $eleve) {
+            ClasseModel $classe, EleveModel $eleve, $estProvisoire = null) {
         $this->sectionanneescolaire = $sectionanneescolaire;
         $this->anneescolaire = $sectionanneescolaire->anneescolaire;
         $this->eleve = $eleve;
         $this->classe = $classe;
+        $this->estProvisoire = $estProvisoire;
     }
     
     // construct rapport
     public function constuct(){
         // recuperation de la section en cours 
         $sectionanneescolaire = $this->sectionanneescolaire;
-        $head = "Moyennes provisoires de ".$this->eleve->name." ".$this->eleve->surname."</br>";
+        $head = $this->getHead();
         $head = $head . " ".$sectionanneescolaire->libelle."</br>";
         // recuperation de toutes les matieres de la classe
         $classesmatieres = ClasseMatiereModel::where('annee_scolaire_id', $this->anneescolaire->id)
@@ -61,6 +63,14 @@ class RapportMoyenne {
     // get rapport
     public function getRapport(){
         return $this->rapport;
+    }
+
+    // get heead
+    public function getHead(){
+        if($this->estProvisoire)
+            return "Moyennes provisoires . </br> Elève : ".$this->eleve->name." ".$this->eleve->surname."</br> . Trimestre : ";
+        else
+            return "Rapport de moyennes de fin de trimestre . </br> Elève : ".$this->eleve->name." ".$this->eleve->surname."</br> . Trimestre : ";
     }
 }
 

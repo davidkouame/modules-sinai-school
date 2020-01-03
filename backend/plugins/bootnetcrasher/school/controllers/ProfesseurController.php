@@ -13,5 +13,11 @@ class ProfesseurController extends Controller
     public function __construct()
     {
         parent::__construct();
+        BackendMenu::setContext('BootnetCrasher.School', 'parametres', 'professeurs');
+    }
+
+    public function listExtendQuery($query,$id)
+    {
+        $query->orderBy('id', 'desc');
     }
 }

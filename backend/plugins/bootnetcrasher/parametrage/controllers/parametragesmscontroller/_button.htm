@@ -1,0 +1,8 @@
+<button class="btn btn-default control-disabled"
+        onclick="$(this).data('request-data', {checked: $('.control-list').listWidget('getChecked')})"
+        data-request="onSendRapport"
+        data-request-confirm="Confirmer la suppression des enregistrements sélectionnés ?"
+        data-trigger-action="enable"
+        data-trigger-condition="checked" data-request-success="$(this).prop('disabled', true)"
+        data-stripe-load-indicator="">Test de rapport
+</button>

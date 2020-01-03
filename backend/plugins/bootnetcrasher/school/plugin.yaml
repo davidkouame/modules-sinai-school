@@ -5,24 +5,12 @@ plugin:
     icon: oc-icon-adjust
     homepage: ''
 navigation:
-    professeurs:
-        label: Professeurs
-        url: bootnetcrasher/school/professeurcontroller
-        icon: icon-life-ring
-    matieres:
-        label: Matières
-        url: bootnetcrasher/school/matierecontroller
-        icon: icon-life-ring
-    anneescolaires:
-        label: 'Années scolaire'
-        url: bootnetcrasher/school/anneescolairecontroller
-        icon: icon-life-ring
     main-menu-item:
         label: Eleves
         url: bootnetcrasher/school/elevecontroller
         icon: icon-adjust
     absenceeleve:
-        label: 'Absences élèves'
+        label: 'Absences'
         url: bootnetcrasher/school/absenceelevecontroller
         icon: icon-adjust
     classeeleve:
@@ -33,11 +21,49 @@ navigation:
         label: Parents
         url: bootnetcrasher/school/parentcontroller
         icon: icon-arrow-right
+    notes:
+        label: Notes
+        url: bootnetcrasher/school/indexcontrollernote
+        icon: icon-life-ring
+        sideMenu:
+            notes:
+                label: Notes
+                url: bootnetcrasher/school/notecontroller
+                icon: icon-sitemap
+            valeursnoteseleves:
+                label: 'Valeur Notes Eleves'
+                url: bootnetcrasher/school/valeurnoteeleve
+                icon: icon-sitemap
+            typenote:
+                label: 'Type note'
+                url: bootnetcrasher/school/typenotecontroller
+                icon: icon-life-ring
+        moyennes:
+            label: Moyennes
+            url: bootnetcrasher/school/indexcontrollermoyenne
+            icon: icon-life-ring
+            sideMenu:
+                moyennesmatieres:
+                    label: Moyennes matieres
+                    url: bootnetcrasher/school/moyennematierecontroller
+                    icon: icon-sitemap
+                moyennessections:
+                    label: Moyennes sections
+                    url: bootnetcrasher/school/moyennesectioncontroller
+                    icon: icon-sitemap
+                moyennesannuelles:
+                    label: Moyennes annuelles
+                    url: bootnetcrasher/school/moyenneannuellecontroller
+                    icon: icon-sitemap
     parametres:
         label: Paramètres
         url: bootnetcrasher/school/indexcontrollerparametre
         icon: icon-life-ring
         sideMenu:
+            professeurs:
+                label: Professeurs
+                url: bootnetcrasher/school/professeurcontroller
+                icon: icon-life-ring
             classes:
                 label: Classes
                 url: bootnetcrasher/school/classecontroller
@@ -45,6 +71,10 @@ navigation:
             sectionsanneescolaire:
                 label: 'Section année scolaire'
                 url: bootnetcrasher/school/sectionanneescolairecontroller
+                icon: icon-sitemap
+            anneescolaire:
+                label: 'Année scolaire'
+                url: bootnetcrasher/school/anneescolairecontroller
                 icon: icon-sitemap
             sessionuserapp:
                 label: 'Session user app'
@@ -86,45 +116,6 @@ navigation:
                 label: Logs sms
                 url: bootnetcrasher/school/logsmscontroller
                 icon: icon-sitemap
-    notes:
-        label: Notes
-        url: bootnetcrasher/school/indexcontrollernote
-        icon: icon-life-ring
-        sideMenu:
-            notes:
-                label: Notes
-                url: bootnetcrasher/school/notecontroller
-                icon: icon-sitemap
-            valeursnoteseleves:
-                label: 'Valeur Notes Eleves'
-                url: bootnetcrasher/school/valeurnoteeleve
-                icon: icon-sitemap
-            typenote:
-                label: 'Type note'
-                url: bootnetcrasher/school/typenotecontroller
-                icon: icon-life-ring
-    moyennes:
-        label: Moyennes
-        url: bootnetcrasher/school/indexcontrollermoyenne
-        icon: icon-life-ring
-        sideMenu:
-            moyennesmatieres:
-                label: Moyennes matieres
-                url: bootnetcrasher/school/moyennematierecontroller
-                icon: icon-sitemap
-            moyennessections:
-                label: Moyennes sections
-                url: bootnetcrasher/school/moyennesectioncontroller
-                icon: icon-sitemap
-            moyennesannuelles:
-                label: Moyennes annuelles
-                url: bootnetcrasher/school/moyenneannuellecontroller
-                icon: icon-sitemap
-    jobs:
-        label: Jobs
-        url: bootnetcrasher/school/jobenattentecontroller
-        icon: icon-life-ring
-        sideMenu:
             jobenattente:
                 label: Jobs en attentes
                 url: bootnetcrasher/school/jobenattentecontroller
@@ -137,3 +128,4 @@ navigation:
                 label: Jobs errors
                 url: bootnetcrasher/school/jobserrorcontroller
                 icon: icon-sitemap
+

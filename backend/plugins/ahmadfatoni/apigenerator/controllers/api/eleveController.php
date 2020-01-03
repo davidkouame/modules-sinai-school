@@ -6,6 +6,7 @@ use BackendMenu;
 use Illuminate\Http\Request;
 use AhmadFatoni\ApiGenerator\Helpers\Helpers;
 use BootnetCrasher\School\Models\EleveModel;
+use Illuminate\Support\Facades\Validator;
 class eleveController extends Controller
 {
     protected $EleveModel;
@@ -36,12 +37,47 @@ class eleveController extends Controller
                 $query->select('*');
             },          
             ))->select('*');
-
         foreach($request->except('page') as $key => $value){
-            $data = $data->where($key, $value);
+            if($key == "search"){
+                $data = $data->where(function($query) use ($request){
+                    $query->where("name", 'like', '%'.$request->get('search').'%')
+                        ->orWhere("surname", 'like', '%'.$request->get('search').'%')
+                        ->orWhere("matricule", 'like', '%'.$request->get('search').'%')
+                        ->orWhere("email", 'like', '%'.$request->get('search').'%');
+                });
+            }else{
+                $data = $data->where($key, $value);
+            }
         }
+        if($request->has('page') && $request->get('page') == 0){
+            $data = $data->get()->toArray();
+        }else{
+            $data = $data->paginate(10)->toArray();
+        }
+        return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
+    }
 
-        $data = $data->paginate(10)->toArray();
+    public function indexCustomise(Request $request){
+        $data = $this->EleveModel;
+        $data = $data->select('id', 'matricule', 'name', 'surname');
+        foreach($request->except('page') as $key => $value){
+            if($key == "search"){
+                $data = $data->where(function($query) use ($request){
+                    $query->where("name", 'like', '%'.$request->get('search').'%')
+                        ->orWhere("surname", 'like', '%'.$request->get('search').'%')
+                        ->orWhere("matricule", 'like', '%'.$request->get('search').'%')
+                        ->orWhere("email", 'like', '%'.$request->get('search').'%');
+                });
+            }else{
+                $data = $data->where($key, $value);
+            }
+
+        }
+        if($request->has('page') && $request->get('page') == 0){
+            $data = $data->get()->toArray();
+        }else{
+            $data = $data->paginate(10)->toArray();
+        }
         return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
     }
 
@@ -113,17 +149,11 @@ class eleveController extends Controller
     }
 
     public function update($id, Request $request){
-
-        $status = $this->EleveModel->where('id',$id)->update($data);
-    
+        $status = $this->EleveModel->where('id',$id)->update($request->all());
         if( $status ){
-            
             return $this->helpers->apiArrayResponseBuilder(200, 'success', 'Data has been updated successfully.');
-
         }else{
-
             return $this->helpers->apiArrayResponseBuilder(400, 'bad request', 'Error, data failed to update.');
-
         }
     }
 
