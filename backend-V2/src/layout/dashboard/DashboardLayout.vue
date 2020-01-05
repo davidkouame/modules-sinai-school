@@ -19,6 +19,8 @@
         <sidebar-link to="/eleves" name="Eleves" icon="ti-map"/>
         <sidebar-link to="/parents" name="Parents" icon="ti-map"/>
         <sidebar-link to="/absences" name="Absences" icon="ti-map"/>
+        <sidebar-link to="/moyennes" name="Moyennes" icon="ti-map"/>
+        <sidebar-link to="/log-sms" name="Log sms" icon="ti-map"/>
         <sidebar-link to="/notifications" name="Notifications" icon="ti-bell"/>
       </template>
       <mobile-menu>

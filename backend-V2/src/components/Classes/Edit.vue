@@ -192,7 +192,7 @@
                             <tbody>
                               <tr v-if="elevesclasses" v-for="(eleveclasse, index) in elevesclasses">
                                 <th scope="row">{{ index + 1}}</th>
-                                <td>{{ eleveclasse.eleve.matricule }}</td>
+                                <td><a :href="'/#/classes-eleves/'+eleveclasse.id">{{ eleveclasse.eleve.matricule }}</a></td>
                                 <td>{{ eleveclasse.eleve.name }}</td>
                                 <td>{{ eleveclasse.eleve.surname }}</td>
                                 <td>

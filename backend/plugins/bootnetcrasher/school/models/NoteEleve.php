@@ -22,7 +22,7 @@ class NoteEleve extends Model {
     /**
      * @var string The database table used by the model.
      */
-    public $table = 'bootnetcrasher_school_note_eleve';
+    public $table = 'bootnetcrasher_school_note_eleve_test';
 
     /**
      * @var array Validation rules
@@ -44,17 +44,21 @@ class NoteEleve extends Model {
     ];
     
     public function afterCreate(){
-        if($this->valeur){
-            $sms = new Sms;
-            $eleve = EleveModel::find($this->eleve_id);
-            if($eleve){
-                $parent = ParentModel::find($eleve->parent_id);
-                if($parent){
-                    $body = $eleve->name . " a obtenu ".$this->valeur." en ".$this->matiere->libelle;
-                    $sms->send($parent->tel, $parent->user, $body);
+        try{
+            /*if($this->valeur){
+                $sms = new Sms;
+                $eleve = EleveModel::find($this->eleve_id);
+                if($eleve){
+                    $parent = ParentModel::find($eleve->parent_id);
+                    if($parent){
+                        $body = $eleve->name . " a obtenu ".$this->valeur." en ".$this->matiere->libelle;
+                        $sms->send($parent->tel, $parent->user, $body);
+                    }
                 }
-            }
-            Queue::push(CalculMoyenneJob::class, ''); 
+                Queue::push(CalculMoyenneJob::class, '');
+            }*/
+        }catch(\Exception $e){
+            trace_log($e->getTrace());
         }
     }
     

@@ -25,17 +25,20 @@ import vSelect from 'vue-select'
 
 import PaperDashboard from "./plugins/paperDashboard";
 import "vue-notifyjs/themes/default.css";
+import Datetime  from 'vue-datetime'
+import 'vue-datetime/dist/vue-datetime.css'
 
 Vue.component('paginate', Paginate)
 Vue.use(PaperDashboard);
 Vue.use(VueTruncate);
+Vue.use(Datetime)
 
 // filter qui permet de formater les dates
-/*Vue.filter('formatDate', function (value) {
+Vue.filter('formatDate', function (value) {
   if (value) {
     return moment(String(value)).format('DD/MM/YYYY')
   }
-});*/
+});
 
 Vue.filter('truncate', function (value, size) {
   if (value) {

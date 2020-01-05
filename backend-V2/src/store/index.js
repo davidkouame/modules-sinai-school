@@ -90,7 +90,19 @@ export default new Vuex.Store({
     currentPage: null,
     countPage: null,
     totalElement: null,
-    matiere: null
+    matiere: null,
+    absences: null,
+    absence: null,
+    raisonsabsences: null,
+    classeeleve: null,
+    moyennes: null,
+    moyennesmatieres: null,
+    moyennessections: null,
+    moyenneannuelle: null,
+    typesmoyenne: null,
+    moyenne: null,
+    alllogsms: null,
+    logsms: null
   },
   mutations: {
     anneesscolaires(state, payload) {
@@ -200,6 +212,42 @@ export default new Vuex.Store({
     },
     parent(state, parent) {
       state.parent = parent
+    },
+    absences(state, absences) {
+      state.absences = absences
+    },
+    absence(state, absence) {
+      state.absence = absence
+    },
+    raisonsabsences(state, raisonsabsences) {
+      state.raisonsabsences = raisonsabsences
+    },
+    classeeleve(state, classeeleve) {
+      state.classeeleve = classeeleve
+    },
+    moyennes(state, moyennes) {
+      state.moyennes = moyennes
+    },
+    moyennesmatieres(state, moyennesmatieres) {
+      state.moyennesmatieres = moyennesmatieres
+    },
+    moyennessections(state, moyennessections) {
+      state.moyennessections = moyennessections
+    },
+    moyenneannuelle(state, moyenneannuelle) {
+      state.moyenneannuelle = moyenneannuelle
+    },
+    typesmoyenne(state, typesmoyenne) {
+      state.typesmoyenne = typesmoyenne
+    },
+    moyenne(state, moyenne) {
+      state.moyenne = moyenne
+    },
+    alllogsms(state, alllogsms) {
+      state.alllogsms = alllogsms
+    },
+    logsms(state, logsms){
+      state.logsms = logsms
     }
   },
   getters: {
@@ -313,6 +361,42 @@ export default new Vuex.Store({
     },
     parent: state => {
       return state.parent
+    },
+    absences: state => {
+      return state.absences
+    },
+    absence: state => {
+      return state.absence
+    },
+    raisonsabsences: state => {
+      return state.raisonsabsences
+    },
+    classeeleve: state => {
+      return state.classeeleve
+    },
+    moyennes: state => {
+      return state.moyennes
+    },
+    moyennesmatieres: state => {
+      return state.moyennesmatieres
+    },
+    moyennessections: state => {
+      return state.moyennessections
+    },
+    moyenneannuelle: state => {
+      return state.moyenneannuelle
+    },
+    typesmoyenne: state => {
+      return state.typesmoyenne
+    },
+    moyenne: state => {
+      return state.moyenne
+    },
+    alllogsms: state => {
+      return state.alllogsms
+    },
+    logsms: state => {
+      return state.logsms
     }
   },
   actions: {
@@ -400,6 +484,19 @@ export default new Vuex.Store({
       Axios.get(url)
         .then(response => {
           context.commit('typesmatiere', response.data.data)
+        })
+        .catch(error => {
+          console.log(error)
+          this.errored = true
+        })
+        .finally(() => (this.loading = false))
+    },
+     getAllTypesMoyenne(context, params) {
+      let nameUrl = "typesmoyenne"
+      let url = getUrl(context, nameUrl, params)
+      Axios.get(url)
+        .then(response => {
+          context.commit('typesmoyenne', response.data.data)
         })
         .catch(error => {
           console.log(error)
@@ -728,33 +825,16 @@ export default new Vuex.Store({
     getParent(context, params) {
       getInformModel(context, params.parentId, "parents", "parent")
     },
-    saveElevesClasse(context, params) {
-      return Axios.post(
-        context.state.endpoint + 'api/v1/elevesclasses/save-eleves', params.data,
-        { headers: { 'Content-Type': 'application/json' } }
-      )
-    },
-    matieresV2(context, params) {
-      let concatParams = null
-      if (params) {
-        concatParams = params.search.map(function (elemen) {
-          return elemen.key + '=' + elemen.value
-        }).join('&')
-        // concatParams =  concatParams
-      }
-      // console.log("params "+ JSON.stringify(concatParams))
-      let url = null;
-      if(concatParams){
-        url = context.state.endpoint + 'api/v1/matieres-v2?' + concatParams
-      }else{
-        url = context.state.endpoint + 'api/v1/matieres-v2/'
-      }
-      Axios.get(
-        url
-      )
+    getAbsences(context, params) {
+      let nameUrl = "absenceseleves"
+      let url = getUrl(context, nameUrl, params)
+      Axios.get(url)
         .then(response => {
-          context.commit('matieres', response.data.data)
-          // console.log("liste de toutes les classes "+JSON.stringify(response.data.data));
+          context.commit('absences', response.data.data.data)
+          context.commit('pageCount', response.data.data.last_page)
+          context.commit('currentPage', response.data.data.current_page);
+          context.commit('countPage', response.data.data.last_page);
+          context.commit('totalElement', response.data.data.total);
         })
         .catch(error => {
           console.log(error)
@@ -762,18 +842,135 @@ export default new Vuex.Store({
         })
         .finally(() => (this.loading = false))
     },
-    saveNote(context, data) {
-      if (data.id) {
+    getAbsence(context, params) {
+      getInformModel(context, params.absenceId, "absenceseleves", "absence")
+    },
+    saveElevesClasse(context, params) {
+      return Axios.post(
+        context.state.endpoint + 'api/v1/elevesclasses/save-eleves', params.data,
+        { headers: { 'Content-Type': 'application/json' } }
+      )
+    },
+    getAllRaisonsAbsences(context, params) {
+      let nameUrl = "raisonsabsences"
+      let url = getUrl(context, nameUrl, params)
+      Axios.get(url)
+        .then(response => {
+          context.commit('raisonsabsences', response.data.data)
+        })
+        .catch(error => {
+          console.log(error)
+          this.errored = true
+        })
+        .finally(() => (this.loading = false))
+    },
+    getNotesWithValues(context, params){
+      let nameUrl = "get-notes-v4"
+      let url = getUrl(context, nameUrl, params)
+      Axios.get(url)
+        .then(response => {
+          context.commit('notes', response.data.data.data)
+          context.commit('pageCount', response.data.data.last_page)
+          context.commit('currentPage', response.data.data.current_page);
+          context.commit('countPage', response.data.data.last_page);
+          context.commit('totalElement', response.data.data.total);
+        })
+        .catch(error => {
+          console.log(error)
+          this.errored = true
+        })
+        .finally(() => (this.loading = false))
+    },
+    getClasseEleve(context, params) {
+      getInformModel(context, params.classeEleveId, "elevesclasses", "classeeleve")
+    },
+    getMoyenne(context, params) {
+      getInformModel(context, params.moyenneId, "moyennes", "moyenne")
+    },
+    addValueNote(context, data) {
         return Axios.put(
-          context.state.endpoint + 'api/v1/notemodel/' + data.id, data,
+          context.state.endpoint + 'api/v1/noteseleves-valeur/' + data.eleve_id
+             + '/' + data.note_id, data,
           { headers: { 'Content-Type': 'application/json' } }
         )
-      } else {
-        return Axios.post(
-          context.state.endpoint + 'api/v1/notemodel', data,
-          { headers: { 'Content-Type': 'application/json' } }
-        )
-      }
+    },
+    getMoyennes(context, params) {
+      let nameUrl = "moyennes"
+      let url = getUrl(context, nameUrl, params)
+      Axios.get(url)
+        .then(response => {
+          context.commit('moyennes', response.data.data.data)
+          context.commit('pageCount', response.data.data.last_page)
+          context.commit('currentPage', response.data.data.current_page);
+          context.commit('countPage', response.data.data.last_page);
+          context.commit('totalElement', response.data.data.total);
+        })
+        .catch(error => {
+          console.log(error)
+          this.errored = true
+        })
+        .finally(() => (this.loading = false))
+    },
+    getMoyennesMatieres(context, params) {
+      let nameUrl = "moyennes"
+      let url = getUrl(context, nameUrl, params)
+      Axios.get(url)
+        .then(response => {
+          context.commit('moyennesmatieres', response.data.data)
+        })
+        .catch(error => {
+          console.log(error)
+          this.errored = true
+        })
+        .finally(() => (this.loading = false))
+    },
+    getMoyennesSections(context, params) {
+      let nameUrl = "moyennes"
+      let url = getUrl(context, nameUrl, params)
+      Axios.get(url)
+        .then(response => {
+          context.commit('moyennessections', response.data.data)
+        })
+        .catch(error => {
+          console.log(error)
+          this.errored = true
+        })
+        .finally(() => (this.loading = false))
+    },
+    getMoyenneAnnuelle(context, params) {
+      let nameUrl = "moyennes"
+      let url = getUrl(context, nameUrl, params)
+      Axios.get(url)
+        .then(response => {
+          if(response.data.data){
+            context.commit('moyenneannuelle', response.data.data[0])
+          }
+        })
+        .catch(error => {
+          console.log(error)
+          this.errored = true
+        })
+        .finally(() => (this.loading = false))
+    },
+    getAllLogSms(context, params) {
+      let nameUrl = "logsms"
+      let url = getUrl(context, nameUrl, params)
+      Axios.get(url)
+        .then(response => {
+          context.commit('alllogsms', response.data.data.data)
+          context.commit('pageCount', response.data.data.last_page)
+          context.commit('currentPage', response.data.data.current_page);
+          context.commit('countPage', response.data.data.last_page);
+          context.commit('totalElement', response.data.data.total);
+        })
+        .catch(error => {
+          console.log(error)
+          this.errored = true
+        })
+        .finally(() => (this.loading = false))
+    },
+    getLogSms(context, params) {
+      getInformModel(context, params.logSmsId, "logsms", "logsms")
     },
     classes(context, params) {
       let concatParams = null

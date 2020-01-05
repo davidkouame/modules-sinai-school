@@ -1,4 +1,4 @@
-1578058485a:1:{s:24:"detailclubsactivites.htm";a:11:{s:8:"fileName";s:24:"detailclubsactivites.htm";s:7:"content";s:177:"title = "Demonstration"
+1578180097a:1:{s:24:"detailclubsactivites.htm";a:11:{s:8:"fileName";s:24:"detailclubsactivites.htm";s:7:"content";s:177:"title = "Demonstration"
 url = "/clubs-activites/:club_activite_id"
 layout = "default"
 is_hidden = 0

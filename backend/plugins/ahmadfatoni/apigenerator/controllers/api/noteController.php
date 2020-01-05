@@ -9,6 +9,8 @@ use BootnetCrasher\School\Models\NoteModel;
 use BootnetCrasher\School\Models\NoteEleve;
 use Dotenv\Validator;
 use DB;
+use Illuminate\Support\Collection;
+use Bootnetcrasher\School\Classes\Collection as TestCollection;
 
 class noteController extends Controller
 {
@@ -234,9 +236,27 @@ class noteController extends Controller
             }
         }
         $data = $data->where('eleve_id', $request->get('eleve_id'))
-            ->orWhereNull('eleve_id', $request->get('eleve_id'))
-            ->select('bootnetcrasher_school_note_eleve.id as note_eleve_id', 'bootnetcrasher_school_note_eleve.*', 'bootnetcrasher_school_note.*', 'bootnetcrasher_school_type_note.libelle as libelle_type_note');
+            ->orWhereNull('eleve_id');
+        $data = $data->select('bootnetcrasher_school_note_eleve.id as note_eleve_id', 'bootnetcrasher_school_note_eleve.*', 'bootnetcrasher_school_note.*', 'bootnetcrasher_school_type_note.libelle as libelle_type_note');
         $data = $data->paginate(10)->toArray();
+        return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
+    }
+
+    public function getNotesV4(Request $request){
+        // recuperation des notes
+        $collect = new TestCollection();
+        $notes = NoteModel::where('classe_id', $request->get('classe_id'))->get();
+        foreach($notes as $note){
+            $noteeleve = NoteEleve::where('note_id', $note->id)->where('eleve_id', $request->get('eleve_id'))->first();
+            $collect->push([
+                "noteeleve" => $noteeleve ? $noteeleve->toArray() : null,
+                "note" => $note->toArray(),
+                "eleve" => $noteeleve && $noteeleve->eleve ? $noteeleve->eleve->toArray() : null,
+                "typenote" => $note->typenote ? $note->typenote->toArray() : null,
+                "matiere" => $note->matiere ? $note->matiere->toArray() : null
+            ]);
+        }
+        $data = $collect->paginate(10)->toArray();
         return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
     }
 

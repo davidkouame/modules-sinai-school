@@ -56,6 +56,8 @@ class moyenneController extends Controller
                           ->where('professeur_id', $request->get('professeur_id'))
                           ->select('*');
                 });
+            }elseif($key == "search"){
+                $data = $data->where("reference", 'like', '%'.$value.'%');
             }else{
                 $data = $data->where($key, $value);
             }
@@ -67,8 +69,11 @@ class moyenneController extends Controller
                     });
             });
         }
-        $data = $data->paginate(10)->toArray();
-        // dd($data);
+        if($request->has('page') && $request->get('page') == 0){
+            $data = $data->get()->toArray();
+        }else{
+            $data = $data->paginate(10)->toArray();
+        }
         return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
     }
 
@@ -172,17 +177,11 @@ class moyenneController extends Controller
     }
 
     public function update($id, Request $request){
-
-        $status = $this->MoyenneModel->where('id',$id)->update($data);
-    
+        $status = $this->MoyenneModel->where('id',$id)->update($request->all());
         if( $status ){
-            
             return $this->helpers->apiArrayResponseBuilder(200, 'success', 'Data has been updated successfully.');
-
         }else{
-
             return $this->helpers->apiArrayResponseBuilder(400, 'bad request', 'Error, data failed to update.');
-
         }
     }
 

@@ -69,6 +69,9 @@ import PreviewEleveClasse from "@/components/ElevesClasses/Preview.vue";
 import AddEleveClasse from "@/components/ElevesClasses/Add.vue";
 import EditEleveClasse from "@/components/ElevesClasses/Edit.vue";
 
+// Classes eleves
+import DetailEleveClasseEleve from "@/components/ClassesEleves/DetailEleve.vue";
+
 // Eleves 
 import ListEleve from "@/components/Eleves/List.vue";
 import PreviewEleve from "@/components/Eleves/Preview.vue";
@@ -80,6 +83,22 @@ import ListParent from "@/components/Parents/List.vue";
 import PreviewParent from "@/components/Parents/Preview.vue";
 import AddParent from "@/components/Parents/Add.vue";
 import EditParent from "@/components/Parents/Edit.vue";
+
+// Absences 
+import ListAbsence from "@/components/Absences/List.vue";
+import PreviewAbsence from "@/components/Absences/Preview.vue";
+import AddAbsence from "@/components/Absences/Add.vue";
+import EditAbsence from "@/components/Absences/Edit.vue";
+
+// Moyennes 
+import ListMoyenne from "@/components/Moyennes/List.vue";
+import PreviewMoyenne from "@/components/Moyennes/Preview.vue";
+import AddMoyenne from "@/components/Moyennes/Add.vue";
+import EditMoyenne from "@/components/Moyennes/Edit.vue";
+
+// Log sms 
+import ListLogSms from "@/components/LogSms/List.vue";
+import PreviewLogSms from "@/components/LogSms/Preview.vue";
 
 const routes = [
   {
@@ -344,6 +363,14 @@ const routes = [
         component: AddEleveClasse
       },
 
+      // ------------------ CLASSES ELEVES ------------------ //
+
+      {
+        path: '/classes-eleves/:id(\\d+)',
+        name: 'Classes Elèves',
+        component: DetailEleveClasseEleve
+      },
+
       // ------------------ ELEVES ------------------ //
 
       {
@@ -389,6 +416,65 @@ const routes = [
         name: "Parents",
         component: AddParent
       },
+
+      // ------------------ ABSENCES ------------------ //
+
+      {
+        path: "absences",
+        name: "Absences",
+        component: ListAbsence
+      },
+      {
+        path: '/absences/preview/:id(\\d+)',
+        name: 'Absences',
+        component: PreviewAbsence
+      },
+      {
+        path: '/absences/edit/:id(\\d+)',
+        name: 'Absences',
+        component: EditAbsence
+      },
+      {
+        path: "/absences/add",
+        name: "Absences",
+        component: AddAbsence
+      },
+
+      // ------------------ MOYENNE ------------------ //
+
+      {
+        path: "moyennes",
+        name: "Moyennes",
+        component: ListMoyenne
+      },
+      {
+        path: '/moyennes/preview/:id(\\d+)',
+        name: 'Moyenne',
+        component: PreviewMoyenne
+      },
+      {
+        path: '/moyennes/edit/:id(\\d+)',
+        name: 'Moyenne',
+        component: EditMoyenne
+      },
+      {
+        path: "/moyennes/add",
+        name: "Moyenne",
+        component: AddMoyenne
+      },
+
+      // ------------------ LOG SMS ------------------ //
+
+      {
+        path: "log-sms",
+        name: "Log sms",
+        component: ListLogSms
+      },
+      {
+        path: '/log-sms/preview/:id(\\d+)',
+        name: 'Log sms',
+        component: PreviewLogSms
+      }
     ]
   },
   { path: "*", component: NotFound }

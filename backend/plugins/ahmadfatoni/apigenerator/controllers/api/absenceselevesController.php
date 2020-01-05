@@ -67,7 +67,11 @@ class absenceselevesController extends Controller
                 $data = $data->where($key, $value);
             }
         }
-        $data = $data->paginate(10)->toArray();
+        if($request->has('page') && $request->get('page') == 0){
+            $data = $data->get()->toArray();
+        }else{
+            $data = $data->paginate(10)->toArray();
+        }
         return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
     }
 
@@ -115,22 +119,13 @@ class absenceselevesController extends Controller
         }
     }
 
-    public function update($id, Request $request)
-    {
-        // $data = $request->all();
-        $data = json_decode($request->getContent(), true);
-
-        $status = $this->AbsenceEleveModel->where('id', $id)->update($data);
-
+    public function update($id, Request $request){
+        $status = $this->AbsenceEleveModel->where('id', $id)->update($request->all());
         if ($status) {
-
             return $this->helpers->apiArrayResponseBuilder(200, 'success',
                 $this->AbsenceEleveModel->where('id', $id)->first()->toArray());
-
         } else {
-
             return $this->helpers->apiArrayResponseBuilder(400, 'bad request', 'Error, data failed to update.');
-
         }
     }
 

@@ -50,3 +50,7 @@ Route::resource('api/v1/series', 'AhmadFatoni\ApiGenerator\Controllers\API\Serie
 Route::get('api/v1/series/{id}/delete', ['as' => 'api/v1/series.delete', 'uses' => 'AhmadFatoni\ApiGenerator\Controllers\API\SerieController@destroy']);
 Route::resource('api/v1/niveaux', 'AhmadFatoni\ApiGenerator\Controllers\API\NiveauController', ['except' => ['destroy', 'create', 'edit']]);
 Route::get('api/v1/niveaux/{id}/delete', ['as' => 'api/v1/niveaux.delete', 'uses' => 'AhmadFatoni\ApiGenerator\Controllers\API\NiveauController@destroy']);
+Route::resource('api/v1/typesmoyenne', 'AhmadFatoni\ApiGenerator\Controllers\API\typeMoyenneController', ['except' => ['destroy', 'create', 'edit']]);
+Route::get('api/v1/typesmoyenne/{id}/delete', ['as' => 'api/v1/typesmoyenne.delete', 'uses' => 'AhmadFatoni\ApiGenerator\Controllers\API\typeMoyenneController@destroy']);
+Route::resource('api/v1/logsms', 'AhmadFatoni\ApiGenerator\Controllers\API\logSmsController', ['except' => ['destroy', 'create', 'edit']]);
+Route::get('api/v1/logsms/{id}/delete', ['as' => 'api/v1/logsms.delete', 'uses' => 'AhmadFatoni\ApiGenerator\Controllers\API\logSmsController@destroy']);

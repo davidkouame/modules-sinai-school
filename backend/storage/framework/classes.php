@@ -496,4 +496,7 @@
   'AhmadFatoni\\ApiGenerator\\Controllers\\API\\TypeMatiereController' => 'plugins/ahmadfatoni/apigenerator/controllers/api/TypeMatiereController.php',
   'AhmadFatoni\\ApiGenerator\\Controllers\\API\\SerieController' => 'plugins/ahmadfatoni/apigenerator/controllers/api/SerieController.php',
   'AhmadFatoni\\ApiGenerator\\Controllers\\API\\NiveauController' => 'plugins/ahmadfatoni/apigenerator/controllers/api/NiveauController.php',
+  'Bootnetcrasher\\School\\Classes\\Collection' => 'plugins/bootnetcrasher/school/classes/Collection.php',
+  'AhmadFatoni\\ApiGenerator\\Controllers\\API\\typeMoyenneController' => 'plugins/ahmadfatoni/apigenerator/controllers/api/typeMoyenneController.php',
+  'AhmadFatoni\\ApiGenerator\\Controllers\\API\\logSmsController' => 'plugins/ahmadfatoni/apigenerator/controllers/api/logSmsController.php',
 );
