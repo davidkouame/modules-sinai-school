@@ -6,6 +6,9 @@ use BackendMenu;
 use Illuminate\Http\Request;
 use AhmadFatoni\ApiGenerator\Helpers\Helpers;
 use BootnetCrasher\School\Models\ParentModel;
+use Illuminate\Support\Facades\Validator;
+use RainLab\User\Models\User;
+
 class parentsController extends Controller
 {
     protected $ParentModel;
@@ -65,28 +68,51 @@ class parentsController extends Controller
     }
 
     public function store(Request $request){
-
-        $arr = $request->all();
-
+        $arr = $request->except('create_account');
         while ( $data = current($arr)) {
             $this->ParentModel->{key($arr)} = $data;
             next($arr);
         }
-
         $validation = Validator::make($request->all(), $this->ParentModel->rules);
-        
         if( $validation->passes() ){
             $this->ParentModel->save();
+            $this->createOrUpdateAccountUser($request, $this->ParentModel);
             return $this->helpers->apiArrayResponseBuilder(201, 'created', ['id' => $this->ParentModel->id]);
         }else{
             return $this->helpers->apiArrayResponseBuilder(400, 'fail', $validation->errors() );
         }
+    }
 
+    public function createOrUpdateAccountUser($data, $parent){
+        if($data->create_account){
+            $user = User::where('parenteleve_id', $parent->id)->first();
+            if($user){
+                $user->password = "0000";
+                $user->password_confirmation = "0000";
+            }else{
+                $user = new User;
+                $user->name = $data->name;
+                $user->email = $data->email;
+                $user->surname = $data->surname;
+                $user->username = $data->email;
+                $user->password = "0000";
+                $user->password_confirmation = "0000";
+                $user->activated_at = now();
+                $user->parenteleve_id = $parent->id;
+            }
+            $user->save();
+            $this->sharedPassword($user);
+        }
+    }
+
+    public function sharedPassword($user){
+        // todo send password a user by tel or email
     }
 
     public function update($id, Request $request){
-        $status = $this->ParentModel->where('id',$id)->update($request->all());
+        $status = $this->ParentModel->where('id',$id)->update($request->except('create_account'));
         if( $status ){
+            $this->createOrUpdateAccountUser($request, $this->ParentModel->where('id',$id)->first());
             return $this->helpers->apiArrayResponseBuilder(200, 'success', 'Data has been updated successfully.');
         }else{
             return $this->helpers->apiArrayResponseBuilder(400, 'bad request', 'Error, data failed to update.');

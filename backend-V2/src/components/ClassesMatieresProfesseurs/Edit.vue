@@ -74,7 +74,8 @@ export default {
       let data = {
         matiere_id: this.classeprofesseurmatiere.matiere_id,
         professeur_id: this.classeprofesseurmatiere.professeur_id,
-        coefficient: this.classeprofesseurmatiere.coefficient
+        coefficient: this.classeprofesseurmatiere.coefficient,
+        annee_scolaire_id: this.classeprofesseurmatiere.classe.annee_scolaire_id
       };
       let store = this.$store;
       store

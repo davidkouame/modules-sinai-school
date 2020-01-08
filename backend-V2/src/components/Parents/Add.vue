@@ -2,7 +2,7 @@
   <card class="card" :title="title">
       <div class="row">
         <div class="col-md-12">
-          <form v-on:submit="saveEleve">
+          <form v-on:submit="saveParent">
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
@@ -11,7 +11,7 @@
                       <input
                         class="form-control"
                         type="text"
-                        v-model="eleve.name"
+                        v-model="parent.name"
                         placeholder="Nom"
                       />
                       <!---->
@@ -24,7 +24,7 @@
                       <input
                         class="form-control"
                         type="text"
-                        v-model="eleve.surname"
+                        v-model="parent.surname"
                         placeholder="Prénom"
                       />
                       <!---->
@@ -39,7 +39,7 @@
                       <input
                         class="form-control"
                         type="email"
-                        v-model="eleve.email"
+                        v-model="parent.email"
                         placeholder="Email"
                       />
                       <!---->
@@ -52,8 +52,22 @@
                       <input
                         class="form-control"
                         type="text"
-                        v-model="eleve.tel"
+                        v-model="parent.tel"
                         placeholder="Téléphone"
+                      />
+                      <!---->
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label class="control-label">Créer un compte user</label>
+                      <!---->
+                      <input
+                        class="form-control"
+                        type="checkbox"
+                        v-model="parent.create_account"
                       />
                       <!---->
                     </div>
@@ -72,21 +86,22 @@
 export default {
   data() {
     return {
-      title: "Eleve",
-      eleve: {"name": "", "surname": "", "email": "", "tel": ""}
+      title: "Parent",
+      parent: {"name": "", "surname": "", "email": "", "tel": "", "create_account": ""}
     };
   },
   methods:{
-    saveEleve(){
+    saveParent(){
       let data = {
-        name: this.eleve.name,
-        surname: this.eleve.surname,
-        email: this.eleve.email,
-        tel: this.eleve.tel
+        name: this.parent.name,
+        surname: this.parent.surname,
+        email: this.parent.email,
+        tel: this.parent.tel,
+        create_account: this.parent.create_account
       };
       let store = this.$store;
       store
-        .dispatch("saveModel", {"url": "eleves", "data": data})
+        .dispatch("saveModel", {"url": "parents", "data": data})
         .then(response => {
           alert("L'enregistrement a été succès")
           this.$router.go(-1)

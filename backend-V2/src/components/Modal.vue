@@ -3,6 +3,7 @@
         <div class="modal-mask">
             <div class="modal-wrapper">
                 
+                <!-- Modal pour supprimer un model -->
                 <div class="modal-container" v-bind:class="{ active: modaltype=='delete' }">
 
                     <!--<div class="modal-header">
@@ -29,6 +30,7 @@
                     </div>
                 </div>
                 
+                <!-- Modal pour ajouter une valeur a une note -->
                 <div class="modal-container" v-bind:class="{ active: modaltype=='addValue' }">
 
 
@@ -51,6 +53,7 @@
                     </div>
                 </div>
                 
+                <!-- Modal pour valider pour une moyenne -->
                 <div class="modal-container" v-bind:class="{ active: modaltype=='validationNotes' }">
 
                     <div class="modal-header">
@@ -74,6 +77,35 @@
                             <button class="modal-default-button btn btn-danger" v-on:click="validerRapport">
                                 Valider
                             </button>
+                        </slot>
+                    </div>
+                </div>
+
+                <!-- Modal pour ajouter une valeur a une note -->
+                <div class="modal-container" v-bind:class="{ active: modaltype=='searchEleve' }">
+
+
+                    <div class="modal-body">
+                        <slot name="body">
+                            Rechercher un élève
+                            <div class="form-group" v-if="eleves">
+                            <v-select :options="eleves"   v-model="eleve" label="matricule">
+                                <template slot="option" slot-scope="option">
+                                    {{ option.matricule }} : {{ option.name+' '+option.surname }}
+                                  </template>
+                                </v-select>
+                            </div>
+                        </slot>
+                    </div>
+
+                    <div class="modal-footer">
+                        <slot name="footer">
+                            <a class="modal-default-button btn btn-primary" @click="$emit('close')">
+                                Annuler
+                            </a>
+                            <a class="modal-default-button btn btn-danger" v-on:click="chooseEleve">
+                                Ajouter
+                            </a>
                         </slot>
                     </div>
                 </div>
@@ -107,12 +139,18 @@ export default {
     return {
       showModal: false,
       valeur: null,
-      rapport: null
+      rapport: null,
+      eleve: null
     }
   },
   created () {
-    console.log('la noteid est ' + this.modelid)
-    // console.log('le nom du model est '+ this.modelname)
+    // recuperation des eleves
+    this.$store.dispatch('getAllEleves', {payload: 0})
+  },
+  computed:{
+    eleves(){
+      return this.$store.getters.eleves
+    }
   },
   methods: {
     getTextBody(){
@@ -172,6 +210,11 @@ export default {
           this.errored = true;
         })
         .finally(() => (this.loading = false));
+    },
+    chooseEleve(){
+        // console.log("l'eleve choisir est "+JSON.stringify(this.eleve))
+        this.$store.dispatch('chooseEleve', this.eleve)
+        this.$emit('close')
     }
   }
 }

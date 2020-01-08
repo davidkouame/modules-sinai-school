@@ -1,5 +1,6 @@
 <?php namespace AhmadFatoni\ApiGenerator\Controllers\API;
 
+use Bootnetcrasher\School\Jobs\CalculMoyenneMatiereJob;
 use BootnetCrasher\School\Models\ClasseMatiereModel;
 use BootnetCrasher\School\Models\MatiereModel;
 use BootnetCrasher\School\Models\SectionAnneeScolaireModel;
@@ -10,6 +11,7 @@ use Illuminate\Http\Request;
 use AhmadFatoni\ApiGenerator\Helpers\Helpers;
 use Illuminate\Support\Facades\Validator;
 use BootnetCrasher\School\Models\MoyenneModel;
+use Queue;
 class moyenneController extends Controller
 {
 	protected $MoyenneModel;
@@ -199,6 +201,11 @@ class moyenneController extends Controller
         return $this->helpers->apiArrayResponseBuilder(200, 'success', 'Data has been deleted successfully.');
     }
 
+    public function generateMoyenneMatiereForSection($id){
+        Queue::push(CalculMoyenneMatiereJob::class,
+            ["section_annee_scolaire_id" => $id]);
+        return $this->helpers->apiArrayResponseBuilder(200, 'success', 'Data has been deleted successfully.');
+    }
 
     public static function getAfterFilters() {return [];}
     public static function getBeforeFilters() {return [];}

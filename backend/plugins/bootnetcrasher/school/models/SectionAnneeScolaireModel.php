@@ -32,6 +32,7 @@ class SectionAnneeScolaireModel extends Model
     ];
 
     public function afterSave(){
+        trace_log("after save");
         if($this->validated_at)
             Queue::push(MoyenneJob::class, ["section_annee_scolaire_id" => $this->id]);
     }

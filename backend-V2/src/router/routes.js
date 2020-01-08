@@ -100,6 +100,17 @@ import EditMoyenne from "@/components/Moyennes/Edit.vue";
 import ListLogSms from "@/components/LogSms/List.vue";
 import PreviewLogSms from "@/components/LogSms/Preview.vue";
 
+// Abonnements 
+import ListAbonnement from "@/components/Abonnements/List.vue";
+import PreviewAbonnement from "@/components/Abonnements/Preview.vue";
+import AddAbonnement from "@/components/Abonnements/Add.vue";
+import EditAbonnement from "@/components/Abonnements/Edit.vue";
+
+import TestApp from "@/components/TestApp.vue"
+
+// Login
+import Login from '@/components/Login.vue'
+
 const routes = [
   {
     path: "/",
@@ -474,10 +485,43 @@ const routes = [
         path: '/log-sms/preview/:id(\\d+)',
         name: 'Log sms',
         component: PreviewLogSms
-      }
+      },
+
+      // ------------------   ABONNEMENT ------------------ //
+
+      {
+        path: "abonnements",
+        name: "Abonnements",
+        component: ListAbonnement
+      },
+      {
+        path: '/abonnements/preview/:id(\\d+)',
+        name: 'Abonnement',
+        component: PreviewAbonnement
+      },
+      {
+        path: '/abonnements/edit/:id(\\d+)',
+        name: 'Abonnement',
+        component: EditAbonnement
+      },
+      {
+        path: "/abonnements/add",
+        name: "Abonnement",
+        component: AddAbonnement
+      },
     ]
   },
-  { path: "*", component: NotFound }
+  {
+    path: "/login",
+    name: "Login",
+    component: Login
+  },
+  {
+    path: "/test-app",
+    name: "Test App",
+    component: TestApp
+  },
+  { path: "*", component: NotFound },
 ];
 
 /**

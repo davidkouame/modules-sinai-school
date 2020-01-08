@@ -22,7 +22,7 @@
       <ul class="nav">
         <!--By default vue-router adds an active class to each route link. This way the links are colored when clicked-->
         <slot name="links">
-          <sidebar-link v-for="(link,index) in sidebarLinks"
+          <sidebar-link v-for="(link,index) in sibebarslinks2"
                         :key="index"
                         :to="link.path"
                         :name="link.name"
@@ -37,6 +37,20 @@
   </div>
 </template>
 <script>
+
+const getCircularReplacer = () => {
+  const seen = new WeakSet();
+  return (key, value) => {
+    if (typeof value === "object" && value !== null) {
+      if (seen.has(value)) {
+        return;
+      }
+      seen.add(value);
+    }
+    return value;
+  };
+};
+
 import MovingArrow from "./MovingArrow.vue";
 import SidebarLink from "./SidebarLink";
 export default {
@@ -67,13 +81,13 @@ export default {
         return acceptedValues.indexOf(value) !== -1;
       }
     },
-    sidebarLinks: {
-      type: Array,
-      default: () => []
-    },
     autoClose: {
       type: Boolean,
       default: true
+    },
+    sidebarLinks: {
+      type: Array,
+      default: () => []
     }
   },
   provide() {
@@ -103,7 +117,8 @@ export default {
       windowWidth: 0,
       isWindows: false,
       hasAutoHeight: false,
-      links: []
+      links: [],
+      sibebarslinks2: [{to:"/log-sms", name:"Absences", icon:"ti-map"}]
     };
   },
   methods: {
@@ -115,6 +130,7 @@ export default {
       });
     },
     addLink(link) {
+      // console.log(JSON.stringify(link, getCircularReplacer()))
       const index = this.$slots.links.indexOf(link.$vnode);
       this.links.splice(index, 0, link);
     },
@@ -133,4 +149,17 @@ export default {
 };
 </script>
 <style>
+  .nav-item.active .nav-item{
+    display: block;
+  }
+
+  .nav-item .nav-item{
+    display: none;
+  }
+
+  .nav-item .nav{
+    animation-fill-mode: both; 
+    animation-timing-function: ease-out;
+    padding-left: 42px
+  }
 </style>

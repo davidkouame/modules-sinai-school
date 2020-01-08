@@ -1,0 +1,25 @@
+fields:
+    abonnement:
+        label: Abonnement
+        nameFrom: name
+        descriptionFrom: description
+        select: reference
+        span: auto
+        type: relation
+        placeholder: Sélectionnez un abonnement
+    eleve:
+        label: Elève
+        nameFrom: name
+        descriptionFrom: description
+        select: 'concat(surname, '' '', name)'
+        span: auto
+        type: relation
+        placeholder: Sélectionnez un élève
+    anneescolaire:
+        label: 'Année scolaire'
+        nameFrom: name
+        descriptionFrom: description
+        select: libelle
+        span: auto
+        type: relation
+        placeholder: Sélectionnez une année scolaire

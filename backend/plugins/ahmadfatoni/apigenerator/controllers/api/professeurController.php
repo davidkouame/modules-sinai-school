@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use AhmadFatoni\ApiGenerator\Helpers\Helpers;
 use Illuminate\Support\Facades\Validator;
 use BootnetCrasher\School\Models\ProfesseurModel;
+use RainLab\User\Models\User;
+
 class professeurController extends Controller
 {
 	protected $ProfesseurModel;
@@ -46,38 +48,28 @@ class professeurController extends Controller
     }
 
     public function show($id){
-
         // $data = $this->ProfesseurModel->where('id',$id)->first();
         $data = $this->ProfesseurModel->with(array(
             'users'=>function($query){
                 $query->select('*');
             }))->select('*')->where('id', '=', $id)->first();
-
         if($data){
-
             return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
-
         }
-
         $this->helpers->apiArrayResponseBuilder(400, 'bad request', ['error' => 'invalid key']);
-
     }
 
     public function store(Request $request){
-        dd($request->all());
-    	$arr = $request->all();
-
+    	$arr = $request->except('create_account');
         while ( $data = current($arr)) {
             $this->ProfesseurModel->{key($arr)} = $data;
             next($arr);
         }
-
         $validation = Validator::make($request->all(), $this->ProfesseurModel->rules);
-        
         if( $validation->passes() ){
             $this->ProfesseurModel->save();
             // création d'un compte user pour le professeur
-            $this->createUserCompte($request);
+            $this->createOrUpdateAccountUser($request, $this->ProfesseurModel);
             return $this->helpers->apiArrayResponseBuilder(201, 'created', ['id' => $this->ProfesseurModel->id]);
         }else{
             return $this->helpers->apiArrayResponseBuilder(400, 'fail', $validation->errors() );
@@ -89,9 +81,36 @@ class professeurController extends Controller
         // todo create teacher accoumpt if the checkbox is checked
     }
 
+    public function createOrUpdateAccountUser($data, $professeur){
+        if($data->create_account){
+            $user = User::where('professeur_id', $professeur->id)->first();
+            if($user){
+                $user->password = "0000";
+                $user->password_confirmation = "0000";
+            }else{
+                $user = new User;
+                $user->name = $data->name;
+                $user->email = $data->email;
+                $user->surname = $data->surname;
+                $user->username = $data->email;
+                $user->password = "0000";
+                $user->password_confirmation = "0000";
+                $user->activated_at = now();
+                $user->professeur_id = $professeur->id;
+            }
+            $user->save();
+            $this->sharedPassword($user);
+        }
+    }
+
+    public function sharedPassword($user){
+        // todo send password a user by tel or email
+    }
+
     public function update($id, Request $request){
-        $status = $this->ProfesseurModel->where('id',$id)->update($request->all());
+        $status = $this->ProfesseurModel->where('id',$id)->update($request->except('create_account'));
         if( $status ){
+            $this->createOrUpdateAccountUser($request, $this->ProfesseurModel->where('id',$id)->first());
             return $this->helpers->apiArrayResponseBuilder(200, 'success', 'Data has been updated successfully.');
         }else{
             return $this->helpers->apiArrayResponseBuilder(400, 'bad request', 'Error, data failed to update.');

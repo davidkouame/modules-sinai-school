@@ -102,7 +102,12 @@ export default new Vuex.Store({
     typesmoyenne: null,
     moyenne: null,
     alllogsms: null,
-    logsms: null
+    logsms: null,
+    abonnements: null,
+    abonnement: null,
+    packsabonnement: null,
+    chooseEleve: null,
+    elevesabonnement: null
   },
   mutations: {
     anneesscolaires(state, payload) {
@@ -248,6 +253,21 @@ export default new Vuex.Store({
     },
     logsms(state, logsms){
       state.logsms = logsms
+    },
+    abonnements(state, abonnements){
+      state.abonnements = abonnements
+    },
+    abonnement(state, abonnement){
+      state.abonnement = abonnement
+    },
+    packsabonnement(state, packsabonnement){
+      state.packsabonnement = packsabonnement
+    },
+    chooseEleve(state, chooseEleve){
+      state.chooseEleve = chooseEleve
+    },
+    elevesabonnement(state, elevesabonnement){
+      state.elevesabonnement = elevesabonnement
     }
   },
   getters: {
@@ -397,6 +417,21 @@ export default new Vuex.Store({
     },
     logsms: state => {
       return state.logsms
+    },
+    abonnements: state => {
+      return state.abonnements
+    },
+    abonnement: state => {
+      return state.abonnement
+    },
+    packsabonnement: state => {
+      return state.packsabonnement
+    },
+    chooseEleve: state =>{
+      return state.chooseEleve
+    },
+    elevesabonnement: state => {
+      return state.elevesabonnement
     }
   },
   actions: {
@@ -825,6 +860,19 @@ export default new Vuex.Store({
     getParent(context, params) {
       getInformModel(context, params.parentId, "parents", "parent")
     },
+    getAllParents(context, params) {
+      let nameUrl = "parents"
+      let url = getUrl(context, nameUrl, params)
+      Axios.get(url)
+        .then(response => {
+          context.commit('parents', response.data.data)
+        })
+        .catch(error => {
+          console.log(error)
+          this.errored = true
+        })
+        .finally(() => (this.loading = false))
+    },
     getAbsences(context, params) {
       let nameUrl = "absenceseleves"
       let url = getUrl(context, nameUrl, params)
@@ -972,33 +1020,66 @@ export default new Vuex.Store({
     getLogSms(context, params) {
       getInformModel(context, params.logSmsId, "logsms", "logsms")
     },
-    classes(context, params) {
-      let concatParams = null
-      if (params) {
-        concatParams = params.map(function (elemen) {
-          return elemen.key + '=' + elemen.value
-        }).join('&')
-        // concatParams =  concatParams
-      }
-      // console.log("params "+ JSON.stringify(concatParams))
-      let url = null;
-      if(concatParams){
-        url = context.state.endpoint + 'api/v1/classesprofesseursmatieres?' + concatParams
-      }else{
-        url = context.state.endpoint + 'api/v1/classesprofesseursmatieres/'
-      }
-      Axios.get(
-        url
-      )
+    getAbonnements(context, params) {
+      let nameUrl = "abonnements"
+      let url = getUrl(context, nameUrl, params)
+      Axios.get(url)
         .then(response => {
-          context.commit('classes', response.data.data)
-          // console.log("liste de toutes les classes "+JSON.stringify(response.data.data));
+          context.commit('abonnements', response.data.data.data)
+          context.commit('pageCount', response.data.data.last_page)
+          context.commit('currentPage', response.data.data.current_page);
+          context.commit('countPage', response.data.data.last_page);
+          context.commit('totalElement', response.data.data.total);
         })
         .catch(error => {
           console.log(error)
           this.errored = true
         })
         .finally(() => (this.loading = false))
+    },
+    getAbonnement(context, params) {
+      getInformModel(context, params.abonnementId, "abonnements", "abonnement")
+    },
+    saveAbonnementWithEleves(context, params) {
+      return Axios.post(
+        context.state.endpoint + 'api/v1/abonnements/store-with-eleves', params.data,
+        { headers: { 'Content-Type': 'application/json' } }
+      )
+    },
+    updateAbonnementWithEleves(context, params){
+      return Axios.put(
+        context.state.endpoint + 'api/v1/abonnements/update-with-eleves/'+params.id, params.data,
+        { headers: { 'Content-Type': 'application/json' }  }
+      )
+    },
+    getAllPacksAbonnement(context, params) {
+      let nameUrl = "packsabonnements"
+      let url = getUrl(context, nameUrl, params)
+      Axios.get(url)
+        .then(response => {
+          context.commit('packsabonnement', response.data.data)
+        })
+        .catch(error => {
+          console.log(error)
+          this.errored = true
+        })
+        .finally(() => (this.loading = false))
+    },
+    getAllElevesAbonnement(context, params) {
+        Axios.get(
+        context.state.endpoint + 'api/v1/abonnements/abonnements-eleves/' + params.abonnementId
+      )
+        .then(response => {
+          context.commit("elevesabonnement", response.data.data)
+        })
+        .catch(error => {
+          console.log(error)
+          this.errored = true
+        })
+        .finally(() => (this.loading = false))
+    },
+    chooseEleve(context, chooseEleve){
+      context.commit('chooseEleve', chooseEleve)
     },
     classeByProfesseur(context, classeByProfesseurId) {
       Axios.get(
@@ -1234,6 +1315,28 @@ export default new Vuex.Store({
         })
         .finally(() => (this.loading = false))
     },
+    login(context, payload) {
+      const data = new FormData()
+      data.append('email', payload.email)
+      data.append('password', payload.password)
+      return Axios.post(
+        context.state.endpoint + 'api/v1/users/login-backend', data,
+        { headers: { 'Content-Type': 'multipart/form-data' } }
+      )
+    },
+    generateBilanAndSend(context, params){
+      Axios.get(
+        context.state.endpoint + 'api/v1/eleves/rapport/'+params.sectionAnneeScolaireId
+      )
+        .then(response => {
+          alert("Le bilan a été généré a été envoyé")
+        })
+        .catch(error => {
+          console.log(error)
+          this.errored = true
+        })
+        .finally(() => (this.loading = false))
+    }
   },
   // modules: modules
 })

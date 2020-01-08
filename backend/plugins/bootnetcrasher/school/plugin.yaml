@@ -13,6 +13,10 @@ navigation:
         label: 'Absences'
         url: bootnetcrasher/school/absenceelevecontroller
         icon: icon-adjust
+    abonnement:
+        label: 'Abonnements'
+        url: bootnetcrasher/school/abonnementcontroller
+        icon: icon-adjust
     classeeleve:
         label: 'Classes'
         url: bootnetcrasher/school/classeelevecontroller
@@ -127,5 +131,9 @@ navigation:
             jobserror:
                 label: Jobs errors
                 url: bootnetcrasher/school/jobserrorcontroller
+                icon: icon-sitemap
+            packabonnement:
+                label: Packs abonnement
+                url: bootnetcrasher/parametrage/packabonnementcontroller
                 icon: icon-sitemap
 

@@ -90,6 +90,7 @@ class classeProfesseurMatiereController extends Controller
     public function store(Request $request){
 
         $arr = $request->all();
+        // dd($request->all());
 
         while ( $data = current($arr)) {
             $this->ClasseMatiereModel->{key($arr)} = $data;
@@ -99,6 +100,8 @@ class classeProfesseurMatiereController extends Controller
         $validation = Validator::make($request->all(), $this->ClasseMatiereModel->rules);
         
         if( $validation->passes() ){
+            // dd($this->ClasseMatiereModel);
+            $this->ClasseMatiereModel->classe_id = $request->get('classe_id');
             $this->ClasseMatiereModel->save();
             return $this->helpers->apiArrayResponseBuilder(201, 'created', ['id' => $this->ClasseMatiereModel->id]);
         }else{

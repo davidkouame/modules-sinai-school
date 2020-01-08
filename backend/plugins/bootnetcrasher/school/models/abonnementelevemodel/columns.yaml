@@ -1,0 +1,19 @@
+columns:
+    abonnement:
+        label: Abonnement
+        type: text
+        searchable: true
+        select: reference
+        relation: abonnement
+    eleve:
+        label: Elève
+        type: text
+        searchable: true
+        select: 'concat(name, '' '',surname)'
+        relation: eleve
+    anneescolaire:
+        label: 'Année scolaire'
+        type: text
+        searchable: true
+        select: libelle
+        relation: anneescolaire

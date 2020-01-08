@@ -2,7 +2,7 @@
   <card class="card" :title="title">
       <div class="row">
         <div class="col-md-12" v-if="professeur">
-          <form v-on:submit="saveMatiere">
+          <form v-on:submit="saveProfesseur">
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
@@ -88,6 +88,20 @@
                   </div>
                 </div>
                 <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label class="control-label">Voulez vous réinitialiser le password ?</label>
+                      <!---->
+                      <input
+                        class="form-control"
+                        type="checkbox"
+                        v-model="professeur.create_account"
+                      />
+                      <!---->
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
                   <div class="col-md-12">
                     <div class="form-group">
                       <label class="control-label">Description</label>
@@ -124,11 +138,15 @@ export default {
     });
   },
   methods:{
-    saveMatiere(){
+    saveProfesseur(){
       let data = {
-        libelle: this.professeur.libelle,
-        typeprofesseur_id: this.professeur.typeprofesseur_id,
-        description: this.professeur.description
+        nom: this.professeur.nom,
+        prenom: this.professeur.prenom,
+        email: this.professeur.email,
+        tel: this.professeur.tel,
+        description: this.professeur.description,
+        matiere: this.professeur.matiere,
+        create_account: this.professeur.create_account,
       };
       let store = this.$store;
       store

@@ -73,6 +73,18 @@
                       <!---->
                     </div>
                   </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label class="control-label">Voulez réinitialiser le password ?</label>
+                      <!---->
+                      <input
+                        class="form-control"
+                        type="checkbox"
+                        v-model="parent.create_account"
+                      />
+                      <!---->
+                    </div>
+                  </div>
                 </div>
                 <div class="clearfix"></div>
                 <a @click="$router.go(-1)" class="btn btn-danger">Annuler</a>
@@ -104,7 +116,8 @@ export default {
         name: this.parent.name,
         surname: this.parent.surname,
         email: this.parent.email,
-        tel: this.parent.tel
+        tel: this.parent.tel,
+        create_account: this.parent.create_account
       };
       let store = this.$store;
       store

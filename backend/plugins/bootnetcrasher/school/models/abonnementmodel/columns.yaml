@@ -1,0 +1,23 @@
+columns:
+    reference:
+        label: 'Référence'
+        type: text
+        searchable: true
+    anneescolaire:
+        label: 'Année scolaire'
+        type: text
+        searchable: true
+        select: libelle
+        relation: anneescolaire
+    packabonnement:
+        label: 'Pack abonnement'
+        type: text
+        searchable: true
+        select: libelle
+        relation: packabonnement
+    parent_id:
+        label: Parent
+        type: text
+        searchable: true
+        select: concat(name, ' ',surname)
+        relation: parent

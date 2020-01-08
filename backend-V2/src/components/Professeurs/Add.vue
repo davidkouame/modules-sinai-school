@@ -73,6 +73,18 @@
                       <!---->
                     </div>
                   </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label class="control-label">Créer un compte user</label>
+                      <!---->
+                      <input
+                        class="form-control"
+                        type="checkbox"
+                        v-model="professeur.create_account"
+                      />
+                      <!---->
+                    </div>
+                  </div>
                 </div>
                 <div class="row">
                   <div class="col-md-12">
@@ -98,7 +110,7 @@ export default {
   data() {
     return {
       title: "Professeur",
-      professeur: {"nom": "", "prenom": "", "email": "", "tel": "", "description": "", "matiere": ""}
+      professeur: {"nom": "", "prenom": "", "email": "", "tel": "", "description": "", "matiere": "", "create_account": ""}
     };
   },
   methods:{
@@ -110,6 +122,7 @@ export default {
         tel: this.professeur.tel,
         description: this.professeur.description,
         matiere: this.professeur.matiere,
+        create_account: this.professeur.create_account,
       };
       let store = this.$store;
       store

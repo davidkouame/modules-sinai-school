@@ -1,0 +1,10 @@
+name: PackAbonnementController
+form: $/bootnetcrasher/parametrage/models/packabonnementmodel/fields.yaml
+modelClass: BootnetCrasher\Parametrage\Models\PackAbonnementModel
+defaultRedirect: bootnetcrasher/parametrage/packabonnementcontroller
+create:
+    redirect: 'bootnetcrasher/parametrage/packabonnementcontroller/update/:id'
+    redirectClose: bootnetcrasher/parametrage/packabonnementcontroller
+update:
+    redirect: bootnetcrasher/parametrage/packabonnementcontroller
+    redirectClose: bootnetcrasher/parametrage/packabonnementcontroller

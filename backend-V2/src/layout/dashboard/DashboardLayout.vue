@@ -4,15 +4,13 @@
       <template slot="links">
         <sidebar-link to="/dashboard" name="Dashboard" icon="ti-panel"/>
         <sidebar-link to="/stats" name="User Profile" icon="ti-user"/>
-        <sidebar-link to="/table-list" name="Table List" icon="ti-view-list-alt"/>
+        <!--<sidebar-link to="/table-list" name="Table List" icon="ti-view-list-alt"/>
         <sidebar-link to="/typography" name="Typography" icon="ti-text"/>
         <sidebar-link to="/icons" name="Icons" icon="ti-pencil-alt2"/>
-        <sidebar-link to="/maps" name="Map" icon="ti-map"/>
-        <sidebar-link to="/annees-scolaires" name="Années scolaires" icon="ti-map"/>
-        <sidebar-link to="/sections-annee-scolaire" name="Sections Année" icon="ti-map"/>
-        <sidebar-link to="/matieres" name="Matières" icon="ti-map"/>
-        <sidebar-link to="/series" name="Series" icon="ti-map"/>
-        <sidebar-link to="/niveaux" name="Niveaux" icon="ti-map"/>
+        <sidebar-link to="/maps" name="Map" icon="ti-map"/>-->
+        
+        
+        
         <sidebar-link to="/notes" name="Notes" icon="ti-map"/>
         <sidebar-link to="/professeurs" name="Professeurs" icon="ti-map"/>
         <sidebar-link to="/classes" name="Classes" icon="ti-map"/>
@@ -20,8 +18,19 @@
         <sidebar-link to="/parents" name="Parents" icon="ti-map"/>
         <sidebar-link to="/absences" name="Absences" icon="ti-map"/>
         <sidebar-link to="/moyennes" name="Moyennes" icon="ti-map"/>
-        <sidebar-link to="/log-sms" name="Log sms" icon="ti-map"/>
-        <sidebar-link to="/notifications" name="Notifications" icon="ti-bell"/>
+        
+        <sidebar-link to="/abonnements" name="Abonnements" icon="ti-map"/>
+        <!-- <sidebar-link to="/notifications" name="Notifications" icon="ti-bell" :sidebarLinks="sibebarslinks"/>-->
+        <sidebar-link to="/log-sms" name="Paramètre" icon="ti-map">
+          <template slot="souslinks">
+            <sous-sidebar-link to="/annees-scolaires" name="Années scolaires" icon="ti-map"/>
+            <sous-sidebar-link to="/sections-annee-scolaire" name="Sections Année" icon="ti-map"/>
+            <sous-sidebar-link to="/log-sms" name="Log sms" icon="ti-map"/>
+            <sous-sidebar-link to="/series" name="Series" icon="ti-map"/>
+            <sous-sidebar-link to="/niveaux" name="Niveaux" icon="ti-map"/>
+            <sous-sidebar-link to="/matieres" name="Matieres" icon="ti-map"/>
+          </template>
+        </sidebar-link>
       </template>
       <mobile-menu>
         <li class="nav-item">
@@ -49,6 +58,7 @@
         <li class="divider"></li>
       </mobile-menu>
     </side-bar>
+    
     <div class="main-panel">
       <top-navbar></top-navbar>
 
@@ -79,6 +89,11 @@ export default {
       if (this.$sidebar.showSidebar) {
         this.$sidebar.displaySidebar(false);
       }
+    }
+  },
+  data(){
+    return{
+      sibebarslinks: [{to:"/log-sms", name:"Absences", icon:"ti-map"}]
     }
   }
 };

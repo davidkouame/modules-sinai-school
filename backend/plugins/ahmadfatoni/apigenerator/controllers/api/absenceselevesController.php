@@ -90,14 +90,17 @@ class absenceselevesController extends Controller
 
     public function store(Request $request)
     {
-
         $arr = $request->all();
-
         while ($data = current($arr)) {
             $this->AbsenceEleveModel->{key($arr)} = $data;
             next($arr);
         }
-
+        $this->AbsenceEleveModel->commentaire = $request->get("commentaire");
+        $this->AbsenceEleveModel->eleve_id = $request->get("eleve_id");
+        $this->AbsenceEleveModel->heure_debut_cours = $request->get("heure_debut_cours");
+        $this->AbsenceEleveModel->heure_fin_cours = $request->get("heure_fin_cours");
+        $this->AbsenceEleveModel->raisonabsence_id = $request->get("raisonabsence_id");
+        $this->AbsenceEleveModel->section_annee_scolaire_id = $request->get("section_annee_scolaire_id");
         if (count($this->AbsenceEleveModel->rules) > 0) {
             $validation = Validator::make($request->all(), $this->AbsenceEleveModel->rules);
             if ($validation->passes()) {

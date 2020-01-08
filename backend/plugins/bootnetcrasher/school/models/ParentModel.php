@@ -47,7 +47,7 @@ class ParentModel extends Model
 
     public function afterSave(){
         $parentmodel = ParentModel::find($this->id);
-        if($parentmodel){
+        if($parentmodel && $this->user){
             DB::table('bootnetcrasher_school_parent')
               ->where('id', $this->id)
               ->update([

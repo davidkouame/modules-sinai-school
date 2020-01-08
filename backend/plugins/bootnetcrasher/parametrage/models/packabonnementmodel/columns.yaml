@@ -1,0 +1,9 @@
+columns:
+    libelle:
+        label: Libellé
+        type: text
+        searchable: true
+    prix:
+        label: Prix
+        type: text
+        searchable: true

@@ -18,10 +18,45 @@ use BootnetCrasher\School\Models\SectionAnneeScolaireModel;
 class CalculMoyenneMatiereJob {
 
     public function fire($job, $data = null) {
-        $this->calculMoyenneMatiere();
+        if(array_key_exists("section_annee_scolaire_id", $data)){
+            $this->calculMoyenneMatiereSection($data["section_annee_scolaire_id"]);
+        }else{
+            $this->calculMoyenneMatiere();
+        }
         $job->delete();
     }
-    
+
+    // calcul de moyenne des matieres pour une section
+    public function calculMoyenneMatiereSection($section_annee_scolaire_id){
+        $section = SectionAnneeScolaireModel::find($section_annee_scolaire_id);
+        $eleves = EleveModel::all();
+        foreach ($eleves as $eleve) {
+            $classeEleve = ClasseEleveModel::where('eleve_id', $eleve->id)
+                ->where('annee_scolaire_id', $section->annee_scolaire_id)
+                ->first();
+            if ($classeEleve) {
+                $matieres = MatiereModel::all();
+                foreach ($matieres as $matiere) {
+                    $notes = NoteModel::where('classe_id', $classeEleve->classe_id)
+                        ->where('matiere_id', $matiere->id)
+                        ->where('section_annee_scolaire_id', $section->id)
+                        ->get()->toArray();
+                    if ($notes)
+                        $this->calculMatiere($notes, $eleve->id, $matiere->id,
+                            $classeEleve->classe_id,
+                            $section->id);
+                    else
+                        trace_log("L'élève ayant l'id ".$eleve->id." qui est dans"
+                            . "la classe ".$classeEleve->classe_id." n'a pas de "
+                            . "note dans la matiere ".$matiere->id);
+                }
+            }else {
+                trace_log("l'élève ayant l'id ".$eleve->id." n'est pas dans une "
+                    . "classe");
+            }
+        }
+    }
+
     // calcul de moyenne matiere
     public function calculMoyenneMatiere(){
         // recuperation de tous les élèves

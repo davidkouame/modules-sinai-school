@@ -170,7 +170,7 @@ export default {
       return this.$store.getters.classes
     },
     sectionsanneescolaire(){
-      return this.$store.getters.classes
+      return this.$store.getters.sectionsanneescolaire
     }
   }
 };

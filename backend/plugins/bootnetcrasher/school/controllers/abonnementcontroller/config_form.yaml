@@ -1,0 +1,10 @@
+name: AbonnementController
+form: $/bootnetcrasher/school/models/abonnementmodel/fields.yaml
+modelClass: BootnetCrasher\School\Models\AbonnementModel
+defaultRedirect: bootnetcrasher/school/abonnementcontroller
+create:
+    redirect: 'bootnetcrasher/school/abonnementcontroller/update/:id'
+    redirectClose: bootnetcrasher/school/abonnementcontroller
+update:
+    redirect: bootnetcrasher/school/abonnementcontroller
+    redirectClose: bootnetcrasher/school/abonnementcontroller

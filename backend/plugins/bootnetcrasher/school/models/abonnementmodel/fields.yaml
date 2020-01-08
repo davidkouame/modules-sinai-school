@@ -1,0 +1,30 @@
+fields:
+    anneescolaire:
+        label: 'Année scolaire'
+        nameFrom: name
+        descriptionFrom: description
+        select: libelle
+        span: auto
+        type: relation
+        placeholder: Sélectionnez une année scolaire
+    packabonnement:
+        label: 'Pack abonnement'
+        nameFrom: name
+        descriptionFrom: description
+        select: libelle
+        span: auto
+        type: relation
+        placeholder: Sélectionnez un pack
+    parent:
+        label: Parent
+        nameFrom: name
+        descriptionFrom: description
+        select: concat(name, ' ', surname)
+        span: auto
+        type: relation
+        placeholder: Sélectionnez un parent
+    commentaire:
+        label: Commentaire
+        size: ''
+        span: auto
+        type: textarea

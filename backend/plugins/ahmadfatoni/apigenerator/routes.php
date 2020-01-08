@@ -54,3 +54,7 @@ Route::resource('api/v1/typesmoyenne', 'AhmadFatoni\ApiGenerator\Controllers\API
 Route::get('api/v1/typesmoyenne/{id}/delete', ['as' => 'api/v1/typesmoyenne.delete', 'uses' => 'AhmadFatoni\ApiGenerator\Controllers\API\typeMoyenneController@destroy']);
 Route::resource('api/v1/logsms', 'AhmadFatoni\ApiGenerator\Controllers\API\logSmsController', ['except' => ['destroy', 'create', 'edit']]);
 Route::get('api/v1/logsms/{id}/delete', ['as' => 'api/v1/logsms.delete', 'uses' => 'AhmadFatoni\ApiGenerator\Controllers\API\logSmsController@destroy']);
+Route::resource('api/v1/abonnements', 'AhmadFatoni\ApiGenerator\Controllers\API\AbonnementController', ['except' => ['destroy', 'create', 'edit']]);
+Route::get('api/v1/abonnements/{id}/delete', ['as' => 'api/v1/abonnements.delete', 'uses' => 'AhmadFatoni\ApiGenerator\Controllers\API\AbonnementController@destroy']);
+Route::resource('api/v1/packsabonnements', 'AhmadFatoni\ApiGenerator\Controllers\API\PackAbonnementController', ['except' => ['destroy', 'create', 'edit']]);
+Route::get('api/v1/packsabonnements/{id}/delete', ['as' => 'api/v1/packsabonnements.delete', 'uses' => 'AhmadFatoni\ApiGenerator\Controllers\API\PackAbonnementController@destroy']);

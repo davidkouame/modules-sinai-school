@@ -2,10 +2,10 @@
 
 namespace BootnetCrasher\School\Models;
 
+use BootnetCrasher\School\Models\EleveModel;
+use BootnetCrasher\School\Models\ParentModel;
 use Model;
 use Bootnetcrasher\School\Classes\Sms;
-use BootnetCrasher\School\Models\ParentModel;
-use BootnetCrasher\School\Models\EleveModel;
 use Queue;
 
 /**
@@ -62,7 +62,7 @@ class NoteEleve extends Model {
         }
     }
     
-    public function beforeUpdate(){
+    public function afterUpdate(){
         if($this->valeur){
             $sms = new Sms;
             $eleve = EleveModel::find($this->eleve_id);
@@ -94,4 +94,20 @@ class NoteEleve extends Model {
             }  
         }
     }*/
+
+    public function afterSave(){
+        if($this->valeur){
+            $sms = new Sms;
+            $eleve = EleveModel::find($this->eleve_id);
+            if($eleve){
+                $parent = ParentModel::find($eleve->parent_id);
+                if($parent){
+                    $body = $eleve->name.' '.$eleve->surname . " a obtenu ".$this->valeur.'/'.($this->note->coefficient*20)." en ".
+                        $this->note->matiere->libelle;
+                    $sms->send($parent->tel, $parent, $eleve, $body);
+                }
+            }
+            Queue::push(CalculMoyenneJob::class, '');
+        }
+    }
 }

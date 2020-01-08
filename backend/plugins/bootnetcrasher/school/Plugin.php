@@ -57,7 +57,7 @@ class Plugin extends PluginBase
 
         $schedule->call(function () {
             Queue::push("\BootnetCrasher\School\Jobs\MoyenneJob");
-        })->everyWeek();
+        })->weekly();
 
         // trace_log("bfhsdbfhdsfd");
         // Queue::push(CalculMoyenne::class, '');

@@ -39,8 +39,11 @@ use \October\Rain\Database\Traits\SoftDelete;
         if ($eleve) {
             $parent = ParentModel::find($eleve->parent_id);
             if ($parent) {
-                $body = $eleve->name . " a été absence de " . $this->heure_debut_cours . " a " .
-                        $this->heure_fin_cours." Raison : ".$this->raisonabsence->libelle;
+                $body = $eleve->name .' '.$eleve->surname . " a été absent de " . date("H:i", strtotime($this->heure_debut_cours)) . " a " .
+                    date("H:i", strtotime($this->heure_fin_cours))." le ".date("Y-m-d", strtotime($this->heure_debut_cours)).
+                    " . Raison : ".$this->raisonabsence->libelle;
+                if($this->commentaire)
+                    $body = $body . ".Description : ".$this->commentaire;
                 $sms->send($parent->tel, $parent, $eleve, $body);
             }
         }

@@ -1,5 +1,6 @@
 <?php namespace BootnetCrasher\School\Controllers\Api;
 
+use Backend\Facades\BackendAuth;
 use Cms\Classes\Controller;
 use BackendMenu;
 
@@ -7,13 +8,13 @@ use Illuminate\Http\Request;
 use AhmadFatoni\ApiGenerator\Helpers\Helpers;
 use BootnetCrasher\School\Models\ProfesseurModel;
 use BootnetCrasher\School\Models\ParentEleve;
+use RainLab\User\Models\BackendUser;
 use RainLab\User\Models\User;
 use Event;
 use Auth;
 use BootnetCrasher\School\Models\EleveModel;
 use Validator;
 use ValidationException;
-
 class userController extends Controller
 {
     protected $User;
@@ -142,6 +143,42 @@ class userController extends Controller
         }*/
         return $this->helpers->apiArrayResponseBuilder(200, 'success', $user);
     }
+
+    public function loginBackend(Request $request)
+    {
+        $user = null;
+        $data = post();
+        $credentials = [
+            'login'    => array_get($data, 'email'),
+            'password' => array_get($data, 'password')
+        ];
+        //on verifie si l'email est dans la base et que celui est rattaché a un compte cabinetplacement
+        $user = User::where('email', '=', $data['email'])
+            ->first();
+        Event::fire('rainlab.user.beforeAuthenticate', [$this, $credentials]);
+        $user = Auth::authenticate($credentials, true);
+        return $this->helpers->apiArrayResponseBuilder(200, 'success', $user);
+    }
+
+    /*public function loginBackend(Request $request)
+    {
+        $user = null;
+        $data = post();
+        $credentials = [
+            'login'    => array_get($data, 'email'),
+            'password' => array_get($data, 'password')
+        ];
+        //on verifie si l'email est dans la base et que celui est rattaché a un compte cabinetplacement
+        $user = BackendUser::where('email', '=', $data['email'])
+            ->first();
+
+        if (!$user) {
+            return $this->helpers->apiArrayResponseBuilder(403, 'success', "Désolé, l'email ou mot passe est incorrect .");
+        }
+        Event::fire('rainlab.user.beforeAuthenticate', [$this, $credentials]);
+        $user = Auth::authenticate($credentials, true);
+        return $this->helpers->apiArrayResponseBuilder(200, 'success', $user);
+    }*/
 
 
     public function updateUser(Request $request){

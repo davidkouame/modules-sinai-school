@@ -39,12 +39,15 @@ export default {
   created() {
     // recuperation de tous les élèves
     this.$store.dispatch('getAllEleves', {payload: 0})
+    // recuperation de la classe
+    this.$store.dispatch('getClasse', {classeId: this.$route.params.id})
   },
   methods:{
     saveEleve(){
       let data = {
         eleves: this.elevesclasse,
-        classe_id: this.$route.params.id
+        classe_id: this.$route.params.id,
+        annee_scolaire_id: this.classe.annee_scolaire_id
       };
       let store = this.$store;
       store
@@ -64,6 +67,9 @@ export default {
   computed:{
     eleves(){
       return this.$store.getters.eleves
+    },
+    classe(){
+      return this.$store.getters.classe
     }
   }
 };

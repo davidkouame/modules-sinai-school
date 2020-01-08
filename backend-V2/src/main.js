@@ -22,11 +22,18 @@ import Paginate from 'vuejs-paginate'
 import VueTruncate from 'vue-truncate-filter'
 import Modal from './components/Modal.vue'
 import vSelect from 'vue-select'
+import Login from './components/Login.vue'
+
+import VueSidebarMenu from 'vue-sidebar-menu'
+import 'vue-sidebar-menu/dist/vue-sidebar-menu.css'
+Vue.use(VueSidebarMenu)
+
 
 import PaperDashboard from "./plugins/paperDashboard";
 import "vue-notifyjs/themes/default.css";
 import Datetime  from 'vue-datetime'
 import 'vue-datetime/dist/vue-datetime.css'
+import 'vue-select/dist/vue-select.css';
 
 Vue.component('paginate', Paginate)
 Vue.use(PaperDashboard);
@@ -64,10 +71,18 @@ Vue.mixin({
 })
 
 
-
-/* eslint-disable no-new */
+if(localStorage.getItem('userId')){
+  /* eslint-disable no-new */
 new Vue({
   router,
   store,
   render: h => h(App)
 }).$mount("#app");
+}else{
+  new Vue({
+    el: '#app',
+    router,
+    store,
+    render: h => h(Login)
+  });
+}

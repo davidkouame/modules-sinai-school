@@ -10,12 +10,47 @@
         <p>{{name}}</p>
       </slot>
     </a>
+    <!--<div class="collapse-menu" :style="style" style="animation-fill-mode: both; animation-timing-function: ease-out;padding-left: 42px" >
+      <li class="nav-item">
+        <a href="#/table-list" class="nav-link">
+          <i class="ti-view-list-alt"></i><p>sous 1</p>
+        </a>
+        <a href="#/table-list" class="nav-link">
+          <i class="ti-view-list-alt"></i><p>sous 2</p>
+        </a>
+      </li>
+    </div>-->
+    <ul class="nav">
+      <slot name="souslinks">
+      </slot>
+    </ul>      
   </component>
 </template>
 <script>
+
+const getCircularReplacer = () => {
+  const seen = new WeakSet();
+  return (key, value) => {
+    if (typeof value === "object" && value !== null) {
+      if (seen.has(value)) {
+        return;
+      }
+      seen.add(value);
+    }
+    return value;
+  };
+};
+
 export default {
   name: "sidebar-link",
-  inheritAttrs: false,
+  // inheritAttrs: false,
+  data() {
+    return {
+      style: "animation-fill-mode: both; animation-timing-function: ease-out; display: none;",
+      isSee: false,
+      souslinks: []
+    };
+  },
   inject: {
     autoClose: {
       default: true
@@ -27,28 +62,68 @@ export default {
       default: ()=>{}
     }
   },
+  provide() {
+    return {
+      addSousLink: this.addSousLink,
+    };
+  },
   props: {
     name: String,
     icon: String,
     tag: {
       type: String,
       default: "router-link"
-    }
+    },
+    sidebarLinks: {
+      type: Array,
+      default: () => []
+    },
   },
   methods: {
     hideSidebar() {
+      // alert("dhdhd");
+      return 0;
+      var styleShow = "animation-fill-mode: both; animation-timing-function: ease-out;padding-left: 42px;"
+      var styleHide = "animation-fill-mode: both; animation-timing-function: ease-out; display: none;padding-left: 42px;"
+      this.style = styleShow
+      if(this.isSee == false){
+        this.style = styleShow
+        this.isSee = true
+      }else{
+        this.style = styleHide
+        this.isSee = false
+      }
       if (this.autoClose) {
-        this.$sidebar.displaySidebar(false);
+        // this.$sidebar.displaySidebar(false);
       }
     },
     isActive() {
       return this.$el.classList.contains("active");
+    },
+    addSousLink(souslink) {
+      // console.log("ffhf")
+      // console.log(JSON.stringify(souslink.$vnode, getCircularReplacer()))
+      const index = this.$slots.souslinks.indexOf(souslink.$vnode);
+      this.souslinks.splice(index, 0, souslink);
+    },
+    removeSousLink(souslink) {
+      const index = this.souslinks.indexOf(souslink);
+      if (index > -1) {
+        this.souslinks.splice(index, 1);
+      }
     }
   },
   mounted() {
     if (this.addLink) {
       this.addLink(this);
     }
+    // console.log("---------- debut de la liste ------")
+    // console.log(this.souslinks)
+    // console.log("---------- fin de la liste ----------")
+  },
+  created(){
+    // console.log("liste des sous links "+ JSON.stringify(this.$slots.souslinks, getCircularReplacer()))
+    // console.log(this.souslinks)
   },
   beforeDestroy() {
     if (this.$el && this.$el.parentNode) {

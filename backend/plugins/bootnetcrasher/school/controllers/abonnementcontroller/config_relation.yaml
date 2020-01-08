@@ -1,0 +1,8 @@
+abonnementeleve:
+    label: Eleves
+    view:
+        list: $/bootnetcrasher/school/models/abonnementelevemodel/columns.yaml
+        toolbarButtons: create|delete
+    manage:
+        form: $/bootnetcrasher/school/models/abonnementelevemodel/fields.yaml
+        list: $/bootnetcrasher/school/models/abonnementelevemodel/columns.yaml

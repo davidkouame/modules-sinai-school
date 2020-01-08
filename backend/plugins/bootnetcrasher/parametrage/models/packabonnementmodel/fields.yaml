@@ -1,0 +1,14 @@
+fields:
+    libelle:
+        label: Libellé
+        span: auto
+        type: text
+    prix:
+        label: Prix
+        span: auto
+        type: number
+    description:
+        label: Description
+        size: ''
+        span: auto
+        type: textarea
