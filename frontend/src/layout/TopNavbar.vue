@@ -42,9 +42,9 @@
           </li>-->
         </ul>
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
+          <!--<li class="nav-item">
             <a class="nav-link" href="#/parametres">Compte</a>
-          </li>
+          </li>-->
           <!--<base-dropdown title="Dropdown">
             <a class="dropdown-item" href="#">Action</a>
             <a class="dropdown-item" href="#">Another action</a>
@@ -57,7 +57,7 @@
 
           <base-dropdown v-bind:title="titleDropdown" v-if="parentId">
             <a v-for="eleve in eleves" class="dropdown-item" href="javascript:void(0)"
-                @click="changeEleve(eleve)">{{ eleve.user.name }}
+                @click="changeEleve(eleve)">{{ eleve.user.name }} {{ eleve.user.surname }}
                 <i class="fa fa-check"  :class="{check:eleve.id == eleveId}" ></i>
             </a>
             <!--<a class="dropdown-item" href="javascript:void(0)" @click="changeEleve(0)">All</a>-->
@@ -121,7 +121,8 @@ export default {
         {'key': 'annee_scolaire_id', 'value': localStorage.getItem('anneeScolaireId')}])
 
     }
-    this.$store.dispatch('sectionsanneescolaire', [{'key': 'annee_scolaire_id', 'value': localStorage.getItem('anneeScolaireId')}])
+    console.log("->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+    this.$store.dispatch('getAllSectionsAnneeScolaire', [{'key': 'annee_scolaire_id', 'value': localStorage.getItem('anneeScolaireId')}])
   },
   methods: {
     capitalizeFirstLetter(string) {

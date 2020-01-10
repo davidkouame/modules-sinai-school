@@ -1,11 +1,22 @@
 <template>
   <div class="content">
     <div class="container-fluid">
+    <!-- Fil d'ariane -->
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="#/">Accueil</a>
+          </li>
+          <li class="breadcrumb-item active"  aria-current="page">
+          Notes
+          </li>
+        </ol>
+      </nav>
+
       <div class="row">
         <div class="col-12">
           <div class="card">
 
-            <!-- Titre de la page -->
             <div class="card-header">
               <h4 class="card-title">Liste des notes</h4>
             </div>
@@ -15,7 +26,7 @@
 
                 <!-- Zone de recherche -->
                 <div class="row">
-                  <div class="float-left col-2">
+                  <div class="float-left col-3" v-if="sectionsanneescolaire">
                     <base-dropdown v-bind:title="titleDropdownSection">
                       <a v-for="sectionanneescolaire in sectionsanneescolaire" class="dropdown-item"
                          href="javascript:void(0)" @click="changeSection(sectionanneescolaire)">
@@ -23,7 +34,7 @@
                       </a>
                     </base-dropdown>
                   </div>
-                  <div class="float-right col-10">
+                  <div class="float-right col-9">
                     <div class="row">
                       <div class="offset-md-6 col-md-6">
                         <div class="input-group mb-3">
@@ -56,7 +67,7 @@
                       <th scope="col">Libellé</th>
                       <th scope="col">Note</th>
                       <th scope="col">Coefficient</th>
-                      <th scope="col">Coeff x Val</th>
+                      <th scope="col">Coef x Val</th>
                       <th scope="col">Date</th>
                       <th scope="col">Type de note</th>
                       <th scope="col">Actions</th>
@@ -65,25 +76,25 @@
                   <tbody>
                     <tr v-if="countNotes" v-for="(note, index) in notes">
                       <th scope="row">{{ index + 1}}</th>
-                      <td><span v-if="note">{{ note.libelle }}</span></td>
-                      <td><span v-if="note">{{ formatValeur(note.valeur) ?
-                        formatValeur(note.valeur)+'/20': '--' }}</span></td>
-                      <td><span v-if="note">{{ note.coefficient }}</span></td>
-                      <td><span v-if="note">{{ formatValeur(note.valeur*note.coefficient) ?
-                        formatValeur(note.valeur*note.coefficient)+'/'+note.coefficient*20 : '--'}}</span></td>
-                      <td><span v-if="note">{{ note.created_at|formatDate }}</span></td>
+                      <td><span v-if="note">{{ note.note.libelle }}</span></td>
+                      <td><span v-if="note">{{ formatValeur(note.noteeleve.valeur) ?
+                        formatValeur(note.noteeleve.valeur)+'/20': '--' }}</span></td>
+                      <td><span v-if="note">{{ note.note.coefficient }}</span></td>
+                      <td><span v-if="note">{{ formatValeur(note.noteeleve.valeur*note.note.coefficient) ?
+                        formatValeur(note.noteeleve.valeur*note.note.coefficient)+'/'+note.note.coefficient*20 : '--'}}</span></td>
+                      <td><span v-if="note">{{ note.note.created_at|formatDate }}</span></td>
                       <td>
-                        <span v-if="note">{{ note.libelle_type_note }}</span>
+                        <span v-if="note">{{ note.typenote.libelle }}</span>
                       </td>
                       <td class="actions">
-                        <a :href="'/#/notes/preview/'+note.note_eleve_id">
+                        <a :href="'/#/notes/preview/'+note.noteeleve.id">
                           <i class="fa fa-eye fa-lg"></i>
                         </a>
                       </td>
                     </tr>
 
                     <tr v-if="!countNotes">
-                      <td colspan="6" style="text-align: center;">Aucun resultat trouvé !</td>
+                      <td colspan="7" style="text-align: center;">Aucun enregistrement trouvé !</td>
                       <td></td>
                     </tr>
                   </tbody>
@@ -107,8 +118,9 @@
                     </div>
                   </div>
                 </div>
+              </div>
             </div>
-            </div>
+
           </div>
         </div>
       </div>
@@ -260,4 +272,5 @@ export default {
 <style>
   li { list-style-type: none}
   .modal-container {width: 700px!important;}
+  
 </style>

@@ -8,11 +8,11 @@ use Model;
 class EleveModel extends Model
 {
     use \October\Rain\Database\Traits\Validation;
-    
+
     use \October\Rain\Database\Traits\SoftDelete;
 
     protected $dates = ['deleted_at'];
-    
+
     protected $appends = ['classe_id', 'full_name'];
 
 
@@ -26,12 +26,12 @@ class EleveModel extends Model
      */
     public $rules = [
     ];
-    
+
     public $hasOne = [
       'users' => ['RainLab\User\Models\User', 'key' => 'eleve_id'],
-      'user' => ['RainLab\User\Models\User', 'key' => 'eleve_id']  
+      'user' => ['RainLab\User\Models\User', 'key' => 'eleve_id']
     ];
-    
+
     protected $fillable = ['test'];
 
     public $belongsTo = [
@@ -56,12 +56,12 @@ class EleveModel extends Model
     /*public function scopeParent($query){
         dd($query);
     }*/
-    
+
     // get la classe de l'élève
     public function classe(){
         return $this->classeseleves ? $this->classeseleves[0] : null;
     }
-    
+
     public function getClasseIdAttribute()
     {
         // dd($this->classeseleves);
@@ -72,5 +72,13 @@ class EleveModel extends Model
     public function getFullNameAttribute()
     {
         return "{$this->name} {$this->surname}";
+    }
+
+    public function afterSave(){
+        // $this->user->name = $this->name;
+        // $this->user->surname = $this->surname;
+        // $this->user->email = $this->email;
+        // $this->user->save();
+        trace_log("modification d'un user");
     }
 }

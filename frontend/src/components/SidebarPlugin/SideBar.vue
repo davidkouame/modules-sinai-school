@@ -7,7 +7,7 @@
       <div class="logo">
         <a href="#" class="simple-text logo__container">
             <div class="logo-img">
-                <img src="img/vue-logo.png" alt="">
+                <img src="https://elysator.com/wp-content/uploads/blank-profile-picture-973460_1280-300x300.png" alt="">
             </div>
           <ul style="padding-top: 14px;padding-left: 0px">
             <li style="line-height: 20px;font-size: 14px;padding-left: 0px;">{{username}} {{usersurname}}</li>

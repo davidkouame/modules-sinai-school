@@ -1,105 +1,121 @@
 <template>
   <div class="content">
     <div class="container-fluid">
+
+      <!-- Fil d'ariane -->
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="#/">Accueil</a>
+          </li>
+          <li class="breadcrumb-item active"  aria-current="page">
+            Absences
+          </li>
+        </ol>
+      </nav>
+
       <div class="row">
         <div class="col-12">
-          <card class="strpied-tabled-with-hover" body-classes="table-full-width table-responsive">
-            <template slot="header">
-              <h4 class="card-title">Liste des absences élèves</h4>
-            </template>
-            <div class="card-body table-full-width table-responsive">
+          <div class="card">
 
-              <!-- Zone de recherche -->
-              <div class="row">
-                <div class="float-left col-2">
-                  <base-dropdown v-bind:title="titleDropdownSection">
-                    <a v-for="sectionanneescolaire in sectionsanneescolaire" class="dropdown-item"
-                       href="javascript:void(0)" @click="changeSection(sectionanneescolaire)">
-                      {{ sectionanneescolaire.libelle }}
-                    </a>
-                  </base-dropdown>
-                </div>
-                <div class="float-right col-10">
-                  <div class="row">
-                    <div class="offset-md-6 col-md-6">
-                      <div class="input-group mb-3">
-                        <input
-                          type="text"
-                          class="form-control"
-                          v-model="searchkeys"
-                          placeholder="Rechercher une note"
-                          aria-label="Recipient's username"
-                          aria-describedby="button-addon2"
-                        />
-                        <div class="input-group-append search-parent">
-                          <button
-                            class="btn btn-outline-secondary"
-                            id="button-addon2"
-                            v-on:click="searchNote"
-                          >rechercher</button>
+            <div class="card-header">
+              <h4 class="card-title">Liste des absences</h4>
+            </div>
+
+            <div class="card-body">
+              <div class="table-responsive">
+
+                <!-- Zone de recherche -->
+                <div class="row">
+                  <div class="float-left col-3" v-if="sectionsanneescolaire">
+                    <base-dropdown v-bind:title="titleDropdownSection">
+                      <a v-for="sectionanneescolaire in sectionsanneescolaire" class="dropdown-item"
+                        href="javascript:void(0)" @click="changeSection(sectionanneescolaire)">
+                        {{ sectionanneescolaire.libelle }}
+                      </a>
+                    </base-dropdown>
+                  </div>
+                  <div class="float-right col-9">
+                    <div class="row">
+                      <div class="offset-md-6 col-md-6">
+                        <div class="input-group mb-3">
+                          <input
+                            type="text"
+                            class="form-control"
+                            v-model="searchkeys"
+                            placeholder="Rechercher une absence"
+                            aria-label="Recipient's username"
+                            aria-describedby="button-addon2"
+                          />
+                          <div class="input-group-append search-parent">
+                            <button
+                              class="btn btn-outline-secondary"
+                              id="button-addon2"
+                              v-on:click="searchAbsence"
+                            >rechercher</button>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
 
-                </div>
-              </div>
-
-
-              <!-- List -->
-              <table class="table table-hover table-striped">
-                <thead>
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Date</th>
-                    <th scope="col">Heure début de cours</th>
-                    <th scope="col">Heure fin de cours</th>
-                    <th scope="col">Raison absence</th>
-                    <th scope="col">Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr v-if="absenceseleves" v-for="(absenceeleve, index) in absenceseleves">
-                    <th scope="row">{{ index + 1}}</th>
-                    <td>{{ getDate(absenceeleve.heure_debut_cours)|formatDate }}</td>
-                    <td>{{ getTime(absenceeleve.heure_debut_cours) }}</td>
-                    <td>{{ getTime(absenceeleve.heure_fin_cours) }}</td>
-                    <td v-if="absenceeleve.raisonabsence">{{ absenceeleve.raisonabsence.libelle }}</td>
-                    <td v-else="absenceeleve.raisonabsence"></td>
-                    <td class="actions">
-                      <a :href="'/#/absences/preview/'+absenceeleve.id">
-                        <i class="fa fa-eye fa-lg"></i>
-                      </a>
-                    </td>
-                  </tr>
-                  <tr v-if="!countAbsences">
-                    <td colspan="6" style="text-align: center;">Aucun resultat trouvé !</td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table>
-
-              <!-- Pagination -->
-              <div class="row" v-if="pageCount > 1">
-                <div class="col-md-4" style="color: #98a7a8;font-size: 13px;">
-                  Enregistrements affichés : {{ currentPage }}-{{ countPage }} sur {{ totalElement }}
-                </div>
-                <div class="col-md-8">
-                  <div class="float-right pagi">
-                    <paginate
-                      :page-count="pageCount"
-                      :click-handler="fetch"
-                      :prev-text="'&laquo;'"
-                      :next-text="'&raquo;'"
-                      :container-class="'pagination'"
-                      :page-class="'page-item'"
-                    ></paginate>
                   </div>
                 </div>
-              </div>
 
+
+                <!-- List -->
+                <table class="table table-hover table-striped">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Date</th>
+                      <th scope="col">Heure début de cours</th>
+                      <th scope="col">Heure fin de cours</th>
+                      <th scope="col">Raison absence</th>
+                      <th scope="col">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr v-if="absenceseleves" v-for="(absenceeleve, index) in absenceseleves">
+                      <th scope="row">{{ index + 1}}</th>
+                      <td>{{ getDate(absenceeleve.heure_debut_cours)|formatDate }}</td>
+                      <td>{{ getTime(absenceeleve.heure_debut_cours) }}</td>
+                      <td>{{ getTime(absenceeleve.heure_fin_cours) }}</td>
+                      <td v-if="absenceeleve.raisonabsence">{{ absenceeleve.raisonabsence.libelle }}</td>
+                      <td v-else="absenceeleve.raisonabsence"></td>
+                      <td class="actions">
+                        <a :href="'/#/absences/preview/'+absenceeleve.id">
+                          <i class="fa fa-eye fa-lg"></i>
+                        </a>
+                      </td>
+                    </tr>
+                    <tr v-if="!countAbsences">
+                      <td colspan="6" style="text-align: center;">Aucun enregistrement trouvé !</td>
+                      <td></td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                <!-- Pagination -->
+                <div class="row" v-if="pageCount > 1">
+                  <div class="col-md-4" style="color: #98a7a8;font-size: 13px;">
+                    Enregistrements affichés : {{ currentPage }}-{{ countPage }} sur {{ totalElement }}
+                  </div>
+                  <div class="col-md-8">
+                    <div class="float-right pagi">
+                      <paginate
+                        :page-count="pageCount"
+                        :click-handler="fetch"
+                        :prev-text="'&laquo;'"
+                        :next-text="'&raquo;'"
+                        :container-class="'pagination'"
+                        :page-class="'page-item'"
+                      ></paginate>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-          </card>
+          </div>
         </div>
       </div>
     </div>
@@ -152,12 +168,12 @@ export default {
       return params;
     },
     refreshList(){
-        console.log(">>>>>>>>>>>>>>>>> "+this.sectionAnneeScolaireId);
+        // console.log(">>>>>>>>>>>>>>>>> "+this.sectionAnneeScolaireId);
         if(this.sectionAnneeScolaireId && this.eleveListId){
             this.fetch();
         }
     },
-    searchNote() {
+    searchAbsence() {
       this.fetch(null, this.searchkeys);
     },
     getDate(time){
@@ -201,7 +217,7 @@ export default {
       return this.$store.getters.totalElement;
     },
     sectionsanneescolaire(){
-      console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+      // console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
       let sectionsanneescolaire = this.$store.getters.sectionsanneescolaire;
       let sectionAnneeScolaireId = this.sectionAnneeScolaireId;
       if(sectionsanneescolaire && sectionsanneescolaire.length > 0){
@@ -217,6 +233,7 @@ export default {
         }
 
       }
+      console.log("liste des sections annee scolaires est "+JSON.stringify(this.$store.getters.sectionsanneescolaire))
       return this.$store.getters.sectionsanneescolaire;
     }
   },

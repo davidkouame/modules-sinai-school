@@ -1,11 +1,28 @@
 <template>
   <div class="content">
     <div class="container-fluid">
+      <!-- Fil d'ariane -->
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="#/">Accueil</a>
+          </li>
+          <li class="breadcrumb-item active"  aria-current="page">
+            <a href="#/absences">
+              Absences
+            </a>
+          </li>
+          <li class="breadcrumb-item">
+              Détail absence
+          </li>
+        </ol>
+      </nav>
+
       <div class="row">
         <div class="col-md-12">
           <div class="card">
             <div class="card-header">
-              <h4 class="card-title">Détail d'absence</h4>
+              <h4 class="card-title">Détail absence</h4>
             </div>
             <div class="card-body">
               <form v-if="absenceeleve">
@@ -103,8 +120,8 @@
                     </div>
                   </div>
                 </div>
-                <div class="clearfix"></div>
-                <a @click="$router.go(-1)" class="btn btn-danger float-right">Retour</a>
+               <!-- <div class="clearfix"></div>
+                <a @click="$router.go(-1)" class="btn btn-danger float-right">Retour</a>-->
               </form>
             </div>
             <!---->

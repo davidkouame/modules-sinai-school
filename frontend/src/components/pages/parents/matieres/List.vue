@@ -1,6 +1,19 @@
 <template>
   <div class="content">
     <div class="container-fluid">
+
+      <!-- Fil d'ariane -->
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="#/">Accueil</a>
+          </li>
+          <li class="breadcrumb-item active"  aria-current="page">
+            Maières
+          </li>
+        </ol>
+      </nav>
+
       <div class="row">
         <div class="col-12">
           <card class="strpied-tabled-with-hover" body-classes="table-full-width table-responsive">
@@ -54,7 +67,7 @@
                     </tr>
 
                     <tr v-if="!countMatieres">
-                      <td colspan="2" style="text-align: center;">Aucun resultat trouvé !</td>
+                      <td colspan="3" >Aucun enregistrement trouvé !</td>
                       <td></td>
                     </tr>
 
@@ -147,8 +160,10 @@ export default {
   },
   computed: {
     matieres() {
+      if(this.$store.getters.matieres){
       this.countMatieres = this.$store.getters.matieres.length > 0;
       // console.log("liste des matieres "+JSON.stringify(this.$store.getters.matieres));
+      }
       return this.$store.getters.matieres;
     },
     classeListId() {

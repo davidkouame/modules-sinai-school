@@ -1,6 +1,24 @@
 <template>
   <div class="content">
     <div class="container-fluid">
+
+          <!-- Fil d'ariane -->
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="#/">Accueil</a>
+          </li>
+          <li class="breadcrumb-item active"  aria-current="page">
+            <a href="#/matieres">
+              Matières
+            </a>
+          </li>
+          <li class="breadcrumb-item">
+              Détail matière
+          </li>
+        </ol>
+      </nav>
+
         <div>
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item">
@@ -29,7 +47,7 @@
                       aria-selected="false"
                     >Information professeur</a>
                 </li>
-                <li class="nav-item">
+                <!--<li class="nav-item">
                     <a
                       class="nav-link"
                       :class="{active:selected == 3}"
@@ -41,7 +59,7 @@
                       aria-controls="profile"
                       aria-selected="false"
                     >Notes</a>
-                </li>
+                </li>-->
             </ul>
             <div class="tab-content" id="myTabContent">
                 <br />
@@ -54,7 +72,6 @@
                     role="tabpanel"
                     aria-labelledby="user-connexion"
                   >
-                    <div class="col-12">
                       <div class="card">
                         <div class="card-body">
                             <form v-if="matiere">
@@ -76,11 +93,10 @@
                                       <input type="text" class="form-control" v-model="coefficient" disabled />
                                     </div>
                                 </div>
-                                <a @click="$router.go(-1)" class="float-right btn btn-danger">retour</a>
+                                <!--<a @click="$router.go(-1)" class="float-right btn btn-danger">retour</a>-->
                             </form>
                         </div>
                       </div>
-                    </div>
                   </div>
 
                 <!-- Information professeur -->
@@ -91,8 +107,6 @@
                     role="tabpanel"
                     aria-labelledby="classes"
                   >
-                    <div class="row">
-                      <div class="col-md-12">
                         <div class="card">
                           <div class="card-body">
                             <form>
@@ -114,41 +128,27 @@
                                       <input v-model="tel" type="text" class="form-control" disabled />
                                     </div>
                                 </div>
-                                <a @click="$router.go(-1)" class="float-right btn btn-danger">retour</a>
+                                <!--<a @click="$router.go(-1)" class="float-right btn btn-danger">retour</a>-->
                             </form>
                           </div>
                         </div>
-                      </div>
-                    </div>
                 </div>
 
                 <!-- Notes -->
-                <div
+                <!--<div
                     class="tab-pane fade"
                     :class="{show:selected == 3,active:selected == 3}"
                     id="profile"
                     role="tabpanel"
                     aria-labelledby="classes"
                   >
-                    <div class="row">
-                        <div class="col-md-12">
                             <div class="card">
                                 <div class="card-body">
                                     <form>
-                                        <!--<div class="row">
-                                            <div class="col">
-                                              <div class="input-group mb-3">
-                                                <input type="text" class="form-control" v-model="searchkeys" placeholder="Rechercher une note" aria-label="Recipient's username" aria-describedby="button-addon2">
-                                                <div class="input-group-append">
-                                                  <button class="btn btn-outline-secondary" id="button-addon2" v-on:click="searchNote">rechercher</button>
-                                                </div>
-                                              </div>
-                                            </div>
-                                        </div>-->
                                         <br>
                                         <div class="row">
                                             <div class="col-md-12">
-                                              <table class="table">
+                                              <table class="table table-hover table-striped">
                                                 <thead>
                                                   <tr>
                                                     <th scope="col">#</th>
@@ -172,12 +172,12 @@
                                                         </a>
                                                     </td>
                                                   </tr>
+                                                  <tr v-if="!countNotes">
+                                                    <td colspan="4" style="text-align: center;">Aucun enregistrement trouvé !</td>
+                                                    <td></td>
+                                                  </tr>
                                                 </tbody>
                                               </table>
-
-                                              <!--<modal v-if="showModal" @close="showModal = false" v-bind:noteid="noteid"></modal>-->
-
-                                              <!-- Pagination -->
                                                 <div class="float-right pagi" v-if="pageCount > 1">
                                                   <paginate
                                                     :page-count="pageCount"
@@ -193,9 +193,7 @@
                                     </form>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
+                </div>-->
             </div>
         </div>
     </div>

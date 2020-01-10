@@ -17,6 +17,24 @@ if (localStorage.getItem('userId')) {
     modules = { storeProfesseur }
   }
 }
+
+// Cette fonction permet de formater l'url et de retourner une url
+function getUrl(context, nameUrl, params){
+  let concatParams = null
+  if (params.search) {
+    concatParams = params.search.map(function (elemen) {
+      return elemen.key + '=' + elemen.value
+    }).join('&')
+  }
+  let result = "ddjdj"
+  if(concatParams){
+    result = context.state.endpoint + 'api/v1/'+ nameUrl +'?page=' + params.payload + '&' + concatParams
+  }else{
+    result = context.state.endpoint + 'api/v1/'+ nameUrl +'?page=' + params.payload
+  }
+  return result;
+}
+
 export default new Vuex.Store({
   strict: true,
   state: {
@@ -419,6 +437,20 @@ export default new Vuex.Store({
         })
         .finally(() => (this.loading = false))
     },
+    getAllAnneesScolaires(context, params){
+      let nameUrl = "anneesscolaires"
+      let url = getUrl(context, nameUrl, params)
+      Axios.get(url)
+        .then(response => {
+          // console.log("anneesscolaires "+JSON.stringify(response.data.data))
+          context.commit('anneesscolaires', response.data.data)
+        })
+        .catch(error => {
+          console.log(error)
+          this.errored = true
+        })
+        .finally(() => (this.loading = false))
+    },
     sessionuserapp(context, request) {
       Axios.get(
         context.state.endpoint + 'api/v1/sessionsuserapp?user_id=' + request.user_id
@@ -778,6 +810,19 @@ export default new Vuex.Store({
       Axios.get(
         url
       )
+        .then(response => {
+          context.commit('sectionsanneescolaire', response.data.data.data)
+        })
+        .catch(error => {
+          console.log(error)
+          this.errored = true
+        })
+        .finally(() => (this.loading = false))
+    },
+    getAllSectionsAnneeScolaire(context, params){
+      let nameUrl = "sectionsanneescolaire"
+      let url = getUrl(context, nameUrl, params)
+      Axios.get(url)
         .then(response => {
           context.commit('sectionsanneescolaire', response.data.data)
         })

@@ -113,9 +113,20 @@ class parentsController extends Controller
         $status = $this->ParentModel->where('id',$id)->update($request->except('create_account'));
         if( $status ){
             $this->createOrUpdateAccountUser($request, $this->ParentModel->where('id',$id)->first());
+            $this->updateUser($this->ParentModel->where('id',$id)->first(), $request);
             return $this->helpers->apiArrayResponseBuilder(200, 'success', 'Data has been updated successfully.');
         }else{
             return $this->helpers->apiArrayResponseBuilder(400, 'bad request', 'Error, data failed to update.');
+        }
+    }
+
+    public function updateUser($parent, $request){
+        if($parent->user){
+            $parent->user->name = $request->get('name');
+            $parent->user->surname = $request->get('surname');
+            $parent->user->surname = $request->get('surname');
+            $parent->user->email = $request->get('email');
+            $parent->user->save();
         }
     }
 

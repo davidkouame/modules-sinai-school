@@ -4,15 +4,13 @@
       <nav>
         <ul class="footer-menu">
           <li>
-            <router-link :to="{path:'/admin'}">Dashboard</router-link>
+            <router-link :to="{path:'/'}">Tableau de bord</router-link>
           </li>
         </ul>
       </nav>
       <div class="copyright text-center">
-        &copy; Coded with
-        <i class="fa fa-heart heart"></i> by
-        <a href="https://binarcode.com" target="_blank">BinarCode</a>.
-        Designed by <a href="https://www.creative-tim.com/?ref=pdf-vuejs" target="_blank">Creative Tim</a>.
+        &copy; Tous droits reservés by
+        <a href="https://ayauka.com" target="_blank">Ayauka</a> 2020.
       </div>
     </div>
   </footer>

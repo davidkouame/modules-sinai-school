@@ -129,16 +129,12 @@ class eleveController extends Controller
     }
 
     public function store(Request $request){
-
         $arr = $request->all();
-
         while ( $data = current($arr)) {
             $this->EleveModel->{key($arr)} = $data;
             next($arr);
         }
-
         $validation = Validator::make($request->all(), $this->EleveModel->rules);
-        
         if( $validation->passes() ){
             $this->EleveModel->save();
             return $this->helpers->apiArrayResponseBuilder(201, 'created', ['id' => $this->EleveModel->id]);
@@ -148,8 +144,19 @@ class eleveController extends Controller
 
     }
 
+    public function updateUser($eleve, $request){
+        if($eleve->user){
+            $eleve->user->name = $request->get('name');
+            $eleve->user->surname = $request->get('surname');
+            $eleve->user->surname = $request->get('surname');
+            $eleve->user->email = $request->get('email');
+            $eleve->user->save();
+        }
+    }
+
     public function update($id, Request $request){
         $status = $this->EleveModel->where('id',$id)->update($request->all());
+        $this->updateUser($this->EleveModel->where('id',$id)->first(), $request);
         if( $status ){
             return $this->helpers->apiArrayResponseBuilder(200, 'success', 'Data has been updated successfully.');
         }else{

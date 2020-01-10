@@ -7,10 +7,9 @@
           <li class="breadcrumb-item">
             <a href="#/">Accueil</a>
           </li>
-          <li class="breadcrumb-item">
-            <a href="#/moyennes">Moyennes</a>
+          <li class="breadcrumb-item active" aria-current="page">
+            Moyennes
           </li>
-          <li class="breadcrumb-item active" aria-current="page">Liste des moyenne</li>
         </ol>
       </nav>
 
@@ -68,7 +67,6 @@
             role="tabpanel"
             aria-labelledby="user-connexion"
           >
-            <div class="col-12">
               <div class="card">
                 <div class="card-body">
                   <div class="table-responsive">
@@ -141,7 +139,7 @@
                         </td>
                       </tr>
                       <tr v-if="!countMoyennes">
-                        <td colspan="6" style="text-align: center;">Aucun resultat trouvé !</td>
+                        <td colspan="6" style="text-align: center;">Aucun enregistrement trouvé !</td>
                         <td></td>
                       </tr>
                       </tbody>
@@ -178,7 +176,6 @@
                   </div>
                 </div>
               </div>
-            </div>
           </div>
 
           <!-- Liste des moyennes de sections -->
@@ -217,7 +214,7 @@
                           <td>{{ moyenneSection.rang }}</td>
                         </tr>
                         <tr v-if="!countMoyennesSections">
-                          <td colspan="6" style="text-align: center;">Aucun resultat trouvé !</td>
+                          <td colspan="6" style="text-align: center;">Aucun enregistrement trouvé !</td>
                           <td></td>
                         </tr>
                         </tbody>
@@ -267,6 +264,10 @@
                           <td><span v-if="moyenneAnnuelle.anneescolaire">{{ moyenneAnnuelle.anneescolaire.libelle }}</span></td>
                           <td> {{ moyenneAnnuelle.valeur }}</td>
                           <td> {{ moyenneAnnuelle.rang }}</td>
+                        </tr>
+                        <tr v-if="!moyenneAnnuelle">
+                          <td colspan="3" style="text-align: center;">Aucun enregistrement trouvé !</td>
+                          <td></td>
                         </tr>
                         </tbody>
                       </table>

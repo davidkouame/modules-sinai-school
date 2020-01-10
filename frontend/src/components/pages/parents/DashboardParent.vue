@@ -8,12 +8,12 @@
               <i class="nc-icon nc-chart text-warning"></i>
             </div>
             <div slot="content">
-              <p class="card-category">Capacity</p>
-              <h4 class="card-title">105GB</h4>
+              <p class="card-category">Absences</p>
+              <h4 class="card-title">120 h</h4>
             </div>
-            <div slot="footer">
+            <!--<div slot="footer">
               <i class="fa fa-refresh"></i>Updated now
-            </div>
+            </div>-->
           </stats-card>
         </div>
 
@@ -23,12 +23,12 @@
               <i class="nc-icon nc-light-3 text-success"></i>
             </div>
             <div slot="content">
-              <p class="card-category">Revenue</p>
-              <h4 class="card-title">$1,345</h4>
+              <p class="card-category">Notes</p>
+              <h4 class="card-title">120</h4>
             </div>
-            <div slot="footer">
+            <!--<div slot="footer">
               <i class="fa fa-calendar-o"></i>Last day
-            </div>
+            </div>-->
           </stats-card>
         </div>
 
@@ -38,16 +38,16 @@
               <i class="nc-icon nc-vector text-danger"></i>
             </div>
             <div slot="content">
-              <p class="card-category">Errors</p>
-              <h4 class="card-title">23</h4>
+              <p class="card-category">Moyennes</p>
+              <h4 class="card-title">12/20</h4>
             </div>
-            <div slot="footer">
+            <!--<div slot="footer">
               <i class="fa fa-clock-o"></i>Last day
-            </div>
+            </div>-->
           </stats-card>
         </div>
 
-        <div class="col-xl-3 col-md-6">
+        <!--<div class="col-xl-3 col-md-6">
           <stats-card>
             <div slot="header" class="icon-info">
               <i class="nc-icon nc-favourite-28 text-primary"></i>
@@ -60,10 +60,10 @@
               <i class="fa fa-refresh"></i>Updated now
             </div>
           </stats-card>
-        </div>
+        </div>-->
 
       </div>
-      <div class="row">
+      <!--<div class="row">
         <div class="col-md-8">
           <chart-card :chart-data="lineChart.data"
                       :chart-options="lineChart.options"
@@ -105,9 +105,9 @@
             </template>
           </chart-card>
         </div>
-      </div>
+      </div>-->
 
-      <div class="row">
+      <!--<div class="row">
         <div class="col-md-6">
           <chart-card
             :chart-data="barChart.data"
@@ -165,7 +165,7 @@
           </card>
 
         </div>
-      </div>
+      </div>-->
     </div>
   </div>
 </template>

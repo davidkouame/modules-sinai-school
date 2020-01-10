@@ -313,6 +313,35 @@ export default {
         })
         .finally(() => (this.loading = false))
     },
+    allnotesparentV4(context, params) {
+      let concatParams = null
+      if (params.search) {
+        concatParams = params.search.map(function (elemen) {
+          return elemen.key + '=' + elemen.value
+        }).join('&')
+      }
+      let url = null
+      if(concatParams){
+        url = context.state.endpoint + 'api/v1/get-notes-v4?page=' + params.payload + '&' + concatParams
+      }else{
+        url = context.state.endpoint + 'api/v1/get-notes-v4?page=' + params.payload
+      }
+      Axios.get(url)
+        .then(response => {
+          // console.log("chargement des notes "+JSON.stringify(response.data.data.data));
+          context.commit('notes', response.data.data.data)
+          context.commit('pageCount', response.data.data.last_page)
+          context.commit('pageCountNote', response.data.data.last_page)
+          context.commit('currentPage', response.data.data.current_page)
+          context.commit('countPage', response.data.data.last_page)
+          context.commit('totalElement', response.data.data.total)
+        })
+        .catch(error => {
+          console.log(error)
+          this.errored = true
+        })
+        .finally(() => (this.loading = false))
+    },
     allnoteseleves(context, payload) {
       Axios.get(
         context.state.endpoint + 'api/v1/noteseleves?eleve_id=' + payload.userId + '&page=' + payload.pageNum

@@ -209,25 +209,18 @@ class noteController extends Controller
         return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
     }
 
-    public function getNotesV3(Request $request){
+    /*public function getNotesV3(Request $request){
         $data = DB::table('bootnetcrasher_school_note')
             ->leftJoin('bootnetcrasher_school_note_eleve', 'bootnetcrasher_school_note.id', '=', 'bootnetcrasher_school_note_eleve.note_id')
             ->leftJoin('bootnetcrasher_school_eleve', 'bootnetcrasher_school_note_eleve.eleve_id', '=', 'bootnetcrasher_school_eleve.id')
             ->leftJoin('bootnetcrasher_school_type_note', 'bootnetcrasher_school_note.typenote_id', '=', 'bootnetcrasher_school_type_note.id');
-            // ->where('eleve_id', $request->get('eleve_id'))
-            // ->WhereNull('eleve_id', $request->get('eleve_id'));
         foreach($request->except(['page', 'eleve_id']) as $key => $value){
             if($key == "search"){
                 $date = explode("/", trim($request->get('search')));
                 if(count($date) == 3){
                     $newdate = $date[2]."-".$date[1]."-".$date[0];
-                    // dd($newdate);
                     $data = $data->whereDate("datenoteeffectue", "=", $newdate);
                 }else{
-                    // $data = $data->where(function ($query) use($request){
-                    //     $query->where("bootnetcrasher_school_note.libelle", "=", $request->get('search'))
-                    //         ->orWhere("bootnetcrasher_school_type_note.libelle", "=", $request->get('search'));
-                    // });
                     $data = $data->where("bootnetcrasher_school_note.libelle", "like", "%".$request->get('search')."%")
                         ->orWhere("bootnetcrasher_school_type_note.libelle", "like", "%".$request->get('search')."%");
                 }
@@ -235,10 +228,54 @@ class noteController extends Controller
                 $data = $data->where($key, $value);
             }
         }
-        $data = $data->where('eleve_id', $request->get('eleve_id'))
-            ->orWhereNull('eleve_id');
         $data = $data->select('bootnetcrasher_school_note_eleve.id as note_eleve_id', 'bootnetcrasher_school_note_eleve.*', 'bootnetcrasher_school_note.*', 'bootnetcrasher_school_type_note.libelle as libelle_type_note');
         $data = $data->paginate(10)->toArray();
+        return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
+    }*/
+
+    public function getNotesV3(Request $request){
+        // recuperation des notes
+        $collect = new TestCollection();
+        // $notes = NoteModel::where('classe_id', $request->get('classe_id'))->get();
+        $notes = $this->NoteModel;
+        foreach($request->except(['page']) as $key => $value){
+            if($key == "search"){
+                $date = explode("/", trim($request->get('search')));
+                if(count($date) == 3){
+                    $newdate = $date[2]."-".$date[1]."-".$date[0];
+                    $notes = $notes->whereDate("datenoteeffectue", "=", $newdate);
+                }else{
+                    $notes = $notes->where("libelle", "like", "%".$request->get('search')."%")
+                        ->orWhereHas('typenote', function($queryTypeNote) use($request) {
+                            $queryTypeNote->where("libelle", "=", trim($request->get('search')));
+                        });
+                }
+            }elseif($key == "eleve_id"){
+                $notes = $notes->whereHas('noteseleves', function ($query) use($request, $key) {
+                    $query->where($key,$request->get('eleve_id'));
+                });
+            }elseif($key == "parent_id"){
+                $notes = $notes->whereHas('noteseleves', function ($query) use($request, $key) {
+                    $query->whereHas('eleve', function ($query) use($request, $key) {
+                        $query->where($key,$request->get('parent_id'));
+                    });
+                });
+            }else{
+                $notes = $notes->where($key, $value);
+            }
+        }
+        $notes = $notes->get();
+        foreach($notes as $note){
+            $noteeleve = NoteEleve::where('note_id', $note->id)->where('eleve_id', $request->get('eleve_id'))->first();
+            $collect->push([
+                "noteeleve" => $noteeleve ? $noteeleve->toArray() : null,
+                "note" => $note->toArray(),
+                "eleve" => $noteeleve && $noteeleve->eleve ? $noteeleve->eleve->toArray() : null,
+                "typenote" => $note->typenote ? $note->typenote->toArray() : null,
+                "matiere" => $note->matiere ? $note->matiere->toArray() : null
+            ]);
+        }
+        $data = $collect->paginate(10)->toArray();
         return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
     }
 

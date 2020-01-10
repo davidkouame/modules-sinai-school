@@ -22,7 +22,7 @@ class NoteEleve extends Model {
     /**
      * @var string The database table used by the model.
      */
-    public $table = 'bootnetcrasher_school_note_eleve_test';
+    public $table = 'bootnetcrasher_school_note_eleve';
 
     /**
      * @var array Validation rules

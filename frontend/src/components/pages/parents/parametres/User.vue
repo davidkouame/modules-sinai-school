@@ -54,7 +54,6 @@
                     role="tabpanel"
                     aria-labelledby="user-connexion"
                   >
-                    <div class="col-12">
                       <div class="card">
                         <div class="card-body">
                           <form>
@@ -92,7 +91,6 @@
                           </form>
                         </div>
                       </div>
-                    </div>
                   </div>
 
                   <!-- Tab classes -->
@@ -103,7 +101,6 @@
                     role="tabpanel"
                     aria-labelledby="classes"
                   >
-                    <div class="row">
                       <div class="col-md-12">
                         <div class="card">
                           <div class="card-body">
@@ -136,7 +133,6 @@
                           </div>
                         </div>
                       </div>
-                    </div>
                   </div>
 
                   <!-- Information App -->
@@ -147,8 +143,6 @@
           role="tabpanel"
           aria-labelledby="classes"
         >
-          <div class="row">
-            <div class="col-md-12">
               <div class="card">
                 <div class="card-body">
                     <form>
@@ -164,8 +158,6 @@
                   </form>
                 </div>
               </div>
-            </div>
-          </div>
         </div>
 
                 </div>
@@ -191,7 +183,7 @@ export default {
   created() {
     this.$store.dispatch("parent", localStorage.getItem("parentId"));
     this.$store.dispatch("sessionuserapp", {user_id: localStorage.getItem("userId")});
-    this.$store.dispatch("anneesscolaires");
+    this.$store.dispatch("getAllAnneesScolaires", {});
   },
   methods: {
     updateUser() {

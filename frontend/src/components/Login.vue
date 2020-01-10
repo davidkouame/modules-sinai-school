@@ -1,14 +1,17 @@
 <template>
   <div class="container">
+    <div>
+      <h1 class="col-md-12" style="padding-left: 31%; margin-top: 54px;">Bienvenue à Ayauka !</h1>
+    </div>
     <div class="row">
-      <div class="offset-4 col-md-7">
-        <h1 class="col-md-8" style="text-align: center; margin-bottom: 50px;">Connexion</h1>
-        <div class="alert alert-danger col-md-8" v-show="errorMessage">{{ errorMessage }}</div>
+      <div class="login">
+        <h2 class="col-md-12" style="text-align: center; margin-bottom: 24px;">Connexion</h2>
+        <div class="alert alert-danger col-md-12" v-show="errorMessage">{{ errorMessage }}</div>
         <form v-on:submit="connection" >
           <div class="form-group">
             <input
               type="email"
-              class="form-control col-md-8"
+              class="form-control col-md-12"
               placeholder="Entrer un email"
               v-model="email"
             />
@@ -16,15 +19,15 @@
           <div class="form-group">
             <input
               type="password"
-              class="form-control col-md-8"
+              class="form-control col-md-12"
               placeholder="Password"
               v-model="password"
             />
           </div>
           <div class="form-group">
-            <div class="col-md-8">
+            <div class="col-md-12">
               <div class="row">
-                <div class="col float-left">
+                <!--<div class="col float-left">
                   <div class="form-check">
                     <input
                       type="checkbox"
@@ -34,13 +37,25 @@
                     />
                     <label class="form-check-label" for="exampleCheck1" style="padding-left: 13px;">Retenir le mot de passe</label>
                   </div>
-                </div>
-                <div class="col float-right"><a href="#">Mot de passe oublié ?</a></div>
+                </div>-->
+                <div class="col float-lfet" style="text-align: center"><a href="#">Mot de passe oublié ?</a></div>
               </div>
             </div>
           </div>
           <!--<a type="submit" class="btn btn-primary col-md-8 active" v-on:click="connection">Connectez vous</a>-->
-          <button type="submit" class="btn btn-primary col-md-8 active">Connectez vous</button>
+          <div class="row">
+            <button type="submit" class="btn btn-primary offset-md-2 col-md-8 active" v-show="!showLoader">Connectez vous</button>
+            </br>
+            <button class="btn btn-primary offset-md-2 col-md-8  active" type="submit" v-show="showLoader" style="color: #fff;background-color:
+             #0062cc;border-color: #005cbf;opacity: 1;opacity: 0.8;color:#fff;background-color:#0062cc;border-color:#005cbf;
+             cursor: default !important;" disabled>
+             <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+              <span class="sr-only">Loading...</span>
+             Connectez vous
+              <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+              <span class="sr-only">Loading...</span>
+            </button>
+          </div>
         </form>
       </div>
     </div>
@@ -56,7 +71,8 @@ export default {
     return {
       email: "",
       password: "",
-      errorMessage: ""
+      errorMessage: "",
+      showLoader: false
     };
   },
     created(){
@@ -73,6 +89,8 @@ export default {
         alert("vdgsds");
     },
     connection(event) {
+      this.showLoader = true;
+      this.errorMessage = null;
       event.preventDefault();
       let email = this.email;
       let password = this.password;
@@ -109,6 +127,7 @@ export default {
         })
         .catch(response => {
           this.errorMessage = "Désolé, l'email ou le password est incorrect";
+          this.showLoader = false;
           console.log(response);
           this.errored = true;
         })
@@ -134,6 +153,7 @@ export default {
             // console.log("l'utilisateur a une session");
             localStorage.setItem("anneeScolaireId", response.data.data[0].annee_scolaire_id);
           }else{
+            if(this.anneesscolaires){
             let anneeScolaireId = this.anneesscolaires[(this.anneesscolaires.length-1)].id;
             localStorage.setItem("anneeScolaireId", anneeScolaireId);
             this.$store.dispatch('anneeScolaireId', anneeScolaireId);
@@ -142,6 +162,7 @@ export default {
             dataSa = {data: data};
             let store = this.$store;
             store.dispatch("saveSessionUserApp", dataSa)
+            }
           }
           window.location.reload();
           // console.log("liste des annees scolaires =>"+JSON.stringify());
@@ -188,5 +209,23 @@ input[type=text]{
 
 ::placeholder {
   font-size: 20px;
+}
+
+body{
+  background-color : #ebebeb;
+}
+
+.login{
+  width: 520px;
+background:
+#fff;
+border-radius: 10px;
+position: relative;
+padding-right: 85px;
+padding-left: 85px;
+padding-bottom: 55px;
+padding-top: 16px;
+    margin-top: 10px;
+    margin-left: 30%
 }
 </style>

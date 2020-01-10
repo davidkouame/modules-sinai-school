@@ -8,9 +8,9 @@
             <a href="#/">Accueil</a>
           </li>
           <li class="breadcrumb-item">
-            <a href="#/notes">Notes</a>
+            <a href="#/moyennes">Moyennes</a>
           </li>
-            <li class="breadcrumb-item active" aria-current="page">Détailler une moyenne</li>
+            <li class="breadcrumb-item active" aria-current="page">Détail moyenne</li>
         </ol>
       </nav>
 
@@ -19,7 +19,7 @@
           <div class="card">
             <!-- Titre de la page -->
             <div class="card-header">
-              <h4 class="card-title">Détailler une moyenne</h4>
+              <h4 class="card-title">Détail moyenne</h4>
             </div>
             <div class="card-body">
               <form v-if="moyenne">
@@ -111,7 +111,7 @@
                       v-bind:eleveId="eleveIdModal"
                     ></modal>
 
-                <a @click="$router.go(-1)" class="btn btn-danger float-right" style="border-right-width: 2px;margin-right: 10px;">Annuler</a>
+                <!--<a @click="$router.go(-1)" class="btn btn-danger float-right" style="border-right-width: 2px;margin-right: 10px;">Annuler</a>-->
               </form>
             </div>
           </div>

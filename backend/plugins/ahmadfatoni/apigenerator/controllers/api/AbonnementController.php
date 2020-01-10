@@ -1,6 +1,7 @@
 <?php namespace AhmadFatoni\ApiGenerator\Controllers\API;
 
 use BootnetCrasher\School\Models\AbonnementEleveModel;
+use BootnetCrasher\School\Models\EleveModel;
 use Cms\Classes\Controller;
 use BackendMenu;
 
@@ -87,6 +88,7 @@ class AbonnementController extends Controller
             if( $validation->passes() ){
                 $this->AbonnementModel->save();
                 $this->createAbonnementEleve($this->AbonnementModel, $request->get('eleves'));
+                $this->updateParentEleve($request->get('parent_id'), $request->get('eleves'));
                 return $this->helpers->apiArrayResponseBuilder(201, 'created', ['id' => $this->AbonnementModel->id]);
             }else{
                 return $this->helpers->apiArrayResponseBuilder(400, 'fail', $validation->errors() );
@@ -113,6 +115,18 @@ class AbonnementController extends Controller
         }
     }
 
+    // mettre a jour le parent id de l'élève
+    public function updateParentEleve($parent_id, $eleves){
+        foreach($eleves as $eleve){
+            // recuperation de l'élève
+            $eleve = EleveModel::find($eleve['id']);
+            if($eleve){
+                $eleve->parent_id = $parent_id;
+                $eleve->save();
+            }
+        }
+    }
+
     public function update($id, Request $request){
         $status = $this->AbonnementModel->where('id',$id)->update($request->all());
         if( $status ){
@@ -126,6 +140,7 @@ class AbonnementController extends Controller
         try{
             $status = $this->AbonnementModel->where('id',$id)->update($request->except('eleves'));
             $this->createAbonnementEleve($this->AbonnementModel->where('id',$id)->first(), $request->get('eleves'));
+            $this->updateParentEleve($request->get('parent_id'), $request->get('eleves'));
             if( $status ){
                 return $this->helpers->apiArrayResponseBuilder(200, 'success', 'Data has been updated successfully.');
             }else{
