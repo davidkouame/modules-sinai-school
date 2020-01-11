@@ -37,10 +37,10 @@
             <td>
               <a :href="'/#/professeurs/preview/'+professeur.id" class="btn btn-icon btn-info btn-sm">
                 <!----><i class="fa fa-user"></i><!---->
-              </a>
+              </a>&nbsp;
               <a :href="'/#/professeurs/edit/'+professeur.id"  class="btn btn-icon btn-success btn-sm">
                 <!----><i class="fa fa-edit"></i><!---->
-              </a>
+              </a>&nbsp;
               <a id="show-modal" @click="showModalF(professeur.id)" type="button" class="btn btn-icon btn-danger btn-sm">
                 <!----><i class="fa fa-times"></i><!---->
               </a>
@@ -84,7 +84,7 @@
 export default {
   data() {
     return {
-      title: "Professeurs",
+      title: "Liste des professeurs",
       showModal: false,
       professeurId: null,
       search: null

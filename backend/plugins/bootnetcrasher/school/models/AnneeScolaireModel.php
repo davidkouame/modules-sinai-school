@@ -1,6 +1,8 @@
 <?php namespace BootnetCrasher\School\Models;
 
 use Model;
+use Bootnetcrasher\School\Jobs\BillanAnnuelleJob;
+use Queue;
 
 /**
  * Model
@@ -28,4 +30,9 @@ class AnneeScolaireModel extends Model
     public $belongsTo = [
         'typeanneescolaire' => ['BootnetCrasher\School\Models\TypeAnneeScolaireModel', 'key' => 'type_annee_scolaire_id', 'otherKey' => 'id'],
     ];
+
+    public function afterUpdate(){
+        if($this->validated_at)
+            Queue::push(BillanAnnuelleJob::class, ["annee_scolaire_id" => $this->id]);
+    }
 }

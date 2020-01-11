@@ -105,8 +105,14 @@
                   </div>
                 </div>
                 <div class="clearfix"></div>
-                <a @click="$router.go(-1)" class="btn btn-danger">Annuler</a>
-      <button type="submit" class="btn btn-primary">Envoyer</button>
+                <div class="float-right">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <a @click="$router.go(-1)" class="btn btn-danger">Annuler</a> &nbsp;
+                      <button type="submit" class="btn btn-primary">Envoyer</button>
+                    </div>
+                  </div>
+                </div>
               </form>
         </div>
       </div>
@@ -117,7 +123,7 @@
 export default {
   data() {
     return {
-      title: "Notes",
+      title: "Ajouter une note",
       note: {"libelle": "", "datenoteeffectue": "", "description": "", "typenote_id": "",
       "matiere_id": "", "coefficient": "", "classe_id": "", "section_annee_scolaire_id": ""}
     };

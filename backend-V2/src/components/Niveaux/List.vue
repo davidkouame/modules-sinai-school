@@ -35,10 +35,10 @@
             <td>
               <a :href="'/#/niveaux/preview/'+matiere.id" class="btn btn-icon btn-info btn-sm">
                 <!----><i class="fa fa-user"></i><!---->
-              </a>
+              </a>&nbsp;
               <a :href="'/#/niveaux/edit/'+matiere.id"  class="btn btn-icon btn-success btn-sm">
                 <!----><i class="fa fa-edit"></i><!---->
-              </a>
+              </a>&nbsp;
               <a id="show-modal" @click="showModalF(matiere.id)" type="button" class="btn btn-icon btn-danger btn-sm">
                 <!----><i class="fa fa-times"></i><!---->
               </a>
@@ -82,7 +82,7 @@
 export default {
   data() {
     return {
-      title: "Niveaux",
+      title: "Liste des niveaux",
       showModal: false,
       niveauId: null,
       search: null

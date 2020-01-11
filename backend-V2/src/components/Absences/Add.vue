@@ -67,8 +67,14 @@
                   </div>
                 </div>
                 <div class="clearfix"></div>
-                <a @click="$router.go(-1)" class="btn btn-danger">Annuler</a>
-      <button type="submit" class="btn btn-primary">Envoyer</button>
+                <div class="float-right">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <a @click="$router.go(-1)" class="btn btn-danger">Annuler</a> &nbsp;
+                      <button type="submit" class="btn btn-primary">Envoyer</button>
+                    </div>
+                  </div>
+                </div>
               </form>
         </div>
       </div>
@@ -79,7 +85,7 @@
 export default {
   data() {
     return {
-      title: "Absence",
+      title: "Ajouter une absence",
       absence: {"eleve_id": "", "raisonabsence_id": "", "description": "", "heure_debut_cours": "", "heure_fin_cours": "", "section_annee_scolaire_id": ""},
       date: null
     };

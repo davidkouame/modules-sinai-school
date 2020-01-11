@@ -75,7 +75,11 @@
                   </div>
                 </div>
                 <div class="clearfix"></div>
-                <a href="#/annees-scolaires" class="btn btn-danger float-right" style="background: #EE2D20;color: #fff;opacity: 1;">Retour</a>
+                <div class="float-right">
+                  <a href="#/annees-scolaires" class="btn btn-danger">Retour</a>
+                  &nbsp;
+                  <a @click="validateAnneeScolaire" class="btn btn-primary">Valider l'année scolaire</a>
+                </div>
               </form>
         </div>
       </div>
@@ -86,7 +90,7 @@
 export default {
   data() {
     return {
-      title: "Année scolaire",
+      title: "Détail année scolaire",
     };
   },
   created() {
@@ -97,6 +101,29 @@ export default {
   computed: {
     anneescolaire() {
       return this.$store.getters.anneescolaire;
+    }
+  },
+  methods:{
+    validateAnneeScolaire(){
+      var currentDate = new Date();
+      var currentDateWithFormat = new Date().toJSON().replace('T',' ').replace('Z', ' ');
+      currentDateWithFormat.replace('Z', ' ');
+      let data = {
+        validated_at: currentDateWithFormat // new Date().toJSON(),
+      };
+      let store = this.$store;
+      store
+        .dispatch("updateModel", {"url": "anneesscolaires", "data": data, "id": this.$route.params.id})
+        .then(response => {
+          alert("La section a été validé avec succès !")
+          this.$router.go(-1)
+        })
+        .catch(error => {
+          console.log(error);
+          alert("Echec lors de la validation")
+          this.errored = true;
+        })
+        .finally(() => (this.loading = false));
     }
   }
 };

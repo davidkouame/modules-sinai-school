@@ -49,10 +49,10 @@ class AbonnementModel extends Model
     public function sendMessage($abonnement_id){
         try{
             $sms = new Sms();
-            $body = "Mes félicitations, votre abonnement à Ayauka a été éffectué avec succès . 
-            Ayauka vous remercie pour votre fidélité .";
+            $body = "Mes félicitations, votre abonnement à Ayauka a été éffectué avec succès . Ayauka vous remercie pour votre fidélité .";
             $abonnement = AbonnementModel::find($abonnement_id);
-            $sms->sendParentForAbonnement($this->parent, $body, $abonnement);
+            $sms->sendParentForAbonnementQueue($this->parent, $body, $abonnement);
+            trace_log("Envoi de sms au parent lors de la création d'un abonnement ");
         }catch (\Exception $ex){
              trace_log("message : ".$ex->getMessage().", trace log".$ex->getTrace());
         }

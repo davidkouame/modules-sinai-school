@@ -39,10 +39,10 @@
             <td>
               <a :href="'/#/absences/preview/'+absence.id" class="btn btn-icon btn-info btn-sm">
                 <!----><i class="fa fa-user"></i><!---->
-              </a>
+              </a>&nbsp;
               <a :href="'/#/absences/edit/'+absence.id"  class="btn btn-icon btn-success btn-sm">
                 <!----><i class="fa fa-edit"></i><!---->
-              </a>
+              </a>&nbsp;
               <a id="show-modal" @click="showModalF(absence.id)" type="button" class="btn btn-icon btn-danger btn-sm">
                 <!----><i class="fa fa-times"></i><!---->
               </a>
@@ -86,7 +86,7 @@
 export default {
   data() {
     return {
-      title: "Absences",
+      title: "Liste des absences",
       showModal: false,
       absenceId: null,
       search: null

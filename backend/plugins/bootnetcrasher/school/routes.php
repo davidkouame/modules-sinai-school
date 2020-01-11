@@ -31,6 +31,7 @@ Route::post('api/v1/abonnements/store-with-eleves', 'AhmadFatoni\ApiGenerator\Co
 Route::put('api/v1/abonnements/update-with-eleves/{id}', 'AhmadFatoni\ApiGenerator\Controllers\API\AbonnementController@updateWithEleve');
 Route::get('api/v1/abonnements/abonnements-eleves/{id}', 'AhmadFatoni\ApiGenerator\Controllers\API\AbonnementController@getElevesAbonnement');
 Route::get('api/v1/moyennes/generate-moyennes-matieres-sections/{id}', 'AhmadFatoni\ApiGenerator\Controllers\API\moyenneController@generateMoyenneMatiereForSection');
+Route::get('api/v1/moyennes/send-billan-periodique/{sectionAnneeScolaireId}', 'AhmadFatoni\ApiGenerator\Controllers\API\moyenneController@sendBillanPeriodique');
 
 
 Route::get('test-code-source', function (){
@@ -57,4 +58,10 @@ Route::get('api/v1/eleves/rapport/{section_annee_scolaire_id}', function($sectio
     $moyenne = new Bootnetcrasher\School\Classes\MoyenneClasse($section_annee_scolaire);
     $moyenne->sendRapport();
     return response()->json(["status_code" => 200, "message" => "success", "data" => "Data has been deleted successfully."]);
+});
+
+
+Route::get('/test-sms', function (){
+    $sms = new \Bootnetcrasher\School\Classes\Sms();
+    $sms->send("22547886905", "Test ayauka");
 });

@@ -41,10 +41,10 @@ use \October\Rain\Database\Traits\SoftDelete;
             if ($parent) {
                 $body = $eleve->name .' '.$eleve->surname . " a été absent de " . date("H:i", strtotime($this->heure_debut_cours)) . " a " .
                     date("H:i", strtotime($this->heure_fin_cours))." le ".date("Y-m-d", strtotime($this->heure_debut_cours)).
-                    " . Raison : ".$this->raisonabsence->libelle;
+                    " ; Raison : ".$this->raisonabsence->libelle;
                 if($this->commentaire)
-                    $body = $body . ".Description : ".$this->commentaire;
-                $sms->send($parent->tel, $parent, $eleve, $body);
+                    $body = $body . "; Description : ".$this->commentaire;
+                $sms->sendQueue($parent->tel, $body, $parent);
             }
         }
     }

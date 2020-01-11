@@ -71,7 +71,14 @@ class anneeScolaireController extends Controller
     }
 
     public function update($id, Request $request){
-        $status = $this->AnneeScolaireModel->where('id',$id)->update($request->all());
+        // $status = $this->AnneeScolaireModel->where('id',$id)->update($request->all());
+        $arr = $request->all();
+        $anneescolaire = $this->AnneeScolaireModel->where('id',$id)->first();
+        while ( $data = current($arr)) {
+            $anneescolaire->{key($arr)} = $data;
+            next($arr);
+        }
+        $status = $anneescolaire->save();
         if( $status ){
             return $this->helpers->apiArrayResponseBuilder(200, 'success', 'Data has been updated successfully.');
         }else{

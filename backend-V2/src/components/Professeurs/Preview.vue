@@ -98,7 +98,7 @@
                   </div>
                 </div>
                 <div class="clearfix"></div>
-                <a href="#/professeurs" class="btn btn-danger float-right" style="background: #EE2D20;color: #fff;opacity: 1;">Retour</a>
+                <a href="#/professeurs" class="btn btn-danger float-right">Retour</a>
               </form>
         </div>
       </div>
@@ -109,7 +109,7 @@
 export default {
   data() {
     return {
-      title: "Professeur",
+      title: "Détail professeur",
     };
   },
   created() {

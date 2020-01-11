@@ -13,7 +13,10 @@ use BootnetCrasher\School\Models\SectionAnneeScolaireModel;
 use Illuminate\Support\Collection;
 use DB;
 
-
+/**
+ * Elle permet d'envoyer un billan à la validation d'une section d'annee
+ * scolaire
+ */
 class MoyenneJob{
 
     private $sectionAnneeScolaire = null;
@@ -38,7 +41,7 @@ class MoyenneJob{
                         $sms = new Sms;
                         $parent = ParentModel::find($eleve->parent_id);
                         if($parent)
-                            $sms->send($parent->tel, $parent, $eleve, $body);
+                            $sms->sendQueue($parent->tel, $body, $parent, $eleve);
                     }
                     
                 }

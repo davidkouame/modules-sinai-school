@@ -67,6 +67,11 @@ export default {
     return {
       showSousSidebarLinkMenu: false
     }
+  },
+  methods: {
+    hideSidebar(){
+      
+    }
   }
 };
 </script>

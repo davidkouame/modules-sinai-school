@@ -1336,6 +1336,19 @@ export default new Vuex.Store({
           this.errored = true
         })
         .finally(() => (this.loading = false))
+    },
+    generateBilanPeriodique(context, params){
+      Axios.get(
+        context.state.endpoint + 'api/v1/moyennes/send-billan-periodique/'+params.sectionAnneeScolaireId
+      )
+        .then(response => {
+          alert("Le bilan périodique a été envoyé ");
+        })
+        .catch(error => {
+          console.log(error)
+          this.errored = true
+        })
+        .finally(() => (this.loading = false))
     }
   },
   // modules: modules

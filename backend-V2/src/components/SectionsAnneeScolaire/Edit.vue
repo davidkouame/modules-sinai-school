@@ -86,8 +86,15 @@
                   </div>
                 </div>
                 <div class="clearfix"></div>
-                <a @click="$router.go(-1)" class="btn btn-danger">Annuler</a>
-      <button type="submit" class="btn btn-primary">Modifier</button>
+                <div class="float-right">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <a @click="$router.go(-1)" class="btn btn-danger">Annuler</a>
+                      &nbsp;
+                      <button type="submit" class="btn btn-primary">Modifier</button>
+                    </div> 
+                  </div>
+                </div>
               </form>
         </div>
       </div>
@@ -101,7 +108,7 @@ import moment from 'moment'
 export default {
   data() {
     return {
-      title: "Section Année scolaire",
+      title: "Modifier une section année scolaire",
       validated_at: "17/11/1973"
     };
   },

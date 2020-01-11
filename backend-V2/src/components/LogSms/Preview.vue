@@ -28,7 +28,7 @@
                       <!---->
                     </div>
                   </div>
-                  <div class="col-md-6">
+                  <div class="col-md-6" v-if="logsms.eleve">
                     <div class="form-group">
                       <label class="control-label">Elève</label>
                       <!---->
@@ -54,7 +54,7 @@
                   </div>
                 </div>
                 <div class="clearfix"></div>
-                <a href="#/log-sms" class="btn btn-danger float-right" style="background: #EE2D20;color: #fff;opacity: 1;">Retour</a>
+                <a href="#/log-sms" class="btn btn-danger float-right">Retour</a>
               </form>
         </div>
       </div>
@@ -65,7 +65,7 @@
 export default {
   data() {
     return {
-      title: "log sms",
+      title: "Détail log sms",
     };
   },
   created() {

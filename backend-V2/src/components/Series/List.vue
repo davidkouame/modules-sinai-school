@@ -33,10 +33,10 @@
             <td>
               <a :href="'/#/series/preview/'+serie.id" class="btn btn-icon btn-info btn-sm">
                 <!----><i class="fa fa-user"></i><!---->
-              </a>
+              </a>&nbsp;
               <a :href="'/#/series/edit/'+serie.id"  class="btn btn-icon btn-success btn-sm">
                 <!----><i class="fa fa-edit"></i><!---->
-              </a>
+              </a>&nbsp;
               <a id="show-modal" @click="showModalF(serie.id)" type="button" class="btn btn-icon btn-danger btn-sm">
                 <!----><i class="fa fa-times"></i><!---->
               </a>
@@ -80,7 +80,7 @@
 export default {
   data() {
     return {
-      title: "Series",
+      title: "Liste des series",
       showModal: false,
       serieId: null,
       search: null

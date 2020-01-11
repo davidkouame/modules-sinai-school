@@ -119,12 +119,12 @@ const routes = [
     children: [
       {
         path: "dashboard",
-        name: "dashboard",
+        name: "Tableau de bord",
         component: Dashboard
       },
       {
-        path: "stats",
-        name: "stats",
+        path: "settings",
+        name: "settings",
         component: UserProfile
       },
       {

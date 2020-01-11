@@ -84,7 +84,7 @@
 export default {
   data() {
     return {
-      title: "Parents",
+      title: "Liste des parents",
       showModal: false,
       parentId: null,
       search: null

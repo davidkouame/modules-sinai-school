@@ -75,7 +75,7 @@
                   </div>
                 </div>
                 <div class="clearfix"></div>
-                <a href="#/parents" class="btn btn-danger float-right" style="background: #EE2D20;color: #fff;opacity: 1;">Retour</a>
+                <a href="#/parents" class="btn btn-danger float-right">Retour</a>
               </form>
         </div>
       </div>
@@ -86,7 +86,7 @@
 export default {
   data() {
     return {
-      title: "Parent",
+      title: "Détail parents",
     };
   },
   created() {

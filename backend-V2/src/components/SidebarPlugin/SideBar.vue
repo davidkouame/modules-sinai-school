@@ -57,7 +57,7 @@ export default {
   props: {
     title: {
       type: String,
-      default: "Paper Dashboard"
+      default: "Ayauka"
     },
     backgroundColor: {
       type: String,

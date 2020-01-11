@@ -42,7 +42,7 @@
                   </div>
                 </div>
                 <div class="clearfix"></div>
-                <a href="#/matieres" class="btn btn-danger float-right" style="background: #EE2D20;color: #fff;opacity: 1;">Retour</a>
+                <a href="#/matieres" class="btn btn-danger float-right">Retour</a>
               </form>
         </div>
       </div>
@@ -53,7 +53,7 @@
 export default {
   data() {
     return {
-      title: "Matiere",
+      title: "Détail classe matière",
     };
   },
   created() {

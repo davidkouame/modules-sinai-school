@@ -25,7 +25,6 @@
             <th scope="col">Référence</th>
             <th scope="col">Libellé</th>
             <th scope="col">Niveau</th>
-            <th scope="col">Serie</th>
             <th scope="col">Actions</th>
           </tr>
         </thead>
@@ -34,15 +33,14 @@
             <th scope="row">{{ index + 1}}</th>
             <td>{{ classe.reference}}</td>
             <td>{{ classe.libelle}}</td>
-            <td>{{ classe.serie ? classe.serie.libelle : ''}}</td>
             <td>{{ classe.niveau ? classe.niveau.libelle : ''}}</td>
             <td>
               <a :href="'/#/classes/preview/'+classe.id" class="btn btn-icon btn-info btn-sm">
                 <!----><i class="fa fa-user"></i><!---->
-              </a>
+              </a>&nbsp;
               <a :href="'/#/classes/edit/'+classe.id"  class="btn btn-icon btn-success btn-sm">
                 <!----><i class="fa fa-edit"></i><!---->
-              </a>
+              </a>&nbsp;
               <a id="show-modal" @click="showModalF(classe.id)" type="button" class="btn btn-icon btn-danger btn-sm">
                 <!----><i class="fa fa-times"></i><!---->
               </a>
@@ -86,7 +84,7 @@
 export default {
   data() {
     return {
-      title: "Classes",
+      title: "Liste des classes",
       showModal: false,
       classeId: null,
       search: null
@@ -180,6 +178,12 @@ export default {
   }
 
   .paginate active{
+  z-index: 1;
+  color: #fff;
+  background-color: #8294a8;
+}
+
+.paginate active{
   z-index: 1;
   color: #fff;
   background-color: #8294a8;

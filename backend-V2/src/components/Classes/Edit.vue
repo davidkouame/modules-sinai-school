@@ -144,7 +144,7 @@
                                   <td>
                                     <a :href="'/#/classes-matieres-professeurs/edit/'+classeprofesseurmatiere.id"  class="btn btn-icon btn-success btn-sm">
                                       <!----><i class="fa fa-edit"></i><!---->
-                                    </a>
+                                    </a>&nbsp;
                                     <a id="show-modal" @click="showModalF(classeprofesseurmatiere.id)"  class="btn btn-icon btn-danger btn-sm">
                                       <!----><i class="fa fa-times"></i><!---->
                                     </a>
@@ -236,8 +236,15 @@
                   </div>
                 </div>
                 <div class="clearfix"></div>
-                <a @click="$router.go(-1)" class="btn btn-danger">Annuler</a>
-                <button type="submit" class="btn btn-primary">Modifier</button>
+                <div class="float-right">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <a @click="$router.go(-1)" class="btn btn-danger">Annuler</a>
+                      &nbsp;
+                      <button type="submit" class="btn btn-primary">Modifier</button>
+                    </div> 
+                  </div>
+                </div>
               </form>
         </div>
       </div>
@@ -251,7 +258,7 @@ import moment from 'moment'
 export default {
   data() {
     return {
-      title: "Classe",
+      title: "Modifier une classe",
       validated_at: "17/11/1973",
       selected: 1,
       classe_id: null,

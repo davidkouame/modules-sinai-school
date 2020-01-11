@@ -238,7 +238,7 @@ import moment from 'moment'
 export default {
   data() {
     return {
-      title: "Eleve",
+      title: "Information élève",
       selected: 1,
       noteEleveId: null,
       showModal: false

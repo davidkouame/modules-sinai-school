@@ -93,7 +93,7 @@
 
                 <a @click="generateMoyenne" class="btn btn-primary float-right" style="background: #EE2D20;color: #fff;opacity: 1;">Générer la moyenne</a>
 
-                <a href="#/sections-annee-scolaire" class="btn btn-danger float-right" style="background: #EE2D20;color: #fff;opacity: 1;">Retour</a>
+                <a href="#/sections-annee-scolaire" class="btn btn-danger float-right">Retour</a>
               </form>
         </div>
       </div>
@@ -104,7 +104,7 @@
 export default {
   data() {
     return {
-      title: "Section année scolaire",
+      title: "Détail section année scolaire",
     };
   },
   created() {

@@ -1,0 +1,12 @@
+{
+    "name": "macbookpro/guzzle",
+    "authors": [
+        {
+            "name": "KOUAME DAVID",
+            "email": "kouamedavid124@gmail.com"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "~6.0"
+    }
+}

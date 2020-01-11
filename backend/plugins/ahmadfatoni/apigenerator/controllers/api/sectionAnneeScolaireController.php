@@ -68,8 +68,19 @@ class sectionAnneeScolaireController extends Controller
     }
 
     public function update($id, Request $request){
-        $status = $this->SectionAnneeScolaireModel->where('id',$id)->update($request->all());
+        // $status = $this->SectionAnneeScolaireModel->where('id',$id)->update($request->all());
+        // $section = $this->SectionAnneeScolaireModel->where('id',$id)->first();
+        // $section->coefficient = 1;
+        // $section->save();
+        $arr = $request->all();
+        $section = $this->SectionAnneeScolaireModel->where('id',$id)->first();
+        while ( $data = current($arr)) {
+            $section->{key($arr)} = $data;
+            next($arr);
+        }
+        $status = $section->save();
         if( $status ){
+            trace_log("mise à jour de la section annnee scolaire ");
             return $this->helpers->apiArrayResponseBuilder(200, 'success', 'Data has been updated successfully.');
         }else{
             return $this->helpers->apiArrayResponseBuilder(400, 'bad request', 'Error, data failed to update.');

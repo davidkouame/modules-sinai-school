@@ -31,8 +31,8 @@ class SectionAnneeScolaireModel extends Model
         'anneescolaire' => ['BootnetCrasher\School\Models\AnneeScolaireModel', 'key' => 'annee_scolaire_id', 'otherKey' => 'id'],
     ];
 
-    public function afterSave(){
-        trace_log("after save");
+    public function afterUpdate(){
+        trace_log("nous sommes dans le after save");
         if($this->validated_at)
             Queue::push(MoyenneJob::class, ["section_annee_scolaire_id" => $this->id]);
     }

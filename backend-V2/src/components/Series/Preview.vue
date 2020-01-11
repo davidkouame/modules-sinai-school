@@ -19,7 +19,7 @@
                   </div>
                 </div>
                 <div class="clearfix"></div>
-                <a href="#/series" class="btn btn-danger float-right" style="background: #EE2D20;color: #fff;opacity: 1;">Retour</a>
+                <a href="#/series" class="btn btn-danger float-right">Retour</a>
               </form>
         </div>
       </div>
@@ -30,7 +30,7 @@
 export default {
   data() {
     return {
-      title: "Serie",
+      title: "Détail serie",
     };
   },
   created() {

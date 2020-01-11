@@ -39,10 +39,10 @@
             <td>
               <a :href="'/#/abonnements/preview/'+abonnement.id" class="btn btn-icon btn-info btn-sm">
                 <!----><i class="fa fa-user"></i><!---->
-              </a>
+              </a>&nbsp;
               <a :href="'/#/abonnements/edit/'+abonnement.id"  class="btn btn-icon btn-success btn-sm">
                 <!----><i class="fa fa-edit"></i><!---->
-              </a>
+              </a>&nbsp;
               <a id="show-modal" @click="showModalF(abonnement.id)" type="button" class="btn btn-icon btn-danger btn-sm">
                 <!----><i class="fa fa-times"></i><!---->
               </a>
@@ -86,7 +86,7 @@
 export default {
   data() {
     return {
-      title: "Abonnements",
+      title: "Liste des abonnements",
       showModal: false,
       abonnementId: null,
       search: null

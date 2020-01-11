@@ -203,7 +203,7 @@
                   </div>
                 </div>
                 <div class="clearfix"></div>
-                <a href="#/classes" class="btn btn-danger float-right" style="background: #EE2D20;color: #fff;opacity: 1;">Retour</a>
+                <a href="#/classes" class="btn btn-danger float-right">Retour</a>
               </form>
         </div>
       </div>
@@ -214,7 +214,7 @@
 export default {
   data() {
     return {
-      title: "Classe",
+      title: "Détail classe",
       selected: 1,
       classe_id: null,
       showModal: false,

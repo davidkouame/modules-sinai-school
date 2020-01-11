@@ -20,7 +20,6 @@
           <tr>
             <th scope="col">#</th>
             <th scope="col">Date de création</th>
-            <th scope="col">Elève</th>
             <th scope="col">Parent</th>
             <th scope="col">Téléphone parent</th>
             <th scope="col">Actions</th>
@@ -30,7 +29,6 @@
           <tr v-if="alllogsms" v-for="(log, index) in alllogsms">
             <th scope="row">{{ index + 1}}</th>
             <td>{{ log.created_at }}</td>
-            <td>{{ log.eleve.name+' '+log.eleve.surname}}</td>
             <td>{{ log.parent.name+' '+log.parent.surname}}</td>
             <td>{{ log.tel }}</td>
             <td>
@@ -68,7 +66,7 @@
 export default {
   data() {
     return {
-      title: "Log sms",
+      title: "Liste des logs sms",
       search: null
     };
   },

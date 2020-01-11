@@ -35,10 +35,10 @@
             <td>
               <a :href="'/#/moyennes/preview/'+moyenne.id" class="btn btn-icon btn-info btn-sm">
                 <!----><i class="fa fa-user"></i><!---->
-              </a>
+              </a>&nbsp;
               <a :href="'/#/moyennes/edit/'+moyenne.id"  class="btn btn-icon btn-success btn-sm">
                 <!----><i class="fa fa-edit"></i><!---->
-              </a>
+              </a>&nbsp;
               <a id="show-modal" @click="showModalF(moyenne.id)" type="button" class="btn btn-icon btn-danger btn-sm">
                 <!----><i class="fa fa-times"></i><!---->
               </a>
@@ -82,7 +82,7 @@
 export default {
   data() {
     return {
-      title: "Moyennes",
+      title: "Liste des moyennes",
       showModal: false,
       moyenneId: null,
       search: null

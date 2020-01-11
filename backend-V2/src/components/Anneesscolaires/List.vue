@@ -39,10 +39,10 @@
             <td>
               <a :href="'/#/annees-scolaires/preview/'+anneescolaire.id" class="btn btn-icon btn-info btn-sm">
                 <!----><i class="fa fa-user"></i><!---->
-              </a>
+              </a>&nbsp;
               <a :href="'/#/annees-scolaires/edit/'+anneescolaire.id"  class="btn btn-icon btn-success btn-sm">
                 <!----><i class="fa fa-edit"></i><!---->
-              </a>
+              </a>&nbsp;
               <a id="show-modal" @click="showModalF(anneescolaire.id)" type="button" class="btn btn-icon btn-danger btn-sm">
                 <!----><i class="fa fa-times"></i><!---->
               </a>
@@ -86,7 +86,7 @@
 export default {
   data() {
     return {
-      title: "Années scolaires",
+      title: "Liste des années scolaires",
       showModal: false,
       anneeScolaireId: null,
       search: null

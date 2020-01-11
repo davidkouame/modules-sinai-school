@@ -35,10 +35,10 @@
             <td>
               <a :href="'/#/matieres/preview/'+matiere.id" class="btn btn-icon btn-info btn-sm">
                 <!----><i class="fa fa-user"></i><!---->
-              </a>
+              </a>&nbsp;
               <a :href="'/#/matieres/edit/'+matiere.id"  class="btn btn-icon btn-success btn-sm">
                 <!----><i class="fa fa-edit"></i><!---->
-              </a>
+              </a>&nbsp;
               <a id="show-modal" @click="showModalF(matiere.id)" type="button" class="btn btn-icon btn-danger btn-sm">
                 <!----><i class="fa fa-times"></i><!---->
               </a>
@@ -82,7 +82,7 @@
 export default {
   data() {
     return {
-      title: "Matieres",
+      title: "Liste des élèves classes",
       showModal: false,
       matiereId: null,
       search: null
