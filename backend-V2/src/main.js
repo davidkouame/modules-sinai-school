@@ -47,6 +47,13 @@ Vue.filter('formatDate', function (value) {
   }
 });
 
+// filter qui permet de formater les dates
+Vue.filter('formatDateTo', function (value) {
+  if (value) {
+    return moment(String(value)).format('YYYY-MM-YY')
+  }
+});
+
 Vue.filter('truncate', function (value, size) {
   if (value) {
     return value.substr(0, size)+' ...';

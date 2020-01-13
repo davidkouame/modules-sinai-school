@@ -101,7 +101,7 @@
                   <div class="row">
                     <div class="col-md-12">
                       <a @click="$router.go(-1)" class="btn btn-danger">Annuler</a> &nbsp;
-                      <button type="submit" class="btn btn-primary">Envoyer</button>
+                      <button type="submit" class="btn btn-primary" :disabled="valueDisabled">Envoyer</button>
                     </div>
                   </div>
                 </div>
@@ -116,11 +116,13 @@ export default {
   data() {
     return {
       title: "Ajouter un professeur",
-      professeur: {"nom": "", "prenom": "", "email": "", "tel": "", "description": "", "matiere": "", "create_account": ""}
+      professeur: {"nom": "", "prenom": "", "email": "", "tel": "", "description": "", "matiere": "", "create_account": ""},
+      valueDisabled: false
     };
   },
   methods:{
     saveProfesseur(){
+      this.valueDisabled = true;
       let data = {
         nom: this.professeur.nom,
         prenom: this.professeur.prenom,
@@ -141,6 +143,7 @@ export default {
           console.log(error);
           alert("echec lors de l'enregistrement")
           this.errored = true;
+          this.valueDisabled = false;
         })
         .finally(() => (this.loading = false));
     }

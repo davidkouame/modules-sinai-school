@@ -58,6 +58,8 @@ class sectionAnneeScolaireController extends Controller
             $this->SectionAnneeScolaireModel->{key($arr)} = $data;
             next($arr);
         }
+        $this->SectionAnneeScolaireModel->annee_scolaire_id = $request->get('annee_scolaire_id');
+        $this->SectionAnneeScolaireModel->coefficient = $request->get('coefficient');
         $validation = Validator::make($request->all(), $this->SectionAnneeScolaireModel->rules);
         if( $validation->passes() ){
             $this->SectionAnneeScolaireModel->save();
@@ -74,10 +76,13 @@ class sectionAnneeScolaireController extends Controller
         // $section->save();
         $arr = $request->all();
         $section = $this->SectionAnneeScolaireModel->where('id',$id)->first();
-        while ( $data = current($arr)) {
+        /*while ( $data = current($arr)) {
             $section->{key($arr)} = $data;
             next($arr);
-        }
+        }*/
+        $section = $this->hydrate($section, $request);
+        // $section->annee_scolaire_id = $request->get('annee_scolaire_id');
+        // $section->coefficient = $request->get('coefficient');
         $status = $section->save();
         if( $status ){
             trace_log("mise à jour de la section annnee scolaire ");
@@ -101,6 +106,12 @@ class sectionAnneeScolaireController extends Controller
         return $this->helpers->apiArrayResponseBuilder(200, 'success', 'Data has been deleted successfully.');
     }
 
+    public function hydrate($model, $request){
+        foreach ($request->all() as $key => $value) {
+            $model->{$key} = $value;
+        }
+        return $model;
+    }
 
     public static function getAfterFilters() {return [];}
     public static function getBeforeFilters() {return [];}

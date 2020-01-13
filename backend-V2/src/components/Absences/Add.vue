@@ -71,7 +71,7 @@
                   <div class="row">
                     <div class="col-md-12">
                       <a @click="$router.go(-1)" class="btn btn-danger">Annuler</a> &nbsp;
-                      <button type="submit" class="btn btn-primary">Envoyer</button>
+                      <button type="submit" class="btn btn-primary" :disabled="valueDisabled">Envoyer</button>
                     </div>
                   </div>
                 </div>
@@ -87,7 +87,8 @@ export default {
     return {
       title: "Ajouter une absence",
       absence: {"eleve_id": "", "raisonabsence_id": "", "description": "", "heure_debut_cours": "", "heure_fin_cours": "", "section_annee_scolaire_id": ""},
-      date: null
+      date: null,
+      valueDisabled: false
     };
   },
   created() {
@@ -100,6 +101,7 @@ export default {
   },
   methods:{
     saveAbsence(){
+      this.valueDisabled = true
       let data = {
         eleve_id: this.absence.eleve_id,
         raisonabsence_id: this.absence.raisonabsence_id,
@@ -121,6 +123,7 @@ export default {
           console.log(error);
           alert("echec lors de l'enregistrement")
           this.errored = true;
+          this.valueDisabled = false;
         })
         .finally(() => (this.loading = false));
     }

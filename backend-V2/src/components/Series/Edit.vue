@@ -1,8 +1,8 @@
 <template>
   <card class="card" :title="title">
       <div class="row">
-        <div class="col-md-12" v-if="matiere">
-          <form v-on:submit="saveMatiere">
+        <div class="col-md-12" v-if="serie">
+          <form v-on:submit="saveserie">
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
@@ -11,39 +11,35 @@
                       <input
                         class="form-control"
                         type="text"
-                        v-model="matiere.libelle"
+                        v-model="serie.libelle"
                         placeholder="Libellé"
                       />
                       <!---->
                     </div>
                   </div>
-                  <div class="form-group">
+                  <!--<div class="form-group">
                       <label class="control-label">Type de matière</label>
-                      <!---->
-                      <select v-model="matiere.typematiere_id" class="form-control" >
-                      <option value="">Sélectionnez un type de matiere</option>
-                      <option :value="typematiere.id" v-for="typematiere in typesmatiere">{{ typematiere.libelle }}</option>
+                      <select v-model="serie.typeserie_id" class="form-control" >
+                      <option value="">Sélectionnez un type de serie</option>
+                      <option :value="typeserie.id" v-for="typeserie in typesserie">{{ typeserie.libelle }}</option>
                       </select>
-                      <!---->
-                    </div>
+                    </div>-->
                 </div>
-                <div class="row">
+                <!--<div class="row">
                   <div class="col-md-12">
                     <div class="form-group">
                       <label class="control-label">Description</label>
-                      <!---->
-                      <textarea class="form-control" v-model="matiere.description"></textarea>
-                      <!---->
+                      <textarea class="form-control" v-model="serie.description"></textarea>
                     </div>
                   </div>
-                </div>
+                </div>-->
                 <div class="clearfix"></div>
                 <div class="float-right">
                   <div class="row">
                     <div class="col-md-12">
                       <a @click="$router.go(-1)" class="btn btn-danger">Annuler</a>
                       &nbsp;
-                      <button type="submit" class="btn btn-primary">Modifier</button>
+                      <button type="submit" class="btn btn-primary" :disabled="valueDisabled">Modifier</button>
                     </div> 
                   </div>
                 </div>
@@ -61,27 +57,25 @@ export default {
   data() {
     return {
       title: "Modifier une serie",
-      validated_at: "17/11/1973"
+      validated_at: "17/11/1973",
+      valueDisabled: false
     };
   },
   created() {
-  // recuperation de l'année scolaire
-    this.$store.dispatch("getMatiere", {
-      matiereId: this.$route.params.id
+    // recuperation de la serie
+    this.$store.dispatch("getSerie", {
+      serieId: this.$route.params.id
     });
-    // recuperation de tous les types de matieres
-    this.$store.dispatch('getAllTypesMatiere', {payload: 0})
   },
   methods:{
-    saveMatiere(){
+    saveserie(){
+      this.valueDisabled = true;
       let data = {
-        libelle: this.matiere.libelle,
-        typematiere_id: this.matiere.typematiere_id,
-        description: this.matiere.description
+        libelle: this.serie.libelle
       };
       let store = this.$store;
       store
-        .dispatch("updateModel", {"url": "matieres", "data": data, "id": this.$route.params.id})
+        .dispatch("updateModel", {"url": "series", "data": data, "id": this.$route.params.id})
         .then(response => {
           alert("L'enregistrement a été succès")
           this.$router.go(-1)
@@ -90,16 +84,14 @@ export default {
           console.log(error);
           alert("echec lors de l'enregistrement")
           this.errored = true;
+          this.valueDisabled = false;
         })
         .finally(() => (this.loading = false));
     }
   },
   computed:{
-    typesmatiere(){
-      return this.$store.getters.typesmatiere
-    },
-    matiere() {
-      return this.$store.getters.matiere;
+    serie() {
+      return this.$store.getters.serie;
     }
   }
 };

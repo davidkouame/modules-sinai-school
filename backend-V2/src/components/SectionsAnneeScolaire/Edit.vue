@@ -77,7 +77,7 @@
                       <!---->
                       <input
                         class="form-control"
-                        type="text"
+                        type="number"
                         v-model="sectionanneescolaire.coefficient"
                         placeholder="Coefficient"
                       />
@@ -91,7 +91,7 @@
                     <div class="col-md-12">
                       <a @click="$router.go(-1)" class="btn btn-danger">Annuler</a>
                       &nbsp;
-                      <button type="submit" class="btn btn-primary">Modifier</button>
+                      <button type="submit" class="btn btn-primary" :disabled="valueDisabled">Modifier</button>
                     </div> 
                   </div>
                 </div>
@@ -109,7 +109,8 @@ export default {
   data() {
     return {
       title: "Modifier une section année scolaire",
-      validated_at: "17/11/1973"
+      validated_at: "17/11/1973",
+      valueDisabled: false
     };
   },
   created() {
@@ -122,6 +123,7 @@ export default {
   },
   methods:{
     saveSectionAnneeScolaire(){
+      this.valueDisabled = true;
       let data = {
         libelle: this.sectionanneescolaire.libelle,
         start: this.sectionanneescolaire.start,
@@ -141,6 +143,7 @@ export default {
           console.log(error);
           alert("echec lors de l'enregistrement")
           this.errored = true;
+          this.valueDisabled = false;
         })
         .finally(() => (this.loading = false));
     }

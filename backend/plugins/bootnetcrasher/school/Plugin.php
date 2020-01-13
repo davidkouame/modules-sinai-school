@@ -76,6 +76,7 @@ class Plugin extends PluginBase
     {
         $this->registerConsoleCommand('school:sendRapportMoyenne', '\BootnetCrasher\School\Console\SendRapportMoyenneCommand');
         $this->registerConsoleCommand('digit:calculMoyennes', '\BootnetCrasher\School\Console\CalculMoyenne');
+        $this->registerConsoleCommand('school:seeder', '\BootnetCrasher\School\Console\SeederSchool');
         // $this->registerConsoleCommand('school.seeder', 'Bootnetcrasher\School\Console\Seeder');
     }
 }

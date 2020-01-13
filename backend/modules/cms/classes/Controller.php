@@ -1607,4 +1607,11 @@ class Controller
             $token
         );
     }
+
+    public function hydrate($model, $request){
+        foreach ($request->all() as $key => $value) {
+            $model->{$key} = $value;
+        }
+        return $model;
+    }
 }

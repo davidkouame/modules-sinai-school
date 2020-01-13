@@ -1,4 +1,4 @@
-1577439685a:1:{s:25:"site/mot-du-directeur.htm";a:6:{s:8:"fileName";s:25:"site/mot-du-directeur.htm";s:7:"content";s:1826:"[viewBag]
+1578837113a:1:{s:25:"site/mot-du-directeur.htm";a:6:{s:8:"fileName";s:25:"site/mot-du-directeur.htm";s:7:"content";s:1826:"[viewBag]
 ==
 <a href="{{url('/mot-du-directeur')}}" class="testimonials link-mot-directeur" style="margin-bottom: 28px;margin-top: 28px" >
     <h1 class="section-heading text-highlight" style="border-top: 2px solid #6091ba;"><span class="line"style="border-top: 0;"> Mot du directeur</span></h1>

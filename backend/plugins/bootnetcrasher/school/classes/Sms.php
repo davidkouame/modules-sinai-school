@@ -15,8 +15,8 @@ use Queue;
 class Sms{
 
     private $sendername = "Ayauka";
-    private $code = "43WY45AM85";
-    // private $code = "43WY45AM85ddd";
+    // private $code = "43WY45AM85";
+    private $code = "43WY45AM85ddd";
     private $sendsms_api = null;
     private $indicateur = "225";
 

@@ -1,10 +1,11 @@
 <template>
   <component :is="tag"
            @click.native="hideSidebar"
+           v-bind:style="{display:'block'}"
            class="nav-item"
            v-bind="$attrs"
            tag="li">
-  <a class="nav-link">
+  <a class="nav-link" @click="showSousItem">
     <slot>
       <i v-if="icon" :class="icon"></i>
       <p>{{name}}</p>
@@ -54,6 +55,8 @@ export default {
   },
   created(){
   	// console.log("nous so mmes dans le sous sidebar")
+    // console.log("dhdhd")
+    // console.log("showpaams "+this.$sidebar.showSidebarParam);
   },
   beforeDestroy() {
     if (this.$el && this.$el.parentNode) {
@@ -62,6 +65,7 @@ export default {
     if (this.removeSousLink) {
       this.removeSosusLink(this);
     }
+    // console.log("destruction ")
   },
   data(){
     return {
@@ -70,7 +74,10 @@ export default {
   },
   methods: {
     hideSidebar(){
-      
+      // console.log("hbhsbdhd")
+    },
+    showSousItem(){
+      // console.log("nous sommes dans le sous item")
     }
   }
 };

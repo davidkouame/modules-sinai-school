@@ -12,6 +12,7 @@ use BootnetCrasher\School\Models\AnneeScolaireModel;
 use BootnetCrasher\School\Models\SectionAnneeScolaireModel;
 use Illuminate\Support\Collection;
 use DB;
+use Bootnetcrasher\School\Classes\CalculMoyenne;
 
 /**
  * Elle permet d'envoyer un billan à la validation d'une section d'annee
@@ -25,6 +26,11 @@ class MoyenneJob{
     public function fire($job, $data = null) {
         try{
             $this->hydrate($data);
+            $calculMoyenne = new CalculMoyenne;
+            // calculer les moyennes des matieres d'une section
+            $calculMoyenne->calculMoyenneMatiere($this->sectionAnneeScolaire);
+            // calculer la moyenne de section
+            $calculMoyenne->calculerLaMoyenneSection($this->sectionAnneeScolaire);
             // recuperation de toutes les classes eleves
             $classeseleves = $this->getClassesEleves();
             $sectionanneescolaire = $this->getSectionAnneeScolaire();

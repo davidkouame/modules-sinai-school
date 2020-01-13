@@ -38,7 +38,7 @@
                       <!---->
                       <input
                         class="form-control"
-                        type="date"
+                        type="text"
                         v-model="note.datenoteeffectue"
                         disabled
                       />

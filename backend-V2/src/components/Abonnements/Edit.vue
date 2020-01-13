@@ -92,7 +92,7 @@
                     <div class="col-md-12">
                       <a @click="$router.go(-1)" class="btn btn-danger">Annuler</a>
                       &nbsp;
-                      <button type="submit" class="btn btn-primary">Modifier</button>
+                      <button type="submit" class="btn btn-primary" :disabled="valueDisabled">Modifier</button>
                     </div> 
                   </div>
                 </div>
@@ -113,7 +113,8 @@ export default {
       showModal: false,
       abonnementId: 0,
       eleves: [],
-      isLoader: false
+      isLoader: false,
+      valueDisabled: false
     };
   },
   created() {
@@ -134,6 +135,7 @@ export default {
   },
   methods:{
     saveAbonnement(){
+      this.valueDisabled = true;
       let data = {
         parent_id: this.abonnement.parent_id,
         annee_scolaire_id: this.abonnement.annee_scolaire_id,
@@ -152,6 +154,7 @@ export default {
           console.log(error);
           alert("echec lors de l'enregistrement")
           this.errored = true;
+          this.valueDisabled = false;
         })
         .finally(() => (this.loading = false));
     },

@@ -80,7 +80,7 @@
                     <div class="col-md-12">
                       <a @click="$router.go(-1)" class="btn btn-danger">Annuler</a>
                       &nbsp;
-                      <button type="submit" class="btn btn-primary">Modifier</button>
+                      <button type="submit" class="btn btn-primary" :disabled="valueDisabled">Modifier</button>
                     </div> 
                   </div>
                 </div>
@@ -96,7 +96,8 @@
 export default {
   data() {
     return {
-      title: "Modifier un élève"
+      title: "Modifier un élève",
+      valueDisabled: false
     };
   },
   created() {
@@ -107,6 +108,7 @@ export default {
   },
   methods:{
     saveEleve(){
+      this.valueDisabled = true;
       let data = {
         name: this.eleve.name,
         surname: this.eleve.surname,
@@ -124,6 +126,7 @@ export default {
           console.log(error);
           alert("echec lors de l'enregistrement")
           this.errored = true;
+          this.valueDisabled = true;
         })
         .finally(() => (this.loading = false));
     }

@@ -21,12 +21,7 @@
                     <div class="form-group">
                       <label class="control-label">Date de création</label>
                       <!---->
-                      <input
-                        class="form-control"
-                        type="date"
-                        v-model="note.datenoteeffectue"
-                        placeholder="Date de création"
-                      />
+                      <datetime v-model="note.datenoteeffectue" input-class="form-control" type="datetime"></datetime>
                       <!---->
                     </div>
                   </div>
@@ -109,7 +104,7 @@
                   <div class="row">
                     <div class="col-md-12">
                       <a @click="$router.go(-1)" class="btn btn-danger">Annuler</a> &nbsp;
-                      <button type="submit" class="btn btn-primary">Envoyer</button>
+                      <button type="submit" class="btn btn-primary" :disabled="valueDisabled">Envoyer</button>
                     </div>
                   </div>
                 </div>
@@ -125,7 +120,8 @@ export default {
     return {
       title: "Ajouter une note",
       note: {"libelle": "", "datenoteeffectue": "", "description": "", "typenote_id": "",
-      "matiere_id": "", "coefficient": "", "classe_id": "", "section_annee_scolaire_id": ""}
+      "matiere_id": "", "coefficient": "", "classe_id": "", "section_annee_scolaire_id": ""},
+      valueDisabled: false
     };
   },
   created() {
@@ -140,9 +136,10 @@ export default {
   },
   methods:{
     saveMatiere(){
+      this.valueDisabled = true;
       let data = {
         libelle: this.note.libelle,
-        datenoteeffectue: this.note.datenoteeffectue,
+        datenoteeffectue: this.note.datenoteeffectue.split(".")[0].replace('T', ' '),
         description: this.note.description,
         typenote_id: this.note.typenote_id,
         matiere_id: this.note.matiere_id,
@@ -160,6 +157,7 @@ export default {
         .catch(error => {
           console.log(error);
           alert("echec lors de l'enregistrement")
+          this.valueDisabled = false;
           this.errored = true;
         })
         .finally(() => (this.loading = false));

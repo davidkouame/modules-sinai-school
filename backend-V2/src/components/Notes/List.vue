@@ -33,7 +33,7 @@
             <td>{{ note.reference}}</td>
             <td>{{ note.libelle | truncate('20')}}</td>
             <td>{{ note.typenote.libelle}}</td>
-            <td>{{ note.created_at}}</td>
+            <td>{{ note.datenoteeffectue}}</td>
             <td>
               <a :href="'/#/notes/preview/'+note.id" class="btn btn-icon btn-info btn-sm">
                 <!----><i class="fa fa-user"></i><!---->

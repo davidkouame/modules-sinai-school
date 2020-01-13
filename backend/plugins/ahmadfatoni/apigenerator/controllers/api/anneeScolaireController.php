@@ -52,12 +52,14 @@ class anneeScolaireController extends Controller
 
     public function store(Request $request){
 
-    	$arr = $request->all();
+        $arr = $request->all();
 
         while ( $data = current($arr)) {
             $this->AnneeScolaireModel->{key($arr)} = $data;
             next($arr);
         }
+
+        $this->AnneeScolaireModel->type_annee_scolaire_id = $request->get('type_annee_scolaire_id');
 
         $validation = Validator::make($request->all(), $this->AnneeScolaireModel->rules);
         
@@ -78,6 +80,8 @@ class anneeScolaireController extends Controller
             $anneescolaire->{key($arr)} = $data;
             next($arr);
         }
+        $anneescolaire = $this->hydrate($anneescolaire, $request);
+        // $anneescolaire->type_annee_scolaire_id = $request->get('type_annee_scolaire_id');
         $status = $anneescolaire->save();
         if( $status ){
             return $this->helpers->apiArrayResponseBuilder(200, 'success', 'Data has been updated successfully.');

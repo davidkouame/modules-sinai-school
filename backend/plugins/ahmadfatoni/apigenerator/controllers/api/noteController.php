@@ -65,9 +65,14 @@ class noteController extends Controller
             }
         }
         
-        if(!$request->has('professeur_id')){
+        /*if(!$request->has('professeur_id')){
             $data = $data->where('professeur_id', 0);
-        }
+        }*/
+
+        //if($request->has('professeur_id')){
+        //    $data = $data->where('professeur_id', 0);
+        //}
+        // dd($data->get());
         
         $data = $data->paginate(10)->toArray();
         return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);

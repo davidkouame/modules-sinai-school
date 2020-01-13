@@ -25,7 +25,6 @@
             <th scope="col">Libellé</th>
             <th scope="col">Début</th>
             <th scope="col">Fin</th>
-            <th scope="col">Date de validation</th>
             <th scope="col">Actions</th>
           </tr>
         </thead>
@@ -35,7 +34,6 @@
             <td>{{ anneescolaire.libelle}}</td>
             <td>{{ anneescolaire.start}}</td>
             <td>{{ anneescolaire.end }}</td>
-            <td>{{ anneescolaire.validated_at }}</td>
             <td>
               <a :href="'/#/annees-scolaires/preview/'+anneescolaire.id" class="btn btn-icon btn-info btn-sm">
                 <!----><i class="fa fa-user"></i><!---->

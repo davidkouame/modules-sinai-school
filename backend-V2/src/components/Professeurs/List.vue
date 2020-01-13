@@ -25,6 +25,7 @@
             <th scope="col">Reference</th>
             <th scope="col">Noms</th>
             <th scope="col">Prénoms</th>
+            <th scope="col">Matière</th>
             <th scope="col">Actions</th>
           </tr>
         </thead>
@@ -34,6 +35,7 @@
             <td>{{ professeur.reference}}</td>
             <td>{{ professeur.nom}}</td>
             <td>{{ professeur.prenom}}</td>
+            <td>{{ professeur.matiere}}</td>
             <td>
               <a :href="'/#/professeurs/preview/'+professeur.id" class="btn btn-icon btn-info btn-sm">
                 <!----><i class="fa fa-user"></i><!---->

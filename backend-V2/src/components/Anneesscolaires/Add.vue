@@ -77,7 +77,7 @@
                   <div class="row">
                     <div class="col-md-12">
                       <a @click="$router.go(-1)" class="btn btn-danger">Annuler</a> &nbsp;
-                      <button type="submit" class="btn btn-primary">Envoyer</button>
+                      <button type="submit" class="btn btn-primary" :disabled="valueDisabled">Envoyer</button>
                     </div>
                   </div>
                 </div>
@@ -92,7 +92,8 @@ export default {
   data() {
     return {
       title: "Ajouter unne année scolaire",
-      anneescolaire: {"libelle": "", "start": "", "end": "", "validated_at": "", "type_annee_scolaire_id": ""}
+      anneescolaire: {"libelle": "", "start": "", "end": "", "validated_at": "", "type_annee_scolaire_id": ""},
+      valueDisabled: false
     };
   },
   created() {
@@ -101,6 +102,8 @@ export default {
   },
   methods:{
     saveAnneeScolaire(){
+      this.valueDisabled = true;
+      // alert("gdgd")
       // console.log("annee scolaire"+JSON.stringify(this.anneescolaire))
       const data = new FormData();
       data.append('libelle', this.anneescolaire.libelle);
@@ -120,6 +123,7 @@ export default {
           console.log(error);
           alert("echec lors de l'enregistrement")
           this.errored = true;
+          this.valueDisabled = false;
         })
         .finally(() => (this.loading = false));
     }

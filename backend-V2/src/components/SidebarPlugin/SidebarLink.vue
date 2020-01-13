@@ -4,7 +4,7 @@
              class="nav-item"
              v-bind="$attrs"
              tag="li">
-    <a class="nav-link">
+    <a class="nav-link" @click="testClick">
       <slot>
         <i v-if="icon" :class="icon"></i>
         <p>{{name}}</p>
@@ -20,7 +20,7 @@
         </a>
       </li>
     </div>-->
-    <ul class="nav">
+    <ul class="nav" style="margin-left: -22px;" v-bind:style="{display:showSousParams}">
       <slot name="souslinks">
       </slot>
     </ul>      
@@ -48,7 +48,8 @@ export default {
     return {
       style: "animation-fill-mode: both; animation-timing-function: ease-out; display: none;",
       isSee: false,
-      souslinks: []
+      souslinks: [],
+      isMenuParam: false
     };
   },
   inject: {
@@ -94,7 +95,7 @@ export default {
         this.isSee = false
       }
       if (this.autoClose) {
-        // this.$sidebar.displaySidebar(false);
+        this.$sidebar.displaySidebar(false);
       }
     },
     isActive() {
@@ -111,6 +112,17 @@ export default {
       if (index > -1) {
         this.souslinks.splice(index, 1);
       }
+    },
+    testClick(){
+      // console.log("le nom du menu est params "+this.name)
+      // this.isMenuParam = this.name == "Paramètre"
+      // this.$sidebar.showSidebarParam
+      if(this.name == "Paramètre"){
+        this.$sidebar.showSidebarParam = true
+      }else{
+        this.$sidebar.showSidebarParam = false
+      }
+      // console.log("le menu est "+this.isMenuParam)
     }
   },
   mounted() {
@@ -124,6 +136,7 @@ export default {
   created(){
     // console.log("liste des sous links "+ JSON.stringify(this.$slots.souslinks, getCircularReplacer()))
     // console.log(this.souslinks)
+    // console.log("à la création");
   },
   beforeDestroy() {
     if (this.$el && this.$el.parentNode) {
@@ -131,6 +144,15 @@ export default {
     }
     if (this.removeLink) {
       this.removeLink(this);
+    }
+  },
+  computed:{
+    showSousParams(){
+      if(this.$sidebar.showSidebarParam){
+        return 'block'
+      }else{
+        return 'none'
+      }
     }
   }
 };

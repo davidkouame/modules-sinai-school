@@ -149,7 +149,7 @@
                   <div class="row">
                     <div class="col-md-12">
                       <a @click="$router.go(-1)" class="btn btn-danger">Annuler</a> &nbsp;
-                      <button type="submit" class="btn btn-primary">Envoyer</button>
+                      <button type="submit" class="btn btn-primary" :disabled="valueDisabled">Envoyer</button>
                     </div>
                   </div>
                 </div>
@@ -166,6 +166,7 @@ export default {
       title: "Ajouter une moyenne",
       moyenne: {"eleve_id": "", "matiere_id": "", "coefficient_matiere": "", "coefficient_section": "", "classe_id": "", "valeur": "", "rang": "", "section_annee_scolaire_id": "", "annee_scolaire_id": "", "type_moyenne_id": "",
       "reference": ""},
+      valueDisabled: false,
       date: null
     };
   },
@@ -187,6 +188,7 @@ export default {
   },
   methods:{
     saveMoyenne(){
+      this.valueDisabled = true;
       let data = {
         eleve_id: this.moyenne.eleve_id,
         matiere_id: this.moyenne.matiere_id,
@@ -212,6 +214,7 @@ export default {
           console.log(error);
           alert("echec lors de l'enregistrement")
           this.errored = true;
+          this.valueDisabled = false;
         })
         .finally(() => (this.loading = false));
     }

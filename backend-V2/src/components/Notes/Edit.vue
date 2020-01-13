@@ -36,12 +36,7 @@
                     <div class="form-group">
                       <label class="control-label">Date de création</label>
                       <!---->
-                      <input
-                        class="form-control"
-                        type="date"
-                        v-model="note.datenoteeffectue"
-                        placeholder="Date de création"
-                      />
+                      <datetime v-model="datenoteeffectue" input-class="form-control" type="datetime"></datetime>
                       <!---->
                     </div>
                   </div>
@@ -125,7 +120,7 @@
                     <div class="col-md-12">
                       <a @click="$router.go(-1)" class="btn btn-danger">Annuler</a>
                       &nbsp;
-                      <button type="submit" class="btn btn-primary">Modifier</button>
+                      <button type="submit" class="btn btn-primary" :disabled="valueDisabled">Modifier</button>
                     </div> 
                   </div>
                 </div>
@@ -143,7 +138,9 @@ export default {
   data() {
     return {
       title: "Modifier une note",
-      validated_at: "17/11/1973"
+      validated_at: "17/11/1973",
+      datenoteeffectue: null,
+      valueDisabled: false
     };
   },
   created() {
@@ -161,9 +158,10 @@ export default {
   },
   methods:{
     saveNote(){
+      this.valueDisabled = true;
       let data = {
         libelle: this.note.libelle,
-        datenoteeffectue: this.note.datenoteeffectue,
+        datenoteeffectue: this.datenoteeffectue.split(".")[0].replace('T', ' '),
         description: this.note.description,
         typenote_id: this.note.typenote_id,
         matiere_id: this.note.matiere_id,
@@ -182,6 +180,7 @@ export default {
           console.log(error);
           alert("echec lors de l'enregistrement")
           this.errored = true;
+          this.valueDisabled = false;
         })
         .finally(() => (this.loading = false));
     }
@@ -201,6 +200,11 @@ export default {
     },
     sectionsanneescolaire(){
       return this.$store.getters.sectionsanneescolaire
+    }
+  },
+  watch:{
+    note(){
+      this.datenoteeffectue = this.note.datenoteeffectue.replace(' ', 'T')+'.00000'
     }
   }
 };

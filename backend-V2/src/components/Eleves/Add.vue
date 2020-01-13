@@ -64,7 +64,7 @@
                   <div class="row">
                     <div class="col-md-12">
                       <a @click="$router.go(-1)" class="btn btn-danger">Annuler</a> &nbsp;
-                      <button type="submit" class="btn btn-primary">Envoyer</button>
+                      <button type="submit" class="btn btn-primary" :disabled="valueDisabled">Envoyer</button>
                     </div>
                   </div>
                 </div>
@@ -79,11 +79,13 @@ export default {
   data() {
     return {
       title: "Ajouter un élève",
-      eleve: {"name": "", "surname": "", "email": "", "tel": ""}
+      eleve: {"name": "", "surname": "", "email": "", "tel": ""},
+      valueDisabled: false
     };
   },
   methods:{
     saveEleve(){
+      this.valueDisabled = true;
       let data = {
         name: this.eleve.name,
         surname: this.eleve.surname,
@@ -101,6 +103,7 @@ export default {
           console.log(error);
           alert("echec lors de l'enregistrement")
           this.errored = true;
+          this.valueDisabled = false;
         })
         .finally(() => (this.loading = false));
     }

@@ -58,7 +58,7 @@
                   <div class="row">
                     <div class="col-md-12">
                       <a @click="$router.go(-1)" class="btn btn-danger">Annuler</a> &nbsp;
-                      <button type="submit" class="btn btn-primary">Envoyer</button>
+                      <button type="submit" class="btn btn-primary" :disabled="valueDisabled">Envoyer</button>
                     </div>
                   </div>
                 </div>
@@ -73,7 +73,8 @@ export default {
   data() {
     return {
       title: "Ajouter une classe",
-      classe: {"libelle": "", "niveau_id": "", "serie_id": "", "annee_scolaire_id": ""}
+      classe: {"libelle": "", "niveau_id": "", "serie_id": "", "annee_scolaire_id": ""},
+      valueDisabled: false
     };
   },
   created() {
@@ -86,6 +87,7 @@ export default {
   },
   methods:{
     saveClasse(){
+      this.valueDisabled = true;
       let data = {
         libelle: this.classe.libelle,
         niveau_id: this.classe.niveau_id,
@@ -103,6 +105,7 @@ export default {
           console.log(error);
           alert("echec lors de l'enregistrement")
           this.errored = true;
+          this.valueDisabled = false;
         })
         .finally(() => (this.loading = false));
     }

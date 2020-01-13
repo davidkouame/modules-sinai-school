@@ -4,6 +4,7 @@ import SousSidebarLink from "./SousSidebarLink";
 
 const SidebarStore = {
   showSidebar: false,
+  showSidebarParam: false,
   sidebarLinks: [],
   displaySidebar(value) {
     this.showSidebar = value;

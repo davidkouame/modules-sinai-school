@@ -32,7 +32,7 @@ class AnneeScolaireModel extends Model
     ];
 
     public function afterUpdate(){
-        if($this->validated_at)
+         if($this->validated_at)
             Queue::push(BillanAnnuelleJob::class, ["annee_scolaire_id" => $this->id]);
     }
 }

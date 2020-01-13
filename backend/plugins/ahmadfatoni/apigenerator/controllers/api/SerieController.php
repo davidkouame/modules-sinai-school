@@ -62,17 +62,11 @@ class SerieController extends Controller
     }
 
     public function update($id, Request $request){
-
-        $status = $this->SerieClasseModel->where('id',$id)->update($data);
-    
+        $status = $this->SerieClasseModel->where('id',$id)->update($request->all());
         if( $status ){
-            
             return $this->helpers->apiArrayResponseBuilder(200, 'success', 'Data has been updated successfully.');
-
         }else{
-
             return $this->helpers->apiArrayResponseBuilder(400, 'bad request', 'Error, data failed to update.');
-
         }
     }
 

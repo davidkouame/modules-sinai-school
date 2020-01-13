@@ -47,6 +47,7 @@ class CalculMoyenne {
      */
     public function calculMoyenneMatiere(SectionAnneeScolaireModel $section){
         if($section){
+            
             // recuperation de tous les élèves
             $eleves = EleveModel::all();
             foreach ($eleves as $eleve) {
@@ -133,22 +134,74 @@ class CalculMoyenne {
                     }
                 }
                 if($moyenneSection && $coefficientSection){
-                    $moyenneModelSection = new MoyenneModel;
-                    $moyenneModelSection->valeur = $moyenneSection ? $moyenneSection / $coefficientSection : 0;
-                    $moyenneModelSection->coefficient_section = $coefficientSection;
-                    $moyenneModelSection->section_annee_scolaire_id = $section->id;
-                    $moyenneModelSection->type_moyenne_id = 3;
-                    $moyenneModelSection->eleve_id = $eleve->id;
-                    $moyenneModelSection->classe_id = $classeEleve->classe_id;
-                    $moyenneModelSection->save();
+                    trace_log("calcul de la moyenne de section ");
+                    trace_log("le coefficient section est ".$coefficientSection);
+                    $valeur = $moyenneSection ? $moyenneSection / $coefficientSection : 0;
+                    $this->saveMoyenneSection($valeur, $coefficientSection, $section->id, 3, $eleve->id, $classeEleve->classe_id);
                 }
             }
         }
     }
 
+    public function saveMoyenne($valeur, $coefficientSection, $sectionId, $typeMoyenneId, $eleveId, $classeId){
+        trace_log("calcul de ma moyenne annuelle ");
+        $moyenneModelSection = MoyenneModel::where('eleve_id', $eleveId)->
+        where('type_moyenne_id', $typeMoyenneId)->where('classe_id', $classeId)->first();
+        if($moyenneModelSection){
+            $moyenneModelSection->valeur = $valeur;
+            $moyenneModelSection->coefficient_section = $coefficientSection;
+        }else{
+            $moyenneModelSection = new MoyenneModel;
+            $moyenneModelSection->valeur = $valeur;
+            $moyenneModelSection->coefficient_section = $coefficientSection;
+            $moyenneModelSection->section_annee_scolaire_id = $sectionId;
+            $moyenneModelSection->type_moyenne_id = $typeMoyenneId;
+            $moyenneModelSection->eleve_id = $eleveId;
+            $moyenneModelSection->classe_id = $classeId;
+        }
+        $moyenneModelSection->save();
+    }
+
+    public function saveMoyenneAnnuelle($valeur, $anneeScolaireId, $typeMoyenneId, $eleveId, $classeId){
+        trace_log("calcul de la moyenne annuelle ");
+        $moyenneModelAnnuelle = MoyenneModel::where('eleve_id', $eleveId)->
+        where('type_moyenne_id', $typeMoyenneId)->where('classe_id', $classeId)->first();
+        if($moyenneModelAnnuelle){
+            $$moyenneModelAnnuelle->valeur = $valeur;
+        }else{
+            $moyenneModelAnnuelle = new MoyenneModel;
+            $moyenneModelAnnuelle->valeur = $valeur;
+            $moyenneModelAnnuelle->annee_scolaire_id = $anneeScolaireId;
+            $moyenneModelAnnuelle->type_moyenne_id = $typeMoyenneId;
+            $moyenneModelAnnuelle->eleve_id = $eleveId;
+            $moyenneModelAnnuelle->classe_id = $classeId;
+        }
+        $moyenneModelAnnuelle->save();
+    }
+
+    public function saveMoyenneSection($valeur, $coefficientSection, $sectionId, $typeMoyenneId, $eleveId, $classeId){
+        $moyenneModelSection = MoyenneModel::where('eleve_id', $eleveId)->
+        where('type_moyenne_id', 3)->where('classe_id', $classeId)
+        ->where('section_annee_scolaire_id', $sectionId)->first();
+        if($moyenneModelSection){
+            $moyenneModelSection->valeur = $valeur;
+            $moyenneModelSection->coefficient_section = $coefficientSection;
+        }else{
+            $moyenneModelSection = new MoyenneModel;
+            $moyenneModelSection->valeur = $valeur;
+            $moyenneModelSection->coefficient_section = $coefficientSection;
+            $moyenneModelSection->section_annee_scolaire_id = $sectionId;
+            $moyenneModelSection->type_moyenne_id = $typeMoyenneId;
+            $moyenneModelSection->eleve_id = $eleveId;
+            $moyenneModelSection->classe_id = $classeId;
+        }
+        $moyenneModelSection->save();
+    }
+
     // Calcul de moyenne des matieres
     public function calculMatiere($notes, $eleve_id, $matiere_id, $classe_id, 
             $section_annee_scolaire_id) {
+                
         $points = null;
         $coefficient = null;
         foreach ($notes as $note) {
@@ -168,9 +221,11 @@ class CalculMoyenne {
             $classematiere = ClasseMatiereModel::where('classe_id', $classe_id)
                     ->where('matiere_id', $matiere_id)->first();
             if($classematiere){
+                // trace_log("calcul des moyennes matieres");
                 // sauvegarde de la moyenne
                 $moyenne = MoyenneModel::where('eleve_id', $eleve_id)
                         ->where('matiere_id', $matiere_id)
+                        ->where('section_annee_scolaire_id', $section_annee_scolaire_id)
                         ->first();
                 if ($moyenne) {
                     $moyenne->valeur = $moy;
@@ -233,13 +288,15 @@ class CalculMoyenne {
                     }
                 }
                 if($moyenneAnnuelle && $coefficientAnnuelle){
-                    $moyenneModelAnnuelle = new MoyenneModel;
+                    /*$moyenneModelAnnuelle = new MoyenneModel;
                     $moyenneModelAnnuelle->valeur = $moyenneAnnuelle ? $moyenneAnnuelle / $coefficientAnnuelle : 0;
                     $moyenneModelAnnuelle->annee_scolaire_id = $anneescolaire->id;
                     $moyenneModelAnnuelle->type_moyenne_id = 1;
                     $moyenneModelAnnuelle->eleve_id = $eleve->id;
                     $moyenneModelAnnuelle->classe_id = $classeEleve->classe_id;
-                    $moyenneModelAnnuelle->save();
+                    $moyenneModelAnnuelle->save();*/
+                    $valeur = $moyenneAnnuelle ? $moyenneAnnuelle / $coefficientAnnuelle : 0;
+                    $this->saveMoyenneAnnuelle($valeur, $anneescolaire->id, 1, $eleve->id, $classeEleve->classe_id);
                 }
             }
         }

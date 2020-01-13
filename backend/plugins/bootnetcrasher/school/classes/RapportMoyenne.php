@@ -100,8 +100,11 @@ class RapportMoyenne {
                     ->first();
         $footer = null;
         if($moyenneannuelle){
+            trace_log("nous avons une moyenne annuelle ");
             $footer = $footer ."----------------------------------\n";
             $footer = $footer."Moyenne annuelle : ".$moyenneannuelle->valeur."/20";
+        }else{
+            trace_log("nous n'avons pas une moyenne annuelle ");
         }
         if($body)
             $this->rapport = $head.$body.$footer;
