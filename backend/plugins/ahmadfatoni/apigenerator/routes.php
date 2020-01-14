@@ -58,3 +58,5 @@ Route::resource('api/v1/abonnements', 'AhmadFatoni\ApiGenerator\Controllers\API\
 Route::get('api/v1/abonnements/{id}/delete', ['as' => 'api/v1/abonnements.delete', 'uses' => 'AhmadFatoni\ApiGenerator\Controllers\API\AbonnementController@destroy']);
 Route::resource('api/v1/packsabonnements', 'AhmadFatoni\ApiGenerator\Controllers\API\PackAbonnementController', ['except' => ['destroy', 'create', 'edit']]);
 Route::get('api/v1/packsabonnements/{id}/delete', ['as' => 'api/v1/packsabonnements.delete', 'uses' => 'AhmadFatoni\ApiGenerator\Controllers\API\PackAbonnementController@destroy']);
+Route::resource('api/v1/pays', 'AhmadFatoni\ApiGenerator\Controllers\API\PaysController', ['except' => ['destroy', 'create', 'edit']]);
+Route::get('api/v1/pays/{id}/delete', ['as' => 'api/v1/pays.delete', 'uses' => 'AhmadFatoni\ApiGenerator\Controllers\API\PaysController@destroy']);

@@ -182,7 +182,6 @@ class userController extends Controller
 
 
     public function updateUser(Request $request){
-        trace_log("vdgvgds");
         $data = $request->all();
         // if($data["password"])
         $rules = null;
@@ -194,7 +193,7 @@ class userController extends Controller
             ];
         }else{
             $rules = [
-                'username'     => 'required',
+                // 'username'     => 'required',
                 // 'tel' => 'required'
             ];
         }
@@ -210,11 +209,15 @@ class userController extends Controller
             n'existe pas ");
             return $this->helpers->apiArrayResponseBuilder(500, 'error', "Une erreur est survenue lors de la mise à jour du professeur !");
         }
-        $user->name = $data['username'];
-        if(array_key_exists("password", $data)){
+        /*if(array_key_exists("username", $data)){
+            $user->name = $data['username'];
+        }*/
+        // $user->name = $data['username'];
+        /*if(array_key_exists("password", $data)){
             $user->password = $data['password'];
             $user->password_confirmation = $data['password_confirmation'];
-        }
+        }*/
+        $user = $this->hydrate($user, $request);
         $user->save();
         if($user->professeur_id){
             $professeur = ProfesseurModel::find($user->professeur_id);
@@ -228,6 +231,17 @@ class userController extends Controller
         }
         return $this->helpers->apiArrayResponseBuilder(200, 'success', $user);
         // $user->name = $request->get('username');
+    }
+
+    public function hydrate($model, $request){
+        foreach ($request->except('password') as $key => $value) {
+            $model->{$key} = $value;
+        }
+        if(array_key_exists("password", $request->all())){
+            $model->password = $data['password'];
+            $model->password_confirmation = $data['password_confirmation'];
+        }
+        return $model;
     }
 
 

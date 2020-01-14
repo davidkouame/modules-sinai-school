@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use AhmadFatoni\ApiGenerator\Helpers\Helpers;
 use BootnetCrasher\School\Models\EleveModel;
 use Illuminate\Support\Facades\Validator;
+use RainLab\User\Models\User;
 class eleveController extends Controller
 {
     protected $EleveModel;
@@ -137,11 +138,35 @@ class eleveController extends Controller
         $validation = Validator::make($request->all(), $this->EleveModel->rules);
         if( $validation->passes() ){
             $this->EleveModel->save();
+            $eleve = $this->EleveModel;
+            $this->createOrUpdateAccountUser($request, $eleve);
             return $this->helpers->apiArrayResponseBuilder(201, 'created', ['id' => $this->EleveModel->id]);
         }else{
             return $this->helpers->apiArrayResponseBuilder(400, 'fail', $validation->errors() );
         }
 
+    }
+
+    public function createOrUpdateAccountUser($data, $eleve){
+        $user = User::where('eleve_id', $eleve->id)->first();
+        if($user){
+            $user->password = "0000";
+            $user->password_confirmation = "0000";
+            trace_log("creation d'un utilisateur");
+        }else{
+            
+            $user = new User;
+            $user->name = $data->name;
+            $user->email = $data->email;
+            $user->surname = $data->surname;
+            $user->username = $data->email;
+            $user->is_activated = 1;
+            $user->password = "0000";
+            $user->password_confirmation = "0000";
+            $user->activated_at = now();
+            $user->eleve_id = $eleve->id;
+        }
+        $user->save();
     }
 
     public function updateUser($eleve, $request){
@@ -156,8 +181,10 @@ class eleveController extends Controller
 
     public function update($id, Request $request){
         $status = $this->EleveModel->where('id',$id)->update($request->all());
+        $eleve = $this->EleveModel->where('id',$id)->first();
         $this->updateUser($this->EleveModel->where('id',$id)->first(), $request);
-        if( $status ){
+        if($status){
+            $this->createOrUpdateAccountUser($request, $eleve);
             return $this->helpers->apiArrayResponseBuilder(200, 'success', 'Data has been updated successfully.');
         }else{
             return $this->helpers->apiArrayResponseBuilder(400, 'bad request', 'Error, data failed to update.');
@@ -165,9 +192,7 @@ class eleveController extends Controller
     }
 
     public function delete($id){
-
         $this->EleveModel->where('id',$id)->delete();
-
         return $this->helpers->apiArrayResponseBuilder(200, 'success', 'Data has been deleted successfully.');
     }
 

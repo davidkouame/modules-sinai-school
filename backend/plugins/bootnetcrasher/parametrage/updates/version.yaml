@@ -15,3 +15,6 @@
 1.0.6:
     - 'Created table bootnetcrasher_parametrage_pack_abonnement'
     - builder_table_create_bootnetcrasher_parametrage_pack_abonnement.php
+1.0.7:
+    - 'Created table bootnetcrasher_parametrage_pays'
+    - builder_table_create_bootnetcrasher_parametrage_pays.php

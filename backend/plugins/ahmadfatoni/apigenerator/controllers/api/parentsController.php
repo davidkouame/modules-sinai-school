@@ -8,6 +8,7 @@ use AhmadFatoni\ApiGenerator\Helpers\Helpers;
 use BootnetCrasher\School\Models\ParentModel;
 use Illuminate\Support\Facades\Validator;
 use RainLab\User\Models\User;
+use Bootnetcrasher\School\Classes\Sms;
 
 class parentsController extends Controller
 {
@@ -96,6 +97,7 @@ class parentsController extends Controller
                 $user->surname = $data->surname;
                 $user->username = $data->email;
                 $user->password = "0000";
+                $user->is_activated = 1;
                 $user->password_confirmation = "0000";
                 $user->activated_at = now();
                 $user->parenteleve_id = $parent->id;
@@ -106,7 +108,18 @@ class parentsController extends Controller
     }
 
     public function sharedPassword($user){
-        // todo send password a user by tel or email
+        try{
+            // recuperation du parent
+            $parent = ParentModel::find($user->parenteleve_id);
+            // trace_log("tel ".$parent->tel);
+            $sms = new Sms();
+            $body = "Mes félicitations, votre compte a été crée avec succès .\nUser:".$user->email."\nPassword: 0000.\n".
+            "Site : www.ayauka.com\nAyauka vous remercie pour votre fidélité .";
+            $sms->sendParamsUserConnexionQueue($parent->tel, $body, $parent);
+        }catch (\Exception $ex){
+            trace_log("message : ".$ex->getMessage());
+            // trace_log("message : ".$ex->getTrace());
+        }
     }
 
     public function update($id, Request $request){

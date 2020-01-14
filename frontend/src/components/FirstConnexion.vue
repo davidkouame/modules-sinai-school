@@ -44,10 +44,13 @@ export default {
   methods: {
     connection() {
       const data = new FormData();
-      data.append("username", localStorage.getItem("userName"));
+     
       data.append("email", localStorage.getItem("userEmail"));
+       /*data.append("username", localStorage.getItem("userName"));
       data.append("password", this.password);
       data.append("password_confirmation", this.password_confirmation);
+      data.append("password_confirmation", this.password_confirmation);*/
+      data.append("first_login", 1);
       this.$store
         .dispatch("updateUser", data)
         .then(response => {

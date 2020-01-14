@@ -191,12 +191,12 @@ export default {
   computed: {
     notes() {
       let notes = this.$store.getters.notes;
-      console.log("tentatives de recuperations des notes ");
+      // console.log("tentatives de recuperations des notes ");
       if(notes){
-        console.log("recuperation des notes");
+        // console.log("recuperation des notes");
         this.countNotes = this.$store.getters.notes.length;
         this.countNotes = this.countNotes > 0;
-        console.log("notes "+JSON.stringify(this.$store.getters.notes));
+        // console.log("notes "+JSON.stringify(this.$store.getters.notes));
       }
       return this.$store.getters.notes;
     },

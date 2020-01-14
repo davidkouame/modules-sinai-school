@@ -510,4 +510,7 @@
   'RainLab\\User\\Models\\BackendUser' => 'plugins/rainlab/user/models/BackendUser.php',
   'Bootnetcrasher\\School\\Classes\\MoyenneClasse' => 'plugins/bootnetcrasher/school/classes/MoyenneClasse.php',
   'Bootnetcrasher\\School\\Classes\\RapportMoyenne' => 'plugins/bootnetcrasher/school/classes/RapportMoyenne.php',
+  'bootnetcrasher\\parametrage\\Controllers\\payscontroller' => 'plugins/bootnetcrasher/parametrage/controllers/payscontroller.php',
+  'BootnetCrasher\\Parametrage\\Models\\PaysModel' => 'plugins/bootnetcrasher/parametrage/models/PaysModel.php',
+  'AhmadFatoni\\ApiGenerator\\Controllers\\API\\PaysController' => 'plugins/ahmadfatoni/apigenerator/controllers/api/PaysController.php',
 );

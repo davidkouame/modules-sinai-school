@@ -62,6 +62,17 @@
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
+                      <label class="control-label">Pays</label>
+                      <!---->
+                      <select v-model="parent.pays_id" class="form-control" >
+                      <option value="">Sélectionnez un pays</option>
+                      <option :value="pay.id" v-for="pay in pays">{{ pay.libelle }}</option>
+                      </select>
+                      <!---->
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
                       <label class="control-label">Créer un compte user</label>
                       <!---->
                       <input
@@ -93,9 +104,12 @@ export default {
   data() {
     return {
       title: "Ajouter un parent",
-      parent: {"name": "", "surname": "", "email": "", "tel": "", "create_account": ""},
+      parent: {"name": "", "surname": "", "email": "", "tel": "", "create_account": "", "pays_id": ""},
       valueDisabled: false
     };
+  },
+  created(){
+    this.$store.dispatch('getAllPays', {page: 0})
   },
   methods:{
     saveParent(){
@@ -105,6 +119,7 @@ export default {
         surname: this.parent.surname,
         email: this.parent.email,
         tel: this.parent.tel,
+        pays_id: this.parent.pays_id,
         create_account: this.parent.create_account
       };
       let store = this.$store;
@@ -121,6 +136,11 @@ export default {
           this.valueDisabled = false;
         })
         .finally(() => (this.loading = false));
+    }
+  },
+  computed:{
+    pays(){
+      return this.$store.getters.pays
     }
   }
 };

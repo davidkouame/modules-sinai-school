@@ -28,11 +28,15 @@ class ParentModel extends Model
     
     public $hasOne = [
       'users' => ['RainLab\User\Models\User', 'key' => 'parenteleve_id'],
-      'user' => ['RainLab\User\Models\User', 'key' => 'parenteleve_id']  
+      'user' => ['RainLab\User\Models\User', 'key' => 'parenteleve_id']
     ];
 
     public $hasMany = [
         'eleves' => ['BootnetCrasher\School\Models\EleveModel', 'key' => 'parent_id', 'otherKey' => 'id'],
+    ];
+
+    public $belongsTo = [
+        'pays' => ['BootnetCrasher\Parametrage\Models\PaysModel', 'key' => 'pays_id', 'otherKey' => 'id'],
     ];
 
     public function beforeCreate()

@@ -15,8 +15,8 @@ use Queue;
 class Sms{
 
     private $sendername = "Ayauka";
-    // private $code = "43WY45AM85";
-    private $code = "43WY45AM85ddd";
+    private $code = "43WY45AM85";
+    // private $code = "43WY45AM85ddd";
     private $sendsms_api = null;
     private $indicateur = "225";
 
@@ -34,7 +34,7 @@ class Sms{
     */
     public function send(String $tel, String $body, Parentmodel $parent = null, EleveModel $eleve = null){
         try{
-            $this->sendWithoutLog($this->indicateur.$tel, $body);
+            $this->sendWithoutLog($this->getIndicateur($parent).$tel, $body);
             $this->logSms($tel, $parent, $eleve, $body);
         } catch (Exception $ex) {
             trace_log("message : ".$ex->getMessage().", trace log".$ex->getTrace());
@@ -55,7 +55,28 @@ class Sms{
                 "code" => $this->code, 
                 "message" => $body, 
                 "sendername" => $this->sendername, 
-                "sendertelname" => $this->indicateur.$tel
+                "sendertelname" => $this->getIndicateur($parent).$tel
+            ]);
+            $this->logSms($tel, $parent, null, $body);
+        } catch (Exception $ex) {
+             trace_log("message : ".$ex->getMessage().", trace log".$ex->getTrace());
+        }
+    }
+
+    /*
+        Envoi des parametres de connexions aux parents
+        @String $tel User tel
+        @BootnetCrasher\School\Models\ParentModel $parent Parent user
+        @String $body Message sms
+    */
+    public function sendParamsUserConnexionQueue(String $tel, String $body, Parentmodel $parent = null){
+        try{
+            Queue::push(SendSmsJob::class, 
+            [
+                "code" => $this->code, 
+                "message" => $body, 
+                "sendername" => $this->sendername, 
+                "sendertelname" => $this->getIndicateur($parent).$tel
             ]);
             $this->logSms($tel, $parent, null, $body);
         } catch (Exception $ex) {
@@ -90,7 +111,7 @@ class Sms{
     */
     public function sendParentForAbonnement($parent, $body, $abonnement){
         try{
-            $this->sendWithoutLog($this->indicateur.$parent->tel, $body);
+            $this->sendWithoutLog($this->getIndicateur($parent).$parent->tel, $body);
             $this->logSms($parent->tel, $parent, null, $body, $abonnement);
         } catch (Exception $ex) {
              trace_log("message : ".$ex->getMessage().", trace log".$ex->getTrace());
@@ -111,7 +132,7 @@ class Sms{
                 "code" => $this->code, 
                 "message" => $body, 
                 "sendername" => $this->sendername, 
-                "sendertelname" => $this->indicateur.$parent->tel
+                "sendertelname" => $this->getIndicateur($parent).$parent->tel
             ]);
             $this->logSms($parent->tel, $parent, null, $body, $abonnement);
         } catch (Exception $ex) {
@@ -141,5 +162,11 @@ class Sms{
         } catch (Exception $ex) {
              trace_log("message : ".$ex->getMessage().", trace log".$ex->getTrace());
         }
+    }
+
+    public function getIndicateur($parent){
+        return $parent->pays->indicatif;
+        // trace_log(" pays ".json_encode($parent->pays));
+        // return "225";
     }
 }

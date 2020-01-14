@@ -1,0 +1,9 @@
+fields:
+    libelle:
+        label: Libellé
+        span: auto
+        type: text
+    indicatif:
+        label: Indicatif
+        span: auto
+        type: text

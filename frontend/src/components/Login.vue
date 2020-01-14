@@ -76,10 +76,12 @@ export default {
     };
   },
     created(){
-        this.$store.dispatch('anneesscolaires');
+        // console.log("chargement des années scolaires ")
+        this.$store.dispatch('getAllAnneesScolaires', {page: 0});
     },
     computed: {
         anneesscolaires(){
+            // console.log("liste des années scolaires "+JSON.stringify(this.anneesscolaires));
             return this.$store.getters.anneesscolaires;
         }
     },
@@ -154,19 +156,18 @@ export default {
             localStorage.setItem("anneeScolaireId", response.data.data[0].annee_scolaire_id);
           }else{
             if(this.anneesscolaires){
-            let anneeScolaireId = this.anneesscolaires[(this.anneesscolaires.length-1)].id;
-            localStorage.setItem("anneeScolaireId", anneeScolaireId);
-            this.$store.dispatch('anneeScolaireId', anneeScolaireId);
-            let dataSa = null;
-            let data = {annee_scolaire_id: anneeScolaireId, user_id: user_id};
-            dataSa = {data: data};
-            let store = this.$store;
-            store.dispatch("saveSessionUserApp", dataSa)
+              // recuperation de la premiere année scolaire 
+              let anneeScolaireId = this.anneesscolaires[(this.anneesscolaires.length-1)].id;
+              localStorage.setItem("anneeScolaireId", anneeScolaireId);
+              this.$store.dispatch('anneeScolaireId', anneeScolaireId);
+              let dataSa = null;
+              let data = {annee_scolaire_id: anneeScolaireId, user_id: user_id};
+              dataSa = {data: data};
+              let store = this.$store;
+              store.dispatch("saveSessionUserApp", dataSa);
             }
           }
           window.location.reload();
-          // console.log("liste des annees scolaires =>"+JSON.stringify());
-          // console.log("la longeur est "+(this.anneesscolaires.length-1));
         })
         .catch(response => {
           // this.errorMessage = "Désolé, l'email ou le password est incorrect";

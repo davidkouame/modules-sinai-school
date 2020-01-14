@@ -429,6 +429,7 @@ export default new Vuex.Store({
         context.state.endpoint + 'api/v1/anneesscolaires'
       )
         .then(response => {
+          // console.log("liste des années scolaires "+JSON)
           context.commit('anneesscolaires', response.data.data)
         })
         .catch(error => {

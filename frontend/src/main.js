@@ -109,8 +109,6 @@ Vue.mixin({
 
 let vue = null;
 if (localStorage.getItem('userId')) {
-  console.log("==================");
-  console.log(localStorage.getItem('firstLogin'));
   if (localStorage.getItem('firstLogin') == 0) {
     vue = {
       el: '#app',
@@ -119,7 +117,6 @@ if (localStorage.getItem('userId')) {
       components: { FirstConnexion },
       template: '<FirstConnexion/>'
     };
-    console.log("dbhdbfhd fdhf dhfd fdhfd fhdfd fhdf df");
   }else{
     if (localStorage.getItem('userType') == "parent") {
     vue = {

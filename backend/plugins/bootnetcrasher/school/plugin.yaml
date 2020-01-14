@@ -136,4 +136,8 @@ navigation:
                 label: Packs abonnement
                 url: bootnetcrasher/parametrage/packabonnementcontroller
                 icon: icon-sitemap
+            pays:
+                label: Pays
+                url: bootnetcrasher/parametrage/payscontroller
+                icon: icon-sitemap
 

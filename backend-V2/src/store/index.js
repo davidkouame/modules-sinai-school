@@ -107,7 +107,8 @@ export default new Vuex.Store({
     abonnement: null,
     packsabonnement: null,
     chooseEleve: null,
-    elevesabonnement: null
+    elevesabonnement: null,
+    pays: null
   },
   mutations: {
     anneesscolaires(state, payload) {
@@ -268,6 +269,9 @@ export default new Vuex.Store({
     },
     elevesabonnement(state, elevesabonnement){
       state.elevesabonnement = elevesabonnement
+    },
+    pays(state, pays){
+      state.pays = pays
     }
   },
   getters: {
@@ -432,6 +436,9 @@ export default new Vuex.Store({
     },
     elevesabonnement: state => {
       return state.elevesabonnement
+    },
+    pays: state => {
+      return state.pays
     }
   },
   actions: {
@@ -1343,6 +1350,19 @@ export default new Vuex.Store({
       )
         .then(response => {
           alert("Le bilan périodique a été envoyé ");
+        })
+        .catch(error => {
+          console.log(error)
+          this.errored = true
+        })
+        .finally(() => (this.loading = false))
+    },
+    getAllPays(context, params) {
+      let nameUrl = "pays"
+      let url = getUrl(context, nameUrl, params)
+      Axios.get(url)
+        .then(response => {
+          context.commit('pays', response.data.data)
         })
         .catch(error => {
           console.log(error)

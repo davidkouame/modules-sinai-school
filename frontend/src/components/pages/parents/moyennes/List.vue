@@ -302,61 +302,41 @@ export default {
       countAbsences: null,
       classeListId: null,
       selected: 1,
+      isLoader: false
     };
   },
   created() {
-    // console/log("l'id de la classe est");
-    // console.log("l'id de la classe est "+localStorage.getItem('eleveId'));
-    // console.log("l'id de la classe est "+this.classeListId);
-    // this.fetch();
     this.$store.dispatch('eleve', localStorage.getItem('eleveId'));
-    // this.fetchSection();
-    console.log("sectionAnneeScolaireId = "+this.sectionAnneeScolaireId+", eleveListId = "+this.eleveListId+", classeListId = "+this.classeListId)
   },
   methods: {
     fetch(pageNum, search = null) {
       pageNum = pageNum == null ? 1 : pageNum;
       let params = [
-        // { key: "search", value: search },
-        // { key: "classe_id", value: this.classeListId },
         { key: "eleve_id", value: this.eleveListId },
         { key: "section_annee_scolaire_id", value: this.sectionAnneeScolaireId },
         { key: "type_moyenne_id", value: 2 }
       ];
-      // console.log("@@@@@@@@@@@@@@@@@@@@@");
       this.$store.dispatch("moyennes", {
         payload: pageNum,
         search: this.trimSearch(params)
       });
     },
     fetchMoyenneSection(pageNum, search = null) {
-        // console.log("==========================");
       pageNum = pageNum == null ? 1 : pageNum;
       let params = [
         // { key: "classe_id", value: this.classeListId },
         { key: "eleve_id", value: this.eleveListId },
         { key: "annee_scolaire_id", value: localStorage.getItem('anneeScolaireId') },
+        // { key: "section_annee_scolaire_id", value: localStorage.getItem('sectionAnneeScolaireId') },
         { key: "type_moyenne_id", value: 3 }
       ];
+      
       this.$store.dispatch("moyennesSections", {
         payload: pageNum,
         search: this.trimSearch(params)
       });
+      // alert("chargement de la moyenne section")
     },
-    /*fetchMoyenneSection(pageNum, search = null) {
-        // console.log("==========================");
-      pageNum = pageNum == null ? 1 : pageNum;
-      let params = [
-        // { key: "classe_id", value: this.classeListId },
-        { key: "eleve_id", value: this.eleveListId },
-        { key: "annee_scolaire_id", value: localStorage.getItem('anneeScolaireId') },
-        { key: "type_moyenne_id", value: 3 }
-      ];
-      this.$store.dispatch("moyennesSections", {
-        payload: pageNum,
-        search: this.trimSearch(params)
-      });
-    },*/
     fetchMoyenneAnuuelle(pageNum, search = null) {
         // console.log("==========================");
       pageNum = pageNum == null ? 1 : pageNum;
@@ -418,14 +398,12 @@ export default {
             this.fetch();
             this.fetchMoyenneSection();
             this.fetchMoyenneAnuuelle();
-          // console.log("sectionAnneeScolaireId = "+this.sectionAnneeScolaireId+", eleveListId = "+this.eleveListId+", classeListId = "+this.classeListId)
         }
-      // console.log("sectionAnneeScolaireId = "+this.sectionAnneeScolaireId+", eleveListId = "+this.eleveListId+", classeListId = "+this.classeListId)
     },
     changeSection(section){
         this.$store.dispatch('sectionAnneeScolaireId', section.id);
         this.titleDropdownSection = section.libelle ;
-        // this.sectionAnneeScolaireId = section.id;
+        // console.log("changement de la section libelle "+section.libelle);
         localStorage.setItem('sectionAnneeScolaireId', section.id);
         this.fetch();
     },
@@ -437,7 +415,7 @@ export default {
         this.moyennesSections.find(function(element){
           // console.log("recherche de la section "+JSON.stringify(element)+", sectionAnneeScolaireId => "+sectionAnneeScolaireId);
           if(sectionAnneeScolaireId == element.section_annee_scolaire_id){
-            console.log("section => "+JSON.stringify(element));
+            // console.log("section => "+JSON.stringify(element));
             search = element.validated_at;
           }
         });
@@ -486,7 +464,7 @@ export default {
         this.countMoyennesSections = this.$store.getters.moyennesSections.length;
         this.countMoyennesSections = this.countMoyennesSections > 0;
       }
-      // console.log(">>>>>>>>>>>>>>>>"+JSON.stringify(this.$store.getters.moyennesSections));
+      // console.log("liste des moyennes de sections "+JSON.stringify(this.$store.getters.moyennesSections));
       return this.$store.getters.moyennesSections;
     },
     pageCount() {
@@ -515,7 +493,7 @@ export default {
         return this.$store.getters.sectionAnneeScolaireId;
     },
     sectionsanneescolaire(){
-      console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+      // console.log("changement de la section annee scolaire "+JSON.stringify(this.$store.getters.sectionsanneescolaire));
       let sectionsanneescolaire = this.$store.getters.sectionsanneescolaire;
       let sectionAnneeScolaireId = this.sectionAnneeScolaireId;
       if(sectionsanneescolaire && sectionsanneescolaire.length > 0){
@@ -526,11 +504,13 @@ export default {
             }
           });
           this.titleDropdownSection = element.libelle;
+          console.log(" l'id de la section est "+element.id)
         }else{
+          console.log("ne change ");
           this.titleDropdownSection = sectionsanneescolaire[0].libelle;
         }
-
       }
+      // console.log(" titleDropdownSection "+this.titleDropdownSection);
       return this.$store.getters.sectionsanneescolaire;
     }
   },
@@ -549,12 +529,12 @@ export default {
         // console.log(this.sectionAnneeScolaireId);
         // this.fetch();
         this.refreshList();
-    },
+    }/*,
     sectionsanneescolaire(){
         if(this.sectionsanneescolaire){
             this.titleDropdownSection = this.sectionsanneescolaire[0].libelle;
         }
-    }
+    }*/
   }
 };
 </script>

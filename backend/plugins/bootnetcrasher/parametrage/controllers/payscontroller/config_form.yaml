@@ -1,0 +1,10 @@
+name: PaysController
+form: $/bootnetcrasher/parametrage/models/paysmodel/fields.yaml
+modelClass: BootnetCrasher\Parametrage\Models\PaysModel
+defaultRedirect: bootnetcrasher/parametrage/payscontroller
+create:
+    redirect: 'bootnetcrasher/parametrage/payscontroller/update/:id'
+    redirectClose: bootnetcrasher/parametrage/payscontroller
+update:
+    redirect: bootnetcrasher/parametrage/payscontroller
+    redirectClose: bootnetcrasher/parametrage/payscontroller
