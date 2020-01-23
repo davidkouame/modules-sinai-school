@@ -64,7 +64,7 @@
                         <span v-if="note.typenote">{{ note.typenote.libelle }}</span>
                       </td>
                       <td style="padding-left: 30px;">
-                        <a :href="'/#/notes/preview/'+note.id">
+                        <a :href="'#/notes/preview/'+note.id">
                           <i class="fa fa-eye fa-lg"></i>
                         </a>
                       </td>

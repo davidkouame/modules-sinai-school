@@ -1,7 +1,7 @@
 <template>
 	<div class="container-fluid">
 		<a @click="generateBilanAndSend" class="btn btn-primary">Générer bilan & envoyer </a>
-		<button @click="generateBillanPeriodique" class="btn btn-primary" :disabled="valueDisabled">Send billan périodique</button>
+		<button @click="generateBillanPeriodique" class="btn btn-primary" :disabled="valueDisabled">Send billan périodique <div v-bind:class="{'spinner-border-customize': valueDisabled}"></div></button>
 		
 		<div class="col-md-6">
                     <div class="form-group">

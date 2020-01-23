@@ -76,7 +76,7 @@
                       <tbody>
                         <tr v-if="countNotes" v-for="(note, index) in notes">
                           <th scope="row">{{ index + 1}}</th>
-                          <td><a :href="'/#/notes/preview/'+note.id" >{{ note.libelle }}</a></td>
+                          <td><a :href="'#/notes/preview/'+note.id" >{{ note.libelle }}</a></td>
                           <td>{{ note.created_at|formatDate }}</td>
                           <td> {{ note.type_note_libelle}} </td>
                           <!--<td v-bind:id="'note-'+note.id">{{ getValeur() }}</td>-->
@@ -88,10 +88,10 @@
                             formatValeur(note.valeur*note.coefficient)+'/'+note.coefficient*20 : '--'}}</td>
                           <!--<td>
                             <div class="row">
-                              <a :href="'/#/notes/preview/'+note.id" class="col">
+                              <a :href="'#/notes/preview/'+note.id" class="col">
                                 <i class="fa fa-eye fa-lg"></i>
                               </a>-->
-                              <!--<a :href="'/#/notes/update/'+note.id" class="col">
+                              <!--<a :href="'#/notes/update/'+note.id" class="col">
                                 <i class="fa fa-pencil fa-lg"></i>
                               </a>-->
                                 <!--<a

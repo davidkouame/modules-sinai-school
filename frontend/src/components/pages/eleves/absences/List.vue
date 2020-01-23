@@ -40,7 +40,7 @@
                     <td v-if="absenceeleve.raisonabsence">{{ absenceeleve.raisonabsence.libelle }}</td>
                     <td v-else="absenceeleve.raisonabsence"></td>
                     <td style="padding-left: 30px;">
-                      <a :href="'/#/absences/preview/'+absenceeleve.id">
+                      <a :href="'#/absences/preview/'+absenceeleve.id">
                         <i class="fa fa-eye fa-lg"></i>
                       </a>
                     </td>

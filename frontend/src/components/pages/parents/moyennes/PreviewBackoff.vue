@@ -88,10 +88,10 @@
                           <td v-bind:id="'coef-valeur-'+note.id">{{ note.coefficient }}</td>
                           <td>
                             <div class="row">
-                              <a :href="'/#/notes/preview/'+note.id" class="col">
+                              <a :href="'#/notes/preview/'+note.id" class="col">
                                 <i class="fa fa-eye fa-lg"></i>
                               </a>
-                              <!--<a :href="'/#/notes/update/'+note.id" class="col">
+                              <!--<a :href="'#/notes/update/'+note.id" class="col">
                                 <i class="fa fa-pencil fa-lg"></i>
                               </a>-->
                             </div>

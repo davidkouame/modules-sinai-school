@@ -10,7 +10,7 @@
               <input type="text" class="form-control search" placeholder="Rechercher une année scolaire" @keyup="searchModel" v-model="search">
             </div>
             <div class="col-md-4">
-              <a :href="'/#/series/add/'"class="btn btn-primary">Ajouter</a>
+              <a :href="'#/series/add/'"class="btn btn-primary">Ajouter</a>
             </div>
           </div>
         </div>
@@ -31,10 +31,10 @@
             <th scope="row">{{ index + 1}}</th>
             <td>{{ serie.libelle}}</td>
             <td>
-              <a :href="'/#/series/preview/'+serie.id" class="btn btn-icon btn-info btn-sm">
+              <a :href="'#/series/preview/'+serie.id" class="btn btn-icon btn-info btn-sm">
                 <!----><i class="fa fa-user"></i><!---->
               </a>&nbsp;
-              <a :href="'/#/series/edit/'+serie.id"  class="btn btn-icon btn-success btn-sm">
+              <a :href="'#/series/edit/'+serie.id"  class="btn btn-icon btn-success btn-sm">
                 <!----><i class="fa fa-edit"></i><!---->
               </a>&nbsp;
               <a id="show-modal" @click="showModalF(serie.id)" type="button" class="btn btn-icon btn-danger btn-sm">

@@ -10,7 +10,7 @@
               <input type="text" class="form-control search" placeholder="Rechercher une moyenne" @keyup="searchModel" v-model="search">
             </div>
             <div class="col-md-4">
-              <a :href="'/#/moyennes/add/'"class="btn btn-primary">Ajouter</a>
+              <a :href="'#/moyennes/add/'"class="btn btn-primary">Ajouter</a>
             </div>
           </div>
         </div>
@@ -33,10 +33,10 @@
             <td>{{ moyenne.reference }}</td>
             <td>{{ moyenne.valeur }}</td>
             <td>
-              <a :href="'/#/moyennes/preview/'+moyenne.id" class="btn btn-icon btn-info btn-sm">
+              <a :href="'#/moyennes/preview/'+moyenne.id" class="btn btn-icon btn-info btn-sm">
                 <!----><i class="fa fa-user"></i><!---->
               </a>&nbsp;
-              <a :href="'/#/moyennes/edit/'+moyenne.id"  class="btn btn-icon btn-success btn-sm">
+              <a :href="'#/moyennes/edit/'+moyenne.id"  class="btn btn-icon btn-success btn-sm">
                 <!----><i class="fa fa-edit"></i><!---->
               </a>&nbsp;
               <a id="show-modal" @click="showModalF(moyenne.id)" type="button" class="btn btn-icon btn-danger btn-sm">

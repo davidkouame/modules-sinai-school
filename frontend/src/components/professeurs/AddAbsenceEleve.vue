@@ -40,7 +40,7 @@
           <input v-model="heure_fin_cours" type="date" class="form-control" />
         </div>
       </div>
-      <a :href="'/#/professeur/absences-eleves'" class="btn btn-danger">Annuler</a>
+      <a :href="'#/professeur/absences-eleves'" class="btn btn-danger">Annuler</a>
       <a v-on:click="addAgence()" class="btn btn-primary">Envoyer</a>
     </form>
   </div>

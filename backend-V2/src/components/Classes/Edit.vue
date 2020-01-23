@@ -120,7 +120,7 @@
                                 <div class="float-right">
                                   <div class="row">
                                     <div class="col-md-4">
-                                      <a :href="'/#/classes-matieres-professeurs/add/'+classe_id" class="btn btn-primary">Ajouter</a>
+                                      <a :href="'#/classes-matieres-professeurs/add/'+classe_id" class="btn btn-primary">Ajouter</a>
                                     </div>
                                   </div>
                                 </div>
@@ -136,13 +136,13 @@
                                 </tr>
                               </thead>
                               <tbody>
-                                <tr v-if=" classesprofesseursmatieres" v-for="(classeprofesseurmatiere, index) in  classesprofesseursmatieres">
+                                <tr v-if="classesprofesseursmatieres" v-for="(classeprofesseurmatiere, index) in  classesprofesseursmatieres">
                                   <th scope="row">{{ index + 1}}</th>
                                   <td>{{ classeprofesseurmatiere.matiere ? classeprofesseurmatiere.matiere.libelle : ''}}</td>
                                   <td>{{ classeprofesseurmatiere.professeur ? classeprofesseurmatiere.professeur.nom + ' '+classeprofesseurmatiere.professeur.prenom  : ''}}</td>
                                   <td>{{ classeprofesseurmatiere.coefficient }}</td>
                                   <td>
-                                    <a :href="'/#/classes-matieres-professeurs/edit/'+classeprofesseurmatiere.id"  class="btn btn-icon btn-success btn-sm">
+                                    <a :href="'#/classes-matieres-professeurs/edit/'+classeprofesseurmatiere.id"  class="btn btn-icon btn-success btn-sm">
                                       <!----><i class="fa fa-edit"></i><!---->
                                     </a>&nbsp;
                                     <a id="show-modal" @click="showModalF(classeprofesseurmatiere.id)"  class="btn btn-icon btn-danger btn-sm">
@@ -174,7 +174,7 @@
                             <div class="float-right">
                               <div class="row">
                                 <div class="col-md-4">
-                                  <a :href="'/#/eleves-classes/add/'+classe_id"class="btn btn-primary">Ajouter</a>
+                                  <a :href="'#/eleves-classes/add/'+classe_id"class="btn btn-primary">Ajouter</a>
                                 </div>
                               </div>
                             </div>
@@ -192,7 +192,7 @@
                             <tbody>
                               <tr v-if="elevesclasses" v-for="(eleveclasse, index) in elevesclasses">
                                 <th scope="row">{{ index + 1}}</th>
-                                <td><a :href="'/#/classes-eleves/'+eleveclasse.id">{{ eleveclasse.eleve.matricule }}</a></td>
+                                <td><a :href="'#/classes-eleves/'+eleveclasse.id">{{ eleveclasse.eleve.matricule }}</a></td>
                                 <td>{{ eleveclasse.eleve.name }}</td>
                                 <td>{{ eleveclasse.eleve.surname }}</td>
                                 <td>
@@ -241,7 +241,7 @@
                     <div class="col-md-12">
                       <a @click="$router.go(-1)" class="btn btn-danger">Annuler</a>
                       &nbsp;
-                      <button type="submit" class="btn btn-primary" :disabled="valueDisabled">Modifier</button>
+                      <button type="submit" class="btn btn-primary" :disabled="valueDisabled">Modifier <div v-bind:class="{'spinner-border-customize': valueDisabled}"></div></button>
                     </div> 
                   </div>
                 </div>

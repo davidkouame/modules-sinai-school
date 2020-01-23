@@ -1,4 +1,4 @@
-1578837110a:1:{s:20:"detailprofesseur.htm";a:10:{s:8:"fileName";s:20:"detailprofesseur.htm";s:7:"content";s:484:"title = "Demonstration"
+1579764493a:1:{s:20:"detailprofesseur.htm";a:10:{s:8:"fileName";s:20:"detailprofesseur.htm";s:7:"content";s:484:"title = "Demonstration"
 url = "/professeurs/:professeur_id"
 layout = "default"
 is_hidden = 0

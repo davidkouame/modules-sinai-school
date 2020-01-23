@@ -56,7 +56,7 @@
                       <th scope="row">{{ index + 1}}</th>
                       <td>{{ matiere.libelle }}</td>
                       <td style="padding-left: 30px;">
-                        <a :href="'/#/matieres/preview/'+matiere.id">
+                        <a :href="'#/matieres/preview/'+matiere.id">
                           <i class="fa fa-eye fa-lg"></i>
                         </a>
                       </td>

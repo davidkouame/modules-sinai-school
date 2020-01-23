@@ -22,7 +22,7 @@
           </div>
         </div>
         <!--<div class="col">
-        <a :href="'/#/matieres/add'" class="btn btn-primary">Ajouter une matiere</a>
+        <a :href="'#/matieres/add'" class="btn btn-primary">Ajouter une matiere</a>
         </div>-->
       </div>
       <div class="row">
@@ -45,7 +45,7 @@
                     <th scope="row">{{ index + 1}}</th>
                     <td>{{ matiere.libelle }}</td>
                     <td>
-                      <a :href="'/#/matieres/preview/'+matiere.id" class="btn btn-primary">Voir</a>
+                      <a :href="'#/matieres/preview/'+matiere.id" class="btn btn-primary">Voir</a>
                     </td>
                   </tr>
                 </tbody>

@@ -104,7 +104,7 @@
                   <div class="row">
                     <div class="col-md-12">
                       <a @click="$router.go(-1)" class="btn btn-danger">Annuler</a> &nbsp;
-                      <button type="submit" class="btn btn-primary" :disabled="valueDisabled">Envoyer</button>
+                      <button type="submit" class="btn btn-primary" :disabled="valueDisabled">Envoyer <div v-bind:class="{'spinner-border-customize': valueDisabled}"></div></button>
                     </div>
                   </div>
                 </div>
@@ -121,7 +121,7 @@ export default {
       title: "Ajouter une note",
       note: {"libelle": "", "datenoteeffectue": "", "description": "", "typenote_id": "",
       "matiere_id": "", "coefficient": "", "classe_id": "", "section_annee_scolaire_id": ""},
-      valueDisabled: false
+      valueDisabled: false,
     };
   },
   created() {
@@ -133,6 +133,7 @@ export default {
     this.$store.dispatch('getAllClasses', {payload: 0})
     // recuperation de toutes les sections annee scolaire
     this.$store.dispatch('getAllSectionsAnneeScolaire', {payload: 0})
+    // console.log("liste des refs "+JSON.stringify(this))
   },
   methods:{
     saveMatiere(){
@@ -179,3 +180,18 @@ export default {
   }
 };
 </script>
+<style>
+  .spinner-border-customize {
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    vertical-align: text-bottom;
+    border: 0.25em solid currentColor;
+        border-right-color: currentcolor;
+    border-right-color: 
+    transparent;
+    border-radius: 50%;
+    -webkit-animation: spinner-border .75s linear infinite;
+    animation: spinner-border .75s linear infinite;
+}
+</style>

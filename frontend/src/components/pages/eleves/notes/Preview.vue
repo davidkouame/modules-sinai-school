@@ -21,7 +21,7 @@
             <a href="#/matieres">Matières</a>
           </li>
           <li class="breadcrumb-item">
-            <a :href="'/#/matieres/preview/'+matiere_id">Détail de la matière</a>
+            <a :href="'#/matieres/preview/'+matiere_id">Détail de la matière</a>
           </li>
           <li class="breadcrumb-item active" aria-current="page">Détail d'une note</li>
         </ol>

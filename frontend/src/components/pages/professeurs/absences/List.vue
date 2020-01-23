@@ -61,7 +61,7 @@
                             </div>
                             <div class="col-md-1">
                                 <div class="col-1 add-form">
-                                    <a :href="'/#/absences/add'">
+                                    <a :href="'#/absences/add'">
                                       <i class="fa fa-plus-circle fa-lg font-size-28"></i>
                                     </a>
                                 </div>
@@ -90,10 +90,10 @@
                       <td>{{ absenceeleve.eleve.name+' '+absenceeleve.eleve.surname}}</td>
                       <td>
                         <div class="row">
-                          <a :href="'/#/absences/preview/'+absenceeleve.id" class="col">
+                          <a :href="'#/absences/preview/'+absenceeleve.id" class="col">
                             <i class="fa fa-eye fa-lg"></i>
                           </a>
-                          <a :href="'/#/absences/update/'+absenceeleve.id" class="col">
+                          <a :href="'#/absences/update/'+absenceeleve.id" class="col">
                             <i class="fa fa-pencil fa-lg"></i>
                           </a>
                           <a id="show-modal" @click="showModalF(absenceeleve.id)" class="col" style="cursor:pointer;color:#42d0ed">

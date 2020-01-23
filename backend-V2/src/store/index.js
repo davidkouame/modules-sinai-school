@@ -55,6 +55,7 @@ export default new Vuex.Store({
   strict: false,
   state: {
     endpoint: 'http://localhost:8888/modules-sinai-school/backend/',
+    // endpoint: 'http://monsitenet.com/modules-sinai-school/backend/',
     api: 'api/v1/note/',
     anneesscolaires: null,
     anneescolaire: null,
@@ -1350,6 +1351,7 @@ export default new Vuex.Store({
       )
         .then(response => {
           alert("Le bilan périodique a été envoyé ");
+          window.location.reload();
         })
         .catch(error => {
           console.log(error)

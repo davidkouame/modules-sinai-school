@@ -9,7 +9,7 @@
       <li>Commentaire  : {{ absenceeleve.commentaire }}</li>
       <li>Elève  : <span v-if="absenceeleve.eleve">{{ absenceeleve.eleve.matricule }}</span></li>
     </ul>
-  <a :href="'/#/professeur/absences-eleves'" class="btn btn-primary">retour</a>
+  <a :href="'#/professeur/absences-eleves'" class="btn btn-primary">retour</a>
   </div>
 </template>
 

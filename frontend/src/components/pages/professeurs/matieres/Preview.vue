@@ -126,7 +126,7 @@
                       <span v-if="note.note.typenote">{{ note.note.typenote.libelle }}</span>
                     </td>
                     <td>
-                      <a :href="'/#/notes/preview/'+note.note.id" class="btn btn-primary">Voir</a>
+                      <a :href="'#/notes/preview/'+note.note.id" class="btn btn-primary">Voir</a>
                     </td>
                   </tr>
                 </tbody>

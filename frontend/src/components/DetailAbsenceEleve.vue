@@ -8,7 +8,7 @@
       <li>Raison absence  : {{ absenceeleve.raisonabsence.libelle }}</li>
       <li>Commentaire  : {{ absenceeleve.commentaire }}</li>
     </ul>
-  <a :href="'/#/absence-eleve'" class="btn btn-primary">retour</a>
+  <a :href="'#/absence-eleve'" class="btn btn-primary">retour</a>
   </div>
 </template>
 

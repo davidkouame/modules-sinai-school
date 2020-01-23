@@ -58,7 +58,7 @@
                             </div>
                             <div class="col-md-1">
                                 <div class="col-1 add-form">
-                                    <a :href="'/#/notes/add'">
+                                    <a :href="'#/notes/add'">
                                       <i class="fa fa-plus-circle fa-lg font-size-28"></i>
                                     </a>
                                 </div>
@@ -90,10 +90,10 @@
                       <td>{{ note.classe.libelle }}</td>
                       <td>
                         <div class="row">
-                          <a :href="'/#/notes/preview/'+note.id" class="col">
+                          <a :href="'#/notes/preview/'+note.id" class="col">
                             <i class="fa fa-eye fa-lg"></i>
                           </a>
-                          <a v-if="!note.rapport_validation_id" :href="'/#/notes/update/'+note.id" class="col">
+                          <a v-if="!note.rapport_validation_id" :href="'#/notes/update/'+note.id" class="col">
                             <i class="fa fa-pencil fa-lg"></i>
                           </a>
                           <a v-if="!note.rapport_validation_id" id="show-modal" @click="showModalF(note.id)" class="col" style="cursor:pointer;color:#42d0ed">

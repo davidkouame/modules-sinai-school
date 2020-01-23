@@ -35,8 +35,8 @@ export default {
     currentPage: null,
     countPage: null,
     totalElement: null,
-    endpoint: 'http://localhost:8888/modules-sinai-school/backend/',
-    // endpoint: 'http://monsitenet.com/modules-sinai-school/backend/'
+    // endpoint: 'http://localhost:8888/modules-sinai-school/backend/',
+    endpoint: 'http://monsitenet.com/modules-sinai-school/backend/'
   },
   mutations: {
     notes(state, payload) {

@@ -13,7 +13,7 @@
         </div>
       </div>
       <div class="col">
-        <a :href="'/#/absences-eleves/add'" class="btn btn-primary">Ajouter une absence</a>
+        <a :href="'#/absences-eleves/add'" class="btn btn-primary">Ajouter une absence</a>
       </div>
     </div>
     <br>
@@ -40,10 +40,10 @@
               <td v-else="absenceeleve.raisonabsence"></td>
               <td>qsdsq</td>
               <td>
-                  <!--<a :href="'/#/absence-eleve/'+absenceeleve.id" class="btn btn-primary">detail</a>-->
+                  <!--<a :href="'#/absence-eleve/'+absenceeleve.id" class="btn btn-primary">detail</a>-->
 
-                <a :href="'/#/absences-eleves/preview/'+absenceeleve.id" class="btn btn-primary">Voir</a>
-              <a :href="'/#/absences-eleves/update/'+absenceeleve.id" class="btn btn-primary">Modifier</a>
+                <a :href="'#/absences-eleves/preview/'+absenceeleve.id" class="btn btn-primary">Voir</a>
+              <a :href="'#/absences-eleves/update/'+absenceeleve.id" class="btn btn-primary">Modifier</a>
               <button id="show-modal" @click="showModalF(absenceeleve.id)" class="btn btn-danger">Supprimer</button>
               </td>
             </tr>

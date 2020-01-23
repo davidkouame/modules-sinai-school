@@ -40,8 +40,8 @@ export default new Vuex.Store({
   state: {
     // endpoint: 'http://localhost/modules-sinai-school/backend/',
     // endpoint: 'http://localhost/modules-sinai-school/backend/',
-    endpoint: 'http://localhost:8888/modules-sinai-school/backend/',
-    // endpoint: 'http://monsitenet.com/modules-sinai-school/backend/',
+    // endpoint: 'http://localhost:8888/modules-sinai-school/backend/',
+    endpoint: 'http://monsitenet.com/modules-sinai-school/backend/',
     api: 'api/v1/note/',
     notes: [],
     noteseleves: [],

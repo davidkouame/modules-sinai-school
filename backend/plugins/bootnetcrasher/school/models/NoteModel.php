@@ -40,11 +40,11 @@ class NoteModel extends Model
     
     public $hasMany = [
         'elevesnotes' => [
-            'bootnetcrasher\school\models\noteeleve',
+            'BootnetCrasher\School\Models\NoteEleve',
             'key' => 'eleve_id'
         ],
         'noteseleves' => [
-            'bootnetcrasher\school\models\noteeleve',
+            'BootnetCrasher\School\Models\NoteEleve',
             'key' => 'note_id'
         ]
     ];

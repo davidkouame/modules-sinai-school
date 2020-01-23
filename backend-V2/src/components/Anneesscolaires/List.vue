@@ -10,7 +10,7 @@
               <input type="text" class="form-control search" placeholder="Rechercher une année scolaire" @keyup="searchModel" v-model="search">
             </div>
             <div class="col-md-4">
-              <a :href="'/#/annees-scolaires/add/'"class="btn btn-primary">Ajouter</a>
+              <a :href="'#/annees-scolaires/add/'"class="btn btn-primary">Ajouter</a>
             </div>
           </div>
         </div>
@@ -35,10 +35,10 @@
             <td>{{ anneescolaire.start}}</td>
             <td>{{ anneescolaire.end }}</td>
             <td>
-              <a :href="'/#/annees-scolaires/preview/'+anneescolaire.id" class="btn btn-icon btn-info btn-sm">
+              <a :href="'#/annees-scolaires/preview/'+anneescolaire.id" class="btn btn-icon btn-info btn-sm">
                 <!----><i class="fa fa-user"></i><!---->
               </a>&nbsp;
-              <a :href="'/#/annees-scolaires/edit/'+anneescolaire.id"  class="btn btn-icon btn-success btn-sm">
+              <a :href="'#/annees-scolaires/edit/'+anneescolaire.id"  class="btn btn-icon btn-success btn-sm">
                 <!----><i class="fa fa-edit"></i><!---->
               </a>&nbsp;
               <a id="show-modal" @click="showModalF(anneescolaire.id)" type="button" class="btn btn-icon btn-danger btn-sm">

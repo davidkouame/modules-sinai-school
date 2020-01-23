@@ -60,7 +60,7 @@
                       <td>{{ matiere.libelle }}</td>
                       <td>{{ matiere.coefficient }}</td>
                       <td class="actions">
-                        <a :href="'/#/matieres/preview/'+matiere.id">
+                        <a :href="'#/matieres/preview/'+matiere.id">
                           <i class="fa fa-eye fa-lg"></i>
                         </a>
                       </td>

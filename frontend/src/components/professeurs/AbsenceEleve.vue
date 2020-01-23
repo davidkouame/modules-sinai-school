@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="container">
     <h1>Liste des absences des élèves</h1>
-    <a :href="'/#/professeur/absenceseleves/add'" class="btn btn-primary">Ajouter une absence</a>
+    <a :href="'#/professeur/absenceseleves/add'" class="btn btn-primary">Ajouter une absence</a>
     <div class="row">
       <div class="col-md-12">
         <table class="table">
@@ -25,11 +25,11 @@
               <td>{{ absenceeleve.heure_fin_cours}}</td>
               <td>
                 <a
-                  :href="'/#/professeur/absences-eleves/'+absenceeleve.id"
+                  :href="'#/professeur/absences-eleves/'+absenceeleve.id"
                   class="btn btn-primary"
                 >detail</a>
                 <a
-                  :href="'/#/professeur/absences-eleves/edit/'+absenceeleve.id"
+                  :href="'#/professeur/absences-eleves/edit/'+absenceeleve.id"
                   class="btn btn-primary"
                 >Modifier</a>
               </td>

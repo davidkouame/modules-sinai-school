@@ -10,7 +10,7 @@
               <input type="text" class="form-control search" placeholder="Rechercher une absence" @keyup="searchModel" v-model="search">
             </div>
             <div class="col-md-4">
-              <a :href="'/#/absences/add/'"class="btn btn-primary">Ajouter</a>
+              <a :href="'#/absences/add/'" class="btn btn-primary">Ajouter</a>
             </div>
           </div>
         </div>
@@ -37,10 +37,10 @@
             <td>{{ getTime(absence.heure_fin_cours) }}</td>
             <td>{{ absence.eleve.name+' '+absence.eleve.surname}}</td>
             <td>
-              <a :href="'/#/absences/preview/'+absence.id" class="btn btn-icon btn-info btn-sm">
+              <a :href="'#/absences/preview/'+absence.id" class="btn btn-icon btn-info btn-sm">
                 <!----><i class="fa fa-user"></i><!---->
               </a>&nbsp;
-              <a :href="'/#/absences/edit/'+absence.id"  class="btn btn-icon btn-success btn-sm">
+              <a :href="'#/absences/edit/'+absence.id"  class="btn btn-icon btn-success btn-sm">
                 <!----><i class="fa fa-edit"></i><!---->
               </a>&nbsp;
               <a id="show-modal" @click="showModalF(absence.id)" type="button" class="btn btn-icon btn-danger btn-sm">

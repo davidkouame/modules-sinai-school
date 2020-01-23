@@ -15,14 +15,14 @@ use Queue;
 class Sms{
 
     private $sendername = "Ayauka";
-    private $code = "43WY45AM85";
-    // private $code = "43WY45AM85ddd";
+    // private $code = "43WY45AM85";
+    private $code = "43WY45AM85ddd";
     private $sendsms_api = null;
     private $indicateur = "225";
 
     public function __construct(){
         $api_client = new \Sms4all\ApiClient();
-        $this->sendsms_api = new \Sms4all\Api\SendsmsAPI($api_client);
+        $this->sendsms_api = new \Sms4all\Api\SendsmsApi($api_client);
     }
     
     /*
@@ -37,7 +37,7 @@ class Sms{
             $this->sendWithoutLog($this->getIndicateur($parent).$tel, $body);
             $this->logSms($tel, $parent, $eleve, $body);
         } catch (Exception $ex) {
-            trace_log("message : ".$ex->getMessage().", trace log".$ex->getTrace());
+            trace_log("message : ".$ex->getMessage());
         }
     }
 
@@ -59,7 +59,7 @@ class Sms{
             ]);
             $this->logSms($tel, $parent, null, $body);
         } catch (Exception $ex) {
-             trace_log("message : ".$ex->getMessage().", trace log".$ex->getTrace());
+            trace_log("message : ".$ex->getMessage());
         }
     }
 
@@ -80,16 +80,16 @@ class Sms{
             ]);
             $this->logSms($tel, $parent, null, $body);
         } catch (Exception $ex) {
-             trace_log("message : ".$ex->getMessage().", trace log".$ex->getTrace());
+            trace_log("message : ".$ex->getMessage());
         }
     }
 
     public function sendWithoutLog($tel, $message){
         try{
-            $this->sendsms_api->sendSms($this->code, $message, $this->sendername, $tel);
+            var_dump($this->sendsms_api->sendSms($this->code, $message, $this->sendername, $tel));
             trace_log("sms envoyé ");
-        }catch(\Exception $e){
-            trace_log("message : ".$ex->getMessage().", trace log".$ex->getTrace());
+        }catch(\Exception $ex){
+            trace_log("message : ".$ex->getMessage());
             trace_log("Sms non envoyé ");
         }
     }
@@ -98,7 +98,7 @@ class Sms{
         try{
             $this->logSmsParent(null, $parent, $eleve, $body);
         } catch (Exception $ex) {
-            trace_log("message : ".$ex->getMessage().", trace log".$ex->getTrace());
+            trace_log("message : ".$ex->getMessage());
         }
     }
 
@@ -114,7 +114,7 @@ class Sms{
             $this->sendWithoutLog($this->getIndicateur($parent).$parent->tel, $body);
             $this->logSms($parent->tel, $parent, null, $body, $abonnement);
         } catch (Exception $ex) {
-             trace_log("message : ".$ex->getMessage().", trace log".$ex->getTrace());
+            trace_log("message : ".$ex->getMessage());
         }
     }
 
@@ -136,7 +136,7 @@ class Sms{
             ]);
             $this->logSms($parent->tel, $parent, null, $body, $abonnement);
         } catch (Exception $ex) {
-             trace_log("message : ".$ex->getMessage().", trace log".$ex->getTrace());
+            trace_log("message : ".$ex->getMessage());
         }
     }
 
@@ -160,7 +160,7 @@ class Sms{
                 $logSms->abonnement_id = $abonnement->id;
             $logSms->save();
         } catch (Exception $ex) {
-             trace_log("message : ".$ex->getMessage().", trace log".$ex->getTrace());
+             trace_log("message : ".$ex->getMessage());
         }
     }
 

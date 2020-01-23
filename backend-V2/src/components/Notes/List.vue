@@ -8,7 +8,7 @@
               <input type="text" class="form-control search" placeholder="Rechercher une note" @keyup="searchModel" v-model="search">
             </div>
             <div class="col-md-4">
-              <a :href="'/#/notes/add/'"class="btn btn-primary">Ajouter</a>
+              <a :href="'#/notes/add/'"class="btn btn-primary">Ajouter</a>
             </div>
           </div>
         </div>
@@ -35,10 +35,10 @@
             <td>{{ note.typenote.libelle}}</td>
             <td>{{ note.datenoteeffectue}}</td>
             <td>
-              <a :href="'/#/notes/preview/'+note.id" class="btn btn-icon btn-info btn-sm">
+              <a :href="'#/notes/preview/'+note.id" class="btn btn-icon btn-info btn-sm">
                 <!----><i class="fa fa-user"></i><!---->
               </a>&nbsp;
-              <a :href="'/#/notes/edit/'+note.id"  class="btn btn-icon btn-success btn-sm">
+              <a :href="'#/notes/edit/'+note.id"  class="btn btn-icon btn-success btn-sm">
                 <!----><i class="fa fa-edit"></i><!---->
               </a>&nbsp;
               <a id="show-modal" @click="showModalF(note.id)" type="button" class="btn btn-icon btn-danger btn-sm">

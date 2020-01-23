@@ -122,7 +122,7 @@
                                     <td>{{ eleve.user.email }}</td>
                                     <td>{{ eleve.tel }}</td>
                                     <td class="actions">
-                                      <a :href="'/#/parametres/eleves/preview/'+eleve.id">
+                                      <a :href="'#/parametres/eleves/preview/'+eleve.id">
                                         <i class="fa fa-eye fa-lg"></i>
                                       </a>
                                     </td>

@@ -239,6 +239,7 @@ class noteController extends Controller
     }*/
 
     public function getNotesV3(Request $request){
+        // die("dd")
         // recuperation des notes
         $collect = new TestCollection();
         // $notes = NoteModel::where('classe_id', $request->get('classe_id'))->get();
@@ -269,6 +270,7 @@ class noteController extends Controller
                 $notes = $notes->where($key, $value);
             }
         }
+        // die("hdh");
         $notes = $notes->get();
         foreach($notes as $note){
             $noteeleve = NoteEleve::where('note_id', $note->id)->where('eleve_id', $request->get('eleve_id'))->first();

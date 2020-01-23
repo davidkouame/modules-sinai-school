@@ -119,7 +119,7 @@
               </div>
             </div>
             <div class="col">
-              <a :href="'/#/notes/add'" class="btn btn-primary">Ajouter une note</a>
+              <a :href="'#/notes/add'" class="btn btn-primary">Ajouter une note</a>
             </div>
           </div>
           <br />
@@ -144,8 +144,8 @@
                       <span v-if="note.typenote">{{ note.typenote.libelle }}</span>
                     </td>
                     <td>
-                      <a :href="'/#/notes/preview/'+note.id" class="btn btn-primary">Voir</a>
-                      <a :href="'/#/notes/update/'+note.id" class="btn btn-primary">Modifier</a>
+                      <a :href="'#/notes/preview/'+note.id" class="btn btn-primary">Voir</a>
+                      <a :href="'#/notes/update/'+note.id" class="btn btn-primary">Modifier</a>
                       <button
                         id="show-modal"
                         @click="showModalF(note.id, 'note')"
@@ -195,10 +195,10 @@
               </div>
             </div>
             <div class="col">
-              <a :href="'/#/absences-eleves/add'" class="btn btn-primary">Ajouter une absence</a>
+              <a :href="'#/absences-eleves/add'" class="btn btn-primary">Ajouter une absence</a>
             </div>
             <!--<div class="col">
-              <a :href="'/#/absences-eleves/add'" class="btn btn-primary">Ajouter une absence</a>
+              <a :href="'#/absences-eleves/add'" class="btn btn-primary">Ajouter une absence</a>
             </div>-->
           </div>
           <br />
@@ -223,14 +223,14 @@
                     <td v-if="absenceeleve.raisonabsence">{{ absenceeleve.raisonabsence.libelle }}</td>
                     <td v-else="absenceeleve.raisonabsence"></td>
                     <td>
-                      <!--<a :href="'/#/absence-eleve/'+absenceeleve.id" class="btn btn-primary">detail</a>-->
+                      <!--<a :href="'#/absence-eleve/'+absenceeleve.id" class="btn btn-primary">detail</a>-->
 
                       <a
-                        :href="'/#/absences-eleves/preview/'+absenceeleve.id"
+                        :href="'#/absences-eleves/preview/'+absenceeleve.id"
                         class="btn btn-primary"
                       >Voir</a>
                       <a
-                        :href="'/#/absences-eleves/update/'+absenceeleve.id"
+                        :href="'#/absences-eleves/update/'+absenceeleve.id"
                         class="btn btn-primary"
                       >Modifier</a>
                       <button
@@ -262,7 +262,7 @@
         </div>
       </fieldset>
     </form>
-    <a :href="'/#/eleves'" class="btn btn-primary">retour</a>
+    <a :href="'#/eleves'" class="btn btn-primary">retour</a>
   </div>
 </template>
 

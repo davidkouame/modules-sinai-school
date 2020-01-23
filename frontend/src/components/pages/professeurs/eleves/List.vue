@@ -58,7 +58,7 @@
                             </div>
                             <!--<div class="col-md-1">
                                 <div class="col-1 add-form">
-                                    <a :href="'/#/notes/add'">
+                                    <a :href="'#/notes/add'">
                                       <i class="fa fa-plus-circle fa-lg font-size-28"></i>
                                     </a>
                                 </div>
@@ -82,12 +82,12 @@
                       <td>{{ eleve.eleve.name }}</td>
                       <td>{{ eleve.eleve.matricule }}</td>
                       <td>
-                        <!--<a :href="'/#/absence-eleve/'+absenceeleve.id" class="btn btn-primary">detail</a>-->
+                        <!--<a :href="'#/absence-eleve/'+absenceeleve.id" class="btn btn-primary">detail</a>-->
 
-                        <a :href="'/#/eleves/preview/'+eleve.eleve.id" class="col">
+                        <a :href="'#/eleves/preview/'+eleve.eleve.id" class="col">
                           <i class="fa fa-eye fa-lg"></i>
                         </a>
-                        <!--<a :href="'/#/absences-eleves/update/'+absenceeleve.id" class="btn btn-primary">Modifier</a>-->
+                        <!--<a :href="'#/absences-eleves/update/'+absenceeleve.id" class="btn btn-primary">Modifier</a>-->
                         <!--<button id="show-modal" @click="showModalF(absenceeleve.id)" class="btn btn-danger">Supprimer</button>-->
                       </td>
                     </tr>

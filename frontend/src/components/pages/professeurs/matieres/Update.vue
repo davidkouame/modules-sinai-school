@@ -40,7 +40,7 @@
           <input v-model="heure_fin_cours" type="date" class="form-control" />
         </div>
       </div>
-      <!-- <a :href="'/#/absences-eleves'" class="btn btn-danger">Annuler</a>-->
+      <!-- <a :href="'#/absences-eleves'" class="btn btn-danger">Annuler</a>-->
       <a @click="$router.go(-1)" class="btn btn-danger">Annuler</a>
       <a v-on:click="editAbsenceEleve()" class="btn btn-primary">Envoyer</a>
     </form>

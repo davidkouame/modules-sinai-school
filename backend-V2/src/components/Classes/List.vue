@@ -10,7 +10,7 @@
               <input type="text" class="form-control search" placeholder="Rechercher une classe" @keyup="searchModel" v-model="search">
             </div>
             <div class="col-md-4">
-              <a :href="'/#/classes/add/'"class="btn btn-primary">Ajouter</a>
+              <a :href="'#/classes/add/'"class="btn btn-primary">Ajouter</a>
             </div>
           </div>
         </div>
@@ -35,10 +35,10 @@
             <td>{{ classe.libelle}}</td>
             <td>{{ classe.niveau ? classe.niveau.libelle : ''}}</td>
             <td>
-              <a :href="'/#/classes/preview/'+classe.id" class="btn btn-icon btn-info btn-sm">
+              <a :href="'#/classes/preview/'+classe.id" class="btn btn-icon btn-info btn-sm">
                 <!----><i class="fa fa-user"></i><!---->
               </a>&nbsp;
-              <a :href="'/#/classes/edit/'+classe.id"  class="btn btn-icon btn-success btn-sm">
+              <a :href="'#/classes/edit/'+classe.id"  class="btn btn-icon btn-success btn-sm">
                 <!----><i class="fa fa-edit"></i><!---->
               </a>&nbsp;
               <a id="show-modal" @click="showModalF(classe.id)" type="button" class="btn btn-icon btn-danger btn-sm">

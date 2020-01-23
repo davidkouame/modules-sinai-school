@@ -264,7 +264,7 @@
                         </div>
                       </div>
                       <div class="col-1 add-form">
-                        <a :href="'/#/notes/add'">
+                        <a :href="'#/notes/add'">
                           <i class="fa fa-plus-circle fa-lg font-size-28"></i>
                         </a>
                       </div>
@@ -287,7 +287,7 @@
                       <tbody>
                         <tr v-if="countNotes" v-for="(note, index) in notes">
                           <th scope="row">{{ index + 1}}</th>
-                          <td><a :href="'/#/notes/preview/'+note.id" >{{ note.libelle }}</a></td>
+                          <td><a :href="'#/notes/preview/'+note.id" >{{ note.libelle }}</a></td>
                           <td>{{ note.created_at|formatDate }}</td>
                           <td> {{ note.type_note_libelle}} </td>
                           <!--<td v-bind:id="'note-'+note.id">{{ getValeur() }}</td>-->
@@ -300,10 +300,10 @@
                           <td>{{ note.rang ? note.rang : '--' }}</td>
                           <td>
                             <div class="row">
-                              <!--<a :href="'/#/notes/preview/'+note.id" class="col">
+                              <!--<a :href="'#/notes/preview/'+note.id" class="col">
                                 <i class="fa fa-eye fa-lg"></i>
                               </a>-->
-                              <!--<a :href="'/#/notes/update/'+note.id" class="col">
+                              <!--<a :href="'#/notes/update/'+note.id" class="col">
                                 <i class="fa fa-pencil fa-lg"></i>
                               </a>-->
                                 <a
@@ -394,7 +394,7 @@
                           </div>
                         </div>-->
                         <div class="col-1 add-form">
-                          <a :href="'/#/absences/add'">
+                          <a :href="'#/absences/add'">
                             <i class="fa fa-plus-circle fa-lg font-size-28"></i>
                           </a>
                         </div>
@@ -423,12 +423,12 @@
                             <td>
                               <div class="row">
                                 <a
-                                  :href="'/#/absences/preview/'+absenceeleve.id"
+                                  :href="'#/absences/preview/'+absenceeleve.id"
                                   class="col"
                                 >
                                   <i class="fa fa-eye fa-lg"></i>
                                 </a>
-                                <a :href="'/#/absences/update/'+absenceeleve.id" class="col">
+                                <a :href="'#/absences/update/'+absenceeleve.id" class="col">
                                   <i class="fa fa-pencil fa-lg"></i>
                                 </a>
                                 <a

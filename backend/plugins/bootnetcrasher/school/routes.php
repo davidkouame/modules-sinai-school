@@ -63,5 +63,10 @@ Route::get('api/v1/eleves/rapport/{section_annee_scolaire_id}', function($sectio
 
 Route::get('/test-sms', function (){
     $sms = new \Bootnetcrasher\School\Classes\Sms();
-    $sms->send("22547886905", "Test ayauka");
+    // $sms->sendWithoutLog("22662049271", "Test ayauka");
+    // $sms->sendWithoutLog("22577024542", "Test ayauka");
+    // $sms->sendWithoutLog("22547886905", "Test ayauka");
+    $sms->sendWithoutLog("22541166425", "Test ayauka");
+    // 
+    die("Sms envoyé ");
 });

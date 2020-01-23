@@ -13,7 +13,7 @@
         <img :src="'data:image/png;base64,'+emploisDuTemps" alt>
       </div>
     </div>
-      <a :href="'/#/'" class="btn btn-primary">retour</a>
+      <a :href="'#/'" class="btn btn-primary">retour</a>
   </div>
 </template>
 

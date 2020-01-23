@@ -132,7 +132,7 @@
                         <td>{{ moyenne.rang }}</td>
                         <td>
                           <div class="row">
-                            <a :href="'/#/moyennes/preview/'+moyenne.id" class="col">
+                            <a :href="'#/moyennes/preview/'+moyenne.id" class="col">
                               <i class="fa fa-eye fa-lg"></i>
                             </a>
                           </div>
