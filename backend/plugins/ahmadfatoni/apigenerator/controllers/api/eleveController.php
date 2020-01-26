@@ -14,6 +14,22 @@ class eleveController extends Controller
 
     protected $helpers;
 
+    private $rules = [
+        "name" => "required",
+        "surname" => "required",
+        "tel" => 'required',
+        "email" => 'required',
+        // "datenaissance" => 'required'
+    ];
+    
+    private $messages = [
+        "name.required" => "Veuillez entrer un nom",
+        "surname.required" => "Veuillez entrer un prénom",
+        "tel.required" => "Veuillez entrer un numéros",
+        "email.required" => "Veuillez entrer un email ",
+        // "datenaissance.required" => "Veuillez entrer une date de naissance"
+    ];
+
     public function __construct(EleveModel $EleveModel, Helpers $helpers)
     {
         parent::__construct();
@@ -131,12 +147,12 @@ class eleveController extends Controller
 
     public function store(Request $request){
         $arr = $request->all();
-        while ( $data = current($arr)) {
-            $this->EleveModel->{key($arr)} = $data;
-            next($arr);
-        }
-        $validation = Validator::make($request->all(), $this->EleveModel->rules);
+        $validation = Validator::make($request->all(), $this->rules, $this->messages);
         if( $validation->passes() ){
+            while ( $data = current($arr)) {
+                $this->EleveModel->{key($arr)} = $data;
+                next($arr);
+            }
             $this->EleveModel->save();
             $eleve = $this->EleveModel;
             $this->createOrUpdateAccountUser($request, $eleve);
@@ -144,7 +160,6 @@ class eleveController extends Controller
         }else{
             return $this->helpers->apiArrayResponseBuilder(400, 'fail', $validation->errors() );
         }
-
     }
 
     public function createOrUpdateAccountUser($data, $eleve){
@@ -154,7 +169,6 @@ class eleveController extends Controller
             $user->password_confirmation = "0000";
             trace_log("creation d'un utilisateur");
         }else{
-            
             $user = new User;
             $user->name = $data->name;
             $user->email = $data->email;
@@ -180,14 +194,19 @@ class eleveController extends Controller
     }
 
     public function update($id, Request $request){
-        $status = $this->EleveModel->where('id',$id)->update($request->all());
-        $eleve = $this->EleveModel->where('id',$id)->first();
-        $this->updateUser($this->EleveModel->where('id',$id)->first(), $request);
-        if($status){
-            $this->createOrUpdateAccountUser($request, $eleve);
-            return $this->helpers->apiArrayResponseBuilder(200, 'success', 'Data has been updated successfully.');
+        $validation = Validator::make($request->all(), $this->rules, $this->messages);
+        if($validation->passes()){
+            $status = $this->EleveModel->where('id',$id)->update($request->all());
+            $eleve = $this->EleveModel->where('id',$id)->first();
+            $this->updateUser($this->EleveModel->where('id',$id)->first(), $request);
+            if($status){
+                $this->createOrUpdateAccountUser($request, $eleve);
+                return $this->helpers->apiArrayResponseBuilder(200, 'success', 'Data has been updated successfully.');
+            }else{
+                return $this->helpers->apiArrayResponseBuilder(400, 'bad request', 'Error, data failed to update.');
+            }
         }else{
-            return $this->helpers->apiArrayResponseBuilder(400, 'bad request', 'Error, data failed to update.');
+            return $this->helpers->apiArrayResponseBuilder(400, 'fail', $validation->errors() );
         }
     }
 

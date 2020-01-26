@@ -1,12 +1,18 @@
 <template>
   <card class="card" :title="title">
       <div class="row">
+
+        <div v-if="error" class="col-md-12">
+          <message-error v-bind:error="error"></message-error>
+        </div>
+
         <div class="col-md-12">
           <form v-on:submit="saveAnneeScolaire">
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label class="control-label">Libellé</label>
+                      <label class="control-label">Libellé (
+                  <span class="span-required">*</span>)</label>
                       <!---->
                       <input
                         class="form-control"
@@ -19,7 +25,8 @@
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label class="control-label">Date de début</label>
+                      <label class="control-label">Date de début (
+                  <span class="span-required">*</span>)</label>
                       <!---->
                       <input
                         class="form-control"
@@ -34,7 +41,8 @@
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label class="control-label">Date de fin</label>
+                      <label class="control-label">Date de fin (
+                  <span class="span-required">*</span>)</label>
                       <!---->
                       <input
                         class="form-control"
@@ -62,7 +70,8 @@
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label class="control-label">Type année scolaire</label>
+                      <label class="control-label">Type année scolaire (
+                  <span class="span-required">*</span>)</label>
                       <!---->
                       <select v-model="anneescolaire.type_annee_scolaire_id" class="form-control" >
                       <option value="">Sélectionnez un type d'année scolaire</option>
@@ -93,7 +102,8 @@ export default {
     return {
       title: "Ajouter unne année scolaire",
       anneescolaire: {"libelle": "", "start": "", "end": "", "validated_at": "", "type_annee_scolaire_id": ""},
-      valueDisabled: false
+      valueDisabled: false,
+      error: null
     };
   },
   created() {
@@ -103,6 +113,7 @@ export default {
   methods:{
     saveAnneeScolaire(){
       this.valueDisabled = true;
+      this.error = null;
       // alert("gdgd")
       // console.log("annee scolaire"+JSON.stringify(this.anneescolaire))
       const data = new FormData();
@@ -120,8 +131,7 @@ export default {
           this.$router.go(-1)
         })
         .catch(error => {
-          console.log(error);
-          alert("echec lors de l'enregistrement")
+          this.error = error;
           this.errored = true;
           this.valueDisabled = false;
         })

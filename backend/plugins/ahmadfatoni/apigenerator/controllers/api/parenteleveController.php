@@ -13,6 +13,22 @@ class parenteleveController extends Controller
 
     protected $helpers;
 
+    private $rules = [
+        "name" => "required",
+        "tel" => 'required',
+        "email" => 'required',
+        "datenaissance" => 'required',
+        "pays_id" => 'required',
+    ];
+    
+    private $messages = [
+        "name.required" => "Veuillez entre un nom",
+        "tel.required" => "Veuillez entrer un numéros",
+        "email.required" => "Veuillez entrer un email",
+        "datenaissance.required" => "Veuillez entrer une date de naissance",
+        "pays_id.required" => "Veuillez entrer un pays",
+    ];
+
     public function __construct(ParentEleve $ParentEleve, Helpers $helpers)
     {
         parent::__construct();
@@ -42,37 +58,31 @@ class parenteleveController extends Controller
     }
 
     public function store(Request $request){
-
     	$arr = $request->all();
-
-        while ( $data = current($arr)) {
-            $this->ParentEleve->{key($arr)} = $data;
-            next($arr);
-        }
-
-        $validation = Validator::make($request->all(), $this->ParentEleve->rules);
-        
+        $validation = Validator::make($request->all(), $this->rules, $this->messages);
         if( $validation->passes() ){
+            while ( $data = current($arr)) {
+                $this->ParentEleve->{key($arr)} = $data;
+                next($arr);
+            }
             $this->ParentEleve->save();
             return $this->helpers->apiArrayResponseBuilder(201, 'created', ['id' => $this->ParentEleve->id]);
         }else{
             return $this->helpers->apiArrayResponseBuilder(400, 'fail', $validation->errors() );
         }
-
     }
 
     public function update($id, Request $request){
-
-        $status = $this->ParentEleve->where('id',$id)->update($data);
-    
-        if( $status ){
-            
-            return $this->helpers->apiArrayResponseBuilder(200, 'success', 'Data has been updated successfully.');
-
+        $validation = Validator::make($request->all(), $this->rules, $this->messages);
+        if($validation->passes()){
+            $status = $this->ParentEleve->where('id',$id)->update($data);
+            if( $status ){
+                return $this->helpers->apiArrayResponseBuilder(200, 'success', 'Data has been updated successfully.');
+            }else{
+                return $this->helpers->apiArrayResponseBuilder(400, 'bad request', 'Error, data failed to update.');
+            }
         }else{
-
-            return $this->helpers->apiArrayResponseBuilder(400, 'bad request', 'Error, data failed to update.');
-
+            return $this->helpers->apiArrayResponseBuilder(400, 'fail', $validation->errors() );
         }
     }
 

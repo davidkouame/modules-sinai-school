@@ -1,12 +1,18 @@
 <template>
   <card class="card" :title="title">
       <div class="row">
+
+        <div v-if="error" class="col-md-12">
+          <message-error v-bind:error="error"></message-error>
+        </div>
+
         <div class="col-md-12" v-if="serie">
           <form v-on:submit="saveserie">
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label class="control-label">Libellé</label>
+                      <label class="control-label">Libellé (
+                  <span class="span-required">*</span>)</label>
                       <!---->
                       <input
                         class="form-control"
@@ -58,7 +64,8 @@ export default {
     return {
       title: "Modifier une serie",
       validated_at: "17/11/1973",
-      valueDisabled: false
+      valueDisabled: false,
+      error: null
     };
   },
   created() {
@@ -70,6 +77,7 @@ export default {
   methods:{
     saveserie(){
       this.valueDisabled = true;
+      this.error = null;
       let data = {
         libelle: this.serie.libelle
       };
@@ -81,8 +89,7 @@ export default {
           this.$router.go(-1)
         })
         .catch(error => {
-          console.log(error);
-          alert("echec lors de l'enregistrement")
+          this.error = error;
           this.errored = true;
           this.valueDisabled = false;
         })

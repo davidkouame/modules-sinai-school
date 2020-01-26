@@ -5,13 +5,28 @@ use BackendMenu;
 
 use Illuminate\Http\Request;
 use AhmadFatoni\ApiGenerator\Helpers\Helpers;
-use Illuminate\Support\Facades\Validator;
 use BootnetCrasher\School\Models\AnneeScolaireModel;
+use Illuminate\Support\Facades\Validator;
+
 class anneeScolaireController extends Controller
 {
 	protected $AnneeScolaireModel;
 
     protected $helpers;
+
+    private $rules = [
+        "libelle" => "required",
+        "start" => 'required',
+        "end" => 'required',
+        "type_annee_scolaire_id" => 'required'
+    ];
+    
+    private $messages = [
+        "libelle.required" => "Veuillez entrez un libellé",
+        "start.required" => "Veuillez entrez une date de début",
+        "end.required" => "Veuillez entrez une date de fin",
+        "type_annee_scolaire_id.required" => "Veuillez sélectionnez un type d'année scolaire"
+    ];
 
     public function __construct(AnneeScolaireModel $AnneeScolaireModel, Helpers $helpers)
     {
@@ -51,42 +66,40 @@ class anneeScolaireController extends Controller
     }
 
     public function store(Request $request){
-
         $arr = $request->all();
-
-        while ( $data = current($arr)) {
-            $this->AnneeScolaireModel->{key($arr)} = $data;
-            next($arr);
-        }
-
-        $this->AnneeScolaireModel->type_annee_scolaire_id = $request->get('type_annee_scolaire_id');
-
-        $validation = Validator::make($request->all(), $this->AnneeScolaireModel->rules);
-        
+        $validation = Validator::make($arr, $this->rules, $this->messages);
         if( $validation->passes() ){
+            $this->AnneeScolaireModel->type_annee_scolaire_id = $request->get('type_annee_scolaire_id');
+            while ( $data = current($arr)) {
+                $this->AnneeScolaireModel->{key($arr)} = $data;
+                next($arr);
+            }
             $this->AnneeScolaireModel->save();
             return $this->helpers->apiArrayResponseBuilder(201, 'created', ['id' => $this->AnneeScolaireModel->id]);
         }else{
             return $this->helpers->apiArrayResponseBuilder(400, 'fail', $validation->errors() );
         }
-
     }
 
     public function update($id, Request $request){
-        // $status = $this->AnneeScolaireModel->where('id',$id)->update($request->all());
         $arr = $request->all();
-        $anneescolaire = $this->AnneeScolaireModel->where('id',$id)->first();
-        while ( $data = current($arr)) {
-            $anneescolaire->{key($arr)} = $data;
-            next($arr);
-        }
-        $anneescolaire = $this->hydrate($anneescolaire, $request);
-        // $anneescolaire->type_annee_scolaire_id = $request->get('type_annee_scolaire_id');
-        $status = $anneescolaire->save();
-        if( $status ){
-            return $this->helpers->apiArrayResponseBuilder(200, 'success', 'Data has been updated successfully.');
+        $validation = Validator::make($arr, $this->rules, $this->messages);
+        if( $validation->passes() ){
+            $anneescolaire = $this->AnneeScolaireModel->where('id',$id)->first();
+            while ( $data = current($arr)) {
+                $anneescolaire->{key($arr)} = $data;
+                next($arr);
+            }
+            $anneescolaire = $this->hydrate($anneescolaire, $request);
+            // $anneescolaire->type_annee_scolaire_id = $request->get('type_annee_scolaire_id');
+            $status = $anneescolaire->save();
+            if( $status ){
+                return $this->helpers->apiArrayResponseBuilder(200, 'success', 'Data has been updated successfully.');
+            }else{
+                return $this->helpers->apiArrayResponseBuilder(400, 'bad request', 'Error, data failed to update.');
+            }
         }else{
-            return $this->helpers->apiArrayResponseBuilder(400, 'bad request', 'Error, data failed to update.');
+            return $this->helpers->apiArrayResponseBuilder(400, 'fail', $validation->errors() );
         }
     }
 

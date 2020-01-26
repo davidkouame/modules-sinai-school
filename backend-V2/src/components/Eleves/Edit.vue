@@ -1,12 +1,18 @@
 <template>
   <card class="card" :title="title">
       <div class="row">
+
+        <div v-if="error" class="col-md-12">
+        <message-error v-bind:error="error"></message-error>
+      </div>
+
         <div class="col-md-12" v-if="eleve">
           <form v-on:submit="saveEleve">
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label class="control-label">Nom</label>
+                      <label class="control-label">Nom (
+                  <span class="span-required">*</span>)</label>
                       <!---->
                       <input
                         class="form-control"
@@ -19,7 +25,8 @@
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label class="control-label">Prénom</label>
+                      <label class="control-label">Prénom (
+                  <span class="span-required">*</span>)</label>
                       <!---->
                       <input
                         class="form-control"
@@ -34,7 +41,8 @@
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label class="control-label">Email</label>
+                      <label class="control-label">Email (
+                  <span class="span-required">*</span>)</label>
                       <!---->
                       <input
                         class="form-control"
@@ -47,7 +55,8 @@
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label class="control-label">Téléphone</label>
+                      <label class="control-label">Téléphone (
+                  <span class="span-required">*</span>)</label>
                       <!---->
                       <input
                         class="form-control"
@@ -97,7 +106,8 @@ export default {
   data() {
     return {
       title: "Modifier un élève",
-      valueDisabled: false
+      valueDisabled: false,
+      error: null
     };
   },
   created() {
@@ -109,6 +119,7 @@ export default {
   methods:{
     saveEleve(){
       this.valueDisabled = true;
+      this.error = null;
       let data = {
         name: this.eleve.name,
         surname: this.eleve.surname,
@@ -123,10 +134,9 @@ export default {
           this.$router.go(-1)
         })
         .catch(error => {
-          console.log(error);
-          alert("echec lors de l'enregistrement")
           this.errored = true;
-          this.valueDisabled = true;
+          this.error = error;
+          this.valueDisabled = false;
         })
         .finally(() => (this.loading = false));
     }

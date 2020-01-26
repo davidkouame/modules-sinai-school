@@ -1,6 +1,11 @@
 <template>
   <card class="card" :title="title">
       <div class="row">
+
+        <div v-if="error" class="col-md-12">
+          <message-error v-bind:error="error"></message-error>
+        </div>
+
         <div class="col-md-12" v-if="sectionanneescolaire">
           <form v-on:submit="saveSectionAnneeScolaire">
                 <div class="row">
@@ -110,7 +115,8 @@ export default {
     return {
       title: "Modifier une section année scolaire",
       validated_at: "17/11/1973",
-      valueDisabled: false
+      valueDisabled: false,
+      error: null
     };
   },
   created() {
@@ -124,6 +130,7 @@ export default {
   methods:{
     saveSectionAnneeScolaire(){
       this.valueDisabled = true;
+      this.error = null;
       let data = {
         libelle: this.sectionanneescolaire.libelle,
         start: this.sectionanneescolaire.start,
@@ -140,8 +147,7 @@ export default {
           this.$router.go(-1)
         })
         .catch(error => {
-          console.log(error);
-          alert("echec lors de l'enregistrement")
+          this.error = error;
           this.errored = true;
           this.valueDisabled = false;
         })

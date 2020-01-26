@@ -1,9 +1,0 @@
-1579764492a:1:{s:24:"detailclubsactivites.htm";a:11:{s:8:"fileName";s:24:"detailclubsactivites.htm";s:7:"content";s:177:"title = "Demonstration"
-url = "/clubs-activites/:club_activite_id"
-layout = "default"
-is_hidden = 0
-
-[detailClubsActivites]
-[filAriane]
-==
-{% component 'detailClubsActivites' %}";s:5:"mtime";i:1573909249;s:6:"markup";s:38:"{% component 'detailClubsActivites' %}";s:4:"code";N;s:5:"title";s:13:"Demonstration";s:3:"url";s:34:"/clubs-activites/:club_activite_id";s:6:"layout";s:7:"default";s:9:"is_hidden";s:1:"0";s:20:"detailClubsActivites";a:0:{}s:9:"filAriane";a:0:{}}}

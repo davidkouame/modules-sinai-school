@@ -1608,8 +1608,13 @@ class Controller
         );
     }
 
-    public function hydrate($model, $request){
-        foreach ($request->all() as $key => $value) {
+    public function hydrate($model, $request, $excepts = null){
+        $data = null;
+        if($excepts)
+            $data = $request->except($excepts);
+        else
+            $data = $request->all();
+        foreach ($data as $key => $value) {
             $model->{$key} = $value;
         }
         return $model;

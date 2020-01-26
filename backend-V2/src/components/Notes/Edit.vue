@@ -1,6 +1,11 @@
 <template>
   <card class="card" :title="title">
       <div class="row">
+
+        <div v-if="error" class="col-md-12">
+        <message-error v-bind:error="error"></message-error>
+      </div>
+
         <div class="col-md-12" v-if="note">
           <form v-on:submit="saveNote">
                 <div class="row">
@@ -21,7 +26,8 @@
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label class="control-label">Libellé</label>
+                      <label class="control-label">Libellé (
+                  <span class="span-required">*</span>)</label>
                       <!---->
                       <input
                         class="form-control"
@@ -34,7 +40,8 @@
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label class="control-label">Date de création</label>
+                      <label class="control-label">Date de création (
+                  <span class="span-required">*</span>)</label>
                       <!---->
                       <datetime v-model="datenoteeffectue" input-class="form-control" type="datetime"></datetime>
                       <!---->
@@ -44,7 +51,8 @@
                 <div class="row">
                   <div class="col-md-6">
                      <div class="form-group">
-                      <label class="control-label">Type de note</label>
+                      <label class="control-label">Type de note (
+                  <span class="span-required">*</span>)</label>
                       <!---->
                       <select v-model="note.typenote_id" class="form-control" >
                       <option value="">Sélectionnez un type de note</option>
@@ -55,7 +63,8 @@
                   </div>
                   <div class="col-md-6">
                      <div class="form-group">
-                      <label class="control-label">Matière</label>
+                      <label class="control-label">Matière (
+                  <span class="span-required">*</span>)</label>
                       <!---->
                       <select v-model="note.matiere_id" class="form-control" >
                       <option value="">Sélectionnez une matière</option>
@@ -68,7 +77,8 @@
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label class="control-label">Coefficient</label>
+                      <label class="control-label">Coefficient (
+                  <span class="span-required">*</span>)</label>
                       <!---->
                       <input
                         class="form-control"
@@ -81,7 +91,8 @@
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label class="control-label">Classe</label>
+                      <label class="control-label">Classe (
+                  <span class="span-required">*</span>)</label>
                       <!---->
                       <select v-model="note.classe_id" class="form-control" >
                       <option value="">Sélectionnez une classe</option>
@@ -94,7 +105,8 @@
                  <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label class="control-label">Section année scolaire</label>
+                      <label class="control-label">Section année scolaire (
+                  <span class="span-required">*</span>)</label>
                       <!---->
                       <select v-model="note.section_annee_scolaire_id" class="form-control" >
                       <option value="">Sélectionnez une section</option>
@@ -140,7 +152,8 @@ export default {
       title: "Modifier une note",
       validated_at: "17/11/1973",
       datenoteeffectue: null,
-      valueDisabled: false
+      valueDisabled: false,
+      error: null
     };
   },
   created() {
@@ -159,6 +172,7 @@ export default {
   methods:{
     saveNote(){
       this.valueDisabled = true;
+      this.error = null;
       let data = {
         libelle: this.note.libelle,
         datenoteeffectue: this.datenoteeffectue.split(".")[0].replace('T', ' '),
@@ -177,9 +191,8 @@ export default {
           this.$router.go(-1)
         })
         .catch(error => {
-          console.log(error);
-          alert("echec lors de l'enregistrement")
           this.errored = true;
+          this.error = error;
           this.valueDisabled = false;
         })
         .finally(() => (this.loading = false));

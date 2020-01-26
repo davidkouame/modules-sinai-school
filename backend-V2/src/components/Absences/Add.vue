@@ -1,12 +1,19 @@
 <template>
   <card class="card" :title="title">
       <div class="row">
+
+        <!-- Show error message -->
+        <div v-if="error" class="col-md-12">
+          <message-error v-bind:error="error"></message-error>
+        </div>
+
         <div class="col-md-12">
           <form v-on:submit="saveAbsence">
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label class="control-label">Elève</label>
+                      <label class="control-label">Elève (
+                  <span class="span-required">*</span>)</label>
                       <!---->
                       <select v-model="absence.eleve_id" class="form-control" >
                       <option value="">Sélectionnez un élève</option>
@@ -17,7 +24,8 @@
                   </div>
                   <div class="col-md-6">
                   <div class="form-group">
-                      <label class="control-label">Raison d'absence</label>
+                      <label class="control-label">Raison d'absence (
+                  <span class="span-required">*</span>)</label>
                       <!---->
                       <select v-model="absence.raisonabsence_id" class="form-control" >
                       <option value="">Sélectionnez une raison</option>
@@ -30,7 +38,8 @@
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label class="control-label">Heure de début</label>
+                      <label class="control-label">Heure de début (
+                  <span class="span-required">*</span>)</label>
                       <!---->
                       <datetime v-model="absence.heure_debut_cours" input-class="form-control" type="datetime"></datetime>
                       <!---->
@@ -38,7 +47,8 @@
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label class="control-label">Heure de fin</label>
+                      <label class="control-label">Heure de fin (
+                  <span class="span-required">*</span>)</label>
                       <!---->
                       <datetime v-model="absence.heure_fin_cours" input-class="form-control" type="datetime"></datetime>
                       <!---->
@@ -88,7 +98,8 @@ export default {
       title: "Ajouter une absence",
       absence: {"eleve_id": "", "raisonabsence_id": "", "description": "", "heure_debut_cours": "", "heure_fin_cours": "", "section_annee_scolaire_id": ""},
       date: null,
-      valueDisabled: false
+      valueDisabled: false,
+      error: null
     };
   },
   created() {
@@ -120,8 +131,7 @@ export default {
           this.$router.go(-1)
         })
         .catch(error => {
-          console.log(error);
-          alert("echec lors de l'enregistrement")
+          this.error = error;
           this.errored = true;
           this.valueDisabled = false;
         })

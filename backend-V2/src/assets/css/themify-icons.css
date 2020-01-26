@@ -1079,3 +1079,8 @@
 .ti-rss-alt:before {
 	content: "\e75f";
 }
+
+/*---------------------------------*/
+.span-required{
+    color: red
+  }

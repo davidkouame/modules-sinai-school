@@ -35,6 +35,10 @@ import Datetime  from 'vue-datetime'
 import 'vue-datetime/dist/vue-datetime.css'
 import 'vue-select/dist/vue-select.css';
 
+import MessageErrorCpt from "./components/Plugin/MessageErrorCpt";
+Vue.use(MessageErrorCpt)
+Vue.component("message-error", MessageErrorCpt);
+
 Vue.component('paginate', Paginate)
 Vue.use(PaperDashboard);
 Vue.use(VueTruncate);
@@ -73,6 +77,28 @@ Vue.mixin({
     },
     sayHello(){
     	console.log("hello ")
+    },
+    traitError(error) {
+      let errors = Object.values(error);
+      let messageErrors = "";
+      // recuperation de la reponse
+      if (errors[1]) {
+        let reponse = errors[1].response;
+        if (JSON.parse(reponse)) {
+          // recuperation des erreurs
+          let dataErrors = JSON.parse(reponse).data;
+          let i = 0;
+          const keys = Object.keys(dataErrors);
+          const values = Object.values(dataErrors);
+          for (const value of values) {
+            let fields = value.values();
+            for (const field of fields) {
+              messageErrors += field + "</br>";
+            }
+          }
+        }
+      }
+      return messageErrors;
     }
   }
 })

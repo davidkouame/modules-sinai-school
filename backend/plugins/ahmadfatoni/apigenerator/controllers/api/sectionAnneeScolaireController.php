@@ -13,6 +13,22 @@ class sectionAnneeScolaireController extends Controller
 
     protected $helpers;
 
+    private $rules = [
+        "libelle" => "required",
+        "annee_scolaire_id" => "required",
+        "coefficient" => "required",
+        "start" => "required",
+        "end" => "required",
+    ];
+    
+    private $messages = [
+        "libelle.required" => "Veuillez entrer un libellé",
+        "annee_scolaire_id.required" => "Veuillez entrer une année scolaire",
+        "coefficient.required" => "Veuillez entrer un coefficient",
+        "start.required" => "Veuillez entrer une date de début la section",
+        "end.required" => "Veuillez entrer une date de fin de la section",
+    ];
+
     public function __construct(SectionAnneeScolaireModel $SectionAnneeScolaireModel, Helpers $helpers)
     {
         parent::__construct();
@@ -54,14 +70,14 @@ class sectionAnneeScolaireController extends Controller
 
     public function store(Request $request){
         $arr = $request->all();
-        while ( $data = current($arr)) {
-            $this->SectionAnneeScolaireModel->{key($arr)} = $data;
-            next($arr);
-        }
-        $this->SectionAnneeScolaireModel->annee_scolaire_id = $request->get('annee_scolaire_id');
-        $this->SectionAnneeScolaireModel->coefficient = $request->get('coefficient');
-        $validation = Validator::make($request->all(), $this->SectionAnneeScolaireModel->rules);
+        $validation = Validator::make($request->all(), $this->rules, $this->messages);
         if( $validation->passes() ){
+            while ( $data = current($arr)) {
+                $this->SectionAnneeScolaireModel->{key($arr)} = $data;
+                next($arr);
+            }
+            $this->SectionAnneeScolaireModel->annee_scolaire_id = $request->get('annee_scolaire_id');
+            $this->SectionAnneeScolaireModel->coefficient = $request->get('coefficient');
             $this->SectionAnneeScolaireModel->save();
             return $this->helpers->apiArrayResponseBuilder(201, 'created', ['id' => $this->SectionAnneeScolaireModel->id]);
         }else{
@@ -70,25 +86,20 @@ class sectionAnneeScolaireController extends Controller
     }
 
     public function update($id, Request $request){
-        // $status = $this->SectionAnneeScolaireModel->where('id',$id)->update($request->all());
-        // $section = $this->SectionAnneeScolaireModel->where('id',$id)->first();
-        // $section->coefficient = 1;
-        // $section->save();
-        $arr = $request->all();
-        $section = $this->SectionAnneeScolaireModel->where('id',$id)->first();
-        /*while ( $data = current($arr)) {
-            $section->{key($arr)} = $data;
-            next($arr);
-        }*/
-        $section = $this->hydrate($section, $request);
-        // $section->annee_scolaire_id = $request->get('annee_scolaire_id');
-        // $section->coefficient = $request->get('coefficient');
-        $status = $section->save();
-        if( $status ){
-            trace_log("mise à jour de la section annnee scolaire ");
-            return $this->helpers->apiArrayResponseBuilder(200, 'success', 'Data has been updated successfully.');
+        $validation = Validator::make($request->all(), $this->rules, $this->messages);
+        if($validation->passes()){
+            $arr = $request->all();
+            $section = $this->SectionAnneeScolaireModel->where('id',$id)->first();
+            $section = $this->hydrate($section, $request);
+            $status = $section->save();
+            if( $status ){
+                trace_log("mise à jour de la section annnee scolaire ");
+                return $this->helpers->apiArrayResponseBuilder(200, 'success', 'Data has been updated successfully.');
+            }else{
+                return $this->helpers->apiArrayResponseBuilder(400, 'bad request', 'Error, data failed to update.');
+            }
         }else{
-            return $this->helpers->apiArrayResponseBuilder(400, 'bad request', 'Error, data failed to update.');
+            return $this->helpers->apiArrayResponseBuilder(400, 'fail', $validation->errors() );
         }
     }
 
@@ -104,13 +115,6 @@ class sectionAnneeScolaireController extends Controller
         $this->SectionAnneeScolaireModel->where('id',$id)->delete();
 
         return $this->helpers->apiArrayResponseBuilder(200, 'success', 'Data has been deleted successfully.');
-    }
-
-    public function hydrate($model, $request){
-        foreach ($request->all() as $key => $value) {
-            $model->{$key} = $value;
-        }
-        return $model;
     }
 
     public static function getAfterFilters() {return [];}

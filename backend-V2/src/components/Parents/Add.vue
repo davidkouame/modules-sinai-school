@@ -1,12 +1,18 @@
 <template>
   <card class="card" :title="title">
       <div class="row">
+
+        <div v-if="error" class="col-md-12">
+        <message-error v-bind:error="error"></message-error>
+      </div>
+
         <div class="col-md-12">
           <form v-on:submit="saveParent">
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label class="control-label">Nom</label>
+                      <label class="control-label">Nom (
+                  <span class="span-required">*</span>)</label>
                       <!---->
                       <input
                         class="form-control"
@@ -19,7 +25,8 @@
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label class="control-label">Prénom</label>
+                      <label class="control-label">Prénom (
+                  <span class="span-required">*</span>)</label>
                       <!---->
                       <input
                         class="form-control"
@@ -34,7 +41,8 @@
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label class="control-label">Email</label>
+                      <label class="control-label">Email (
+                  <span class="span-required">*</span>)</label>
                       <!---->
                       <input
                         class="form-control"
@@ -47,7 +55,8 @@
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label class="control-label">Téléphone</label>
+                      <label class="control-label">Téléphone (
+                  <span class="span-required">*</span>)</label>
                       <!---->
                       <input
                         class="form-control"
@@ -62,7 +71,8 @@
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label class="control-label">Pays</label>
+                      <label class="control-label">Pays (
+                  <span class="span-required">*</span>)</label>
                       <!---->
                       <select v-model="parent.pays_id" class="form-control" >
                       <option value="">Sélectionnez un pays</option>
@@ -105,7 +115,8 @@ export default {
     return {
       title: "Ajouter un parent",
       parent: {"name": "", "surname": "", "email": "", "tel": "", "create_account": "", "pays_id": ""},
-      valueDisabled: false
+      valueDisabled: false,
+      error: null
     };
   },
   created(){
@@ -114,6 +125,7 @@ export default {
   methods:{
     saveParent(){
       this.valueDisabled = true;
+      this.error = null;
       let data = {
         name: this.parent.name,
         surname: this.parent.surname,
@@ -130,9 +142,8 @@ export default {
           this.$router.go(-1)
         })
         .catch(error => {
-          console.log(error);
-          alert("echec lors de l'enregistrement")
           this.errored = true;
+          this.error = error;
           this.valueDisabled = false;
         })
         .finally(() => (this.loading = false));

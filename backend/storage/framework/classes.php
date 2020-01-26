@@ -513,4 +513,10 @@
   'bootnetcrasher\\parametrage\\Controllers\\payscontroller' => 'plugins/bootnetcrasher/parametrage/controllers/payscontroller.php',
   'BootnetCrasher\\Parametrage\\Models\\PaysModel' => 'plugins/bootnetcrasher/parametrage/models/PaysModel.php',
   'AhmadFatoni\\ApiGenerator\\Controllers\\API\\PaysController' => 'plugins/ahmadfatoni/apigenerator/controllers/api/PaysController.php',
+  'BootnetCrasher\\School\\Models\\ParametrageAppModel' => 'plugins/bootnetcrasher/school/models/ParametrageAppModel.php',
+  'AhmadFatoni\\ApiGenerator\\Controllers\\API\\parametrageAppController' => 'plugins/ahmadfatoni/apigenerator/controllers/api/parametrageAppController.php',
+  'BootnetCrasher\\School\\Console\\SendRapportMoyenneCommand' => 'plugins/bootnetcrasher/school/console/SendRapportMoyenneCommand.php',
+  'BootnetCrasher\\School\\Console\\CalculMoyenne' => 'plugins/bootnetcrasher/school/console/CalculMoyenne.php',
+  'BootnetCrasher\\School\\Console\\SeederSchool' => 'plugins/bootnetcrasher/school/console/SeederSchool.php',
+  'Mohsin\\Rest\\Console\\CreateRestController' => 'plugins/mohsin/rest/console/CreateRestController.php',
 );

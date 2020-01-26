@@ -10,19 +10,24 @@ use BootnetCrasher\School\Models\ParentModel;
 use BootnetCrasher\School\Models\EleveModel;
 use BootnetCrasher\School\Models\AbonnementModel;
 use Bootnetcrasher\School\Jobs\SendSmsJob;
+use BootnetCrasher\School\Models\ParametrageAppModel;
 use Queue;
 
 class Sms{
 
     private $sendername = "Ayauka";
     // private $code = "43WY45AM85";
-    private $code = "43WY45AM85ddd";
+    private $code = null;
     private $sendsms_api = null;
     private $indicateur = "225";
+    private $isSendSms = false;
 
     public function __construct(){
         $api_client = new \Sms4all\ApiClient();
         $this->sendsms_api = new \Sms4all\Api\SendsmsApi($api_client);
+        $parametrageApp = ParametrageAppModel::find(1);
+        $this->code = $parametrageApp->code_login_sms4all;
+        $this->isSendSms = $parametrageApp->send_sms_statut == 1 ? true : false;
     }
     
     /*
@@ -50,13 +55,15 @@ class Sms{
     */
     public function sendQueue(String $tel, String $body, Parentmodel $parent = null, EleveModel $eleve = null){
         try{
-            Queue::push(SendSmsJob::class, 
-            [
-                "code" => $this->code, 
-                "message" => $body, 
-                "sendername" => $this->sendername, 
-                "sendertelname" => $this->getIndicateur($parent).$tel
-            ]);
+            if($this->isSendSms){
+                Queue::push(SendSmsJob::class, 
+                [
+                    "code" => $this->code, 
+                    "message" => $body, 
+                    "sendername" => $this->sendername, 
+                    "sendertelname" => $this->getIndicateur($parent).$tel
+                ]);
+            }
             $this->logSms($tel, $parent, null, $body);
         } catch (Exception $ex) {
             trace_log("message : ".$ex->getMessage());
@@ -71,13 +78,15 @@ class Sms{
     */
     public function sendParamsUserConnexionQueue(String $tel, String $body, Parentmodel $parent = null){
         try{
-            Queue::push(SendSmsJob::class, 
-            [
-                "code" => $this->code, 
-                "message" => $body, 
-                "sendername" => $this->sendername, 
-                "sendertelname" => $this->getIndicateur($parent).$tel
-            ]);
+            if($this->isSendSms){
+                Queue::push(SendSmsJob::class, 
+                [
+                    "code" => $this->code, 
+                    "message" => $body, 
+                    "sendername" => $this->sendername, 
+                    "sendertelname" => $this->getIndicateur($parent).$tel
+                ]);
+            }
             $this->logSms($tel, $parent, null, $body);
         } catch (Exception $ex) {
             trace_log("message : ".$ex->getMessage());
@@ -86,7 +95,8 @@ class Sms{
 
     public function sendWithoutLog($tel, $message){
         try{
-            var_dump($this->sendsms_api->sendSms($this->code, $message, $this->sendername, $tel));
+            if($this->isSendSms)
+                $this->sendsms_api->sendSms($this->code, $message, $this->sendername, $tel);
             trace_log("sms envoyé ");
         }catch(\Exception $ex){
             trace_log("message : ".$ex->getMessage());
@@ -127,13 +137,15 @@ class Sms{
     */
     public function sendParentForAbonnementQueue($parent, $body, $abonnement){
         try{
-            Queue::push(SendSmsJob::class, 
-            [
-                "code" => $this->code, 
-                "message" => $body, 
-                "sendername" => $this->sendername, 
-                "sendertelname" => $this->getIndicateur($parent).$parent->tel
-            ]);
+            if($this->isSendSms){
+                Queue::push(SendSmsJob::class, 
+                [
+                    "code" => $this->code, 
+                    "message" => $body, 
+                    "sendername" => $this->sendername, 
+                    "sendertelname" => $this->getIndicateur($parent).$parent->tel
+                ]);
+            }
             $this->logSms($parent->tel, $parent, null, $body, $abonnement);
         } catch (Exception $ex) {
             trace_log("message : ".$ex->getMessage());

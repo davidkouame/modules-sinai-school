@@ -15,6 +15,20 @@ class professeurController extends Controller
 
     protected $helpers;
 
+    private $rules = [
+        "nom" => "required",
+        "prenom" => 'required',
+        "email" => 'required',
+        "tel" => 'required',
+    ];
+    
+    private $messages = [
+        "nom.required" => "Veuillez entrer un nom",
+        "prenom.required" => "Veuillez entrer un prénom",
+        "email.required" => "Veuillez entrer un email",
+        "tel.required" => "Veuillez entrer un tel",
+    ];
+
     public function __construct(ProfesseurModel $ProfesseurModel, Helpers $helpers)
     {
         parent::__construct();
@@ -60,13 +74,14 @@ class professeurController extends Controller
     }
 
     public function store(Request $request){
-    	$arr = $request->except('create_account');
-        while ( $data = current($arr)) {
-            $this->ProfesseurModel->{key($arr)} = $data;
-            next($arr);
-        }
-        $validation = Validator::make($request->all(), $this->ProfesseurModel->rules);
+        $arr = $request->except('create_account');
+        $validation = Validator::make($request->all(), $this->rules, $this->messages);
         if( $validation->passes() ){
+            /*while ( $data = current($arr)) {
+                $this->ProfesseurModel->{key($arr)} = $data;
+                next($arr);
+            }*/
+            $this->ProfesseurModel = $this->hydrate($this->ProfesseurModel, $request, ['create_account']);
             $this->ProfesseurModel->save();
             // création d'un compte user pour le professeur
             $this->createOrUpdateAccountUser($request, $this->ProfesseurModel);
@@ -74,7 +89,6 @@ class professeurController extends Controller
         }else{
             return $this->helpers->apiArrayResponseBuilder(400, 'fail', $validation->errors() );
         }
-
     }
 
     public function createUserCompte(){
@@ -108,12 +122,17 @@ class professeurController extends Controller
     }
 
     public function update($id, Request $request){
-        $status = $this->ProfesseurModel->where('id',$id)->update($request->except('create_account'));
-        if( $status ){
-            $this->createOrUpdateAccountUser($request, $this->ProfesseurModel->where('id',$id)->first());
-            return $this->helpers->apiArrayResponseBuilder(200, 'success', 'Data has been updated successfully.');
+        $validation = Validator::make($request->all(), $this->rules, $this->messages);
+        if($validation->passes()){
+            $status = $this->ProfesseurModel->where('id',$id)->update($request->except('create_account'));
+            if( $status ){
+                $this->createOrUpdateAccountUser($request, $this->ProfesseurModel->where('id',$id)->first());
+                return $this->helpers->apiArrayResponseBuilder(200, 'success', 'Data has been updated successfully.');
+            }else{
+                return $this->helpers->apiArrayResponseBuilder(400, 'bad request', 'Error, data failed to update.');
+            }
         }else{
-            return $this->helpers->apiArrayResponseBuilder(400, 'bad request', 'Error, data failed to update.');
+            return $this->helpers->apiArrayResponseBuilder(400, 'fail', $validation->errors() );
         }
     }
 

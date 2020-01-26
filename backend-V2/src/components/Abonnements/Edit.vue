@@ -1,6 +1,12 @@
 <template>
   <card class="card" :title="title">
       <div class="row">
+        
+        <!-- Show error message -->
+        <div v-if="error" class="col-md-12">
+          <message-error v-bind:error="error"></message-error>
+        </div>
+
         <div class="col-md-12" v-if="abonnement">
           <form v-on:submit="saveAbonnement">
                <div class="row">
@@ -114,7 +120,8 @@ export default {
       abonnementId: 0,
       eleves: [],
       isLoader: false,
-      valueDisabled: false
+      valueDisabled: false,
+      error: null
     };
   },
   created() {
@@ -151,8 +158,7 @@ export default {
           this.$router.go(-1)
         })
         .catch(error => {
-          console.log(error);
-          alert("echec lors de l'enregistrement")
+          this.error = error;
           this.errored = true;
           this.valueDisabled = false;
         })

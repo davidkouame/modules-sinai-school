@@ -65,8 +65,25 @@ Route::get('/test-sms', function (){
     $sms = new \Bootnetcrasher\School\Classes\Sms();
     // $sms->sendWithoutLog("22662049271", "Test ayauka");
     // $sms->sendWithoutLog("22577024542", "Test ayauka");
-    // $sms->sendWithoutLog("22547886905", "Test ayauka");
-    $sms->sendWithoutLog("22541166425", "Test ayauka");
+    $sms->sendWithoutLog("22547886905", "Test ayauka");
+    // $sms->sendWithoutLog("22541166425", "Test ayauka");
     // 
     die("Sms envoyé ");
+});
+
+Route::get('api/v1/test-sms-v1', function (\Illuminate\Http\Request $request){
+    $sms = new \Bootnetcrasher\School\Classes\Sms();
+    $sms->sendWithoutLog($request->get('tel'), $request->get('message'));
+    trace_log("tel ".$request->get('tel'));
+    trace_log("message ".$request->get('message'));
+    // $sms->sendWithoutLog("22547886905", "Test ayauka");
+    return response()->json(["status_code" => 200, "message" => "success", "data" => "Data has sent deleted successfully."]);
+    // return $request->get('message');
+});
+
+Route::get('api/v1/generate-data-for-section-annee-scolaire/{section_id}', function($section_id){
+    \Artisan::call('school:seeder', [
+        "--section" => $section_id
+    ]);
+    return response()->json(["status_code" => 200, "message" => "success", "data" => "Data has sent deleted successfully."]);
 });

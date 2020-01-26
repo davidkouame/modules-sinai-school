@@ -17,6 +17,18 @@ class AbonnementController extends Controller
 
     protected $helpers;
 
+    private $rules = [
+        "parent_id" => "required",
+        "pack_abonnement_id" => 'required',
+        "annee_scolaire_id" => 'required'
+    ];
+    
+    private $messages = [
+        "parent_id.required" => "Veuillez sélectionnez un parent",
+        "pack_abonnement_id.required" => "Veuillez sélectionnez un pack d'abonnement",
+        "annee_scolaire_id.required" => "Veuillez sélectionnez une année scolaire",
+    ];
+
     public function __construct(AbonnementModel $AbonnementModel, Helpers $helpers)
     {
         parent::__construct();
@@ -68,7 +80,6 @@ class AbonnementController extends Controller
             $this->AbonnementModel->{key($arr)} = $data;
             next($arr);
         }
-        $validation = Validator::make($request->all(), $this->AbonnementModel->rules);
         if( $validation->passes() ){
             $this->AbonnementModel->save();
             return $this->helpers->apiArrayResponseBuilder(201, 'created', ['id' => $this->AbonnementModel->id]);
@@ -78,13 +89,12 @@ class AbonnementController extends Controller
     }
 
     public function storeWithEleve(Request $request){
-        try{
             $arr = $request->except('eleves');
             while ( $data = current($arr)) {
                 $this->AbonnementModel->{key($arr)} = $data;
                 next($arr);
             }
-            $validation = Validator::make($request->all(), $this->AbonnementModel->rules);
+            $validation = Validator::make($request->all(), $this->rules, $this->messages);
             if( $validation->passes() ){
                 $this->AbonnementModel->save();
                 $this->createAbonnementEleve($this->AbonnementModel, $request->get('eleves'));
@@ -93,10 +103,6 @@ class AbonnementController extends Controller
             }else{
                 return $this->helpers->apiArrayResponseBuilder(400, 'fail', $validation->errors() );
             }
-        }catch (\Exception $e){
-            trace_log($e->getTrace());
-            return $this->helpers->apiArrayResponseBuilder(400, 'fail', $e->getTrace() );
-        }
     }
 
     public function createAbonnementEleve($abonnement, $eleves){
@@ -137,7 +143,8 @@ class AbonnementController extends Controller
     }
 
     public function updateWithEleve($id, Request $request){
-        try{
+        $validation = Validator::make($request->all(), $this->rules, $this->messages);
+        if($validation->passes()){
             $status = $this->AbonnementModel->where('id',$id)->update($request->except('eleves'));
             $this->createAbonnementEleve($this->AbonnementModel->where('id',$id)->first(), $request->get('eleves'));
             $this->updateParentEleve($request->get('parent_id'), $request->get('eleves'));
@@ -146,9 +153,8 @@ class AbonnementController extends Controller
             }else{
                 return $this->helpers->apiArrayResponseBuilder(400, 'bad request', 'Error, data failed to update.');
             }
-        }catch (\Exception $e){
-            trace_log($e->getTrace());
-            $this->helpers->apiArrayResponseBuilder(400, 'fail', $e->getTrace() );
+        }else{
+            return $this->helpers->apiArrayResponseBuilder(400, 'fail', $validation->errors() );
         }
     }
 

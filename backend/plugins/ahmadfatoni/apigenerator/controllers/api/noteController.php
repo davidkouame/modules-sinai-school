@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use AhmadFatoni\ApiGenerator\Helpers\Helpers;
 use BootnetCrasher\School\Models\NoteModel;
 use BootnetCrasher\School\Models\NoteEleve;
-use Dotenv\Validator;
+use Illuminate\Support\Facades\Validator;
 use DB;
 use Illuminate\Support\Collection;
 use Bootnetcrasher\School\Classes\Collection as TestCollection;
@@ -17,6 +17,27 @@ class noteController extends Controller
     protected $NoteModel;
 
     protected $helpers;
+
+    private $rules = [
+        "libelle" => "required",
+        "datenoteeffectue" => 'required',
+        "typenote_id" => 'required',
+        "matiere_id" => 'required',
+        "coefficient" => 'required',
+        "classe_id" => 'required',
+        "section_annee_scolaire_id" => 'required'
+    ];
+    
+    private $messages = [
+        "libelle.required" => "Veuillez entrer un libellé",
+        "datenoteeffectue.required" => "Veuillez entrer la date à la note a été effectuée",
+        "typenote_id.required" => "Veuillez sélectionner le type de note",
+        "matiere_id.required" => "Veuillez sélectionner une matière",
+        "coefficient.required" => "Veuillez entrer un coefficient",
+        "classe_id.required" => "Veuillez sélectionner une classe",
+        "classe_id.required" => "Veuillez sélectionner une classe",
+        "section_annee_scolaire_id.required" => "Veuillez sélectionner une section d'année scolaire",
+    ];
 
     public function __construct(NoteModel $NoteModel, Helpers $helpers)
     {
@@ -387,54 +408,42 @@ class noteController extends Controller
     }
 
     public function store(Request $request){
-        $datajson = json_decode($request->getContent(), true);
-        $bodyResponse = null;
-        $NoteModel = null;
-        // foreach ($datajson['classe_id'] as $classe_id){
-            // $arr = $request->except(['classe_id']);
+        $validation = Validator::make($request->all(), $this->rules, $this->messages);
+        if( $validation->passes() ){
+            $datajson = json_decode($request->getContent(), true);
+            $bodyResponse = null;
             $arr = $request->all();
-            $NoteModel = new NoteModel();
-            while ( $data = current($arr)) {
-                $NoteModel->{key($arr)} = $data;
+            
+            $note = new NoteModel();
+            /*while ( $data = current($arr)) {
+                $note->{key($arr)} = $data;
                 next($arr);
-            }
-            // $NoteModel->classe_id = join(",", $datajson['classe_id']);
-            $NoteModel->save();
-            if(count($NoteModel->rules) > 0){
-                $validation = Validator::make($request->all(), $NoteModel->rules);
-                if( $validation->passes() ){
-                    $NoteModel->save();
-                    $bodyResponse = $this->helpers->apiArrayResponseBuilder(201, 'created',
-                        ['id' => $NoteModel->id]);
-                }else{
-                    $bodyResponse = $this->helpers->apiArrayResponseBuilder(400, 'fail',
-                        $validation->errors() );
-                }
-            }else{
-                $NoteModel->save();
-                $bodyResponse = $this->helpers->apiArrayResponseBuilder(201, 'created',
-                    $NoteModel->toArray());
-            }
-        // }
+            }*/
+            $note = $this->hydrate($note, $request);
+            // $NoteModel->typenote_id = $request->get('typenote_id');
+            $note->save();
+            $bodyResponse = $this->helpers->apiArrayResponseBuilder(201, 'created',
+                ['id' => $note->id]);
+        }else{
+            $bodyResponse = $this->helpers->apiArrayResponseBuilder(400, 'fail',
+                $validation->errors() );
+        }
         return $bodyResponse;
     }
 
     public function update($id, Request $request){
-
-        $data = json_decode($request->getContent(), true);
-
-        // $data['classe_id'] = join(',', $data['classe_id']);
-
-        $status = $this->NoteModel->where('id',$id)->update($data);
-    
-        if( $status ){
-            
-            return $this->helpers->apiArrayResponseBuilder(200, 'success', 'Data has been updated successfully.');
-
+        $validation = Validator::make($request->all(), $this->rules, $this->messages);
+        if($validation->passes()){
+            $data = json_decode($request->getContent(), true);
+            $status = $this->NoteModel->where('id',$id)->update($data);
+            if( $status ){
+                return $this->helpers->apiArrayResponseBuilder(200, 'success', 'Data has been updated successfully.');
+            }else{
+                return $this->helpers->apiArrayResponseBuilder(400, 'bad request', 'Error, data failed to update.');
+            }
         }else{
-
-            return $this->helpers->apiArrayResponseBuilder(400, 'bad request', 'Error, data failed to update.');
-
+            return $this->helpers->apiArrayResponseBuilder(400, 'fail',
+            $validation->errors() );
         }
     }
 

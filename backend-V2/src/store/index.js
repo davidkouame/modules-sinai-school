@@ -109,7 +109,8 @@ export default new Vuex.Store({
     packsabonnement: null,
     chooseEleve: null,
     elevesabonnement: null,
-    pays: null
+    pays: null,
+    parametrageapp: null
   },
   mutations: {
     anneesscolaires(state, payload) {
@@ -273,6 +274,9 @@ export default new Vuex.Store({
     },
     pays(state, pays){
       state.pays = pays
+    },
+    parametrageapp(state, parametrageapp){
+      state.parametrageapp = parametrageapp
     }
   },
   getters: {
@@ -440,6 +444,9 @@ export default new Vuex.Store({
     },
     pays: state => {
       return state.pays
+    },
+    parametrageapp: state => {
+      return state.parametrageapp
     }
   },
   actions: {
@@ -1371,7 +1378,39 @@ export default new Vuex.Store({
           this.errored = true
         })
         .finally(() => (this.loading = false))
+    },
+    getParametrageApp(context, params) {
+      getInformModel(context, params.parametrageappId, "parametrages", "parametrageapp")
+    },
+    sendTestSms(context, params) {
+      Axios.get(
+        context.state.endpoint + 'api/v1/test-sms-v1?tel=' + params.tel + '&message=' + params.message
+      )
+        .then(response => {
+          alert("sms sent successfully !")
+          window.location.reload();
+        })
+        .catch(error => {
+          console.log(error)
+          this.errored = true
+        })
+        .finally(() => (this.loading = false))
+    },
+    generateNotesForSection(context, params) {
+      Axios.get(
+        context.state.endpoint + 'api/v1/generate-data-for-section-annee-scolaire/' + params.sectionAnneeScolaireId
+      )
+        .then(response => {
+          alert("Data notes generated successfuly !")
+          window.location.reload();
+        })
+        .catch(error => {
+          console.log(error)
+          this.errored = true
+        })
+        .finally(() => (this.loading = false))
     }
-  },
+  }
+  
   // modules: modules
 })

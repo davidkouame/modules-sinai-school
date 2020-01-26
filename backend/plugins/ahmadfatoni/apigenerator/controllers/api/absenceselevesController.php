@@ -7,13 +7,27 @@ use Illuminate\Http\Request;
 use AhmadFatoni\ApiGenerator\Helpers\Helpers;
 use BootnetCrasher\School\Models\AbsenceEleveModel;
 use BootnetCrasher\School\Models\EleveModel;
-use Dotenv\Validator;
+use Illuminate\Support\Facades\Validator;
 
 class absenceselevesController extends Controller
 {
     protected $AbsenceEleveModel;
 
     protected $helpers;
+
+    private $rules = [
+        "heure_debut_cours" => "required",
+        "heure_fin_cours" => 'required',
+        "raisonabsence_id" => 'required',
+        "eleve_id" => 'required',
+    ];
+    
+    private $messages = [
+        "heure_debut_cours.required" => "Veuillez entrez une date de début",
+        "heure_fin_cours.required" => "Veuillez entrez une heure de fin",
+        "raisonabsence_id.required" => "Veuillez sélectionnez une raison d'absence",
+        "eleve_id.required" => "Veuillez sélectionnez un élève",
+    ];
 
     public function __construct(AbsenceEleveModel $AbsenceEleveModel, Helpers $helpers)
     {
@@ -95,40 +109,43 @@ class absenceselevesController extends Controller
             $this->AbsenceEleveModel->{key($arr)} = $data;
             next($arr);
         }
-        $this->AbsenceEleveModel->commentaire = $request->get("commentaire");
-        $this->AbsenceEleveModel->eleve_id = $request->get("eleve_id");
-        $this->AbsenceEleveModel->heure_debut_cours = $request->get("heure_debut_cours");
-        $this->AbsenceEleveModel->heure_fin_cours = $request->get("heure_fin_cours");
-        $this->AbsenceEleveModel->raisonabsence_id = $request->get("raisonabsence_id");
-        $this->AbsenceEleveModel->section_annee_scolaire_id = $request->get("section_annee_scolaire_id");
-        if (count($this->AbsenceEleveModel->rules) > 0) {
-            $validation = Validator::make($request->all(), $this->AbsenceEleveModel->rules);
-            if ($validation->passes()) {
-                $this->AbsenceEleveModel->save();
-                return $this->helpers->apiArrayResponseBuilder(201, 'created', ['id' => $this->AbsenceEleveModel->id]);
+        $validation = Validator::make($request->all(), $this->rules, $this->messages);
+        if($validation->passes()){
+            $this->AbsenceEleveModel->commentaire = $request->get("commentaire");
+            $this->AbsenceEleveModel->eleve_id = $request->get("eleve_id");
+            $this->AbsenceEleveModel->heure_debut_cours = $request->get("heure_debut_cours");
+            $this->AbsenceEleveModel->heure_fin_cours = $request->get("heure_fin_cours");
+            $this->AbsenceEleveModel->raisonabsence_id = $request->get("raisonabsence_id");
+            $this->AbsenceEleveModel->section_annee_scolaire_id = $request->get("section_annee_scolaire_id");
+            if (count($this->AbsenceEleveModel->rules) > 0) {
+                $validation = Validator::make($request->all(), $this->AbsenceEleveModel->rules);
+                if ($validation->passes()) {
+                    $this->AbsenceEleveModel->save();
+                    return $this->helpers->apiArrayResponseBuilder(201, 'created', ['id' => $this->AbsenceEleveModel->id]);
+                } else {
+                    return $this->helpers->apiArrayResponseBuilder(400, 'fail', $validation->errors());
+                }
             } else {
-                return $this->helpers->apiArrayResponseBuilder(400, 'fail', $validation->errors());
+                $absenceelevemodel = $this->AbsenceEleveModel->save();
+                return $this->helpers->apiArrayResponseBuilder(201, 'created', $this->AbsenceEleveModel->toArray());
             }
-        } else {
-            $absenceelevemodel = $this->AbsenceEleveModel->save();
-            /*dd($this->AbsenceEleveModel->with(array(
-                'raisonabsence'=>function($query){
-                    $query->select('*');
-                },
-                'eleve'=>function($query){
-                    $query->select('*');
-                }, ))->first()->toArray());*/
-            return $this->helpers->apiArrayResponseBuilder(201, 'created', $this->AbsenceEleveModel->toArray());
+        }else{
+            return $this->helpers->apiArrayResponseBuilder(400, 'fail', $validation->errors() );
         }
     }
 
     public function update($id, Request $request){
-        $status = $this->AbsenceEleveModel->where('id', $id)->update($request->all());
-        if ($status) {
-            return $this->helpers->apiArrayResponseBuilder(200, 'success',
-                $this->AbsenceEleveModel->where('id', $id)->first()->toArray());
-        } else {
-            return $this->helpers->apiArrayResponseBuilder(400, 'bad request', 'Error, data failed to update.');
+        $validation = Validator::make($request->all(), $this->rules, $this->messages);
+        if($validation->passes()){
+            $status = $this->AbsenceEleveModel->where('id', $id)->update($request->all());
+            if ($status) {
+                return $this->helpers->apiArrayResponseBuilder(200, 'success',
+                    $this->AbsenceEleveModel->where('id', $id)->first()->toArray());
+            } else {
+                return $this->helpers->apiArrayResponseBuilder(400, 'bad request', 'Error, data failed to update.');
+            }
+        }else{
+            return $this->helpers->apiArrayResponseBuilder(400, 'fail', $validation->errors() );
         }
     }
 

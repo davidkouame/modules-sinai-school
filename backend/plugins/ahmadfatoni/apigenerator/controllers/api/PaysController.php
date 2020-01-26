@@ -13,6 +13,16 @@ class PaysController extends Controller
 
     protected $helpers;
 
+    private $rules = [
+        "libelle" => "required",
+        "indicatif" => 'required'
+    ];
+    
+    private $messages = [
+        "libelle.required" => "Veuillez entre un libellé",
+        "indicatif.required" => "Veuillez entrer un indicatif"
+    ];
+
     public function __construct(PaysModel $PaysModel, Helpers $helpers)
     {
         parent::__construct();
@@ -42,37 +52,31 @@ class PaysController extends Controller
     }
 
     public function store(Request $request){
-
     	$arr = $request->all();
-
-        while ( $data = current($arr)) {
-            $this->PaysModel->{key($arr)} = $data;
-            next($arr);
-        }
-
-        $validation = Validator::make($request->all(), $this->PaysModel->rules);
-        
+        $validation = Validator::make($request->all(), $this->rules, $this->messages);
         if( $validation->passes() ){
+            while ( $data = current($arr)) {
+                $this->PaysModel->{key($arr)} = $data;
+                next($arr);
+            }
             $this->PaysModel->save();
             return $this->helpers->apiArrayResponseBuilder(201, 'created', ['id' => $this->PaysModel->id]);
         }else{
             return $this->helpers->apiArrayResponseBuilder(400, 'fail', $validation->errors() );
         }
-
     }
 
     public function update($id, Request $request){
-
-        $status = $this->PaysModel->where('id',$id)->update($data);
-    
-        if( $status ){
-            
-            return $this->helpers->apiArrayResponseBuilder(200, 'success', 'Data has been updated successfully.');
-
+        $validation = Validator::make($request->all(), $this->rules, $this->messages);
+        if($validation->passes()){
+            $status = $this->PaysModel->where('id',$id)->update($data);
+            if( $status ){
+                return $this->helpers->apiArrayResponseBuilder(200, 'success', 'Data has been updated successfully.');
+            }else{
+                return $this->helpers->apiArrayResponseBuilder(400, 'bad request', 'Error, data failed to update.');
+            }
         }else{
-
-            return $this->helpers->apiArrayResponseBuilder(400, 'bad request', 'Error, data failed to update.');
-
+            return $this->helpers->apiArrayResponseBuilder(400, 'fail', $validation->errors() ); 
         }
     }
 

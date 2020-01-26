@@ -1,12 +1,18 @@
 <template>
   <card class="card" :title="title">
       <div class="row">
+
+        <div v-if="error" class="col-md-12">
+        <message-error v-bind:error="error"></message-error>
+      </div>
+
         <div class="col-md-12">
           <form v-on:submit="saveProfesseur">
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label class="control-label">Nom</label>
+                      <label class="control-label">Nom (
+                  <span class="span-required">*</span>)</label>
                       <!---->
                       <input
                         class="form-control"
@@ -19,7 +25,8 @@
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label class="control-label">Prénom</label>
+                      <label class="control-label">Prénom (
+                  <span class="span-required">*</span>)</label>
                       <!---->
                       <input
                         class="form-control"
@@ -34,7 +41,8 @@
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label class="control-label">Email</label>
+                      <label class="control-label">Email (
+                  <span class="span-required">*</span>)</label>
                       <!---->
                       <input
                         class="form-control"
@@ -47,7 +55,8 @@
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label class="control-label">Téléphone</label>
+                      <label class="control-label">Téléphone (
+                  <span class="span-required">*</span>)</label>
                       <!---->
                       <input
                         class="form-control"
@@ -62,7 +71,7 @@
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label class="control-label">Matière</label>
+                      <label class="control-label">Matière </label>
                       <!---->
                       <input
                         class="form-control"
@@ -117,11 +126,13 @@ export default {
     return {
       title: "Ajouter un professeur",
       professeur: {"nom": "", "prenom": "", "email": "", "tel": "", "description": "", "matiere": "", "create_account": ""},
-      valueDisabled: false
+      valueDisabled: false,
+      error: null
     };
   },
   methods:{
     saveProfesseur(){
+      this.error = null;
       this.valueDisabled = true;
       let data = {
         nom: this.professeur.nom,
@@ -140,8 +151,7 @@ export default {
           this.$router.go(-1)
         })
         .catch(error => {
-          console.log(error);
-          alert("echec lors de l'enregistrement")
+          this.error = error;
           this.errored = true;
           this.valueDisabled = false;
         })

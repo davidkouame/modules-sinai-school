@@ -1,6 +1,11 @@
 <template>
   <card class="card" :title="title">
       <div class="row">
+
+        <div v-if="error" class="col-md-12">
+        <message-error v-bind:error="error"></message-error>
+      </div>
+
         <div class="row card-body-header">
       <div class="col-sm-6">
       </div>
@@ -25,7 +30,8 @@
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
-                        <label class="control-label">Series</label>
+                        <label class="control-label">Series (
+                  <span class="span-required">*</span>)</label>
                         <!---->
                         <select v-model="classe.serie_id" class="form-control" >
                         <option value="">Sélectionnez une serie</option>
@@ -38,7 +44,8 @@
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label class="control-label">Libellé</label>
+                      <label class="control-label">Libellé (
+                  <span class="span-required">*</span>)</label>
                       <!---->
                       <input
                         class="form-control"
@@ -51,7 +58,8 @@
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
-                        <label class="control-label">Niveaux</label>
+                        <label class="control-label">Niveaux (
+                  <span class="span-required">*</span>)</label>
                         <!---->
                         <select v-model="classe.niveau_id" class="form-control" >
                         <option value="">Sélectionnez un niveau</option>
@@ -64,7 +72,8 @@
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
-                        <label class="control-label">Année scolaire</label>
+                        <label class="control-label">Année scolaire (
+                  <span class="span-required">*</span>)</label>
                         <!---->
                         <select v-model="classe.annee_scolaire_id" class="form-control" >
                         <option value="">Sélectionnez une année scolaire</option>
@@ -267,7 +276,8 @@ export default {
       classeId: null,
       classeMatiereProfesseurId: null,
       eleveclasse_id: null,
-      valueDisabled: false
+      valueDisabled: false,
+      error: null
     };
   },
   created() {
@@ -289,6 +299,7 @@ export default {
   },
   methods:{
     saveClasse(){
+      this.error = null;
       this.valueDisabled = true;
       let data = {
         libelle: this.classe.libelle,
@@ -304,8 +315,7 @@ export default {
           this.$router.go(-1)
         })
         .catch(error => {
-          console.log(error);
-          alert("echec lors de l'enregistrement")
+          this.error = error;
           this.errored = true;
           this.valueDisabled = false;
         })

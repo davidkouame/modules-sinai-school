@@ -20,6 +20,8 @@ class SeederSchool extends Command
      */
     protected $name = 'school:seeder';
 
+    private $sectionId = null;
+
     /**
      * @var string The console command description.
      */
@@ -34,6 +36,11 @@ class SeederSchool extends Command
 
     public function handle()
     {
+        // trace_log("la section id selection est ".$this->option('sectionAnneeScolaireId'));
+        // $option = $this->option('section');
+        // trace_log("la section id section est ".$this->option('section'));
+        $this->sectionId = $this->option('section');
+        // trace_log("la section id est ".$this->sectionId);
         // recuperation de l'annee scolaire
         $anneeScolaire = $this->getAnneeScolaire();
         // recuperation de la section année scolaire
@@ -52,7 +59,9 @@ class SeederSchool extends Command
      */
     protected function getArguments()
     {
-        return [];
+        return [
+            ['section', InputArgument::OPTIONAL, 'An example argument.']
+        ];
     }
 
     /**
@@ -61,7 +70,9 @@ class SeederSchool extends Command
      */
     protected function getOptions()
     {
-        return [];
+        return [
+            ['section', null, InputOption::VALUE_OPTIONAL, 'An example option.', null]
+        ];
     }
 
     // generate a note for this class
@@ -193,6 +204,6 @@ class SeederSchool extends Command
     }
 
     public function getSectionAnneescolaire(){
-        return SectionAnneeScolaireModel::find(3);
+        return SectionAnneeScolaireModel::find($this->sectionId);
     }
 }

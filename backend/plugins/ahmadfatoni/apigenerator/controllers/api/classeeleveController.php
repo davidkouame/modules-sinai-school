@@ -24,19 +24,11 @@ class classeeleveController extends Controller
     public function index(Request $request){
         $data = $this->ClasseEleveModel->with(array(
             'eleve'=>function($query) use ($request) {
-                /*if($request->has('name')){
-                    $query->where('name', $request->get('name'));
-                }
-
-                if($request->has('matricule')){
-                    $query->where('matricule', $request->get('matricule'));
-                }*/
                 $query->select('*');
             },
             'classe'=>function($query){
                 $query->select('*');
-            }, )); // ->select('*')->get()->toArray();
-        // dd($request->except('page', 'matricule', 'name'));
+            }, ));
         foreach($request->except('page', 'matricule', 'name') as $key => $value){
             if($key == "libelle"){
                 $data = $data->where($key, 'like', '%'.$value.'%');
