@@ -95,6 +95,7 @@ export default new Vuex.Store({
     absences: null,
     absence: null,
     raisonsabsences: null,
+    raisonabsence: null,
     classeeleve: null,
     moyennes: null,
     moyennesmatieres: null,
@@ -110,7 +111,9 @@ export default new Vuex.Store({
     chooseEleve: null,
     elevesabonnement: null,
     pays: null,
-    parametrageapp: null
+    parametrageapp: null,
+    typesmoyennes: null,
+    typemoyenne: null,
   },
   mutations: {
     anneesscolaires(state, payload) {
@@ -230,6 +233,9 @@ export default new Vuex.Store({
     raisonsabsences(state, raisonsabsences) {
       state.raisonsabsences = raisonsabsences
     },
+    raisonabsence(state, raisonabsence) {
+      state.raisonabsence = raisonabsence
+    },
     classeeleve(state, classeeleve) {
       state.classeeleve = classeeleve
     },
@@ -277,6 +283,12 @@ export default new Vuex.Store({
     },
     parametrageapp(state, parametrageapp){
       state.parametrageapp = parametrageapp
+    },
+    typesmoyennes(state, typesmoyennes){
+      state.typesmoyennes = typesmoyennes
+    },
+    typemoyenne(state, typemoyenne){
+      state.typemoyenne = typemoyenne
     }
   },
   getters: {
@@ -400,6 +412,9 @@ export default new Vuex.Store({
     raisonsabsences: state => {
       return state.raisonsabsences
     },
+    raisonabsence: state => {
+      return state.raisonabsence
+    },
     classeeleve: state => {
       return state.classeeleve
     },
@@ -447,6 +462,12 @@ export default new Vuex.Store({
     },
     parametrageapp: state => {
       return state.parametrageapp
+    },
+    typesmoyennes: state => {
+      return state.typesmoyennes
+    },
+    typemoyenne: state => {
+      return state.typemoyenne
     }
   },
   actions: {
@@ -1000,6 +1021,19 @@ export default new Vuex.Store({
         })
         .finally(() => (this.loading = false))
     },
+    getRaisonsAbsences(context, params) {
+      let nameUrl = "raisonsabsences"
+      let url = getUrl(context, nameUrl, params)
+      Axios.get(url)
+        .then(response => {
+          context.commit('raisonsabsences', response.data.data.data)
+        })
+        .catch(error => {
+          console.log(error)
+          this.errored = true
+        })
+        .finally(() => (this.loading = false))
+    },
     getMoyenneAnnuelle(context, params) {
       let nameUrl = "moyennes"
       let url = getUrl(context, nameUrl, params)
@@ -1054,6 +1088,9 @@ export default new Vuex.Store({
     },
     getAbonnement(context, params) {
       getInformModel(context, params.abonnementId, "abonnements", "abonnement")
+    },
+    getRaisonAbsence(context, params) {
+      getInformModel(context, params.raisonabsenceId, "raisonsabsences", "raisonabsence")
     },
     saveAbonnementWithEleves(context, params) {
       return Axios.post(
@@ -1409,6 +1446,22 @@ export default new Vuex.Store({
           this.errored = true
         })
         .finally(() => (this.loading = false))
+    },
+    getTypesMoyennes(context, params) {
+      let nameUrl = "typesmoyenne"
+      let url = getUrl(context, nameUrl, params)
+      Axios.get(url)
+        .then(response => {
+          context.commit('typesmoyennes', response.data.data.data)
+        })
+        .catch(error => {
+          console.log(error)
+          this.errored = true
+        })
+        .finally(() => (this.loading = false))
+    },
+    getTypeMoyenne(context, params) {
+      getInformModel(context, params.id, "typesmoyenne", "typemoyenne")
     }
   }
   

@@ -28,10 +28,16 @@ class raisonabsenceController extends Controller
         $this->helpers          = $helpers;
     }
 
-    public function index(){
-
-        $data = $this->RaisonAbsenceModel->all()->toArray();
-
+    public function index(Request $request){
+        $data = $this->RaisonAbsenceModel;
+        if($request->has('search')){
+            $data = $data->where("libelle", 'like', '%'.$request->get('search').'%');
+        }
+        if($request->has('page') && $request->get('page') == 0){
+            $data = $data->get()->toArray();
+        }else{
+            $data = $data->paginate(10)->toArray();
+        }
         return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
     }
 
@@ -39,7 +45,7 @@ class raisonabsenceController extends Controller
 
         $data = $this->RaisonAbsenceModel->where('id',$id)->first();
 
-        if( count($data) > 0){
+        if($data){
 
             return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
 
@@ -67,7 +73,7 @@ class raisonabsenceController extends Controller
     public function update($id, Request $request){
         $validation = Validator::make($request->all(), $this->rules, $this->messages);
         if($validation->passes()){
-            $status = $this->RaisonAbsenceModel->where('id',$id)->update($data);
+            $status = $this->RaisonAbsenceModel->where('id',$id)->update($request->all());
             if( $status ){
                 return $this->helpers->apiArrayResponseBuilder(200, 'success', 'Data has been updated successfully.');
             }else{

@@ -106,6 +106,18 @@ import PreviewAbonnement from "@/components/Abonnements/Preview.vue";
 import AddAbonnement from "@/components/Abonnements/Add.vue";
 import EditAbonnement from "@/components/Abonnements/Edit.vue";
 
+// Raisons absences 
+import ListRaisonAbsence from "@/components/RaisonsAbsences/List.vue";
+import PreviewRaisonAbsence from "@/components/RaisonsAbsences/Preview.vue";
+import AddRaisonAbsence from "@/components/RaisonsAbsences/Add.vue";
+import EditRaisonAbsence from "@/components/RaisonsAbsences/Edit.vue";
+
+// Types de moyennes
+import ListTypeMoyenne from "@/components/TypesMoyennes/List.vue";
+import PreviewTypeMoyenne from "@/components/TypesMoyennes/Preview.vue";
+import AddTypeMoyenne from "@/components/TypesMoyennes/Add.vue";
+import EditTypeMoyenne from "@/components/TypesMoyennes/Edit.vue";
+
 import TestApp from "@/components/TestApp.vue"
 
 // Login
@@ -509,6 +521,50 @@ const routes = [
         name: "Abonnement",
         component: AddAbonnement
       },
+
+      // ------------------  RAISONS ABSENCES ------------------ //
+      {
+        path: "raisonsabsences",
+        name: "RaisonsAbsences",
+        component: ListRaisonAbsence
+      },
+      {
+        path: '/raisonsabsences/preview/:id(\\d+)',
+        name: 'RaisonAbsence',
+        component: PreviewRaisonAbsence
+      },
+      {
+        path: '/raisonsabsences/edit/:id(\\d+)',
+        name: 'RaisonAbsence',
+        component: EditRaisonAbsence
+      },
+      {
+        path: "/raisonsabsences/add",
+        name: "RaisonAbsence",
+        component: AddRaisonAbsence
+      },
+
+      // ------------------  TYPE DE MOYENNES ------------------ //
+      {
+        path: "typesmoyennes",
+        name: "TypesMoyennes",
+        component: ListTypeMoyenne
+      },
+      {
+        path: '/typesmoyennes/preview/:id(\\d+)',
+        name: 'TypeMoyenne',
+        component: PreviewTypeMoyenne
+      },
+      {
+        path: '/typesmoyennes/edit/:id(\\d+)',
+        name: 'TypeMoyenne',
+        component: EditTypeMoyenne
+      },
+      {
+        path: "/typesmoyennes/add",
+        name: "TypeMoyenne",
+        component: AddTypeMoyenne
+      }
     ]
   },
   {

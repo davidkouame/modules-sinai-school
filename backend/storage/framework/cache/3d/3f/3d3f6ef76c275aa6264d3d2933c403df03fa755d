@@ -1,0 +1,9 @@
+1580052799a:1:{s:14:"actualites.htm";a:10:{s:8:"fileName";s:14:"actualites.htm";s:7:"content";s:129:"title = "Demonstration"
+url = "/actualites"
+layout = "default"
+is_hidden = 0
+
+[actualitesall]
+==
+
+{% component 'actualitesall' %}";s:5:"mtime";i:1573909249;s:6:"markup";s:31:"{% component 'actualitesall' %}";s:4:"code";N;s:5:"title";s:13:"Demonstration";s:3:"url";s:11:"/actualites";s:6:"layout";s:7:"default";s:9:"is_hidden";s:1:"0";s:13:"actualitesall";a:0:{}}}
