@@ -12,7 +12,7 @@ class ParametrageAppModel extends Model
     /**
      * @var string The database table used by the model.
      */
-    public $table = 'bootnetcrasher_parametrage_ap';
+    public $table = 'bootnetcrasher_parametrage_app';
 
     /**
      * @var array Validation rules

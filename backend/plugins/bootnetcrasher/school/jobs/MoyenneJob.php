@@ -13,6 +13,7 @@ use BootnetCrasher\School\Models\SectionAnneeScolaireModel;
 use Illuminate\Support\Collection;
 use DB;
 use Bootnetcrasher\School\Classes\CalculMoyenne;
+use Bootnetcrasher\School\Classes\Abonnement;
 
 /**
  * Elle permet d'envoyer un billan à la validation d'une section d'annee
@@ -40,16 +41,18 @@ class MoyenneJob{
                         ? $classeeleve->classe->allEleves($this->getAnnneeScolaireEnCours()->id)
                         : null;
                 foreach($eleves as $eleve){
-                    $rapportmoyenne = new RapportMoyenne($sectionanneescolaire, $classeeleve->classe, $eleve, $this->estProvisoire);
-                    $rapportmoyenne->constuct();
-                    $body = $rapportmoyenne->getRapport();
-                    if($body){
-                        $sms = new Sms;
-                        $parent = ParentModel::find($eleve->parent_id);
-                        if($parent)
-                            $sms->sendQueue($parent->tel, $body, $parent, $eleve);
+                    if(Abonnement::hasAbonnement($eleve)){
+                        $rapportmoyenne = new RapportMoyenne($sectionanneescolaire, $classeeleve->classe, $eleve, $this->estProvisoire);
+                        $rapportmoyenne->constuct();
+                        $body = $rapportmoyenne->getRapport();
+                        if($body){
+                            $sms = new Sms;
+                            // $parent = ParentModel::find($eleve->parent_id);
+                            $parent = Abonnement::getParentToAbonnement($eleve);
+                            if($parent)
+                                $sms->sendQueue($parent->tel, $body, $parent, $eleve);
+                        }
                     }
-                    
                 }
             }
            $this->saveSuccessJob($job);

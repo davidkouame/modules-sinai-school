@@ -14,6 +14,7 @@ use BootnetCrasher\School\Models\ClasseEleveModel;
 use BootnetCrasher\School\Models\ClasseMatiereModel;
 use BootnetCrasher\School\Models\AnneeScolaireModel;
 use BootnetCrasher\School\Models\SectionAnneeScolaireModel;
+use Bootnetcrasher\School\Classes\Abonnement;
 
 class CalculMoyenneMatiereJob {
 
@@ -31,28 +32,30 @@ class CalculMoyenneMatiereJob {
         $section = SectionAnneeScolaireModel::find($section_annee_scolaire_id);
         $eleves = EleveModel::all();
         foreach ($eleves as $eleve) {
-            $classeEleve = ClasseEleveModel::where('eleve_id', $eleve->id)
-                ->where('annee_scolaire_id', $section->annee_scolaire_id)
-                ->first();
-            if ($classeEleve) {
-                $matieres = MatiereModel::all();
-                foreach ($matieres as $matiere) {
-                    $notes = NoteModel::where('classe_id', $classeEleve->classe_id)
-                        ->where('matiere_id', $matiere->id)
-                        ->where('section_annee_scolaire_id', $section->id)
-                        ->get()->toArray();
-                    if ($notes)
-                        $this->calculMatiere($notes, $eleve->id, $matiere->id,
-                            $classeEleve->classe_id,
-                            $section->id);
-                    else
-                        trace_log("L'élève ayant l'id ".$eleve->id." qui est dans"
-                            . "la classe ".$classeEleve->classe_id." n'a pas de "
-                            . "note dans la matiere ".$matiere->id);
+            if(Abonnement::hasAbonnement($eleve)){
+                $classeEleve = ClasseEleveModel::where('eleve_id', $eleve->id)
+                    ->where('annee_scolaire_id', $section->annee_scolaire_id)
+                    ->first();
+                if ($classeEleve) {
+                    $matieres = MatiereModel::all();
+                    foreach ($matieres as $matiere) {
+                        $notes = NoteModel::where('classe_id', $classeEleve->classe_id)
+                            ->where('matiere_id', $matiere->id)
+                            ->where('section_annee_scolaire_id', $section->id)
+                            ->get()->toArray();
+                        if ($notes)
+                            $this->calculMatiere($notes, $eleve->id, $matiere->id,
+                                $classeEleve->classe_id,
+                                $section->id);
+                        else
+                            trace_log("L'élève ayant l'id ".$eleve->id." qui est dans"
+                                . "la classe ".$classeEleve->classe_id." n'a pas de "
+                                . "note dans la matiere ".$matiere->id);
+                    }
+                }else {
+                    trace_log("l'élève ayant l'id ".$eleve->id." n'est pas dans une "
+                        . "classe");
                 }
-            }else {
-                trace_log("l'élève ayant l'id ".$eleve->id." n'est pas dans une "
-                    . "classe");
             }
         }
     }
@@ -62,41 +65,42 @@ class CalculMoyenneMatiereJob {
         // recuperation de tous les élèves
         $eleves = EleveModel::all();
         foreach ($eleves as $eleve) {
-            // recuperation de toutes les années scolaires
-            // $anneesScolaires = AnneeScolaireModel::all();
-            $anneeScolaire = AnneeScolaireModel::find(2);
-            // foreach($anneesScolaires as $anneeScolaire){
-                $classeEleve = ClasseEleveModel::where('eleve_id', $eleve->id)
-                        ->where('annee_scolaire_id', $anneeScolaire->id)
-                        ->first();
-                if ($classeEleve) {
-                    // recuperation de toutes les sections de l'année scolaire
-                    $sectionsAnneeScolaire = SectionAnneeScolaireModel::
-                            where('annee_scolaire_id', $anneeScolaire->id)
-                            ->get();
-                    foreach($sectionsAnneeScolaire as $section){
-                        $matieres = MatiereModel::all();
-                        foreach ($matieres as $matiere) {
-                            $notes = NoteModel::where('classe_id', $classeEleve->classe_id)
-                                            ->where('matiere_id', $matiere->id)
-                                            ->where('section_annee_scolaire_id', $section->id)
-                                            ->get()->toArray();
-                            if ($notes)
-                                $this->calculMatiere($notes, $eleve->id, $matiere->id, 
-                                        $classeEleve->classe_id,
-                                        $section->id);
-                            else
-                                trace_log("L'élève ayant l'id ".$eleve->id." qui est dans"
-                                        . "la classe ".$classeEleve->classe_id." n'a pas de "
-                                        . "note dans la matiere ".$matiere->id);
+            if(Abonnement::hasAbonnement($eleve)){
+                // recuperation de toutes les années scolaires
+                // $anneesScolaires = AnneeScolaireModel::all();
+                $anneeScolaire = AnneeScolaireModel::find(2);
+                // foreach($anneesScolaires as $anneeScolaire){
+                    $classeEleve = ClasseEleveModel::where('eleve_id', $eleve->id)
+                            ->where('annee_scolaire_id', $anneeScolaire->id)
+                            ->first();
+                    if ($classeEleve) {
+                        // recuperation de toutes les sections de l'année scolaire
+                        $sectionsAnneeScolaire = SectionAnneeScolaireModel::
+                                where('annee_scolaire_id', $anneeScolaire->id)
+                                ->get();
+                        foreach($sectionsAnneeScolaire as $section){
+                            $matieres = MatiereModel::all();
+                            foreach ($matieres as $matiere) {
+                                $notes = NoteModel::where('classe_id', $classeEleve->classe_id)
+                                                ->where('matiere_id', $matiere->id)
+                                                ->where('section_annee_scolaire_id', $section->id)
+                                                ->get()->toArray();
+                                if ($notes)
+                                    $this->calculMatiere($notes, $eleve->id, $matiere->id, 
+                                            $classeEleve->classe_id,
+                                            $section->id);
+                                else
+                                    trace_log("L'élève ayant l'id ".$eleve->id." qui est dans"
+                                            . "la classe ".$classeEleve->classe_id." n'a pas de "
+                                            . "note dans la matiere ".$matiere->id);
+                            }
                         }
-                    }
-                }else {
-                    trace_log("l'élève ayant l'id ".$eleve->id." n'est pas dans une "
-                            . "classe");
-                } 
-            // }
-            
+                    }else {
+                        trace_log("l'élève ayant l'id ".$eleve->id." n'est pas dans une "
+                                . "classe");
+                    } 
+                // }
+            }
         }
     }
 

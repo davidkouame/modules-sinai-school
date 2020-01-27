@@ -14,6 +14,9 @@ use BootnetCrasher\School\Models\ClasseEleveModel;
 use BootnetCrasher\School\Models\ClasseMatiereModel;
 use BootnetCrasher\School\Models\AnneeScolaireModel;
 use BootnetCrasher\School\Models\SectionAnneeScolaireModel;
+use BootnetCrasher\School\Models\AbonnementModel;
+use Bootnetcrasher\School\Classes\Abonnement;
+
 
 /**
  * Permet de calculer les moyennes des matières des sections année scolaire
@@ -51,26 +54,28 @@ class CalculMoyenne {
             // recuperation de tous les élèves
             $eleves = EleveModel::all();
             foreach ($eleves as $eleve) {
-                $classeEleve = ClasseEleveModel::where('eleve_id', $eleve->id)
-                        ->where('annee_scolaire_id', $section->annee_scolaire_id)
-                        ->first();
-                if ($classeEleve) {
-                    $matieres = MatiereModel::all();
-                    foreach ($matieres as $matiere) {
-                        $notes = NoteModel::where('classe_id', $classeEleve->classe_id)
-                                        ->where('matiere_id', $matiere->id)
-                                        ->where('section_annee_scolaire_id', $section->id)
-                                        ->get()->toArray();
-                        if ($notes)
-                            $this->calculMatiere($notes, $eleve->id, $matiere->id, 
-                                    $classeEleve->classe_id,
-                                    $section->id);
-                        else
-                            trace_log("L'élève ayant l'id ".$eleve->id." qui est dans"
-                                    . "la classe ".$classeEleve->classe_id." n'a pas de "
-                                    . "note dans la matiere ".$matiere->id);
-                    }
-                } 
+                if(Abonnement::hasAbonnement($eleve)){
+                    $classeEleve = ClasseEleveModel::where('eleve_id', $eleve->id)
+                            ->where('annee_scolaire_id', $section->annee_scolaire_id)
+                            ->first();
+                    if ($classeEleve) {
+                        $matieres = MatiereModel::all();
+                        foreach ($matieres as $matiere) {
+                            $notes = NoteModel::where('classe_id', $classeEleve->classe_id)
+                                            ->where('matiere_id', $matiere->id)
+                                            ->where('section_annee_scolaire_id', $section->id)
+                                            ->get()->toArray();
+                            if ($notes)
+                                $this->calculMatiere($notes, $eleve->id, $matiere->id, 
+                                        $classeEleve->classe_id,
+                                        $section->id);
+                            else
+                                trace_log("L'élève ayant l'id ".$eleve->id." qui est dans"
+                                        . "la classe ".$classeEleve->classe_id." n'a pas de "
+                                        . "note dans la matiere ".$matiere->id);
+                        }
+                    } 
+                }
             }
         }
         
@@ -85,18 +90,20 @@ class CalculMoyenne {
         $anneeScolaire = $this->getAnneeScolaire();
         $eleves = EleveModel::all();
         foreach ($eleves as $eleve) {
-            foreach($anneesScolaires as $anneeScolaire){
-                $classeEleve = ClasseEleveModel::where('eleve_id', $eleve->id)
-                        ->where('annee_scolaire_id', $anneeScolaire->id)
-                        ->first();
-                if ($classeEleve) {
-                    // recuperation de toutes les sections de l'année scolaire
-                    $sectionsAnneeScolaire = SectionAnneeScolaireModel::
-                            where('annee_scolaire_id', $anneeScolaire->id)
-                            ->get();
-                    foreach($sectionsAnneeScolaire as $section){
-                        // Calculer la moyenne de section 
-                        $this->calculerLaMoyenneSection($section);
+            if(Abonnement::hasAbonnement($eleve)){
+                foreach($anneesScolaires as $anneeScolaire){
+                    $classeEleve = ClasseEleveModel::where('eleve_id', $eleve->id)
+                            ->where('annee_scolaire_id', $anneeScolaire->id)
+                            ->first();
+                    if ($classeEleve) {
+                        // recuperation de toutes les sections de l'année scolaire
+                        $sectionsAnneeScolaire = SectionAnneeScolaireModel::
+                                where('annee_scolaire_id', $anneeScolaire->id)
+                                ->get();
+                        foreach($sectionsAnneeScolaire as $section){
+                            // Calculer la moyenne de section 
+                            $this->calculerLaMoyenneSection($section);
+                        }
                     }
                 }
             }
@@ -110,34 +117,36 @@ class CalculMoyenne {
     public function calculerLaMoyenneSection(SectionAnneeScolaireModel $section){
         $eleves = EleveModel::all();
         foreach ($eleves as $eleve) {
-            $classeEleve = ClasseEleveModel::where('eleve_id', $eleve->id)
-                    ->where('annee_scolaire_id', $section->annee_scolaire_id)
-                    ->first();
-            if ($classeEleve) {
-                // recuperation de toutes les matieres de la classe
-                $classesMatieres = ClasseMatiereModel::where('classe_id', 
-                        $classeEleve->classe_id)->get();
-                $moyenneSection = null;
-                $coefficientSection = null;
-                foreach($classesMatieres as $classeMatiere){
-                        // recuperation de la moyenne de l'élève dans cette
-                        // matiere dans la section année scolaire
-                    $moyenneModel = MoyenneModel::where('eleve_id', $eleve->id)
-                                ->where('matiere_id', $classeMatiere->matiere_id)
-                                ->where('section_annee_scolaire_id', $section->id)
-                                ->where('type_moyenne_id', 2)
-                                ->first();
-                    if($moyenneModel){
-                        $moyenneSection += $moyenneModel->valeur * 
-                                $moyenneModel->coefficient_matiere;
-                        $coefficientSection += $moyenneModel->coefficient_matiere;
+            if(Abonnement::hasAbonnement($eleve)){
+                $classeEleve = ClasseEleveModel::where('eleve_id', $eleve->id)
+                        ->where('annee_scolaire_id', $section->annee_scolaire_id)
+                        ->first();
+                if ($classeEleve) {
+                    // recuperation de toutes les matieres de la classe
+                    $classesMatieres = ClasseMatiereModel::where('classe_id', 
+                            $classeEleve->classe_id)->get();
+                    $moyenneSection = null;
+                    $coefficientSection = null;
+                    foreach($classesMatieres as $classeMatiere){
+                            // recuperation de la moyenne de l'élève dans cette
+                            // matiere dans la section année scolaire
+                        $moyenneModel = MoyenneModel::where('eleve_id', $eleve->id)
+                                    ->where('matiere_id', $classeMatiere->matiere_id)
+                                    ->where('section_annee_scolaire_id', $section->id)
+                                    ->where('type_moyenne_id', 2)
+                                    ->first();
+                        if($moyenneModel){
+                            $moyenneSection += $moyenneModel->valeur * 
+                                    $moyenneModel->coefficient_matiere;
+                            $coefficientSection += $moyenneModel->coefficient_matiere;
+                        }
                     }
-                }
-                if($moyenneSection && $coefficientSection){
-                    trace_log("calcul de la moyenne de section ");
-                    trace_log("le coefficient section est ".$coefficientSection);
-                    $valeur = $moyenneSection ? $moyenneSection / $coefficientSection : 0;
-                    $this->saveMoyenneSection($valeur, $coefficientSection, $section->id, 3, $eleve->id, $classeEleve->classe_id);
+                    if($moyenneSection && $coefficientSection){
+                        trace_log("calcul de la moyenne de section ");
+                        trace_log("le coefficient section est ".$coefficientSection);
+                        $valeur = $moyenneSection ? $moyenneSection / $coefficientSection : 0;
+                        $this->saveMoyenneSection($valeur, $coefficientSection, $section->id, 3, $eleve->id, $classeEleve->classe_id);
+                    }
                 }
             }
         }
@@ -201,55 +210,53 @@ class CalculMoyenne {
     // Calcul de moyenne des matieres
     public function calculMatiere($notes, $eleve_id, $matiere_id, $classe_id, 
             $section_annee_scolaire_id) {
-                
-        $points = null;
-        $coefficient = null;
-        foreach ($notes as $note) {
-            $noteeleve = NoteEleve::where('eleve_id', $eleve_id)
-                    ->where('note_id', $note['id'])
-                    ->first();
-            if($noteeleve){
-                $valeur = $noteeleve->valeur;
-                $points+=$valeur * $note['coefficient'];
-                $coefficient+=$note['coefficient'];
-            }
-            
-        }
-        if($points && $coefficient){
-            $moy = $points / $coefficient;
-            // recuperation du coefficient de la matiere
-            $classematiere = ClasseMatiereModel::where('classe_id', $classe_id)
-                    ->where('matiere_id', $matiere_id)->first();
-            if($classematiere){
-                // trace_log("calcul des moyennes matieres");
-                // sauvegarde de la moyenne
-                $moyenne = MoyenneModel::where('eleve_id', $eleve_id)
-                        ->where('matiere_id', $matiere_id)
-                        ->where('section_annee_scolaire_id', $section_annee_scolaire_id)
+            $points = null;
+            $coefficient = null;
+            foreach ($notes as $note) {
+                $noteeleve = NoteEleve::where('eleve_id', $eleve_id)
+                        ->where('note_id', $note['id'])
                         ->first();
-                if ($moyenne) {
-                    $moyenne->valeur = $moy;
-                    $moyenne->coefficient_matiere = $classematiere->coefficient;
-                    $moyenne->classe_id  = $classe_id;
-                    $moyenne->type_moyenne_id  = 2;
-                    $moyenne->section_annee_scolaire_id = $section_annee_scolaire_id;
-                    $moyenne->save();
-                } else {
-                    $moyenne = new MoyenneModel;
-                    $moyenne->eleve_id = $eleve_id;
-                    $moyenne->matiere_id = $matiere_id;
-                    $moyenne->valeur = $moy;
-                    $moyenne->coefficient_matiere = $classematiere->coefficient;
-                    $moyenne->classe_id  = $classe_id;
-                    $moyenne->type_moyenne_id  = 2;
-                    $moyenne->section_annee_scolaire_id = $section_annee_scolaire_id;
-                    $moyenne->save();
+                if($noteeleve){
+                    $valeur = $noteeleve->valeur;
+                    $points+=$valeur * $note['coefficient'];
+                    $coefficient+=$note['coefficient'];
                 }
-            }else{
-                trace_log("classe_id : ".$classe_id."; matiere_id :".$matiere_id);
             }
-            
-        }
+            if($points && $coefficient){
+                $moy = $points / $coefficient;
+                // recuperation du coefficient de la matiere
+                $classematiere = ClasseMatiereModel::where('classe_id', $classe_id)
+                        ->where('matiere_id', $matiere_id)->first();
+                if($classematiere){
+                    // trace_log("calcul des moyennes matieres");
+                    // sauvegarde de la moyenne
+                    $moyenne = MoyenneModel::where('eleve_id', $eleve_id)
+                            ->where('matiere_id', $matiere_id)
+                            ->where('section_annee_scolaire_id', $section_annee_scolaire_id)
+                            ->first();
+                    if ($moyenne) {
+                        $moyenne->valeur = $moy;
+                        $moyenne->coefficient_matiere = $classematiere->coefficient;
+                        $moyenne->classe_id  = $classe_id;
+                        $moyenne->type_moyenne_id  = 2;
+                        $moyenne->section_annee_scolaire_id = $section_annee_scolaire_id;
+                        $moyenne->save();
+                    } else {
+                        $moyenne = new MoyenneModel;
+                        $moyenne->eleve_id = $eleve_id;
+                        $moyenne->matiere_id = $matiere_id;
+                        $moyenne->valeur = $moy;
+                        $moyenne->coefficient_matiere = $classematiere->coefficient;
+                        $moyenne->classe_id  = $classe_id;
+                        $moyenne->type_moyenne_id  = 2;
+                        $moyenne->section_annee_scolaire_id = $section_annee_scolaire_id;
+                        $moyenne->save();
+                    }
+                }else{
+                    trace_log("classe_id : ".$classe_id."; matiere_id :".$matiere_id);
+                }
+            }
+        
     }
 
     /**
@@ -301,4 +308,6 @@ class CalculMoyenne {
             }
         }
     }
+
+
 }

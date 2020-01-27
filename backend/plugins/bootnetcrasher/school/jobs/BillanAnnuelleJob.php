@@ -12,6 +12,7 @@ use BootnetCrasher\School\Models\AnneeScolaireModel;
 use BootnetCrasher\School\Models\SectionAnneeScolaireModel;
 use Bootnetcrasher\School\Classes\CalculMoyenne;
 use Illuminate\Support\Collection;
+use Bootnetcrasher\School\Classes\Abonnement;
 use DB;
 
 /**
@@ -52,16 +53,18 @@ class BillanAnnuelleJob{
                     ? $classeeleve->classe->allEleves($anneescolaire->id)
                     : null;
             foreach($eleves as $eleve){
-                $rapportmoyenne = new RapportMoyenne();
-                $rapportmoyenne->constructMoyenneAnnuelle($anneescolaire, $classeeleve->classe, $eleve);
-                $body = $rapportmoyenne->getRapport();
-                if($body){
-                    $sms = new Sms;
-                    $parent = ParentModel::find($eleve->parent_id);
-                    if($parent)
-                        $sms->sendQueue($parent->tel, $body, $parent, $eleve);
+                if(Abonnement::hasAbonnement($eleve)){
+                    $rapportmoyenne = new RapportMoyenne();
+                    $rapportmoyenne->constructMoyenneAnnuelle($anneescolaire, $classeeleve->classe, $eleve);
+                    $body = $rapportmoyenne->getRapport();
+                    if($body){
+                        $sms = new Sms;
+                        // $parent = ParentModel::find($eleve->parent_id);
+                        $parent = Abonnement::getParentToAbonnement($eleve);
+                        if($parent)
+                            $sms->sendQueue($parent->tel, $body, $parent, $eleve);
+                    }
                 }
-                
             }
         }
     }

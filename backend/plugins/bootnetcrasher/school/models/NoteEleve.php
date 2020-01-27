@@ -6,6 +6,7 @@ use BootnetCrasher\School\Models\EleveModel;
 use BootnetCrasher\School\Models\ParentModel;
 use Model;
 use Bootnetcrasher\School\Classes\Sms;
+use Bootnetcrasher\School\Classes\Abonnement;
 use Queue;
 
 /**
@@ -67,8 +68,9 @@ class NoteEleve extends Model {
             if($this->valeur){
                 $sms = new Sms;
                 $eleve = EleveModel::find($this->eleve_id);
-                if($eleve){
-                    $parent = ParentModel::find($eleve->parent_id);
+                if($eleve && Abonnement::hasAbonnement($eleve)){
+                    $parent = Abonnement::getParentToAbonnement($eleve);
+                    // $parent = ParentModel::find($eleve->parent_id);
                     if($parent){
                         $body = $eleve->name . " a obtenu ".$this->valeur." en ".
                                 $this->note->matiere->libelle;
@@ -99,13 +101,15 @@ class NoteEleve extends Model {
         }
     }*/
 
+    // Send sms after set value note at student
     public function afterSave(){
         try{
             if($this->valeur){
                 $sms = new Sms;
                 $eleve = EleveModel::find($this->eleve_id);
-                if($eleve){
-                    $parent = ParentModel::find($eleve->parent_id);
+                if($eleve && Abonnement::hasAbonnement($eleve)){
+                    // $parent = ParentModel::find($eleve->parent_id);
+                    $parent = Abonnement::getParentToAbonnement($eleve);
                     if($parent){
                         $body = $eleve->name.' '.$eleve->surname . " a obtenu ".$this->valeur.'/'.($this->note->coefficient*20)." en ".
                             $this->note->matiere->libelle;

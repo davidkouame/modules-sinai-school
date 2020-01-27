@@ -233,10 +233,8 @@ class userController extends Controller
         // $user->name = $request->get('username');
     }
 
-    public function hydrate($model, $request){
-        foreach ($request->except('password') as $key => $value) {
-            $model->{$key} = $value;
-        }
+    public function hydrateUser($model, $request){
+        $model = $this->hydrate($model, $request, ['password']);
         if(array_key_exists("password", $request->all())){
             $model->password = $data['password'];
             $model->password_confirmation = $data['password_confirmation'];

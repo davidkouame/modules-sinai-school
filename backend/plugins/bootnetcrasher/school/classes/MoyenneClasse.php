@@ -10,6 +10,7 @@ use BootnetCrasher\School\Models\JobSuccessModel;
 use BootnetCrasher\School\Models\ParentModel;
 use BootnetCrasher\School\Models\SectionAnneeScolaireModel;
 use Illuminate\Support\Collection;
+use Bootnetcrasher\School\Classes\Abonnement;
 
 class MoyenneClasse
 {
@@ -38,14 +39,17 @@ class MoyenneClasse
                     ? $classeeleve->classe->allEleves($this->getAnnneeScolaireEnCours()->id)
                     : null;
                 foreach($eleves as $eleve){
-                    $rapportmoyenne = new RapportMoyenne($sectionanneescolaire, $classeeleve->classe, $eleve, $this->estProvisoire);
-                    $rapportmoyenne->constuct();
-                    $body = $rapportmoyenne->getRapport();
-                    if($body){
-                        $sms = new Sms;
-                        $parent = ParentModel::find($eleve->parent_id);
-                        if($parent)
-                            $sms->send($parent->tel, $parent, $eleve, $body);
+                    if(Abonnement::hasAbonnement($eleve))
+                        $rapportmoyenne = new RapportMoyenne($sectionanneescolaire, $classeeleve->classe, $eleve, $this->estProvisoire);
+                        $rapportmoyenne->constuct();
+                        $body = $rapportmoyenne->getRapport();
+                        if($body){
+                            $sms = new Sms;
+                            // $parent = ParentModel::find($eleve->parent_id);
+                            $parent = Abonnement::getParentToAbonnement($eleve);
+                            if($parent)
+                                $sms->send($parent->tel, $parent, $eleve, $body);
+                        }
                     }
                 }
             }

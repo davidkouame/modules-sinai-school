@@ -6,6 +6,7 @@ use Model;
 use Bootnetcrasher\School\Classes\Sms;
 use BootnetCrasher\School\Models\EleveModel;
 use BootnetCrasher\School\Models\ParentModel;
+use Bootnetcrasher\School\Classes\Abonnement;
 
 /**
  * Model
@@ -36,8 +37,9 @@ use \October\Rain\Database\Traits\SoftDelete;
     public function afterCreate() {
         $sms = new Sms;
         $eleve = EleveModel::find($this->eleve_id);
-        if ($eleve) {
-            $parent = ParentModel::find($eleve->parent_id);
+        if ($eleve && Abonnement::hasAbonnement($eleve)) {
+            // $parent = ParentModel::find($eleve->parent_id);
+            $parent = Abonnement::getParentToAbonnement($eleve);
             if ($parent) {
                 $body = $eleve->name .' '.$eleve->surname . " a été absent de " . date("H:i", strtotime($this->heure_debut_cours)) . " a " .
                     date("H:i", strtotime($this->heure_fin_cours))." le ".date("Y-m-d", strtotime($this->heure_debut_cours)).

@@ -519,4 +519,5 @@
   'BootnetCrasher\\School\\Console\\CalculMoyenne' => 'plugins/bootnetcrasher/school/console/CalculMoyenne.php',
   'BootnetCrasher\\School\\Console\\SeederSchool' => 'plugins/bootnetcrasher/school/console/SeederSchool.php',
   'Mohsin\\Rest\\Console\\CreateRestController' => 'plugins/mohsin/rest/console/CreateRestController.php',
+  'Bootnetcrasher\\School\\Classes\\Abonnement' => 'plugins/bootnetcrasher/school/classes/Abonnement.php',
 );
