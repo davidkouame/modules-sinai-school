@@ -135,7 +135,7 @@ export default {
       coefficient: null,
       multiple: true,
       matiere_id: null,
-      sectionAnneeScolaireId: localStorage.getItem('sectionAnneeScolaireId')
+      sectionAnneeScolaireId: this.$cookies.get('sectionAnneeScolaireId')
     };
   },
   created() {
@@ -143,10 +143,10 @@ export default {
     this.$store.dispatch("typesnotes");
     this.$store.dispatch("matieresall");
     this.$store.dispatch('classes', [{'key': 'professeur_id',
-    'value': localStorage.getItem('professeurId')}]);
+    'value': this.$cookies.get('professeurId')}]);
     this.$store.dispatch(
       "classesByProfesseur",
-      localStorage.getItem("professeurId")
+      this.$cookies.get("professeurId")
     );
   },
   methods: {
@@ -159,7 +159,7 @@ export default {
       data["coefficient"] = this.coefficient;
       data["matiere_id"] = this.matiere ?  this.matiere.id : null;
       data["description"] = this.description;
-      data["professeur_id"] = localStorage.getItem("professeurId");
+      data["professeur_id"] = this.$cookies.get("professeurId");
       data["section_annee_scolaire_id"] = this.sectionAnneeScolaireId;
       // console.log("log data " +);
       /*data.append('datenoteeffectue', this.datenoteeffectue);
@@ -188,7 +188,7 @@ export default {
       if(event.target.value){
         let params = [
           { key: "classe_id", value: event.target.value },
-          { key: "professeur_id", value: localStorage.getItem('professeurId') }
+          { key: "professeur_id", value: this.$cookies.get('professeurId') }
         ];
         this.$store.dispatch("searchMatiereByClasseAndProfesseur", {
           search: this.trimSearch(params)
@@ -196,7 +196,7 @@ export default {
       }else{
         // todo when classe is null
       }
-      // console.log("classe_id "+event.target.value+", professeur_id "+localStorage.getItem("professeurId"))
+      // console.log("classe_id "+event.target.value+", professeur_id "+this.$cookies.get("professeurId"))
 
     },
     trimSearch(searchs = null) {

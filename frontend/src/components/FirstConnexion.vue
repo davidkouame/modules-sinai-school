@@ -45,8 +45,8 @@ export default {
     connection() {
       const data = new FormData();
      
-      data.append("email", localStorage.getItem("userEmail"));
-       /*data.append("username", localStorage.getItem("userName"));
+      data.append("email", this.$cookies.get("userEmail"));
+       /*data.append("username", this.$cookies.get("userName"));
       data.append("password", this.password);
       data.append("password_confirmation", this.password_confirmation);
       data.append("password_confirmation", this.password_confirmation);*/
@@ -55,7 +55,7 @@ export default {
         .dispatch("updateUser", data)
         .then(response => {
           alert("modificaion réussite avec succes");
-          localStorage.setItem("firstLogin", 1);
+          this.$cookies.set("firstLogin", 1);
           window.location.reload();
         })
         .catch(response => {

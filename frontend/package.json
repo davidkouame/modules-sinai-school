@@ -16,6 +16,8 @@
   "dependencies": {
     "run": "^1.4.0",
     "vue": "^2.5.2",
+    "vue-cookies": "^1.6.1",
+    "vue-route-middleware": "^1.0.6",
     "vue-router": "^3.0.1",
     "vuex": "^3.1.1"
   },

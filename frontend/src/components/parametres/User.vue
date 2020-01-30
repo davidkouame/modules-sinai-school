@@ -91,8 +91,8 @@ export default {
     }
   },
   created(){
-    this.$store.dispatch('professeur', localStorage.getItem('professeurId'));
-    this.$store.dispatch('getClassesByProfesseurId', localStorage.getItem('professeurId'));
+    this.$store.dispatch('professeur', this.$cookies.get('professeurId'));
+    this.$store.dispatch('getClassesByProfesseurId', this.$cookies.get('professeurId'));
   },
   methods: {
     updateUser(){

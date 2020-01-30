@@ -522,13 +522,13 @@ export default {
         this.$store.dispatch("allnotesandvaleur", {
           payload: pageNum,
           search: [{ key: "libelle", value: search },
-                  { key: "professeur_id", value: localStorage.getItem("professeurId") },
+                  { key: "professeur_id", value: this.$cookies.get("professeurId") },
                   { key: "eleve_id", value: this.$route.params.id }]
         });
       } else {
         this.$store.dispatch("allnotesandvaleur", {
           payload: pageNum,
-          search: [{ key: "professeur_id", value: localStorage.getItem("professeurId") },
+          search: [{ key: "professeur_id", value: this.$cookies.get("professeurId") },
                   { key: "eleve_id", value: this.$route.params.id }]
         });
       }
@@ -610,7 +610,7 @@ export default {
   watch:{
     eleve: function() {
       this.$store.dispatch('getMatiereByProfesseurAndClasse', {"professeurId":
-      localStorage.getItem("professeurId"),
+      this.$cookies.get("professeurId"),
       "classeId": this.eleve.classeseleves[0].classe_id});
     },
     matiere: function(){

@@ -1,3 +1,4 @@
+
 import DashboardLayout from '../layout/DashboardLayout.vue'
 // GeneralViews
 import NotFound from '../pages/NotFoundPage.vue'
@@ -24,6 +25,11 @@ import Overview from '@/components/Overview.vue'
 import routerParent from '@/components/pages/parents/router'
 import routerEleve from '@/components/pages/eleves/router'
 import routerProfesseur from '@/components/pages/professeurs/router'
+
+import Vue from 'vue'
+
+import VueCookies from 'vue-cookies'
+Vue.use(VueCookies)
 
 /*const baseRoutes = [
   {
@@ -97,11 +103,12 @@ function view(name) {
 //  export default routes
 
 let routes = null
+const cookies = Vue.prototype.$cookies;
 // const routes = baseRoutes;//.concat(messagesRoutes, peopleRoutes);
-if (localStorage.getItem('userId')) {
-  if (localStorage.getItem('userType') == "parent") {
+if (cookies.get('userId')) {
+  if (cookies.get('userType') == "parent") {
     routes = baseRoutes.concat(routerParent);
-  }else if(localStorage.getItem('userType') == "eleve"){
+  }else if(cookies.get('userType') == "eleve"){
     routes = baseRoutes.concat(routerEleve);
   }else{
     routes = baseRoutes.concat(routerProfesseur);

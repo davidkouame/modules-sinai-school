@@ -118,16 +118,35 @@ import PreviewTypeMoyenne from "@/components/TypesMoyennes/Preview.vue";
 import AddTypeMoyenne from "@/components/TypesMoyennes/Add.vue";
 import EditTypeMoyenne from "@/components/TypesMoyennes/Edit.vue";
 
+import Vue from "vue";
+
+
+
 import TestApp from "@/components/TestApp.vue"
 
 // Login
 import Login from '@/components/Login.vue'
 
+// import auth from '@/middleware/auth';
+
 const routes = [
   {
     path: "/",
     component: DashboardLayout,
-    redirect: "/dashboard",
+    redirect: "dashboard",
+    /*meta: {
+      middleware: (to, from, next ) => {
+        const cookies = Vue.prototype.$cookies;
+        // console.log("===========================");
+        // console.log("to :"+to.path);
+        // console.log("from :"+from.path);
+        // next("/login");
+        if(!cookies.get("userId")){
+          next({ name: 'Login' });
+        }
+        next();
+      }
+    },*/
     children: [
       {
         path: "dashboard",

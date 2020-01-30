@@ -183,12 +183,12 @@ export default {
     };
   },
   created() {
-    this.$store.dispatch("professeurP", localStorage.getItem("professeurId"));
-    this.$store.dispatch("sessionuserapp", {user_id: localStorage.getItem("userId")});
+    this.$store.dispatch("professeurP", this.$cookies.get("professeurId"));
+    this.$store.dispatch("sessionuserapp", {user_id: this.$cookies.get("userId")});
     this.$store.dispatch("anneesscolaires");
     this.$store.dispatch(
       "getClassesByProfesseurIdP",
-      localStorage.getItem("professeurId")
+      this.$cookies.get("professeurId")
     );
   },
   methods: {
@@ -218,10 +218,10 @@ export default {
     saveSessionUser() {
       /*const data = new FormData();
       data.append("annee_scolaire_id", this.anneescolaire.id);
-      data.append("user_id", localStorage.getItem("userId"));*/
+      data.append("user_id", this.$cookies.get("userId"));*/
       let dataSa = null;
       let data = {annee_scolaire_id: this.anneescolaire.id, 
-                user_id: localStorage.getItem("userId")};
+                user_id: this.$cookies.get("userId")};
       if(this.sessionuserapp){
         dataSa = {id: this.sessionuserapp.id, data: data};
       }else{
@@ -234,7 +234,7 @@ export default {
         .then(response => {
           store.dispatch("sessionuserapp", response.data.data);
           store.dispatch("anneeScolaireId", this.anneescolaire.id);
-          localStorage.setItem("anneeScolaireId", this.anneescolaire.id);
+          this.$cookies.set("anneeScolaireId", this.anneescolaire.id);
           alert("La mise à jour a été effectué avec succès !");
             window.location.reload();
         })

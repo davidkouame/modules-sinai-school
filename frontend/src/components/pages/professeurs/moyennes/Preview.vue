@@ -164,13 +164,13 @@ export default {
         this.$store.dispatch("allnotesandvaleurV2", {
           payload: pageNum,
           search: [{ key: "libelle", value: search },
-                  { key: "professeur_id", value: localStorage.getItem("professeurId") },
+                  { key: "professeur_id", value: this.$cookies.get("professeurId") },
                   { key: "eleve_id", value: this.moyenne.eleve.id }]
         });
       } else {
         this.$store.dispatch("allnotesandvaleurV2", {
           payload: pageNum,
-          search: [{ key: "professeur_id", value: localStorage.getItem("professeurId") },
+          search: [{ key: "professeur_id", value: this.$cookies.get("professeurId") },
                   { key: "eleve_id", value: this.moyenne.eleve.id }]
         });
       }

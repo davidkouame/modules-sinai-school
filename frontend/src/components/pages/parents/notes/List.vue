@@ -154,7 +154,7 @@ export default {
       let params = [
         { key: "search", value: search },
         { key: "eleve_id", value: this.eleveListId },
-        { key: "parent_id", value: localStorage.getItem("parentId") },
+        { key: "parent_id", value: this.$cookies.get("parentId") },
         { key: "section_annee_scolaire_id", value: this.sectionAnneeScolaireId }
       ];
       this.$store.dispatch("allnotesparentV3", {
@@ -189,7 +189,7 @@ export default {
       this.$store.dispatch('sectionAnneeScolaireId', section.id);
       this.titleDropdownSection = section.libelle ;
       // this.sectionAnneeScolaireId = section.id;
-      localStorage.setItem('sectionAnneeScolaireId', section.id);
+      this.$cookies.set('sectionAnneeScolaireId', section.id);
       this.fetch();
     },
     formatValeur(valeur){

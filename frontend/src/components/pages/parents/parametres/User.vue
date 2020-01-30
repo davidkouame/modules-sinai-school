@@ -181,8 +181,8 @@ export default {
     };
   },
   created() {
-    this.$store.dispatch("parent", localStorage.getItem("parentId"));
-    this.$store.dispatch("sessionuserapp", {user_id: localStorage.getItem("userId")});
+    this.$store.dispatch("parent", this.$cookies.get("parentId"));
+    this.$store.dispatch("sessionuserapp", {user_id: this.$cookies.get("userId")});
     this.$store.dispatch("getAllAnneesScolaires", {});
   },
   methods: {
@@ -212,7 +212,7 @@ export default {
     saveSessionUser() {
       let dataSa = null;
       let data = {annee_scolaire_id: this.anneescolaire.id, 
-                user_id: localStorage.getItem("userId")};
+                user_id: this.$cookies.get("userId")};
       if(this.sessionuserapp){
         dataSa = {id: this.sessionuserapp.id, data: data};
       }else{
@@ -225,7 +225,7 @@ export default {
         .then(response => {
           store.dispatch("sessionuserapp", response.data.data);
           store.dispatch("anneeScolaireId", this.anneescolaire.id);
-          localStorage.setItem("anneeScolaireId", this.anneescolaire.id);
+          this.$cookies.set("anneeScolaireId", this.anneescolaire.id);
           alert("La mise à jour a été effectué avec succès !");
             window.location.reload();
         })

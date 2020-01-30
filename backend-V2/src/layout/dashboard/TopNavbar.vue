@@ -70,11 +70,7 @@ export default {
       this.$sidebar.displaySidebar(false);
     },
     logout(){
-      localStorage.removeItem("userId");
-      localStorage.removeItem("userName");
-      localStorage.removeItem("userSurname");
-      localStorage.removeItem("userEmail");
-      localStorage.removeItem("firstLogin");
+      this.$cookies.keys().forEach(cookie => this.$cookies.remove(cookie))
       window.location.reload();
     }
   }

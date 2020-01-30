@@ -120,7 +120,7 @@ export default {
       let params = [
         { key: "libelle", value: search },
         { key: "classe_id", value: this.classeListId },
-        { key: "eleve_id", value: localStorage.getItem("eleveId") }
+        { key: "eleve_id", value: this.$cookies.get("eleveId") }
       ];
       this.$store.dispatch("allnotes", {
         payload: pageNum,

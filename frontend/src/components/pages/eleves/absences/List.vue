@@ -95,7 +95,7 @@ export default {
       pageNum = pageNum == null ? 1 : pageNum;
       let params = [
         { key: "libelle", value: search },
-        { key: "eleve_id", value: localStorage.getItem("eleveId") }
+        { key: "eleve_id", value: this.$cookies.get("eleveId") }
       ];
       this.$store.dispatch("getAbsenceseleves", {
         payload: pageNum,

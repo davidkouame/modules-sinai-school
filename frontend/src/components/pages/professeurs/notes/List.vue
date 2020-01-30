@@ -158,13 +158,13 @@ export default {
       countNotes: null,
       classeId: null,
       titleDropdownClasse: null
-      // sectionAnneeScolaireId: localStorage.getItem('sectionAnneeScolaireId')
+      // sectionAnneeScolaireId: this.$cookies.get('sectionAnneeScolaireId')
     };
   },
   created() {
     this.fetch();
     this.$store.dispatch('classes', [{'key': 'professeur_id',
-    'value': localStorage.getItem('professeurId')}]);
+    'value': this.$cookies.get('professeurId')}]);
   },
   methods: {
     fetch(pageNum, search = null) {
@@ -172,7 +172,7 @@ export default {
       let params = [
         { key: "libelle", value: search },
         { key: "classe_id", value: this.classeListId },
-        { key: "professeur_id", value: localStorage.getItem('professeurId') },
+        { key: "professeur_id", value: this.$cookies.get('professeurId') },
         { key: "section_annee_scolaire_id", value: this.sectionAnneeScolaireId }
       ];
       this.$store.dispatch("allnotes", {

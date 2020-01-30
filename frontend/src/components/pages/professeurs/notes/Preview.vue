@@ -100,7 +100,7 @@ export default {
     this.$store.dispatch("matieres");
     this.$store.dispatch(
       "classesByProfesseur",
-      localStorage.getItem("professeurId")
+      this.$cookies.get("professeurId")
     );
     this.$store.dispatch("note", this.$route.params.id);
   },

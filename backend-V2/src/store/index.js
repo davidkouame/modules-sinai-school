@@ -7,16 +7,6 @@ import storeProfesseur from '@/components/pages/professeurs/store'*/
 
 Vue.use(Vuex)
 
-/*let modules = null
-if (localStorage.getItem('userId')) {
-  if (localStorage.getItem('userType') == "parent") {
-    modules = { storeParent }
-  }else if (localStorage.getItem('userType') == "eleve"){
-    modules = { storeEleve }
-  }else{
-    modules = { storeProfesseur }
-  }
-}*/
 
 // Cette fonction permet de formater l'url et de retourner une url
 function getUrl(context, nameUrl, params){

@@ -131,10 +131,10 @@ export default {
     this.$store.dispatch("matieresall");
     this.$store.dispatch(
       "classesByProfesseur",
-      localStorage.getItem("professeurId")
+      this.$cookies.get("professeurId")
     );
     this.$store.dispatch('classes', [{'key': 'professeur_id', 
-    'value': localStorage.getItem('professeurId')}]);
+    'value': this.$cookies.get('professeurId')}]);
     this.$store.dispatch("note", this.$route.params.id);
   },
   methods: {
@@ -148,7 +148,7 @@ export default {
       data["id"] = this.$route.params.id;
       data["description"] = this.description;
       data["matiere_id"] = this.matiere_id;
-      data["professeur_id"] = localStorage.getItem("professeurId");
+      data["professeur_id"] = this.$cookies.get("professeurId");
 
       let store = this.$store;
       store

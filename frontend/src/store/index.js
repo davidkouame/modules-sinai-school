@@ -8,10 +8,11 @@ import storeProfesseur from '@/components/pages/professeurs/store'
 Vue.use(Vuex)
 
 let modules = null
-if (localStorage.getItem('userId')) {
-  if (localStorage.getItem('userType') == "parent") {
+const cookies = Vue.prototype.$cookies;
+if (cookies.get('userId')) {
+  if (cookies.get('userType') == "parent") {
     modules = { storeParent }
-  }else if (localStorage.getItem('userType') == "eleve"){
+  }else if (cookies.get('userType') == "eleve"){
     modules = { storeEleve }
   }else{
     modules = { storeProfesseur }
@@ -40,8 +41,8 @@ export default new Vuex.Store({
   state: {
     // endpoint: 'http://localhost/modules-sinai-school/backend/',
     // endpoint: 'http://localhost/modules-sinai-school/backend/',
-    // endpoint: 'http://localhost:8888/modules-sinai-school/backend/',
-    endpoint: 'http://monsitenet.com/modules-sinai-school/backend/',
+    endpoint: 'http://localhost:8888/modules-sinai-school/backend/',
+    // endpoint: 'http://monsitenet.com/modules-sinai-school/backend/',
     api: 'api/v1/note/',
     notes: [],
     noteseleves: [],

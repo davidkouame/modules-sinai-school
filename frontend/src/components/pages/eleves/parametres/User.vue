@@ -71,7 +71,7 @@ export default {
     };
   },
   created() {
-    this.$store.dispatch("eleve", localStorage.getItem("eleveId"));
+    this.$store.dispatch("eleve", this.$cookies.get("eleveId"));
   },
   methods: {
     updateUser() {

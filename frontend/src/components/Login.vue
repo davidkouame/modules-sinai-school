@@ -100,31 +100,33 @@ export default {
       this.$store
         .dispatch("loginParentEleve", { email, password })
         .then(response => {
-          localStorage.setItem("userId", response.data.data.id);
-          localStorage.setItem("userName", response.data.data.name);
-          localStorage.setItem("userSurname", response.data.data.surname);
-          localStorage.setItem("userEmail", response.data.data.email);
-          localStorage.setItem("firstLogin", response.data.data.first_login);
-          localStorage.setItem(
+          this.$cookies.set("userId", response.data.data.id);
+          this.$cookies.set("userName", response.data.data.name);
+          this.$cookies.set("userSurname", response.data.data.surname);
+          this.$cookies.set("userEmail", response.data.data.email);
+          this.$cookies.set("firstLogin", response.data.data.first_login);
+          this.$cookies.set(
             "userType",
             this.getNameTypeUser(response.data.data)
           );
-          localStorage.setItem(
+          this.$cookies.set(
             "professeurId",
             response.data.data.professeur_id
           );
-          localStorage.setItem("parentId", response.data.data.parenteleve_id);
-          localStorage.setItem("eleveId", response.data.data.eleve_id);
+          this.$cookies.set("parentId", response.data.data.parenteleve_id);
+          this.$cookies.set("eleveId", response.data.data.eleve_id);
 
-          localStorage.userId = response.data.data.id;
-          localStorage.userName = response.data.data.name;
-          localStorage.userEmail = response.data.data.email;
-          localStorage.userType = this.getNameTypeUser(response.data.data);
-          // localStorage.firstLogin = this.getNameTypeUser(response.data.data.first_login);
-          console.log("=================="+localStorage.firstLogin);
-          localStorage.professeurId = response.data.data.professeur_id;
-          localStorage.parentId = response.data.data.parenteleve_id;
-          localStorage.eleveId = response.data.data.eleve_id;
+          this.$cookies.set("userId", response.data.data.id);
+          this.$cookies.set("userName", response.data.data.name);
+          this.$cookies.set("userEmail", response.data.data.email);
+          this.$cookies.set("userType", this.getNameTypeUser(response.data.data));
+          this.$cookies.set("professeurId", response.data.data.professeur_id);
+          this.$cookies.set("parentId", response.data.data.parenteleve_id);
+          this.$cookies.set("eleveId", response.data.data.eleve_id);
+
+
+
+
           this.loadSessionUser(response.data.data.id);
         })
         .catch(response => {
@@ -153,12 +155,12 @@ export default {
           // console.log("response =>"+JSON.stringify(response.data.data[0].annee_scolaire_id));
           if(response.data.data){
             // console.log("l'utilisateur a une session");
-            localStorage.setItem("anneeScolaireId", response.data.data[0].annee_scolaire_id);
+            this.$cookies.set("anneeScolaireId", response.data.data[0].annee_scolaire_id);
           }else{
             if(this.anneesscolaires){
               // recuperation de la premiere année scolaire 
               let anneeScolaireId = this.anneesscolaires[(this.anneesscolaires.length-1)].id;
-              localStorage.setItem("anneeScolaireId", anneeScolaireId);
+              this.$cookies.set("anneeScolaireId", anneeScolaireId);
               this.$store.dispatch('anneeScolaireId', anneeScolaireId);
               let dataSa = null;
               let data = {annee_scolaire_id: anneeScolaireId, user_id: user_id};

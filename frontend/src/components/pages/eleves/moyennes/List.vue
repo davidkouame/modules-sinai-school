@@ -137,10 +137,10 @@ export default {
   },
   created() {
     // console/log("l'id de la classe est");
-    // console.log("l'id de la classe est "+localStorage.getItem('eleveId'));
+    // console.log("l'id de la classe est "+this.$cookies.get('eleveId'));
     // console.log("l'id de la classe est "+this.classeListId);
     // this.fetch();
-    this.$store.dispatch('eleve', localStorage.getItem('eleveId'));
+    this.$store.dispatch('eleve', this.$cookies.get('eleveId'));
   },
   methods: {
     fetch(pageNum, search = null) {
@@ -148,7 +148,7 @@ export default {
       let params = [
         { key: "libelle", value: search },
         // { key: "classe_id", value: this.classeListId },
-        { key: "eleve_id", value: localStorage.getItem('eleveId') }
+        { key: "eleve_id", value: this.$cookies.get('eleveId') }
       ];
       this.$store.dispatch("moyennes", {
         payload: pageNum,

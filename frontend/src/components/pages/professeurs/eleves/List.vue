@@ -141,14 +141,14 @@ export default {
       titleDropdownClasse: null,
       countAbsences: null,
       classeId: null
-      // sectionAnneeScolaireId: localStorage.getItem('sectionAnneeScolaireId'),
-      // anneeScolaireId: localStorage.getItem('anneeScolaireId')
+      // sectionAnneeScolaireId: this.$cookies.get('sectionAnneeScolaireId'),
+      // anneeScolaireId: this.$cookies.get('anneeScolaireId')
     };
   },
   created() {
     this.fetch();
     this.$store.dispatch('classes', [{'key': 'professeur_id',
-      'value': localStorage.getItem('professeurId')}]);
+      'value': this.$cookies.get('professeurId')}]);
   },
   methods: {
     fetch(pageNum, search = null) {
@@ -224,7 +224,7 @@ export default {
     },
     anneeScolaireId(){
         return this.$store.getters.anneeScolaireId ? this.$store.getters.anneeScolaireId :
-        localStorage.getItem('anneeScolaireId');
+        this.$cookies.get('anneeScolaireId');
     },
     currentPage(){
       return this.$store.getters.currentPage;

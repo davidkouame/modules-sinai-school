@@ -84,7 +84,7 @@ export default {
       commentaire: null,
       heure_debut_cours: null,
       heure_fin_cours: null,
-      sectionAnneeScolaireId: localStorage.getItem('sectionAnneeScolaireId')
+      sectionAnneeScolaireId: this.$cookies.get('sectionAnneeScolaireId')
     };
   },
   created() {

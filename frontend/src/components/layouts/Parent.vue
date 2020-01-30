@@ -44,22 +44,19 @@ export default {
   name: "Parent",
   data() {
     return {
-      username: localStorage.userName,
-      email: localStorage.userEmail, 
+        username: this.$cookies.get('userName'),
+      email: this.$cookies.get('userEmail'),
       eleveId: null
     };
   },
   created() {
     this.$store.dispatch('loadElevesByProfesseurId', 
-    localStorage.getItem('parentId'));
+    this.$cookies.get('parentId'));
   },
   methods: {
     logout: function(){
       // nous devons externaliser la fonctionn de déconnexion et de connexion
-      localStorage.userId = "";
-      localStorage.userName = "";
-      localStorage.userEmail = "";
-      localStorage.userType  = "";
+      this.$cookies.keys().forEach(cookie => this.$cookies.remove(cookie))
       window.location.reload();
     }
   },

@@ -151,7 +151,7 @@ export default {
       pageNum = pageNum == null ? 1 : pageNum;
       this.$store.dispatch("allnotesandvaleurV2", {
           payload: pageNum,
-          search: [{ key: "eleve_id", value: localStorage.getItem('eleveId') },
+          search: [{ key: "eleve_id", value: this.$cookies.get('eleveId') },
                     { key: "matiere_id", value: this.moyenne.matiere_id }]
         });
     },

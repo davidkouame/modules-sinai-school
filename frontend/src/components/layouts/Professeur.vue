@@ -54,15 +54,15 @@ export default {
   name: 'Professeur',
   data () {
     return {
-      username: localStorage.userName,
-      email: localStorage.userEmail,
+        username: this.$cookies.get('userName'),
+      email: this.$cookies.get('userEmail'),
       classeId: null
     }
   },
   methods: {
     logout: function () {
       // nous devons externaliser la fonctionn de déconnexion et de connexion
-      window.localStorage.clear()
+      this.$cookies.keys().forEach(cookie => this.$cookies.remove(cookie))
       window.location.reload()
     },
     created(){

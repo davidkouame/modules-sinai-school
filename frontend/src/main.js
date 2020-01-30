@@ -40,9 +40,24 @@ import ParentLayout from './layout/ParentLayout.vue'
 import ProfesseurLayout from './layout/ProfesseurLayout.vue'
 import moment from 'moment'
 
+
+
+import VueCookies from 'vue-cookies'
+Vue.use(VueCookies)
+
+// set default config
+Vue.$cookies.config('7d')
+
+// set global cookie
+Vue.$cookies.set('theme','default');
+Vue.$cookies.set('hover-time','1s');
+
+
 // plugin setup
 Vue.use(VueRouter)
 Vue.use(LightBootstrap)
+
+
 
 // configure router
 const router = new VueRouter({
@@ -107,9 +122,11 @@ Vue.mixin({
   }
 });
 
+const cookies = Vue.prototype.$cookies;
+
 let vue = null;
-if (localStorage.getItem('userId')) {
-  if (localStorage.getItem('firstLogin') == 0) {
+if (cookies.get('userId')) {
+  if (cookies.get('firstLogin') == 0) {
     vue = {
       el: '#app',
       router,
@@ -118,7 +135,7 @@ if (localStorage.getItem('userId')) {
       template: '<FirstConnexion/>'
     };
   }else{
-    if (localStorage.getItem('userType') == "parent") {
+    if (cookies.get('userType') == "parent") {
     vue = {
       el: '#app',
       router,
@@ -126,7 +143,7 @@ if (localStorage.getItem('userId')) {
       components: { ParentLayout },
       template: '<ParentLayout/>'
     };
-  } else if(localStorage.getItem('userType') == "professeur"){
+  } else if(cookies.get('userType') == "professeur"){
     vue = {
       el: '#app',
       router,

@@ -89,16 +89,16 @@
         }
       },
       username(){
-        return localStorage.getItem(("userName"))
+        return this.$cookies.get(("userName"))
       },
       usersurname(){
-        return localStorage.getItem(("userSurname"))
+        return this.$cookies.get(("userSurname"))
       },
       useremail(){
-        return localStorage.getItem(("userEmail"))
+        return this.$cookies.get(("userEmail"))
       },
       typeuser(){
-        return localStorage.getItem(("userType"))
+        return this.$cookies.get(("userType"))
       }
     }
   }

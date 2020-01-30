@@ -99,13 +99,13 @@ export default {
   data() {
     return {
       activeNotifications: false,
-      username: localStorage.userName,
-      email: localStorage.userEmail,
+        username: this.$cookies.get('userName'),
+      email: this.$cookies.get('userEmail'),
       eleveId: null,
       titleDropdown: "Elèves",
       titleDropdownClasse: "Classes",
-      parentId: localStorage.getItem('parentId') != "null",
-      professeurId: localStorage.getItem('professeurId') != "null",
+      parentId: this.$cookies.get('parentId') != "null",
+      professeurId: this.$cookies.get('professeurId') != "null",
       classeId: null,
       sectionAnneeScolaireId: null,
       titleDropdownSection: null
@@ -113,16 +113,16 @@ export default {
   },
   created() {
     // console.log("la valeur de section id a la création est "+this.sectionAnneeScolaireId);
-    if(localStorage.getItem('parentId') && localStorage.getItem('parentId')!="null"){
+    if(this.$cookies.get('parentId') && this.$cookies.get('parentId')!="null"){
       this.$store.dispatch('loadElevesByProfesseurId',
-      localStorage.getItem('parentId'));
+      this.$cookies.get('parentId'));
     }else{
-      this.$store.dispatch('classes', [{'key': 'professeur_id', 'value': localStorage.getItem('professeurId')},
-        {'key': 'annee_scolaire_id', 'value': localStorage.getItem('anneeScolaireId')}])
+      this.$store.dispatch('classes', [{'key': 'professeur_id', 'value': this.$cookies.get('professeurId')},
+        {'key': 'annee_scolaire_id', 'value': this.$cookies.get('anneeScolaireId')}])
 
     }
     console.log("->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
-    this.$store.dispatch('getAllSectionsAnneeScolaire', [{'key': 'annee_scolaire_id', 'value': localStorage.getItem('anneeScolaireId')}])
+    this.$store.dispatch('getAllSectionsAnneeScolaire', [{'key': 'annee_scolaire_id', 'value': this.$cookies.get('anneeScolaireId')}])
   },
   methods: {
     capitalizeFirstLetter(string) {
@@ -142,17 +142,14 @@ export default {
     },
     logout: function() {
       // nous devons externaliser la fonctionn de déconnexion et de connexion
-      localStorage.userId = "";
-      localStorage.userName = "";
-      localStorage.userEmail = "";
-      localStorage.userType = "";
+      this.$cookies.keys().forEach(cookie => this.$cookies.remove(cookie))
       window.location.reload();
     },
     changeEleve(eleve){
       this.$store.dispatch('eleveId', eleve.id);
       this.titleDropdown = eleve.user.name;
       this.eleveId = eleve.id;
-      localStorage.setItem('eleveId', eleve.id);
+      this.$cookies.set('eleveId', eleve.id);
       this.$router.push({ path: '/dashboard' })
     },
     changeClasse(classe){
@@ -170,8 +167,8 @@ export default {
         this.$store.dispatch('sectionAnneeScolaireId', section.id);
         this.titleDropdownSection = section.libelle ;
         this.sectionAnneeScolaireId = section.id;
-        localStorage.setItem('sectionAnneeScolaireId', section.id);
-        // localStorage.setItem('anneeScolaireId', section.annee_scolaire_id);
+        this.$cookies.set('sectionAnneeScolaireId', section.id);
+        // this.$cookies.set('anneeScolaireId', section.annee_scolaire_id);
         // this.$router.push('#/dashboard');
         this.$router.push({ path: '/dashboard' })
     }
@@ -181,7 +178,7 @@ export default {
         if(this.parentId && this.eleves){
             this.eleveId = this.eleves[0].id;
             this.$store.dispatch('eleveId', this.eleves[0].id);
-            localStorage.setItem('eleveId', this.eleves[0].id);
+            this.$cookies.set('eleveId', this.eleves[0].id);
             this.titleDropdown = this.eleves[0].user ? this.eleves[0].user.name : null;
         }
     },
@@ -189,7 +186,7 @@ export default {
        // console.log(">>>>>>> "+JSON.stringify(this.sectionsanneescolaire));
        // this.sectionAnneeScolaire = this.$store.getters.sectionsanneescolaire[0].id;
        // this.titleDropdownSection = this.$store.getters.sectionsanneescolaire[0].libelle;
-       let sectionAnneeScolaireId = localStorage.getItem('sectionAnneeScolaireId');
+       let sectionAnneeScolaireId = this.$cookies.get('sectionAnneeScolaireId');
         if(this.$store.getters.sectionsanneescolaire){
             if(sectionAnneeScolaireId){
               if(sectionAnneeScolaireId!=-1){
@@ -201,7 +198,7 @@ export default {
                   // console.log("la section d'annee recherche est "+JSON.stringify(sectionAnneeScolaire))
                   if(sectionAnneeScolaire){
                     this.sectionAnneeScolaireId = sectionAnneeScolaire.id;
-                    localStorage.setItem('sectionAnneeScolaireId', sectionAnneeScolaire.id);
+                    this.$cookies.set('sectionAnneeScolaireId', sectionAnneeScolaire.id);
                     this.$store.dispatch('sectionAnneeScolaireId', sectionAnneeScolaire.id);
                     this.$store.dispatch('anneeScolaireId', sectionAnneeScolaire.annee_scolaire_id);
                     this.titleDropdownSection = sectionAnneeScolaire.libelle;
@@ -210,21 +207,21 @@ export default {
               }else{
                   this.sectionAnneeScolaireId = this.$store.getters.sectionsanneescolaire[0].id;
                   this.titleDropdownSection = this.$store.getters.sectionsanneescolaire[0].libelle;
-                  localStorage.setItem('sectionAnneeScolaireId', this.sectionAnneeScolaireId);
-                  localStorage.setItem('anneeScolaireId', this.$store.getters.sectionsanneescolaire[0].annee_scolaire_id);
+                  this.$cookies.set('sectionAnneeScolaireId', this.sectionAnneeScolaireId);
+                  this.$cookies.set('anneeScolaireId', this.$store.getters.sectionsanneescolaire[0].annee_scolaire_id);
                   this.$store.dispatch('sectionAnneeScolaireId', this.sectionAnneeScolaireId);
                   this.$store.dispatch('anneeScolaireId', this.$store.getters.sectionsanneescolaire[0].annee_scolaire_id);
               }
             }else{
               this.sectionAnneeScolaireId = this.$store.getters.sectionsanneescolaire[0].id;
               this.titleDropdownSection = this.$store.getters.sectionsanneescolaire[0].libelle;
-              localStorage.setItem('sectionAnneeScolaireId', this.sectionAnneeScolaireId);
-              localStorage.setItem('anneeScolaireId', this.$store.getters.sectionsanneescolaire[0].annee_scolaire_id);
+              this.$cookies.set('sectionAnneeScolaireId', this.sectionAnneeScolaireId);
+              this.$cookies.set('anneeScolaireId', this.$store.getters.sectionsanneescolaire[0].annee_scolaire_id);
               this.$store.dispatch('sectionAnneeScolaireId', this.sectionAnneeScolaireId);
               this.$store.dispatch('anneeScolaireId', this.$store.getters.sectionsanneescolaire[0].annee_scolaire_id);
             }
         }else{
-            localStorage.setItem('sectionAnneeScolaireId', -1);
+            this.$cookies.set('sectionAnneeScolaireId', -1);
             this.$store.dispatch('sectionAnneeScolaireId', -1);
         }
         // console.log("la valeur de section id lors du changement est "+this.sectionAnneeScolaireId);

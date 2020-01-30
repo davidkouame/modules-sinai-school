@@ -24,6 +24,19 @@ import Modal from './components/Modal.vue'
 import vSelect from 'vue-select'
 import Login from './components/Login.vue'
 
+
+
+/*import VueCookies from 'vue-cookies'
+Vue.use(VueCookies)
+
+// set default config
+Vue.$cookies.config('7d')
+
+// set global cookie
+Vue.$cookies.set('theme','default');
+Vue.$cookies.set('hover-time','1s');*/
+
+
 import VueSidebarMenu from 'vue-sidebar-menu'
 import 'vue-sidebar-menu/dist/vue-sidebar-menu.css'
 Vue.use(VueSidebarMenu)
@@ -103,19 +116,9 @@ Vue.mixin({
   }
 })
 
-
-if(localStorage.getItem('userId')){
-  /* eslint-disable no-new */
+/* eslint-disable no-new */
 new Vue({
   router,
   store,
   render: h => h(App)
 }).$mount("#app");
-}else{
-  new Vue({
-    el: '#app',
-    router,
-    store,
-    render: h => h(Login)
-  });
-}

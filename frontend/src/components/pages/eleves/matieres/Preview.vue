@@ -227,7 +227,7 @@ export default {
       return this.$store.getters.matiere;
     },
     eleveListId() {
-      return localStorage.getItem("eleveId");
+      return this.$cookies.get("eleveId");
     },
     classesprofesseursmatieres() {
       return this.$store.getters.classesprofesseursmatieres;
@@ -248,7 +248,7 @@ export default {
       pageNum = pageNum == null ? 1 : pageNum;
       let params = [
         { key: "libelle", value: search },
-        // {key: 'parent_id', value: localStorage.getItem('parentId')},
+        // {key: 'parent_id', value: this.$cookies.get('parentId')},
         { key: "eleve_id", value: this.eleveListId },
         { key: "matiere_id", value: this.$route.params.id }
       ];
@@ -289,7 +289,7 @@ export default {
       let params = [
         { key: "libelle", value: search },
         { key: "classe_id", value: this.classeListId },
-        { key: "eleve_id", value: localStorage.getItem("eleveId") }
+        { key: "eleve_id", value: this.$cookies.get("eleveId") }
       ];
       this.$store.dispatch("allnotes", {
         payload: pageNum,

@@ -89,7 +89,7 @@ export default {
       let params = [
         {key: 'libelle', value: search},
         {key: 'eleve_id', value: this.eleveListId},
-        {key: 'parent_id', value: localStorage.getItem('parentId')},
+        {key: 'parent_id', value: this.$cookies.get('parentId')},
         {key: 'classe_id', value: this.classeListId}
       ];
       this.$store.dispatch('matieres', {payload: pageNum, search: this.trimSearch(params)})
@@ -123,13 +123,13 @@ export default {
     },
     eleveListId(){
       let eleveId = this.$store.getters.eleveId
-      localStorage.setItem("eleveId", eleveId)
+      this.$cookies.set("eleveId", eleveId)
       return eleveId
     }
   },
   watch:{
     eleveListId(){
-      localStorage.setItem("eleveId", this.eleveListId)
+      this.$cookies.set("eleveId", this.eleveListId)
       this.fetch();
     }
   }

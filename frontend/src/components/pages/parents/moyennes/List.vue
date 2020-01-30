@@ -306,7 +306,7 @@ export default {
     };
   },
   created() {
-    this.$store.dispatch('eleve', localStorage.getItem('eleveId'));
+    this.$store.dispatch('eleve', this.$cookies.get('eleveId'));
   },
   methods: {
     fetch(pageNum, search = null) {
@@ -326,8 +326,8 @@ export default {
       let params = [
         // { key: "classe_id", value: this.classeListId },
         { key: "eleve_id", value: this.eleveListId },
-        { key: "annee_scolaire_id", value: localStorage.getItem('anneeScolaireId') },
-        // { key: "section_annee_scolaire_id", value: localStorage.getItem('sectionAnneeScolaireId') },
+        { key: "annee_scolaire_id", value: this.$cookies.get('anneeScolaireId') },
+        // { key: "section_annee_scolaire_id", value: this.$cookies.get('sectionAnneeScolaireId') },
         { key: "type_moyenne_id", value: 3 }
       ];
       
@@ -343,7 +343,7 @@ export default {
       let params = [
         // { key: "classe_id", value: this.classeListId },
         { key: "eleve_id", value: this.eleveListId },
-        { key: "annee_scolaire_id", value: localStorage.getItem('anneeScolaireId') },
+        { key: "annee_scolaire_id", value: this.$cookies.get('anneeScolaireId') },
         { key: "type_moyenne_id", value: 1 }
       ];
       this.$store.dispatch("moyenneAnnuelle", {
@@ -354,7 +354,7 @@ export default {
     fetchSection(pageNum, search = null) {
       pageNum = pageNum == null ? 1 : pageNum;
       let params = [
-        { key: "annee_scolaire_id", value: localStorage.getItem('anneeScolaireId') }
+        { key: "annee_scolaire_id", value: this.$cookies.get('anneeScolaireId') }
       ];
       this.$store.dispatch("sectionsanneescolaire", {
         payload: pageNum,
@@ -404,7 +404,7 @@ export default {
         this.$store.dispatch('sectionAnneeScolaireId', section.id);
         this.titleDropdownSection = section.libelle ;
         // console.log("changement de la section libelle "+section.libelle);
-        localStorage.setItem('sectionAnneeScolaireId', section.id);
+        this.$cookies.set('sectionAnneeScolaireId', section.id);
         this.fetch();
     },
     showMessageForMoyenneMatieres(){
