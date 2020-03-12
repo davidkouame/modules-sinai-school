@@ -26,7 +26,8 @@ import Login from './components/Login.vue'
 
 
 
-/*import VueCookies from 'vue-cookies'
+
+import VueCookies from 'vue-cookies'
 Vue.use(VueCookies)
 
 // set default config
@@ -34,7 +35,7 @@ Vue.$cookies.config('7d')
 
 // set global cookie
 Vue.$cookies.set('theme','default');
-Vue.$cookies.set('hover-time','1s');*/
+Vue.$cookies.set('hover-time','1s');
 
 
 import VueSidebarMenu from 'vue-sidebar-menu'

@@ -1,19 +1,15 @@
 <template>
   <card class="card" :title="title">
     <div class="row card-body-header">
-      <div class="col-sm-6">
-      </div>
-      <div class="col-sm-6">
-        <div class="float-right">
-          <div class="row">
-            <div class="col-md-8">
-              <input type="text" class="form-control search" placeholder="Rechercher une année scolaire" @keyup="searchModel" v-model="search">
+      <div class="offset-md-3 col-sm-8">
+          <div class="row float-right">
+            <div class="col-md-10">
+              <input type="text" class="form-control search" placeholder="Rechercher un niveau" @keyup="searchModel" v-model="search">
             </div>
-            <div class="col-md-4">
+            <div class="col-md-2">
               <a :href="'#/niveaux/add/'"class="btn btn-primary">Ajouter</a>
             </div>
           </div>
-        </div>
       </div>
     </div>
     
@@ -23,7 +19,7 @@
           <tr>
             <th scope="col">#</th>
             <th scope="col">Libellé</th>
-            <th scope="col">Ordre</th>
+            <!--<th scope="col">Ordre</th>-->
             <th scope="col">Actions</th>
           </tr>
         </thead>
@@ -31,7 +27,7 @@
           <tr v-if="niveaux" v-for="(matiere, index) in niveaux">
             <th scope="row">{{ index + 1}}</th>
             <td>{{ matiere.libelle}}</td>
-            <td>{{ matiere.ordre}}</td>
+            <!--<td>{{ matiere.ordre}}</td>-->
             <td>
               <a :href="'#/niveaux/preview/'+matiere.id" class="btn btn-icon btn-info btn-sm">
                 <!----><i class="fa fa-user"></i><!---->

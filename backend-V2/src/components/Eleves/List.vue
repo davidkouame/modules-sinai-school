@@ -7,7 +7,7 @@
         <div class="float-right">
           <div class="row">
             <div class="col-md-8">
-              <input type="text" class="form-control search" placeholder="Rechercher un eleve" @keyup="searchModel" v-model="search">
+              <input type="text" class="form-control search" placeholder="Rechercher un élève" @keyup="searchModel" v-model="search">
             </div>
             <div class="col-md-4">
               <a :href="'#/eleves/add/'"class="btn btn-primary">Ajouter</a>

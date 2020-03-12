@@ -1,19 +1,15 @@
 <template>
   <card class="card" :title="title">
     <div class="row card-body-header">
-      <div class="col-sm-6">
-      </div>
-      <div class="col-sm-6">
-        <div class="float-right">
-          <div class="row">
-            <div class="col-md-8">
-              <input type="text" class="form-control search" placeholder="Rechercher une année scolaire" @keyup="searchModel" v-model="search">
+      <div class="offset-md-3 col-sm-8">
+          <div class="row float-right">
+            <div class="col-md-10">
+              <input type="text" class="form-control search extend-height-input" placeholder="Rechercher une année scolaire" @keyup="searchModel" v-model="search">
             </div>
-            <div class="col-md-4">
-              <a :href="'#/annees-scolaires/add/'"class="btn btn-primary">Ajouter</a>
+            <div class="col-md-2">
+              <a :href="'#/annees-scolaires/add/'" class="btn btn-primary">Ajouter</a>
             </div>
           </div>
-        </div>
       </div>
     </div>
     
@@ -190,6 +186,10 @@ export default {
   z-index: 1;
   color: #fff !important;
   background-color: #8294a8 !important;
+}
+
+.extend-height-input{
+  height: 41px !important
 }
 
 </style>

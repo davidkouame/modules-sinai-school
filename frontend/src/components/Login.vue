@@ -46,7 +46,7 @@
           <div class="row">
             <button type="submit" class="btn btn-primary offset-md-2 col-md-8 active" v-show="!showLoader">Connectez vous</button>
             </br>
-            <button class="btn btn-primary offset-md-2 col-md-8  active" type="submit" v-show="showLoader" style="color: #fff;background-color:
+            <button class="btn btn-primary offset-md-2 col-md-8" type="submit" v-show="showLoader" style="color: #fff;background-color:
              #0062cc;border-color: #005cbf;opacity: 1;opacity: 0.8;color:#fff;background-color:#0062cc;border-color:#005cbf;
              cursor: default !important;" disabled>
              <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>

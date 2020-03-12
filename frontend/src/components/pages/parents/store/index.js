@@ -35,8 +35,8 @@ export default {
     moyennesSections: null,
     moyenne: null,
     valeurs: null,
-    endpoint: 'http://localhost:8888/modules-sinai-school/backend/',
-    // endpoint: 'http://monsitenet.com/modules-sinai-school/backend/'
+    // endpoint: 'http://localhost:8888/modules-sinai-school/backend/',
+    endpoint: 'http://monsitenet.com/modules-sinai-school/backend/'
   },
   mutations: {
     notes(state, payload) {

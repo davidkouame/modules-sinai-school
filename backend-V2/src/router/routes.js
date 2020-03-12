@@ -134,7 +134,7 @@ const routes = [
     path: "/",
     component: DashboardLayout,
     redirect: "dashboard",
-    /*meta: {
+    meta: {
       middleware: (to, from, next ) => {
         const cookies = Vue.prototype.$cookies;
         // console.log("===========================");
@@ -144,9 +144,8 @@ const routes = [
         if(!cookies.get("userId")){
           next({ name: 'Login' });
         }
-        next();
       }
-    },*/
+    },
     children: [
       {
         path: "dashboard",

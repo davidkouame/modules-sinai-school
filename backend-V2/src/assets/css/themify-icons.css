@@ -1084,3 +1084,7 @@
 .span-required{
     color: red
   }
+
+  .extend-height-input{
+	height: 41px !important
+  }
