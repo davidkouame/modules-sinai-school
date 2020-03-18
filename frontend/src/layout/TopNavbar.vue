@@ -114,14 +114,12 @@ export default {
   created() {
     // console.log("la valeur de section id a la création est "+this.sectionAnneeScolaireId);
     if(this.$cookies.get('parentId') && this.$cookies.get('parentId')!="null"){
-      this.$store.dispatch('loadElevesByProfesseurId',
-      this.$cookies.get('parentId'));
+      this.$store.dispatch('loadElevesByProfesseurId',this.$cookies.get('parentId'));
     }else{
       this.$store.dispatch('classes', [{'key': 'professeur_id', 'value': this.$cookies.get('professeurId')},
         {'key': 'annee_scolaire_id', 'value': this.$cookies.get('anneeScolaireId')}])
-
     }
-    console.log("->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+    // console.log("->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
     this.$store.dispatch('getAllSectionsAnneeScolaire', [{'key': 'annee_scolaire_id', 'value': this.$cookies.get('anneeScolaireId')}])
   },
   methods: {
@@ -175,12 +173,12 @@ export default {
   },
   watch: {
     eleves() {
-        if(this.parentId && this.eleves){
-            this.eleveId = this.eleves[0].id;
-            this.$store.dispatch('eleveId', this.eleves[0].id);
-            this.$cookies.set('eleveId', this.eleves[0].id);
-            this.titleDropdown = this.eleves[0].user ? this.eleves[0].user.name : null;
-        }
+      if(this.parentId && this.eleves){
+          this.eleveId = this.eleves[0].id;
+          this.$store.dispatch('eleveId', this.eleves[0].id);
+          this.$cookies.set('eleveId', this.eleves[0].id);
+          this.titleDropdown = this.eleves[0].user ? this.eleves[0].user.name : null;
+      }
     },
     sectionsanneescolaire(){
        // console.log(">>>>>>> "+JSON.stringify(this.sectionsanneescolaire));

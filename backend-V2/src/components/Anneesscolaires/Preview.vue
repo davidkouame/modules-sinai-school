@@ -115,7 +115,7 @@ export default {
       store
         .dispatch("updateModel", {"url": "anneesscolaires", "data": data, "id": this.$route.params.id})
         .then(response => {
-          alert("La section a été validé avec succès !")
+          alert("L'année scolaire a été validé avec succès !")
           this.$router.go(-1)
         })
         .catch(error => {

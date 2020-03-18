@@ -44,7 +44,8 @@ function getInformModel(context, modelId, nameUrl, modelDispatch){
 export default new Vuex.Store({
   strict: false,
   state: {
-    endpoint: 'http://localhost:8888/modules-sinai-school/backend/',
+    // endpoint: 'http://localhost:8888/modules-sinai-school/backend/',
+    endpoint: 'http://localhost:8888/ayauka/backend/',
     // endpoint: 'http://monsitenet.com/modules-sinai-school/backend/',
     api: 'api/v1/note/',
     anneesscolaires: null,

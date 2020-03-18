@@ -84,26 +84,22 @@
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label class="control-label">Créer un compte user</label>
-                      <!---->
-                      <input
-                        class="form-control"
-                        type="checkbox"
-                        v-model="professeur.create_account"
-                      />
-                      <!---->
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-12">
-                    <div class="form-group">
                       <label class="control-label">Description</label>
                       <!---->
                       <textarea class="form-control" v-model="professeur.description"></textarea>
                       <!---->
                     </div>
                   </div>
+                  <!--<div class="col-md-6">
+                    <div class="form-group">
+                      <label class="control-label">Créer un compte user</label>
+                      <input
+                        class="form-control"
+                        type="checkbox"
+                        v-model="professeur.create_account"
+                      />
+                    </div>
+                  </div>-->
                 </div>
                 <div class="clearfix"></div>
                 <div class="float-right">
@@ -147,7 +143,7 @@ export default {
       store
         .dispatch("saveModel", {"url": "professeurs", "data": data})
         .then(response => {
-          alert("L'enregistrement a été succès")
+          alert("L'enregistrement a été éffectué avec succès")
           this.$router.go(-1)
         })
         .catch(error => {

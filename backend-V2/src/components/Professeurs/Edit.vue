@@ -96,20 +96,18 @@
                     </div>
                   </div>
                 </div>
-                <div class="row">
+                <!--<div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
                       <label class="control-label">Voulez vous réinitialiser le password ?</label>
-                      <!---->
                       <input
                         class="form-control"
                         type="checkbox"
                         v-model="professeur.create_account"
                       />
-                      <!---->
                     </div>
                   </div>
-                </div>
+                </div>-->
                 <div class="row">
                   <div class="col-md-12">
                     <div class="form-group">
@@ -172,7 +170,7 @@ export default {
       store
         .dispatch("updateModel", {"url": "professeurs", "data": data, "id": this.$route.params.id})
         .then(response => {
-          alert("L'enregistrement a été succès")
+          alert("L'enregistrement a été éffectué avec succès")
           this.$router.go(-1)
         })
         .catch(error => {

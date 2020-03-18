@@ -39,7 +39,7 @@ class MoyenneClasse
                     ? $classeeleve->classe->allEleves($this->getAnnneeScolaireEnCours()->id)
                     : null;
                 foreach($eleves as $eleve){
-                    if(Abonnement::hasAbonnement($eleve))
+                    if(Abonnement::hasAbonnement($eleve)){
                         $rapportmoyenne = new RapportMoyenne($sectionanneescolaire, $classeeleve->classe, $eleve, $this->estProvisoire);
                         $rapportmoyenne->constuct();
                         $body = $rapportmoyenne->getRapport();
@@ -48,12 +48,12 @@ class MoyenneClasse
                             // $parent = ParentModel::find($eleve->parent_id);
                             $parent = Abonnement::getParentToAbonnement($eleve);
                             if($parent)
-                                $sms->send($parent->tel, $parent, $eleve, $body);
+                                $sms->send($parent->tel, $body, $parent, $eleve);
                         }
                     }
                 }
             }
-        }catch(\Exception $e){
+        }catch(Exception $e){
             trace_log($e);
         }
     }

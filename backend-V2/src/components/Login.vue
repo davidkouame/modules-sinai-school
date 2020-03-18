@@ -24,13 +24,13 @@
               v-model="password"
             />
           </div>
-          <div class="form-group">
+          <!--<div class="form-group">
             <div class="col-md-12">
               <div class="row">
                 <div class="col float-lfet" style="text-align: center"><a href="#">Mot de passe oublié ?</a></div>
               </div>
             </div>
-          </div>
+          </div>-->
           <div class="row">
             <button type="submit" class="btn btn-primary offset-md-2 col-md-8 active" v-if="!showLoader">Connectez vous</button>
             </br>
@@ -96,7 +96,7 @@ export default {
           window.location.reload();
         })
         .catch(response => {
-          this.errorMessage = "Désolé, l'email ou le password est incorrect";
+          this.errorMessage = "Désolé, l'email ou le mot de passe est incorrect";
           console.log(response);
           this.showLoader = false;
           this.errored = true;

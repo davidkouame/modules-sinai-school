@@ -1,0 +1,61 @@
+1584352118a:1:{s:25:"site/mot-du-directeur.htm";a:6:{s:8:"fileName";s:25:"site/mot-du-directeur.htm";s:7:"content";s:1826:"[viewBag]
+==
+<a href="{{url('/mot-du-directeur')}}" class="testimonials link-mot-directeur" style="margin-bottom: 28px;margin-top: 28px" >
+    <h1 class="section-heading text-highlight" style="border-top: 2px solid #6091ba;"><span class="line"style="border-top: 0;"> Mot du directeur</span></h1>
+    <!--<div class="carousel-controls">
+          <a class="prev" href="#testimonials-carousel" data-slide="prev"><i class="fas fa-caret-left"></i></a>
+          <a class="next" href="#testimonials-carousel" data-slide="next"><i class="fas fa-caret-right"></i></a>
+      </div>-->
+    <!--//carousel-controls-->
+    <div class="section-content">
+        <div class="testimonials-carousel carousel slide">
+            <div class="carousel-inner">
+                <div class="carousel-item item active" style='min-height: 188px;'>
+                    <blockquote class="quote">
+                        <p>
+                            <i class="fas fa-quote-left"></i>{{ "I’m very happy interdum eget ipsum. Nunc pulvinar ut nulla eget sollicitudin. In hac habitasse platea dictumst. Duis luctus snfjdnsfjds" |truncate(179, '...')}}</p>
+                    </blockquote>
+                    <div class="source" style='padding-top: 4px;'>
+                        <p class="people"><span class="name">Marissa Spencerddsds</span><br /><span class="title">Directeur
+                                </span></p>
+                        <img class="profile" src="{{ 'assets/images/profile-1.png'|theme}}"
+                             alt="" style="border: 0px;right: 0px;" />
+                    </div>
+                </div>
+                <!--//item-->
+            </div>
+            <!--//carousel-inner-->
+        </div>
+        <!--//testimonials-carousel-->
+    </div>
+    <!--//section-content-->
+</a>";s:5:"mtime";i:1573909249;s:6:"markup";s:1813:"<a href="{{url('/mot-du-directeur')}}" class="testimonials link-mot-directeur" style="margin-bottom: 28px;margin-top: 28px" >
+    <h1 class="section-heading text-highlight" style="border-top: 2px solid #6091ba;"><span class="line"style="border-top: 0;"> Mot du directeur</span></h1>
+    <!--<div class="carousel-controls">
+          <a class="prev" href="#testimonials-carousel" data-slide="prev"><i class="fas fa-caret-left"></i></a>
+          <a class="next" href="#testimonials-carousel" data-slide="next"><i class="fas fa-caret-right"></i></a>
+      </div>-->
+    <!--//carousel-controls-->
+    <div class="section-content">
+        <div class="testimonials-carousel carousel slide">
+            <div class="carousel-inner">
+                <div class="carousel-item item active" style='min-height: 188px;'>
+                    <blockquote class="quote">
+                        <p>
+                            <i class="fas fa-quote-left"></i>{{ "I’m very happy interdum eget ipsum. Nunc pulvinar ut nulla eget sollicitudin. In hac habitasse platea dictumst. Duis luctus snfjdnsfjds" |truncate(179, '...')}}</p>
+                    </blockquote>
+                    <div class="source" style='padding-top: 4px;'>
+                        <p class="people"><span class="name">Marissa Spencerddsds</span><br /><span class="title">Directeur
+                                </span></p>
+                        <img class="profile" src="{{ 'assets/images/profile-1.png'|theme}}"
+                             alt="" style="border: 0px;right: 0px;" />
+                    </div>
+                </div>
+                <!--//item-->
+            </div>
+            <!--//carousel-inner-->
+        </div>
+        <!--//testimonials-carousel-->
+    </div>
+    <!--//section-content-->
+</a>";s:4:"code";N;s:7:"viewBag";a:0:{}}}
