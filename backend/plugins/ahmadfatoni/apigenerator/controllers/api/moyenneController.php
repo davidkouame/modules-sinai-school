@@ -63,7 +63,11 @@ class moyenneController extends Controller
                           ->select('*');
                 });
             }elseif($key == "search"){
-                $data = $data->where("reference", 'like', '%'.$value.'%');
+                $data = $data->where("reference", 'like', '%'.$value.'%')
+                ->orWhereHas('eleve', function ($query) use($value) {
+                    $query->where('name', $value)
+                          ->orWhere('surname', $value);
+                });
             }else{
                 $data = $data->where($key, $value);
             }
