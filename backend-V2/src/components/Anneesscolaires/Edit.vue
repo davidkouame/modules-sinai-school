@@ -56,14 +56,13 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label class="control-label">Date de validation</label>
-                      <!---->
                       <input
                         class="form-control"
                         type="date"
                         v-model="validated_at"
                         placeholder="Date de validation"
+                        disabled
                       />
-                      <!---->
                     </div>
                   </div>
                 </div>
@@ -105,7 +104,7 @@ export default {
   data() {
     return {
       title: "Modifier une année scolaire",
-      validated_at: "17/11/1973",
+      validated_at: "",
       valueDisabled: false,
       error: null
     };
@@ -151,6 +150,16 @@ export default {
     },
     anneescolaire() {
       return this.$store.getters.anneescolaire;
+    }
+  },
+  watch:{
+    anneescolaire() {
+      let validated_at = this.anneescolaire.validated_at.split(" ")[0];
+      // console.log("&&&&&&& "+validated_at);
+      this.validated_at = validated_at;
+      // validated_at = validated_at.split("/");
+      // this.validated_at = validated_at[2]+"-"+validated_at[1]+"-"+validated_at[0];
+      // this.validated_at = "2020-02-02";
     }
   }
 };

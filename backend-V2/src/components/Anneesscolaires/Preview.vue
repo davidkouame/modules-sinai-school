@@ -105,15 +105,15 @@ export default {
   },
   methods:{
     validateAnneeScolaire(){
-      var currentDate = new Date();
+      /*var currentDate = new Date();
       var currentDateWithFormat = new Date().toJSON().replace('T',' ').replace('Z', ' ');
       currentDateWithFormat.replace('Z', ' ');
       let data = {
         validated_at: currentDateWithFormat // new Date().toJSON(),
-      };
+      };*/
       let store = this.$store;
       store
-        .dispatch("updateModel", {"url": "anneesscolaires", "data": data, "id": this.$route.params.id})
+        .dispatch("validateModel", {"url": "anneesscolaires", "data": {}, "id": this.$route.params.id})
         .then(response => {
           alert("L'année scolaire a été validé avec succès !")
           this.$router.go(-1)

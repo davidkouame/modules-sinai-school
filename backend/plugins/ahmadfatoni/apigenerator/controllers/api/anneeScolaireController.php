@@ -103,6 +103,17 @@ class anneeScolaireController extends Controller
         }
     }
 
+    public function validate($id){
+        $anneescolaire = $this->AnneeScolaireModel->where('id',$id)->first();
+        $anneescolaire->validated_at = now();
+        $status = $anneescolaire->save();
+        if($status){
+            return $this->helpers->apiArrayResponseBuilder(200, 'success', 'Data has been updated successfully.');
+        }else{
+            return $this->helpers->apiArrayResponseBuilder(400, 'bad request', 'Error, data failed to update.');
+        }
+    }
+
     public function delete($id){
         $this->AnneeScolaireModel->where('id',$id)->delete();
         return $this->helpers->apiArrayResponseBuilder(200, 'success', 'Data has been deleted successfully.');

@@ -32,6 +32,7 @@ Route::put('api/v1/abonnements/update-with-eleves/{id}', 'AhmadFatoni\ApiGenerat
 Route::get('api/v1/abonnements/abonnements-eleves/{id}', 'AhmadFatoni\ApiGenerator\Controllers\API\AbonnementController@getElevesAbonnement');
 Route::get('api/v1/moyennes/generate-moyennes-matieres-sections/{id}', 'AhmadFatoni\ApiGenerator\Controllers\API\moyenneController@generateMoyenneMatiereForSection');
 Route::get('api/v1/moyennes/send-billan-periodique/{sectionAnneeScolaireId}', 'AhmadFatoni\ApiGenerator\Controllers\API\moyenneController@sendBillanPeriodique');
+Route::put('api/v1/anneesscolaires/validate/{id}', 'AhmadFatoni\ApiGenerator\Controllers\API\anneeScolaireController@validate');
 
 
 Route::get('test-code-source', function (){

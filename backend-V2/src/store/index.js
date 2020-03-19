@@ -512,6 +512,12 @@ export default new Vuex.Store({
         { headers: { 'Content-Type': 'application/json' }  }
       )
     },
+    validateModel(context, params){
+      return Axios.put(
+        context.state.endpoint + 'api/v1/'+params.url+'/validate/'+params.id, params.data,
+        { headers: { 'Content-Type': 'application/json' }  }
+      )
+    },
     getAllTypesAnneeScolaire(context, params) {
       let nameUrl = "typesanneescolaire"
       let url = getUrl(context, nameUrl, params)
