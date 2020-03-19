@@ -55,7 +55,6 @@ class noteController extends Controller
             'matiere'=>function($query){
                 $query->select('*');
             },
-
             'classe'=>function($query){
                 $query->with(array(
                     'eleves'=>function($q){
@@ -80,7 +79,8 @@ class noteController extends Controller
                     }
                 );
             }else if($key == "search"){
-                $data = $data->where("libelle", 'like', '%'.$value.'%');
+                $data = $data->where("libelle", 'like', '%'.$value.'%')
+                ->orWhere('created_at', 'like', '%'.$value.'%');
             } else{
                 $data = $data->where($key, $value);
             }
