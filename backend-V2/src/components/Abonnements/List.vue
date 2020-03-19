@@ -24,7 +24,7 @@
             <th scope="col">#</th>
             <th scope="col">Référence</th>
             <th scope="col">Parent</th>
-            <th scope="col">Année scolaire</th>
+            <!--<th scope="col">Année scolaire</th>-->
             <th scope="col">Date de création</th>
             <th scope="col">Actions</th>
           </tr>
@@ -34,7 +34,7 @@
             <th scope="row">{{ index + 1}}</th>
             <td>{{ abonnement.reference  }}</td>
             <td>{{ abonnement.parent ? abonnement.parent.name+' '+abonnement.parent.surname : '--' }}</td>
-            <td>{{ abonnement.anneescolaire ? abonnement.anneescolaire.libelle : '--' }}</td>
+            <!--<td>{{ abonnement.anneescolaire ? abonnement.anneescolaire.libelle : '--' }}</td>-->
             <td>{{ abonnement.created_at | formatDate }}</td>
             <td>
               <a :href="'#/abonnements/preview/'+abonnement.id" class="btn btn-icon btn-info btn-sm">

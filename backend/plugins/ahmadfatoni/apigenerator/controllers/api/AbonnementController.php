@@ -48,9 +48,13 @@ class AbonnementController extends Controller
             'anneescolaire'=>function($query){
                 $query->select('*');
             }, ));
-        if($request->has('search')){
-            $data = $data->where("reference", 'like', '%'.$request->get('search').'%');
-        }
+            if($request->has('search')){
+                $data = $data->where("reference", 'like', '%'.$request->get('search').'%')
+                ->orWhereHas('parent', function($queryEleve) use($request) {
+                    $queryEleve->where("name", 'like', '%'.$request->get('search').'%')
+                    ->orWhere("surname", 'like', '%'.$request->get('search').'%');
+                });
+            }
             if($request->has('page') && $request->get('page') == 0){
                 $data = $data->get()->toArray();
             }else{
