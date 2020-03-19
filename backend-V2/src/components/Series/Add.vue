@@ -60,7 +60,7 @@ export default {
       store
         .dispatch("saveModel", {"url": "series", "data": data})
         .then(response => {
-          alert("L'enregistrement a été succès")
+          alert("L'enregistrement a été éffectué avec succès")
           this.$router.go(-1)
         })
         .catch(error => {

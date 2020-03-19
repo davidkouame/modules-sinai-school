@@ -90,7 +90,7 @@ export default {
       store
         .dispatch("updateModel", {"url": "classesprofesseursmatieres", "data": data, "id": this.$route.params.id})
         .then(response => {
-          alert("L'enregistrement a été succès")
+          alert("L'enregistrement a été éffectué avec succès")
           this.$router.go(-1)
         })
         .catch(error => {
