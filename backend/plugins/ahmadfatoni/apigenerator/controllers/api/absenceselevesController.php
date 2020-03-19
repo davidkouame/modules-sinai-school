@@ -70,8 +70,10 @@ class absenceselevesController extends Controller
                         ->orWhereDate("heure_fin_cours", "=", $newdate);
                 } else {
                         $data = $data->whereHas('raisonabsence', function($queryRaisonAbsence) use($request) {
-                            // $queryRaisonAbsence->where("libelle", "=", trim($request->get('search')));
                             $queryRaisonAbsence->where("libelle", 'like', '%'.$request->get('search').'%');
+                        })->orWhereHas('eleve', function($queryEleve) use($request) {
+                            $queryEleve->where("name", 'like', '%'.$request->get('search').'%')
+                            ->orWhere("surname", 'like', '%'.$request->get('search').'%');
                         });
                 }
                 // $data = $data->whereHas('eleve', function ($query) use($request, $key) {
