@@ -34,7 +34,7 @@ use \October\Rain\Database\Traits\SoftDelete;
         "eleve" => ["BootnetCrasher\School\Models\EleveModel", "key" => "eleve_id", "otherKey" => "id"],
     ];
 
-    public function afterCreate() {
+    /*public function afterCreate() {
         $sms = new Sms;
         $eleve = EleveModel::find($this->eleve_id);
         if ($eleve && Abonnement::hasAbonnement($eleve)) {
@@ -49,6 +49,6 @@ use \October\Rain\Database\Traits\SoftDelete;
                 $sms->sendQueue($parent->tel, $body, $parent);
             }
         }
-    }
+    }*/
 
 }
