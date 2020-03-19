@@ -11,7 +11,7 @@
 				<!---->
 			</div>
         </div>
-		<a @click="generateBilanAndSend" class="btn btn-primary">Générer bilan & envoyer </a> &nbsp;
+		<a @click="generateBilanAndSend" class="btn btn-primary">Générer bilan & Enregistrer </a> &nbsp;
 		<button @click="generateBillanPeriodique" class="btn btn-primary" :disabled="valueDisabled">Send billan périodique <div v-bind:class="{'spinner-border-customize': valueDisabled}"></div></button>
 		<hr>
 		<h2>Sms</h2>

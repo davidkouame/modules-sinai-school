@@ -99,7 +99,7 @@
                   type="submit"
                   class="btn btn-primary"
                   :disabled="valueDisabled"
-                >Envoyer</button>
+                >Enregistrer</button>
               </div>
             </div>
           </div>
