@@ -53,7 +53,7 @@
                   @close="showModal = false"
                   v-bind:modelid="matiereId"
                   modelname="matiere"
-                  textBody="Voulez vous supprimez cette matiere ?"
+                  textBody="Voulez vous supprimez cette matière ?"
                   nameUrl="matieres"
                 ></modal>
       
