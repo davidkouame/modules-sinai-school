@@ -59,6 +59,7 @@
                         type="date"
                         v-model="validated_at"
                         placeholder="Date de validation"
+                        disabled
                       />
                       <!---->
                     </div>
@@ -114,7 +115,7 @@ export default {
   data() {
     return {
       title: "Modifier une section année scolaire",
-      validated_at: "17/11/1973",
+      validated_at: "",
       valueDisabled: false,
       error: null
     };
@@ -160,6 +161,12 @@ export default {
     },
     anneesscolaires(){
       return this.$store.getters.anneesscolaires
+    }
+  },
+  watch:{
+    sectionanneescolaire() {
+      let validated_at = this.sectionanneescolaire.validated_at.split(" ")[0];
+      this.validated_at = validated_at;
     }
   }
 };

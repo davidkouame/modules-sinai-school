@@ -103,6 +103,17 @@ class sectionAnneeScolaireController extends Controller
         }
     }
 
+    public function validate($id){
+        $section = $this->SectionAnneeScolaireModel->where('id',$id)->first();
+        $section->validated_at = now();
+        $status = $section->save();
+        if($status){
+            return $this->helpers->apiArrayResponseBuilder(200, 'success', 'Data has been updated successfully.');
+        }else{
+            return $this->helpers->apiArrayResponseBuilder(400, 'bad request', 'Error, data failed to update.');
+        }
+    }
+
     public function delete($id){
 
         $this->SectionAnneeScolaireModel->where('id',$id)->delete();

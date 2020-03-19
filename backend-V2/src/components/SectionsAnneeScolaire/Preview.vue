@@ -89,7 +89,8 @@
                 </div>
                 <div class="clearfix"></div>
 
-                <a @click="validateSection" class="btn btn-primary float-right" style="background: #EE2D20;color: #fff;opacity: 1;">Valider la section</a>
+                <a @click="validateSection" class="btn btn-primary float-right" v-if="!sectionanneescolaire.validated_at">Valider la section</a>
+                <a href="javascript:void(0)" class="btn btn-primary float-right" v-if="sectionanneescolaire.validated_at" disabled>Valider la section</a>
 
                 <!--<a @click="generateMoyenne" class="btn btn-primary float-right" style="background: #EE2D20;color: #fff;opacity: 1;">Générer la moyenne</a>-->
 
@@ -122,17 +123,17 @@ export default {
       alert("la moyenne a été généré avec succes ")
     },
     validateSection(){
-      var currentDate = new Date();
+      /*var currentDate = new Date();
       console.log(currentDate);
       var currentDateWithFormat = new Date().toJSON().replace('T',' ').replace('Z', ' ');
       currentDateWithFormat.replace('Z', ' ');
       // console.log(currentDateWithFormat);
       let data = {
         validated_at: currentDateWithFormat // new Date().toJSON(),
-      };
+      };*/
       let store = this.$store;
       store
-        .dispatch("updateModel", {"url": "sectionsanneescolaire", "data": data, "id": this.$route.params.id})
+        .dispatch("validateModel", {"url": "sectionsanneescolaire", "data": {}, "id": this.$route.params.id})
         .then(response => {
           alert("La section a été validé avec succès !")
           this.$router.go(-1)

@@ -78,7 +78,8 @@
                 <div class="float-right">
                   <a href="#/annees-scolaires" class="btn btn-danger">Retour</a>
                   &nbsp;
-                  <a @click="validateAnneeScolaire" class="btn btn-primary">Valider l'année scolaire</a>
+                  <a @click="validateAnneeScolaire" class="btn btn-primary" v-if="!anneescolaire.validated_at">Valider l'année scolaire</a>
+                  <a href="javascript:void(0)" class="btn btn-primary" disabled v-else>Valider l'année scolaire</a>
                 </div>
               </form>
         </div>
