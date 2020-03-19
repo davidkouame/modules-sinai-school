@@ -39,6 +39,9 @@ class moyenneController extends Controller
             },
             'anneescolaire' => function($query){
                 $query->select('*');
+            },
+            'typemoyenne' => function($query){
+                $query->select('*');
             }
         ));
         foreach($request->except('page', 'classe_id') as $key => $value){

@@ -24,6 +24,8 @@
             <th scope="col">#</th>
             <th scope="col">Référence</th>
             <th scope="col">Elève</th>
+            <th scope="col">Type de moyenne</th>
+            <th scope="col">Valeur</th>
             <th scope="col">Actions</th>
           </tr>
         </thead>
@@ -31,6 +33,10 @@
           <tr v-if="moyennes" v-for="(moyenne, index) in moyennes">
             <th scope="row">{{ index + 1}}</th>
             <td>{{ moyenne.reference }}</td>
+            <td v-if="moyenne && moyenne.eleve">{{ moyenne.eleve.name }} {{ moyenne.eleve.surname }}</td>
+            <td v-else></td>
+            <td v-if="moyenne && moyenne.typemoyenne">{{ moyenne.typemoyenne.libelle }}</td>
+            <td v-else></td>
             <td>{{ moyenne.valeur }}</td>
             <td>
               <a :href="'#/moyennes/preview/'+moyenne.id" class="btn btn-icon btn-info btn-sm">
