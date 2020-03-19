@@ -95,7 +95,7 @@ class noteController extends Controller
         //}
         // dd($data->get());
         
-        $data = $data->paginate(10)->toArray();
+        $data = $data->orderBy('created_at', 'desc')->paginate(10)->toArray();
         return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
     }
     

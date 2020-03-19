@@ -63,11 +63,11 @@ class classeProfesseurMatiereController extends Controller
             }
         }
         if($searchProfesseur){
-            $data = $data->get()->unique('classe_id')->toArray();
+            $data = $data->orderBy('created_at', 'desc')->get()->unique('classe_id')->toArray();
         }elseif($searchEleve){
-            $data = $data->get()->unique('matiere_id')->toArray();
+            $data = $data->orderBy('created_at', 'desc')->get()->unique('matiere_id')->toArray();
         }else{
-            $data = $data->get()->toArray();
+            $data = $data->orderBy('created_at', 'desc')->get()->toArray();
         }
         return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
     }

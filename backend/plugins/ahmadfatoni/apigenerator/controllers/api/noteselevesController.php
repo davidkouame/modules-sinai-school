@@ -35,7 +35,7 @@ class noteselevesController extends Controller
                 $query->where($key, $data);
             } 
         }
-        $data = $query->paginate(10)->toArray();
+        $data = $query->orderBy('created_at', 'desc')->paginate(10)->toArray();
         return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
     }
     

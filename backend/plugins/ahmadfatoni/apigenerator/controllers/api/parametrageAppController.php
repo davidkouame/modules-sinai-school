@@ -22,7 +22,7 @@ class parametrageAppController extends Controller
 
     public function index(){
 
-        $data = $this->ParametrageAppModel->all()->toArray();
+        $data = $this->ParametrageAppModel->orderBy('created_at', 'desc')->all()->toArray();
 
         return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
     }

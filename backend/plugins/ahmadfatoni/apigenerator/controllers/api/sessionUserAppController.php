@@ -33,9 +33,9 @@ class sessionUserAppController extends Controller
             
         foreach($request->except(['page']) as $key => $value){
             if($key == "libelle"){
-                $data = $data->where($key, 'like', '%'.$value.'%');
+                $data = $data->orderBy('created_at', 'desc')->where($key, 'like', '%'.$value.'%');
             }else{
-                $data = $data->where($key, $value);
+                $data = $data->orderBy('created_at', 'desc')->where($key, $value);
             }
         }
         

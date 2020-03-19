@@ -26,7 +26,7 @@ class userController extends Controller
         $data = $this->User->with(array(
             'users'=>function($query){
                 $query->select('*');
-            }, ))->select('*')->get()->toArray();
+            }, ))->orderBy('created_at', 'desc')->select('*')->get()->toArray();
         return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
     }
 

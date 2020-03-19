@@ -80,9 +80,9 @@ class moyenneController extends Controller
             });
         }
         if($request->has('page') && $request->get('page') == 0){
-            $data = $data->get()->toArray();
+            $data = $data->orderBy('created_at', 'desc')->get()->toArray();
         }else{
-            $data = $data->paginate(10)->toArray();
+            $data = $data->orderBy('created_at', 'desc')->paginate(10)->toArray();
         }
         return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
     }

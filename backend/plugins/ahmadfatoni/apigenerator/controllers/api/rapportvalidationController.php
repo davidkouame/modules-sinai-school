@@ -25,7 +25,7 @@ class rapportvalidationController extends Controller
 
     public function index(){
 
-        $data = $this->RapportValidationModel->all()->toArray();
+        $data = $this->RapportValidationModel->orderBy('created_at', 'desc')->all()->toArray();
 
         return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
     }

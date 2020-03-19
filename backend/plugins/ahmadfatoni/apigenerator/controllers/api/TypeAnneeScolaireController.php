@@ -30,9 +30,9 @@ class TypeAnneeScolaireController extends Controller
 
     public function index(Request $request){
         if($request->has('page') && $request->get('page') == 0)
-            $data = $this->TypeAnneeScolaireModel->get()->toArray();
+            $data = $this->TypeAnneeScolaireModel->orderBy('created_at', 'desc')->get()->toArray();
         else
-            $data = $this->TypeAnneeScolaireModel->paginate(10)->toArray();
+            $data = $this->TypeAnneeScolaireModel->orderBy('created_at', 'desc')->paginate(10)->toArray();
         return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
     }
 
