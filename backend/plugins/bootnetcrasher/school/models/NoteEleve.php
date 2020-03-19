@@ -63,7 +63,7 @@ class NoteEleve extends Model {
         }
     }
     
-    public function afterUpdate(){
+    /*public function afterUpdate(){
         try{
             if($this->valeur){
                 $sms = new Sms;
@@ -82,7 +82,7 @@ class NoteEleve extends Model {
         }catch(\Exception $e){
             trace_log("message : ".$e->getMessage().", trace :".$e->getTrace());
         }
-    }
+    }*/
 
 
     /*public function afterUpdate(){
