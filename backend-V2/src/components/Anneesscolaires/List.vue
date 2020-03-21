@@ -26,7 +26,7 @@
         </thead>
         <tbody>
           <tr v-if="anneesscolaires" v-for="(anneescolaire, index) in anneesscolaires">
-            <th scope="row">{{ index + 1}}</th>
+            <th scope="row">{{ indexPagnation + index + 1}}</th>
             <td>{{ anneescolaire.libelle}}</td>
             <td>{{ anneescolaire.start}}</td>
             <td>{{ anneescolaire.end }}</td>
@@ -83,7 +83,8 @@ export default {
       title: "Liste des années scolaires",
       showModal: false,
       anneeScolaireId: null,
-      search: null
+      search: null,
+      indexPagnation: 0
     };
   },
   created(){
@@ -135,6 +136,11 @@ export default {
     },
     showEmptySentenceAnneeScolaire(){
       return  this.notEmptyObject(this.anneesscolaires) == 0
+    }
+  },
+  watch:{
+    currentPage(){
+      this.indexPagnation = (this.currentPage-1) * 10;
     }
   }
 };

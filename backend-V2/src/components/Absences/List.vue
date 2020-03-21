@@ -31,7 +31,7 @@
         </thead>
         <tbody>
           <tr v-if="absences" v-for="(absence, index) in absences">
-            <th scope="row">{{ index + 1}}</th>
+            <th scope="row">{{ indexPagnation + index + 1}}</th>
             <td>{{ getDate(absence.heure_debut_cours)|formatDate }}</td>
             <td>{{ getTime(absence.heure_debut_cours) }}</td>
             <td>{{ getTime(absence.heure_fin_cours) }}</td>
@@ -89,7 +89,8 @@ export default {
       title: "Liste des absences",
       showModal: false,
       absenceId: null,
-      search: null
+      search: null,
+      indexPagnation: 0
     };
   },
   created(){
@@ -145,6 +146,11 @@ export default {
     },
     showEmptySentenceAbsence(){
       return  this.notEmptyObject(this.absences) == 0
+    }
+  },
+  watch:{
+    currentPage(){
+      this.indexPagnation = (this.currentPage-1) * 10;
     }
   }
 };

@@ -30,7 +30,7 @@
         </thead>
         <tbody>
           <tr v-if="classes" v-for="(classe, index) in classes">
-            <th scope="row">{{ index + 1}}</th>
+            <th scope="row">{{ indexPagnation + index + 1}}</th>
             <td>{{ classe.reference}}</td>
             <td>{{ classe.libelle}}</td>
             <td>{{ classe.niveau ? classe.niveau.libelle : ''}}</td>
@@ -87,7 +87,8 @@ export default {
       title: "Liste des classes",
       showModal: false,
       classeId: null,
-      search: null
+      search: null,
+      indexPagnation: 0
     };
   },
   created(){
@@ -136,6 +137,11 @@ export default {
     },
     showEmptySentenceClasse(){
       return  this.notEmptyObject(this.classes) == 0
+    }
+  },
+  watch:{
+    currentPage(){
+      this.indexPagnation = (this.currentPage-1) * 10;
     }
   }
 };

@@ -1,6 +1,9 @@
 <template>
   <card class="card" :title="title">
       <div class="row">
+        <div v-if="error" class="col-md-12">
+          <message-error v-bind:error="error"></message-error>
+        </div>
         <div class="col-md-12">
           <form v-on:submit="saveMatiere">
             <div class="row">
@@ -77,6 +80,7 @@ export default {
   methods:{
     saveMatiere(){
       this.valueDisabled = true;
+      this.error = null;
       let data = {
         matiere_id: this.classematiereprofesseur.matiere_id,
         professeur_id: this.classematiereprofesseur.professeur_id,
@@ -93,7 +97,8 @@ export default {
         })
         .catch(error => {
           console.log(error);
-          alert("echec lors de l'enregistrement")
+          // alert("echec lors de l'enregistrement")
+          this.error = error;
           this.errored = true;
           this.valueDisabled = false;
         })

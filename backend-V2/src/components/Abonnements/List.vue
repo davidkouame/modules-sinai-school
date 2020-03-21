@@ -31,11 +31,12 @@
         </thead>
         <tbody>
           <tr v-if="abonnements" v-for="(abonnement, index) in abonnements">
-            <th scope="row">{{ index + 1}}</th>
+            <th scope="row">{{ indexPagnation + index + 1}}</th>
             <td>{{ abonnement.reference  }}</td>
             <td>{{ abonnement.parent ? abonnement.parent.name+' '+abonnement.parent.surname : '--' }}</td>
             <!--<td>{{ abonnement.anneescolaire ? abonnement.anneescolaire.libelle : '--' }}</td>-->
-            <td>{{ abonnement.created_at | formatDate }}</td>
+            <!--<td>{{ abonnement.created_at | formatDate }}</td>-->
+            <td>{{ abonnement.created_at }}</td>
             <td>
               <a :href="'#/abonnements/preview/'+abonnement.id" class="btn btn-icon btn-info btn-sm">
                 <!----><i class="fa fa-user"></i><!---->
@@ -89,7 +90,8 @@ export default {
       title: "Liste des abonnements",
       showModal: false,
       abonnementId: null,
-      search: null
+      search: null,
+      indexPagnation: 0
     };
   },
   created(){
@@ -138,6 +140,11 @@ export default {
     },
     showEmptySentenceAbonnement(){
       return  this.notEmptyObject(this.abonnements) == 0
+    }
+  },
+  watch:{
+    currentPage(){
+      this.indexPagnation = (this.currentPage-1) * 10;
     }
   }
 };

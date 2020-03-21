@@ -24,7 +24,7 @@
                       <input
                         class="form-control"
                         type="text"
-                        v-bind:value="moyenne.matiere.libelle? moyenne.matiere.libelle+' '+moyenne.matiere.libelle : ''"
+                        v-bind:value="moyenne.matiere && moyenne.matiere.libelle? moyenne.matiere.libelle+' '+moyenne.matiere.libelle : ''"
                         disabled
                       />
                       <!---->

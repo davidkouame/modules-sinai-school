@@ -29,7 +29,7 @@
         </thead>
         <tbody>
           <tr v-if="notes" v-for="(note, index) in notes">
-            <th scope="row">{{ index + 1}}</th>
+            <th scope="row">{{ indexPagnation + index + 1}}</th>
             <td>{{ note.reference}}</td>
             <td>{{ note.libelle | truncate('20')}}</td>
             <td>{{ note.typenote.libelle}}</td>
@@ -87,7 +87,8 @@ export default {
       title: "Liste des notes",
       showModal: false,
       noteId: null,
-      search: null
+      search: null,
+      indexPagnation: 0
     };
   },
   created(){
@@ -136,6 +137,11 @@ export default {
     },
     showEmptySentenceNote(){
       return  this.notEmptyObject(this.notes) == 0
+    }
+  },
+  watch:{
+    currentPage(){
+      this.indexPagnation = (this.currentPage-1) * 10;
     }
   }
 };
