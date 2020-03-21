@@ -31,7 +31,7 @@
         </thead>
         <tbody>
           <tr v-if="professeurs" v-for="(professeur, index) in professeurs">
-            <th scope="row">{{ index + 1}}</th>
+            <th scope="row">{{ indexPagnation + index + 1}}</th>
             <td>{{ professeur.reference}}</td>
             <td>{{ professeur.nom}}</td>
             <td>{{ professeur.prenom}}</td>
@@ -89,7 +89,8 @@ export default {
       title: "Liste des professeurs",
       showModal: false,
       professeurId: null,
-      search: null
+      search: null,
+      indexPagnation: 0
     };
   },
   created(){
@@ -138,6 +139,11 @@ export default {
     },
     showEmptySentenceProfesseur(){
       return  this.notEmptyObject(this.professeurs) == 0
+    }
+  },
+  watch:{
+    currentPage(){
+      this.indexPagnation = (this.currentPage-1) * 10;
     }
   }
 };

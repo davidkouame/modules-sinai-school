@@ -29,7 +29,7 @@
         </thead>
         <tbody>
           <tr v-if="matieres" v-for="(matiere, index) in matieres">
-            <th scope="row">{{ index + 1}}</th>
+            <th scope="row">{{ indexPagnation + index + 1}}</th>
             <td>{{ matiere.libelle}}</td>
             <td>{{ matiere.typematiere.libelle}}</td>
             <td>
@@ -85,7 +85,8 @@ export default {
       title: "Liste des matières",
       showModal: false,
       matiereId: null,
-      search: null
+      search: null,
+      indexPagnation: 0
     };
   },
   created(){
@@ -134,6 +135,11 @@ export default {
     },
     showEmptySentenceMatiere(){
       return  this.notEmptyObject(this.matieres) == 0
+    }
+  },
+  watch:{
+    currentPage(){
+      this.indexPagnation = (this.currentPage-1) * 10;
     }
   }
 };

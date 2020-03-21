@@ -30,7 +30,7 @@ class TypeMatiereController extends Controller
 
     public function index(){
 
-        $data = $this->TypeMatiere->orderBy('created_at', 'desc')->all()->toArray();
+        $data = $this->TypeMatiere->orderBy('created_at', 'desc')->get()->toArray();
 
         return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
     }

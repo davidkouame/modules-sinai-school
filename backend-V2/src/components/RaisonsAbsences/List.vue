@@ -59,7 +59,7 @@
                   <div class="col-md-4" style="color: #98a7a8;font-size: 13px;">
                     Enregistrements affichés : {{ currentPage }}-{{ countPage }} sur {{ totalElement }}
                   </div>
-                  <div class="col-md-8">
+                  <!--<div class="col-md-8">
                     <div class="float-right pagi">
                       <paginate
                         :page-count="pageCount"
@@ -70,7 +70,7 @@
                         :page-class="'page-item'"
                       ></paginate>
                     </div>
-                  </div>
+                  </div>-->
                 </div>
 
     </div>

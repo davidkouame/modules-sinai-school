@@ -30,7 +30,7 @@
         </thead>
         <tbody>
           <tr v-if="eleves" v-for="(eleve, index) in eleves">
-            <th scope="row">{{ index + 1}}</th>
+            <th scope="row">{{ indexPagnation + index + 1}}</th>
             <td>{{ eleve.matricule}}</td>
             <td>{{ eleve.name}}</td>
             <td>{{ eleve.surname}}</td>
@@ -87,7 +87,8 @@ export default {
       title: "Liste des élèves",
       showModal: false,
       eleveId: null,
-      search: null
+      search: null,
+      indexPagnation: 0
     };
   },
   created(){
@@ -136,6 +137,11 @@ export default {
     },
     showEmptySentenceEleve(){
       return  this.notEmptyObject(this.eleves) == 0
+    }
+  },
+  watch:{
+    currentPage(){
+      this.indexPagnation = (this.currentPage-1) * 10;
     }
   }
 };

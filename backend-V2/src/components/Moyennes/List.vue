@@ -31,7 +31,7 @@
         </thead>
         <tbody>
           <tr v-if="moyennes" v-for="(moyenne, index) in moyennes">
-            <th scope="row">{{ index + 1}}</th>
+            <th scope="row">{{ indexPagnation + index + 1}}</th>
             <td>{{ moyenne.reference }}</td>
             <td v-if="moyenne && moyenne.eleve">{{ moyenne.eleve.name }} {{ moyenne.eleve.surname }}</td>
             <td v-else></td>
@@ -91,7 +91,8 @@ export default {
       title: "Liste des moyennes",
       showModal: false,
       moyenneId: null,
-      search: null
+      search: null,
+      indexPagnation: 0
     };
   },
   created(){
@@ -147,6 +148,11 @@ export default {
     },
     showEmptySentenceMoyenne(){
       return  this.notEmptyObject(this.moyennes) == 0
+    }
+  },
+  watch:{
+    currentPage(){
+      this.indexPagnation = (this.currentPage-1) * 10;
     }
   }
 };

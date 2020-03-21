@@ -30,7 +30,7 @@
         </thead>
         <tbody>
           <tr v-if="sectionsanneescolaire" v-for="(sectionanneescolaire, index) in sectionsanneescolaire">
-            <th scope="row">{{ index + 1}}</th>
+            <th scope="row">{{ indexPagnation + index + 1}}</th>
             <td>{{ sectionanneescolaire.libelle}}</td>
             <td>{{ sectionanneescolaire.start}}</td>
             <td>{{ sectionanneescolaire.end }}</td>
@@ -87,7 +87,8 @@ export default {
       title: "Liste des sections année scolaire",
       showModal: false,
       sectionAnneeScolaireId: null,
-      search: null
+      search: null,
+      indexPagnation: 0
     };
   },
   created(){
@@ -136,6 +137,11 @@ export default {
     },
     showEmptySentenceSectionAnneeScolaire(){
       return  this.notEmptyObject(this.sectionsanneescolaire) == 0
+    }
+  },
+  watch:{
+    currentPage(){
+      this.indexPagnation = (this.currentPage-1) * 10;
     }
   }
 };

@@ -30,7 +30,7 @@
         </thead>
         <tbody>
           <tr v-if="parents" v-for="(parent, index) in parents">
-            <th scope="row">{{ index + 1}}</th>
+            <th scope="row">{{ indexPagnation + index + 1}}</th>
             <td>{{ parent.matricule}}</td>
             <td>{{ parent.name}}</td>
             <td>{{ parent.surname}}</td>
@@ -87,7 +87,8 @@ export default {
       title: "Liste des parents",
       showModal: false,
       parentId: null,
-      search: null
+      search: null,
+      indexPagnation: 0
     };
   },
   created(){
@@ -137,6 +138,11 @@ export default {
     },
     showEmptySentenceParent(){
       return  this.notEmptyObject(this.parents) == 0
+    }
+  },
+  watch:{
+    currentPage(){
+      this.indexPagnation = (this.currentPage-1) * 10;
     }
   }
 };

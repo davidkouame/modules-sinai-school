@@ -54,7 +54,8 @@ class AbonnementModel extends Model
             $sms->sendParentForAbonnementQueue($this->parent, $body, $abonnement);
             trace_log("Envoi de sms au parent lors de la création d'un abonnement ");
         }catch (\Exception $ex){
-             trace_log("message : ".$ex->getMessage().", trace log".$ex->getTrace());
+            // trace_log("message : ".$ex->getMessage().", trace log".$ex->getTrace());
+            trace_log("message : ".$ex->getMessage());
         }
     }
 

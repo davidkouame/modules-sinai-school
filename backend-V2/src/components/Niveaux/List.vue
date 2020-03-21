@@ -25,7 +25,7 @@
         </thead>
         <tbody>
           <tr v-if="niveaux" v-for="(matiere, index) in niveaux">
-            <th scope="row">{{ index + 1}}</th>
+            <th scope="row">{{ indexPagnation + index + 1}}</th>
             <td>{{ matiere.libelle}}</td>
             <!--<td>{{ matiere.ordre}}</td>-->
             <td>
@@ -81,7 +81,8 @@ export default {
       title: "Liste des niveaux",
       showModal: false,
       niveauId: null,
-      search: null
+      search: null,
+      indexPagnation: 0
     };
   },
   created(){
@@ -130,6 +131,11 @@ export default {
     },
     showEmptySentenceNiveau(){
       return  this.notEmptyObject(this.niveaux) == 0
+    }
+  },
+  watch:{
+    currentPage(){
+      this.indexPagnation = (this.currentPage-1) * 10;
     }
   }
 };

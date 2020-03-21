@@ -28,7 +28,7 @@
         </thead>
         <tbody>
           <tr v-if="series" v-for="(serie, index) in series">
-            <th scope="row">{{ index + 1}}</th>
+            <th scope="row">{{ indexPagnation + index + 1}}</th>
             <td>{{ serie.libelle}}</td>
             <td>
               <a :href="'#/series/preview/'+serie.id" class="btn btn-icon btn-info btn-sm">
@@ -83,7 +83,8 @@ export default {
       title: "Liste des series",
       showModal: false,
       serieId: null,
-      search: null
+      search: null,
+      indexPagnation: 0
     };
   },
   created(){
@@ -132,6 +133,11 @@ export default {
     },
     showEmptySentenceSerie(){
       return  this.notEmptyObject(this.series) == 0
+    }
+  },
+  watch:{
+    currentPage(){
+      this.indexPagnation = (this.currentPage-1) * 10;
     }
   }
 };
