@@ -176,7 +176,7 @@ class CalculMoyenne {
         $moyenneModelAnnuelle = MoyenneModel::where('eleve_id', $eleveId)->
         where('type_moyenne_id', $typeMoyenneId)->where('classe_id', $classeId)->first();
         if($moyenneModelAnnuelle){
-            $$moyenneModelAnnuelle->valeur = $valeur;
+            $moyenneModelAnnuelle->valeur = $valeur;
         }else{
             $moyenneModelAnnuelle = new MoyenneModel;
             $moyenneModelAnnuelle->valeur = $valeur;
