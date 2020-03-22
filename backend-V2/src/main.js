@@ -27,6 +27,7 @@ import Login from './components/Login.vue'
 
 
 
+
 import VueCookies from 'vue-cookies'
 Vue.use(VueCookies)
 
@@ -40,6 +41,7 @@ Vue.$cookies.set('hover-time','1s');
 
 import VueSidebarMenu from 'vue-sidebar-menu'
 import 'vue-sidebar-menu/dist/vue-sidebar-menu.css'
+import './assets/css/home.css'
 Vue.use(VueSidebarMenu)
 
 
