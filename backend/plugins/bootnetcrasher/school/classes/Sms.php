@@ -64,7 +64,7 @@ class Sms{
                     "sendertelname" => $this->getIndicateur($parent).$tel
                 ]);
             }
-            $this->logSms($tel, $parent, null, $body);
+            $this->logSms($tel, $parent, $eleve, $body);
         } catch (Exception $ex) {
             trace_log("message : ".$ex->getMessage());
         }

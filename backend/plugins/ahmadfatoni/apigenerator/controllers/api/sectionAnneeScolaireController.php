@@ -93,7 +93,6 @@ class sectionAnneeScolaireController extends Controller
             $section = $this->hydrate($section, $request);
             $status = $section->save();
             if( $status ){
-                trace_log("mise à jour de la section annnee scolaire ");
                 return $this->helpers->apiArrayResponseBuilder(200, 'success', 'Data has been updated successfully.');
             }else{
                 return $this->helpers->apiArrayResponseBuilder(400, 'bad request', 'Error, data failed to update.');
