@@ -23,14 +23,14 @@
             <a class="dropdown-item" href="#">Notification 4</a>
             <a class="dropdown-item" href="#">Another notification</a>
           </drop-down>-->
-          <li class="nav-item">
+          <!--<li class="nav-item">
             <a href="#/settings" class="nav-link">
               <i class="ti-settings"></i>
               <p>
                 Paramètre
               </p>
             </a>
-          </li>
+          </li>-->
           <li class="nav-item">
             <a @click="logout" class="btn btn-primary nav-link">
               Déconnexion
