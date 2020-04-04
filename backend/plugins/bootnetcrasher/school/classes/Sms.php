@@ -12,7 +12,8 @@ use BootnetCrasher\School\Models\AbonnementModel;
 use Bootnetcrasher\School\Jobs\SendSmsJob;
 use BootnetCrasher\School\Models\ParametrageAppModel;
 use Queue;
-
+use BootnetCrasher\School\Models\SmsSchoolModel;
+use BootnetCrasher\School\Models\AbonnementEleveModel;
 class Sms{
 
     private $sendername = "Ayauka";
@@ -37,9 +38,10 @@ class Sms{
         @BootnetCrasher\School\Models\EleveModel $eleve User
         @String $body Message sms
     */
-    public function send(String $tel, String $body, Parentmodel $parent = null, EleveModel $eleve = null){
+    public function send(String $tel, String $body, Parentmodel $parent = null, 
+    EleveModel $eleve = null, Abonnement $abonnement){
         try{
-            $this->sendWithoutLog($this->getIndicateur($parent).$tel, $body);
+            $this->sendWithoutLog($this->getIndicateur($parent).$tel, $body, $abonnement);
             $this->logSms($tel, $parent, $eleve, $body);
         } catch (Exception $ex) {
             trace_log("message : ".$ex->getMessage());
@@ -53,7 +55,8 @@ class Sms{
         @BootnetCrasher\School\Models\EleveModel $eleve User
         @String $body Message sms
     */
-    public function sendQueue(String $tel, String $body, Parentmodel $parent = null, EleveModel $eleve = null){
+    public function sendQueue(String $tel, String $body, Parentmodel $parent = null, 
+    EleveModel $eleve = null, AbonnementModel $abonnement){
         try{
             if($this->isSendSms){
                 Queue::push(SendSmsJob::class, 
@@ -61,7 +64,8 @@ class Sms{
                     "code" => $this->code, 
                     "message" => $body, 
                     "sendername" => $this->sendername, 
-                    "sendertelname" => $this->getIndicateur($parent).$tel
+                    "sendertelname" => $this->getIndicateur($parent).$tel,
+                    "abonnementId" => $abonnement->id
                 ]);
             }
             $this->logSms($tel, $parent, $eleve, $body);
@@ -76,7 +80,8 @@ class Sms{
         @BootnetCrasher\School\Models\ParentModel $parent Parent user
         @String $body Message sms
     */
-    public function sendParamsUserConnexionQueue(String $tel, String $body, Parentmodel $parent = null){
+    public function sendParamsUserConnexionQueue(String $tel, String $body, Parentmodel $parent = null, 
+    AbonnementModel $abonnement){
         try{
             if($this->isSendSms){
                 Queue::push(SendSmsJob::class, 
@@ -84,7 +89,8 @@ class Sms{
                     "code" => $this->code, 
                     "message" => $body, 
                     "sendername" => $this->sendername, 
-                    "sendertelname" => $this->getIndicateur($parent).$tel
+                    "sendertelname" => $this->getIndicateur($parent).$tel,
+                    "abonnementId" => $abonnement->id
                 ]);
             }
             $this->logSms($tel, $parent, null, $body);
@@ -93,11 +99,14 @@ class Sms{
         }
     }
 
-    public function sendWithoutLog($tel, $message){
+    public function sendWithoutLog($tel, $message, $abonnement){
         try{
-            if($this->isSendSms)
+            if($this->isModuleSmsAppEnable() && $this->isModuleSmsEcoleEnable($abonnement) && $this->isModuleSmsAbonnementEnable($abonnement)){
                 $this->sendsms_api->sendSms($this->code, $message, $this->sendername, $tel);
-            trace_log("sms envoyé ");
+                $this->reduceSmsModuleEcole($abonnement);
+                $this->reduceSmsModuleAbonnement($abonnement);
+                trace_log("sms envoyé ");
+            }
         }catch(\Exception $ex){
             trace_log("message : ".$ex->getMessage());
             trace_log("Sms non envoyé ");
@@ -121,7 +130,7 @@ class Sms{
     */
     public function sendParentForAbonnement($parent, $body, $abonnement){
         try{
-            $this->sendWithoutLog($this->getIndicateur($parent).$parent->tel, $body);
+            $this->sendWithoutLog($this->getIndicateur($parent).$parent->tel, $body, $abonnement);
             $this->logSms($parent->tel, $parent, null, $body, $abonnement);
         } catch (Exception $ex) {
             trace_log("message : ".$ex->getMessage());
@@ -143,7 +152,8 @@ class Sms{
                     "code" => $this->code, 
                     "message" => $body, 
                     "sendername" => $this->sendername, 
-                    "sendertelname" => $this->getIndicateur($parent).$parent->tel
+                    "sendertelname" => $this->getIndicateur($parent).$parent->tel,
+                    "abonnementId" => $abonnement->id
                 ]);
             }
             $this->logSms($parent->tel, $parent, null, $body, $abonnement);
@@ -180,5 +190,36 @@ class Sms{
         return $parent->pays->indicatif;
         // trace_log(" pays ".json_encode($parent->pays));
         // return "225";
+    }
+
+    // Permet de vérifier si le module SMS est actif pour toute l'application 
+    public function isModuleSmsAppEnable(){
+        return $this->isSendSms;
+    }
+
+    // Permet de vérifier si le module sms pour une école est actif et il existe encore des sms
+    public function isModuleSmsEcoleEnable(AbonnementModel $abonnement){
+        $smsschool = SmsSchoolModel::where('school_id', $abonnement->school_id)->first();
+        return $smsschool && $smsschool->is_run == 1 && $smsschool->nbre_sms_restant > 0 ? true : false;
+    }
+
+    // Permet de vérifier si le module sms est actif et il existe des sms pour cet abonnement
+    public function isModuleSmsAbonnementEnable(AbonnementModel $abonnement){
+        return $abonnement && $abonnement->is_run == 1 && $smsschool->nbre_sms_restant > 0 ? true : false;
+    }
+
+    // Pour reduire le nombre de sms dans le module des sms de l'école
+    public function reduceSmsModuleEcole(AbonnementModel $abonnement){
+        $smsschool = SmsSchoolModel::where('school_id', $abonnement->school_id)->first();
+        $smsschool->nbre_sms_restant = $smsschool->nbre_sms_restant - 1;
+        $smsschool->nbre_sms_consome = $smsschool->nbre_sms_consome + 1;
+        $smsschool->save();
+    }
+
+    // Pour reduire le nombre de sms dans le module des sms au niveau de l'abonnement
+    public function reduceSmsModuleAbonnement(AbonnementModel $abonnement){
+        $abonnement->nbre_sms_restant = $smsschool->nbre_sms_restant - 1;
+        $abonnement->nbre_sms_consome = $smsschool->nbre_sms_consome + 1;
+        $abonnement->save();
     }
 }

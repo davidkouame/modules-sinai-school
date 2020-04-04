@@ -107,13 +107,16 @@ class NoteEleve extends Model {
             if($this->valeur){
                 $sms = new Sms;
                 $eleve = EleveModel::find($this->eleve_id);
-                if($eleve && Abonnement::hasAbonnement($eleve)){
+                if($eleve && Abonnement::hasAbonnement($eleve, $this->note->sectionanneescolaire->anneescolaire)){
                     // $parent = ParentModel::find($eleve->parent_id);
-                    $parent = Abonnement::getParentToAbonnement($eleve);
-                    if($parent){
+                    $anneescolaire = $this->note && $this->note->sectionanneescolaire 
+                    && $this->note->sectionanneescolaire->anneescolaire ? $this->note->sectionanneescolaire->anneescolaire : null;
+                    $parent = Abonnement::getParentToAbonnement($eleve, $anneescolaire);
+                    $abonnement = Abonnement::getParentToAbonnement($eleve, $anneescolaire);
+                    if($parent && $abonnement){
                         $body = $eleve->name.' '.$eleve->surname . " a obtenu ".$this->valeur.'/'.($this->note->coefficient*20)." en ".
                             $this->note->matiere->libelle;
-                        $sms->sendQueue($parent->tel, $body, $parent, $eleve);
+                        $sms->sendQueue($parent->tel, $body, $parent, $eleve, $abonnement);
                     }
                 }
                 // Queue::push(CalculMoyenneJob::class, '');

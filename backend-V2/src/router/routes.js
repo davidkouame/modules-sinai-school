@@ -118,6 +118,9 @@ import PreviewTypeMoyenne from "@/components/TypesMoyennes/Preview.vue";
 import AddTypeMoyenne from "@/components/TypesMoyennes/Add.vue";
 import EditTypeMoyenne from "@/components/TypesMoyennes/Edit.vue";
 
+// Module SMS
+import ListSms from "@/components/Sms/List.vue";
+
 import Vue from "vue";
 
 
@@ -582,6 +585,13 @@ const routes = [
         path: "/typesmoyennes/add",
         name: "TypeMoyenne",
         component: AddTypeMoyenne
+      },
+
+      // ------------------  MODULE SMS ------------------ //
+      {
+        path: "/sms",
+        name: "Sms",
+        component: ListSms
       }
     ]
   },

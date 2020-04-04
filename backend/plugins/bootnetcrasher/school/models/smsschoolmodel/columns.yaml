@@ -1,0 +1,21 @@
+columns:
+    school:
+        label: Ecole
+        nameFrom: name
+        descriptionFrom: description
+        searchable: true
+        select: libelle
+        relation: school
+        placeholder: Selectionner une école
+    nbre_sms_initial:
+        label: 'Sms inititals'
+        type: number
+        searchable: true
+    nbre_sms_consome:
+        label: 'Sms consomés'
+        type: number
+        searchable: true
+    nbre_sms_restant:
+        label: 'Sms restant'
+        type: number
+        searchable: true

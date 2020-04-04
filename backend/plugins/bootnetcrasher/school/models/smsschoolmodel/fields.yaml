@@ -1,0 +1,24 @@
+fields:
+    school:
+        label: Ecole
+        nameFrom: libelle
+        descriptionFrom: description
+        span: auto
+        type: relation
+        placeholder: 'Sélectionner un école'
+    nbre_sms_initial:
+        label: 'Sms initials'
+        span: auto
+        type: number
+    nbre_sms_consome:
+        label: 'Sms consomés'
+        span: auto
+        type: number
+    nbre_sms_restant:
+        label: 'Sms restants'
+        span: auto
+        type: number
+    is_run:
+        label: 'Start sms'
+        span: auto
+        type: switch

@@ -105,6 +105,7 @@ export default new Vuex.Store({
     parametrageapp: null,
     typesmoyennes: null,
     typemoyenne: null,
+    ecolesms: null,
   },
   mutations: {
     anneesscolaires(state, payload) {
@@ -280,6 +281,9 @@ export default new Vuex.Store({
     },
     typemoyenne(state, typemoyenne){
       state.typemoyenne = typemoyenne
+    },
+    ecolesms(state, ecolesms) {
+      state.ecolesms = ecolesms
     }
   },
   getters: {
@@ -459,6 +463,9 @@ export default new Vuex.Store({
     },
     typemoyenne: state => {
       return state.typemoyenne
+    },
+    ecolesms: state => {
+      return state.ecolesms
     }
   },
   actions: {
@@ -1459,7 +1466,27 @@ export default new Vuex.Store({
     },
     getTypeMoyenne(context, params) {
       getInformModel(context, params.id, "typesmoyenne", "typemoyenne")
-    }
+    },
+    ecolesms(context, ecoleId) {
+      Axios.get(
+        context.state.endpoint + 'api/v1/ecolesms?school_id='+ecoleId)
+        .then(response => {
+          if(response.data.data.data && response.data.data.data.length > 0){
+            context.commit('ecolesms', response.data.data.data[0])
+          }
+        })
+        .catch(error => {
+          console.log(error)
+          this.errored = true
+        })
+        .finally(() => (this.loading = false))
+    },
+    updateStatutSms(context, params) {
+      return Axios.put(
+        context.state.endpoint + 'api/v1/ecolesms/'+params.id, params.data,
+        { headers: { 'Content-Type': 'application/json' } }
+      )
+    },
   }
   
   // modules: modules

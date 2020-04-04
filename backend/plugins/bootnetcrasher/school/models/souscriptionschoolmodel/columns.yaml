@@ -1,0 +1,22 @@
+columns:
+    school:
+        label: Ecole
+        nameFrom: name
+        descriptionFrom: description
+        searchable: true
+        select: libelle
+        relation: school
+    anneescolaire:
+        label: Année scolaire
+        nameFrom: name
+        descriptionFrom: description
+        searchable: true
+        select: libelle
+        relation: anneescolaire
+    typesouscription:
+        label: Type de souscription
+        nameFrom: name
+        descriptionFrom: description
+        searchable: true
+        select: libelle
+        relation: typesouscription

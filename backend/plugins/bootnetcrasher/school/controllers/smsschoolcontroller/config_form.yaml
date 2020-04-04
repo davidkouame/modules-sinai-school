@@ -1,0 +1,10 @@
+name: SmsSchoolController
+form: $/bootnetcrasher/school/models/smsschoolmodel/fields.yaml
+modelClass: BootnetCrasher\School\Models\SmsSchoolModel
+defaultRedirect: bootnetcrasher/school/smsschoolcontroller
+create:
+    redirect: 'bootnetcrasher/school/smsschoolcontroller/update/:id'
+    redirectClose: bootnetcrasher/school/smsschoolcontroller
+update:
+    redirect: bootnetcrasher/school/smsschoolcontroller
+    redirectClose: bootnetcrasher/school/smsschoolcontroller

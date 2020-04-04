@@ -53,16 +53,17 @@ class BillanAnnuelleJob{
                     ? $classeeleve->classe->allEleves($anneescolaire->id)
                     : null;
             foreach($eleves as $eleve){
-                if(Abonnement::hasAbonnement($eleve)){
+                if(Abonnement::hasAbonnement($eleve, $anneescolaire)){
                     $rapportmoyenne = new RapportMoyenne();
                     $rapportmoyenne->constructMoyenneAnnuelle($anneescolaire, $classeeleve->classe, $eleve);
                     $body = $rapportmoyenne->getRapport();
                     if($body){
                         $sms = new Sms;
                         // $parent = ParentModel::find($eleve->parent_id);
-                        $parent = Abonnement::getParentToAbonnement($eleve);
-                        if($parent)
-                            $sms->sendQueue($parent->tel, $body, $parent, $eleve);
+                        $abonnement = Abonnement::getParentToAbonnement($eleve, $anneescolaire);
+                        $parent = Abonnement::getParentToAbonnement($eleve, $anneescolaire);
+                        if($parent && $abonnement)
+                            $sms->sendQueue($parent->tel, $body, $parent, $eleve, $abonnement);
                     }
                 }
             }

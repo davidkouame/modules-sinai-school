@@ -153,10 +153,10 @@ class userController extends Controller
             'password' => array_get($data, 'password')
         ];
         //on verifie si l'email est dans la base et que celui est rattaché a un compte cabinetplacement
-        $user = BackendUser::where('email', '=', $data['email'])
+        $user = User::where('email', '=', $data['email'])->whereNotNull('ecole_id')
             ->first();
         // Event::fire('rainlab.user.beforeAuthenticate', [$this, $credentials]);
-        $user = BackendAuth::authenticate($credentials, true);
+        $user = Auth::authenticate($credentials, true);
         return $this->helpers->apiArrayResponseBuilder(200, 'success', $user);
     }
 

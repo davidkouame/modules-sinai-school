@@ -31,6 +31,7 @@
             <sous-sidebar-link to="/matieres" name="Matieres" icon="ti-map"/>
             <sous-sidebar-link to="/typesmoyennes" name="Type de moyennes" icon="ti-map"/>
             <sous-sidebar-link to="/raisonsabsences" name="Raisons d'absences" icon="ti-map"/>
+            <sous-sidebar-link to="/sms" name="SMS" icon="ti-map"/>
           </template>
         </sidebar-link>
       </template>

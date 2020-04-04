@@ -520,4 +520,13 @@
   'BootnetCrasher\\School\\Console\\SeederSchool' => 'plugins/bootnetcrasher/school/console/SeederSchool.php',
   'Mohsin\\Rest\\Console\\CreateRestController' => 'plugins/mohsin/rest/console/CreateRestController.php',
   'Bootnetcrasher\\School\\Classes\\Abonnement' => 'plugins/bootnetcrasher/school/classes/Abonnement.php',
+  'bootnetcrasher\\school\\Controllers\\schoolcontroller' => 'plugins/bootnetcrasher/school/controllers/schoolcontroller.php',
+  'BootnetCrasher\\School\\Models\\SchoolModel' => 'plugins/bootnetcrasher/school/models/SchoolModel.php',
+  'bootnetcrasher\\school\\Controllers\\smsschoolcontroller' => 'plugins/bootnetcrasher/school/controllers/smsschoolcontroller.php',
+  'BootnetCrasher\\School\\Models\\SmsSchoolModel' => 'plugins/bootnetcrasher/school/models/SmsSchoolModel.php',
+  'bootnetcrasher\\parametrage\\Controllers\\typesouscriptioncontroller' => 'plugins/bootnetcrasher/parametrage/controllers/typesouscriptioncontroller.php',
+  'BootnetCrasher\\Parametrage\\Models\\TypeSouscriptionModel' => 'plugins/bootnetcrasher/parametrage/models/TypeSouscriptionModel.php',
+  'bootnetcrasher\\school\\Controllers\\souscriptionschoolmodel' => 'plugins/bootnetcrasher/school/controllers/souscriptionschoolmodel.php',
+  'BootnetCrasher\\School\\Models\\SouscriptionSchoolModel' => 'plugins/bootnetcrasher/school/models/SouscriptionSchoolModel.php',
+  'AhmadFatoni\\ApiGenerator\\Controllers\\API\\EcoleSmsController' => 'plugins/ahmadfatoni/apigenerator/controllers/api/EcoleSmsController.php',
 );

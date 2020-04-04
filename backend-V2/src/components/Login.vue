@@ -93,6 +93,7 @@ export default {
           this.$cookies.set("userSurname", response.data.data.surname);
           this.$cookies.set("userEmail", response.data.data.email);
           this.$cookies.set("firstLogin", response.data.data.first_login);
+          this.$cookies.set("ecoleId", response.data.data.ecole_id);
           window.location.reload();
         })
         .catch(response => {

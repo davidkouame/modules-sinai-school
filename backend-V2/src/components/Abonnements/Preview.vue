@@ -55,6 +55,28 @@
                   </div>
                 </div>
                 <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label class="control-label">Nombre de sms initial</label>
+                      <input v-model="abonnement.nbre_sms_initial" class="form-control" disabled/>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label class="control-label">Nombre de sms consomé</label>
+                      <input v-model="abonnement.nbre_sms_consomme" class="form-control" disabled/>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label class="control-label">Nombre de sms restant</label>
+                      <input v-model="abonnement.nbre_sms_restant" class="form-control" disabled/>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
                   <table class="table table-d">
                     <thead>
                       <tr>

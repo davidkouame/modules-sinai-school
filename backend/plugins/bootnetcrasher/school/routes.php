@@ -90,8 +90,8 @@ Route::get('api/v1/generate-data-for-section-annee-scolaire/{section_id}', funct
     return response()->json(["status_code" => 200, "message" => "success", "data" => "Data has sent deleted successfully."]);
 });
 
-Route::get('test-verify-abonnement', function(){
+/*Route::get('test-verify-abonnement', function(){
     $eleve = BootnetCrasher\School\Models\EleveModel::find(1);
     $response = Bootnetcrasher\School\Classes\Abonnement::hasAbonnement($eleve);
     die($response);
-});
+});*/

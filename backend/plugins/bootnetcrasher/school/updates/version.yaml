@@ -162,3 +162,33 @@
 1.0.55:
     - 'Created table bootnetcrasher_school_abonnement_eleve'
     - builder_table_create_bootnetcrasher_school_abonnement_eleve.php
+1.0.56:
+    - 'Created table bootnetcrasher_school_sms'
+    - builder_table_create_bootnetcrasher_school_sms.php
+1.0.57:
+    - 'Updated table bootnetcrasher_school_sms'
+    - builder_table_update_bootnetcrasher_school_sms.php
+1.0.58:
+    - 'Updated table bootnetcrasher_school_sms'
+    - builder_table_update_bootnetcrasher_school_sms_2.php
+1.0.59:
+    - 'Created table bootnetcrasher_school_school'
+    - builder_table_create_bootnetcrasher_school_school.php
+1.0.60:
+    - 'Created table bootnetcrasher_school_souscription_school'
+    - builder_table_create_bootnetcrasher_school_souscription_school.php
+1.0.61:
+    - 'Updated table bootnetcrasher_school_sms'
+    - builder_table_update_bootnetcrasher_school_sms_3.php
+1.0.62:
+    - 'Updated table bootnetcrasher_school_abonnement'
+    - builder_table_update_bootnetcrasher_school_abonnement_2.php
+1.0.63:
+    - 'Updated table bootnetcrasher_school_abonnement'
+    - builder_table_update_bootnetcrasher_school_abonnement_3.php
+1.0.64:
+    - 'Updated table bootnetcrasher_school_abonnement'
+    - builder_table_update_bootnetcrasher_school_abonnement_4.php
+1.0.65:
+    - 'Updated table bootnetcrasher_school_abonnement'
+    - builder_table_update_bootnetcrasher_school_abonnement_5.php

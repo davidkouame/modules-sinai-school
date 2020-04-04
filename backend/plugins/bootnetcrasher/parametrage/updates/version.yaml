@@ -18,3 +18,6 @@
 1.0.7:
     - 'Created table bootnetcrasher_parametrage_pays'
     - builder_table_create_bootnetcrasher_parametrage_pays.php
+1.0.8:
+    - 'Created table bootnetcrasher_parametrage_type_souscription'
+    - builder_table_create_bootnetcrasher_parametrage_type_souscription.php

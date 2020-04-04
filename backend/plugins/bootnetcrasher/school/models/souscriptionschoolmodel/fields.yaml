@@ -1,0 +1,25 @@
+fields:
+    school:
+        label: Ecole
+        nameFrom: name
+        descriptionFrom: description
+        select: libelle
+        span: auto
+        type: relation
+        placeholder: Sélectionner une école
+    anneescolaire:
+        label: 'Année scolaire'
+        nameFrom: name
+        descriptionFrom: description
+        select: libelle
+        span: auto
+        type: relation
+        placeholder: Sélectionner une année scolaire
+    typesouscription:
+        label: 'Type de souscription'
+        nameFrom: name
+        descriptionFrom: description
+        select: libelle
+        span: auto
+        type: relation
+        placeholder: Sélectionner un type de souscription

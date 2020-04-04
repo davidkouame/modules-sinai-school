@@ -227,6 +227,16 @@ class User extends UserBase
         }
     }
 
+    /*public function beforeCreate(){
+        // dd($this->groups);
+        $isSchool = false;
+        foreach($this->groups as $groups){
+            if($groups->code == "ecoles"){
+                $isSchool = true;
+            }
+        }
+    }*/
+
     /**
      * After create event
      * @return void
@@ -237,6 +247,23 @@ class User extends UserBase
 
         if ($this->send_invite) {
             $this->sendInvitation();
+        }
+
+        // Create a school acccount 
+        $isSchool = false;
+        foreach($this->groups as $groups){
+            if($groups->code == "ecoles"){
+                $isSchool = true;
+            }
+        }
+        if($isSchool){
+            $school = new \BootnetCrasher\School\Models\SchoolModel;
+            $school->libelle = $this->surname;
+            $school->save();
+
+            // Update user
+            $this->ecole_id = $school->id;
+            $this->save();
         }
     }
 

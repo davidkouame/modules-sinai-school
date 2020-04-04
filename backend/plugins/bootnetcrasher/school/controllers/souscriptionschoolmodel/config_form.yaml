@@ -1,0 +1,10 @@
+name: SouscriptionSchoolModel
+form: $/bootnetcrasher/school/models/souscriptionschoolmodel/fields.yaml
+modelClass: BootnetCrasher\School\Models\SouscriptionSchoolModel
+defaultRedirect: bootnetcrasher/school/souscriptionschoolmodel
+create:
+    redirect: 'bootnetcrasher/school/souscriptionschoolmodel/update/:id'
+    redirectClose: bootnetcrasher/school/souscriptionschoolmodel
+update:
+    redirect: bootnetcrasher/school/souscriptionschoolmodel
+    redirectClose: bootnetcrasher/school/souscriptionschoolmodel

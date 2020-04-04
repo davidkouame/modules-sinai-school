@@ -54,7 +54,7 @@ class CalculMoyenne {
             // recuperation de tous les élèves
             $eleves = EleveModel::all();
             foreach ($eleves as $eleve) {
-                if(Abonnement::hasAbonnement($eleve)){
+                if(Abonnement::hasAbonnement($eleve, $section->anneescolaire)){
                     $classeEleve = ClasseEleveModel::where('eleve_id', $eleve->id)
                             ->where('annee_scolaire_id', $section->annee_scolaire_id)
                             ->first();
@@ -86,6 +86,7 @@ class CalculMoyenne {
      * @param SectionAnneeScolaireModel $section
      */
     public function calculerLesMoyennesDeSections(){
+        die("REVOIR LE CODE SOURCE ");
         // recuperation de l'année scolaire en coure
         $anneeScolaire = $this->getAnneeScolaire();
         $eleves = EleveModel::all();
@@ -117,7 +118,7 @@ class CalculMoyenne {
     public function calculerLaMoyenneSection(SectionAnneeScolaireModel $section){
         $eleves = EleveModel::all();
         foreach ($eleves as $eleve) {
-            if(Abonnement::hasAbonnement($eleve)){
+            if(Abonnement::hasAbonnement($eleve,section->anneescolaire)){
                 $classeEleve = ClasseEleveModel::where('eleve_id', $eleve->id)
                         ->where('annee_scolaire_id', $section->annee_scolaire_id)
                         ->first();

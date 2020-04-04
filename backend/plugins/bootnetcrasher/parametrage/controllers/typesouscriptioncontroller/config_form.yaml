@@ -1,0 +1,10 @@
+name: TypeSouscriptionController
+form: $/bootnetcrasher/parametrage/models/typesouscriptionmodel/fields.yaml
+modelClass: BootnetCrasher\Parametrage\Models\TypeSouscriptionModel
+defaultRedirect: bootnetcrasher/parametrage/typesouscriptioncontroller
+create:
+    redirect: 'bootnetcrasher/parametrage/typesouscriptioncontroller/update/:id'
+    redirectClose: bootnetcrasher/parametrage/typesouscriptioncontroller
+update:
+    redirect: bootnetcrasher/parametrage/typesouscriptioncontroller
+    redirectClose: bootnetcrasher/parametrage/typesouscriptioncontroller
