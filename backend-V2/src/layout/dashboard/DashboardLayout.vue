@@ -2,36 +2,34 @@
   <div class="wrapper">
     <side-bar>
       <template slot="links">
-        <sidebar-link to="/dashboard" name="Tableau de bord" icon="ti-panel"/>
+        <sidebar-link to="/dashboard" name="Tableau de bord" icon="ti-panel" />
         <!--<sidebar-link to="/stats" name="User Profile" icon="ti-user"/>-->
         <!--<sidebar-link to="/table-list" name="Table List" icon="ti-view-list-alt"/>
         <sidebar-link to="/typography" name="Typography" icon="ti-text"/>
         <sidebar-link to="/icons" name="Icons" icon="ti-pencil-alt2"/>
         <sidebar-link to="/maps" name="Map" icon="ti-map"/>-->
-        
-        
-        
-        <sidebar-link to="/notes" name="Notes" icon="ti-map"/>
-        <sidebar-link to="/professeurs" name="Professeurs" icon="ti-map"/>
-        <sidebar-link to="/classes" name="Classes" icon="ti-map"/>
-        <sidebar-link to="/eleves" name="Eleves" icon="ti-map"/>
-        <sidebar-link to="/parents" name="Parents" icon="ti-map"/>
-        <sidebar-link to="/absences" name="Absences" icon="ti-map"/>
-        <sidebar-link to="/moyennes" name="Moyennes" icon="ti-map"/>
-        
-        <sidebar-link to="/abonnements" name="Abonnements" icon="ti-map"/>
+
+        <sidebar-link to="/notes" name="Notes" icon="fa fa-book" />
+        <sidebar-link to="/professeurs" name="Professeurs" icon="fa fa-users" />
+        <sidebar-link to="/classes" name="Classes" icon="fas fa-book-reader" />
+        <sidebar-link to="/eleves" name="Eleves" icon="fas fa-user-graduate" />
+        <sidebar-link to="/parents" name="Parents" icon="fas fa-user-tie" />
+        <sidebar-link to="/absences" name="Absences" icon="far fa-clock" />
+        <sidebar-link to="/moyennes" name="Moyennes" icon="ti-map" />
+
+        <sidebar-link to="/abonnements" name="Abonnements" icon="fas fa-pen" />
         <!-- <sidebar-link to="/notifications" name="Notifications" icon="ti-bell" :sidebarLinks="sibebarslinks"/>-->
-        <sidebar-link to="/log-sms" name="Paramètre" icon="ti-map">
+        <sidebar-link to="/log-sms" name="Paramètre" icon="fas fa-cogs">
           <template slot="souslinks">
-            <sous-sidebar-link to="/annees-scolaires" name="Années scolaires" icon="ti-map"/>
-            <sous-sidebar-link to="/sections-annee-scolaire" name="Sections Année" icon="ti-map"/>
-            <sous-sidebar-link to="/log-sms" name="Log sms" icon="ti-map"/>
-            <sous-sidebar-link to="/series" name="Series" icon="ti-map"/>
-            <sous-sidebar-link to="/niveaux" name="Niveaux" icon="ti-map"/>
-            <sous-sidebar-link to="/matieres" name="Matieres" icon="ti-map"/>
-            <sous-sidebar-link to="/typesmoyennes" name="Type de moyennes" icon="ti-map"/>
-            <sous-sidebar-link to="/raisonsabsences" name="Raisons d'absences" icon="ti-map"/>
-            <sous-sidebar-link to="/sms" name="SMS" icon="ti-map"/>
+            <sous-sidebar-link to="/annees-scolaires" name="Années scolaires" icon="fas fa-cogs" />
+            <sous-sidebar-link to="/sections-annee-scolaire" name="Sections Année" icon="fas fa-cogs" />
+            <sous-sidebar-link to="/log-sms" name="Log sms" icon="fas fa-cogs" />
+            <sous-sidebar-link to="/series" name="Series" icon="fas fa-cogs" />
+            <sous-sidebar-link to="/niveaux" name="Niveaux" icon="fas fa-cogs" />
+            <sous-sidebar-link to="/matieres" name="Matieres" icon="fas fa-cogs" />
+            <sous-sidebar-link to="/typesmoyennes" name="Type de moyennes" icon="fas fa-cogs" />
+            <sous-sidebar-link to="/raisonsabsences" name="Raisons d'absences" icon="fas fa-cogs" />
+            <sous-sidebar-link to="/sms" name="SMS" icon="fas fa-cogs" />
           </template>
         </sidebar-link>
       </template>
@@ -42,10 +40,7 @@
             <p>Stats</p>
           </a>
         </li>
-        <drop-down class="nav-item"
-                   title="5 Notifications"
-                   title-classes="nav-link"
-                   icon="ti-bell">
+        <drop-down class="nav-item" title="5 Notifications" title-classes="nav-link" icon="ti-bell">
           <a class="dropdown-item">Notification 1</a>
           <a class="dropdown-item">Notification 2</a>
           <a class="dropdown-item">Notification 3</a>
@@ -61,13 +56,11 @@
         <li class="divider"></li>
       </mobile-menu>
     </side-bar>
-    
+
     <div class="main-panel">
       <top-navbar></top-navbar>
 
-      <dashboard-content @click.native="toggleSidebar">
-
-      </dashboard-content>
+      <dashboard-content @click.native="toggleSidebar"></dashboard-content>
 
       <content-footer></content-footer>
     </div>
@@ -94,10 +87,47 @@ export default {
       }
     }
   },
-  data(){
-    return{
-      sibebarslinks: [{to:"/log-sms", name:"Absences", icon:"ti-map"}]
-    }
+  data() {
+    return {
+      sibebarslinks: [{ to: "/log-sms", name: "Absences", icon: "ti-map" }]
+    };
   }
 };
 </script>
+
+<style scoped>
+/*.nav-link p{
+  font-family: Poppins-Medium !important;
+}*/
+.wrapper .sidebar .nav p{
+  font-size: 13px;
+}
+/*body,
+html {
+  height: 100%;
+  font-family: Poppins-Regular, sans-serif;
+}*/
+
+/*//////////////////////////////////////////////////////////////////
+[ FONT ]*/
+
+/*@font-face {
+  font-family: Poppins-Regular;
+  src: url("../assets/fonts/poppins/Poppins-Regular.ttf");
+}
+
+@font-face {
+  font-family: Poppins-Bold;
+  src: url("../assets/fonts/poppins/Poppins-Bold.ttf");
+}
+
+@font-face {
+  font-family: Poppins-Medium;
+  src: url("../assets/fonts/poppins/Poppins-Medium.ttf");
+}
+
+@font-face {
+  font-family: Montserrat-Bold;
+  src: url("../assets/fonts/montserrat/Montserrat-Bold.ttf");
+}*/
+</style>
