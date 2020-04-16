@@ -6,7 +6,7 @@
       <div class="col-sm-6">
         <div class="float-right">
           <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-12">
               <input type="text" class="form-control search" placeholder="Rechercher une moyenne" @keyup="searchModel" v-model="search">
             </div>
             <!--<div class="col-md-4">
