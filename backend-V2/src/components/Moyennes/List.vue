@@ -40,7 +40,7 @@
             <td>{{ moyenne.valeur }}</td>
             <td>
               <a :href="'#/moyennes/preview/'+moyenne.id" class="btn btn-icon btn-info btn-sm">
-                <i class="fa fa-user"></i>
+                <i class="fa fa-eye"></i>
               </a>&nbsp;
               <!--<a :href="'#/moyennes/edit/'+moyenne.id"  class="btn btn-icon btn-success btn-sm">
                 <i class="fa fa-edit"></i>

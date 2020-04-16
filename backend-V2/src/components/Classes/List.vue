@@ -36,13 +36,13 @@
             <td>{{ classe.niveau ? classe.niveau.libelle : ''}}</td>
             <td>
               <a :href="'#/classes/preview/'+classe.id" class="btn btn-icon btn-info btn-sm">
-                <!----><i class="fa fa-user"></i><!---->
+                <!----><i class="fa fa-eye"></i><!---->
               </a>&nbsp;
               <a :href="'#/classes/edit/'+classe.id"  class="btn btn-icon btn-success btn-sm">
                 <!----><i class="fa fa-edit"></i><!---->
               </a>&nbsp;
               <a id="show-modal" @click="showModalF(classe.id)" type="button" class="btn btn-icon btn-danger btn-sm btn-delete">
-                <!----><i class="fa fa-times"></i><!---->
+                <!----><i class="fa fa-trash"></i><!---->
               </a>
             </td>
           </tr>

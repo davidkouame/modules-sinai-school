@@ -33,7 +33,7 @@
             <td>{{ log.tel }}</td>
             <td>
               <a :href="'#/log-sms/preview/'+log.id" class="btn btn-icon btn-info btn-sm">
-                <!----><i class="fa fa-user"></i><!---->
+                <!----><i class="fa fa-eye"></i><!---->
               </a>
             </td>
           </tr>

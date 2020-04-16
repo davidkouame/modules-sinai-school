@@ -10,7 +10,7 @@
               <input type="text" class="form-control search" placeholder="Rechercher une abonnement" @keyup="searchModel" v-model="search">
             </div>
             <div class="col-md-4">
-              <a :href="'#/abonnements/add/'"class="btn btn-primary btn-add">Ajouter</a>
+              <a :href="'#/abonnements/add/'" class="btn btn-primary btn-add">Ajouter</a>
             </div>
           </div>
         </div>
@@ -39,13 +39,13 @@
             <td>{{ abonnement.created_at }}</td>
             <td>
               <a :href="'#/abonnements/preview/'+abonnement.id" class="btn btn-icon btn-info btn-sm">
-                <!----><i class="fa fa-user"></i><!---->
+                <!----><i class="fa fa-eye"></i><!---->
               </a>&nbsp;
               <a :href="'#/abonnements/edit/'+abonnement.id"  class="btn btn-icon btn-success btn-sm">
                 <!----><i class="fa fa-edit"></i><!---->
               </a>&nbsp;
               <a id="show-modal" @click="showModalF(abonnement.id)" type="button" class="btn btn-icon btn-danger btn-sm btn-delete">
-                <!----><i class="fa fa-times"></i><!---->
+                <!----><i class="fa fa-trash"></i><!---->
               </a>
             </td>
           </tr>

@@ -32,13 +32,13 @@
             <td>{{ raisonabsence.libelle}}</td>
             <td>
               <a :href="'#/raisonsabsences/preview/'+raisonabsence.id" class="btn btn-icon btn-info btn-sm">
-                <!----><i class="fa fa-user"></i><!---->
+                <!----><i class="fa fa-eye"></i><!---->
               </a>&nbsp;
               <a :href="'#/raisonsabsences/edit/'+raisonabsence.id"  class="btn btn-icon btn-success btn-sm">
                 <!----><i class="fa fa-edit"></i><!---->
               </a>&nbsp;
               <a id="show-modal" @click="showModalF(raisonabsence.id)" type="button" class="btn btn-icon btn-danger btn-sm btn-delete">
-                <!----><i class="fa fa-times"></i><!---->
+                <!----><i class="fa fa-trash"></i><!---->
               </a>
             </td>
           </tr>

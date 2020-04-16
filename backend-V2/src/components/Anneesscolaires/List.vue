@@ -32,13 +32,13 @@
             <td>{{ anneescolaire.end }}</td>
             <td>
               <a :href="'#/annees-scolaires/preview/'+anneescolaire.id" class="btn btn-icon btn-info btn-sm">
-                <!----><i class="fa fa-user"></i><!---->
+                <!----><i class="fa fa-eye"></i><!---->
               </a>&nbsp;
               <a :href="'#/annees-scolaires/edit/'+anneescolaire.id"  class="btn btn-icon btn-success btn-sm">
                 <!----><i class="fa fa-edit"></i><!---->
               </a>&nbsp;
               <a id="show-modal" @click="showModalF(anneescolaire.id)" type="button" class="btn btn-icon btn-danger btn-sm btn-delete">
-                <!----><i class="fa fa-times"></i><!---->
+                <!----><i class="fa fa-trash"></i><!---->
               </a>
             </td>
           </tr>
