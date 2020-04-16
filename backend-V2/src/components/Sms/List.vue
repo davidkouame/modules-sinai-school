@@ -8,7 +8,7 @@
             <li>Nombre de sms consomé :  {{ ecolesms.nbre_sms_consome }}</li>
             <li>Nombre de sms restant : {{ ecolesms.nbre_sms_restant }}</li>
           </ul>
-          <button class="btn btn-primary" v-on:click="startSms()" v-if="ecolesms && !is_run">
+          <button class="btn btn-primary btn-add" v-on:click="startSms()" v-if="ecolesms && !is_run">
             Start
             <div v-bind:class="{'spinner-border-customize': valueDisabled}"></div>
           </button>

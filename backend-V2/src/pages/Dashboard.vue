@@ -4,7 +4,8 @@
     <!--Stats cards-->
     <div class="row">
       <div class="col-md-6 col-xl-3" v-for="stats in statsCards" :key="stats.title">
-        <stats-card>
+        <a :href="`${stats.link}`">
+          <stats-card>
           <div class="icon-big text-center" :class="`icon-${stats.type}`" slot="header">
             <i :class="stats.icon"></i>
           </div>
@@ -16,13 +17,14 @@
             <i :class="stats.footerIcon"></i> {{stats.footerText}}
           </div>
         </stats-card>
+        </a>
       </div>
     </div>
 
     <!--Charts-->
     <div class="row">
 
-      <div class="col-12">
+      <!--<div class="col-12">
         <chart-card title="Users behavior"
                     sub-title="24 Hours performance"
                     :chart-data="usersChart.data"
@@ -36,9 +38,9 @@
             <i class="fa fa-circle text-warning"></i> Click Second Time
           </div>
         </chart-card>
-      </div>
+      </div>-->
 
-      <div class="col-md-6 col-12">
+      <!--<div class="col-md-6 col-12">
         <chart-card title="Email Statistics"
                     sub-title="Last campaign performance"
                     :chart-data="preferencesChart.data"
@@ -66,7 +68,7 @@
             <i class="fa fa-circle text-warning"></i> BMW 5 Series
           </div>
         </chart-card>
-      </div>
+      </div>-->
 
     </div>
 
@@ -85,40 +87,8 @@ export default {
    */
   data() {
     return {
-      statsCards: [
-        {
-          type: "warning",
-          icon: "ti-server",
-          title: "Capacity",
-          value: "105GB",
-          footerText: "Updated now",
-          footerIcon: "ti-reload"
-        },
-        {
-          type: "success",
-          icon: "ti-wallet",
-          title: "Revenue",
-          value: "$1,345",
-          footerText: "Last day",
-          footerIcon: "ti-calendar"
-        },
-        {
-          type: "danger",
-          icon: "ti-pulse",
-          title: "Errors",
-          value: "23",
-          footerText: "In the last hour",
-          footerIcon: "ti-timer"
-        },
-        {
-          type: "info",
-          icon: "ti-twitter-alt",
-          title: "Followers",
-          value: "+45",
-          footerText: "Updated now",
-          footerIcon: "ti-reload"
-        }
-      ],
+      smsRestants : "105GB",
+      statsCards: null,
       usersChart: {
         data: {
           labels: [
@@ -189,6 +159,98 @@ export default {
         options: {}
       }
     };
+  },
+  created() {
+    this.$store.dispatch("ecolesms", this.$cookies.get('ecoleId'));
+    this.$store.dispatch("getAbonnements", {payload: 1, search: null});
+  },
+  computed: {
+    ecolesms() {
+      return this.$store.getters.ecolesms;
+    },
+    totalElement(){
+      return this.$store.getters.totalElement;
+    }
+  },
+  watch: {
+    ecolesms(){
+      this.statsCards = [
+        {
+          type: "warning",
+          icon: "ti-server",
+          title: "Sms restants",
+          value: this.ecolesms.nbre_sms_restant,
+          footerText: "Updated now",
+          footerIcon: "ti-reload",
+          link: "#/sms"
+        },
+        {
+          type: "warning",
+          icon: "ti-server",
+          title: "Sms conso.",
+          value: this.ecolesms.nbre_sms_consome,
+          footerText: "Updated now",
+          footerIcon: "ti-reload",
+          link: "#/sms"
+        },
+        {
+          type: "success",
+          icon: "ti-wallet",
+          title: "Abonnements",
+          value: this.totalElement,
+          footerText: "Last day",
+          footerIcon: "ti-calendar",
+          link: "#/abonnements"
+        }/*,
+        {
+          type: "danger",
+          icon: "ti-pulse",
+          title: "Renseignement Inf",
+          value: "23",
+          footerText: "In the last hour",
+          footerIcon: "ti-timer"
+        }*/
+      ]
+    },
+    totalElement(){
+      this.statsCards = [
+        {
+          type: "warning",
+          icon: "ti-server",
+          title: "Sms restants",
+          value: this.ecolesms.nbre_sms_restant,
+          footerText: "Updated now",
+          footerIcon: "ti-reload",
+          link: "#/sms"
+        },
+        {
+          type: "warning",
+          icon: "ti-server",
+          title: "Sms conso.",
+          value: this.ecolesms.nbre_sms_consome,
+          footerText: "Updated now",
+          footerIcon: "ti-reload",
+          link: "#/sms"
+        },
+        {
+          type: "success",
+          icon: "ti-wallet",
+          title: "Abonnements",
+          value: this.totalElement,
+          footerText: "Last day",
+          footerIcon: "ti-calendar",
+          link: "#/abonnements"
+        }/*,
+        {
+          type: "danger",
+          icon: "ti-pulse",
+          title: "Renseignement Inf",
+          value: "23",
+          footerText: "In the last hour",
+          footerIcon: "ti-timer"
+        }*/
+      ]
+    }
   }
 };
 </script>

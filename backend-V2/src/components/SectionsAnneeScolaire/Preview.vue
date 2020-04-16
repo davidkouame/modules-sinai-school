@@ -88,13 +88,17 @@
                   </div>
                 </div>
                 <div class="clearfix"></div>
-
-                <a @click="validateSection" class="btn btn-primary float-right" v-if="!sectionanneescolaire.validated_at">Valider la section</a>
-                <a href="javascript:void(0)" class="btn btn-primary float-right" v-if="sectionanneescolaire.validated_at" disabled>Valider la section</a>
+              <div class="float-right">
+                <a href="#/sections-annee-scolaire" class="btn btn-danger">Retour</a>
+                &nbsp;
+                <a @click="validateSection" class="btn btn-primary btn-add" v-if="!sectionanneescolaire.validated_at">Valider1 la section</a>
+                <a href="javascript:void(0)" class="btn btn-primary float-right btn-add" v-if="sectionanneescolaire.validated_at" disabled>Valider2 la section</a>
 
                 <!--<a @click="generateMoyenne" class="btn btn-primary float-right" style="background: #EE2D20;color: #fff;opacity: 1;">Générer la moyenne</a>-->
-
-                <a href="#/sections-annee-scolaire" class="btn btn-danger float-right">Retour</a>
+                
+                
+              </div>
+                
               </form>
         </div>
       </div>

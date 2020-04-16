@@ -1487,6 +1487,22 @@ export default new Vuex.Store({
         { headers: { 'Content-Type': 'application/json' } }
       )
     },
+    getEleveClasseByEleveIdAndAnneeScolaireId(context, param){
+      // eleveclass
+      Axios.get(
+        context.state.endpoint + 'api/v1/get-eleveclasse/'+param.eleveId+'/'+param.AnneeScolaireId)
+        .then(response => {
+          if(response.data.data.data && response.data.data.data.length > 0){
+            // context.commit('eleveclass', response.data.data.data[0])
+            console.log("get-eleves-classes -> "+response.data.data);
+          }
+        })
+        .catch(error => {
+          console.log(error)
+          this.errored = true
+        })
+        .finally(() => (this.loading = false))
+    }
   }
   
   // modules: modules

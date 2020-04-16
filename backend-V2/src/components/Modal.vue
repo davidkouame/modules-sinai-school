@@ -4,7 +4,7 @@
             <div class="modal-wrapper">
                 
                 <!-- Modal pour supprimer un model -->
-                <div class="modal-container" v-bind:class="{ active: modaltype=='delete' }">
+                <div class="col-md-4 modal-container" v-bind:class="{ active: modaltype=='delete' }" style="text-align: center">
 
                     <!--<div class="modal-header">
                         <slot name="header">
@@ -20,10 +20,10 @@
 
                     <div class="modal-footer">
                         <slot name="footer">
-                            <a class="modal-default-button btn btn-primary" @click="$emit('close')">
+                            <a class="modal-default-button btn btn-danger btn-delete" @click="$emit('close')">
                                 Non
                             </a>
-                            <a class="modal-default-button btn btn-danger" v-on:click="deleteModel">
+                            <a class="modal-default-button btn btn-primary btn-add" v-on:click="deleteModel">
                                 Oui
                             </a>
                         </slot>
@@ -43,10 +43,10 @@
 
                     <div class="modal-footer">
                         <slot name="footer">
-                            <button class="modal-default-button btn btn-primary" @click="$emit('close')">
+                            <button class="modal-default-button btn btn-danger btn-delete" @click="$emit('close')">
                                 Annuler
                             </button>
-                            <button class="modal-default-button btn btn-danger" v-on:click="editValueNote">
+                            <button class="modal-default-button btn btn-add" v-on:click="editValueNote">
                                 Modifier
                             </button>
                         </slot>
@@ -100,10 +100,10 @@
 
                     <div class="modal-footer">
                         <slot name="footer">
-                            <a class="modal-default-button btn btn-primary" @click="$emit('close')">
+                            <a class="modal-default-button btn btn-danger btn-delete" @click="$emit('close')">
                                 Annuler
                             </a>
-                            <a class="modal-default-button btn btn-danger" v-on:click="chooseEleve">
+                            <a class="modal-default-button btn btn-primary btn-add" v-on:click="chooseEleve">
                                 Ajouter
                             </a>
                         </slot>

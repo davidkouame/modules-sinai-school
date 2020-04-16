@@ -32,7 +32,7 @@
             </a>
           </li>-->
           <li class="nav-item">
-            <a @click="logout" class="btn btn-primary nav-link" style="background: #15477A;border-color: #15477A;color: #fff;">
+            <a @click="logout" class="btn btn-primary nav-link btn-add">
               Déconnexion
             </a>
           </li>

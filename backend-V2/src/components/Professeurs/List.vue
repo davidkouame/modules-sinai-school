@@ -10,7 +10,7 @@
               <input type="text" class="form-control search" placeholder="Rechercher un professeur" @keyup="searchModel" v-model="search">
             </div>
             <div class="col-md-4">
-              <a :href="'#/professeurs/add/'"class="btn btn-primary">Ajouter</a>
+              <a :href="'#/professeurs/add/'"class="btn btn-primary btn-add">Ajouter</a>
             </div>
           </div>
         </div>
@@ -43,7 +43,7 @@
               <a :href="'#/professeurs/edit/'+professeur.id"  class="btn btn-icon btn-success btn-sm">
                 <!----><i class="fa fa-edit"></i><!---->
               </a>&nbsp;
-              <a id="show-modal" @click="showModalF(professeur.id)" type="button" class="btn btn-icon btn-danger btn-sm">
+              <a id="show-modal" @click="showModalF(professeur.id)" type="button" class="btn btn-icon btn-danger btn-sm btn-delete">
                 <!----><i class="fa fa-times"></i><!---->
               </a>
             </td>

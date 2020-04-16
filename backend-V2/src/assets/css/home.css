@@ -14,3 +14,13 @@
 a[data-v-82963a40] {
     cursor: pointer;
 }
+
+.btn-add{
+    background: #15477A !important;
+    border-color: #15477A !important;
+    color: #fff !important;
+}
+
+.btn-delete, .btn-edit{
+    color: #fff !important;
+}

@@ -7,7 +7,7 @@
               <input type="text" class="form-control search" placeholder="Rechercher un niveau" @keyup="searchModel" v-model="search">
             </div>
             <div class="col-md-2">
-              <a :href="'#/niveaux/add/'"class="btn btn-primary">Ajouter</a>
+              <a :href="'#/niveaux/add/'" class="btn btn-primary btn-add">Ajouter</a>
             </div>
           </div>
       </div>
@@ -35,7 +35,7 @@
               <a :href="'#/niveaux/edit/'+matiere.id"  class="btn btn-icon btn-success btn-sm">
                 <!----><i class="fa fa-edit"></i><!---->
               </a>&nbsp;
-              <a id="show-modal" @click="showModalF(matiere.id)" type="button" class="btn btn-icon btn-danger btn-sm">
+              <a id="show-modal" @click="showModalF(matiere.id)" type="button" class="btn btn-icon btn-danger btn-sm btn-delete">
                 <!----><i class="fa fa-times"></i><!---->
               </a>
             </td>

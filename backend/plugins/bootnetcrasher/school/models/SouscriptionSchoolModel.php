@@ -1,6 +1,7 @@
 <?php namespace BootnetCrasher\School\Models;
 
 use Model;
+use BootnetCrasher\School\Models\AnneeScolaireModel;
 
 /**
  * Model
@@ -30,4 +31,12 @@ class SouscriptionSchoolModel extends Model
         'anneescolaire' => ['BootnetCrasher\School\Models\AnneeScolaireModel', 'key' => 'annee_scolaire_id', 'otherKey' => 'id'],
         'typesouscription' => ['BootnetCrasher\Parametrage\Models\TypeSouscriptionModel', 'key' => 'type_souscription_id', 'otherKey' => 'id'],
     ];
+
+    public function afterSave(){
+        $anneeScolaire = AnneeScolaireModel::find($this->annee_scolaire_id);
+        if($anneeScolaire){
+            $anneeScolaire->school_id = $this->id;
+            $anneeScolaire->save();
+        }
+    }
 }

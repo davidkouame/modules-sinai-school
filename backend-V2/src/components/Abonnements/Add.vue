@@ -75,7 +75,7 @@
               <a
                 id="show-modal"
                 @click="openModalSearchEleve()"
-                class="btn btn-primary"
+                class="btn btn-primary btn-add"
                 type="button"
               >Ajouter</a>
             </div>
@@ -126,8 +126,8 @@
           <div class="float-right">
             <div class="row">
               <div class="col-md-12">
-                <a @click="$router.go(-1)" class="btn btn-danger">Annuler</a> &nbsp;
-                <button type="submit" class="btn btn-primary" :disabled="valueDisabled">
+                <a @click="$router.go(-1)" class="btn btn-danger btn-delete">Annuler</a> &nbsp;
+                <button type="submit" class="btn btn-primary btn-add" :disabled="valueDisabled">
                   Enregistrer
                   <div v-bind:class="{'spinner-border-customize': valueDisabled}"></div>
                 </button>

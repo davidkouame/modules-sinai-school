@@ -8,6 +8,7 @@ use AhmadFatoni\ApiGenerator\Helpers\Helpers;
 use BootnetCrasher\School\Models\EleveModel;
 use Illuminate\Support\Facades\Validator;
 use RainLab\User\Models\User;
+use BootnetCrasher\School\Models\ClasseEleveModel;
 class eleveController extends Controller
 {
     protected $EleveModel;
@@ -37,7 +38,6 @@ class eleveController extends Controller
         $this->helpers          = $helpers;
     }
 
-    
     public function index(Request $request){ 
         $data = $this->EleveModel->with(array(
             'user'=>function($query){
@@ -216,10 +216,13 @@ class eleveController extends Controller
     }
 
     public function destroy($id){
-
         $this->EleveModel->where('id',$id)->delete();
-
         return $this->helpers->apiArrayResponseBuilder(200, 'success', 'Data has been deleted successfully.');
+    }
+
+    public function getEleveClasseByEleveIdAndAnneeScolaireId($eleve_id, $annee_scolaire_id){
+        $classeEleve = ClasseEleveModel::where('eleve_id', $eleve_id)->where('annee_scolaire_id', $annee_scolaire_id)->first();
+        return $this->helpers->apiArrayResponseBuilder(200, 'success', $classeEleve->toArray());
     }
 
 

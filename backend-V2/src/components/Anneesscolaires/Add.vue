@@ -94,10 +94,10 @@
           <div class="float-right">
             <div class="row">
               <div class="col-md-12">
-                <a @click="$router.go(-1)" class="btn btn-danger">Annuler</a> &nbsp;
+                <a @click="$router.go(-1)" class="btn btn-danger btn-delete">Annuler</a> &nbsp;
                 <button
                   type="submit"
-                  class="btn btn-primary"
+                  class="btn btn-primary btn-add"
                   :disabled="valueDisabled"
                 >Enregistrer</button>
               </div>

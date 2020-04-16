@@ -7,7 +7,7 @@
               <input type="text" class="form-control search extend-height-input" placeholder="Rechercher une année scolaire" @keyup="searchModel" v-model="search">
             </div>
             <div class="col-md-2">
-              <a :href="'#/annees-scolaires/add/'" class="btn btn-primary">Ajouter</a>
+              <a :href="'#/annees-scolaires/add/'" class="btn btn-primary btn-add">Ajouter</a>
             </div>
           </div>
       </div>
@@ -37,7 +37,7 @@
               <a :href="'#/annees-scolaires/edit/'+anneescolaire.id"  class="btn btn-icon btn-success btn-sm">
                 <!----><i class="fa fa-edit"></i><!---->
               </a>&nbsp;
-              <a id="show-modal" @click="showModalF(anneescolaire.id)" type="button" class="btn btn-icon btn-danger btn-sm">
+              <a id="show-modal" @click="showModalF(anneescolaire.id)" type="button" class="btn btn-icon btn-danger btn-sm btn-delete">
                 <!----><i class="fa fa-times"></i><!---->
               </a>
             </td>

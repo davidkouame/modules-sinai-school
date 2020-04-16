@@ -95,7 +95,7 @@
                                   <td>{{ note.typenote.libelle }}</td>
                                   <td>{{ note.matiere.libelle }}</td>
                                   <td>
-                                    <a id="show-modal" @click="showModalF(note.note.id)" type="button" class="btn btn-icon btn-success btn-sm">
+                                    <a id="show-modal" @click="showModalF(note.note.id)" type="button" class="btn btn-icon btn-success btn-sm btn-edit">
                                       <!----><i class="fa fa-edit"></i><!---->
                                     </a>
                                   </td>
