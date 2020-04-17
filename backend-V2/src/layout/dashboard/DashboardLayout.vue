@@ -15,11 +15,12 @@
         <sidebar-link to="/eleves" name="Eleves" icon="fas fa-user-graduate" />
         <sidebar-link to="/parents" name="Parents" icon="fas fa-user-tie" />
         <sidebar-link to="/absences" name="Absences" icon="far fa-clock" />
-        <sidebar-link to="/moyennes" name="Moyennes" icon="ti-map" />
-
         <sidebar-link to="/abonnements" name="Abonnements" icon="fas fa-pen" />
+        <sidebar-link to="/moyennes" name="Moyennes" icon="ti-map" />
+        
+        
         <!-- <sidebar-link to="/notifications" name="Notifications" icon="ti-bell" :sidebarLinks="sibebarslinks"/>-->
-        <sidebar-link to="/log-sms" name="Paramètre" icon="fas fa-cogs">
+        <sidebar-link to="#/" name="Paramètre" icon="fas fa-cogs">
           <template slot="souslinks">
             <sous-sidebar-link to="/annees-scolaires" name="Années scolaires" icon="fas fa-cogs" />
             <sous-sidebar-link to="/sections-annee-scolaire" name="Sections Année" icon="fas fa-cogs" />

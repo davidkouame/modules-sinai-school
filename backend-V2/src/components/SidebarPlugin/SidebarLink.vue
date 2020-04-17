@@ -80,6 +80,9 @@ export default {
       default: () => []
     },
   },
+  created(){
+    // console.log("la valeur par defaut "+this.$sidebar.showSidebarParam)
+  },
   methods: {
     hideSidebar() {
       // alert("dhdhd");
@@ -118,7 +121,11 @@ export default {
       // this.isMenuParam = this.name == "Paramètre"
       // this.$sidebar.showSidebarParam
       if(this.name == "Paramètre"){
-        this.$sidebar.showSidebarParam = true
+        if(this.$sidebar.showSidebarParam){
+          this.$sidebar.showSidebarParam = false;
+        }else{
+          this.$sidebar.showSidebarParam = true;
+        }
       }else{
         this.$sidebar.showSidebarParam = false
       }
