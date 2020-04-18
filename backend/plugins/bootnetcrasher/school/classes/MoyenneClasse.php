@@ -11,6 +11,7 @@ use BootnetCrasher\School\Models\ParentModel;
 use BootnetCrasher\School\Models\SectionAnneeScolaireModel;
 use Illuminate\Support\Collection;
 use Bootnetcrasher\School\Classes\Abonnement;
+use Mail;
 
 class MoyenneClasse
 {
@@ -49,8 +50,19 @@ class MoyenneClasse
                             // $parent = ParentModel::find($eleve->parent_id);
                             $anneescolaire = $this->getAnnneeScolaireEnCours();
                             $parent = Abonnement::getParentToAbonnement($eleve, $anneescolaire);
-                            if($parent)
+                            if($parent){
+                                // Send sms
                                 $sms->send($parent->tel, $body, $parent, $eleve);
+
+                                // Send email
+                                $email = $parent->email;
+                                $vars = ["body" => $body];
+                                Mail::queue('school::mail.rapport.moyenne', $vars, function($message) use($email){
+                                    $message->to($email, 'Admin Person');
+                                    $message->subject('This is a reminder');
+                                });
+                            }
+                                
                         }
                     }
                 }

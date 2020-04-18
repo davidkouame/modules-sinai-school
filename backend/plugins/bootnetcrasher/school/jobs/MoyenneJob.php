@@ -14,6 +14,7 @@ use Illuminate\Support\Collection;
 use DB;
 use Bootnetcrasher\School\Classes\CalculMoyenne;
 use Bootnetcrasher\School\Classes\Abonnement;
+use Mail;
 
 /**
  * Elle permet d'envoyer un billan à la validation d'une section d'annee
@@ -51,8 +52,18 @@ class MoyenneJob{
                             $anneescolaire = $this->getAnnneeScolaireEnCours();
                             $abonnement = Abonnement::getParentToAbonnement($eleve, $anneescolaire);
                             $parent = Abonnement::getParentToAbonnement($eleve, $anneescolaire);
-                            if($parent && $abonnement)
+                            if($parent && $abonnement){
+                                // Send sms
                                 $sms->sendQueue($parent->tel, $body, $parent, $eleve, $abonnement);
+
+                                // Send email
+                                $email = $parent->email;
+                                $vars = ["body" => $body];
+                                Mail::queue('school::mail.rapport.moyenne', $vars, function($message) use($email){
+                                    $message->to($email, 'Admin Person');
+                                    $message->subject('This is a reminder');
+                                });
+                            }
                         }
                     }
                 }

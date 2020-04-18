@@ -2,6 +2,7 @@
 
 use Bootnetcrasher\School\Classes\Sms;
 use Model;
+use Mail;
 
 /**
  * Model
@@ -43,15 +44,31 @@ class AbonnementModel extends Model
     }
 
     public function afterCreate(){
-        $this->sendMessage($this->id);
+        $this->sendSmsMessage($this->id);
     }
 
-    public function sendMessage($abonnement_id){
+    public function sendSmsMessage($abonnement_id){
         try{
             $sms = new Sms();
             $body = "Mes félicitations, votre abonnement à Ayauka a été éffectué avec succès . Ayauka vous remercie pour votre fidélité .";
             $abonnement = AbonnementModel::find($abonnement_id);
             $sms->sendParentForAbonnementQueue($this->parent, $body, $abonnement);
+            trace_log("Envoi de sms au parent lors de la création d'un abonnement ");
+        }catch (\Exception $ex){
+            // trace_log("message : ".$ex->getMessage().", trace log".$ex->getTrace());
+            trace_log("message : ".$ex->getMessage());
+        }
+    }
+
+    // Send Email
+    public function sendEmailMessage($abonnement_id){
+        try{
+            $body = "Mes félicitations, votre abonnement à Ayauka a été éffectué avec succès . Ayauka vous remercie pour votre fidélité .";
+            $email = $this->parent->email;
+            Mail::queue('school::mail.after.created.abonnement', [], function($message) use($email){
+                $message->to($email, 'Admin Person');
+                $message->subject('This is a reminder');
+            });
             trace_log("Envoi de sms au parent lors de la création d'un abonnement ");
         }catch (\Exception $ex){
             // trace_log("message : ".$ex->getMessage().", trace log".$ex->getTrace());

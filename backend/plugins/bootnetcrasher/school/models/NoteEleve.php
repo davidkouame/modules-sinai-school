@@ -8,6 +8,7 @@ use Model;
 use Bootnetcrasher\School\Classes\Sms;
 use Bootnetcrasher\School\Classes\Abonnement;
 use Queue;
+use Mail;
 
 /**
  * Model
@@ -105,7 +106,6 @@ class NoteEleve extends Model {
     public function afterSave(){
         try{
             if($this->valeur){
-                $sms = new Sms;
                 $eleve = EleveModel::find($this->eleve_id);
                 if($eleve && Abonnement::hasAbonnement($eleve, $this->note->sectionanneescolaire->anneescolaire)){
                     // $parent = ParentModel::find($eleve->parent_id);
@@ -116,7 +116,22 @@ class NoteEleve extends Model {
                     if($parent && $abonnement){
                         $body = $eleve->name.' '.$eleve->surname . " a obtenu ".$this->valeur.'/'.($this->note->coefficient*20)." en ".
                             $this->note->matiere->libelle;
+
+                        // Send sms
+                        $sms = new Sms;
                         $sms->sendQueue($parent->tel, $body, $parent, $eleve, $abonnement);
+
+                        // Send Email
+                        $vars = [
+                            'nameandsurname' => $eleve->name.' '.$eleve->surname , 
+                            'value' => $this->valeur.'/'.($this->note->coefficient*20),
+                            'matiere' => $this->note->matiere->libelle
+                        ];
+                        $email = $parent->email;
+                        Mail::queue('school::mail.after.created.note', $vars, function($message) use ($email) {
+                            $message->to($email, 'Admin Person');
+                            $message->subject('This is a reminder');
+                        });
                     }
                 }
                 // Queue::push(CalculMoyenneJob::class, '');

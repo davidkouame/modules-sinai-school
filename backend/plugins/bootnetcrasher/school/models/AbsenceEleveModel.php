@@ -7,6 +7,7 @@ use Bootnetcrasher\School\Classes\Sms;
 use BootnetCrasher\School\Models\EleveModel;
 use BootnetCrasher\School\Models\ParentModel;
 use Bootnetcrasher\School\Classes\Abonnement;
+use Mail;
 
 /**
  * Model
@@ -34,8 +35,7 @@ use \October\Rain\Database\Traits\SoftDelete;
         "eleve" => ["BootnetCrasher\School\Models\EleveModel", "key" => "eleve_id", "otherKey" => "id"],
     ];
 
-    /*public function afterCreate() {
-        $sms = new Sms;
+    public function afterCreate() {
         $eleve = EleveModel::find($this->eleve_id);
         if ($eleve && Abonnement::hasAbonnement($eleve)) {
             // $parent = ParentModel::find($eleve->parent_id);
@@ -46,9 +46,29 @@ use \October\Rain\Database\Traits\SoftDelete;
                     " ; Raison : ".$this->raisonabsence->libelle;
                 if($this->commentaire)
                     $body = $body . "; Description : ".$this->commentaire;
-                $sms->sendQueue($parent->tel, $body, $parent);
+                
+                // Send sms
+                // $sms = new Sms;
+                // $sms->sendQueue($parent->tel, $body, $parent);
+
+                // Send Email
+                $vars = [
+                    'nameandsurname' => $eleve->name.' '.$eleve->surname , 
+                    'heuredebut' => date("H:i", strtotime($this->heure_debut_cours)),
+                    'heurefin' => date("H:i", strtotime($this->heure_fin_cours)),
+                    'date' => date("Y-m-d", strtotime($this->heure_debut_cours)),
+                    'raison' => $this->raisonabsence->libelle
+                ];
+                if($this->commentaire){
+                    $vars['description'] = "; Description : ".$this->commentaire;
+                }
+                $email = $parent->email;
+                Mail::queue('school::mail.after.created.absence', $vars, function($message) use($email){
+                    $message->to($email, 'Admin Person');
+                    $message->subject('This is a reminder');
+                });
             }
         }
-    }*/
+    }
 
 }

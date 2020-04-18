@@ -14,6 +14,7 @@ use Bootnetcrasher\School\Classes\CalculMoyenne;
 use Illuminate\Support\Collection;
 use Bootnetcrasher\School\Classes\Abonnement;
 use DB;
+use Mail;
 
 /**
  * Elle permet d'envoyer un billan périodique aux parents d'élèves d'une année scolaire
@@ -64,8 +65,20 @@ class BillanPeriodiqueJob{
                         $anneescolaire = $this->getAnnneeScolaireEnCours();
                         $abonnement = Abonnement::getParentToAbonnement($eleve, $anneescolaire);
                         $parent = Abonnement::getParentToAbonnement($eleve, $anneescolaire);
-                        if($parent && $abonnement)
+
+                        
+                        if($parent && $abonnement){
+                            // Send sms
                             $sms->sendQueue($parent->tel, $body, $parent, $eleve, $abonnement);
+
+                            // Send email
+                            $email = $parent->email;
+                            $vars = ["body" => $body];
+                            Mail::queue('school::mail.rapport.moyenne', $vars, function($message) use($email){
+                                $message->to($email, 'Admin Person');
+                                $message->subject('This is a reminder');
+                            });
+                        }
                     }
                 }
             }
