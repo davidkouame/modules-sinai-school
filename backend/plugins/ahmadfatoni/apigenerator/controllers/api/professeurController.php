@@ -38,21 +38,26 @@ class professeurController extends Controller
 
     public function index(Request $request){
         $data = $this->ProfesseurModel;
-        if($request->has('search')){
-            // dd("dd");
-            /*$data = $data->where("nom", 'like', '%'.$request->get('search'.'%'))
-            ->orWhere("prenom", 'like', '%'.$request->get('search'.'%'))
-            ->orWhere("reference", 'like', '%'.$request->get('search'.'%'))
-            ->orWhere("name", 'like', '%'.$request->get('search'.'%'))
-            ->orWhere("email", 'like', '%'.$request->get('search'.'%'));*/
-            $data = $data->where(function($query) use ($request){
-                $query->where("nom", 'like', '%'.$request->get('search').'%')
-                    ->orWhere("prenom", 'like', '%'.$request->get('search').'%')
-                    ->orWhere("reference", 'like', '%'.$request->get('search').'%')
-                    ->orWhere("name", 'like', '%'.$request->get('search').'%')
-                    ->orWhere("email", 'like', '%'.$request->get('search').'%');
-            });
+        foreach($request->except(['page']) as $key => $value){
+            if($request->has('search')){
+                // dd("dd");
+                /*$data = $data->where("nom", 'like', '%'.$request->get('search'.'%'))
+                ->orWhere("prenom", 'like', '%'.$request->get('search'.'%'))
+                ->orWhere("reference", 'like', '%'.$request->get('search'.'%'))
+                ->orWhere("name", 'like', '%'.$request->get('search'.'%'))
+                ->orWhere("email", 'like', '%'.$request->get('search'.'%'));*/
+                $data = $data->where(function($query) use ($request){
+                    $query->where("nom", 'like', '%'.$request->get('search').'%')
+                        ->orWhere("prenom", 'like', '%'.$request->get('search').'%')
+                        ->orWhere("reference", 'like', '%'.$request->get('search').'%')
+                        ->orWhere("name", 'like', '%'.$request->get('search').'%')
+                        ->orWhere("email", 'like', '%'.$request->get('search').'%');
+                });
+            }else{
+                $data = $data->where($key, $value);
+            }
         }
+        
         if($request->has('page') && $request->get('page') == 0){
             $data = $data->orderBy('created_at', 'desc')->get()->toArray();
         }else{

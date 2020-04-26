@@ -121,6 +121,7 @@ class classeeleveController extends Controller
                 $classeEleveModel->classe_id = $classe->id;
                 $classeEleveModel->annee_scolaire_id = $classe->annee_scolaire_id;
                 $classeEleveModel->eleve_id = $eleve['id'];
+                $classeEleveModel->school_id = $request->get('school_id');
                 $classeEleveModel->save();
             }
             return $this->helpers->apiArrayResponseBuilder(201, 'created', []);

@@ -100,7 +100,9 @@ export default {
       absenceId: this.$route.params.id
     });
     // recuperation des eleves
-    this.$store.dispatch('getAllEleves', {payload: 0})
+    this.$store.dispatch('getAllEleves', {payload: 0, search : [
+      {key: "school_id", value: this.$cookies.get('ecoleId')},
+      {key: "annee_scolaire_id", value: this.$cookies.get('anneeScolaireId')}]})
     // recuperation des raisons d'absences
     this.$store.dispatch('getAllRaisonsAbsences', {payload: 0})
   },
@@ -114,6 +116,8 @@ export default {
         commentaire: this.absence.description,
         heure_debut_cours: this.heure_debut.split(".")[0].replace('T', ' '),
         heure_fin_cours: this.heure_fin.split(".")[0].replace('T', ' '),
+        school_id: this.$cookies.get('ecoleId'),
+        annee_scolaire_id: this.$cookies.get('anneeScolaireId')
       };
       let store = this.$store;
       store

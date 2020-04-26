@@ -104,6 +104,8 @@ export default {
         niveau_id: this.classe.niveau_id,
         serie_id: this.classe.serie_id,
         annee_scolaire_id: this.classe.annee_scolaire_id,
+        school_id: this.$cookies.get('ecoleId'),
+        annee_scolaire_id: this.$cookies.get('anneeScolaireId')
       };
       let store = this.$store;
       store

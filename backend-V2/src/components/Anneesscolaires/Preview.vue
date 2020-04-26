@@ -95,8 +95,8 @@ export default {
     };
   },
   created() {
-    this.$store.dispatch("getAnneeScolaire", {
-      anneeScolaireId: this.$route.params.id
+    this.$store.dispatch("getAnneeScolaireBySchoolId", {
+      anneeScolaireId: this.$route.params.id, schoolId: this.$cookies.get('ecoleId')
     });
   },
   computed: {
@@ -114,7 +114,7 @@ export default {
       };*/
       let store = this.$store;
       store
-        .dispatch("validateModel", {"url": "anneesscolaires", "data": {}, "id": this.$route.params.id})
+        .dispatch("validateModel", {"url": "anneesscolaires", "data": {school_id: this.$cookies.get('ecoleId')}, "id": this.$route.params.id})
         .then(response => {
           alert("L'année scolaire a été validé avec succès !")
           this.$router.go(-1)

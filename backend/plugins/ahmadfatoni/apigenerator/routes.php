@@ -62,7 +62,9 @@ Route::resource('api/v1/pays', 'AhmadFatoni\ApiGenerator\Controllers\API\PaysCon
 Route::get('api/v1/pays/{id}/delete', ['as' => 'api/v1/pays.delete', 'uses' => 'AhmadFatoni\ApiGenerator\Controllers\API\PaysController@destroy']);
 Route::resource('api/v1/parametrages', 'AhmadFatoni\ApiGenerator\Controllers\API\parametrageAppController', ['except' => ['destroy', 'create', 'edit']]);
 Route::get('api/v1/parametrages/{id}/delete', ['as' => 'api/v1/parametrages.delete', 'uses' => 'AhmadFatoni\ApiGenerator\Controllers\API\parametrageAppController@destroy']);
-Route::resource('api/v1/ecole', 'AhmadFatoni\ApiGenerator\Controllers\API\EcoleController', ['except' => ['destroy', 'create', 'edit']]);
-Route::get('api/v1/ecole/{id}/delete', ['as' => 'api/v1/ecole.delete', 'uses' => 'AhmadFatoni\ApiGenerator\Controllers\API\EcoleController@destroy']);
 Route::resource('api/v1/ecolesms', 'AhmadFatoni\ApiGenerator\Controllers\API\EcoleSmsController', ['except' => ['destroy', 'create', 'edit']]);
 Route::get('api/v1/ecolesms/{id}/delete', ['as' => 'api/v1/ecolesms.delete', 'uses' => 'AhmadFatoni\ApiGenerator\Controllers\API\EcoleSmsController@destroy']);
+Route::resource('api/v1/souscriptionschools', 'AhmadFatoni\ApiGenerator\Controllers\API\SouscriptionSchoolController', ['except' => ['destroy', 'create', 'edit']]);
+Route::get('api/v1/souscriptionschools/{id}/delete', ['as' => 'api/v1/souscriptionschools.delete', 'uses' => 'AhmadFatoni\ApiGenerator\Controllers\API\SouscriptionSchoolController@destroy']);
+Route::resource('api/v1/schools', 'AhmadFatoni\ApiGenerator\Controllers\API\SchoolController', ['except' => ['destroy', 'create', 'edit']]);
+Route::get('api/v1/schools/{id}/delete', ['as' => 'api/v1/schools.delete', 'uses' => 'AhmadFatoni\ApiGenerator\Controllers\API\SchoolController@destroy']);

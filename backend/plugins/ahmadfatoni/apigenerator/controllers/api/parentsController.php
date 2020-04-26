@@ -51,14 +51,19 @@ class parentsController extends Controller
                     }
                 ));
             } ));
-        if($request->has('search')){
-            $data = $data->where(function($query) use ($request){
-                $query->where("name", 'like', '%'.$request->get('search').'%')
-                    ->orWhere("surname", 'like', '%'.$request->get('search').'%')
-                    ->orWhere("matricule", 'like', '%'.$request->get('search').'%')
-                    ->orWhere("email", 'like', '%'.$request->get('search').'%');
-            });
+        foreach($request->except(['page']) as $key => $value){
+            if($request->has('search')){
+                $data = $data->where(function($query) use ($request){
+                    $query->where("name", 'like', '%'.$request->get('search').'%')
+                        ->orWhere("surname", 'like', '%'.$request->get('search').'%')
+                        ->orWhere("matricule", 'like', '%'.$request->get('search').'%')
+                        ->orWhere("email", 'like', '%'.$request->get('search').'%');
+                });
+            }else{
+                $data = $data->where($key, $value);
+            }
         }
+        
         if($request->has('page') && $request->get('page') == 0){
             $data = $data->orderBy('created_at', 'desc')->get()->toArray();
         }else{

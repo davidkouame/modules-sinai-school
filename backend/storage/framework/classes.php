@@ -529,4 +529,5 @@
   'bootnetcrasher\\school\\Controllers\\souscriptionschoolmodel' => 'plugins/bootnetcrasher/school/controllers/souscriptionschoolmodel.php',
   'BootnetCrasher\\School\\Models\\SouscriptionSchoolModel' => 'plugins/bootnetcrasher/school/models/SouscriptionSchoolModel.php',
   'AhmadFatoni\\ApiGenerator\\Controllers\\API\\EcoleSmsController' => 'plugins/ahmadfatoni/apigenerator/controllers/api/EcoleSmsController.php',
+  'AhmadFatoni\\ApiGenerator\\Controllers\\API\\SchoolController' => 'plugins/ahmadfatoni/apigenerator/controllers/api/SchoolController.php',
 );

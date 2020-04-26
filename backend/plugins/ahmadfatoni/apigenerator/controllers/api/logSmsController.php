@@ -28,11 +28,15 @@ class logSmsController extends Controller
             'eleve'=>function($query){
                 $query->select('*');
             }, ));
-        if($request->has('search')){
-            $date = explode("-", trim($request->get('search')));
-            if (count($date) == 3) {
-                // $newdate = $date[2] . "-" . $date[1] . "-" . $date[0];
-                $data = $data->whereDate("created_at", "=", $request->get('search'));
+        foreach($request->except(['page']) as $key => $value){
+            if($request->has('search')){
+                $date = explode("-", trim($request->get('search')));
+                if (count($date) == 3) {
+                    // $newdate = $date[2] . "-" . $date[1] . "-" . $date[0];
+                    $data = $data->whereDate("created_at", "=", $request->get('search'));
+                }
+            }else{
+                $data = $data->where($key, $value);
             }
         }
         if($request->has('page') && $request->get('page') == 0){

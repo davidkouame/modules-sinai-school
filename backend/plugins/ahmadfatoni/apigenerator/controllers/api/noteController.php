@@ -81,6 +81,7 @@ class noteController extends Controller
             }else if($key == "search"){
                 $data = $data->where("libelle", 'like', '%'.$value.'%')
                 ->orWhere('created_at', 'like', '%'.$value.'%')
+                ->orWhere('reference', 'like', '%'.$value.'%')
                 ->orWhereHas(
                     'typenote',function($query) use($request){
                         $query->where('libelle', $request->get('search'))

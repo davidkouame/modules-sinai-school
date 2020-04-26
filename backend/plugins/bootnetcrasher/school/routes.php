@@ -35,6 +35,10 @@ Route::get('api/v1/moyennes/send-billan-periodique/{sectionAnneeScolaireId}', 'A
 Route::put('api/v1/anneesscolaires/validate/{id}', 'AhmadFatoni\ApiGenerator\Controllers\API\anneeScolaireController@validate');
 Route::put('api/v1/sectionsanneescolaire/validate/{id}', 'AhmadFatoni\ApiGenerator\Controllers\API\sectionAnneeScolaireController@validate');
 Route::get('api/v1/eleves/get-eleveclasse/{eleve_id}/{annee_scolaire_id}', 'AhmadFatoni\ApiGenerator\Controllers\API\eleveController@getEleveClasseByEleveIdAndAnneeScolaireId');
+Route::get('api/v1/anneesscolaires/get-by-school-id/{school_id}', 'AhmadFatoni\ApiGenerator\Controllers\API\anneeScolaireController@getAnneesScolairesBySchoolId');
+Route::get('api/v1/anneescolaire/get-by-school-id/{annee_scolaire_id}/{school_id}', 'AhmadFatoni\ApiGenerator\Controllers\API\anneeScolaireController@getAnneeScolaireBySchoolId');
+Route::get('api/v1/schools/show-customise/{id}', 'AhmadFatoni\ApiGenerator\Controllers\API\SchoolController@getCustomiseShow');
+Route::put('api/v1/schools/customise-school/{id}', 'AhmadFatoni\ApiGenerator\Controllers\API\SchoolController@customiseUpdate');
 
 
 Route::get('test-code-source', function (){

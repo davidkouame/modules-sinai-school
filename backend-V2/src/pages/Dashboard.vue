@@ -162,7 +162,10 @@ export default {
   },
   created() {
     this.$store.dispatch("ecolesms", this.$cookies.get('ecoleId'));
-    this.$store.dispatch("getAbonnements", {payload: 1, search: null});
+    this.$store.dispatch("getAbonnements", {payload: 1, search: [
+      {key: 'school_id', value: this.$cookies.get('ecoleId')},
+      {key: 'annee_scolaire_id', value: this.$cookies.get('anneeScolaireId')}
+      ]});
   },
   computed: {
     ecolesms() {

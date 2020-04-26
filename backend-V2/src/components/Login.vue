@@ -122,7 +122,25 @@ export default {
           this.$cookies.set("userEmail", response.data.data.email);
           this.$cookies.set("firstLogin", response.data.data.first_login);
           this.$cookies.set("ecoleId", response.data.data.ecole_id);
-          window.location.reload();
+          let schoolId = response.data.data.ecole_id;
+          this.$cookies.set("ecoleId", schoolId);
+
+          // Recuperation de l'année scolaire
+          this.$store
+          .dispatch("getAnneeScolaireAfterlogin", schoolId)
+          .then(response => {
+            this.$cookies.set("anneeScolaireId", response.data.data.data[0].id);
+            window.location.reload();
+          })
+          .catch(response => {
+            this.errorMessage =
+              "Désolé, l'email ou le mot de passe est incorrect";
+            console.log(response);
+            this.showLoader = false;
+            this.errored = true;
+          })
+          .finally(() => (this.loading = false));
+
         })
         .catch(response => {
           this.errorMessage =

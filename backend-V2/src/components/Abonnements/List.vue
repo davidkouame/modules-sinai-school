@@ -100,14 +100,17 @@ export default {
   methods: {
     dispatchAbonnements(pageNum, search = null){
       pageNum = pageNum == null ? 1 : pageNum
-      let params = [{key: 'search', value: search}];
+      let params = [
+        {key: 'search', value: search}, 
+        {key: 'school_id', value: this.$cookies.get('ecoleId')},
+        {key: 'annee_scolaire_id', value: this.$cookies.get('anneeScolaireId')}
+        ];
       this.$store.dispatch('getAbonnements', 
       {payload: pageNum, search: this.trimSearch(params)})
     },
     trimSearch(searchs = null){
       let params = [];
       for (var key in searchs) {
-        console.log("type of "+typeof searchs[key].value)
         if(searchs[key].value){
           params.push({'key': searchs[key].key, 'value': searchs[key].value});
         }

@@ -182,6 +182,8 @@ export default {
         coefficient: this.note.coefficient,
         classe_id: this.note.classe_id,
         section_annee_scolaire_id: this.note.section_annee_scolaire_id,
+        school_id: this.$cookies.get('ecoleId'),
+        annee_scolaire_id: this.$cookies.get('anneeScolaireId')
       };
       let store = this.$store;
       store

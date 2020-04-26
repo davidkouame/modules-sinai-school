@@ -42,7 +42,7 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label class="control-label">Date de fin (
-                  <span class="span-required">*</span>)</label>
+                       <span class="span-required">*</span>)</label>
                       <!---->
                       <input
                         class="form-control"
@@ -55,35 +55,8 @@
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label class="control-label">Date de validation</label>
-                      <!---->
-                      <input
-                        class="form-control"
-                        type="date"
-                        v-model="sectionanneescolaire.validated_at"
-                        placeholder="Date de validation"
-                      />
-                      <!---->
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label class="control-label">Année scolaire (
-                  <span class="span-required">*</span>)</label>
-                      <!---->
-                      <select v-model="sectionanneescolaire.annee_scolaire_id" class="form-control" >
-                      <option value="">Sélectionnez une année scolaire</option>
-                      <option :value="anneescolaire.id" v-for="anneescolaire in anneesscolaires">{{ anneescolaire.libelle }}</option>
-                      </select>
-                      <!---->
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
                       <label class="control-label">Coefficient (
-                  <span class="span-required">*</span>)</label>
+                      <span class="span-required">*</span>)</label>
                       <!---->
                       <input
                         class="form-control"
@@ -94,6 +67,30 @@
                       <!---->
                     </div>
                   </div>
+                  <!--<div class="col-md-6">
+                    <div class="form-group">
+                      <label class="control-label">Date de validation</label>
+                      <input
+                        class="form-control"
+                        type="date"
+                        v-model="sectionanneescolaire.validated_at"
+                        placeholder="Date de validation"
+                      />
+                    </div>
+                  </div>-->
+                </div>
+                <div class="row">
+                  <!--<div class="col-md-6">
+                    <div class="form-group">
+                      <label class="control-label">Année scolaire (
+                      <span class="span-required">*</span>)</label>
+                      <select v-model="sectionanneescolaire.annee_scolaire_id" class="form-control" >
+                      <option value="">Sélectionnez une année scolaire</option>
+                      <option :value="anneescolaire.id" v-for="anneescolaire in anneesscolaires">{{ anneescolaire.libelle }}</option>
+                      </select>
+                    </div>
+                  </div>-->
+                  
                 </div>
                 <div class="clearfix"></div>
                 <div class="float-right">
@@ -133,8 +130,10 @@ export default {
         start: this.sectionanneescolaire.start,
         end: this.sectionanneescolaire.end,
         validated_at: this.sectionanneescolaire.validated_at,
-        annee_scolaire_id: this.sectionanneescolaire.annee_scolaire_id,
+        // annee_scolaire_id: this.sectionanneescolaire.annee_scolaire_id,
         coefficient: this.sectionanneescolaire.coefficient,
+        school_id: this.$cookies.get('ecoleId'),
+        annee_scolaire_id: this.$cookies.get('anneeScolaireId')
       };
       let store = this.$store;
       store

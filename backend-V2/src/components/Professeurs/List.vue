@@ -99,7 +99,7 @@ export default {
   methods: {
     dispatchProfesseurs(pageNum, search = null){
       pageNum = pageNum == null ? 1 : pageNum
-      let params = [{key: 'search', value: search}];
+      let params = [{key: 'search', value: search}, {key: 'school_id', value: this.$cookies.get('ecoleId')}];
       this.$store.dispatch('getProfesseurs', 
       {payload: pageNum, search: this.trimSearch(params)})
     },

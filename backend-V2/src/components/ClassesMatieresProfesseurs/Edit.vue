@@ -76,7 +76,7 @@ export default {
       classeProfesseurMatiereId: this.$route.params.id
     });
     // recuperation de tous les professeurs
-    this.$store.dispatch('getAllProfesseurs', {payload: 0})
+    this.$store.dispatch('getAllProfesseurs', {payload: 0, search : [{key: "school_id", value: this.$cookies.get('ecoleId')}]})
     // recuperation de toutes les matieres
     this.$store.dispatch('getAllMatieres', {payload: 0})
   },
@@ -88,7 +88,8 @@ export default {
         matiere_id: this.classeprofesseurmatiere.matiere_id,
         professeur_id: this.classeprofesseurmatiere.professeur_id,
         coefficient: this.classeprofesseurmatiere.coefficient,
-        annee_scolaire_id: this.classeprofesseurmatiere.classe.annee_scolaire_id
+        annee_scolaire_id: this.classeprofesseurmatiere.classe.annee_scolaire_id,
+        school_id: this.$cookies.get('ecoleId')
       };
       let store = this.$store;
       store

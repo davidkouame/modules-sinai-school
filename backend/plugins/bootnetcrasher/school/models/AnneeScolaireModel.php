@@ -31,8 +31,8 @@ class AnneeScolaireModel extends Model
         'typeanneescolaire' => ['BootnetCrasher\School\Models\TypeAnneeScolaireModel', 'key' => 'type_annee_scolaire_id', 'otherKey' => 'id'],
     ];
 
-    public function afterUpdate(){
+    /*public function afterUpdate(){
          if($this->validated_at)
             Queue::push(BillanAnnuelleJob::class, ["annee_scolaire_id" => $this->id]);
-    }
+    }*/
 }

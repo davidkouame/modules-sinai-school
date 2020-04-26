@@ -48,12 +48,17 @@ class AbonnementController extends Controller
             'anneescolaire'=>function($query){
                 $query->select('*');
             }, ));
-            if($request->has('search')){
-                $data = $data->where("reference", 'like', '%'.$request->get('search').'%')
-                ->orWhereHas('parent', function($queryEleve) use($request) {
-                    $queryEleve->where("name", 'like', '%'.$request->get('search').'%')
-                    ->orWhere("surname", 'like', '%'.$request->get('search').'%');
-                });
+
+            foreach ($request->except('page', 'classe_id') as $key => $value) {
+                if ($key == "search") {
+                    $data = $data->where("reference", 'like', '%'.$request->get('search').'%')
+                    ->orWhereHas('parent', function($queryEleve) use($request) {
+                        $queryEleve->where("name", 'like', '%'.$request->get('search').'%')
+                        ->orWhere("surname", 'like', '%'.$request->get('search').'%');
+                    });
+                } else {
+                    $data = $data->where($key, $value);
+                }
             }
             if($request->has('page') && $request->get('page') == 0){
                 $data = $data->orderBy('created_at', 'desc')->get()->toArray();
@@ -100,6 +105,8 @@ class AbonnementController extends Controller
             }
             $validation = Validator::make($request->all(), $this->rules, $this->messages);
             if( $validation->passes() ){
+                $this->AbonnementModel->annee_scolaire_id = $request->get('annee_scolaire_id');
+                $this->AbonnementModel->school_id = $request->get('school_id');
                 $this->AbonnementModel->save();
                 $this->createAbonnementEleve($this->AbonnementModel, $request->get('eleves'));
                 $this->updateParentEleve($request->get('parent_id'), $request->get('eleves'));

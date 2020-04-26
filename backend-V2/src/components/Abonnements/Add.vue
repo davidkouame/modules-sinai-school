@@ -25,26 +25,7 @@
                 <!---->
               </div>
             </div>
-            <div class="col-md-6">
-              <div class="form-group">
-                <label class="control-label">
-                  Année scolaire (
-                  <span class="span-required">*</span>)
-                </label>
-                <!---->
-                <select v-model="abonnement.annee_scolaire_id" class="form-control">
-                  <option value>Sélectionnez une année scolaire</option>
-                  <option
-                    :value="anneescolaire.id"
-                    v-for="anneescolaire in anneesscolaires"
-                  >{{ anneescolaire.libelle }}</option>
-                </select>
-                <!---->
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6">
+             <div class="col-md-6">
               <div class="form-group">
                 <label class="control-label">
                   Pack abonnement (
@@ -61,14 +42,30 @@
                 <!---->
               </div>
             </div>
-            <div class="col-md-6">
+            <!--<div class="col-md-6">
+              <div class="form-group">
+                <label class="control-label">
+                  Année scolaire (
+                  <span class="span-required">*</span>)
+                </label>
+                <select v-model="abonnement.annee_scolaire_id" class="form-control">
+                  <option value>Sélectionnez une année scolaire</option>
+                  <option
+                    :value="anneescolaire.id"
+                    v-for="anneescolaire in anneesscolaires"
+                  >{{ anneescolaire.libelle }}</option>
+                </select>
+              </div>
+            </div>-->
+          </div>
+          <div class="row">
+           
+            <!--<div class="col-md-6">
               <div class="form-group">
                 <label class="control-label">Commentaire</label>
-                <!---->
                 <textarea class="form-control" v-model="abonnement.commentaire"></textarea>
-                <!---->
               </div>
-            </div>
+            </div>-->
           </div>
           <div class="row">
             <div class="col-md-4">
@@ -168,7 +165,9 @@ export default {
     // recuperation des packs d'abonnements
     this.$store.dispatch("getAllPacksAbonnement", { payload: 0 });
     // recuperation des parents
-    this.$store.dispatch("getAllParents", { payload: 0 });
+    this.$store.dispatch("getAllParents", { payload: 0 , search: [
+      {key: 'school_id', value: this.$cookies.get('ecoleId')},
+      {key: 'annee_scolaire_id', value: this.$cookies.get('anneeScolaireId')}]});
   },
   methods: {
     saveAbonnement() {
@@ -179,7 +178,8 @@ export default {
         pack_abonnement_id: this.abonnement.pack_abonnement_id,
         commentaire: this.abonnement.commentaire,
         eleves: this.eleves,
-        school_id: this.$cookies.get('ecoleId')
+        school_id: this.$cookies.get('ecoleId'),
+        annee_scolaire_id: this.$cookies.get('anneeScolaireId')
       };
       let store = this.$store;
       // console.log("data "+JSON.stringify(data))

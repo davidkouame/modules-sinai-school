@@ -101,7 +101,9 @@ export default {
         name: this.eleve.name,
         surname: this.eleve.surname,
         email: this.eleve.email,
-        tel: this.eleve.tel
+        tel: this.eleve.tel,
+        school_id: this.$cookies.get('ecoleId'),
+        annee_scolaire_id: this.$cookies.get('anneeScolaireId')
       };
       let store = this.$store;
       store

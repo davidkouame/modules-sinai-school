@@ -22,15 +22,16 @@
         <!-- <sidebar-link to="/notifications" name="Notifications" icon="ti-bell" :sidebarLinks="sibebarslinks"/>-->
         <sidebar-link to="#/" name="Paramètre" icon="fas fa-cogs">
           <template slot="souslinks">
-            <sous-sidebar-link to="/annees-scolaires" name="Années scolaires" icon="fas fa-cogs" />
+            <!--<sous-sidebar-link to="/annees-scolaires" name="Années scolaires" icon="fas fa-cogs" />-->
             <sous-sidebar-link to="/sections-annee-scolaire" name="Sections Année" icon="fas fa-cogs" />
             <sous-sidebar-link to="/log-sms" name="Log sms" icon="fas fa-cogs" />
-            <sous-sidebar-link to="/series" name="Series" icon="fas fa-cogs" />
-            <sous-sidebar-link to="/niveaux" name="Niveaux" icon="fas fa-cogs" />
-            <sous-sidebar-link to="/matieres" name="Matieres" icon="fas fa-cogs" />
-            <sous-sidebar-link to="/typesmoyennes" name="Type de moyennes" icon="fas fa-cogs" />
-            <sous-sidebar-link to="/raisonsabsences" name="Raisons d'absences" icon="fas fa-cogs" />
+            <!--<sous-sidebar-link to="/series" name="Series" icon="fas fa-cogs" />-->
+            <!--<sous-sidebar-link to="/niveaux" name="Niveaux" icon="fas fa-cogs" />-->
+            <!--<sous-sidebar-link to="/matieres" name="Matieres" icon="fas fa-cogs" />-->
+            <!--<sous-sidebar-link to="/typesmoyennes" name="Type de moyennes" icon="fas fa-cogs" />-->
+            <!--<sous-sidebar-link to="/raisonsabsences" name="Raisons d'absences" icon="fas fa-cogs" />-->
             <sous-sidebar-link to="/sms" name="SMS" icon="fas fa-cogs" />
+            <sous-sidebar-link to="/profil" name="Mon profil" icon="fas fa-cogs" />
           </template>
         </sidebar-link>
       </template>

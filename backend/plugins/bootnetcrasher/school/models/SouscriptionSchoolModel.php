@@ -2,6 +2,8 @@
 
 use Model;
 use BootnetCrasher\School\Models\AnneeScolaireModel;
+use Bootnetcrasher\School\Jobs\BillanAnnuelleJob;
+use Queue;
 
 /**
  * Model
@@ -35,8 +37,17 @@ class SouscriptionSchoolModel extends Model
     public function afterSave(){
         $anneeScolaire = AnneeScolaireModel::find($this->annee_scolaire_id);
         if($anneeScolaire){
-            $anneeScolaire->school_id = $this->id;
+            // $anneeScolaire->school_id = $this->id;
             $anneeScolaire->save();
         }
+        // Create SmsSchool
+        $smsSchool = new SmsSchoolModel;
+        $smsSchool->school_id = $this->school_id;
+        $smsSchool->save();
     }
+
+    public function afterUpdate(){
+        if($this->validated_at)
+           Queue::push(BillanAnnuelleJob::class, ["annee_scolaire_id" => $this->annee_scolaire_id]);
+   }
 }

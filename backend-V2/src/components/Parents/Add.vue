@@ -120,7 +120,7 @@ export default {
     };
   },
   created(){
-    this.$store.dispatch('getAllPays', {page: 0})
+    this.$store.dispatch('getAllPays', {payload: 0})
   },
   methods:{
     saveParent(){
@@ -132,7 +132,9 @@ export default {
         email: this.parent.email,
         tel: this.parent.tel,
         pays_id: this.parent.pays_id,
-        create_account: this.parent.create_account
+        create_account: this.parent.create_account,
+        school_id: this.$cookies.get('ecoleId'),
+        annee_scolaire_id: this.$cookies.get('anneeScolaireId')
       };
       let store = this.$store;
       store

@@ -71,7 +71,7 @@ export default {
   },
   created() {
     // recuperation de tous les professeurs
-    this.$store.dispatch('getAllProfesseurs', {payload: 0})
+    this.$store.dispatch('getAllProfesseurs', {payload: 0, search : [{key: "school_id", value: this.$cookies.get('ecoleId')}] })
     // recuperation de toutes les matieres
     this.$store.dispatch('getAllMatieres', {payload: 0})
     // recuperation de la classe
@@ -87,6 +87,7 @@ export default {
         coefficient: this.classematiereprofesseur.coefficient,
         annee_scolaire_id: this.classe.annee_scolaire_id,
         classe_id: this.classe.id,
+        school_id: this.$cookies.get('ecoleId')
       };
       let store = this.$store;
       store

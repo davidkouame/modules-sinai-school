@@ -6,9 +6,9 @@
             <div class="col-md-10">
               <input type="text" class="form-control search extend-height-input" placeholder="Rechercher une année scolaire" @keyup="searchModel" v-model="search">
             </div>
-            <div class="col-md-2">
+            <!--<div class="col-md-2">
               <a :href="'#/annees-scolaires/add/'" class="btn btn-primary btn-add">Ajouter</a>
-            </div>
+            </div>-->
           </div>
       </div>
     </div>
@@ -32,14 +32,14 @@
             <td>{{ anneescolaire.end }}</td>
             <td>
               <a :href="'#/annees-scolaires/preview/'+anneescolaire.id" class="btn btn-icon btn-info btn-sm">
-                <!----><i class="fa fa-eye"></i><!---->
+                <i class="fa fa-eye"></i>
               </a>&nbsp;
-              <a :href="'#/annees-scolaires/edit/'+anneescolaire.id"  class="btn btn-icon btn-success btn-sm">
-                <!----><i class="fa fa-edit"></i><!---->
+              <!--<a :href="'#/annees-scolaires/edit/'+anneescolaire.id"  class="btn btn-icon btn-success btn-sm">
+                <i class="fa fa-edit"></i>
               </a>&nbsp;
               <a id="show-modal" @click="showModalF(anneescolaire.id)" type="button" class="btn btn-icon btn-danger btn-sm btn-delete">
-                <!----><i class="fa fa-trash"></i><!---->
-              </a>
+                <i class="fa fa-trash"></i>
+              </a>-->
             </td>
           </tr>
           <tr v-show="showEmptySentenceAnneeScolaire"><td colspan="6" style="text-align: center;">Aucun resultat trouvé !</td></tr>
@@ -93,8 +93,8 @@ export default {
   methods: {
     dispatchAnnneesScolaires(pageNum, search = null){
       pageNum = pageNum == null ? 1 : pageNum
-      let params = [{key: 'search', value: search}];
-      this.$store.dispatch('getAnneesScolaires', 
+      let params = [{key: 'search', value: search}, {key: 'school_id', value: this.$cookies.get('ecoleId')}];
+      this.$store.dispatch('getAnneesScolairesBySchoolId', 
       {payload: pageNum, search: this.trimSearch(params)})
     },
     trimSearch(searchs = null){

@@ -45,7 +45,9 @@ export default {
   },
   created() {
     // recuperation de tous les élèves
-    this.$store.dispatch('getAllEleves', {payload: 0})
+    this.$store.dispatch('getAllEleves', {payload: 0, search : [
+      {key: "school_id", value: this.$cookies.get('ecoleId')},
+      {key: "annee_scolaire_id", value: this.$cookies.get('anneeScolaireId')}]})
     // recuperation de la classe
     this.$store.dispatch('getClasse', {classeId: this.$route.params.id})
   },
@@ -55,7 +57,8 @@ export default {
       let data = {
         eleves: this.elevesclasse,
         classe_id: this.$route.params.id,
-        annee_scolaire_id: this.classe.annee_scolaire_id
+        annee_scolaire_id: this.classe.annee_scolaire_id,
+        school_id: this.$cookies.get('ecoleId')
       };
       let store = this.$store;
       store

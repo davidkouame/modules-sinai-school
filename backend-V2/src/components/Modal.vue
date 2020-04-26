@@ -145,7 +145,10 @@ export default {
   },
   created () {
     // recuperation des eleves
-    this.$store.dispatch('getAllEleves', {payload: 0})
+    this.$store.dispatch('getAllEleves', {payload: 0, search: [
+        {key: 'school_id', value: this.$cookies.get('ecoleId')},
+        {key: 'annee_scolaire_id', value: this.$cookies.get('anneeScolaireId')}
+    ]})
   },
   computed:{
     eleves(){

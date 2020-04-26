@@ -16,7 +16,7 @@ function getUrl(context, nameUrl, params){
       return elemen.key + '=' + elemen.value
     }).join('&')
   }
-  let result = "ddjdj"
+  let result = ""
   if(concatParams){
     result = context.state.endpoint + 'api/v1/'+ nameUrl +'?page=' + params.payload + '&' + concatParams
   }else{
@@ -106,6 +106,7 @@ export default new Vuex.Store({
     typesmoyennes: null,
     typemoyenne: null,
     ecolesms: null,
+    school: null,
   },
   mutations: {
     anneesscolaires(state, payload) {
@@ -284,6 +285,9 @@ export default new Vuex.Store({
     },
     ecolesms(state, ecolesms) {
       state.ecolesms = ecolesms
+    },
+    school(state, school) {
+      state.school = school
     }
   },
   getters: {
@@ -466,6 +470,9 @@ export default new Vuex.Store({
     },
     ecolesms: state => {
       return state.ecolesms
+    },
+    school: state => {
+      return state.school
     }
   },
   actions: {
@@ -486,6 +493,40 @@ export default new Vuex.Store({
         })
         .finally(() => (this.loading = false))
     },
+    getAnneesScolairesBySchoolId(context, params) {
+      let nameUrl = "anneesscolaires"
+      let school_id = null;
+      let search = null;
+      for (var key in params.search) {
+        if(params.search[key].key == "school_id"){
+          school_id = params.search[key].value;
+        }else{
+          search = params.search[key].value;
+        }
+      }
+      let url = context.state.endpoint + "api/v1/anneesscolaires/get-by-school-id/"+school_id+"?page="+params.payload;
+      if(search){
+        url+="&search="+search;
+      }
+      Axios.get(url)
+        .then(response => {
+          console.log()
+          context.commit('anneesscolaires', response.data.data.data)
+          context.commit('pageCount', response.data.data.last_page)
+          context.commit('currentPage', response.data.data.current_page);
+          context.commit('countPage', response.data.data.last_page);
+          context.commit('totalElement', response.data.data.total);
+        })
+        .catch(error => {
+          console.log(error)
+          this.errored = true
+        })
+        .finally(() => (this.loading = false))
+    },
+    getAnneeScolaireAfterlogin(context, schoolId){
+      let url = context.state.endpoint + "api/v1/anneesscolaires/get-by-school-id/"+schoolId;
+      return Axios.get(url);
+    },
     getSectionsAnneeScolaire(context, params) {
       let nameUrl = "sectionsanneescolaire"
       let url = getUrl(context, nameUrl, params)
@@ -505,6 +546,20 @@ export default new Vuex.Store({
     },
     getAnneeScolaire(context, params) {
       getInformModel(context, params.anneeScolaireId, "anneesscolaires", "anneescolaire")
+    },
+    getAnneeScolaireBySchoolId(context, params) {
+      // getInformModel(context, params.anneeScolaireId, "anneesscolaires", "anneescolaire")
+      Axios.get(
+        context.state.endpoint + 'api/v1/anneescolaire/get-by-school-id/' + params.anneeScolaireId + '/' + params.schoolId
+      )
+        .then(response => {
+          context.commit("anneescolaire", response.data.data)
+        })
+        .catch(error => {
+          console.log(error)
+          this.errored = true
+        })
+        .finally(() => (this.loading = false))
     },
     saveModel(context, params) {
       return Axios.post(
@@ -1108,6 +1163,12 @@ export default new Vuex.Store({
         { headers: { 'Content-Type': 'application/json' }  }
       )
     },
+    updateSchoolCustomise(context, params){
+      return Axios.put(
+        context.state.endpoint + 'api/v1/schools/customise-school/'+params.id, params.data,
+        { headers: { 'Content-Type': 'application/json' }  }
+      )
+    },
     getAllPacksAbonnement(context, params) {
       let nameUrl = "packsabonnements"
       let url = getUrl(context, nameUrl, params)
@@ -1496,6 +1557,19 @@ export default new Vuex.Store({
             // context.commit('eleveclass', response.data.data.data[0])
             console.log("get-eleves-classes -> "+response.data.data);
           }
+        })
+        .catch(error => {
+          console.log(error)
+          this.errored = true
+        })
+        .finally(() => (this.loading = false))
+    },
+    getSchool(context, params) {
+      Axios.get(
+        context.state.endpoint + 'api/v1/schools/show-customise/' + params.schoolId
+      )
+        .then(response => {
+          context.commit("school", response.data.data)
         })
         .catch(error => {
           console.log(error)

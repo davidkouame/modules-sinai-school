@@ -138,6 +138,7 @@ export default {
         description: this.professeur.description,
         matiere: this.professeur.matiere,
         create_account: this.professeur.create_account,
+        school_id: this.$cookies.get('ecoleId')
       };
       let store = this.$store;
       store

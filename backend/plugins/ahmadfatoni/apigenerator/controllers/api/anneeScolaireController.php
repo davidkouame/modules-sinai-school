@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use AhmadFatoni\ApiGenerator\Helpers\Helpers;
 use BootnetCrasher\School\Models\AnneeScolaireModel;
 use Illuminate\Support\Facades\Validator;
+use BootnetCrasher\School\Models\SouscriptionSchoolModel;
 
 class anneeScolaireController extends Controller
 {
@@ -54,12 +55,52 @@ class anneeScolaireController extends Controller
         return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
     }
 
+    public function getAnneesScolairesBySchoolId(Request $request, $school_id){
+        $souscriptions = SouscriptionSchoolModel::where('school_id', $school_id)->pluck('annee_scolaire_id')->toArray();
+        $data = $this->AnneeScolaireModel::whereIn('id', $souscriptions);
+        foreach($request->except(['page']) as $key => $value){
+            if($key == "search"){
+                $data = $data->where("libelle", 'like', '%'.$value.'%');
+            }else{
+                $data = $data->where($key, $value);
+            }
+        }
+        if($request->has('page') && $request->get('page') == 0){
+            $data = $data->orderBy('created_at', 'desc')->get()->toArray();
+        }else{
+            $data = $data->orderBy('created_at', 'desc')->paginate(10)->toArray();
+        }
+        $data['data'][0]['test'] = 'test';
+        foreach($data['data'] as $key => $dat){
+            $souscription = SouscriptionSchoolModel::where('annee_scolaire_id', $dat['id'])->where('school_id', $school_id)
+            ->first();
+            $data['data'][$key]['validated_at'] = $souscription->validated_at;
+        }
+        
+        return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
+    }
+
     public function show($id){
         $data = $this->AnneeScolaireModel->with(array(
             'typeanneescolaire'=>function($query){
                 $query->select();
             }, ))->where('id',$id)->first();
         if($data){
+            return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
+        }
+        $this->helpers->apiArrayResponseBuilder(400, 'bad request', ['error' => 'invalid key']);
+    }
+
+    public function getAnneeScolaireBySchoolId($annee_scolaire_id, $school_id){
+        $souscription = SouscriptionSchoolModel::where('annee_scolaire_id', $annee_scolaire_id)->where('school_id', $school_id)
+        ->first();
+        $data = $this->AnneeScolaireModel->with(array(
+            'typeanneescolaire'=>function($query){
+                $query->select();
+            }, ))->where('id',$annee_scolaire_id)->first();
+        if($data){
+            $data = $data->toArray();
+            $data["validated_at"] = $souscription->validated_at;
             return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
         }
         $this->helpers->apiArrayResponseBuilder(400, 'bad request', ['error' => 'invalid key']);
@@ -103,10 +144,13 @@ class anneeScolaireController extends Controller
         }
     }
 
-    public function validate($id){
-        $anneescolaire = $this->AnneeScolaireModel->where('id',$id)->first();
-        $anneescolaire->validated_at = now();
-        $status = $anneescolaire->save();
+    public function validate(Request $request, $id){
+        $school_id = $request->get("school_id");
+        $souscription = SouscriptionSchoolModel::where('annee_scolaire_id', $id)->where('school_id', $school_id)
+        ->first();
+        // $anneescolaire = $this->AnneeScolaireModel->where('id',$id)->first();
+        $souscription->validated_at = now();
+        $status = $souscription->save();
         if($status){
             return $this->helpers->apiArrayResponseBuilder(200, 'success', 'Data has been updated successfully.');
         }else{

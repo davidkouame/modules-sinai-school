@@ -170,7 +170,9 @@ export default {
         annee_scolaire_id: this.abonnement.annee_scolaire_id,
         pack_abonnement_id: this.abonnement.pack_abonnement_id,
         commentaire: this.abonnement.commentaire,
-        eleves: this.eleves
+        eleves: this.eleves,
+        school_id: this.$cookies.get('ecoleId'),
+        annee_scolaire_id: this.$cookies.get('anneeScolaireId')
       };
       let store = this.$store;
       store

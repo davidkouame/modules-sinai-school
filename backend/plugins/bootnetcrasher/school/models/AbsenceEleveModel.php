@@ -33,13 +33,15 @@ use \October\Rain\Database\Traits\SoftDelete;
     public $belongsTo = [
         "raisonabsence" => ["BootnetCrasher\Parametrage\Models\RaisonAbsenceModel", "key" => "raisonabsence_id", "otherKey" => "id"],
         "eleve" => ["BootnetCrasher\School\Models\EleveModel", "key" => "eleve_id", "otherKey" => "id"],
+        "sectionanneescolaire" => ["BootnetCrasher\School\Models\SectionAnneeScolaireModel", "key" => "eleve_id", "otherKey" => "id"],
     ];
 
     public function afterCreate() {
         $eleve = EleveModel::find($this->eleve_id);
         if ($eleve && Abonnement::hasAbonnement($eleve)) {
             // $parent = ParentModel::find($eleve->parent_id);
-            $parent = Abonnement::getParentToAbonnement($eleve);
+            $anneescolaire = $this->sectionanneescolaire->anneescolaire;
+            $parent = Abonnement::getParentToAbonnement($eleve, $anneescolaire);
             if ($parent) {
                 $body = $eleve->name .' '.$eleve->surname . " a été absent de " . date("H:i", strtotime($this->heure_debut_cours)) . " a " .
                     date("H:i", strtotime($this->heure_fin_cours))." le ".date("Y-m-d", strtotime($this->heure_debut_cours)).

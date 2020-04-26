@@ -77,6 +77,7 @@ class sectionAnneeScolaireController extends Controller
                 next($arr);
             }
             $this->SectionAnneeScolaireModel->annee_scolaire_id = $request->get('annee_scolaire_id');
+            $this->SectionAnneeScolaireModel->school_id = $request->get('school_id');
             $this->SectionAnneeScolaireModel->coefficient = $request->get('coefficient');
             $this->SectionAnneeScolaireModel->save();
             return $this->helpers->apiArrayResponseBuilder(201, 'created', ['id' => $this->SectionAnneeScolaireModel->id]);

@@ -46,8 +46,12 @@ class classesController extends Controller
             'serie'=>function($query){
                 $query->select('*');
             }, ));
-        if($request->has('search')){
-            $data = $data->where("libelle", 'like', '%'.$request->get('search').'%');
+        foreach($request->except(['page']) as $key => $value){
+            if($request->has('search')){
+                $data = $data->where("libelle", 'like', '%'.$request->get('search').'%');
+            }else{
+                $data = $data->where($key, $value);
+            }
         }
         if($request->has('page') && $request->get('page') == 0){
             $data = $data->orderBy('created_at', 'desc')->get()->toArray();

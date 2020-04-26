@@ -101,7 +101,10 @@ export default {
   methods: {
     dispatchMoyennes(pageNum, search = null){
       pageNum = pageNum == null ? 1 : pageNum
-      let params = [{key: 'search', value: search}];
+      let params = [
+        {key: 'search', value: search}, 
+        {key: 'school_id', value: this.$cookies.get('ecoleId')},
+        {key: 'annee_scolaire_id', value: this.$cookies.get('anneeScolaireId')}];
       this.$store.dispatch('getMoyennes', 
       {payload: pageNum, search: this.trimSearch(params)})
     },

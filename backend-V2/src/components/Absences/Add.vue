@@ -56,18 +56,16 @@
                   </div>
                 </div>
                 <div class="row">
-                  <div class="col-md-6">
+                  <!--<div class="col-md-6">
                     <div class="form-group">
                       <label class="control-label">Sections année scolaire</label>
-                      <!---->
                       <select v-model="absence.section_annee_scolaire_id" class="form-control" >
                       <option value="">Sélectionnez une section année scolaire</option>
                       <option :value="sectionanneescolaire.id" v-for="sectionanneescolaire in sectionsanneescolaire">{{ sectionanneescolaire.libelle }} </option>
                       </select>
-                      <!---->
                     </div>
-                  </div>
-                  <div class="col-md-6">
+                  </div>-->
+                  <div class="col-md-12">
                     <div class="form-group">
                       <label class="control-label">Description</label>
                       <!---->
@@ -104,7 +102,9 @@ export default {
   },
   created() {
     // recuperation des eleves
-    this.$store.dispatch('getAllEleves', {payload: 0})
+    this.$store.dispatch('getAllEleves', {payload: 0, search : [
+      {key: "school_id", value: this.$cookies.get('ecoleId')},
+      {key: "annee_scolaire_id", value: this.$cookies.get('anneeScolaireId')}]})
     // recuperation des raisons d'absences
     this.$store.dispatch('getAllRaisonsAbsences', {payload: 0})
     // recuperation des sections de classes
@@ -119,7 +119,9 @@ export default {
         commentaire: this.absence.description,
         heure_debut_cours: this.absence.heure_debut_cours.split(".")[0].replace('T', ' '),
         heure_fin_cours: this.absence.heure_fin_cours.split(".")[0].replace('T', ' '),
-        section_annee_scolaire_id: this.absence.section_annee_scolaire_id
+        // section_annee_scolaire_id: this.absence.section_annee_scolaire_id,
+        school_id: this.$cookies.get('ecoleId'),
+        annee_scolaire_id: this.$cookies.get('anneeScolaireId')
       };
       let store = this.$store;
       // console.log("data "+JSON.stringify(data))
