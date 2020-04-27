@@ -10,7 +10,7 @@
               <input type="text" class="form-control search" placeholder="Rechercher une section" @keyup="searchModel" v-model="search">
             </div>
             <div class="col-md-4">
-              <a :href="'#/sections-annee-scolaire/add/'" class="btn btn-primary btn-add">Ajouter</a>
+              <a :href="'#/sections-annee-scolaire/add/'" class="btn btn-primary btn-add"  v-if="checkPermission('ADD_SECTIONANNEESCOLAIRE')">Ajouter</a>
             </div>
           </div>
         </div>
@@ -38,10 +38,10 @@
               <a :href="'#/sections-annee-scolaire/preview/'+sectionanneescolaire.id" class="btn btn-icon btn-info btn-sm">
                 <!----><i class="fa fa-eye"></i><!---->
               </a>&nbsp;
-              <a :href="'#/sections-annee-scolaire/edit/'+sectionanneescolaire.id"  class="btn btn-icon btn-success btn-sm">
+              <a :href="'#/sections-annee-scolaire/edit/'+sectionanneescolaire.id"  class="btn btn-icon btn-success btn-sm" v-if="checkPermission('EDIT_SECTIONANNEESCOLAIRE')">
                 <!----><i class="fa fa-edit"></i><!---->
               </a>&nbsp;
-              <a id="show-modal" @click="showModalF(sectionanneescolaire.id)" type="button" class="btn btn-icon btn-danger btn-sm btn-delete">
+              <a id="show-modal" @click="showModalF(sectionanneescolaire.id)" type="button" class="btn btn-icon btn-danger btn-sm btn-delete" v-if="checkPermission('DELETE_SECTIONANNEESCOLAIRE')">
                 <!----><i class="fa fa-trash"></i><!---->
               </a>
             </td>

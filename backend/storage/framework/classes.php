@@ -530,4 +530,13 @@
   'BootnetCrasher\\School\\Models\\SouscriptionSchoolModel' => 'plugins/bootnetcrasher/school/models/SouscriptionSchoolModel.php',
   'AhmadFatoni\\ApiGenerator\\Controllers\\API\\EcoleSmsController' => 'plugins/ahmadfatoni/apigenerator/controllers/api/EcoleSmsController.php',
   'AhmadFatoni\\ApiGenerator\\Controllers\\API\\SchoolController' => 'plugins/ahmadfatoni/apigenerator/controllers/api/SchoolController.php',
+  'backend\\Controllers\\userroles' => 'modules/backend/controllers/userroles.php',
+  'backend\\Controllers\\usergroups' => 'modules/backend/controllers/usergroups.php',
+  'AhmadFatoni\\ApiGenerator\\Controllers\\API\\RoleController' => 'plugins/ahmadfatoni/apigenerator/controllers/api/RoleController.php',
+  'BootnetCrasher\\Parametrage\\Models\\Role' => 'plugins/bootnetcrasher/parametrage/models/Role.php',
+  'AhmadFatoni\\ApiGenerator\\Controllers\\API\\PermissionController' => 'plugins/ahmadfatoni/apigenerator/controllers/api/PermissionController.php',
+  'BootnetCrasher\\Parametrage\\Models\\PermissionModel' => 'plugins/bootnetcrasher/parametrage/models/PermissionModel.php',
+  'BootnetCrasher\\Parametrage\\Models\\PermissionMenuModel' => 'plugins/bootnetcrasher/parametrage/models/PermissionMenuModel.php',
+  'BootnetCrasher\\Parametrage\\Models\\PermissionRoleModel' => 'plugins/bootnetcrasher/parametrage/models/PermissionRoleModel.php',
+  'AhmadFatoni\\ApiGenerator\\Controllers\\API\\PermissionRoleController' => 'plugins/ahmadfatoni/apigenerator/controllers/api/PermissionRoleController.php',
 );

@@ -39,6 +39,7 @@ Route::get('api/v1/anneesscolaires/get-by-school-id/{school_id}', 'AhmadFatoni\A
 Route::get('api/v1/anneescolaire/get-by-school-id/{annee_scolaire_id}/{school_id}', 'AhmadFatoni\ApiGenerator\Controllers\API\anneeScolaireController@getAnneeScolaireBySchoolId');
 Route::get('api/v1/schools/show-customise/{id}', 'AhmadFatoni\ApiGenerator\Controllers\API\SchoolController@getCustomiseShow');
 Route::put('api/v1/schools/customise-school/{id}', 'AhmadFatoni\ApiGenerator\Controllers\API\SchoolController@customiseUpdate');
+Route::get('api/v1/permissionsroles/onload-permissions-by-role-id/{id}', 'AhmadFatoni\ApiGenerator\Controllers\API\PermissionRoleController@onloadPermissionsCodeByRoleId');
 
 
 Route::get('test-code-source', function (){

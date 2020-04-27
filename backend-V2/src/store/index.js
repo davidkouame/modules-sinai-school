@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import Axios from 'axios'
+
 /*import storeParent from '@/components/pages/parents/store'
 import storeEleve from '@/components/pages/eleves/store'
 import storeProfesseur from '@/components/pages/professeurs/store'*/
@@ -107,6 +108,12 @@ export default new Vuex.Store({
     typemoyenne: null,
     ecolesms: null,
     school: null,
+    roles: null,
+    role: null,
+    user: null,
+    users: null,
+    permissions: null,
+    permission: null
   },
   mutations: {
     anneesscolaires(state, payload) {
@@ -288,6 +295,24 @@ export default new Vuex.Store({
     },
     school(state, school) {
       state.school = school
+    },
+    role(state, role) {
+      state.role = role
+    },
+    roles(state, roles) {
+      state.roles = roles
+    },
+    user(state, user) {
+      state.user = user
+    },
+    users(state, users) {
+      state.users = users
+    },
+    permissions(state, permissions) {
+      state.permissions = permissions
+    },
+    permission(state, permission) {
+      state.permission = permission
     }
   },
   getters: {
@@ -473,6 +498,24 @@ export default new Vuex.Store({
     },
     school: state => {
       return state.school
+    },
+    roles: state => {
+      return state.roles
+    },
+    role: state => {
+      return state.role
+    },
+    users: state => {
+      return state.users
+    },
+    user: state => {
+      return state.user
+    },
+    permission: state => {
+      return state.permission
+    },
+    permissions: state => {
+      return state.permissions
     }
   },
   actions: {
@@ -568,7 +611,6 @@ export default new Vuex.Store({
       )
     },
     updateModel(context, params){
-      // console.log("data "+JSON.stringify(params.data))
       return Axios.put(
         context.state.endpoint + 'api/v1/'+params.url+'/'+params.id, params.data,
         { headers: { 'Content-Type': 'application/json' }  }
@@ -1576,7 +1618,93 @@ export default new Vuex.Store({
           this.errored = true
         })
         .finally(() => (this.loading = false))
+    },
+    getRoles(context, params) {
+      let nameUrl = "roles"
+      let url = getUrl(context, nameUrl, params)
+      Axios.get(url)
+        .then(response => {
+          if(response.data.data){
+            context.commit('roles', response.data.data.data);
+            context.commit('pageCount', response.data.data.last_page)
+            context.commit('currentPage', response.data.data.current_page);
+            context.commit('countPage', response.data.data.last_page);
+            context.commit('totalElement', response.data.data.total);
+          }
+        })
+        .catch(error => {
+          console.log(error)
+          this.errored = true
+        })
+        .finally(() => (this.loading = false))
+    },
+    getRole(context, params) {
+      getInformModel(context, params.id, "roles", "role")
+    },
+    getUsers(context, params) {
+      let nameUrl = "users"
+      let url = getUrl(context, nameUrl, params)
+      Axios.get(url)
+        .then(response => {
+          if(response.data.data){
+            context.commit('users', response.data.data.data)
+            context.commit('pageCount', response.data.data.last_page)
+            context.commit('currentPage', response.data.data.current_page);
+            context.commit('countPage', response.data.data.last_page);
+            context.commit('totalElement', response.data.data.total);
+          }
+        })
+        .catch(error => {
+          console.log(error)
+          this.errored = true
+        })
+        .finally(() => (this.loading = false))
+    },
+    getUser(context, params) {
+      getInformModel(context, params.id, "users", "user")
+    },
+    getRolesAll(context, params) {
+      let nameUrl = "roles"
+      let url = getUrl(context, nameUrl, params)
+      Axios.get(url)
+        .then(response => {
+          context.commit('roles', response.data.data)
+        })
+        .catch(error => {
+          console.log(error)
+          this.errored = true
+        })
+        .finally(() => (this.loading = false))
+    },
+    getPermissionsAll(context, params) {
+      let nameUrl = "permissions"
+      let url = getUrl(context, nameUrl, params)
+      Axios.get(url)
+        .then(response => {
+          context.commit('permissions', response.data.data)
+        })
+        .catch(error => {
+          console.log(error)
+          this.errored = true
+        })
+        .finally(() => (this.loading = false))
+    },
+    onloadPermissions(context, roleId){
+      return Axios.get(
+        context.state.endpoint + 'api/v1/permissionsroles/onload-permissions-by-role-id/'+roleId);
+        /*.then(response => {
+          if(response.data.data.data && response.data.data.data.length > 0){
+            // context.commit('permissions', response.data.data)
+            // console.log("====> permissions "+response.data.data);
+          }
+        })
+        .catch(error => {
+          console.log(error)
+          this.errored = true
+        })
+        .finally(() => (this.loading = false))*/
     }
+    
   }
   
   // modules: modules

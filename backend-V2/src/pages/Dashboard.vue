@@ -191,7 +191,7 @@ export default {
           type: "warning",
           icon: "ti-server",
           title: "Sms conso.",
-          value: this.ecolesms.nbre_sms_consome,
+          value: this.ecolesms ? this.ecolesms.nbre_sms_consome : 0,
           footerText: "Updated now",
           footerIcon: "ti-reload",
           link: "#/sms"
@@ -221,7 +221,7 @@ export default {
           type: "warning",
           icon: "ti-server",
           title: "Sms restants",
-          value: this.ecolesms.nbre_sms_restant,
+          value: this.ecolesms ? this.ecolesms.nbre_sms_restant : 0,
           footerText: "Updated now",
           footerIcon: "ti-reload",
           link: "#/sms"
@@ -230,7 +230,7 @@ export default {
           type: "warning",
           icon: "ti-server",
           title: "Sms conso.",
-          value: this.ecolesms.nbre_sms_consome,
+          value: this.ecolesms ? this.ecolesms.nbre_sms_consome : 0,
           footerText: "Updated now",
           footerIcon: "ti-reload",
           link: "#/sms"

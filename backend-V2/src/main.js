@@ -35,8 +35,8 @@ Vue.use(VueCookies)
 Vue.$cookies.config('7d')
 
 // set global cookie
-Vue.$cookies.set('theme','default');
-Vue.$cookies.set('hover-time','1s');
+Vue.$cookies.set('theme', 'default');
+Vue.$cookies.set('hover-time', '1s');
 
 
 import VueSidebarMenu from 'vue-sidebar-menu'
@@ -47,7 +47,7 @@ Vue.use(VueSidebarMenu)
 
 import PaperDashboard from "./plugins/paperDashboard";
 import "vue-notifyjs/themes/default.css";
-import Datetime  from 'vue-datetime'
+import Datetime from 'vue-datetime'
 import 'vue-datetime/dist/vue-datetime.css'
 import 'vue-select/dist/vue-select.css';
 
@@ -76,8 +76,8 @@ Vue.filter('formatDateTo', function (value) {
 
 Vue.filter('truncate', function (value, size) {
   if (value) {
-    return value.substr(0, size)+' ...';
-  }else{
+    return value.substr(0, size) + ' ...';
+  } else {
     return value
   }
 });
@@ -88,11 +88,11 @@ Vue.component('v-select', vSelect)
 
 Vue.mixin({
   methods: {
-    notEmptyObject(someObject){
+    notEmptyObject(someObject) {
       return someObject ? Object.keys(someObject).length : 0
     },
-    sayHello(){
-    	console.log("hello ")
+    sayHello() {
+      console.log("hello ")
     },
     traitError(error) {
       let errors = Object.values(error);
@@ -115,6 +115,26 @@ Vue.mixin({
         }
       }
       return messageErrors;
+    },
+    checkPermission(permission) {
+      let result = false;
+      let isAdmin = this.$cookies.get("isAdmin");
+      let role_id = this.$cookies.get("roleId");
+      if (isAdmin == 1 && role_id == 1) {
+        result = true;
+      } else {
+        let permissions = this.$cookies.get("permissions");
+        if (permissions) {
+          result = permissions.split(",").find(function (p) {
+            return p == permission;
+          });
+          result = result == permission ? true : false;
+        } else {
+          result = false;
+        }
+      }
+
+      return result;
     }
   }
 })

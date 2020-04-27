@@ -172,19 +172,29 @@ class AbonnementController extends Controller
     public function getElevesAbonnement($id){
         try{
             $eleves = new Collection;
+            // $eleves = [];
             // recuperation de l'abonnement
             $abonnement = AbonnementModel::find($id);
             foreach($abonnement->abonnementeleve as $abonnementeleve){
                 $eleve = $abonnementeleve->eleve;
                 $eleves->push(["id" => $eleve->id, "matricule" => $eleve->matricule, "name" => $eleve->name, "surname" => $eleve->surname]);
+                // $eleves[] = ["id" => $eleve->id, "matricule" => $eleve->matricule, "name" => $eleve->name, "surname" => $eleve->surname];
             }
             $data = $eleves->toArray();
             return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
         }catch (\Exception $e){
-            trace_log($e->getTrace());
-            return $this->helpers->apiArrayResponseBuilder(400, 'fail', $e->getTrace() );
+            // dd("error");
+            // dd($e->getMessage());
+            trace_log($e->getMessage());
+            return $this->helpers->apiArrayResponseBuilder(400, 'fail', $e->getMessage() );
         }
     }
+
+    /*public function getElevesAbonnement($id){
+        // recuperation de l'abonnement
+        $abonnement = AbonnementModel::find($id);
+        dd("dd");
+    }*/
 
     public function delete($id){
 

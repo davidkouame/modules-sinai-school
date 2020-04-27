@@ -126,7 +126,17 @@ import ListSms from "@/components/Sms/List.vue";
 
 import Vue from "vue";
 
+// Rôles
+import ListRole from "@/components/Roles/List.vue";
+import PreviewRole from "@/components/Roles/Preview.vue";
+import AddRole from "@/components/Roles/Add.vue";
+import EditRole from "@/components/Roles/Edit.vue";
 
+// Users
+import ListUser from "@/components/Users/List.vue";
+import PreviewUser from "@/components/Users/Preview.vue";
+import AddUser from "@/components/Users/Add.vue";
+import EditUser from "@/components/Users/Edit.vue";
 
 import TestApp from "@/components/TestApp.vue"
 
@@ -441,6 +451,31 @@ const routes = [
         component: AddEleve
       },
 
+
+      // ------------------ ROLES ------------------ //
+
+      {
+        path: "roles",
+        name: "Rôles",
+        component: ListRole
+      },
+      {
+        path: '/roles/preview/:id(\\d+)',
+        name: 'Rôles',
+        component: PreviewRole
+      },
+      {
+        path: '/roles/edit/:id(\\d+)',
+        name: 'Rôles',
+        component: EditRole
+      },
+      {
+        path: "/roles/add",
+        name: "Rôles",
+        component: AddRole
+      },
+
+
       // ------------------ PARENTS ------------------ //
 
       {
@@ -601,6 +636,28 @@ const routes = [
         path: '/profil',
         name: 'Profil',
         component: Profil
+      },
+
+      // ------------------  Users ------------------ //
+      {
+        path: "users",
+        name: "Utilisateurs",
+        component: ListUser
+      },
+      {
+        path: '/users/preview/:id(\\d+)',
+        name: 'Utilisateurs',
+        component: PreviewUser
+      },
+      {
+        path: '/users/edit/:id(\\d+)',
+        name: 'Utilisateurs',
+        component: EditUser
+      },
+      {
+        path: "/users/add",
+        name: "Utilisateurs",
+        component: AddUser
       }
     ]
   },

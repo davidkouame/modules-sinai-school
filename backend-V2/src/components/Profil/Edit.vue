@@ -6,19 +6,19 @@
         <message-error v-bind:error="error"></message-error>
       </div>
 
-      <div class="col-md-12" v-if="school">
+      <div class="col-md-12" v-if="user">
         <form v-on:submit="saveSchoolParam">
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
                 <label class="control-label">Nom et prénom</label>
-                <input class="form-control" v-model="school.username"/>
+                <input class="form-control" v-model="user.name"/>
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
                 <label class="control-label">Email</label>
-                <input class="form-control" disabled  v-model="school.email"/>
+                <input class="form-control" disabled  v-model="user.email"/>
               </div>
             </div>
 
@@ -96,7 +96,9 @@ export default {
     // recuperation des années scolaires
     this.dispatchAnnneesScolaires();
     // recuperation des informations de l'admin de l'école
-    this.$store.dispatch("getSchool",{schoolId: this.$cookies.get('ecoleId')});
+    // this.$store.dispatch("getSchool",{schoolId: this.$cookies.get('ecoleId')});
+    // recuperation des informations du user
+    this.$store.dispatch("getUser",{id: this.$cookies.get('userId')});
 
   },
   methods: {
@@ -124,15 +126,16 @@ export default {
     saveSchoolParam() {
       this.valueDisabled = true;
       let data = {
-        username: this.school.username,
+        name: this.user.name,
         password: this.password,
-        confirmationpassword: this.confirmationpassword
+        password_confirmation: this.confirmationpassword
       };
       let store = this.$store;
       store
-        .dispatch("updateSchoolCustomise", {
+        .dispatch("updateModel", {
           data: data,
-          id: this.$cookies.get("ecoleId")
+          url: "users",
+          id: this.$cookies.get("userId")
         })
         .then(response => {
           alert("L'enregistrement a été éffectué avec succès");
@@ -204,9 +207,12 @@ export default {
     },
     anneesscolaires() {
       return this.$store.getters.anneesscolaires;
-    },
+    }/*,
     school(){
       return this.$store.getters.school;
+    }*/,
+    user(){
+      return this.$store.getters.user;
     }
   },
   watch: {

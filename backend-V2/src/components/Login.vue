@@ -122,6 +122,8 @@ export default {
           this.$cookies.set("userEmail", response.data.data.email);
           this.$cookies.set("firstLogin", response.data.data.first_login);
           this.$cookies.set("ecoleId", response.data.data.ecole_id);
+          this.$cookies.set("roleId", response.data.data.role_id);
+          this.$cookies.set("isAdmin", response.data.data.is_admin);
           let schoolId = response.data.data.ecole_id;
           this.$cookies.set("ecoleId", schoolId);
 
@@ -130,16 +132,36 @@ export default {
           .dispatch("getAnneeScolaireAfterlogin", schoolId)
           .then(response => {
             this.$cookies.set("anneeScolaireId", response.data.data.data[0].id);
-            window.location.reload();
-          })
-          .catch(response => {
+            // console.log("====> role id"+this.$cookies.get("roleId"));
+
+            // recuperation de toutes les permissions
+            this.$store
+            .dispatch("onloadPermissions", this.$cookies.get("roleId"))
+            .then(response => {
+              // console.log("reponse permission");
+              // console.log(response.data.data);
+              this.$cookies.set("permissions", response.data.data);
+
+              // recuperation de toutes les permissions
+              window.location.reload();
+            })
+            .catch(response => {
+              this.errorMessage =
+                "Désolé, l'email ou le mot de passe est incorrect";
+              console.log(response);
+              this.showLoader = false;
+              this.errored = true;
+            })
+            .finally(() => (this.loading = false));
+
+            // window.location.reload();
+          }).catch(response => {
             this.errorMessage =
               "Désolé, l'email ou le mot de passe est incorrect";
             console.log(response);
             this.showLoader = false;
             this.errored = true;
-          })
-          .finally(() => (this.loading = false));
+          }).finally(() => (this.loading = false));
 
         })
         .catch(response => {

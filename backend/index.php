@@ -37,6 +37,9 @@ $app = require_once __DIR__.'/bootstrap/app.php';
 |
 */
 
+
+// ini_set('memory_limit','2GO');
+
 $kernel = $app->make('Illuminate\Contracts\Http\Kernel');
 
 $response = $kernel->handle(

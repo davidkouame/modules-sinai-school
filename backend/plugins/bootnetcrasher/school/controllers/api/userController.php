@@ -21,6 +21,10 @@ class userController extends Controller
 
     protected $helpers;
 
+    private $rules = [];
+
+    private $messages = [];
+
     public function __construct(User $User, Helpers $helpers)
     {
         parent::__construct();
@@ -29,24 +33,52 @@ class userController extends Controller
     }
 
 
-    public function index(){
+    /*public function index(){
         $data = $this->User->with(array(
             'users'=>function($query){
                 $query->select('*');
             }, ))->select('*')->get()->toArray();
         return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
+    }*/
+
+    public function index(Request $request){
+        $data = $this->User;
+        foreach($request->except('page') as $key => $value){
+            if($key == "search"){
+                $data = $data->where("name", 'like', '%'.$value.'%')
+                ->orWhere("email", 'like', '%'.$value.'%')
+                ->orWhere("username", 'like', '%'.$value.'%')
+                ->orWhere("surname", 'like', '%'.$value.'%');
+            }else{
+                $data = $data->where($key, $value);
+            }
+        }
+        if($request->has('page') && $request->get('page') == 0){
+            $data = $data->orderBy('created_at', 'desc')->get()->toArray();
+        }else{
+            $data = $data->orderBy('created_at', 'desc')->paginate(10)->toArray();
+        }
+        return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
     }
 
-
-    public function show($id){
+    /*public function show($id){
         $data = $this->User->with(array(
             'users'=>function($query){
                 $query->select('*');
             }, ))->select('*')->where('id', '=', $id)->first();
         return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
+    }*/
+
+    public function show($id){
+        $data = $this->User->where('id',$id)->first();
+        if($data){
+            return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
+        }
+        $this->helpers->apiArrayResponseBuilder(400, 'bad request', ['error' => 'invalid key']);
     }
 
-    public function store(Request $request){
+
+    /*public function store(Request $request){
 
         $arr = $request->all();
 
@@ -64,9 +96,24 @@ class userController extends Controller
             return $this->helpers->apiArrayResponseBuilder(400, 'fail', $validation->errors() );
         }
 
+    }*/
+
+    public function store(Request $request){
+        $arr = $request->all();
+        $validation = Validator::make($request->all(), $this->rules, $this->messages);
+        if( $validation->passes() ){
+            while ( $data = current($arr)) {
+                $this->User->{key($arr)} = $data;
+                next($arr);
+            }
+            $this->User->save();
+            return $this->helpers->apiArrayResponseBuilder(201, 'created', ['id' => $this->User->id]);
+        }else{
+            return $this->helpers->apiArrayResponseBuilder(400, 'fail', $validation->errors() );
+        }
     }
 
-    public function update($id, Request $request){
+    /*public function update($id, Request $request){
 
         $status = $this->User->where('id',$id)->update($data);
 
@@ -78,6 +125,20 @@ class userController extends Controller
 
             return $this->helpers->apiArrayResponseBuilder(400, 'bad request', 'Error, data failed to update.');
 
+        }
+    }*/
+
+    public function update($id, Request $request){
+        $validation = Validator::make($request->all(), $this->rules, $this->messages);
+        if($validation->passes()){
+            $status = $this->User->where('id',$id)->update($request->all());
+            if( $status ){
+                return $this->helpers->apiArrayResponseBuilder(200, 'success', 'Data has been updated successfully.');
+            }else{
+                return $this->helpers->apiArrayResponseBuilder(400, 'bad request', 'Error, data failed to update.');
+            }
+        }else{
+            return $this->helpers->apiArrayResponseBuilder(400, 'fail', $validation->errors() );
         }
     }
 

@@ -21,3 +21,24 @@
 1.0.8:
     - 'Created table bootnetcrasher_parametrage_type_souscription'
     - builder_table_create_bootnetcrasher_parametrage_type_souscription.php
+1.0.9:
+    - 'Created table bootnetcrasher_parametrage_user_group'
+    - builder_table_create_bootnetcrasher_parametrage_user_group.php
+1.0.10:
+    - 'Created table bootnetcrasher_parametrage_users_groups'
+    - builder_table_create_bootnetcrasher_parametrage_users_groups.php
+1.0.11:
+    - 'Created table bootnetcrasher_parametrage_role'
+    - builder_table_create_bootnetcrasher_parametrage_role.php
+1.0.12:
+    - 'Created table bootnetcrasher_parametrage_permission'
+    - builder_table_create_bootnetcrasher_parametrage_permission.php
+1.0.13:
+    - 'Created table bootnetcrasher_parametrage_permission_menu'
+    - builder_table_create_bootnetcrasher_parametrage_permission_menu.php
+1.0.14:
+    - 'Updated table bootnetcrasher_parametrage_permission'
+    - builder_table_update_bootnetcrasher_parametrage_permission.php
+1.0.15:
+    - 'Created table bootnetcrasher_parametrage_permissions_roles'
+    - builder_table_create_bootnetcrasher_parametrage_permissions_roles.php

@@ -21,6 +21,12 @@ class AbonnementModel extends Model
      */
     public $table = 'bootnetcrasher_school_abonnement';
 
+    /**
+     * @var array Validation rules
+     */
+    public $rules = [
+    ];
+
     public $belongsTo = [
         "packabonnement" => ["BootnetCrasher\Parametrage\Models\PackAbonnementModel", "key" => "pack_abonnement_id", "otherKey" => "id"],
         "parent" => ["BootnetCrasher\School\Models\ParentModel", "key" => "parent_id", "otherKey" => "id"],
@@ -29,12 +35,6 @@ class AbonnementModel extends Model
 
     public $hasMany = [
         'abonnementeleve' => ['BootnetCrasher\School\Models\AbonnementEleveModel', 'key' => 'abonnement_id', 'otherKey' => 'id'],
-    ];
-
-    /**
-     * @var array Validation rules
-     */
-    public $rules = [
     ];
 
     public function beforeCreate()

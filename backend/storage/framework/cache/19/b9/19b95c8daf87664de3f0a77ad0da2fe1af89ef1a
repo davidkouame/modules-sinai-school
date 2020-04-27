@@ -1,9 +1,0 @@
-1587792876a:1:{s:17:"detailexamens.htm";a:11:{s:8:"fileName";s:17:"detailexamens.htm";s:7:"content";s:146:"title = "Demonstration"
-url = "/examens/:examen_id"
-layout = "default"
-is_hidden = 0
-
-[detailexamen]
-[filAriane]
-==
-{% component 'detailexamen' %}";s:5:"mtime";i:1573909249;s:6:"markup";s:30:"{% component 'detailexamen' %}";s:4:"code";N;s:5:"title";s:13:"Demonstration";s:3:"url";s:19:"/examens/:examen_id";s:6:"layout";s:7:"default";s:9:"is_hidden";s:1:"0";s:12:"detailexamen";a:0:{}s:9:"filAriane";a:0:{}}}

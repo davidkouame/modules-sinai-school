@@ -35,6 +35,10 @@ class User extends UserBase
         'groups' => [UserGroup::class, 'table' => 'users_groups']
     ];
 
+    public $belongsTo = [
+        'role' => ['BootnetCrasher\Parametrage\Models\Role', 'key' => 'role_id', 'otherKey' => 'id'],
+    ];
+
     public $attachOne = [
         'avatar' => \System\Models\File::class
     ];
@@ -257,6 +261,8 @@ class User extends UserBase
             }
         }
         if($isSchool){
+            $this->is_admin = 1;
+            $this->role_id = 1;
             $school = new \BootnetCrasher\School\Models\SchoolModel;
             $school->libelle = $this->surname;
             $school->save();
