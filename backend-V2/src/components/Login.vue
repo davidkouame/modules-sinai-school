@@ -7,8 +7,8 @@
         </div>
 
         <form class="login100-form validate-form" v-on:submit="connection">
-          <span class="login100-form-title">Member Login</span>
-
+          <span class="login100-form-title">Connexion</span>
+          <div class="alert alert-danger" v-show="errorMessage">{{ errorMessage }}</div>
           <div
             class="wrap-input100 validate-input"
             data-validate="Valid email is required: ex@abc.xyz"
@@ -26,7 +26,7 @@
               type="password"
               name="pass"
               v-model="password"
-              placeholder="Password"
+              placeholder="Mot de passe"
             />
             <span class="focus-input100"></span>
             <span class="symbol-input100">
@@ -35,7 +35,7 @@
           </div>
 
           <div class="container-login100-form-btn">
-            <button class="login100-form-btn active" v-if="!showLoader">Login</button>
+            <button class="login100-form-btn active" v-if="!showLoader">Se connecter</button>
             <br />
             <button
               class="login100-form-btn active"
@@ -47,7 +47,7 @@
             >
               <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
               <span class="sr-only">Loading...</span>
-              Login
+              Se connecter
               <span
                 class="spinner-grow spinner-grow-sm"
                 role="status"
@@ -113,6 +113,7 @@ export default {
       let email = this.email;
       let password = this.password;
       let store = this.$store;
+      this.errorMessage = "";
       this.$store
         .dispatch("login", { email, password })
         .then(response => {
@@ -8035,7 +8036,8 @@ iframe {
 /*------------------------------------------------------------------
 [  ]*/
 .login100-form {
-  width: 290px;
+  /*width: 290px;*/
+  width: 335px
 }
 
 .login100-form-title {
