@@ -45,7 +45,7 @@
                 </div>
 
                 <!-- Liste -->
-                <table class="table table-hover table-striped">
+                <table class="table table-d">
                   <thead>
                     <tr>
                       <th>#</th>

@@ -18,7 +18,7 @@
           <div class="card">
 
             <div class="card-header">
-              <h4 class="card-title">Liste des notes</h4>
+              <h4 class="card-title">Liste des notes {{ countNotes }}</h4>
             </div>
 
             <div class="card-body">
@@ -60,7 +60,7 @@
                 </div>
 
                 <!-- Liste -->
-                <table class="table table-hover table-striped">
+                <table class="table table-d">
                   <thead>
                     <tr>
                       <th scope="col">#</th>
@@ -75,7 +75,7 @@
                   </thead>
                   <tbody>
                     <tr v-if="countNotes" v-for="(note, index) in notes">
-                      <th scope="row">{{ index + 1}}</th>
+                      <td scope="row">{{ index + 1}}</td>
                       <td><span v-if="note">{{ note.note.libelle }}</span></td>
                       <td><span v-if="note">{{ formatValeur(note.noteeleve.valeur) ?
                         formatValeur(note.noteeleve.valeur)+'/20': '--' }}</span></td>
@@ -87,9 +87,10 @@
                         <span v-if="note">{{ note.typenote.libelle }}</span>
                       </td>
                       <td class="actions">
-                        <a :href="'#/notes/preview/'+note.noteeleve.id">
+                        <!--<a :href="'#/notes/preview/'+note.noteeleve.id">
                           <i class="fa fa-eye fa-lg"></i>
-                        </a>
+                        </a>-->
+                        <a :href="'#/notes/preview/'+note.noteeleve.id" class="btn btn-icon btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i></a>
                       </td>
                     </tr>
 
@@ -202,17 +203,28 @@ export default {
       }else{
         return null;
       }
+    },
+    isEmpty(obj) {
+      for(var key in obj) {
+          if(obj.hasOwnProperty(key))
+              return false;
+      }
+      return true;
     }
   },
   computed: {
     notes() {
-      this.countNotes = this.$store.getters.notes.length > 0;
+      this.countNotes = !this.isEmpty(this.$store.getters.notes);
+      // console.log(this.$store.getters.notes);
+      // this.countNotes = this.$store.getters.notes.length > 0;
+      // console.log("count "+!this.isEmpty(this.$store.getters.notes));
+      // console.log("====== >"+JSON.stringify(this.$store.getters.notes))
       // this.countNotes = this.$store.getters.notes.length > 0;
       // var te = this.$store.getters.notes.length > 0;
       // console.log("le countNote est "+JSON.stringify(this.$store.getters.notes));
       // console.log("le countNote est "+te);
       // console.log("la liste des notes"+JSON.stringify(this.$store.getters.notes[0]))
-      console.log("liste des notes "+JSON.stringify(this.$store.getters.notes));
+      // console.log("liste des notes "+JSON.stringify(this.$store.getters.notes));
       return this.$store.getters.notes;
     },
     allnoteseleves() {
@@ -237,7 +249,7 @@ export default {
       return this.$store.getters.totalElement;
     },
     sectionsanneescolaire(){
-      console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+      // console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
       let sectionsanneescolaire = this.$store.getters.sectionsanneescolaire;
       let sectionAnneeScolaireId = this.sectionAnneeScolaireId;
       if(sectionsanneescolaire && sectionsanneescolaire.length > 0){

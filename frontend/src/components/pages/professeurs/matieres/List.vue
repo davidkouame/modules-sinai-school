@@ -32,7 +32,7 @@
               <h4 class="card-title">Liste des matières</h4>
             </template>
             <div class="card-body table-full-width table-responsive">
-              <table class="table table-hover table-striped">
+              <table class="table table-d">
                 <thead>
                   <tr>
                     <th scope="col">#</th>

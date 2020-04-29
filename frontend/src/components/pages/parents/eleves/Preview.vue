@@ -73,8 +73,8 @@ export default {
   created() {
     this.eleveId = this.$route.params.id;
     this.$store.dispatch("eleve", this.eleveId);
-    this.fetchAbsence();
-    this.fetchNote();
+    /// this.fetchAbsence();
+    /// this.fetchNote();
   },
   methods: {
     searchAbsenceEleve() {

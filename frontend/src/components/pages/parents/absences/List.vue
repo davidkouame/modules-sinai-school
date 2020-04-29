@@ -63,7 +63,7 @@
 
 
                 <!-- List -->
-                <table class="table table-hover table-striped">
+                <table class="table table-d">
                   <thead>
                     <tr>
                       <th scope="col">#</th>
@@ -76,16 +76,19 @@
                   </thead>
                   <tbody>
                     <tr v-if="absenceseleves" v-for="(absenceeleve, index) in absenceseleves">
-                      <th scope="row">{{ index + 1}}</th>
+                      <td scope="row">{{ index + 1}}</td>
                       <td>{{ getDate(absenceeleve.heure_debut_cours)|formatDate }}</td>
                       <td>{{ getTime(absenceeleve.heure_debut_cours) }}</td>
                       <td>{{ getTime(absenceeleve.heure_fin_cours) }}</td>
                       <td v-if="absenceeleve.raisonabsence">{{ absenceeleve.raisonabsence.libelle }}</td>
                       <td v-else="absenceeleve.raisonabsence"></td>
                       <td class="actions">
-                        <a :href="'#/absences/preview/'+absenceeleve.id">
+                        <!--<a :href="'#/absences/preview/'+absenceeleve.id">
                           <i class="fa fa-eye fa-lg"></i>
-                        </a>
+                        </a>-->
+
+                        <a :href="'#/absences/preview/'+absenceeleve.id" class="btn btn-icon btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i></a>
+
                       </td>
                     </tr>
                     <tr v-if="!countAbsences">

@@ -3,27 +3,27 @@
     <side-bar>
       <mobile-menu slot="content"></mobile-menu>
       <sidebar-link to="/dashboard">
-        <i class="nc-icon nc-chart-pie-35"></i>
+        <i class="ti-panel" aria-hidden="true"></i>
         <p>Tableau de bord</p>
       </sidebar-link>
       <sidebar-link to="/notes">
-        <i class="nc-icon nc-bell-55"></i>
+        <i class="fa fa-book" aria-hidden="true"></i>
         <p>Notes</p>
       </sidebar-link>
       <sidebar-link to="/absences">
-        <i class="nc-icon nc-bell-55"></i>
+        <i class="far fa-clock" aria-hidden="true"></i>
         <p>Absences</p>
       </sidebar-link>
-      <sidebar-link to="/matieres">
+      <!--<sidebar-link to="/matieres">
         <i class="nc-icon nc-bell-55"></i>
         <p>Matières</p>
-      </sidebar-link>
+      </sidebar-link>-->
       <sidebar-link to="/moyennes">
-        <i class="nc-icon nc-bell-55"></i>
+        <i class="ti-map" aria-hidden="true"></i>
         <p>Moyennes</p>
       </sidebar-link>
       <sidebar-link to="/parametres">
-        <i class="nc-icon nc-bell-55"></i>
+         <i class="fas fa-cogs" aria-hidden="true"></i>
         <p>Paramètres</p>
       </sidebar-link>
     </side-bar>
@@ -71,3 +71,19 @@ export default {
   }
 };
 </script>
+
+<style>
+  
+.sidebar[data-color="black"]::after, body > .navbar-collapse[data-color="black"]::after {
+
+    background: #15477A !important;
+        background-size: auto;
+    background-size: 150% 150%;
+
+}
+
+.sidebar::before, body > .navbar-collapse::before {
+    opacity: 0.8;
+    background: #000000;
+}
+</style>

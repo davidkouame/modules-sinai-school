@@ -9,6 +9,7 @@ use BootnetCrasher\School\Models\ParentModel;
 use Illuminate\Support\Facades\Validator;
 use RainLab\User\Models\User;
 use Bootnetcrasher\School\Classes\Sms;
+use BootnetCrasher\School\Models\ClasseEleveModel;
 
 class parentsController extends Controller
 {
@@ -73,7 +74,7 @@ class parentsController extends Controller
     }
 
     
-    public function show($id){ 
+    public function show(Request $request, $id){ 
         $data = $this->ParentModel->with(array(
             'user'=>function($query){
                 $query->select('*');
@@ -86,6 +87,18 @@ class parentsController extends Controller
                 ));
             },
              ))->select('*')->where('id', '=', $id)->first();
+        $data = $data->toArray();
+        // $classe = C::where('eleve_id')
+        foreach($data['eleves'] as $key => $eleve){
+            $classeeleve = ClasseEleveModel::where('eleve_id', $eleve['id'])
+            ->where('annee_scolaire_id', $request->get('annee_scolaire_id'))->first();
+            $classe = $classeeleve ? $classeeleve->classe : null;
+            // dd($classe->classe);
+            // dd($key);
+            // dd($data['eleves'][$key]);
+            $data['eleves'][$key]['classe'] = $classe->toArray();
+
+        }
         return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
     }
 

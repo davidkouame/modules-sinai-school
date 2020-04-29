@@ -298,7 +298,7 @@ class noteController extends Controller
                 $notes = $notes->where($key, $value);
             }
         }
-        // die("hdh");
+        // dd($notes->get());
         $notes = $notes->get();
         foreach($notes as $note){
             $noteeleve = NoteEleve::where('note_id', $note->id)->where('eleve_id', $request->get('eleve_id'))->first();
@@ -311,6 +311,7 @@ class noteController extends Controller
             ]);
         }
         $data = $collect->paginate(10)->toArray();
+        // dd($this->helpers->apiArrayResponseBuilder(200, 'success', $data));
         return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
     }
 

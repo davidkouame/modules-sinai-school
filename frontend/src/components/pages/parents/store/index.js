@@ -299,7 +299,7 @@ export default {
       }
       Axios.get(url)
         .then(response => {
-          // console.log("chargement des notes "+JSON.stringify(response.data.data.data));
+          // console.log("chargement des notes "+JSON.stringify(response.data.data.data[0]));
           context.commit('notes', response.data.data.data)
           context.commit('pageCount', response.data.data.last_page)
           context.commit('pageCountNote', response.data.data.last_page)
@@ -746,6 +746,18 @@ export default {
     parent(context, parentId) {
       Axios.get(
         context.state.endpoint + 'api/v1/parents/'+parentId)
+        .then(response => {
+          context.commit('parent', response.data.data)
+        })
+        .catch(error => {
+          console.log(error)
+          this.errored = true
+        })
+        .finally(() => (this.loading = false))
+    },
+    parentSearch(context, param) {
+      Axios.get(
+        context.state.endpoint + 'api/v1/parents/'+param.id+'?annee_scolaire_id='+param.annee_scolaire_id)
         .then(response => {
           context.commit('parent', response.data.data)
         })

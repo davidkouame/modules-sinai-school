@@ -14,7 +14,7 @@
       </nav>
 
       <div>
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <ul class="nav nav-tabs" id="myTab" role="tablist" style="background-color: #fff; height: 42px">
           <li class="nav-item">
             <a
               class="nav-link"
@@ -108,7 +108,7 @@
                       </div>-->
                     </div>
 
-                    <table class="table table-hover table-striped">
+                    <table class="table table-d">
                       <thead>
                       <tr>
                         <th scope="col">#</th>
@@ -122,7 +122,7 @@
                       </thead>
                       <tbody>
                       <tr v-if="countMoyennes" v-for="(moyenne, index) in moyennes">
-                        <th scope="row">{{ index + 1}}</th>
+                        <td scope="row">{{ index + 1}}</td>
                         <td>{{ moyenne.matiere.libelle }}</td>
                         <td>{{ formatMoyenne(moyenne.valeur) }} / 20</td>
                         <td>{{ moyenne.coefficient_matiere }}</td>
@@ -132,9 +132,10 @@
                         <td>{{ moyenne.rang }}</td>
                         <td>
                           <div class="row">
-                            <a :href="'#/moyennes/preview/'+moyenne.id" class="col">
+                            <!--<a :href="'#/moyennes/preview/'+moyenne.id" class="col">
                               <i class="fa fa-eye fa-lg"></i>
-                            </a>
+                            </a>-->
+                            <a :href="'#/moyennes/preview/'+moyenne.id" class="btn btn-icon btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i></a>
                           </div>
                         </td>
                       </tr>
@@ -154,7 +155,7 @@
                     ></modal>
 
                     <!-- Pagination -->
-                    <div class="float-right pagi" v-if="pageCount > 1">
+                    <!--<div class="float-right pagi" v-if="pageCount > 1">
                       <paginate
                         :page-count="pageCount"
                         :click-handler="fetch"
@@ -162,7 +163,7 @@
                         :next-text="'&raquo;'"
                         :container-class="'pagination'"
                       ></paginate>
-                    </div>
+                    </div>-->
 
                     <!--<a v-if="seeBtnValidation" class="btn btn-primary" @click="validate">valider</a>-->
                     <ul v-if="rapportvalidation">
@@ -193,7 +194,7 @@
                     <div class="table-responsive">
                       <!-- Zone de recherche -->
 
-                      <table class="table table-hover table-striped">
+                      <table class="table table-d">
                         <thead>
                         <tr>
                           <th scope="col">#</th>
@@ -206,7 +207,7 @@
                         </thead>
                         <tbody>
                         <tr v-if="countMoyennesSections" v-for="(moyenneSection, index) in moyennesSections">
-                          <th scope="row">{{ index + 1}}</th>
+                          <td scope="row">{{ index + 1}}</td>
                           <td><span v-if="moyenneSection.sectionanneescolaire">{{ moyenneSection.sectionanneescolaire.libelle }}</span></td>
                           <td> {{ moyenneSection.valeur }}</td>
                           <td>{{ moyenneSection.sectionanneescolaire.coefficient }}</td>
@@ -249,7 +250,7 @@
                     <div class="table-responsive">
                       <!-- Zone de recherche -->
 
-                      <table class="table table-hover table-striped">
+                      <table class="table table-d">
                         <thead>
                         <tr>
                           <th scope="col">#</th>
@@ -260,7 +261,7 @@
                         </thead>
                         <tbody>
                         <tr v-if="moyenneAnnuelle">
-                          <th scope="row">1</th>
+                          <td scope="row">1</td>
                           <td><span v-if="moyenneAnnuelle.anneescolaire">{{ moyenneAnnuelle.anneescolaire.libelle }}</span></td>
                           <td> {{ moyenneAnnuelle.valeur }}</td>
                           <td> {{ moyenneAnnuelle.rang }}</td>

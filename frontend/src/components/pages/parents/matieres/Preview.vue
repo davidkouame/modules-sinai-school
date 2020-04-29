@@ -148,7 +148,7 @@
                                         <br>
                                         <div class="row">
                                             <div class="col-md-12">
-                                              <table class="table table-hover table-striped">
+                                              <table class="table table-d">
                                                 <thead>
                                                   <tr>
                                                     <th scope="col">#</th>

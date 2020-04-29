@@ -1,21 +1,17 @@
 <template>
   <div class="content">
     <div class="container-fluid">
-
       <!-- Fil d'ariane -->
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
             <a href="#/">Accueil</a>
           </li>
-          <li class="breadcrumb-item active"  aria-current="page">
-            <a href="#/notes">
-              Notes
-            </a>
+          <li class="breadcrumb-item active" aria-current="page">
+            <!-- <a href="#/notes"> -->
+            <a href="javascript:void(0)" @click="$router.go(-1)">Notes</a>
           </li>
-          <li class="breadcrumb-item">
-              Détail note
-          </li>
+          <li class="breadcrumb-item">Détail note</li>
         </ol>
       </nav>
 
@@ -77,7 +73,7 @@
                         placeholder="Home Address"
                         class="form-control"
                         type="text"
-                        v-model="noteeleve.note.created_at"
+                        v-bind:value="noteeleve.note.created_at|formatDate"
                         disabled
                       />
                     </div>
@@ -110,7 +106,19 @@
                   </div>
                 </div>
                 <div class="row">
-                  <div class="col-md-12">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label class="control-label">Rang</label>
+                      <input
+                        aria-describedby="addon-right addon-left"
+                        class="form-control"
+                        type="text"
+                        v-model="noteeleve.rang"
+                        disabled
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-6">
                     <div class="form-group">
                       <label class="control-label">Description</label>
                       <textarea
@@ -123,7 +131,7 @@
                         disabled
                       >
                       {{ noteeleve.note.description }}
-                  </textarea>
+                      </textarea>
                     </div>
                   </div>
                 </div>
@@ -139,33 +147,36 @@
 </template>
 
 <script>
-import Axios from 'axios'
+import Axios from "axios";
 
 export default {
-  name: 'DetailNote',
-  data () {
+  name: "DetailNote",
+  data() {
     return {
       note_id: 0,
       eleve_id: 1,
-      elevenote: ''
-    }
+      elevenote: ""
+    };
   },
-  created () {
-    this.$store.dispatch('noteeleve', this.$route.params.id)
+  created() {
+    this.$store.dispatch("noteeleve", this.$route.params.id);
   },
   methods: {
-    formatValeur(valeur){
-      if(valeur.toString().length==1){
-        return '0'+valeur;
-      }else{
+    formatValeur(valeur) {
+      if (valeur.toString().length == 1) {
+        return "0" + valeur;
+      } else {
         return valeur;
       }
+    },
+    redirectBreadcrumbNote() {
+      alert("sss");
     }
   },
   computed: {
-    noteeleve () {
-      return this.$store.getters.noteeleve
+    noteeleve() {
+      return this.$store.getters.noteeleve;
     }
   }
-}
+};
 </script>

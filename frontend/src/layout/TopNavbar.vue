@@ -56,9 +56,9 @@
           </base-dropdown>-->
 
           <base-dropdown v-bind:title="titleDropdown" v-if="parentId">
-            <a v-for="eleve in eleves" class="dropdown-item" href="javascript:void(0)"
-                @click="changeEleve(eleve)">{{ eleve.user.name }} {{ eleve.user.surname }}
-                <i class="fa fa-check"  :class="{check:eleve.id == eleveId}" ></i>
+            <a v-for="eleve in eleves" class="dropdown-item" href="javascript:void(0)"@click="changeEleve(eleve)">
+                <span style="display: inline-block !important">{{ eleve.user.name }} {{ eleve.user.surname }}</span>
+                <i class="fa fa-check" style="display: inline-block !important" :class="{check:eleve.id == eleveId}" ></i>
             </a>
             <!--<a class="dropdown-item" href="javascript:void(0)" @click="changeEleve(0)">All</a>-->
           </base-dropdown>
@@ -72,7 +72,7 @@
           </base-dropdown>
 
           <li class="nav-item">
-            <a href="javascript:void(0)" v-on:click="logout" class="nav-link">Déconnexion</a>
+            <a href="javascript:void(0)" v-on:click="logout" class="nav-link btn btn-add">Déconnexion</a>
           </li>
         </ul>
       </div>

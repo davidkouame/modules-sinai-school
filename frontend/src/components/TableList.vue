@@ -10,7 +10,7 @@
               <h4 class="card-title">Striped Table with Hover</h4>
               <p class="card-category">Here is a subtitle for this table</p>
             </template>
-            <l-table class="table-hover table-striped"
+            <l-table class="table-d"
                      :columns="table1.columns"
                      :data="table1.data">
             </l-table>
@@ -41,7 +41,7 @@
               <h4 class="card-title">Small table</h4>
               <p class="card-category">Here is a subtitle for this table</p>
             </template>
-            <l-table class="table-hover table-striped table-sm"
+            <l-table class="table-d table-sm"
                      :columns="table1.columns"
                      :data="table1.data">
             </l-table>

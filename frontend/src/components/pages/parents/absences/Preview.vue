@@ -36,7 +36,7 @@
                         placeholder="First Name"
                         class="form-control"
                         type="text"
-                        v-bind:value="getDate(absenceeleve.heure_debut_cours)"
+                        v-bind:value="absenceeleve.heure_debut_cours|formatDate"
                         disabled
                       />
                       <!---->
