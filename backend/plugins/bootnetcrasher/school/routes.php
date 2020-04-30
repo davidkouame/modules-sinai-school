@@ -101,3 +101,56 @@ Route::get('api/v1/generate-data-for-section-annee-scolaire/{section_id}', funct
     $response = Bootnetcrasher\School\Classes\Abonnement::hasAbonnement($eleve);
     die($response);
 });*/
+
+Route::get('api/v1/send-code-reset-password/{email}', function($email){
+
+    $user = RainLab\User\Models\User::findByEmail($email);
+    if(!$user){
+        return response()->json(["status_code" => 400, "message" => "error", "data" => "Erreur code invalide !."]);
+    }
+    $code = implode('!', [$user->id, $user->getResetPasswordCode()]);
+    $link = "http://localhost:8080/#/check-reset-password/".$code;
+    $data = [
+        'name' => $user->name,
+        'link' => $link,
+        'code' => $code
+    ];
+    \Mail::send('rainlab.user::mail.restore', $data, function($message) use ($user) {
+        $message->to($user->email, $user->full_name);
+    });
+    return response()->json(["status_code" => 200, "message" => "success", "data" => "Un email a été envoyé !"]);
+});
+
+Route::get('api/v1/check-code-reset-password/{code}', function($code){
+    $parts = explode('!', $code);
+    if (count($parts) != 2) {
+        return response()->json(["status_code" => 400, "message" => "error", "data" => "Erreur code invalide !."]);
+    }
+
+    list($userId, $code) = $parts;
+
+    if (!strlen(trim($userId)) || !strlen(trim($code)) || !$code) {
+        return response()->json(["status_code" => 400, "message" => "error", "data" => "Erreur code invalide !."]);
+    }
+
+    if (!$user = \Auth::findUserById($userId)) {
+        return response()->json(["status_code" => 400, "message" => "error", "data" => "Erreur code invalide !."]);
+    }
+
+    return response()->json(["status_code" => 200, "message" => "success", "data" => ['user' => $user, 'code' => $code]]);
+});
+
+Route::post('api/v1/reset-password/{id}', function(\Illuminate\Http\Request $request, $id){
+    $user = \Auth::findUserById($id);
+    if (!$user) {
+        return response()->json(["status_code" => 400, "message" => "error", "data" => "Erreur user does not exist !."], 400, ['error' => 'invalid key']);
+    }
+    $result = $user->attemptResetPassword($request->get('code'), $request->get('password'));
+    // return response()->json(["status_code" => 200, "message" => "success", "data" => " L'utilisateur a été réinitialisé avec succès !."], 200, $user->toArray());
+    if (!$result) {
+        return response()->json(["status_code" => 400, "message" => "error", "data" => "Erreur when réinitialisation password !."]);
+    }else{
+        // return response()->json(["status_code" => 200, "message" => "success", "data" => $result->toArray()]);
+        return response()->json(["status_code" => 200, "message" => "success", "data" => " L'utilisateur a été réinitialisé avec succès !."], 200, $user->toArray());
+    }
+});

@@ -40,6 +40,8 @@ import ParentLayout from './layout/ParentLayout.vue'
 import ProfesseurLayout from './layout/ProfesseurLayout.vue'
 import moment from 'moment'
 
+import VueRouteMiddleware from 'vue-route-middleware';
+
 
 
 import VueCookies from 'vue-cookies'
@@ -70,7 +72,9 @@ const router = new VueRouter({
       return { x: 0, y: 0 }
     }
   }
-})
+});
+
+router.beforeEach(VueRouteMiddleware());
 
 /* eslint-disable no-new */
 /*new Vue({
@@ -122,7 +126,7 @@ Vue.mixin({
   }
 });
 
-const cookies = Vue.prototype.$cookies;
+/*
 
 let vue = null;
 if (cookies.get('userId')) {
@@ -171,6 +175,16 @@ if (cookies.get('userId')) {
   };
 }
 
-/* eslint-disable */
+// eslint-disable
 new Vue(vue);
+*/
+
+const cookies = Vue.prototype.$cookies;
+
+/* eslint-disable no-new */
+new Vue({
+  router,
+  store,
+  render: h => h(App)
+}).$mount("#app");
 

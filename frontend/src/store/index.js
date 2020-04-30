@@ -864,6 +864,20 @@ export default new Vuex.Store({
         })
         .finally(() => (this.loading = false))
     },
+    checkEmailResetPassword(context, email){
+      return Axios.get(
+        context.state.endpoint + 'api/v1/send-code-reset-password/'+ email
+      );
+    },
+    checkCodeResetPassword(context, code){
+      return Axios.get(
+        context.state.endpoint + 'api/v1/check-code-reset-password/'+ code
+      );
+    },
+    resetPassword(context, data) {
+      return Axios.post(context.state.endpoint + 'api/v1/reset-password/'+data.id, data.data,
+        { headers: { 'Content-Type': 'application/json' } })
+    }
   },
   modules: modules
 })
