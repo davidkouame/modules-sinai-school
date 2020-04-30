@@ -41,8 +41,7 @@
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label class="control-label">Email (
-                  <span class="span-required">*</span>)</label>
+                      <label class="control-label">Email <!--(<span class="span-required">*</span>)--></label>
                       <!---->
                       <input
                         class="form-control"
@@ -55,8 +54,7 @@
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label class="control-label">Téléphone (
-                  <span class="span-required">*</span>)</label>
+                      <label class="control-label">Téléphone <!--(<span class="span-required">*</span>)--></label>
                       <!---->
                       <input
                         class="form-control"

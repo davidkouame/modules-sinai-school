@@ -18,16 +18,16 @@ class eleveController extends Controller
     private $rules = [
         "name" => "required",
         "surname" => "required",
-        "tel" => 'required',
-        "email" => 'required',
+        // "tel" => 'required',
+        // "email" => 'required',
         // "datenaissance" => 'required'
     ];
     
     private $messages = [
         "name.required" => "Veuillez entrer un nom",
         "surname.required" => "Veuillez entrer un prénom",
-        "tel.required" => "Veuillez entrer un numéros",
-        "email.required" => "Veuillez entrer un email ",
+        // "tel.required" => "Veuillez entrer un numéros",
+        // "email.required" => "Veuillez entrer un email ",
         // "datenaissance.required" => "Veuillez entrer une date de naissance"
     ];
 
@@ -153,9 +153,11 @@ class eleveController extends Controller
                 $this->EleveModel->{key($arr)} = $data;
                 next($arr);
             }
+            $this->EleveModel->annee_scolaire_id = $request->get('annee_scolaire_id');
+            $this->EleveModel->school_id = $request->get('school_id');
             $this->EleveModel->save();
             $eleve = $this->EleveModel;
-            $this->createOrUpdateAccountUser($request, $eleve);
+            // $this->createOrUpdateAccountUser($request, $eleve);
             return $this->helpers->apiArrayResponseBuilder(201, 'created', ['id' => $this->EleveModel->id]);
         }else{
             return $this->helpers->apiArrayResponseBuilder(400, 'fail', $validation->errors() );
@@ -195,13 +197,15 @@ class eleveController extends Controller
 
     public function update($id, Request $request){
         $validation = Validator::make($request->all(), $this->rules, $this->messages);
-        if(
-            $validation->passes()){
+        if($validation->passes()){
             $status = $this->EleveModel->where('id',$id)->update($request->all());
             $eleve = $this->EleveModel->where('id',$id)->first();
-            $this->updateUser($this->EleveModel->where('id',$id)->first(), $request);
+            $eleve->annee_scolaire_id = $request->get('annee_scolaire_id');
+            $eleve->school_id = $request->get('school_id');
+            $eleve->save();
+            // $this->updateUser($this->EleveModel->where('id',$id)->first(), $request);
             if($status){
-                $this->createOrUpdateAccountUser($request, $eleve);
+                // $this->createOrUpdateAccountUser($request, $eleve);
                 return $this->helpers->apiArrayResponseBuilder(200, 'success', 'Data has been updated successfully.');
             }else{
                 return $this->helpers->apiArrayResponseBuilder(400, 'bad request', 'Error, data failed to update.');
