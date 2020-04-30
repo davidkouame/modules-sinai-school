@@ -53,7 +53,7 @@ class rapportvalidationController extends Controller
             next($arr);
         }
         $validation = Validator::make($request->all(), $this->RapportValidationModel->rules);
-        if( $validation->passes() ){
+        if($validation->passes() ){
             $this->RapportValidationModel->save();
             $this->validatedNote($this->RapportValidationModel->id, $request->get('classe_id'));
             return $this->helpers->apiArrayResponseBuilder(201, 'created', ['id' => $this->RapportValidationModel->id]);

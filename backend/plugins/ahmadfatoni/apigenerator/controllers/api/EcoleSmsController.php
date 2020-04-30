@@ -56,7 +56,7 @@ class EcoleSmsController extends Controller
 
         $validation = Validator::make($request->all(), $this->SmsSchoolModel->rules);
         
-        if( $validation->passes() ){
+        if($validation->passes() ){
             $this->SmsSchoolModel->save();
             return $this->helpers->apiArrayResponseBuilder(201, 'created', ['id' => $this->SmsSchoolModel->id]);
         }else{

@@ -88,7 +88,7 @@ class noteselevesController extends Controller
 
         $validation = Validator::make($request->all(), $this->NoteEleve->rules);
         
-        if( $validation->passes() ){
+        if($validation->passes() ){
             $this->NoteEleve->save();
             return $this->helpers->apiArrayResponseBuilder(201, 'created', ['id' => $this->NoteEleve->id]);
         }else{

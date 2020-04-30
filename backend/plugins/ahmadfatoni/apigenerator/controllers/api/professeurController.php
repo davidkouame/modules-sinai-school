@@ -81,7 +81,7 @@ class professeurController extends Controller
     public function store(Request $request){
         $arr = $request->except('create_account');
         $validation = Validator::make($request->all(), $this->rules, $this->messages);
-        if( $validation->passes() ){
+        if($validation->passes() ){
             /*while ( $data = current($arr)) {
                 $this->ProfesseurModel->{key($arr)} = $data;
                 next($arr);

@@ -58,7 +58,7 @@ class raisonabsenceController extends Controller
     public function store(Request $request){
     	$arr = $request->all();
         $validation = Validator::make($request->all(), $this->rules, $this->messages);
-        if( $validation->passes() ){
+        if($validation->passes() ){
             while ( $data = current($arr)) {
                 $this->RaisonAbsenceModel->{key($arr)} = $data;
                 next($arr);

@@ -177,7 +177,7 @@ class moyenneController extends Controller
 
         $validation = Validator::make($request->all(), $this->MoyenneModel->rules);
         
-        if( $validation->passes() ){
+        if($validation->passes() ){
             $this->MoyenneModel->save();
             return $this->helpers->apiArrayResponseBuilder(201, 'created', ['id' => $this->MoyenneModel->id]);
         }else{

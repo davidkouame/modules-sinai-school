@@ -32,8 +32,8 @@
           <tr v-if="sectionsanneescolaire" v-for="(sectionanneescolaire, index) in sectionsanneescolaire">
             <th scope="row">{{ indexPagnation + index + 1}}</th>
             <td>{{ sectionanneescolaire.libelle}}</td>
-            <td>{{ sectionanneescolaire.start}}</td>
-            <td>{{ sectionanneescolaire.end }}</td>
+            <td>{{ sectionanneescolaire.start|formatDate}}</td>
+            <td>{{ sectionanneescolaire.end|formatDate }}</td>
             <td>
               <a :href="'#/sections-annee-scolaire/preview/'+sectionanneescolaire.id" class="btn btn-icon btn-info btn-sm">
                 <!----><i class="fa fa-eye"></i><!---->

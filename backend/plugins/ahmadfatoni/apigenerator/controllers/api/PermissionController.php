@@ -71,7 +71,7 @@ class PermissionController extends Controller
 
         $validation = Validator::make($request->all(), $this->PermissionModel->rules);
         
-        if( $validation->passes() ){
+        if($validation->passes() ){
             $this->PermissionModel->save();
             return $this->helpers->apiArrayResponseBuilder(201, 'created', ['id' => $this->PermissionModel->id]);
         }else{

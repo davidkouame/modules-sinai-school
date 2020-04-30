@@ -121,7 +121,7 @@ class absenceselevesController extends Controller
             $this->AbsenceEleveModel->section_annee_scolaire_id = $request->get("section_annee_scolaire_id");
             if (count($this->AbsenceEleveModel->rules) > 0) {
                 $validation = Validator::make($request->all(), $this->AbsenceEleveModel->rules);
-                if ($validation->passes()) {
+                if (!$validation->passes()) {
                     $this->AbsenceEleveModel->save();
                     return $this->helpers->apiArrayResponseBuilder(201, 'created', ['id' => $this->AbsenceEleveModel->id]);
                 } else {

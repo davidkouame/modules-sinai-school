@@ -60,7 +60,7 @@ class SouscriptionSchoolController extends Controller
 
         $validation = Validator::make($request->all(), $this->SouscriptionSchoolModel->rules);
         
-        if( $validation->passes() ){
+        if($validation->passes() ){
             $this->SouscriptionSchoolModel->save();
             return $this->helpers->apiArrayResponseBuilder(201, 'created', ['id' => $this->SouscriptionSchoolModel->id]);
         }else{

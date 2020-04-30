@@ -73,7 +73,7 @@ class classeeleveController extends Controller
 
         $validation = Validator::make($request->all(), $this->ClasseEleveModel->rules);
         
-        if( $validation->passes() ){
+        if($validation->passes() ){
             $this->ClasseEleveModel->save();
             return $this->helpers->apiArrayResponseBuilder(201, 'created', ['id' => $this->ClasseEleveModel->id]);
         }else{

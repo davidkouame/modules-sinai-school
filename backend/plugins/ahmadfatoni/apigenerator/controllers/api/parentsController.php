@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Validator;
 use RainLab\User\Models\User;
 use Bootnetcrasher\School\Classes\Sms;
 use BootnetCrasher\School\Models\ClasseEleveModel;
+use BootnetCrasher\School\Models\AbonnementModel;
 
 class parentsController extends Controller
 {
@@ -21,7 +22,7 @@ class parentsController extends Controller
         "name" => "required",
         "surname" => "required",
         "tel" => 'required',
-        "email" => 'required',
+        "email" => 'required|unique:bootnetcrasher_school_parent',
         "pays_id" => 'required',
     ];
     
@@ -30,7 +31,17 @@ class parentsController extends Controller
         "surname.required" => "Veuillez entrer un prénom",
         "tel.required" => "Veuillez entrer un numéros",
         "email.required" => "Veuillez entrer un email",
+        "email.unique" => "Email doit être unique",
         "pays_id.required" => "Veuillez entrer un pays",
+    ];
+
+    private $rules_user = [
+        'email'    => 'required|between:6,255|email|unique:users'
+    ];
+
+    public $messages_user = [
+        "email.required" => "Veuillez entrer un email",
+        "email.unique" => "Email doit être unique",
     ];
 
     public function __construct(ParentModel $ParentModel, Helpers $helpers)
@@ -104,8 +115,14 @@ class parentsController extends Controller
 
     public function store(Request $request){
         $arr = $request->except('create_account');
+        // Validation user
+        $validation = Validator::make($request->all(), $this->rules_user);
+        if(!$validation->passes()){
+            return $this->helpers->apiArrayResponseBuilder(400, 'fail', $validation->errors() );
+        }
+        // Validation Parent
         $validation = Validator::make($request->all(), $this->rules, $this->messages);
-        if( $validation->passes() ){
+        if($validation->passes() ){
             while ( $data = current($arr)) {
                 $this->ParentModel->{key($arr)} = $data;
                 next($arr);
@@ -145,11 +162,14 @@ class parentsController extends Controller
         try{
             // recuperation du parent
             $parent = ParentModel::find($user->parenteleve_id);
-            // trace_log("tel ".$parent->tel);
-            $sms = new Sms();
-            $body = "Mes félicitations, votre compte a été crée avec succès .\nUser:".$user->email."\nPassword: 0000.\n".
-            "Site : www.ayauka.com\nAyauka vous remercie pour votre fidélité .";
-            $sms->sendParamsUserConnexionQueue($parent->tel, $body, $parent);
+            // recuperation de l'abonnement du parent
+            $abonnement = AbonnementModel::where('parent_id', $parent->id)->first();
+            if($abonnement){
+                $sms = new Sms();
+                $body = "Mes félicitations, votre compte a été crée avec succès .\nUser:".$user->email."\nPassword: 0000.\n".
+                "Site : www.ayauka.com\nAyauka vous remercie pour votre fidélité .";
+                $sms->sendParamsUserConnexionQueue($parent->tel, $body, $parent, $abonnement);
+            }
         }catch (\Exception $ex){
             trace_log("message : ".$ex->getMessage());
             // trace_log("message : ".$ex->getTrace());
@@ -157,6 +177,12 @@ class parentsController extends Controller
     }
 
     public function update($id, Request $request){
+        // Validation user
+        $validation = Validator::make($request->all(), $this->User->rules, $this->User->messages);
+        if(!$validation->passes() ){
+            return $this->helpers->apiArrayResponseBuilder(400, 'fail', $validation->errors() );
+        }
+        // Validation parent
         $validation = Validator::make($request->all(), $this->rules, $this->messages);
         if($validation->passes()){
             $status = $this->ParentModel->where('id',$id)->update($request->except('create_account'));

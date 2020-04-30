@@ -67,7 +67,7 @@ class sessionUserAppController extends Controller
 
         $validation = Validator::make($request->all(), $this->SessionUserAppModel->rules);
         
-        if( $validation->passes() ){
+        if($validation->passes() ){
             $this->SessionUserAppModel->save();
             return $this->helpers->apiArrayResponseBuilder(201, 'created', ['id' => $this->SessionUserAppModel->id]);
         }else{

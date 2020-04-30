@@ -46,7 +46,7 @@ class parametrageAppController extends Controller
 
         $validation = Validator::make($request->all(), $this->ParametrageAppModel->rules);
         
-        if( $validation->passes() ){
+        if($validation->passes() ){
             $this->ParametrageAppModel->save();
             return $this->helpers->apiArrayResponseBuilder(201, 'created', ['id' => $this->ParametrageAppModel->id]);
         }else{

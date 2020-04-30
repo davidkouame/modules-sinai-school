@@ -54,7 +54,7 @@ class UsersGroupsController extends Controller
 
         $validation = Validator::make($request->all(), $this->UsersGroups->rules);
         
-        if( $validation->passes() ){
+        if($validation->passes() ){
             $this->UsersGroups->save();
             return $this->helpers->apiArrayResponseBuilder(201, 'created', ['id' => $this->UsersGroups->id]);
         }else{

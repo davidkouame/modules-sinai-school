@@ -40,7 +40,7 @@
             <td>{{ user.name }}</td>
             <td>{{ user.email }}</td>
             <td>{{ user.role ? user.role.libelle : '' }}</td>
-            <td>{{ user.created_at }}</td>
+            <td>{{ user.created_at|formatDate }}</td>
             <td>
               <a
                 :href="'#/users/preview/'+user.id"

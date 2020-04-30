@@ -53,7 +53,7 @@ class PaysController extends Controller
     public function store(Request $request){
     	$arr = $request->all();
         $validation = Validator::make($request->all(), $this->rules, $this->messages);
-        if( $validation->passes() ){
+        if($validation->passes() ){
             while ( $data = current($arr)) {
                 $this->PaysModel->{key($arr)} = $data;
                 next($arr);
@@ -67,7 +67,7 @@ class PaysController extends Controller
 
     public function update($id, Request $request){
         $validation = Validator::make($request->all(), $this->rules, $this->messages);
-        if($validation->passes()){
+        if(!$validation->passes()){
             $status = $this->PaysModel->where('id',$id)->update($data);
             if( $status ){
                 return $this->helpers->apiArrayResponseBuilder(200, 'success', 'Data has been updated successfully.');

@@ -148,7 +148,7 @@ class eleveController extends Controller
     public function store(Request $request){
         $arr = $request->all();
         $validation = Validator::make($request->all(), $this->rules, $this->messages);
-        if( $validation->passes() ){
+        if($validation->passes() ){
             while ( $data = current($arr)) {
                 $this->EleveModel->{key($arr)} = $data;
                 next($arr);
@@ -195,7 +195,8 @@ class eleveController extends Controller
 
     public function update($id, Request $request){
         $validation = Validator::make($request->all(), $this->rules, $this->messages);
-        if($validation->passes()){
+        if(
+            $validation->passes()){
             $status = $this->EleveModel->where('id',$id)->update($request->all());
             $eleve = $this->EleveModel->where('id',$id)->first();
             $this->updateUser($this->EleveModel->where('id',$id)->first(), $request);

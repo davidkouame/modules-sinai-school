@@ -45,7 +45,7 @@
             <td>{{ abonnement.parent ? abonnement.parent.name+' '+abonnement.parent.surname : '--' }}</td>
             <!--<td>{{ abonnement.anneescolaire ? abonnement.anneescolaire.libelle : '--' }}</td>-->
             <!--<td>{{ abonnement.created_at | formatDate }}</td>-->
-            <td>{{ abonnement.created_at }}</td>
+            <td>{{ abonnement.created_at|formatDate }}</td>
             <td>
               <a
                 :href="'#/abonnements/preview/'+abonnement.id"

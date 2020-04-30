@@ -417,7 +417,7 @@ class noteController extends Controller
 
     public function store(Request $request){
         $validation = Validator::make($request->all(), $this->rules, $this->messages);
-        if( $validation->passes() ){
+        if($validation->passes() ){
             $datajson = json_decode($request->getContent(), true);
             $bodyResponse = null;
             $arr = $request->all();

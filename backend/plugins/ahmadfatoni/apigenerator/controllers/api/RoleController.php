@@ -58,7 +58,7 @@ class RoleController extends Controller
     public function store(Request $request){
         $arr = $request->all();
         $validation = Validator::make($request->all(), $this->Role->rules);
-        if( $validation->passes() ){
+        if($validation->passes() ){
             while ( $data = current($arr)) {
                 $this->Role->{key($arr)} = $data;
                 next($arr);

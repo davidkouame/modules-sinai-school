@@ -89,7 +89,7 @@ class ProfesseurClasseController extends Controller
 
         $validation = Validator::make($request->all(), $this->ProfesseurClasseModel->rules);
         
-        if( $validation->passes() ){
+        if($validation->passes() ){
             $this->ProfesseurClasseModel->save();
             return $this->helpers->apiArrayResponseBuilder(201, 'created', ['id' => $this->ProfesseurClasseModel->id]);
         }else{

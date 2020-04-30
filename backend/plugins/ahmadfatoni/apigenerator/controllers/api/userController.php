@@ -59,8 +59,6 @@ class userController extends Controller
         return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
     }
 
-    
-
     /*public function show($id){
         $data = $this->User->with(array(
             'users'=>function($query){
@@ -92,7 +90,7 @@ class userController extends Controller
 
         $validation = Validator::make($request->all(), $this->User->rules);
 
-        if( $validation->passes() ){
+        if(!$validation->passes() ){
             $this->User->save();
             return $this->helpers->apiArrayResponseBuilder(201, 'created', ['id' => $this->User->id]);
         }else{
@@ -118,7 +116,7 @@ class userController extends Controller
     public function store(Request $request){
         $arr = $request->except('password');
         $validation = Validator::make($request->all(), $this->rules, $this->messages);
-        if( $validation->passes() ){
+        if($validation->passes() ){
             while ( $data = current($arr)) {
                 $this->User->{key($arr)} = $data;
                 next($arr);

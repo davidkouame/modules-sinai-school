@@ -39,7 +39,7 @@
                       <input
                         class="form-control"
                         type="text"
-                        v-model="note.datenoteeffectue"
+                        v-bind:value="note.datenoteeffectue|formatDate"
                         disabled
                       />
                       <!---->

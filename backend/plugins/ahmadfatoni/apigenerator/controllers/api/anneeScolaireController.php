@@ -109,7 +109,7 @@ class anneeScolaireController extends Controller
     public function store(Request $request){
         $arr = $request->all();
         $validation = Validator::make($arr, $this->rules, $this->messages);
-        if( $validation->passes() ){
+        if($validation->passes() ){
             $this->AnneeScolaireModel->type_annee_scolaire_id = $request->get('type_annee_scolaire_id');
             while ( $data = current($arr)) {
                 $this->AnneeScolaireModel->{key($arr)} = $data;
@@ -125,7 +125,7 @@ class anneeScolaireController extends Controller
     public function update($id, Request $request){
         $arr = $request->all();
         $validation = Validator::make($arr, $this->rules, $this->messages);
-        if( $validation->passes() ){
+        if($validation->passes() ){
             $anneescolaire = $this->AnneeScolaireModel->where('id',$id)->first();
             while ( $data = current($arr)) {
                 $anneescolaire->{key($arr)} = $data;

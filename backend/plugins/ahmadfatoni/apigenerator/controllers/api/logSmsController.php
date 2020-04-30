@@ -71,7 +71,7 @@ class logSmsController extends Controller
 
         $validation = Validator::make($request->all(), $this->LogSmsModel->rules);
         
-        if( $validation->passes() ){
+        if($validation->passes() ){
             $this->LogSmsModel->save();
             return $this->helpers->apiArrayResponseBuilder(201, 'created', ['id' => $this->LogSmsModel->id]);
         }else{

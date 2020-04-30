@@ -139,13 +139,22 @@ export default {
   },
   created() {
     // recuperation de tous les types de notes
-    this.$store.dispatch('getAllTypesNote', {payload: 0})
+    this.$store.dispatch('getAllTypesNote', {payload: 0 , search: [
+        {key: 'school_id', value: this.$cookies.get('ecoleId')},
+        {key: 'annee_scolaire_id', value: this.$cookies.get('anneeScolaireId')}
+        ] });
     // recuperation de toutes les matieres
-    this.$store.dispatch('getAllMatieres', {payload: 0})
+    this.$store.dispatch('getAllMatieres', {payload: 0});
     // recuperation de toutes les classes
-    this.$store.dispatch('getAllClasses', {payload: 0})
+    this.$store.dispatch('getAllClasses', {payload: 0, search: [
+        {key: 'school_id', value: this.$cookies.get('ecoleId')},
+        {key: 'annee_scolaire_id', value: this.$cookies.get('anneeScolaireId')}
+        ] });
     // recuperation de toutes les sections annee scolaire
-    this.$store.dispatch('getAllSectionsAnneeScolaire', {payload: 0})
+    this.$store.dispatch('getAllSectionsAnneeScolaire', {payload: 0, search: [
+        {key: 'school_id', value: this.$cookies.get('ecoleId')},
+        {key: 'annee_scolaire_id', value: this.$cookies.get('anneeScolaireId')}
+        ] })
     // console.log("liste des refs "+JSON.stringify(this))
   },
   methods:{

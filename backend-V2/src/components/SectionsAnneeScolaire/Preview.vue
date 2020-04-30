@@ -24,7 +24,7 @@
                       <input
                         class="form-control"
                         type="text"
-                        v-model="sectionanneescolaire.start"
+                        v-bind:value="sectionanneescolaire.start|formatDate"
                         disabled
                       />
                       <!---->
@@ -39,7 +39,7 @@
                       <input
                         class="form-control"
                         type="text"
-                        v-model="sectionanneescolaire.end"
+                        v-bind:value="sectionanneescolaire.end|formatDate"
                         disabled
                       />
                       <!---->

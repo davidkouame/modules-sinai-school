@@ -8,8 +8,12 @@ use BackendMenu;
 use Illuminate\Http\Request;
 use AhmadFatoni\ApiGenerator\Helpers\Helpers;
 use BootnetCrasher\School\Models\AbonnementModel;
+use BootnetCrasher\School\Models\ParentModel;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Validator;
+use RainLab\User\Models\User;
+use Bootnetcrasher\School\Classes\Sms;
+use BootnetCrasher\Parametrage\Models\PackAbonnementModel;
 
 class AbonnementController extends Controller
 {
@@ -53,8 +57,12 @@ class AbonnementController extends Controller
                 if ($key == "search") {
                     $data = $data->where("reference", 'like', '%'.$request->get('search').'%')
                     ->orWhereHas('parent', function($queryEleve) use($request) {
-                        $queryEleve->where("name", 'like', '%'.$request->get('search').'%')
-                        ->orWhere("surname", 'like', '%'.$request->get('search').'%');
+                        foreach(explode(" ", $request->get('search')) as $val){
+                            if(strlen(trim($val)) > 0){
+                                $queryEleve->where("name", 'like', '%'.$val.'%')
+                                ->orWhere("surname", 'like', '%'.$val.'%');
+                            }
+                        }
                     });
                 } else {
                     $data = $data->where($key, $value);
@@ -89,11 +97,37 @@ class AbonnementController extends Controller
             $this->AbonnementModel->{key($arr)} = $data;
             next($arr);
         }
-        if( $validation->passes() ){
-            $this->AbonnementModel->save();
-            return $this->helpers->apiArrayResponseBuilder(201, 'created', ['id' => $this->AbonnementModel->id]);
+        if($validation->passes() ){
+            // recuperation des sms par abonnement
+            $sms = PackAbonnementModel::find($request->get('pack_abonnement_id'));
+            $this->AbonnementModel->nbre_sms_initial = $sms->nbre_sms;
+            $status = $this->AbonnementModel->save();
+            if($status){
+                $this->sharedPassword($this->AbonnementModel);
+                return $this->helpers->apiArrayResponseBuilder(201, 'created', ['id' => $this->AbonnementModel->id]);
+            }else{
+                return $this->helpers->apiArrayResponseBuilder(400, 'fail', ["error" => "Erreur lors de la création d'un abonnement "] );    
+            }
+            
         }else{
             return $this->helpers->apiArrayResponseBuilder(400, 'fail', $validation->errors() );
+        }
+    }
+
+    public function sharedPassword($abonnement){
+        try{
+            $user = User::where('parenteleve_id', $abonnement->parent_id)->first();
+            if($user){
+                // recuperation du parent
+                $parent = ParentModel::find($abonnement->parent_id);
+                $sms = new Sms();
+                $body = "Mes félicitations, votre compte a été crée avec succès .\nUser:".$user->email."\nPassword: 0000.\n".
+                "Site : www.ayauka.com\nAyauka vous remercie pour votre fidélité .";
+                $sms->sendParamsUserConnexionQueue($parent->tel, $body, $parent, $abonnement);
+            }
+        }catch (\Exception $ex){
+            trace_log("message : ".$ex->getMessage());
+            // trace_log("message : ".$ex->getTrace());
         }
     }
 
@@ -104,13 +138,21 @@ class AbonnementController extends Controller
                 next($arr);
             }
             $validation = Validator::make($request->all(), $this->rules, $this->messages);
-            if( $validation->passes() ){
+            if($validation->passes() ){
                 $this->AbonnementModel->annee_scolaire_id = $request->get('annee_scolaire_id');
                 $this->AbonnementModel->school_id = $request->get('school_id');
-                $this->AbonnementModel->save();
-                $this->createAbonnementEleve($this->AbonnementModel, $request->get('eleves'));
-                $this->updateParentEleve($request->get('parent_id'), $request->get('eleves'));
-                return $this->helpers->apiArrayResponseBuilder(201, 'created', ['id' => $this->AbonnementModel->id]);
+                $sms = PackAbonnementModel::find($request->get('pack_abonnement_id'));
+                $this->AbonnementModel->nbre_sms_initial = $sms->nbre_sms;
+                $status = $this->AbonnementModel->save();
+                if($status){
+                    $this->createAbonnementEleve($this->AbonnementModel, $request->get('eleves'));
+                    $this->updateParentEleve($request->get('parent_id'), $request->get('eleves'));
+                    $this->sharedPassword($this->AbonnementModel);
+                    return $this->helpers->apiArrayResponseBuilder(201, 'created', ['id' => $this->AbonnementModel->id]);
+                }else{
+                    return $this->helpers->apiArrayResponseBuilder(400, 'fail', ["error" => "Erreur lors de la création d'un abonnement "] );    
+                }
+                
             }else{
                 return $this->helpers->apiArrayResponseBuilder(400, 'fail', $validation->errors() );
             }

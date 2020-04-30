@@ -84,13 +84,11 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label class="control-label">Créer un compte user</label>
-                      <!---->
                       <input
                         class="form-control"
                         type="checkbox"
                         v-model="parent.create_account"
                       />
-                      <!---->
                     </div>
                   </div>
                 </div>

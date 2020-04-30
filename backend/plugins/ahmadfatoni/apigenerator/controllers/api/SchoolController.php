@@ -70,7 +70,7 @@ class SchoolController extends Controller
 
         $validation = Validator::make($request->all(), $this->SchoolModel->rules);
         
-        if( $validation->passes() ){
+        if($validation->passes() ){
             $this->SchoolModel->save();
             return $this->helpers->apiArrayResponseBuilder(201, 'created', ['id' => $this->SchoolModel->id]);
         }else{

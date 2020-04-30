@@ -79,7 +79,7 @@ class PermissionRoleController extends Controller
 
         $validation = Validator::make($request->all(), $this->PermissionRoleModel->rules);
         
-        if( $validation->passes() ){
+        if($validation->passes() ){
             $this->PermissionRoleModel->save();
             return $this->helpers->apiArrayResponseBuilder(201, 'created', ['id' => $this->PermissionRoleModel->id]);
         }else{
