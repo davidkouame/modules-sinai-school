@@ -62,7 +62,7 @@
     "html-webpack-plugin": "^2.30.1",
     "jest": "^22.0.4",
     "jest-serializer-vue": "^0.3.0",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "laravel-elixir": "^6.0.0-18",
     "laravel-elixir-browserify-official": "^0.1.3",
     "laravel-elixir-vue-2": "^0.3.0",
