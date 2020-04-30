@@ -570,6 +570,10 @@ export default new Vuex.Store({
       let url = context.state.endpoint + "api/v1/anneesscolaires/get-by-school-id/"+schoolId;
       return Axios.get(url);
     },
+    getUserSession(context, userId){
+      let url = context.state.endpoint + "api/v1/sessionsuserapp?user_id="+userId;
+      return Axios.get(url);
+    },
     getSectionsAnneeScolaire(context, params) {
       let nameUrl = "sectionsanneescolaire"
       let url = getUrl(context, nameUrl, params)
@@ -1208,6 +1212,12 @@ export default new Vuex.Store({
     updateSchoolCustomise(context, params){
       return Axios.put(
         context.state.endpoint + 'api/v1/schools/customise-school/'+params.id, params.data,
+        { headers: { 'Content-Type': 'application/json' }  }
+      )
+    },
+    saveUserSession(context, data){
+      return Axios.post(
+        context.state.endpoint + 'api/v1/sessionsuserapp', data,
         { headers: { 'Content-Type': 'application/json' }  }
       )
     },

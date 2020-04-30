@@ -135,17 +135,40 @@ export default {
             this.$cookies.set("anneeScolaireId", response.data.data.data[0].id);
             // console.log("====> role id"+this.$cookies.get("roleId"));
 
-            // recuperation de toutes les permissions
+            // recuperation de la session user
             this.$store
-            .dispatch("onloadPermissions", this.$cookies.get("roleId"))
+            .dispatch("getUserSession", this.$cookies.get("userId"))
             .then(response => {
-              // console.log("reponse permission");
-              // console.log(response.data.data);
-              this.$cookies.set("permissions", response.data.data);
+              // sauvegarde de la session 
+              if(response.data.data){
+                let user = response.data.data.data[0];
+                this.$cookies.set("anneeScolaireId", user.annee_scolaire_id);
+              }else{
+                this.$store
+                .dispatch("saveUserSession", {user_id: this.$cookies.get("userId"), 
+                annee_scolaire_id: this.$cookies.get("anneeScolaireId")})
+              }
 
               // recuperation de toutes les permissions
-              window.location.reload();
-            })
+              this.$store
+              .dispatch("onloadPermissions", this.$cookies.get("roleId"))
+              .then(response => {
+                // console.log("reponse permission");
+                // console.log(response.data.data);
+                this.$cookies.set("permissions", response.data.data);
+
+                // recuperation de toutes les permissions
+                window.location.reload();
+              })
+              .catch(response => {
+                this.errorMessage =
+                  "Désolé, l'email ou le mot de passe est incorrect";
+                console.log(response);
+                this.showLoader = false;
+                this.errored = true;
+              })
+              .finally(() => (this.loading = false));
+              })
             .catch(response => {
               this.errorMessage =
                 "Désolé, l'email ou le mot de passe est incorrect";
@@ -155,7 +178,11 @@ export default {
             })
             .finally(() => (this.loading = false));
 
-            // window.location.reload();
+
+
+
+            
+
           }).catch(response => {
             this.errorMessage =
               "Désolé, l'email ou le mot de passe est incorrect";

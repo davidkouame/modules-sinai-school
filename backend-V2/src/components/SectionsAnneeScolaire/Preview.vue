@@ -91,8 +91,8 @@
               <div class="float-right">
                 <a href="#/sections-annee-scolaire" class="btn btn-danger">Retour</a>
                 &nbsp;
-                <a @click="validateSection" class="btn btn-primary btn-add" v-if="!sectionanneescolaire.validated_at">Valider1 la section</a>
-                <a href="javascript:void(0)" class="btn btn-primary float-right btn-add" v-if="sectionanneescolaire.validated_at" disabled>Valider2 la section</a>
+                <a @click="validateSection" class="btn btn-primary btn-add" v-if="!sectionanneescolaire.validated_at" >Valider la section <div v-bind:class="{'spinner-border-customize': valueDisabledValidateSectionAnneeScolaire}"></div></a>
+                <a href="javascript:void(0)" class="btn btn-primary float-right btn-add" v-if="sectionanneescolaire.validated_at" disabled>Valider la section</a>
 
                 <!--<a @click="generateMoyenne" class="btn btn-primary float-right" style="background: #EE2D20;color: #fff;opacity: 1;">Générer la moyenne</a>-->
                 
@@ -110,6 +110,7 @@ export default {
   data() {
     return {
       title: "Détail section année scolaire",
+      valueDisabledValidateSectionAnneeScolaire: false
     };
   },
   created() {
@@ -135,17 +136,20 @@ export default {
       let data = {
         validated_at: currentDateWithFormat // new Date().toJSON(),
       };*/
+      this.valueDisabledValidateSectionAnneeScolaire = true;
       let store = this.$store;
       store
         .dispatch("validateModel", {"url": "sectionsanneescolaire", "data": {}, "id": this.$route.params.id})
         .then(response => {
           alert("La section a été validé avec succès !")
-          this.$router.go(-1)
+          // this.$router.go(-1)
+          window.location.reload();
         })
         .catch(error => {
           console.log(error);
           alert("Echec lors de la validation")
           this.errored = true;
+          this.valueDisabledValidateSectionAnneeScolaire = false;
         })
         .finally(() => (this.loading = false));
     }

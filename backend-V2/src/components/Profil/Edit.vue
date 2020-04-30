@@ -66,7 +66,7 @@
                   <div v-bind:class="{'spinner-border-customize': valueDisabled}"></div>
                 </button>
                 &nbsp;
-                  <a @click="validateAnneeScolaire" class="btn btn-primary btn-add" v-if="isValidate()">Valider l'année scolaire</a>
+                  <a @click="validateAnneeScolaire" class="btn btn-primary btn-add" v-if="isValidate()">Valider l'année scolaire <div v-bind:class="{'spinner-border-customize': valueDisabledValidateAnneeScolaire}"></div></a>
                   <a href="javascript:void(0)" class="btn btn-primary btn-add" disabled v-else>Valider l'année scolaire</a>
               </div>
             </div>
@@ -89,7 +89,8 @@ export default {
       error: null,
       anneescolaire: null,
       password: null,
-      confirmationpassword: null
+      confirmationpassword: null,
+      valueDisabledValidateAnneeScolaire: false
     };
   },
   created() {
@@ -138,8 +139,11 @@ export default {
           id: this.$cookies.get("userId")
         })
         .then(response => {
-          alert("L'enregistrement a été éffectué avec succès");
           this.$cookies.set("anneeScolaireId", this.anneescolaire);
+          this.$store
+          .dispatch("saveUserSession", {user_id: this.$cookies.get("userId"), 
+          annee_scolaire_id: this.anneescolaire});
+          alert("L'enregistrement a été éffectué avec succès");
           window.location.reload();
         })
         .catch(error => {
@@ -150,6 +154,7 @@ export default {
         .finally(() => (this.loading = false));
     },
     validateAnneeScolaire(){
+      this.valueDisabledValidateAnneeScolaire = true;
       let store = this.$store;
       store
         .dispatch("validateModel", {"url": "anneesscolaires", "data": {school_id: this.$cookies.get('ecoleId')}, "id": this.anneescolaire})
@@ -161,6 +166,7 @@ export default {
           console.log(error);
           alert("Echec lors de la validation")
           this.errored = true;
+          this.valueDisabledValidateAnneeScolaire = false;
         })
         .finally(() => (this.loading = false));
     },
