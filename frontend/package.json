@@ -14,12 +14,15 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "luxon": "^1.23.0",
     "run": "^1.4.0",
     "vue": "^2.5.2",
     "vue-cookies": "^1.6.1",
+    "vue-datetime": "^1.0.0-beta.13",
     "vue-route-middleware": "^1.0.7",
     "vue-router": "^3.0.1",
-    "vuex": "^3.1.1"
+    "vuex": "^3.1.1",
+    "weekstart": "^1.0.1"
   },
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^5.11.2",

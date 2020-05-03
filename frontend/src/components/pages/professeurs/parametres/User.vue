@@ -1,7 +1,7 @@
 <template>
   <div class="content">
     <div class="container-fluid">
-      <ul class="nav nav-tabs" id="myTab" role="tablist">
+      <ul class="nav nav-tabs" id="myTab" role="tablist" style="background-color: #fff">
         <li class="nav-item">
           <a
             class="nav-link"
@@ -53,14 +53,27 @@
           role="tabpanel"
           aria-labelledby="user-connexion"
         >
-          <div class="col-12">
+        <!-- Show error message -->
+      <div v-if="error" class="col-md-12">
+        <message-error v-bind:error="error"></message-error>
+      </div>
+
+          <div class="col-12" style="padding: 0px;">
             <div class="card">
               <div class="card-body">
                 <form>
                   <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Username</label>
+                    <label class="col-sm-2 col-form-label">Nom (
+                  <span class="span-required">*</span>)</label>
                     <div class="col-sm-10">
-                      <input v-model="username" type="text" class="form-control" />
+                      <input v-model="nom" type="text" class="form-control" />
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Prénoms (
+                  <span class="span-required">*</span>)</label>
+                    <div class="col-sm-10">
+                      <input v-model="prenom" type="text" class="form-control" />
                     </div>
                   </div>
                   <div class="form-group row">
@@ -70,7 +83,7 @@
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Tel</label>
+                    <label class="col-sm-2 col-form-label">Tel </label>
                     <div class="col-sm-10">
                       <input v-model="tel" type="text" class="form-control" />
                     </div>
@@ -87,7 +100,7 @@
                       <input v-model="password_confirmation" type="password" class="form-control" />
                     </div>
                   </div>
-                  <a v-on:click="updateUser()" class="btn btn-primary float-right">Enregistrer</a>
+                  <a v-on:click="updateUser()" class="btn btn-primary btn-add float-right">Enregistrer <div v-bind:class="{'spinner-border-customize': valueDisabled}"></div></a>
                 </form>
               </div>
             </div>
@@ -112,17 +125,17 @@
                         <tr>
                           <th scope="col">#</th>
                           <th scope="col">Libelle</th>
-                          <th scope="col">Professeur principale</th>
+                          <!--<th scope="col">Professeur principale</th>-->
                           <th scope="col">Nombre d'élève</th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr v-if="classes" v-for="(classe, index) in classes">
-                          <th scope="row">{{ index + 1}}</th>
+                          <td scope="row">{{ index + 1}}</td>
                           <td>{{ classe.classe.libelle }}</td>
-                          <td v-if="classe.classe.professeurprincipal">{{ classe.classe.professeurprincipal.nom }} {{ classe.classe.professeurprincipal.prenom }}</td>
-                          <td></td>
-                          <td>{{ classe.classe.nbre_eleve_id }}</td>
+                          <!--<td v-if="classe.classe.professeurprincipal">{{ classe.classe.professeurprincipal.nom }} {{ classe.classe.professeurprincipal.prenom }}</td>
+                          <td></td>-->
+                          <td>{{ classe.classe ? classe.classe.nbre_eleve : '0' }}</td>
                         </tr>
                       </tbody>
                     </table>
@@ -147,14 +160,14 @@
                 <div class="card-body">
                     <form>
                     <div class="form-group row">
-                      <label class="col-sm-2 col-form-label">Année Scolaire</label>
+                      <label class="col-sm-2 col-form-label">Année Scolaire </label>
                       <div class="col-sm-10">
-                        <select v-model="anneescolaire" class="form-control">
+                        <select v-model="anneescolaire" class="form-control" v-if="anneesscolaires">
                             <option :value="annee" v-for="annee in anneesscolaires">{{ annee.libelle }}</option>
                         </select>
                       </div>
                     </div>
-                    <a v-on:click="saveSessionUser()" class="btn btn-primary float-right">Enregistrer</a>
+                    <a v-on:click="saveSessionUser()" class="btn btn-primary btn-add float-right">Enregistrer <div v-bind:class="{'spinner-border-customize': valueDisabledAnneeScolaire}"></div></a>
                   </form>
                 </div>
               </div>
@@ -179,13 +192,18 @@ export default {
       confirmpassword: null,
       tel: null,
       selected: 1,
-      anneescolaire: null
+      anneescolaire: null,
+      nom: null,
+      prenom: null,
+      error: null,
+      valueDisabled: false,
+      valueDisabledAnneeScolaire: false
     };
   },
   created() {
     this.$store.dispatch("professeurP", this.$cookies.get("professeurId"));
     this.$store.dispatch("sessionuserapp", {user_id: this.$cookies.get("userId")});
-    this.$store.dispatch("anneesscolaires");
+    this.$store.dispatch("getAllAnneesScolaires", {payload: 0});
     this.$store.dispatch(
       "getClassesByProfesseurIdP",
       this.$cookies.get("professeurId")
@@ -193,13 +211,23 @@ export default {
   },
   methods: {
     updateUser() {
-      const data = new FormData();
-      data.append("username", this.username);
+      this.error = "";
+      this.valueDisabled = true;
+      // const data = new FormData();
+      let data = null;
+      // data.append("username", this.username);
+      /*data.append("name", this.nom);
+      data.append("surname", this.prenom);
       data.append("tel", this.tel);
-      data.append("email", this.email);
+      data.append("email", this.email);*/
+      
       if (this.password) {
-        data.append("password", this.password);
-        data.append("password_confirmation", this.password_confirmation);
+        // data.append("password", this.password);
+        // data.append("password_confirmation", this.password_confirmation);
+        data = {name: this.nom, surname: this.prenom, tel: this.tel, 
+        email: this.email, password: this.password, password_confirmation: this.password_confirmation};
+      }else{
+        data = {name: this.nom, surname: this.prenom, tel: this.tel, email: this.email};
       }
       let store = this.$store;
       store
@@ -207,15 +235,19 @@ export default {
         .then(response => {
           store.dispatch("raisonsabsences", response.data.data);
           alert("La mise à jour a été effectué avec succès !");
+          window.location.reload();
         })
         .catch(error => {
           console.log(error);
-          alert("echec lors de l'enregistrement");
+          // alert("echec lors de l'enregistrement");
           this.errored = true;
+          this.error = error;
+          this.valueDisabled = false;
         })
         .finally(() => (this.loading = false));
     },
     saveSessionUser() {
+      this.valueDisabledAnneeScolaire = true;
       /*const data = new FormData();
       data.append("annee_scolaire_id", this.anneescolaire.id);
       data.append("user_id", this.$cookies.get("userId"));*/
@@ -240,8 +272,10 @@ export default {
         })
         .catch(error => {
           console.log(error);
-          alert("echec lors de l'enregistrement");
+          // alert("echec lors de l'enregistrement");
+          this.error = error;
           this.errored = true;
+          this.valueDisabledAnneeScolaire = false;
         })
         .finally(() => (this.loading = false));
     }
@@ -263,7 +297,9 @@ export default {
   },
   watch: {
     professeur: function() {
-      this.username = this.professeur.users.name;
+      // console.log("professeur "+JSON.stringify(this.professeur))
+      this.nom = this.professeur.nom;
+      this.prenom = this.professeur.prenom;
       this.email = this.professeur.users.email;
       this.tel = this.professeur.tel;
     },

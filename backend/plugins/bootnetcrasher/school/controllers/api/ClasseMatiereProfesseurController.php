@@ -31,7 +31,7 @@ class classeMatiereProfesseurController extends Controller
 
     public function getClassesByProfesseurId($professeurId = null){
         $data = $this->ClasseMatiereModel->where('professeur_id', $professeurId)
-        ->groupBy('professeur_id')->with(array(
+        ->with(array(
             'classe'=>function($query){
                 //$query->select('*');
                 $query->with(array(

@@ -116,7 +116,15 @@ class eleveController extends Controller
         ))->select('*');
 
         foreach($request->except('page') as $key => $value){
-            $data = $data->where($key, $value);
+            if($key == "classe_id"){
+                $data = $data->whereHas('classeseleves', function ($query) use ($request) {
+                    if ($request->has('classe_id')) {
+                        $query->where('classe_id', $request->get('classe_id'));
+                    }
+                });
+            }else{
+                $data = $data->where($key, $value);
+            }
         }
 
         $data = $data->get()->toArray();

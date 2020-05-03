@@ -14,7 +14,7 @@
         </ol>
       </nav>
 
-      <ul class="nav nav-tabs" id="myTab" role="tablist">
+      <ul class="nav nav-tabs" id="myTab" role="tablist" style="background-color: #fff">
         <li class="nav-item">
           <a
             class="nav-link"
@@ -286,7 +286,7 @@
                       </thead>
                       <tbody>
                         <tr v-if="countNotes" v-for="(note, index) in notes">
-                          <th scope="row">{{ index + 1}}</th>
+                          <td scope="row">{{ index + 1}}</td>
                           <td><a :href="'#/notes/preview/'+note.id" >{{ note.libelle }}</a></td>
                           <td>{{ note.created_at|formatDate }}</td>
                           <td> {{ note.type_note_libelle}} </td>
@@ -299,7 +299,7 @@
                         formatValeur(note.valeur*note.coefficient)+'/'+note.coefficient*20 : '--'}}</td>
                           <td>{{ note.rang ? note.rang : '--' }}</td>
                           <td>
-                            <div class="row">
+                            <div class="row" style="margin-left: 16px">
                               <!--<a :href="'#/notes/preview/'+note.id" class="col">
                                 <i class="fa fa-eye fa-lg"></i>
                               </a>-->
@@ -311,10 +311,10 @@
                                 id="show-modal"
                                 @click="showModalF(note.id, 'note')"
                                 :class="note.id"
-                                class="col "
-                                style="cursor:pointer;color:#42d0ed"
+                                class="col btn btn-icon btn-success btn-sm"
+                                style="color: #fff"
                               >
-                                <i class="fa fa-pencil fa-lg"></i>
+                                <i class="fa fa-edit"></i>
                               </a>
                             </div>
                           </td>
@@ -393,11 +393,11 @@
                             </div>
                           </div>
                         </div>-->
-                        <div class="col-1 add-form">
+                        <!--<div class="col-1 add-form">
                           <a :href="'#/absences/add'">
                             <i class="fa fa-plus-circle fa-lg font-size-28"></i>
                           </a>
-                        </div>
+                        </div>-->
                       </div>
 
                       <table class="table table-d">
@@ -412,7 +412,7 @@
                         </thead>
                         <tbody>
                           <tr v-if="absenceseleves" v-for="(absenceeleve, index) in absenceseleves">
-                            <th scope="row">{{ index + 1}}</th>
+                            <td scope="row">{{ index + 1}}</td>
                             <td>{{ absenceeleve.heure_debut_cours}}</td>
                             <td>{{ absenceeleve.heure_fin_cours}}</td>
                             <!-- <td>{{ noteeleve.note.created_at|formatDate }}</td> -->
@@ -424,20 +424,20 @@
                               <div class="row">
                                 <a
                                   :href="'#/absences/preview/'+absenceeleve.id"
-                                  class="col"
+                                  class="col btn btn-icon btn-info btn-sm"
                                 >
-                                  <i class="fa fa-eye fa-lg"></i>
-                                </a>
-                                <a :href="'#/absences/update/'+absenceeleve.id" class="col">
-                                  <i class="fa fa-pencil fa-lg"></i>
-                                </a>
+                                  <i class="fa fa-eye"></i>
+                                </a>&nbsp;
+                                <a :href="'#/absences/update/'+absenceeleve.id" class="col btn btn-icon btn-success btn-sm">
+                                  <i class="fa fa-edit"></i>
+                                </a>&nbsp;
                                 <a
                                   id="show-modal"
                                   @click="showModalF(absenceeleve.id, 'absence')"
-                                  class="col"
+                                  class="col btn btn-icon btn-danger btn-sm btn-delete"
                                   style="cursor:pointer;color:#42d0ed"
                                 >
-                                  <i class="fa fa-trash-o fa-lg"></i>
+                                  <i class="fa fa-trash"></i>
                                 </a>
                               </div>
                             </td>
@@ -535,13 +535,16 @@ export default {
           payload: pageNum,
           search: [{ key: "libelle", value: search },
                   { key: "professeur_id", value: this.$cookies.get("professeurId") },
-                  { key: "eleve_id", value: this.$route.params.id }]
+                  { key: "classe_id", value: this.$cookies.get("classeId") }
+                  /*{ key: "eleve_id", value: this.$route.params.id }*/]
         });
       } else {
         this.$store.dispatch("allnotesandvaleurV2", {
           payload: pageNum,
           search: [{ key: "professeur_id", value: this.$cookies.get("professeurId") },
-                  { key: "eleve_id", value: this.$route.params.id }]
+                  /*{ key: "eleve_id", value: this.$route.params.id }*/
+                  { key: "classe_id", value: this.$cookies.get("classeId")}
+                  ]
         });
       }
     },
@@ -592,7 +595,7 @@ export default {
   },
   computed: {
     notes() {
-      this.countNotes = this.$store.getters.notes.length;
+      this.countNotes = this.$store.getters.notes ? this.$store.getters.notes.length : 0;
       this.countNotes = this.countNotes > 0;
       return this.$store.getters.notes;
     },
@@ -640,9 +643,9 @@ export default {
   },
   watch:{
     eleve: function() {
-      this.$store.dispatch('getMatiereByProfesseurAndClasse', {"professeurId":
+      /*this.$store.dispatch('getMatiereByProfesseurAndClasse', {"professeurId":
       this.$cookies.get("professeurId"),
-      "classeId": this.eleve.classeseleves[0].classe_id});
+      "classeId": this.eleve.classeseleves[0].classe_id});*/
     },
     matiere: function(){
         if(this.matiere){

@@ -25,46 +25,46 @@
             <div class="card-body">
               <form>
                 <div class="form-group row">
-                  <label class="col-sm-2 col-form-label">Libelle</label>
-                  <div class="col-sm-10">
+                  <label class="col-sm-3 col-form-label">Libelle</label>
+                  <div class="col-sm-9">
                     <input type="text" class="form-control" v-model="libelle" disabled/>
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label class="col-sm-2 col-form-label">Date de note effectué</label>
-                  <div class="col-sm-10">
+                  <label class="col-sm-3 col-form-label">Date de note effectué</label>
+                  <div class="col-sm-9">
                     <input type="date" class="form-control" v-model="datenoteeffectue" disabled/>
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label class="col-sm-2 col-form-label">Types notes</label>
-                  <div class="col-sm-10">
-                    <input v-bind:value="note.typenote.libelle" type="text" class="form-control" disabled/>
+                  <label class="col-sm-3 col-form-label">Types notes</label>
+                  <div class="col-sm-9">
+                    <input v-bind:value="note.typenote ? note.typenote.libelle : ''" type="text" class="form-control" disabled/>
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label class="col-sm-2 col-form-label">Classes</label>
-                  <div class="col-sm-10">
-                    <input v-bind:value="note.classe.libelle" type="text" class="form-control" disabled/>
+                  <label class="col-sm-3 col-form-label">Classes</label>
+                  <div class="col-sm-9">
+                    <input v-bind:value="note.classe ? note.classe.libelle : ''" type="text" class="form-control" disabled/>
                   </div>
                 </div>
 
                 <!-- Matiere -->
                 <div class="form-group row">
-                  <label class="col-sm-2 col-form-label">Matières</label>
-                  <div class="col-sm-10">
-                    <input v-bind:value="note.matiere.libelle" type="text" class="form-control" disabled/>
+                  <label class="col-sm-3 col-form-label">Matières</label>
+                  <div class="col-sm-9">
+                    <input v-bind:value="note.matiere ? note.matiere.libelle : ''" type="text" class="form-control" disabled/>
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label class="col-sm-2 col-form-label">Coefficient</label>
-                  <div class="col-sm-10">
+                  <label class="col-sm-3 col-form-label">Coefficient</label>
+                  <div class="col-sm-9">
                     <input v-model="coefficient" type="number" class="form-control" disabled/>
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label class="col-sm-2 col-form-label">Description</label>
-                  <div class="col-sm-10">
+                  <label class="col-sm-3 col-form-label">Description</label>
+                  <div class="col-sm-9">
                     <textarea v-model="description" class="form-control" disabled></textarea>
                   </div>
                 </div>
@@ -98,10 +98,10 @@ export default {
     this.$store.dispatch("eleves");
     this.$store.dispatch("typesnotes");
     this.$store.dispatch("matieres");
-    this.$store.dispatch(
+    /*this.$store.dispatch(
       "classesByProfesseur",
       this.$cookies.get("professeurId")
-    );
+    );*/
     this.$store.dispatch("note", this.$route.params.id);
   },
   methods: {

@@ -3,7 +3,7 @@
         <div class="modal-mask">
             <div class="modal-wrapper">
                 
-                <div class="modal-container" v-bind:class="{ active: modaltype=='delete' }">
+                <div class="col-md-4 modal-container" v-bind:class="{ active: modaltype=='delete' }">
 
                     <!--<div class="modal-header">
                         <slot name="header">
@@ -11,7 +11,7 @@
                         </slot>
                     </div>-->
 
-                    <div class="modal-body">
+                    <div class="modal-body" style="text-align: center">
                         <slot name="body">
                             {{ getTextBody() }}
                         </slot>
@@ -29,7 +29,7 @@
                     </div>
                 </div>
                 
-                <div class="modal-container" v-bind:class="{ active: modaltype=='addValue' }">
+                <div class="col-md-4 modal-container" v-bind:class="{ active: modaltype=='addValue' }">
 
 
                     <div class="modal-body">
@@ -124,7 +124,7 @@ export default {
         // this.showModal = false
       this.$store.dispatch('deleteNote', this.modelid).then(response => {
         this.$emit('close')
-        alert("L'enregistrement a été supprimé avec succès")
+        alert("La suppression a été effectué avec succès")
         //  this.$router.push('/notes')
           location.reload()
       })
@@ -208,7 +208,7 @@ export default {
     }
 
     .modal-container {
-        width: 300px;
+        /*width: 300px;*/
         margin: 0px auto;
         padding: 20px 30px;
         background-color: #fff;

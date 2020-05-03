@@ -33,7 +33,7 @@ use \October\Rain\Database\Traits\SoftDelete;
     public $belongsTo = [
         "raisonabsence" => ["BootnetCrasher\Parametrage\Models\RaisonAbsenceModel", "key" => "raisonabsence_id", "otherKey" => "id"],
         "eleve" => ["BootnetCrasher\School\Models\EleveModel", "key" => "eleve_id", "otherKey" => "id"],
-        "sectionanneescolaire" => ["BootnetCrasher\School\Models\SectionAnneeScolaireModel", "key" => "eleve_id", "otherKey" => "id"],
+        "sectionanneescolaire" => ["BootnetCrasher\School\Models\SectionAnneeScolaireModel", "key" => "section_annee_scolaire_id", "otherKey" => "id"],
     ];
 
     public function afterCreate() {

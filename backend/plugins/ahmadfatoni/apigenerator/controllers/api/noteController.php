@@ -30,7 +30,7 @@ class noteController extends Controller
     
     private $messages = [
         "libelle.required" => "Veuillez entrer un libellé",
-        "datenoteeffectue.required" => "Veuillez entrer la date à la note a été effectuée",
+        "datenoteeffectue.required" => "Veuillez entrer la date à la quelle la note a été effectuée",
         "typenote_id.required" => "Veuillez sélectionner le type de note",
         "matiere_id.required" => "Veuillez sélectionner une matière",
         "coefficient.required" => "Veuillez entrer un coefficient",
@@ -79,15 +79,21 @@ class noteController extends Controller
                     }
                 );
             }else if($key == "search"){
+                $array_date = explode("/", $value);
+                $index1 = isset($array_date[2]) ? $array_date[2]."-" : '';
+                $index2 = isset($array_date[1]) ? $array_date[1]."-" : '';
+                $index3 = isset($array_date[0]) ? $array_date[0] : '';
+                $date = $index1.$index2.$index3;
                 $data = $data->where("libelle", 'like', '%'.$value.'%')
-                ->orWhere('created_at', 'like', '%'.$value.'%')
+                ->orWhere('created_at', 'like', '%'.$date.'%')
                 ->orWhere('reference', 'like', '%'.$value.'%')
                 ->orWhereHas(
                     'typenote',function($query) use($request){
-                        $query->where('libelle', $request->get('search'))
+                        $query->where("libelle", 'like', '%'.$request->get('search').'%')
                         ->select('*');
                     }
                 );
+                
             } else{
                 $data = $data->where($key, $value);
             }
@@ -154,22 +160,26 @@ class noteController extends Controller
         return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
     }
 
-    // elle retourne les notes et ainsi que le valeur
+    // elle retourne les notes et ainsi que les valeur
     public function indexValeurV2(Request $request){
-        $data = DB::table('bootnetcrasher_school_note_eleve')
-            ->join('bootnetcrasher_school_note', 'bootnetcrasher_school_note.id', '=', 'bootnetcrasher_school_note_eleve.note_id')
+        $data = DB::table('bootnetcrasher_school_note')
+            ->leftjoin('bootnetcrasher_school_note_eleve', 'bootnetcrasher_school_note_eleve.note_id', '=', 'bootnetcrasher_school_note.id')
             ->join('bootnetcrasher_school_type_note', 'bootnetcrasher_school_type_note.id', '=', 'bootnetcrasher_school_note.typenote_id')
             ->join('bootnetcrasher_school_matiere', 'bootnetcrasher_school_matiere.id', '=', 'bootnetcrasher_school_note.matiere_id')
             ->join('bootnetcrasher_school_classe', 'bootnetcrasher_school_classe.id', '=', 'bootnetcrasher_school_note.classe_id');
+        
         foreach($request->except(['page']) as $key => $value){
             if($key == "libelle"){
                 $data->where('bootnetcrasher_school_note.libelle', 'like', '%'.$value.'%');
             }elseif ($key == "eleve_id"){
+                // recuperation de classe 
                 $data->where('bootnetcrasher_school_note_eleve.eleve_id', '=', $value);
             }else{
                 $data = $data->where($key, $value);
             }
         }
+        // dd($data->where('professeur_id', 19)->get());
+        // dd($data->get());
         $data = $data->select('bootnetcrasher_school_note.libelle', 'bootnetcrasher_school_type_note.libelle as type_note_libelle',
             'bootnetcrasher_school_note.created_at', 'bootnetcrasher_school_note_eleve.valeur', 'bootnetcrasher_school_note_eleve.rang',
             'bootnetcrasher_school_note.coefficient', 'bootnetcrasher_school_note_eleve.id as note_eleve_id', 'bootnetcrasher_school_note.id')
@@ -418,9 +428,9 @@ class noteController extends Controller
     public function store(Request $request){
         $validation = Validator::make($request->all(), $this->rules, $this->messages);
         if($validation->passes() ){
-            $datajson = json_decode($request->getContent(), true);
-            $bodyResponse = null;
-            $arr = $request->all();
+            // $datajson = json_decode($request->getContent(), true);
+            // $bodyResponse = null;
+            // $arr = $request->all();
             
             $note = new NoteModel();
             /*while ( $data = current($arr)) {

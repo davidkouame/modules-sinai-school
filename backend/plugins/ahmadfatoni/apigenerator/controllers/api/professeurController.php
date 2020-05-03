@@ -101,25 +101,26 @@ class professeurController extends Controller
     }
 
     public function createOrUpdateAccountUser($data, $professeur){
-        if($data->create_account){
-            $user = User::where('professeur_id', $professeur->id)->first();
-            if($user){
-                $user->password = "0000";
-                $user->password_confirmation = "0000";
-            }else{
-                $user = new User;
-                $user->name = $data->name;
-                $user->email = $data->email;
-                $user->surname = $data->surname;
-                $user->username = $data->email;
-                $user->password = "0000";
-                $user->password_confirmation = "0000";
-                $user->activated_at = now();
-                $user->professeur_id = $professeur->id;
-            }
-            $user->save();
-            $this->sharedPassword($user);
+        // if($data->create_account){
+        $user = User::where('professeur_id', $professeur->id)->first();
+        if($user){
+            $user->password = "0000";
+            $user->password_confirmation = "0000";
+        }else{
+            $user = new User;
+            $user->name = $data->name;
+            $user->email = $data->email;
+            $user->surname = $data->surname;
+            $user->username = $data->email;
+            $user->password = "0000";
+            $user->password_confirmation = "0000";
+            $user->activated_at = now();
+            $user->is_activated = 1;
+            $user->professeur_id = $professeur->id;
         }
+        $user->save();
+        $this->sharedPassword($user);
+        // 
     }
 
     public function sharedPassword($user){

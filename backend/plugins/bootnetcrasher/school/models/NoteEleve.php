@@ -107,12 +107,13 @@ class NoteEleve extends Model {
         try{
             if($this->valeur){
                 $eleve = EleveModel::find($this->eleve_id);
-                if($eleve && Abonnement::hasAbonnement($eleve, $this->note->sectionanneescolaire->anneescolaire)){
+                if($eleve && $this->note && $this->note->sectionanneescolaire && Abonnement::hasAbonnement($eleve, $this->note->sectionanneescolaire->anneescolaire)){
                     // $parent = ParentModel::find($eleve->parent_id);
                     $anneescolaire = $this->note && $this->note->sectionanneescolaire 
                     && $this->note->sectionanneescolaire->anneescolaire ? $this->note->sectionanneescolaire->anneescolaire : null;
                     $parent = Abonnement::getParentToAbonnement($eleve, $anneescolaire);
-                    $abonnement = Abonnement::getParentToAbonnement($eleve, $anneescolaire);
+                    // $abonnement = Abonnement::getParentToAbonnement($eleve, $anneescolaire);
+                    $abonnement = Abonnement::getAbonnement($eleve, $anneescolaire);
                     if($parent && $abonnement){
                         $body = $eleve->name.' '.$eleve->surname . " a obtenu ".$this->valeur.'/'.($this->note->coefficient*20)." en ".
                             $this->note->matiere->libelle;
@@ -137,7 +138,8 @@ class NoteEleve extends Model {
                 // Queue::push(CalculMoyenneJob::class, '');
             }
         }catch(\Exception $e){
-            trace_log("message : ".$e->getMessage().", trace :".$e->getTrace());
+            // trace_log("message : ".$e->getMessage().", trace :".$e->getTrace());
+            // trace_log("message : ".$e->getMessage());
         }
     }
 }

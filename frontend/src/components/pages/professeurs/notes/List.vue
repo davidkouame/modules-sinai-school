@@ -27,7 +27,7 @@
                 <!-- Zone de recherche -->
                 <div class="row">
                     <div class="float-left col-2">
-                        <base-dropdown v-bind:title="titleDropdownClasse">
+                        <base-dropdown v-bind:title="titleDropdownClasse" v-if="classes">
                             <a v-for="classe in classes" class="dropdown-item"
                                 href="javascript:void(0)" @click="changeClasse(classe)">
                               {{ classe.classe.libelle }}
@@ -58,7 +58,7 @@
                             </div>
                             <div class="col-md-1">
                                 <div class="col-1 add-form">
-                                    <a :href="'#/notes/add'">
+                                    <a :href="'#/notes/add'" style="color: #3F5E7D">
                                       <i class="fa fa-plus-circle fa-lg font-size-28"></i>
                                     </a>
                                 </div>
@@ -81,23 +81,25 @@
                   </thead>
                   <tbody>
                     <tr v-if="countNotes" v-for="(note, index) in notes">
-                      <th scope="row">{{ index + 1}}</th>
+                      <td scope="row">{{ indexPagnation + index + 1}}</td>
                       <td>{{ note.libelle }}</td>
                       <td>{{ note.created_at|formatDate }}</td>
                       <td>
                         <span v-if="note.typenote">{{ note.typenote.libelle }}</span>
                       </td>
-                      <td>{{ note.classe.libelle }}</td>
+                      <td>{{ note.classe ? note.classe.libelle : '' }}</td>
                       <td>
                         <div class="row">
-                          <a :href="'#/notes/preview/'+note.id" class="col">
-                            <i class="fa fa-eye fa-lg"></i>
-                          </a>
-                          <a v-if="!note.rapport_validation_id" :href="'#/notes/update/'+note.id" class="col">
-                            <i class="fa fa-pencil fa-lg"></i>
-                          </a>
-                          <a v-if="!note.rapport_validation_id" id="show-modal" @click="showModalF(note.id)" class="col" style="cursor:pointer;color:#42d0ed">
-                            <i class="fa fa-trash-o fa-lg"></i>
+                          <a :href="'#/notes/preview/'+note.id" class="col btn btn-icon btn-info btn-sm">
+                            <!---->
+                            <i class="fa fa-eye"></i>
+                            <!---->
+                          </a>&nbsp;
+                          <a v-if="!note.rapport_validation_id" :href="'#/notes/update/'+note.id" class="col btn btn-icon btn-success btn-sm">
+                            <i class="fa fa-edit"></i>
+                          </a>&nbsp;
+                          <a v-if="!note.rapport_validation_id" id="show-modal" @click="showModalF(note.id)" class="col btn btn-icon btn-danger btn-sm btn-delete" style="cursor:pointer;color:#42d0ed">
+                            <i class="fa fa-trash"></i>
                           </a>
                         </div>
                       </td>
@@ -157,7 +159,8 @@ export default {
       noteid: null,
       countNotes: null,
       classeId: null,
-      titleDropdownClasse: null
+      titleDropdownClasse: null,
+      indexPagnation: 0
       // sectionAnneeScolaireId: this.$cookies.get('sectionAnneeScolaireId')
     };
   },
@@ -170,7 +173,7 @@ export default {
     fetch(pageNum, search = null) {
       pageNum = pageNum == null ? 1 : pageNum;
       let params = [
-        { key: "libelle", value: search },
+        { key: "search", value: search },
         { key: "classe_id", value: this.classeListId },
         { key: "professeur_id", value: this.$cookies.get('professeurId') },
         { key: "section_annee_scolaire_id", value: this.sectionAnneeScolaireId }
@@ -215,7 +218,7 @@ export default {
   },
   computed: {
     notes() {
-      this.countNotes = this.$store.getters.notes.length;
+      this.countNotes = this.$store.getters.notes ? this.$store.getters.notes.length : 0;
       this.countNotes = this.countNotes > 0;
       return this.$store.getters.notes;
     },
@@ -259,6 +262,9 @@ export default {
         // console.log(this.sectionAnneeScolaireId);
         // this.fetch();
         this.refreshList();
+    },
+    currentPage() {
+      this.indexPagnation = (this.currentPage - 1) * 10;
     }
   }
 };
@@ -267,4 +273,6 @@ export default {
   .check{display: block !important}
   a .fa-check{display: none}
   li { list-style-type: none}
+
+  
 </style>

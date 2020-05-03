@@ -15,6 +15,12 @@
       </nav>
 
       <div class="row">
+
+        <!-- Show error message -->
+      <div v-if="error" class="col-md-12">
+        <message-error v-bind:error="error"></message-error>
+      </div>
+      
         <div class="col-12">
           <div class="card">
             <!-- Titre de la page -->
@@ -25,16 +31,19 @@
             <div class="card-body">
               <form>
                 <div class="form-group row">
-                  <label class="col-sm-2 col-form-label">Elève</label>
-                  <div class="col-sm-10">
+                  <label class="col-sm-3 col-form-label">Elève (
+                  <span class="span-required">*</span>)</label>
+                  <div class="col-sm-9">
                     <select v-model="eleve" class="form-control">
-                      <option :value="eleve.id" v-for="eleve in eleves">{{ eleve.matricule }}</option>
+                      <option value="">Sélectionner un élève</option>
+                      <option :value="eleve.id" v-for="eleve in eleves">{{ eleve.name+' '+eleve.surname }}</option>
                     </select>
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label class="col-sm-2 col-form-label">Raison d'absence</label>
-                  <div class="col-sm-10">
+                  <label class="col-sm-3 col-form-label">Raison d'absence (
+                  <span class="span-required">*</span>)</label>
+                  <div class="col-sm-9">
                     <select v-model="raisonabsence" id class="form-control">
                       <option value>Sélectionner une raison d'absence</option>
                       <option
@@ -45,25 +54,36 @@
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label class="col-sm-2 col-form-label">Commentaire</label>
-                  <div class="col-sm-10">
+                  <label class="col-sm-3 col-form-label">Commentaire (
+                  <span class="span-required">*</span>)</label>
+                  <div class="col-sm-9">
                     <textarea v-model="commentaire" class="form-control"></textarea>
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label class="col-sm-2 col-form-label">Heure de début de cours</label>
-                  <div class="col-sm-10">
-                    <input v-model="heure_debut_cours" type="date" class="form-control" />
+                  <label class="col-sm-3 col-form-label">Heure de début de cours (
+                  <span class="span-required">*</span>)</label>
+                  <div class="col-sm-9">
+                        <datetime
+                  v-model="heure_debut_cours"
+                  input-class="form-control"
+                  type="datetime"
+                ></datetime>
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label class="col-sm-2 col-form-label">Heure de fin de cours</label>
-                  <div class="col-sm-10">
-                    <input v-model="heure_fin_cours" type="date" class="form-control" />
+                  <label class="col-sm-3 col-form-label">Heure de fin de cours (
+                  <span class="span-required">*</span>)</label>
+                  <div class="col-sm-9">
+                        <datetime
+                  v-model="heure_fin_cours"
+                  input-class="form-control"
+                  type="datetime"
+                ></datetime>
                   </div>
                 </div>
-                <a v-on:click="editAbsenceEleve()" class="btn btn-primary float-right">Envoyer</a>
-                <a @click="$router.go(-1)" class="btn btn-danger float-right" style="border-right-width: 2px;margin-right: 10px;">Annuler</a>
+                <a v-on:click="editAbsenceEleve()" class="btn btn-primary btn-add float-right">Enregistrer <div v-bind:class="{'spinner-border-customize': valueDisabled}"></div></a>
+                <a @click="$router.go(-1)" class="btn btn-danger btn-delete float-right" style="border-right-width: 2px;margin-right: 10px;">Annuler</a>
               </form>
             </div>
           </div>
@@ -84,11 +104,14 @@ export default {
       heure_fin_cours: null,
       commentaire: null,
       raisonabsence: null,
-      eleve: null
+      eleve: null,
+      error: null,
+      valueDisabled: false
     };
   },
   created() {
-    this.$store.dispatch("elevesProfesseur");
+    // this.$store.dispatch("elevesProfesseur");
+    this.$store.dispatch("elevesProfesseurV2", this.$cookies.get('classeId'));
     this.$store.dispatch("raisonsabsences");
     this.$store.dispatch("absenceeleve", {
       action: "edit",
@@ -97,6 +120,8 @@ export default {
   },
   methods: {
     editAbsenceEleve() {
+      this.error = "";
+      this.valueDisabled = true;
       /*const data = new FormData();
       data.append("heure_debut_cours", "2019-09-15");
       data.append("heure_fin_cours", "2019-09-15");
@@ -104,14 +129,24 @@ export default {
       data.append("eleve_id", 4);
       data.append("commentaire", "dsqhdhqsdqs");*/
       let data = {
-        heure_debut_cours: this.heure_debut_cours,
-        heure_fin_cours: this.heure_fin_cours,
+        heure_debut_cours: this.heure_debut_cours
+          .split(".")[0]
+          .replace("T", " "),
+        heure_fin_cours: this.heure_fin_cours
+          .split(".")[0]
+          .replace("T", " "),
         raisonabsence_id: this.raisonabsence,
         eleve_id: this.eleve,
-        commentaire: this.commentaire
+        commentaire: this.commentaire,
+        section_annee_scolaire_id: this.$cookies.get('sectionAnneeScolaireId'),
+        school_id: this.$cookies.get('schoolId'),
+        annee_scolaire_id: this.$cookies.get('anneeScolaireId'),
+        professeur_id: this.$cookies.get('professeurId')
       };
-      console.log(this.eleve);
+      // console.log(this.eleve);
       let store = this.$store;
+      // console.log(this.$route.params.id);
+      // this.$route.params.id;
       store
         .dispatch("absenceselevesP", {
           data: data,
@@ -119,13 +154,15 @@ export default {
           absenceEleveId: this.$route.params.id
         })
         .then(response => {
-          alert("la mise a été éffectué avec succès");
+          alert("L'enregistrement a été éffectué avec succès");
           this.$router.push("/absences");
         })
         .catch(error => {
           console.log(error);
-          alert("echec lors de la mise à jour");
+          // alert("echec lors de la mise à jour");
           this.errored = true;
+          this.valueDisabled = false;
+          this.error = error;
         })
         .finally(() => (this.loading = false));
     }

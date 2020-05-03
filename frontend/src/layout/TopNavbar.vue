@@ -66,8 +66,8 @@
           <base-dropdown v-bind:title="titleDropdownSection" v-if="sectionsanneescolaire && professeurId">
             <a v-for="section in sectionsanneescolaire" class="dropdown-item"
                 href="javascript:void(0)" @click="changeSectionAnneeScolaire(section)">
-              {{ section.libelle }}
-              <i class="fa fa-check"  :class="{check:section.id == sectionAnneeScolaireId}" ></i>
+              <span style="display: inline-block !important">{{ section.libelle }}</span>
+              <i  style="display: inline-block !important" :class="{'fa fa-check':section.id == sectionAnneeScolaireId}"></i>
             </a>
           </base-dropdown>
 

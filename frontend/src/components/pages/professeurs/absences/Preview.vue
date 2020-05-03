@@ -23,11 +23,11 @@
             </div>
 
             <div class="card-body">
-              <form>
+              <form v-if="absenceeleve">
                 <div class="form-group row">
                   <label class="col-sm-2 col-form-label">Elève</label>
                   <div class="col-sm-10">
-                    <input v-model="absenceeleve.eleve.matricule" class="form-control" disabled>
+                    <input v-bind:value="absenceeleve.eleve.name+' '+absenceeleve.eleve.surname" class="form-control" disabled>
                   </div>
                 </div>
                 <div class="form-group row">
@@ -45,13 +45,13 @@
                 <div class="form-group row">
                   <label class="col-sm-2 col-form-label">Heure de début de cours</label>
                   <div class="col-sm-10">
-                    <input v-model="absenceeleve.heure_debut_cours" type="date" class="form-control" disabled/>
+                    <input v-model="absenceeleve.heure_debut_cours" type="text" class="form-control" disabled/>
                   </div>
                 </div>
                 <div class="form-group row">
                   <label class="col-sm-2 col-form-label">Heure de fin de cours</label>
                   <div class="col-sm-10">
-                    <input v-model="absenceeleve.heure_fin_cours" type="date" class="form-control" disabled/>
+                    <input v-model="absenceeleve.heure_fin_cours" type="text" class="form-control" disabled/>
                   </div>
                 </div>
                 <a
@@ -83,8 +83,8 @@ export default {
   },
   watch: {
     absenceeleve(){
-      this.absenceeleve.heure_debut_cours = this.absenceeleve.heure_debut_cours.substring(0, 10);
-      this.absenceeleve.heure_fin_cours = this.absenceeleve.heure_fin_cours.substring(0, 10);
+      // this.absenceeleve.heure_debut_cours = this.absenceeleve.heure_debut_cours.substring(0, 10);
+      // this.absenceeleve.heure_fin_cours = this.absenceeleve.heure_fin_cours.substring(0, 10);
       this.commentaire =this.absenceeleve.commentaire;
       this.eleve = this.absenceeleve.eleve ? this.absenceeleve.eleve.id : null;
       this.raisonabsence = this.absenceeleve.raisonabsence ? this.absenceeleve.raisonabsence.id : null; 

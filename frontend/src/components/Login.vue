@@ -146,6 +146,9 @@ export default {
             this.getNameTypeUser(response.data.data)
           );
           this.$cookies.set("professeurId", response.data.data.professeur_id);
+          if(response.data.data.professeur){
+            this.$cookies.set("schoolId", response.data.data.professeur.school_id);
+          }
           this.$cookies.set("parentId", response.data.data.parenteleve_id);
           this.$cookies.set("eleveId", response.data.data.eleve_id);
 

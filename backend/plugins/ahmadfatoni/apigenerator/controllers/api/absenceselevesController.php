@@ -19,13 +19,15 @@ class absenceselevesController extends Controller
         "heure_debut_cours" => "required",
         "heure_fin_cours" => 'required',
         "raisonabsence_id" => 'required',
-        "eleve_id" => 'required',
+        "section_annee_scolaire_id" => 'required',
+        "eleve_id" => 'required'
     ];
     
     private $messages = [
         "heure_debut_cours.required" => "Veuillez entrez une date de début",
         "heure_fin_cours.required" => "Veuillez entrez une heure de fin",
         "raisonabsence_id.required" => "Veuillez sélectionnez une raison d'absence",
+        "section_annee_scolaire_id.required" => "Veuillez sélectionnez une section année scolaire",
         "eleve_id.required" => "Veuillez sélectionnez un élève",
     ];
 
@@ -91,7 +93,6 @@ class absenceselevesController extends Controller
         return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
     }
 
-
     public function show($id)
     {
         $data = $this->AbsenceEleveModel->with(array(
@@ -112,6 +113,9 @@ class absenceselevesController extends Controller
             next($arr);
         }
         $validation = Validator::make($request->all(), $this->rules, $this->messages);
+        // dd($request->all());
+        // dd($validation->passes());
+        // die("dddd");
         if($validation->passes()){
             $this->AbsenceEleveModel->commentaire = $request->get("commentaire");
             $this->AbsenceEleveModel->eleve_id = $request->get("eleve_id");
@@ -121,7 +125,7 @@ class absenceselevesController extends Controller
             $this->AbsenceEleveModel->section_annee_scolaire_id = $request->get("section_annee_scolaire_id");
             if (count($this->AbsenceEleveModel->rules) > 0) {
                 $validation = Validator::make($request->all(), $this->AbsenceEleveModel->rules);
-                if (!$validation->passes()) {
+                if ($validation->passes()) {
                     $this->AbsenceEleveModel->save();
                     return $this->helpers->apiArrayResponseBuilder(201, 'created', ['id' => $this->AbsenceEleveModel->id]);
                 } else {
@@ -137,9 +141,10 @@ class absenceselevesController extends Controller
     }
 
     public function update($id, Request $request){
-        $validation = Validator::make($request->all(), $this->rules, $this->messages);
+        $data = json_decode(file_get_contents('php://input'), true);
+        $validation = Validator::make($data, $this->rules, $this->messages);
         if($validation->passes()){
-            $status = $this->AbsenceEleveModel->where('id', $id)->update($request->all());
+            $status = $this->AbsenceEleveModel->where('id', $id)->update($data);
             if ($status) {
                 return $this->helpers->apiArrayResponseBuilder(200, 'success',
                     $this->AbsenceEleveModel->where('id', $id)->first()->toArray());

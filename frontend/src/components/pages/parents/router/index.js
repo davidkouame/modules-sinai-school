@@ -23,23 +23,21 @@ import DashboardParent from '@/components/pages/parents/DashboardParent.vue'
 import ParentLayout from '@/layout/ParentLayout.vue'
 
 // Login
-import Login from '@/components/Login.vue'
+// import Login from '@/components/Login.vue'
 
 export default [
   {
     path: "/",
     component: ParentLayout,
     redirect: "dashboard",
-    meta: {
+    /*meta: {
       middleware: (to, from, next ) => {
-        console.log("je suis dans le middleware ");
         const cookies = Vue.prototype.$cookies;
         if(!cookies.get("userId")){
-          // next({ name: 'Login' });
+          next({ name: 'Login' });
         }
-        next({ name: 'Login' });
       }
-    },
+    },*/
     children: [
       {
         path: '/dashboard',
@@ -114,12 +112,12 @@ export default [
          }
        }
      },*/
-  },
+  }/*,
   {
     path: "/login",
     name: "Login",
     component: Login
-  }
+  }*/
   /*{
     path: '/',
     name: 'DashboardParent',

@@ -37,6 +37,7 @@ class User extends UserBase
 
     public $belongsTo = [
         'role' => ['BootnetCrasher\Parametrage\Models\Role', 'key' => 'role_id', 'otherKey' => 'id'],
+        'professeur' => ['BootnetCrasher\School\Models\ProfesseurModel', 'key' => 'professeur_id', 'otherKey' => 'id'],
     ];
 
     public $attachOne = [

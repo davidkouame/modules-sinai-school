@@ -73,7 +73,7 @@ class noteeleveController extends Controller
     {
         $arr = $request->all();
         $validation = Validator::make($request->all(), $this->rules, $this->messages);
-        if (!$validation->passes()) {
+        if ($validation->passes()) {
             while ($data = current($arr)) {
                 $this->NoteEleve->{key($arr)} = $data;
                 next($arr);

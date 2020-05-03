@@ -472,7 +472,7 @@ export default new Vuex.Store({
       return Axios.get(
         context.state.endpoint + 'api/v1/sessionsuserapp?user_id=' + request.user_id
       )
-    },
+    }/*,
     raisonsabsences(context) {
       Axios.get(
         context.state.endpoint + 'api/v1/raisonsabsences'
@@ -485,7 +485,7 @@ export default new Vuex.Store({
           this.errored = true
         })
         .finally(() => (this.loading = false))
-    }/*,
+    }*//*,
     saveAgence(context, data) {
       return Axios.post(
         context.state.endpoint + 'api/v1/absenceseleves', data,

@@ -66,12 +66,12 @@ class ProfesseurModel extends Model
         $this->reference = $this->getReference();
     }
 
-    public function beforeUpdate(){
+    /*public function beforeUpdate(){
         // todo update reference if reference empty
         dd($this->reference);
         if(!$this->reference)
             $this->reference = $this->getReference();
-    }
+    }*/
 
     // generate matricule
     public function getReference(){

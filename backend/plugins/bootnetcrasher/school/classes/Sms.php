@@ -42,21 +42,14 @@ class Sms{
     EleveModel $eleve = null, Abonnement $abonnement){
         try{
             $this->sendWithoutLog($this->getIndicateur($parent).$tel, $body, $abonnement);
-            $this->logSms($tel, $parent, $eleve, $body);
+            $this->logSms($tel, $parent, $eleve, $body, $abonnement);
         } catch (Exception $ex) {
             trace_log("message : ".$ex->getMessage());
         }
     }
 
-    /*
-        Send sms at parent by queue
-        @String $tel User tel
-        @BootnetCrasher\School\Models\ParentModel $parent Parent user
-        @BootnetCrasher\School\Models\EleveModel $eleve User
-        @String $body Message sms
-    */
-    public function sendQueue(String $tel, String $body, Parentmodel $parent = null, 
-    EleveModel $eleve = null, AbonnementModel $abonnement){
+    
+    public function sendQueue($tel, $body,  $parent, $eleve , $abonnement){
         try{
             if($this->isSendSms){
                 Queue::push(SendSmsJob::class, 
@@ -68,7 +61,7 @@ class Sms{
                     "abonnementId" => $abonnement->id
                 ]);
             }
-            $this->logSms($tel, $parent, $eleve, $body);
+            $this->logSms($tel, $parent, $eleve, $body, $abonnement);
         } catch (Exception $ex) {
             trace_log("message : ".$ex->getMessage());
         }
@@ -93,7 +86,7 @@ class Sms{
                     "abonnementId" => $abonnement->id
                 ]);
             }
-            $this->logSms($tel, $parent, null, $body);
+            $this->logSms($tel, $parent, null, $body, $abonnement);
         } catch (Exception $ex) {
             trace_log("message : ".$ex->getMessage());
         }
@@ -178,8 +171,11 @@ class Sms{
             if($eleve)
                 $logSms->eleve_id = $eleve->id;
             $logSms->content = $body;
-            if($abonnement)
+            if($abonnement){
                 $logSms->abonnement_id = $abonnement->id;
+                $logSms->school_id = $abonnement->school_id;
+                $logSms->annee_scolaire_id = $abonnement->annee_scolaire_id;
+            }
             $logSms->save();
         } catch (Exception $ex) {
              trace_log("message : ".$ex->getMessage());

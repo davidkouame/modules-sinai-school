@@ -35,8 +35,8 @@ export default {
     currentPage: null,
     countPage: null,
     totalElement: null,
-    // endpoint: 'http://localhost:8888/modules-sinai-school/backend/',
-    endpoint: 'http://monsitenet.com/modules-sinai-school/backend/'
+    endpoint: 'http://localhost:8888/ayauka/backend/',
+    // endpoint: 'http://monsitenet.com/modules-sinai-school/backend/'
   },
   mutations: {
     notes(state, payload) {
@@ -439,13 +439,14 @@ export default {
         })
         .finally(() => (this.loading = false))
     },
-    elevesProfesseurV2(context) {
+    elevesProfesseurV2(context, classeId) {
       Axios.get(
-        context.state.endpoint + 'api/v1/eleves-without-paginate'
+        context.state.endpoint + 'api/v1/eleves-without-paginate?classe_id='+classeId
       )
         .then(response => {
           context.commit('eleves', response.data.data)
-          // console.log("log d'eleves dans le store "+ JSON.stringify(response.data.data));
+          // console.log("list des eleves "+ JSON.stringify(response.data.data));
+          // console.log("list des eleves ");
         })
         .catch(error => {
           console.log(error)
@@ -468,10 +469,10 @@ export default {
     },
     raisonsabsences(context) {
       Axios.get(
-        context.state.endpoint + 'api/v1/raisonsabsences'
+        context.state.endpoint + 'api/v1/raisonsabsences?page=0'
       )
         .then(response => {
-          context.commit('raisonsabsences', response.data.data)
+          context.commit('raisonsabsences', response.data.data);
         })
         .catch(error => {
           console.log(error)
@@ -481,8 +482,9 @@ export default {
     },
     saveAgence(context, data) {
       return Axios.post(
-        context.state.endpoint + 'api/v1/absenceseleves', data,
-        { headers: { 'Content-Type': 'multipart/form-data' } }
+        context.state.endpoint + 'api/v1/absenceseleves', data,/*
+        { headers: { 'Content-Type': 'multipart/form-data' } }*/
+        { headers: { 'Content-Type': 'application/json' } }
       )
     },
     saveRapport(context, data) {

@@ -1580,9 +1580,9 @@ export default new Vuex.Store({
     getTypeMoyenne(context, params) {
       getInformModel(context, params.id, "typesmoyenne", "typemoyenne")
     },
-    ecolesms(context, ecoleId) {
+    ecolesms(context, param) {
       Axios.get(
-        context.state.endpoint + 'api/v1/ecolesms?school_id='+ecoleId)
+        context.state.endpoint + 'api/v1/ecolesms?school_id='+param.ecoleId+'&annee_scolaire_id='+param.anneeScolaireId)
         .then(response => {
           if(response.data.data.data && response.data.data.data.length > 0){
             context.commit('ecolesms', response.data.data.data[0])

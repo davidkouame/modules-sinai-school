@@ -75,7 +75,7 @@
                       </thead>
                       <tbody>
                         <tr v-if="countNotes" v-for="(note, index) in notes">
-                          <th scope="row">{{ index + 1}}</th>
+                          <td scope="row">{{ index + 1}}</td>
                           <td><a :href="'#/notes/preview/'+note.id" >{{ note.libelle }}</a></td>
                           <td>{{ note.created_at|formatDate }}</td>
                           <td> {{ note.type_note_libelle}} </td>
@@ -210,7 +210,7 @@ export default {
   },
   computed: {
     notes() {
-      this.countNotes = this.$store.getters.notes.length;
+      this.countNotes = this.$store.getters.notes ? this.$store.getters.notes.length : 0;
       this.countNotes = this.countNotes > 0;
       return this.$store.getters.notes;
     },

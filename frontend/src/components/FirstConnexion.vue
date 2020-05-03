@@ -114,6 +114,8 @@ export default {
       this.showLoader = true;
       this.errorMessage = "";
       const data = new FormData();
+      console.log("password -> "+this.password);
+      console.log("password_confirmation -> "+this.password_confirmation);
      
       data.append("email", this.$cookies.get("userEmail"));
        /*data.append("username", this.$cookies.get("userName"));
@@ -141,17 +143,6 @@ export default {
           console.log(response);
           this.errored = true;
         });
-    },
-    getNameTypeUser(user) {
-      let nameTypeUser = "";
-      if (user.parenteleve_id) {
-        nameTypeUser = "parent";
-      } else if (user.professeur_id) {
-        nameTypeUser = "professeur";
-      } else if (user.eleve_id) {
-        nameTypeUser = "eleve";
-      }
-      return nameTypeUser;
     }
   }
 };

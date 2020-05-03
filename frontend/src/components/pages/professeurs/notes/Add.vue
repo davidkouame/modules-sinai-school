@@ -15,6 +15,12 @@
       </nav>
 
       <div class="row">
+
+        <!-- Show error message -->
+      <div v-if="error" class="col-md-12">
+        <message-error v-bind:error="error"></message-error>
+      </div>
+
         <div class="col-12">
           <div class="card">
             <!-- Titre de la page -->
@@ -25,20 +31,23 @@
             <div class="card-body">
               <form>
                 <div class="form-group row">
-                  <label class="col-sm-2 col-form-label">Libelle</label>
-                  <div class="col-sm-10">
+                  <label class="col-sm-3 col-form-label">Libelle (
+                  <span class="span-required">*</span>)</label>
+                  <div class="col-sm-9">
                     <input type="text" class="form-control" v-model="libelle" />
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label class="col-sm-2 col-form-label">Date de note effectué</label>
-                  <div class="col-sm-10">
+                  <label class="col-sm-3 col-form-label">Date de note effectué (
+                  <span class="span-required">*</span>)</label>
+                  <div class="col-sm-9">
                     <input type="date" class="form-control" v-model="datenoteeffectue" />
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label class="col-sm-2 col-form-label">Types notes</label>
-                  <div class="col-sm-10">
+                  <label class="col-sm-3 col-form-label">Types notes (
+                  <span class="span-required">*</span>)</label>
+                  <div class="col-sm-9">
                     <select v-model="typenote" class="form-control">
                       <option value="null">Sélectionner un type de note</option>
                       <option
@@ -49,8 +58,9 @@
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label class="col-sm-2 col-form-label">Classes</label>
-                  <div class="col-sm-10">
+                  <label class="col-sm-3 col-form-label">Classes (
+                  <span class="span-required">*</span>)</label>
+                  <div class="col-sm-9">
                     <!--<select
                       v-model="classe"
                       class="form-control"
@@ -91,27 +101,29 @@
                   </div>
                 </div>-->
                 <div class="form-group row">
-                  <label class="col-sm-2 col-form-label">Matières</label>
-                  <div class="col-sm-10">
+                  <label class="col-sm-3 col-form-label">Matières (
+                  <span class="span-required">*</span>)</label>
+                  <div class="col-sm-9">
                     <input type="text" class="form-control" v-bind:value="matiere ? matiere.libelle : ''" disabled/>
                   </div>
                 </div>
 
 
                 <div class="form-group row">
-                  <label class="col-sm-2 col-form-label">Coefficient</label>
-                  <div class="col-sm-10">
+                  <label class="col-sm-3 col-form-label">Coefficient (
+                  <span class="span-required">*</span>)</label>
+                  <div class="col-sm-9">
                     <input v-model="coefficient" type="number" class="form-control" />
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label class="col-sm-2 col-form-label">Description</label>
-                  <div class="col-sm-10">
+                  <label class="col-sm-3 col-form-label">Description</label>
+                  <div class="col-sm-9">
                     <textarea v-model="description" class="form-control"></textarea>
                   </div>
                 </div>
-                <a v-on:click="createNote()" class="btn btn-primary float-right">Enregistrer</a>
-                <a @click="$router.go(-1)" class="btn btn-danger float-right" style="border-right-width: 2px;margin-right: 10px;">Annuler</a>
+                <a v-on:click="createNote()" class="btn btn-primary btn-add float-right">Enregistrer <div v-bind:class="{'spinner-border-customize': valueDisabled}"></div></a>
+                <a @click="$router.go(-1)" class="btn btn-danger btn-delete float-right" style="border-right-width: 2px;margin-right: 10px;">Annuler</a>
               </form>
             </div>
           </div>
@@ -135,7 +147,9 @@ export default {
       coefficient: null,
       multiple: true,
       matiere_id: null,
-      sectionAnneeScolaireId: this.$cookies.get('sectionAnneeScolaireId')
+      sectionAnneeScolaireId: this.$cookies.get('sectionAnneeScolaireId'),
+      error: null,
+      valueDisabled: false
     };
   },
   created() {
@@ -144,13 +158,15 @@ export default {
     this.$store.dispatch("matieresall");
     this.$store.dispatch('classes', [{'key': 'professeur_id',
     'value': this.$cookies.get('professeurId')}]);
-    this.$store.dispatch(
+    /*this.$store.dispatch(
       "classesByProfesseur",
       this.$cookies.get("professeurId")
-    );
+    );*/
   },
   methods: {
     createNote() {
+      this.error = "";
+      this.valueDisabled = true;
       const data = {};
       data["libelle"] = this.libelle;
       data["datenoteeffectue"] = this.datenoteeffectue;
@@ -161,6 +177,8 @@ export default {
       data["description"] = this.description;
       data["professeur_id"] = this.$cookies.get("professeurId");
       data["section_annee_scolaire_id"] = this.sectionAnneeScolaireId;
+      data["school_id"] = this.$cookies.get('schoolId');
+      data["annee_scolaire_id"] = this.$cookies.get('anneeScolaireId');
       // console.log("log data " +);
       /*data.append('datenoteeffectue', this.datenoteeffectue);
       data.append('description', this.description);
@@ -173,13 +191,15 @@ export default {
         .dispatch("saveNoteP", data)
         .then(response => {
           store.dispatch("raisonsabsences", response.data.data);
-          alert("L'enregistrement a été succès");
+          alert("L'enregistrement a été éffectué avec succès");
           // this.$router.push('/notes')
           this.$router.go(-1);
         })
         .catch(error => {
           console.log(error);
-          alert("echec lors de l'enregistrement");
+          this.error = error;
+          this.valueDisabled = false;
+          // alert("echec lors de l'enregistrement");
           this.errored = true;
         })
         .finally(() => (this.loading = false));

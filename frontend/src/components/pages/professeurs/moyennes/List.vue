@@ -77,7 +77,7 @@
                   </thead>
                   <tbody>
                     <tr v-if="countMoyennes" v-for="(moyenne, index) in moyennes">
-                      <th scope="row">{{ index + 1}}</th>
+                      <td scope="row">{{ index + 1}}</td>
                       <td>{{ moyenne.eleve.matricule }}</td>
                       <td>{{ moyenne.eleve.name }}</td>
                       <td>{{ moyenne.eleve.surname }}</td>
@@ -88,9 +88,9 @@
                            {{ moyenne.coefficient_matiere * 20 }}</td>
                       <td>{{ moyenne.rang ? moyenne.rang : '--'  }}</td>
                       <td>
-                        <div class="row">
-                          <a :href="'#/moyennes/preview/'+moyenne.id" class="col">
-                            <i class="fa fa-eye fa-lg"></i>
+                        <div class="row" style="margin-left: 18px;">
+                          <a :href="'#/moyennes/preview/'+moyenne.id" class="col btn btn-icon btn-info btn-sm">
+                            <i class="fa fa-eye"></i>
                           </a>
                         </div>
                       </td>

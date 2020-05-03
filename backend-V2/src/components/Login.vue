@@ -141,7 +141,7 @@ export default {
             .then(response => {
               // sauvegarde de la session 
               if(response.data.data){
-                let user = response.data.data.data[0];
+                let user = response.data.data[0];
                 this.$cookies.set("anneeScolaireId", user.annee_scolaire_id);
               }else{
                 this.$store

@@ -39,10 +39,16 @@ import EleveLayout from './layout/EleveLayout.vue'
 import ParentLayout from './layout/ParentLayout.vue'
 import ProfesseurLayout from './layout/ProfesseurLayout.vue'
 import moment from 'moment'
+import MessageErrorCpt from "./components/Plugin/MessageErrorCpt";
+Vue.use(MessageErrorCpt)
+Vue.component("message-error", MessageErrorCpt);
+
+import Datetime from 'vue-datetime'
+import 'vue-datetime/dist/vue-datetime.css'
 
 import VueRouteMiddleware from 'vue-route-middleware';
 
-
+Vue.use(Datetime)
 
 import VueCookies from 'vue-cookies'
 Vue.use(VueCookies)
@@ -82,6 +88,36 @@ router.beforeEach(VueRouteMiddleware());
   render: h => h(App),
   router
 })*/
+
+Vue.mixin({
+  methods: {
+    notEmptyObject(someObject) {
+      return someObject ? Object.keys(someObject).length : 0
+    },
+    traitError(error) {
+      let errors = Object.values(error);
+      let messageErrors = "";
+      // recuperation de la reponse
+      if (errors[1]) {
+        let reponse = errors[1].response;
+        if (JSON.parse(reponse)) {
+          // recuperation des erreurs
+          let dataErrors = JSON.parse(reponse).data;
+          let i = 0;
+          const keys = Object.keys(dataErrors);
+          const values = Object.values(dataErrors);
+          for (const value of values) {
+            let fields = value.values();
+            for (const field of fields) {
+              messageErrors += field + "</br>";
+            }
+          }
+        }
+      }
+      return messageErrors;
+    }
+  }
+})
 
 Vue.config.productionTip = false
 

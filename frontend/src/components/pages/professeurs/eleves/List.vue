@@ -19,7 +19,7 @@
           <div class="card">
             <!-- Titre de la page -->
             <div class="card-header">
-              <h4 class="card-title">Liste des élèves {{ classeListId }}</h4>
+              <h4 class="card-title">Liste des élèves </h4>
             </div>
 
             <div class="card-body">
@@ -78,14 +78,14 @@
                   </thead>
                   <tbody>
                     <tr v-if="countEleves" v-for="(eleve, index) in eleves">
-                      <th scope="row">{{ index + 1}}</th>
+                      <td scope="row">{{ index + 1}}</td>
                       <td>{{ eleve.eleve.name }}</td>
                       <td>{{ eleve.eleve.matricule }}</td>
                       <td>
                         <!--<a :href="'#/absence-eleve/'+absenceeleve.id" class="btn btn-primary">detail</a>-->
 
-                        <a :href="'#/eleves/preview/'+eleve.eleve.id" class="col">
-                          <i class="fa fa-eye fa-lg"></i>
+                        <a :href="'#/eleves/preview/'+eleve.eleve.id" class="btn-icon btn-info btn-sm">
+                          <i class="fa fa-eye"></i>
                         </a>
                         <!--<a :href="'#/absences-eleves/update/'+absenceeleve.id" class="btn btn-primary">Modifier</a>-->
                         <!--<button id="show-modal" @click="showModalF(absenceeleve.id)" class="btn btn-danger">Supprimer</button>-->
@@ -195,10 +195,11 @@ export default {
         this.titleDropdownClasse = "Classes";
         this.classeId = 0;
       }else{
-        console.log("check classe est "+ JSON.stringify(classe.classe.id));
+        // console.log("check classe est "+ JSON.stringify(classe.classe.id));
         this.$store.dispatch('classeId', classe.classe.id);
         this.titleDropdownClasse = classe.classe.libelle ;
         this.classeId = classe.classe.id;
+        this.$cookies.set('classeId', classe.classe.id)
       }
     },
     refreshList(){
@@ -220,6 +221,9 @@ export default {
       return this.$store.getters.classeId;
     },
     classes () {
+      if(this.$store.getters.classes && this.$store.getters.classes[0] && this.$store.getters.classes[0].classe){
+        this.$cookies.set('classeId', this.$store.getters.classes[0].classe.id)
+      }
       return this.$store.getters.classes
     },
     anneeScolaireId(){

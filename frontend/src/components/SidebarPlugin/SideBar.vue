@@ -8,9 +8,9 @@
         <a href="#" class="simple-text logo__container">
             <div class="logo-img" style="width: 40px; height: 40px">
                 <!--<img src="https://elysator.com/wp-content/uploads/blank-profile-picture-973460_1280-300x300.png" alt="">-->
-                <img src="http://localhost:3001/img/vue-logo.c2a605fb.png" alt="">
+                <img src="@/assets/img/vue-logo.png" alt="">
             </div>
-            Ayauka
+            {{ title }}
           <!--<ul style="padding-top: 14px;padding-left: 0px">
             <li style="line-height: 20px;font-size: 14px;padding-left: 0px;">{{username}} {{usersurname}}</li>
             <li style="line-height: 20px;font-size: 14px;padding-left: 0px;">{{typeuser}}</li>

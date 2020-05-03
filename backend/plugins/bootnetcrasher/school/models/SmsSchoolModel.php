@@ -27,5 +27,6 @@ class SmsSchoolModel extends Model
 
     public $belongsTo = [
         'school' => ['BootnetCrasher\School\Models\SchoolModel', 'key' => 'school_id', 'otherKey' => 'id'],
+        'anneescolaire' => ['BootnetCrasher\School\Models\AnneeScolaireModel', 'key' => 'annee_scolaire_id', 'otherKey' => 'id'],
     ];
 }

@@ -38,7 +38,7 @@ export default {
     };
   },
   created() {
-    this.$store.dispatch("ecolesms", this.$cookies.get('ecoleId'));
+    this.$store.dispatch("ecolesms", {ecoleId: this.$cookies.get('ecoleId'), anneeScolaireId: this.$cookies.get('anneeScolaireId')});
   },
   methods: {
     startSms(){

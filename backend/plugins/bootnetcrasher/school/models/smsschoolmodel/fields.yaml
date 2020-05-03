@@ -6,6 +6,13 @@ fields:
         span: auto
         type: relation
         placeholder: 'Sélectionner un école'
+    anneescolaire:
+        label: Année scolaire
+        nameFrom: libelle
+        descriptionFrom: description
+        span: auto
+        type: relation
+        placeholder: 'Sélectionner une année scolaire'
     nbre_sms_initial:
         label: 'Sms initials'
         span: auto

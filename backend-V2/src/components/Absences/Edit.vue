@@ -55,7 +55,17 @@
                   </div>
                 </div>
                 <div class="row">
-                  <div class="col-md-12">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label class="control-label">Sections année scolaire (
+                  <span class="span-required">*</span>)</label>
+                      <select v-model="absence.section_annee_scolaire_id" class="form-control" >
+                      <option value="">Sélectionnez une section année scolaire</option>
+                      <option :value="sectionanneescolaire.id" v-for="sectionanneescolaire in sectionsanneescolaire">{{ sectionanneescolaire.libelle }} </option>
+                      </select>
+                    </div>
+            </div>
+                  <div class="col-md-6">
                     <div class="form-group">
                       <label class="control-label">Description</label>
                       <!---->
@@ -105,6 +115,11 @@ export default {
       {key: "annee_scolaire_id", value: this.$cookies.get('anneeScolaireId')}]})
     // recuperation des raisons d'absences
     this.$store.dispatch('getAllRaisonsAbsences', {payload: 0})
+    // recuperation de toutes les sections annee scolaire
+    this.$store.dispatch('getAllSectionsAnneeScolaire', {payload: 0, search: [
+        {key: 'school_id', value: this.$cookies.get('ecoleId')},
+        {key: 'annee_scolaire_id', value: this.$cookies.get('anneeScolaireId')}
+        ] })
   },
   methods:{
     saveAbsence(){
@@ -117,7 +132,8 @@ export default {
         heure_debut_cours: this.heure_debut.split(".")[0].replace('T', ' '),
         heure_fin_cours: this.heure_fin.split(".")[0].replace('T', ' '),
         school_id: this.$cookies.get('ecoleId'),
-        annee_scolaire_id: this.$cookies.get('anneeScolaireId')
+        annee_scolaire_id: this.$cookies.get('anneeScolaireId'),
+        section_annee_scolaire_id: this.absence.section_annee_scolaire_id
       };
       let store = this.$store;
       store
@@ -143,6 +159,9 @@ export default {
     },
     raisonsabsences(){
       return this.$store.getters.raisonsabsences
+    },
+    sectionsanneescolaire(){
+      return this.$store.getters.sectionsanneescolaire
     }
   },
   watch:{

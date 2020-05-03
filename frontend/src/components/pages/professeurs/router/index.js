@@ -25,29 +25,34 @@ import ListMoyenne from '@/components/pages/professeurs/moyennes/List.vue'
 import PreviewMoyenne from '@/components/pages/professeurs/moyennes/Preview.vue'
 
 import DashboardProfesseur from '@/components/pages/professeurs/DashboardProfesseur.vue'
+import ProfesseurLayout from '@/layout/ProfesseurLayout.vue'
 
 
 export default [
   {
-    path: '/',
-    name: 'DashboardProfesseur',
-    component: DashboardProfesseur
-  },
-  {
-    path: '/dashboard',
-    name: 'DashboardProfesseur',
-    component: DashboardProfesseur
-  },
-  {
-    path: '/notes',
-    name: 'ListNote',
-    component: ListNote
-  },
-  {
-  	path: '/notes/preview/:id(\\d+)',
-  	name: 'PreviewNote',
-  	component: PreviewNote
-  },
+    path: "/",
+    component: ProfesseurLayout,
+    redirect: "dashboard",
+    children: [{
+      path: '/',
+      name: 'DashboardProfesseur',
+      component: DashboardProfesseur
+    },
+    {
+      path: '/dashboard',
+      name: 'DashboardProfesseur',
+      component: DashboardProfesseur
+    },
+    {
+      path: '/notes',
+      name: 'ListNote',
+      component: ListNote
+    },
+    {
+      path: '/notes/preview/:id(\\d+)',
+      name: 'PreviewNote',
+      component: PreviewNote
+    },
     {
       path: '/notes/add',
       name: 'AddNote',
@@ -118,4 +123,10 @@ export default [
       name: 'PreviewEleve',
       component: PreviewEleve
     }
+    ]
+  }
+
+
+
+
 ];

@@ -46,7 +46,7 @@
                       <!---->
                       <input
                         class="form-control"
-                        type="text"
+                        type="email"
                         v-model="professeur.email"
                         placeholder="Email"
                       />

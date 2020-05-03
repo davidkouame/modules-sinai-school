@@ -52,6 +52,7 @@ import PreviewEleve from '@/components/pages/parents/eleves/Preview.vue'
 
 import DashboardParent from '@/components/pages/parents/DashboardParent.vue'
 import ParentLayout from '@/layout/ParentLayout.vue'
+import HomeLayout from '@/layout/HomeLayout.vue'
 
 // Login
 // import Login from '@/components/Login.vue'
@@ -138,9 +139,9 @@ Vue.use(VueCookies);
 ]*/
 
 const baseRoutes = [
-  {
+  /*{
     path: "/",
-    component: ParentLayout,
+    component: HomeLayout,
     redirect: "dashboard",
     meta: {
       middleware: (to, from, next) => {
@@ -149,74 +150,12 @@ const baseRoutes = [
           next({ name: 'Login' });
         }
 
-        if(cookies.get('firstLogin') == 0){
+        if (cookies.get('firstLogin') == 0) {
           next({ name: 'FirstConnexion' });
         }
       }
-    },
-    children: [
-      {
-        path: '/dashboard',
-        name: 'DashboardParent',
-        component: DashboardParent
-      },
-      {
-        path: '/notes',
-        name: 'ListNote',
-        component: ListNote
-      },
-      {
-        path: '/notes/preview/:id(\\d+)',
-        name: 'PreviewNote',
-        component: PreviewNote
-      },
-      {
-        path: '/absences',
-        name: 'ListAbsenceEleve',
-        component: ListAbsenceEleve
-      },
-      {
-        path: '/absences/preview/:id(\\d+)',
-        name: 'PreviewAbsenceEleve',
-        component: PreviewAbsenceEleve
-      },
-      {
-        path: '/matieres',
-        name: 'ListMatiere',
-        component: ListMatiere
-      },
-      {
-        path: '/matieres/preview/:id(\\d+)',
-        name: 'PreviewMatiere',
-        component: PreviewMatiere
-      },
-      {
-        path: '/moyennes',
-        name: 'ListMoyenne',
-        component: ListMoyenne
-      },
-      {
-        path: '/moyennes/preview/:id(\\d+)',
-        name: 'PreviewMoyenne',
-        component: PreviewMoyenne
-      },
-      {
-        path: '/parametres',
-        name: 'ParentParametre',
-        component: ParentParametre
-      },
-      {
-        path: '/parametres/eleve/:id(\\d+)',
-        name: 'ParentParametre',
-        component: ParentParametre
-      },
-      {
-        path: '/parametres/eleves/preview/:id(\\d+)',
-        name: 'PreviewEleve',
-        component: PreviewEleve
-      }
-    ]
-  },
+    }
+  },*/
   {
     path: "/login",
     name: "Login",
@@ -261,21 +200,44 @@ function view(name) {
 //  export default routes
 
 
-let routes = baseRoutes
+let routes = null;
 const cookies = Vue.prototype.$cookies;
 // const routes = baseRoutes;//.concat(messagesRoutes, peopleRoutes);
 
-/*if (cookies.get('userId')) {
+if (cookies.get('userId') && cookies.get('firstLogin') != 0) {
   if (cookies.get('userType') == "parent") {
     routes = baseRoutes.concat(routerParent);
-  }else if(cookies.get('userType') == "eleve"){
-    routes = baseRoutes.concat(routerEleve);
-  }else{
+    console.log("je suis dans la route du parent");
+  } else if (cookies.get('userType') == "professeur") {
+    console.log("je suis dans la route du professeur");
     routes = baseRoutes.concat(routerProfesseur);
   }
-}else{
+  console.log("je suis ni chez le professeur ni chez le parent !");
+} else {
+  console.log("je suis dans la base ");
+  baseRoutes.push({
+    path: "/",
+    component: HomeLayout,
+    redirect: "dashboard",
+    meta: {
+      middleware: (to, from, next) => {
+        const cookies = Vue.prototype.$cookies;
+        if (!cookies.get("userId")) {
+          next({ name: 'Login' });
+        }
+
+        if (cookies.get('firstLogin') == 0) {
+          next({ name: 'FirstConnexion' });
+        }
+      }
+    },
+    children: routerParent[0]['children']
+  });
   routes = baseRoutes;
-}*/
+  // console.log("routes "+JSON.stringify(routes))
+}
+
+// console.log("routes "+JSON.stringify(routerParent[0]['children']));
 
 // routes = baseRoutes.concat(routerParent);
 

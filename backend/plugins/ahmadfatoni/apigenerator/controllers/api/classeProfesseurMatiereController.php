@@ -130,7 +130,7 @@ class classeProfesseurMatiereController extends Controller
         $arr = $request->all();
         $arr["classe_id"] = $id;
         $validation = Validator::make($arr, $this->rules, $this->messages);
-        if(!$validation->passes() ){
+        if($validation->passes() ){
             $status = $this->ClasseMatiereModel->where('id',$id)->update($request->all());
             if( $status ){
                 return $this->helpers->apiArrayResponseBuilder(200, 'success', 'Data has been updated successfully.');

@@ -90,7 +90,7 @@ class userController extends Controller
 
         $validation = Validator::make($request->all(), $this->User->rules);
 
-        if(!$validation->passes() ){
+        if($validation->passes() ){
             $this->User->save();
             return $this->helpers->apiArrayResponseBuilder(201, 'created', ['id' => $this->User->id]);
         }else{

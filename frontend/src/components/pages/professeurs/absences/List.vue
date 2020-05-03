@@ -61,7 +61,7 @@
                             </div>
                             <div class="col-md-1">
                                 <div class="col-1 add-form">
-                                    <a :href="'#/absences/add'">
+                                    <a :href="'#/absences/add'" style="color: #3F5E7D">
                                       <i class="fa fa-plus-circle fa-lg font-size-28"></i>
                                     </a>
                                 </div>
@@ -83,21 +83,21 @@
                   </thead>
                   <tbody>
                     <tr v-if="countAbsences" v-for="(absenceeleve, index) in absenceseleves">
-                      <th scope="row">{{ index + 1}}</th>
+                      <td scope="row">{{ index + 1}}</td>
                       <td>{{ getDate(absenceeleve.heure_debut_cours)|formatDate }}</td>
                       <td>{{ getTime(absenceeleve.heure_debut_cours) }}</td>
                       <td>{{ getTime(absenceeleve.heure_fin_cours) }}</td>
                       <td>{{ absenceeleve.eleve.name+' '+absenceeleve.eleve.surname}}</td>
                       <td>
                         <div class="row">
-                          <a :href="'#/absences/preview/'+absenceeleve.id" class="col">
-                            <i class="fa fa-eye fa-lg"></i>
-                          </a>
-                          <a :href="'#/absences/update/'+absenceeleve.id" class="col">
-                            <i class="fa fa-pencil fa-lg"></i>
-                          </a>
-                          <a id="show-modal" @click="showModalF(absenceeleve.id)" class="col" style="cursor:pointer;color:#42d0ed">
-                            <i class="fa fa-trash-o fa-lg"></i>
+                          <a :href="'#/absences/preview/'+absenceeleve.id" class="col btn btn-icon btn-info btn-sm">
+                            <i class="fa fa-eye"></i>
+                          </a>&nbsp;
+                          <a :href="'#/absences/update/'+absenceeleve.id" class="col btn btn-icon btn-success btn-sm">
+                            <i class="fa fa-edit"></i>
+                          </a>&nbsp;
+                          <a id="show-modal" @click="showModalF(absenceeleve.id)" class="col btn btn-icon btn-danger btn-sm btn-delete" style="cursor:pointer;color:#42d0ed">
+                            <i class="fa fa-trash"></i>
                           </a>
                         </div>
                       </td>
@@ -172,7 +172,8 @@ export default {
       let params = [
         {key: 'search', value: search},
         {key: 'classe_id', value: this.classeListId},
-        {key: 'section_annee_scolaire_id', value: this.sectionAnneeScolaireId }];
+        {key: 'section_annee_scolaire_id', value: this.sectionAnneeScolaireId },
+        {key: 'professeur_id', value: this.$cookies.get('professeurId') }];
       this.$store.dispatch("absenceselevesP", { pageNum: pageNum,
       search: this.trimSearch(params) });
     },
@@ -198,14 +199,14 @@ export default {
         this.$store.dispatch('classeId', classe.classe.id);
         this.titleDropdownClasse = classe.classe.libelle ;
         this.classeId = classe.classe.id;
+        this.$cookies.set('classeId', classe.classe.id)
       }
     },
     refreshList(){
-        if(this.classeListId && this.sectionAnneeScolaireId){
-            this.fetch();
-            // console.log("classeListId "+JSON.stringify(this.classeListId)+", sectionAnneeScolaireId "+JSON.stringify(this.sectionAnneeScolaireId))
-        }
-
+      if(this.classeListId && this.sectionAnneeScolaireId){
+          this.fetch();
+          // console.log("classeListId "+JSON.stringify(this.classeListId)+", sectionAnneeScolaireId "+JSON.stringify(this.sectionAnneeScolaireId))
+      }
     },
     getDate(time){
       return time.split(" ")[0]
@@ -224,7 +225,7 @@ export default {
       if(absences){
         this.countAbsences = absences.length;
         this.countAbsences = this.countAbsences > 0;
-        console.log("absenceseleves "+JSON.stringify(absences));
+        // console.log("absenceseleves "+JSON.stringify(absences));
       }
       return absences;
     },
@@ -237,6 +238,11 @@ export default {
     classes () {
         // this.sectionAnneeScolaireId = 0;
         // this.sectionAnneeScolaireId = this.$store.getters.sectionAnneeScolaireId;
+        // this.$store.dispatch('classeId', classe.classe.id);
+        if(this.$store.getters.classes && this.$store.getters.classes[0] && this.$store.getters.classes[0].classe){
+          // this.$store.dispatch('classeId', this.$store.getters.classes[0].classe.id);
+          this.$cookies.set('classeId', this.$store.getters.classes[0].classe.id)
+        }
       return this.$store.getters.classes
     },
     sectionAnneeScolaireId(){
