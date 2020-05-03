@@ -89,7 +89,7 @@
                     <div class="col-md-12">
                       <a @click="$router.go(-1)" class="btn btn-danger btn-delete">Annuler</a>
                       &nbsp;
-                      <button type="submit" class="btn btn-primary" :disabled="valueDisabled">Modifier <div v-bind:class="{'spinner-border-customize': valueDisabled}"></div></button>
+                      <button type="submit" class="btn btn-primary btn-add" :disabled="valueDisabled">Modifier <div v-bind:class="{'spinner-border-customize': valueDisabled}"></div></button>
                     </div> 
                   </div>
                 </div>

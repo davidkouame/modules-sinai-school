@@ -89,7 +89,7 @@
                 </div>
                 <div class="clearfix"></div>
               <div class="float-right">
-                <a href="#/sections-annee-scolaire" class="btn btn-danger">Retour</a>
+                <a href="#/sections-annee-scolaire" class="btn btn-danger btn-delete">Retour</a>
                 &nbsp;
                 <a @click="validateSection" class="btn btn-primary btn-add" v-if="!sectionanneescolaire.validated_at" >Valider la section <div v-bind:class="{'spinner-border-customize': valueDisabledValidateSectionAnneeScolaire}"></div></a>
                 <a href="javascript:void(0)" class="btn btn-primary float-right btn-add" v-if="sectionanneescolaire.validated_at" disabled>Valider la section</a>

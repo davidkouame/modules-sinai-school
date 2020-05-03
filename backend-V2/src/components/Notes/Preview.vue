@@ -128,7 +128,7 @@
                   </div>
                 </div>
                 <div class="clearfix"></div>
-                <a href="#/notes" class="btn btn-danger float-right">Retour</a>
+                <a href="#/notes" class="btn btn-danger btn-delete float-right">Retour</a>
               </form>
         </div>
       </div>

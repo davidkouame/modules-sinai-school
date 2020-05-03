@@ -97,7 +97,7 @@
                   </table>
                 </div>
                 <div class="clearfix"></div>
-                <a href="#/abonnements" class="btn btn-danger float-right">Retour</a>
+                <a href="#/abonnements" class="btn btn-danger btn-delete float-right">Retour</a>
               </form>
         </div>
       </div>
