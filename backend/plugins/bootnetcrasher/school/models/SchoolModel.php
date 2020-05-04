@@ -24,4 +24,8 @@ class SchoolModel extends Model
      */
     public $rules = [
     ];
+
+    public $belongsTo = [
+        'pays' => ['BootnetCrasher\Parametrage\Models\PaysModel', 'key' => 'pays_id', 'otherKey' => 'id'],
+    ];
 }

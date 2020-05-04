@@ -22,7 +22,7 @@
               <h4 class="card-title">Détailler une note</h4>
             </div>
 
-            <div class="card-body">
+            <div class="card-body" v-if="note">
               <form>
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Libelle</label>
@@ -156,7 +156,7 @@ export default {
       // console.log("nous avons changé la valeur de note "+JSON.stringify(this.note));
       if (this.note) {
         this.libelle = this.note.libelle;
-        this.typenote = this.note.typenote.id;
+        this.typenote = this.note.typenote ? this.note.typenote.id : '';
         this.datenoteeffectue = this.note.datenoteeffectue.split(" ")[0]; // this.note.datenoteeffectue;
         this.coefficient = this.note.coefficient;
         this.description = this.note.description;

@@ -247,35 +247,36 @@ class userController extends Controller
         try{
             $data = $request->all();
             // if($data["password"])
-            $rules = null;
-            $messages = null;
-            if(array_key_exists("password", $data)){
-                $rules = [
-                    'name'     => 'required',
-                    'surname'     => 'required',
-                    // 'tel' => 'required',
-                    'password' => 'required|confirmed',
-                    'password_confirmation' => 'required_with:password'
-                ];
-                $messages = [
-                    "name.required" => "Veuillez entrer un nom",
-                    "surname.required" => "Veuillez entrer un prénom",
-                    "password.required" => "Veuillez entrer un mot de passe",
-                    "password_confirmation.required" => "Veuillez entrer un mot de passe de confirmation",
-                    "password_confirmation.required_with" => "Désolé les mots de passes ne correspondent"
-                ];
-            }else{
-                $rules = [
-                    'name'     => 'required',
-                    'surname'     => 'required'
-                    // 'tel' => 'required',
-                ];
-                $messages = [
-                    "name.required" => "Veuillez entrer un nom",
-                    "surname.required" => "Veuillez entrer un prénom"
-                ];
+            $rules = [];
+            $messages = [];
+            if(!$request->has('first_login')){
+                if(array_key_exists("password", $data)){
+                    $rules = [
+                        'name'     => 'required',
+                        'surname'     => 'required',
+                        // 'tel' => 'required',
+                        'password' => 'required|confirmed',
+                        'password_confirmation' => 'required_with:password'
+                    ];
+                    $messages = [
+                        "name.required" => "Veuillez entrer un nom",
+                        "surname.required" => "Veuillez entrer un prénom",
+                        "password.required" => "Veuillez entrer un mot de passe",
+                        "password_confirmation.required" => "Veuillez entrer un mot de passe de confirmation",
+                        "password_confirmation.required_with" => "Désolé les mots de passes ne correspondent"
+                    ];
+                }else{
+                    $rules = [
+                        'name'     => 'required',
+                        'surname'     => 'required'
+                        // 'tel' => 'required',
+                    ];
+                    $messages = [
+                        "name.required" => "Veuillez entrer un nom",
+                        "surname.required" => "Veuillez entrer un prénom"
+                    ];
+                }
             }
-            
             $validation = Validator::make($data, $rules, $messages);
             if (!$validation->passes()) {
                 trace_log("Une erreur est survenue lors de la mise à jour de l'utilsateur, message : l'utilisateur

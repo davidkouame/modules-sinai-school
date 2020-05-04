@@ -41,7 +41,12 @@
                   <label class="col-sm-3 col-form-label">Date de note effectué (
                   <span class="span-required">*</span>)</label>
                   <div class="col-sm-9">
-                    <input type="date" class="form-control" v-model="datenoteeffectue" />
+                    <!--<input type="date" class="form-control" v-model="datenoteeffectue" />-->
+                    <datetime
+                  v-model="datenoteeffectue"
+                  input-class="form-control"
+                  type="datetime"
+                ></datetime>
                   </div>
                 </div>
                 <div class="form-group row">
@@ -158,7 +163,9 @@ export default {
       this.valueDisabled = true;
       const data = {};
       data["libelle"] = this.libelle;
-      data["datenoteeffectue"] = this.datenoteeffectue;
+      data["datenoteeffectue"] = this.datenoteeffectue
+          .split(".")[0]
+          .replace("T", " "); // this.datenoteeffectue;
       data["typenote_id"] = this.typenote;
       data["classe_id"] = this.classe;
       data["coefficient"] = this.coefficient;
@@ -209,8 +216,8 @@ export default {
       return this.$store.getters.note;
     },
     classes () {
-       console.log("@@@@@@@@@@@@@@@@@@@@@");
-       console.log(JSON.stringify(this.$store.getters.classes));
+       // console.log("@@@@@@@@@@@@@@@@@@@@@");
+       // console.log(JSON.stringify(this.$store.getters.classes));
       return this.$store.getters.classes;
     }
   },
@@ -219,7 +226,8 @@ export default {
       if (this.note) {
         this.libelle = this.note.libelle;
         this.typenote = this.note.typenote.id;
-        this.datenoteeffectue = this.note.datenoteeffectue.split(" ")[0]; // this.note.datenoteeffectue;
+        // this.datenoteeffectue = this.note.datenoteeffectue.split(" ")[0]; // this.note.datenoteeffectue;
+        this.datenoteeffectue = this.note.datenoteeffectue.substring(0,10);
         this.coefficient = this.note.coefficient;
         this.description = this.note.description;
         this.matiere_id = this.note.matiere_id;

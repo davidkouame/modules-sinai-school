@@ -26,46 +26,52 @@
               <div class="table-responsive">
                 <!-- Zone de recherche -->
                 <div class="row">
-                    <div class="float-left col-2">
-                        <base-dropdown v-bind:title="titleDropdownClasse" v-if="classes">
-                            <a v-for="classe in classes" class="dropdown-item"
-                                href="javascript:void(0)" @click="changeClasse(classe)">
-                              {{ classe.classe.libelle }}
-                              <i class="fa fa-check"  :class="{check:classe.classe.id == classeId}" ></i>
-                            </a>
-                        </base-dropdown>
-                    </div>
-                    <div class="float-right offset-md-4 col-6">
-                        <div class="row">
-                            <div class="col-md-10">
-                                <div class="input-group mb-3">
-                                    <input
-                                      type="text"
-                                      class="form-control"
-                                      v-model="searchkeys"
-                                      placeholder="Rechercher une note"
-                                      aria-label="Recipient's username"
-                                      aria-describedby="button-addon2"
-                                    />
-                                    <div class="input-group-append search-parent">
-                                      <button
-                                        class="btn btn-outline-secondary"
-                                        id="button-addon2"
-                                        v-on:click="searchNote"
-                                      >rechercher</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-1">
-                                <div class="col-1 add-form">
-                                    <a :href="'#/notes/add'" style="color: #3F5E7D">
-                                      <i class="fa fa-plus-circle fa-lg font-size-28"></i>
-                                    </a>
-                                </div>
-                            </div>
+                  <div class="float-left col-2">
+                    <base-dropdown v-bind:title="titleDropdownClasse" v-if="classes">
+                      <a
+                        v-for="classe in classes"
+                        class="dropdown-item"
+                        href="javascript:void(0)"
+                        @click="changeClasse(classe)"
+                      >
+                        {{ classe.classe.libelle }}
+                        <i
+                          class="fa fa-check"
+                          :class="{check:classe.classe.id == classeId}"
+                        ></i>
+                      </a>
+                    </base-dropdown>
+                  </div>
+                  <div class="float-right offset-md-4 col-6">
+                    <div class="row">
+                      <div class="col-md-10">
+                        <div class="input-group mb-3">
+                          <input
+                            type="text"
+                            class="form-control"
+                            v-model="searchkeys"
+                            placeholder="Rechercher une note"
+                            aria-label="Recipient's username"
+                            aria-describedby="button-addon2"
+                          />
+                          <div class="input-group-append search-parent">
+                            <button
+                              class="btn btn-outline-secondary"
+                              id="button-addon2"
+                              v-on:click="searchNote"
+                            >rechercher</button>
+                          </div>
                         </div>
+                      </div>
+                      <div class="col-md-1">
+                        <div class="col-1 add-form">
+                          <a :href="'#/notes/add'" style="color: #3F5E7D">
+                            <i class="fa fa-plus-circle fa-lg font-size-28"></i>
+                          </a>
+                        </div>
+                      </div>
                     </div>
-
+                  </div>
                 </div>
 
                 <table class="table table-d">
@@ -90,15 +96,28 @@
                       <td>{{ note.classe ? note.classe.libelle : '' }}</td>
                       <td>
                         <div class="row">
-                          <a :href="'#/notes/preview/'+note.id" class="col btn btn-icon btn-info btn-sm">
+                          <a
+                            :href="'#/notes/preview/'+note.id"
+                            class="col btn btn-icon btn-info btn-sm"
+                          >
                             <!---->
                             <i class="fa fa-eye"></i>
                             <!---->
                           </a>&nbsp;
-                          <a v-if="!note.rapport_validation_id" :href="'#/notes/update/'+note.id" class="col btn btn-icon btn-success btn-sm">
+                          <a
+                            v-if="!note.rapport_validation_id"
+                            :href="'#/notes/update/'+note.id"
+                            class="col btn btn-icon btn-success btn-sm"
+                          >
                             <i class="fa fa-edit"></i>
                           </a>&nbsp;
-                          <a v-if="!note.rapport_validation_id" id="show-modal" @click="showModalF(note.id)" class="col btn btn-icon btn-danger btn-sm btn-delete" style="cursor:pointer;color:#42d0ed">
+                          <a
+                            v-if="!note.rapport_validation_id"
+                            id="show-modal"
+                            @click="showModalF(note.id)"
+                            class="col btn btn-icon btn-danger btn-sm btn-delete"
+                            style="cursor:pointer;color:#42d0ed"
+                          >
                             <i class="fa fa-trash"></i>
                           </a>
                         </div>
@@ -120,9 +139,10 @@
 
                 <!-- Pagination -->
                 <div class="row" v-if="pageCount > 1">
-                  <div class="col-md-4" style="color: #98a7a8;font-size: 13px;">
-                    Enregistrements affichés : {{ currentPage }}-{{ countPage }} sur {{ totalElement }}
-                  </div>
+                  <div
+                    class="col-md-4"
+                    style="color: #98a7a8;font-size: 13px;"
+                  >Enregistrements affichés : {{ currentPage }}-{{ countPage }} sur {{ totalElement }}</div>
                   <div class="col-md-8">
                     <div class="float-right pagi">
                       <paginate
@@ -136,7 +156,6 @@
                     </div>
                   </div>
                 </div>
-
               </div>
             </div>
           </div>
@@ -166,8 +185,9 @@ export default {
   },
   created() {
     this.fetch();
-    this.$store.dispatch('classes', [{'key': 'professeur_id',
-    'value': this.$cookies.get('professeurId')}]);
+    this.$store.dispatch("classes", [
+      { key: "professeur_id", value: this.$cookies.get("professeurId") }
+    ]);
   },
   methods: {
     fetch(pageNum, search = null) {
@@ -175,7 +195,7 @@ export default {
       let params = [
         { key: "search", value: search },
         { key: "classe_id", value: this.classeListId },
-        { key: "professeur_id", value: this.$cookies.get('professeurId') },
+        { key: "professeur_id", value: this.$cookies.get("professeurId") },
         { key: "section_annee_scolaire_id", value: this.sectionAnneeScolaireId }
       ];
       this.$store.dispatch("allnotes", {
@@ -199,26 +219,29 @@ export default {
       }
       return params;
     },
-    changeClasse(classe){
-      if(classe == 0){
-        this.$store.dispatch('classeId', null);
+    changeClasse(classe) {
+      if (classe == 0) {
+        this.$store.dispatch("classeId", null);
         this.titleDropdownClasse = "Classes";
         this.classeId = 0;
-      }else{
-        this.$store.dispatch('classeId', classe.classe.id);
-        this.titleDropdownClasse = classe.classe.libelle ;
+      } else {
+        this.$store.dispatch("classeId", classe.classe.id);
+        this.titleDropdownClasse = classe.classe.libelle;
         this.classeId = classe.classe.id;
+        this.$cookies.set("classeId", classe.classe.id);
       }
     },
-    refreshList(){
-        if(this.classeListId && this.sectionAnneeScolaireId){
-            this.fetch();
-        }
+    refreshList() {
+      if (this.classeListId && this.sectionAnneeScolaireId) {
+        this.fetch();
+      }
     }
   },
   computed: {
     notes() {
-      this.countNotes = this.$store.getters.notes ? this.$store.getters.notes.length : 0;
+      this.countNotes = this.$store.getters.notes
+        ? this.$store.getters.notes.length
+        : 0;
       this.countNotes = this.countNotes > 0;
       return this.$store.getters.notes;
     },
@@ -231,19 +254,27 @@ export default {
     classeListId() {
       return this.$store.getters.classeId;
     },
-    classes () {
-      return this.$store.getters.classes
+    classes() {
+      if (
+        !this.$cookies.get("classeId") &&
+        this.$store.getters.classes &&
+        this.$store.getters.classes[0] &&
+        this.$store.getters.classes[0].classe
+      ) {
+        this.$cookies.set("classeId", this.$store.getters.classes[0].classe.id);
+      }
+      return this.$store.getters.classes;
     },
-    sectionAnneeScolaireId(){
-        return this.$store.getters.sectionAnneeScolaireId;
+    sectionAnneeScolaireId() {
+      return this.$store.getters.sectionAnneeScolaireId;
     },
-    currentPage(){
+    currentPage() {
       return this.$store.getters.currentPage;
     },
-    countPage(){
+    countPage() {
       return this.$store.getters.countPage;
     },
-    totalElement(){
+    totalElement() {
       return this.$store.getters.totalElement;
     }
   },
@@ -252,16 +283,24 @@ export default {
       // this.fetch();
       this.refreshList();
     },
-    classes(){
-      if(this.classes){
+    classes() {
+      let classeId = this.$cookies.get("classeId");
+      if (!classeId && this.classes) {
         this.titleDropdownClasse = this.classes[0].classe.libelle;
-        this.$store.dispatch('classeId', this.classes[0].classe.id);
-        }
+        this.$store.dispatch("classeId", this.classes[0].classe.id);
+      } else {
+        this.$store.dispatch("classeId", this.$cookies.get("classeId"));
+        // console.log(" la classe trouvée dans le fin dest "+;
+        let classe = this.classes.find(element => element.classe.id == classeId);
+        this.titleDropdownClasse = classe.classe ? classe.classe.libelle : '';
+        // this.titleDropdownClasse = "bshdbshdbs";
+        // console.log("libelle de la classe "+this.titleDropdownClasse);
+      }
     },
-    sectionAnneeScolaireId(){
-        // console.log(this.sectionAnneeScolaireId);
-        // this.fetch();
-        this.refreshList();
+    sectionAnneeScolaireId() {
+      // console.log(this.sectionAnneeScolaireId);
+      // this.fetch();
+      this.refreshList();
     },
     currentPage() {
       this.indexPagnation = (this.currentPage - 1) * 10;
@@ -270,9 +309,13 @@ export default {
 };
 </script>
 <style>
-  .check{display: block !important}
-  a .fa-check{display: none}
-  li { list-style-type: none}
-
-  
+.check {
+  display: block !important;
+}
+a .fa-check {
+  display: none;
+}
+li {
+  list-style-type: none;
+}
 </style>

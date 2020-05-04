@@ -1498,7 +1498,8 @@ export default new Vuex.Store({
         context.state.endpoint + 'api/v1/eleves/rapport/'+params.sectionAnneeScolaireId
       )
         .then(response => {
-          alert("Le bilan a été généré a été envoyé")
+          alert("Le bilan a été généré a été envoyé");
+          window.location.reload();
         })
         .catch(error => {
           console.log(error)

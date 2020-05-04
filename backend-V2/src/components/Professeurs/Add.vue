@@ -90,16 +90,18 @@
                       <!---->
                     </div>
                   </div>
-                  <!--<div class="col-md-6">
-                    <div class="form-group">
-                      <label class="control-label">Créer un compte user</label>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="row form-group">
+                      <label class="col-md-5 control-label">Créer un compte user</label>
                       <input
-                        class="form-control"
+                        class="col-md-1 form-control"
                         type="checkbox"
                         v-model="professeur.create_account"
                       />
                     </div>
-                  </div>-->
+                  </div>
                 </div>
                 <div class="clearfix"></div>
                 <div class="float-right">

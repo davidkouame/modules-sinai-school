@@ -178,7 +178,7 @@ export default {
       // console.log(">>>>>>> "+noteId);
     },
     formatValeur(valeur){
-      if(valeur){
+      if(valeur || valeur==0){
         if(valeur.toString().length==1){
           return '0'+valeur;
         }else{

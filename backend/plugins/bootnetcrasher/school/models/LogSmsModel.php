@@ -20,8 +20,8 @@ class LogSmsModel extends Model
     public $table = 'bootnetcrasher_school_log_sms';
     
     public $belongsTo = [
-        'parent' => ['BootnetCrasher\School\Models\ParentModel', 'key' => 'parent_id', 'otherKey' => 'id'],
-        'eleve' => ['BootnetCrasher\School\Models\EleveModel', 'key' => 'eleve_id', 'otherKey' => 'id']
+        //'user' => ['RainLab\User\Models\User', 'key' => 'user_id', 'otherKey' => 'id'],
+        'parent' => ['RainLab\User\Models\User', 'key' => 'user_id', 'otherKey' => 'parenteleve_id'],
     ];
 
     /**

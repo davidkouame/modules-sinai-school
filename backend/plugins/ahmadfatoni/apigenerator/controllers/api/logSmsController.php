@@ -24,10 +24,7 @@ class logSmsController extends Controller
         $data = $this->LogSmsModel->with(array(
             'parent'=>function($query){
                 $query->select('*');
-            },
-            'eleve'=>function($query){
-                $query->select('*');
-            }, ));
+            }));
         foreach($request->except(['page']) as $key => $value){
             if($request->has('search')){
                 $date = explode("-", trim($request->get('search')));
@@ -53,10 +50,7 @@ class logSmsController extends Controller
         $data = $this->LogSmsModel->with(array(
             'parent'=>function($query){
                 $query->select('*');
-            },
-            'eleve'=>function($query){
-                $query->select('*');
-            }, ))->select('*')->where('id', '=', $id)->first();
+            }))->select('*')->where('id', '=', $id)->first();
         return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
     }
 

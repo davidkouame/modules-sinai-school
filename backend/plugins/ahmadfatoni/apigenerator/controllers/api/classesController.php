@@ -19,14 +19,14 @@ class classesController extends Controller
     private $rules = [
         "libelle" => "required",
         "niveau_id" => 'required',
-        "serie_id" => 'required',
+        // "serie_id" => 'required',
         "annee_scolaire_id" => 'required'
     ];
     
     private $messages = [
         "libelle.required" => "Veuillez entrer un libellé",
         "niveau_id.required" => "Veuillez entrer un niveau",
-        "serie_id.required" => "Veuillez sélectionner une serie",
+        // "serie_id.required" => "Veuillez sélectionner une serie",
         "annee_scolaire_id.required" => "Veuillez sélectionner une année scolaire",
     ];
 
@@ -91,6 +91,11 @@ class classesController extends Controller
                 $this->ClasseModel->{key($arr)} = $data;
                 next($arr);
             }
+            if(strlen($request->get('serie_id')) > 0){
+                $this->ClasseModel->serie_id = $request->get('serie_id');
+            }
+            $this->ClasseModel->school_id = $request->get('school_id');
+            $this->ClasseModel->annee_scolaire_id = $request->get('annee_scolaire_id');
             $this->ClasseModel->save();
             return $this->helpers->apiArrayResponseBuilder(201, 'created', ['id' => $this->ClasseModel->id]);
         }else{
@@ -102,6 +107,14 @@ class classesController extends Controller
         $validation = Validator::make($request->all(), $this->rules, $this->messages);
         if($validation->passes()){
             $status = $this->ClasseModel->where('id',$id)->update($request->all());
+            $classe = $this->ClasseModel->where('id',$id)->first();
+            if(strlen($request->get('serie_id')) > 0){
+                $this->ClasseModel->serie_id = $request->get('serie_id');
+            }
+            // $classe->serie_id = $request->get('serie_id');
+            $classe->school_id = $request->get('school_id');
+            $classe->annee_scolaire_id = $request->get('annee_scolaire_id');
+            $classe->save();
             if( $status ){
                 return $this->helpers->apiArrayResponseBuilder(200, 'success', 'Data has been updated successfully.');
             }else{

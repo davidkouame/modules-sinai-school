@@ -123,6 +123,7 @@ class absenceselevesController extends Controller
             $this->AbsenceEleveModel->heure_fin_cours = $request->get("heure_fin_cours");
             $this->AbsenceEleveModel->raisonabsence_id = $request->get("raisonabsence_id");
             $this->AbsenceEleveModel->section_annee_scolaire_id = $request->get("section_annee_scolaire_id");
+            $this->AbsenceEleveModel->admin_id = $request->get("admin_id");
             if (count($this->AbsenceEleveModel->rules) > 0) {
                 $validation = Validator::make($request->all(), $this->AbsenceEleveModel->rules);
                 if ($validation->passes()) {

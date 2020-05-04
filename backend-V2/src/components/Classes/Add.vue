@@ -43,8 +43,7 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label class="control-label">
-                  Series (
-                  <span class="span-required">*</span>)
+                  Series 
                 </label>
                 <!---->
                 <select v-model="classe.serie_id" class="form-control">
@@ -54,13 +53,12 @@
                 <!---->
               </div>
             </div>
-            <div class="col-md-6">
+            <!--<div class="col-md-6">
               <div class="form-group">
                 <label class="control-label">
                   Année scolaire (
                   <span class="span-required">*</span>)
                 </label>
-                <!---->
                 <select v-model="classe.annee_scolaire_id" class="form-control">
                   <option value>Sélectionnez une année scolaire</option>
                   <option
@@ -68,9 +66,8 @@
                     v-for="anneescolaire in anneesscolaires"
                   >{{ anneescolaire.libelle }}</option>
                 </select>
-                <!---->
               </div>
-            </div>
+            </div>-->
           </div>
           <div class="clearfix"></div>
           <div class="float-right">
@@ -121,7 +118,7 @@ export default {
         libelle: this.classe.libelle,
         niveau_id: this.classe.niveau_id,
         serie_id: this.classe.serie_id,
-        annee_scolaire_id: this.classe.annee_scolaire_id,
+        // annee_scolaire_id: this.classe.annee_scolaire_id,
         school_id: this.$cookies.get("ecoleId"),
         annee_scolaire_id: this.$cookies.get("anneeScolaireId")
       };

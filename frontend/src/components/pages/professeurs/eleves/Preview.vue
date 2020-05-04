@@ -10,7 +10,7 @@
           <li class="breadcrumb-item">
             <a href="#/eleves">Elèves</a>
           </li>
-          <li class="breadcrumb-item active" aria-current="page">Détailler une élève</li>
+          <li class="breadcrumb-item active" aria-current="page">Détailler élève</li>
         </ol>
       </nav>
 
@@ -131,7 +131,7 @@
                         <input
                           type="text"
                           class="form-control"
-                          v-bind:value="eleve.user.email"
+                          v-bind:value="eleve.user ? eleve.user.email : ''"
                           disabled
                         />
                       </div>
@@ -515,14 +515,16 @@ export default {
       if (search) {
         this.$store.dispatch("absenceseleves", {
           payload: pageNum,
-          search: [{ key: "libelle", value: search }],
+          search: [
+            { key: "libelle", value: search },
+            { key: "professeur_id", value: this.$cookies.get("professeurId") }],
           params: { eleveId: this.eleveId },
           eleveId: this.eleveId
         });
       } else {
         this.$store.dispatch("absenceseleves", {
           payload: pageNum,
-          search: null,
+          search: [{ key: "professeur_id", value: this.$cookies.get("professeurId") }],
           params: { eleveId: this.eleveId },
           eleveId: this.eleveId
         });
@@ -535,15 +537,16 @@ export default {
           payload: pageNum,
           search: [{ key: "libelle", value: search },
                   { key: "professeur_id", value: this.$cookies.get("professeurId") },
-                  { key: "classe_id", value: this.$cookies.get("classeId") }
-                  /*{ key: "eleve_id", value: this.$route.params.id }*/]
+                  { key: "classe_id", value: this.$cookies.get("classeId") },
+                  { key: "eleve_id", value: this.$route.params.id }]
         });
       } else {
         this.$store.dispatch("allnotesandvaleurV2", {
           payload: pageNum,
           search: [{ key: "professeur_id", value: this.$cookies.get("professeurId") },
-                  /*{ key: "eleve_id", value: this.$route.params.id }*/
-                  { key: "classe_id", value: this.$cookies.get("classeId")}
+                  { key: "eleve_id", value: this.$route.params.id },
+                  { key: "classe_id", value: this.$cookies.get("classeId")},
+                  { key: "eleve_id", value: this.$route.params.id }
                   ]
         });
       }
@@ -575,7 +578,8 @@ export default {
         }
     },
     formatValeur(valeur){
-      if(valeur){
+      // console.log("la valeur est "+valeur.toString());
+      if(valeur || valeur==0){
         if(valeur.toString().length==1){
           return '0'+valeur;
         }else{

@@ -97,7 +97,7 @@
                       id="show-modal"
                       @click="removeEleve(index)"
                       type="button"
-                      class="btn btn-icon btn-danger btn-sm"
+                      class="btn btn-icon btn-danger btn-delete btn-sm"
                     >
                       <!---->
                       <i class="fa fa-times"></i>

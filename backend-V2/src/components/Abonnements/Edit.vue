@@ -1,138 +1,166 @@
 <template>
   <card class="card" :title="title">
-      <div class="row">
-        
-        <!-- Show error message -->
-        <div v-if="error" class="col-md-12">
-          <message-error v-bind:error="error"></message-error>
-        </div>
-
-        <div class="col-md-12" v-if="abonnement">
-          <form v-on:submit="saveAbonnement">
-               <div class="row">
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label class="control-label">Parent</label>
-                      <!---->
-                      <select v-model="abonnement.parent_id" class="form-control" >
-                      <option value="">Sélectionnez un parent</option>
-                      <option :value="parent.id" v-for="parent in parents">{{ parent.name }} {{ parent.surname }}</option>
-                      </select>
-                      <!---->
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label class="control-label">Année scolaire</label>
-                      <!---->
-                      <select v-model="abonnement.annee_scolaire_id" class="form-control" >
-                      <option value="">Sélectionnez une année scolaire</option>
-                      <option :value="anneescolaire.id" v-for="anneescolaire in anneesscolaires">{{ anneescolaire.libelle }}</option>
-                      </select>
-                      <!---->
-                    </div>
-                    </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label class="control-label">Pack abonnement</label>
-                      <!---->
-                      <select v-model="abonnement.pack_abonnement_id" class="form-control" >
-                      <option value="">Sélectionnez un pack</option>
-                      <option :value="packabonnement.id" v-for="packabonnement in packsabonnement">{{ packabonnement.libelle }}</option>
-                      </select>
-                      <!---->
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label class="control-label">Commentaire</label>
-                      <!---->
-                      <textarea class="form-control" v-model="abonnement.commentaire"></textarea>
-                      <!---->
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label class="control-label">Nombre de sms initial</label>
-                      <input v-model="abonnement.nbre_sms_initial" class="form-control" disabled/>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label class="control-label">Nombre de sms consomé</label>
-                      <input v-model="abonnement.nbre_sms_consomme" class="form-control" disabled/>
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label class="control-label">Nombre de sms restant</label>
-                      <input v-model="abonnement.nbre_sms_restant" class="form-control" disabled/>
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-4">
-                    <a id="show-modal" @click="openModalSearchEleve()" class="btn btn-primary btn-add" type="button" >Ajouter</a>
-                  </div>
-                  <table class="table table-d">
-                    <thead>
-                      <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Matricule</th>
-                        <th scope="col">Nom</th>
-                        <th scope="col">Prénom</th>
-                        <th scope="col">Actions</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-          <tr v-if="eleve" v-for="(eleve, index) in eleves">
-            <th scope="row">{{ index + 1}}</th>
-            <td>{{ eleve.matricule  }}</td>
-            <td>{{ eleve.name  }}</td>
-            <td>{{ eleve.surname  }}</td>
-            <td>
-              <a id="show-modal" @click="removeEleve(index)" type="button" class="btn btn-icon btn-danger btn-sm">
-                <!----><i class="fa fa-times"></i><!---->
-              </a>
-            </td>
-          </tr>
-          <tr v-show="showEmptySentenceAbonnement"><td colspan="6" style="text-align: center;">Aucun resultat trouvé !</td></tr>
-        </tbody>
-                  </table>
-                  <modal
-                  v-if="showModal"
-                  @close="showModal = false"
-                  v-bind:modelid="abonnementId"
-                  modelname="abonnement"
-                  nameUrl="abonnements"
-                  modaltype="searchEleve"
-                ></modal>
-                </div>
-                <div class="clearfix"></div>
-                <div class="float-right">
-                  <div class="row">
-                    <div class="col-md-12">
-                      <a @click="$router.go(-1)" class="btn btn-danger btn-delete">Annuler</a>
-                      &nbsp;
-                      <button type="submit" class="btn btn-primary btn-add" :disabled="valueDisabled">Modifier <div v-bind:class="{'spinner-border-customize': valueDisabled}"></div></button>
-                    </div> 
-                  </div>
-                </div>
-              </form>
-        </div>
+    <div class="row">
+      <!-- Show error message -->
+      <div v-if="error" class="col-md-12">
+        <message-error v-bind:error="error"></message-error>
       </div>
+
+      <div class="col-md-12" v-if="abonnement">
+        <form v-on:submit="saveAbonnement">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="control-label">Parent</label>
+                <!---->
+                <select v-model="abonnement.parent_id" class="form-control">
+                  <option value>Sélectionnez un parent</option>
+                  <option
+                    :value="parent.id"
+                    v-for="parent in parents"
+                  >{{ parent.name }} {{ parent.surname }}</option>
+                </select>
+                <!---->
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="control-label">Année scolaire</label>
+                <!---->
+                <select v-model="abonnement.annee_scolaire_id" class="form-control">
+                  <option value>Sélectionnez une année scolaire</option>
+                  <option
+                    :value="anneescolaire.id"
+                    v-for="anneescolaire in anneesscolaires"
+                  >{{ anneescolaire.libelle }}</option>
+                </select>
+                <!---->
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="control-label">Pack abonnement</label>
+                <!---->
+                <select v-model="abonnement.pack_abonnement_id" class="form-control">
+                  <option value>Sélectionnez un pack</option>
+                  <option
+                    :value="packabonnement.id"
+                    v-for="packabonnement in packsabonnement"
+                  >{{ packabonnement.libelle }}</option>
+                </select>
+                <!---->
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="control-label">Commentaire</label>
+                <!---->
+                <textarea class="form-control" v-model="abonnement.commentaire"></textarea>
+                <!---->
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="control-label">Nombre de sms initial</label>
+                <input v-model="abonnement.nbre_sms_initial" class="form-control" disabled />
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="control-label">Nombre de sms consomé</label>
+                <input v-model="abonnement.nbre_sms_consomme" class="form-control" disabled />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="control-label">Nombre de sms restant</label>
+                <input v-model="abonnement.nbre_sms_restant" class="form-control" disabled />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <a
+                id="show-modal"
+                @click="openModalSearchEleve()"
+                class="btn btn-primary btn-add"
+                type="button"
+              >Ajouter</a>
+            </div>
+            <table class="table table-d">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Matricule</th>
+                  <th scope="col">Nom</th>
+                  <th scope="col">Prénom</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-if="eleve" v-for="(eleve, index) in eleves">
+                  <th scope="row">{{ index + 1}}</th>
+                  <td>{{ eleve.matricule }}</td>
+                  <td>{{ eleve.name }}</td>
+                  <td>{{ eleve.surname }}</td>
+                  <td>
+                    <a
+                      id="show-modal"
+                      @click="removeEleve(index)"
+                      type="button"
+                      class="btn btn-icon btn-danger btn-delete btn-sm"
+                    >
+                      <!---->
+                      <i class="fa fa-times"></i>
+                      <!---->
+                    </a>
+                  </td>
+                </tr>
+                <tr v-show="showEmptySentenceAbonnement">
+                  <td colspan="6" style="text-align: center;">Aucun resultat trouvé !</td>
+                </tr>
+              </tbody>
+            </table>
+            <modal
+              v-if="showModal"
+              @close="showModal = false"
+              v-bind:modelid="abonnementId"
+              modelname="abonnement"
+              nameUrl="abonnements"
+              modaltype="searchEleve"
+            ></modal>
+          </div>
+          <div class="clearfix"></div>
+          <div class="float-right">
+            <div class="row">
+              <div class="col-md-12">
+                <a @click="$router.go(-1)" class="btn btn-danger btn-delete">Annuler</a>
+                &nbsp;
+                <button
+                  type="submit"
+                  class="btn btn-primary btn-add"
+                  :disabled="valueDisabled"
+                >
+                  Modifier
+                  <div v-bind:class="{'spinner-border-customize': valueDisabled}"></div>
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
   </card>
 </template>
 
 <script>
-
-import moment from 'moment'
+import moment from "moment";
 
 export default {
   data() {
@@ -154,16 +182,18 @@ export default {
     // recuperation des eleves
     // this.$store.dispatch('getAllEleves', {payload: 0})
     // recuperation des années scolaires
-    this.$store.dispatch('getAllAnneesScolaires', {payload: 0})
+    this.$store.dispatch("getAllAnneesScolaires", { payload: 0 });
     // recuperation des packs d'abonnements
-    this.$store.dispatch('getAllPacksAbonnement', {payload: 0})
+    this.$store.dispatch("getAllPacksAbonnement", { payload: 0 });
     // recuperation des parents
-    this.$store.dispatch('getAllParents', {payload: 0})
+    this.$store.dispatch("getAllParents", { payload: 0 });
     // recuperation des eleves de l'abonnements
-    this.$store.dispatch('getAllElevesAbonnement', {abonnementId: this.$route.params.id})
+    this.$store.dispatch("getAllElevesAbonnement", {
+      abonnementId: this.$route.params.id
+    });
   },
-  methods:{
-    saveAbonnement(){
+  methods: {
+    saveAbonnement() {
       this.valueDisabled = true;
       let data = {
         parent_id: this.abonnement.parent_id,
@@ -171,15 +201,18 @@ export default {
         pack_abonnement_id: this.abonnement.pack_abonnement_id,
         commentaire: this.abonnement.commentaire,
         eleves: this.eleves,
-        school_id: this.$cookies.get('ecoleId'),
-        annee_scolaire_id: this.$cookies.get('anneeScolaireId')
+        school_id: this.$cookies.get("ecoleId"),
+        annee_scolaire_id: this.$cookies.get("anneeScolaireId")
       };
       let store = this.$store;
       store
-        .dispatch("updateAbonnementWithEleves", {"data": data, "id": this.$route.params.id})
+        .dispatch("updateAbonnementWithEleves", {
+          data: data,
+          id: this.$route.params.id
+        })
         .then(response => {
-          alert("L'enregistrement a été éffectué avec succès")
-          this.$router.go(-1)
+          alert("L'enregistrement a été éffectué avec succès");
+          this.$router.go(-1);
         })
         .catch(error => {
           this.error = error;
@@ -192,44 +225,44 @@ export default {
       this.showModal = true;
       this.abonnementId = 1;
     },
-    removeEleve(index){
-      this.eleves.splice(index, 1); 
+    removeEleve(index) {
+      this.eleves.splice(index, 1);
     }
   },
-  computed:{
+  computed: {
     abonnement() {
       return this.$store.getters.abonnement;
     },
-    anneesscolaires(){
-      return this.$store.getters.anneesscolaires
+    anneesscolaires() {
+      return this.$store.getters.anneesscolaires;
     },
-    packsabonnement(){
-      return this.$store.getters.packsabonnement
+    packsabonnement() {
+      return this.$store.getters.packsabonnement;
     },
-    parents(){
-      return this.$store.getters.parents
+    parents() {
+      return this.$store.getters.parents;
     },
-    eleve(){
-      return this.$store.getters.chooseEleve
+    eleve() {
+      return this.$store.getters.chooseEleve;
     },
-    showEmptySentenceAbonnement(){
-      return  this.notEmptyObject(this.eleves) == 0
+    showEmptySentenceAbonnement() {
+      return this.notEmptyObject(this.eleves) == 0;
     },
-    elevesComputed(){
-      return this.$store.getters.elevesabonnement
+    elevesComputed() {
+      return this.$store.getters.elevesabonnement;
     }
   },
-  watch:{
-    eleve(){
-      this.eleves.push(this.eleve)
+  watch: {
+    eleve() {
+      this.eleves.push(this.eleve);
     },
-    elevesComputed(){
-      if(this.elevesComputed && !this.isLoader){
-        var i = 0
-        for(i = 0; i < this.elevesComputed.length; i++){
-          this.eleves.push(this.elevesComputed[i])
+    elevesComputed() {
+      if (this.elevesComputed && !this.isLoader) {
+        var i = 0;
+        for (i = 0; i < this.elevesComputed.length; i++) {
+          this.eleves.push(this.elevesComputed[i]);
         }
-        this.isLoader = true
+        this.isLoader = true;
       }
     }
   }

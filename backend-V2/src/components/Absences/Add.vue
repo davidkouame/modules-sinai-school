@@ -172,7 +172,8 @@ export default {
         // section_annee_scolaire_id: this.absence.section_annee_scolaire_id,
         school_id: this.$cookies.get("ecoleId"),
         annee_scolaire_id: this.$cookies.get("anneeScolaireId"),
-        section_annee_scolaire_id: this.absence.section_annee_scolaire_id
+        section_annee_scolaire_id: this.absence.section_annee_scolaire_id,
+        admin_id: this.$cookies.get("userId"),
       };
       let store = this.$store;
       // console.log("data "+JSON.stringify(data))

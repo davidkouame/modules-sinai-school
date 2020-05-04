@@ -279,7 +279,7 @@ export default {
       this.$store.dispatch('getMoyenneAnnuelle', {page: 0, search: this.trimSearch(params)})
     },
     formatValeur(valeur){
-      if(valeur){
+      if(valeur || valeur==0){
         if(valeur.toString().length==1){
           return '0'+valeur;
         }else{

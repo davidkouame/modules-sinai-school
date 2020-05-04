@@ -3,3 +3,9 @@ columns:
         label: Libellé
         type: text
         searchable: true
+    pays:
+        label: Pays
+        type: text
+        searchable: true
+        select: libelle
+        relation: pays

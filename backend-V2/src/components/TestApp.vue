@@ -11,8 +11,8 @@
 				<!---->
 			</div>
         </div>
-		<a @click="generateBilanAndSend" class="btn btn-primary">Générer bilan & Enregistrer </a> &nbsp;
-		<button @click="generateBillanPeriodique" class="btn btn-primary" :disabled="valueDisabled">Send billan périodique <div v-bind:class="{'spinner-border-customize': valueDisabled}"></div></button>
+		<!--<a @click="generateBilanAndSend" class="btn btn-primary" style="color: #fff">Générer bilan & Enregistrer <div v-bind:class="{'spinner-border-customize': isLoaderBtnGenerateSendBilan}"></div></a> &nbsp;-->
+		<button @click="generateBillanPeriodique" class="btn btn-primary" :disabled="valueDisabled">Générer le billan périodique et envoyer le aux parents<div v-bind:class="{'spinner-border-customize': valueDisabled}"></div></button>
 		<hr>
 		<h2>Sms</h2>
 		<div class="row">
@@ -62,6 +62,7 @@ export default{
 			telephoneSendSms: null,
 			valueDisabledSendTestSms: false,
 			valueDisabledGenerateSectionNote: false,
+			isLoaderBtnGenerateSendBilan: false
 		}
 	},
 	created(){
@@ -74,6 +75,7 @@ export default{
 	},
 	methods:{
 		generateBilanAndSend(){
+			this.isLoaderBtnGenerateSendBilan = true;
 			this.$store.dispatch('generateBilanAndSend', {sectionAnneeScolaireId: this.sectionAnneeScolaireId})
 		},
 		generateBillanPeriodique(){

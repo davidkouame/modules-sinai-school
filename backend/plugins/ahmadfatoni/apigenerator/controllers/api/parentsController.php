@@ -18,12 +18,14 @@ class parentsController extends Controller
 
     protected $helpers;
 
+    private $email = null;
+
     private $rules = [
         "name" => "required",
         "surname" => "required",
         "tel" => 'required',
-        "email" => 'required|unique:bootnetcrasher_school_parent',
-        "pays_id" => 'required',
+        'email' => 'required|between:6,255|email|unique:bootnetcrasher_school_parent,email',
+        "pays_id" => 'required'
     ];
     
     private $messages = [
@@ -31,12 +33,12 @@ class parentsController extends Controller
         "surname.required" => "Veuillez entrer un prénom",
         "tel.required" => "Veuillez entrer un numéros",
         "email.required" => "Veuillez entrer un email",
-        "email.unique" => "Email doit être unique",
+        "email.unique" => "Email doit être unique unique",
         "pays_id.required" => "Veuillez entrer un pays",
     ];
 
     private $rules_user = [
-        'email'    => 'required|between:6,255|email|unique:users'
+        'email' => 'required|between:6,255|email|unique:users'
     ];
 
     public $messages_user = [
@@ -83,7 +85,6 @@ class parentsController extends Controller
         }
         return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
     }
-
     
     public function show(Request $request, $id){ 
         $data = $this->ParentModel->with(array(
@@ -107,8 +108,9 @@ class parentsController extends Controller
             // dd($classe->classe);
             // dd($key);
             // dd($data['eleves'][$key]);
-            $data['eleves'][$key]['classe'] = $classe->toArray();
-
+            if($classe){
+                $data['eleves'][$key]['classe'] = $classe->toArray();
+            }
         }
         return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
     }
@@ -116,7 +118,7 @@ class parentsController extends Controller
     public function store(Request $request){
         $arr = $request->except('create_account');
         // Validation user
-        $validation = Validator::make($request->all(), $this->rules_user);
+        $validation = Validator::make($request->all(), $this->rules_user, $this->messages_user);
         if(!$validation->passes()){
             return $this->helpers->apiArrayResponseBuilder(400, 'fail', $validation->errors() );
         }
@@ -177,13 +179,43 @@ class parentsController extends Controller
     }
 
     public function update($id, Request $request){
-        // Validation user
-        $validation = Validator::make($request->all(), $this->User->rules, $this->User->messages);
+        $user = User::where('parenteleve_id', $id)->first();
+        $rules = [
+            "name" => "required",
+            "surname" => "required",
+            "tel" => 'required',
+            'email' => 'required|between:6,255|email|unique:bootnetcrasher_school_parent,email,'.$id,
+            "pays_id" => 'required'
+        ];
+        
+        $messages = [
+            "name.required" => "Veuillez entrer un nom",
+            "surname.required" => "Veuillez entrer un prénom",
+            "tel.required" => "Veuillez entrer un numéros",
+            "email.required" => "Veuillez entrer un email",
+            "email.unique" => "Email doit être unique unique",
+            "pays_id.required" => "Veuillez entrer un pays",
+        ];
+
+        $rules_user = [
+            'email' => 'required|between:6,255|email|unique:users,email,'.$user->id
+        ];
+    
+        $messages_user = [
+            "email.required" => "Veuillez entrer un email",
+            "email.unique" => "Email doit être unique",
+        ];
+
+        $validation = Validator::make($request->all(), $rules_user, $messages_user);
+        if(!$validation->passes()){
+            return $this->helpers->apiArrayResponseBuilder(400, 'fail', $validation->errors() );
+        }
+        
+        // Validation Parent
+        $validation = Validator::make($request->all(), $rules, $messages);
         if(!$validation->passes() ){
             return $this->helpers->apiArrayResponseBuilder(400, 'fail', $validation->errors() );
         }
-        // Validation parent
-        $validation = Validator::make($request->all(), $this->rules, $this->messages);
         if($validation->passes()){
             $status = $this->ParentModel->where('id',$id)->update($request->except('create_account'));
             if( $status ){

@@ -96,25 +96,23 @@
                     </div>
                   </div>
                 </div>
-                <!--<div class="row">
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label class="control-label">Voulez vous réinitialiser le password ?</label>
-                      <input
-                        class="form-control"
-                        type="checkbox"
-                        v-model="professeur.create_account"
-                      />
-                    </div>
-                  </div>
-                </div>-->
                 <div class="row">
-                  <div class="col-md-12">
+                  <div class="col-md-6">
                     <div class="form-group">
                       <label class="control-label">Description</label>
                       <!---->
                       <textarea class="form-control" v-model="professeur.description"></textarea>
                       <!---->
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="row form-group">
+                      <label class="col-md-7 control-label">Voulez vous réinitialiser le password ?</label>
+                      <input
+                        class="col-md-1 form-control"
+                        type="checkbox"
+                        v-model="professeur.create_account"
+                      />
                     </div>
                   </div>
                 </div>

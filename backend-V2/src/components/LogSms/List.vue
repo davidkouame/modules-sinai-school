@@ -20,8 +20,9 @@
           <tr>
             <th scope="col">#</th>
             <th scope="col">Date de création</th>
-            <th scope="col">Parent</th>
-            <th scope="col">Téléphone parent</th>
+            <th scope="col">Type</th>
+            <th scope="col">Utilisateur</th>
+            <th scope="col">Téléphone</th>
             <th scope="col">Actions</th>
           </tr>
         </thead>
@@ -29,7 +30,8 @@
           <tr v-if="alllogsms" v-for="(log, index) in alllogsms">
             <th scope="row">{{ index + 1}}</th>
             <td>{{ log.created_at }}</td>
-            <td>{{ log.parent.name+' '+log.parent.surname}}</td>
+            <td>{{ log.type_user }}</td>
+            <td>{{ getUser(log) }}</td>
             <td>{{ log.tel }}</td>
             <td>
               <a :href="'#/log-sms/preview/'+log.id" class="btn btn-icon btn-info btn-sm">
@@ -104,6 +106,13 @@ export default {
       var times = time.split(" ")[1].split(":")
       return times[0]+":"+times[1]
     },
+    getUser(log){
+      if(log.type_user == "parent"){
+        return log.parent ? log.parent.name+' '+log.parent.surname : '';
+      }else{
+        return ''
+      }
+    }
   },
   computed:{
     alllogsms(){

@@ -41,7 +41,12 @@
                   <label class="col-sm-3 col-form-label">Date de note effectué (
                   <span class="span-required">*</span>)</label>
                   <div class="col-sm-9">
-                    <input type="date" class="form-control" v-model="datenoteeffectue" />
+                    <!--<input type="date" class="form-control" v-model="datenoteeffectue" />-->
+                    <datetime
+                  v-model="datenoteeffectue"
+                  input-class="form-control"
+                  type="datetime"
+                ></datetime>
                   </div>
                 </div>
                 <div class="form-group row">
@@ -169,7 +174,9 @@ export default {
       this.valueDisabled = true;
       const data = {};
       data["libelle"] = this.libelle;
-      data["datenoteeffectue"] = this.datenoteeffectue;
+      data["datenoteeffectue"] = this.datenoteeffectue
+          .split(".")[0]
+          .replace("T", " "); // this.datenoteeffectue;
       data["typenote_id"] = this.typenote;
       data["classe_id"] = this.classe;
       data["coefficient"] = this.coefficient;

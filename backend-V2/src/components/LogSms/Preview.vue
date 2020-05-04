@@ -19,22 +19,22 @@
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label class="control-label">Parent</label>
+                      <label class="control-label">Type user</label>
                       <!---->
                       <input 
                         class="form-control"
-                        v-bind:value="logsms.parent.name+' '+logsms.parent.surname"
+                        v-bind:value="logsms.type_user"
                         disabled/>
                       <!---->
                     </div>
                   </div>
-                  <div class="col-md-6" v-if="logsms.eleve">
+                  <div class="col-md-6">
                     <div class="form-group">
-                      <label class="control-label">Elève</label>
+                      <label class="control-label">Utilisateur</label>
                       <!---->
                       <input 
                         class="form-control"
-                        v-bind:value="logsms.eleve.name+' '+logsms.eleve.surname"
+                        v-bind:value="getUser(logsms)"
                         disabled/>
                       <!---->
                     </div>
@@ -76,6 +76,15 @@ export default {
   computed: {
     logsms() {
       return this.$store.getters.logsms;
+    }
+  },
+  methods:{
+    getUser(log){
+      if(log.type_user == "parent"){
+        return log.parent ? log.parent.name+' '+log.parent.surname : '';
+      }else{
+        return ''
+      }
     }
   }
 };

@@ -8,6 +8,7 @@ use AhmadFatoni\ApiGenerator\Helpers\Helpers;
 use Illuminate\Support\Facades\Validator;
 use BootnetCrasher\School\Models\ProfesseurModel;
 use RainLab\User\Models\User;
+use Bootnetcrasher\School\Classes\Sms;
 
 class professeurController extends Controller
 {
@@ -124,7 +125,17 @@ class professeurController extends Controller
     }
 
     public function sharedPassword($user){
-        // todo send password a user by tel or email
+        try{
+            // recuperation du professeur
+            $professeur = ProfesseurModel::find($user->professeur_id);
+            $sms = new Sms();
+                $body = "Mes félicitations, votre compte a été crée avec succès .\nUser:".$user->email."\nPassword: 0000.\n".
+                "Site : www.ayauka.com\nAyauka vous remercie pour votre fidélité .";
+                $sms->sendParamsUserConnexionQueue($professeur->tel, $body, $professeur, null, "professeur");
+        }catch (\Exception $ex){
+            trace_log("Erreur dans la fonction sharedPassword message : ".$ex->getMessage());
+            // trace_log("message : ".$ex->getTrace());
+        }
     }
 
     public function update($id, Request $request){

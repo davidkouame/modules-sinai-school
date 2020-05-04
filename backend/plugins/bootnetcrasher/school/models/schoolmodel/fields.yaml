@@ -3,3 +3,10 @@ fields:
         label: Libellé
         span: auto
         type: text
+    pays:
+        label: Pays
+        nameFrom: libelle
+        descriptionFrom: description
+        span: auto
+        type: relation
+        placeholder: Sélectionner un pays

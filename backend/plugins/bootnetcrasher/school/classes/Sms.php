@@ -67,14 +67,7 @@ class Sms{
         }
     }
 
-    /*
-        Envoi des parametres de connexions aux parents
-        @String $tel User tel
-        @BootnetCrasher\School\Models\ParentModel $parent Parent user
-        @String $body Message sms
-    */
-    public function sendParamsUserConnexionQueue(String $tel, String $body, Parentmodel $parent = null, 
-    AbonnementModel $abonnement){
+    public function sendParamsUserConnexionQueue($tel, $body, $user = null, $abonnement = null, $typeUser = null){
         try{
             if($this->isSendSms){
                 Queue::push(SendSmsJob::class, 
@@ -82,11 +75,13 @@ class Sms{
                     "code" => $this->code, 
                     "message" => $body, 
                     "sendername" => $this->sendername, 
-                    "sendertelname" => $this->getIndicateur($parent).$tel,
-                    "abonnementId" => $abonnement->id
+                    "sendertelname" => $this->getIndicateur($user).$tel,
+                    "abonnementId" => $abonnement ? $abonnement->id : null,
+                    "typeUser" => $typeUser,
+                    "schoolId" => $user->school_id
                 ]);
             }
-            $this->logSms($tel, $parent, null, $body, $abonnement);
+            $this->logSms($tel, $user, null, $body, $abonnement);
         } catch (Exception $ex) {
             trace_log("message : ".$ex->getMessage());
         }
@@ -155,26 +150,21 @@ class Sms{
         }
     }
 
-    /*
-        Save log when we send sms
-        @String $tel User tel
-        @BootnetCrasher\School\Models\ParentModel $parent Parent user
-        @BootnetCrasher\School\Models\EleveModel $eleve User
-        @BootnetCrasher\School\Models\AbonnementModel $abonnement Abonnement user
-        @String $body Message sms
-    */
-    public function logSms(String $tel, Parentmodel $parent, EleveModel $eleve = null, String $body, AbonnementModel $abonnement = null){
+    public function logSms($tel, $user, $eleve = null, $body, $abonnement = null){
         try{
             $logSms = new LogSmsModel;
             $logSms->tel = $tel;
-            $logSms->parent_id = $parent->id;
-            if($eleve)
-                $logSms->eleve_id = $eleve->id;
+            $logSms->user_id = $user->id;
+            // if($eleve)
+            //     $logSms->eleve_id = $eleve->id;
             $logSms->content = $body;
             if($abonnement){
-                $logSms->abonnement_id = $abonnement->id;
+                // $logSms->abonnement_id = $abonnement->id;
                 $logSms->school_id = $abonnement->school_id;
                 $logSms->annee_scolaire_id = $abonnement->annee_scolaire_id;
+                $logSms->type_user = "parent";
+            }else{
+                $logSms->type_user = "professeur";
             }
             $logSms->save();
         } catch (Exception $ex) {
@@ -182,10 +172,15 @@ class Sms{
         }
     }
 
-    public function getIndicateur($parent){
-        return $parent->pays->indicatif;
-        // trace_log(" pays ".json_encode($parent->pays));
-        // return "225";
+    public function getIndicateur($user, $typerUser = null){
+        if($typerUser = "professeur"){
+            $professeur = $user;
+            return $professeur && $professeur->school && 
+            $professeur->school->pays ? $professeur->school->pays->indicatif : '';
+        }else{
+            $parent = $user;
+            return $parent->pays->indicatif;
+        }
     }
 
     // Permet de vérifier si le module SMS est actif pour toute l'application 

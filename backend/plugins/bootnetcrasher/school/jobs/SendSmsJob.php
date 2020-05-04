@@ -16,19 +16,34 @@ class SendSmsJob{
 
     public function fire($job, $data = null) {
         try{
-            $abonnement = AbonnementModel::find($data["abonnementId"]);
-            if($this->isModuleSmsAppEnable() && $this->isModuleSmsEcoleEnable($abonnement) 
-            && $this->isModuleSmsAbonnementEnable($abonnement)){
-                $api_client = new \Sms4all\ApiClient();
-                $sendsms_api = new \Sms4all\Api\SendsmsAPI($api_client);
-                $sendsms_api->sendSms($data["code"], $data["message"], $data["sendername"], $data["sendertelname"]);
-                $this->saveSuccessJob($job);
-                $this->reduceSmsModuleEcole($abonnement);
-                $this->reduceSmsModuleAbonnement($abonnement);
-                trace_log("Sms envoyé ");
+            if(isset($data['typeUser']) && $data['typeUser'] == "professeur"){
+                $schoolId = $data['schoolId'];
+                if($this->isModuleSmsAppEnable() && $this->isModuleSmsEcoleEnable($abonnement) 
+                && $this->isModuleSmsAbonnementEnable($data['schoolId'])){
+                    $api_client = new \Sms4all\ApiClient();
+                    $sendsms_api = new \Sms4all\Api\SendsmsAPI($api_client);
+                    $sendsms_api->sendSms($data["code"], $data["message"], $data["sendername"], $data["sendertelname"]);
+                    $this->saveSuccessJob($job);
+                    $this->reduceSmsModuleEcole($schoolId);
+                    // $this->reduceSmsModuleAbonnement($abonnement);
+                    trace_log("Sms envoyé ");
+                }
             }else{
-                trace_log("Sms envoyé ");
+                $abonnement = AbonnementModel::find($data["abonnementId"]);
+                if($abonnement && $this->isModuleSmsAppEnable() && $this->isModuleSmsEcoleEnable($abonnement->school_id) 
+                && $this->isModuleSmsAbonnementEnable($abonnement)){
+                    $api_client = new \Sms4all\ApiClient();
+                    $sendsms_api = new \Sms4all\Api\SendsmsAPI($api_client);
+                    $sendsms_api->sendSms($data["code"], $data["message"], $data["sendername"], $data["sendertelname"]);
+                    $this->saveSuccessJob($job);
+                    $this->reduceSmsModuleEcole($abonnement->school_id);
+                    $this->reduceSmsModuleAbonnement($abonnement);
+                    trace_log("Sms envoyé ");
+                }else{
+                    trace_log("Sms non envoyé ");
+                }
             }
+            
         }catch(\Exception $e){
             trace_log("sms non envoyé ");
             trace_log($e);
@@ -59,8 +74,8 @@ class SendSmsJob{
     }
 
     // Permet de vérifier si le module sms pour une école est actif et il existe encore des sms
-    public function isModuleSmsEcoleEnable(AbonnementModel $abonnement){
-        $abonnement = SmsSchoolModel::where('school_id', $abonnement->school_id)->first();
+    public function isModuleSmsEcoleEnable($schoolId){
+        $abonnement = SmsSchoolModel::where('school_id', $schoolId)->first();
         return $smsschool && $smsschool->is_run == 1 && $smsschool->nbre_sms_restant > 0 ? true : false;
     }
 
@@ -70,8 +85,8 @@ class SendSmsJob{
     }
 
     // Pour reduire le nombre de sms dans le module des sms de l'école
-    public function reduceSmsModuleEcole(AbonnementModel $abonnement){
-        $smsschool = SmsSchoolModel::where('school_id', $abonnement->school_id)->first();
+    public function reduceSmsModuleEcole($schoolId){
+        $smsschool = SmsSchoolModel::where('school_id', $schoolId)->first();
         $smsschool->nbre_sms_restant = $smsschool->nbre_sms_restant - 1;
         $smsschool->nbre_sms_consome = $smsschool->nbre_sms_consome + 1;
         $smsschool->save();

@@ -30,13 +30,13 @@
 
             <div class="card-body">
               <form>
-                <div class="form-group row" v-if="eleves">
+                <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Elève   (
                   <span class="span-required">*</span>)</label>
                   <div class="col-sm-9">
                     <select v-model="eleve" class="form-control" >
                       <option value="null">Sélectionner un élève</option>
-                      <option :value="eleve.id" v-for="eleve in eleves">{{ eleve.name+' '+eleve.surname }}</option>
+                      <option :value="eleve.id" v-for="eleve in eleves" v-if="eleves">{{ eleve.name+' '+eleve.surname }}</option>
                     </select>
                   </div>
                 </div>

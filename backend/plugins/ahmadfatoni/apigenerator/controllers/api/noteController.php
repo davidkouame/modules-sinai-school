@@ -160,32 +160,74 @@ class noteController extends Controller
         return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
     }
 
-    // elle retourne les notes et ainsi que les valeur
+    // Retourne les notes et ainsi que les valeur
     public function indexValeurV2(Request $request){
         $data = DB::table('bootnetcrasher_school_note')
-            ->leftjoin('bootnetcrasher_school_note_eleve', 'bootnetcrasher_school_note_eleve.note_id', '=', 'bootnetcrasher_school_note.id')
+            // ->leftjoin('bootnetcrasher_school_note_eleve', 'bootnetcrasher_school_note_eleve.note_id', '=', 'bootnetcrasher_school_note.id')
             ->join('bootnetcrasher_school_type_note', 'bootnetcrasher_school_type_note.id', '=', 'bootnetcrasher_school_note.typenote_id')
             ->join('bootnetcrasher_school_matiere', 'bootnetcrasher_school_matiere.id', '=', 'bootnetcrasher_school_note.matiere_id')
             ->join('bootnetcrasher_school_classe', 'bootnetcrasher_school_classe.id', '=', 'bootnetcrasher_school_note.classe_id');
-        
-        foreach($request->except(['page']) as $key => $value){
+        foreach($request->except(['page', 'eleve_id']) as $key => $value){
             if($key == "libelle"){
                 $data->where('bootnetcrasher_school_note.libelle', 'like', '%'.$value.'%');
-            }elseif ($key == "eleve_id"){
-                // recuperation de classe 
-                $data->where('bootnetcrasher_school_note_eleve.eleve_id', '=', $value);
             }else{
                 $data = $data->where($key, $value);
             }
         }
-        // dd($data->where('professeur_id', 19)->get());
-        // dd($data->get());
         $data = $data->select('bootnetcrasher_school_note.libelle', 'bootnetcrasher_school_type_note.libelle as type_note_libelle',
-            'bootnetcrasher_school_note.created_at', 'bootnetcrasher_school_note_eleve.valeur', 'bootnetcrasher_school_note_eleve.rang',
-            'bootnetcrasher_school_note.coefficient', 'bootnetcrasher_school_note_eleve.id as note_eleve_id', 'bootnetcrasher_school_note.id')
+            'bootnetcrasher_school_note.created_at', /*'bootnetcrasher_school_note_eleve.valeur', 'bootnetcrasher_school_note_eleve.rang',*/
+            'bootnetcrasher_school_note.coefficient', /*'bootnetcrasher_school_note_eleve.id as note_eleve_id',*/ 'bootnetcrasher_school_note.id')
             ->get()->toArray();
+        foreach($data as $key => $element){
+            // recuperation de la valeur de la note de l'élève
+            $noteEleve = NoteEleve::where('eleve_id', $request->get('eleve_id'))
+            ->where('note_id', $element->id)->first();
+            $data[$key]->valeur = $noteEleve ? $noteEleve->valeur : null;
+            $data[$key]->rang = $noteEleve ? $noteEleve->valeur : null;
+            $data[$key]->note_eleve_id = $noteEleve ? $noteEleve->id : null;
+        }
         return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
     }
+
+    /*// elle retourne les notes et ainsi que les valeur
+    public function indexValeurV2(Request $request){
+        // recuperation des notes en fonction des critères
+        $data = $this->NoteModel->with(array(
+            'typenote'=>function($query){
+                $query->select('*');
+            },
+            'matiere'=>function($query){
+                $query->select('*');
+            },
+            'classe'=>function($query){
+                $query->with(array(
+                    'eleves'=>function($q){
+                        $q->select('*');
+                    }
+                ));
+            } ));
+        foreach($request->except(['page', 'eleve_id']) as $key => $value){
+            if($key == "libelle"){
+                $data->where('bootnetcrasher_school_note.libelle', 'like', '%'.$value.'%');
+            }else{
+                $data = $data->where($key, $value);
+            }
+        }
+        dd($data->select('bootnetcrasher_school_type_note.libelle as type_note_libelle')->get());
+        // dd($data->get());
+        if($request->has('page') && $request->get('page') == 0){
+            $data = $data->orderBy('created_at', 'desc')->get()->toArray();
+        }else{
+            $data = $data->orderBy('created_at', 'desc')->paginate(10)->toArray();
+        }
+        foreach($data['data'] as $key => $element){
+            // recuperation de la valeur de la note de l'élève
+            $noteEleve = NoteEleve::where('eleve_id', $request->get('eleve_id'))
+            ->where('note_id', $element['id'])->first();
+            $data['data'][$key]['valeur'] = $noteEleve ? $noteEleve->valeur : null;
+        }
+        return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
+    }*/
 
     public function showNote(Request $request){
         $data = DB::table('bootnetcrasher_school_note')
