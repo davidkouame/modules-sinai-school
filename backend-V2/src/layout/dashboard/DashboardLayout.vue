@@ -28,7 +28,7 @@
               icon="fas fa-cogs"
               v-if="checkPermission('SEE_MENU_SECTIONANNEESCOLAIRE')"
             />
-            <sous-sidebar-link to="/log-sms" name="Log sms" icon="fas fa-cogs" v-if="checkPermission('SEE_MENU_LOGSMS')"/>
+            <!--<sous-sidebar-link to="/log-sms" name="Log sms" icon="fas fa-cogs" v-if="checkPermission('SEE_MENU_LOGSMS')"/>-->
             <!--<sous-sidebar-link to="/series" name="Series" icon="fas fa-cogs" />-->
             <!--<sous-sidebar-link to="/niveaux" name="Niveaux" icon="fas fa-cogs" />-->
             <!--<sous-sidebar-link to="/matieres" name="Matieres" icon="fas fa-cogs" />-->

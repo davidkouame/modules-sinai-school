@@ -30,7 +30,7 @@
             <th scope="col">Nom et prénom</th>
             <th scope="col">Email</th>
             <th scope="col">Rôle</th>
-            <th scope="col">Date de création</th>
+            <!--<th scope="col">Date de création</th>-->
             <th scope="col">Actions</th>
           </tr>
         </thead>
@@ -40,7 +40,7 @@
             <td>{{ user.name }}</td>
             <td>{{ user.email }}</td>
             <td>{{ user.role ? user.role.libelle : '' }}</td>
-            <td>{{ user.created_at|formatDate }}</td>
+            <!--<td>{{ user.created_at|formatDate }}</td>-->
             <td>
               <a
                 :href="'#/users/preview/'+user.id"
